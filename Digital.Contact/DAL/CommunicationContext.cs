@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+
+namespace Digital.Contact.DAL
+{
+    public class CommunicationContext:DbContext
+    {
+        public CommunicationContext():base("CommunicationContext"){}
+
+        public DbSet<Digital.Contact.Models.IdeaModel> IdeaModels { get; set; }
+
+        public DbSet<Digital.Contact.Models.UsersModel> UsersModels { get; set; }
+
+        public DbSet<Digital.Contact.Models.TemplateModels> TemplateModels { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+
+    }
+}

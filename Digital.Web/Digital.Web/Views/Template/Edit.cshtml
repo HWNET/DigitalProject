@@ -1,0 +1,81 @@
+﻿@model Digital.Contact.Models.TemplateModels
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        
+           
+
+            <div class="widget">
+                <div class="widget-head">
+                  <div class="pull-left">Quick Posts</div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="widget-content">
+                  <div class="padd">
+                    <div class="form quick-post">
+@using (Html.BeginForm("Edit","Templates",FormMethod.Post,new{@class="form-horizontal"}))
+{
+    @Html.AntiForgeryToken()
+    
+   
+       
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.Name)</label>
+            <div class="col-md-9">
+				@Html.TextBoxFor(model => model.Name, new { @class = "form-control", Id = "Name" })
+				 @Html.ValidationMessageFor(model => model.Name)
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.TableName)</label>
+            <div class="col-md-9">
+				@Html.TextBoxFor(model => model.TableName, new { @class = "form-control", Id = "TableName" })
+				 @Html.ValidationMessageFor(model => model.TableName)
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsCreate)</label>
+            <div class="col-md-9">
+				@Html.TextBoxFor(model => model.IsCreate, new { @class = "form-control", Id = "IsCreate" })
+				 @Html.ValidationMessageFor(model => model.IsCreate)
+               
+            </div>
+        </div>
+
+         <div class="form-group">
+               <!-- Buttons -->
+				<div class="col-lg-offset-2 col-lg-9">
+				<button type="submit" class="btn btn-danger">保 存</button>
+				</div>
+           </div>
+
+
+
+ }
+                   </div>
+                </div>
+                <div class="widget-foot">
+                    <!-- Footer goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
