@@ -367,6 +367,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Digital.Common\Digital.Common\Digital.Common.csproj">
+      <Project>{52a3e388-e058-4cfa-b065-78ed1c86fdc7}</Project>
+      <Name>Digital.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Digital.Contact\Digital.Contact.csproj">
       <Project>{c4d9ac59-be05-4abc-b047-dbfed29ba671}</Project>
       <Name>Digital.Contact</Name>
