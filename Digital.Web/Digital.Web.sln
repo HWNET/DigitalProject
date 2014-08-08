@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Contact", "..\Digit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitial.WindowsService", "..\Digital.WindowsService\Digitial.WindowsService\Digitial.WindowsService.csproj", "{90B50C1A-1996-4B66-889E-073EDA4CCEAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Common", "..\Digital.Common\Digital.Common\Digital.Common.csproj", "{52A3E388-E058-4CFA-B065-78ED1C86FDC7}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs21
 		SccLocalPath0 = .
@@ -24,6 +26,9 @@ Global
 		SccProjectUniqueName3 = ..\\Digital.WindowsService\\Digitial.WindowsService\\Digitial.WindowsService.csproj
 		SccProjectName3 = ../Digital.WindowsService/Digitial.WindowsService
 		SccLocalPath3 = ..\\Digital.WindowsService\\Digitial.WindowsService
+		SccProjectUniqueName4 = ..\\Digital.Common\\Digital.Common\\Digital.Common.csproj
+		SccProjectName4 = ../Digital.Common/Digital.Common
+		SccLocalPath4 = ..\\Digital.Common\\Digital.Common
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +47,10 @@ Global
 		{90B50C1A-1996-4B66-889E-073EDA4CCEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90B50C1A-1996-4B66-889E-073EDA4CCEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90B50C1A-1996-4B66-889E-073EDA4CCEAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A3E388-E058-4CFA-B065-78ED1C86FDC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A3E388-E058-4CFA-B065-78ED1C86FDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A3E388-E058-4CFA-B065-78ED1C86FDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A3E388-E058-4CFA-B065-78ED1C86FDC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

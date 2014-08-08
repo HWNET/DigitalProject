@@ -84,6 +84,9 @@
     <Compile Include="Utilities\Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\Excel\NPOI.dll" />
+    <Content Include="lib\Pdf\itextsharp.dll" />
+    <Content Include="lib\Pdf\wnvpdfcreator.dll" />
     <Content Include="lib\Practices\Microsoft.Practices.EnterpriseLibrary.Common.dll" />
     <Content Include="lib\Practices\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll" />
     <Content Include="lib\Practices\Microsoft.Practices.ObjectBuilder2.dll" />
