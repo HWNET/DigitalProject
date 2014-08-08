@@ -1,4 +1,5 @@
-﻿using Digital.Contact.DAL;
+﻿using Digital.Common.Logging;
+using Digital.Contact.DAL;
 using Digital.Contact.Models;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,7 @@ namespace Digital.Contact.BLL
                 }
                 catch (Exception ex)
                 {
-                    //log
+                    Logger.Error(ex);
                     return new UsersModel();
                 }
             }
@@ -116,9 +117,9 @@ namespace Digital.Contact.BLL
                     db.SaveChanges();
                     return true;
                 }
-                catch
+                catch(Exception ex)
                 {
-                    //log
+                    Logger.Error(ex);
                     return false;
                 }
             }
