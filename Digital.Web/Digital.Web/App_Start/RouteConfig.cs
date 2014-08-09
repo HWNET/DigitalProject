@@ -16,7 +16,7 @@ namespace Digital.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{PageIndex}",
-                defaults: new { controller = "Users", action = "Index", PageIndex = UrlParameter.Optional}
+                defaults: new { controller = "Users", action = "Login", PageIndex = UrlParameter.Optional}
             );
            // routes.MapRoute(
            //    name: "Default1",

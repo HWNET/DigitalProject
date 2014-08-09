@@ -126,7 +126,7 @@
                             data: { Id: $("#DataId").val() },
                             url: "/Users/Delete",
                             success: function (data) {
-                                if (data) {
+                                if (data=="true") {
                                     IsRefresh = true;
                                     AlertMsg("ok", "删除成功");
 
@@ -142,12 +142,12 @@
 
 
                     function AlertMsg(type, msg) {
-                        if (type == "error") {
-                            $("#AlertDiv").attr("class", "alert alert-success");
-                        }
-                        else {
-                            $("#AlertDiv").attr("class", "alert alert-warning");
-                        }
+                        //if (type == "error") {
+                        //    $("#AlertDiv").attr("class", "alert alert-success");
+                        //}
+                        //else {
+                        //    $("#AlertDiv").attr("class", "alert alert-warning");
+                        //}
                         $("#AlertContent").text(msg);
                         $("#AlertModal").modal("show");
                     }

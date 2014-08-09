@@ -40,6 +40,25 @@ namespace Digital.Web.Controllers
             }
         }
 
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string UserName, string Password)
+        {
+            if (UserName == Password)
+            {
+                return Content("true");
+            }
+            else
+            {
+                return Content("false");
+            }
+        }
+
         private ActionResult SearchFun(int? PageIndex)
         {
             Func<UsersModel, bool> where = o => o.Name == Request["name"];

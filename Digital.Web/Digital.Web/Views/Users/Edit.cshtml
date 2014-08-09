@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
+    ViewBag.IsRequest = "class=open";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
@@ -25,9 +26,6 @@
                         @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal" }))
                         {
                             @Html.AntiForgeryToken()
-
-
-
                             @Html.ValidationSummary(true)
                             @Html.HiddenFor(model => model.ID)
 
