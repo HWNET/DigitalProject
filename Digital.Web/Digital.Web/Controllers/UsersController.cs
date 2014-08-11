@@ -103,7 +103,7 @@ namespace Digital.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,RegisterDate")] UsersModel usersmodel)
+        public ActionResult Edit([Bind(Include = "ID,Name,RegisterDate,Passwords")] UsersModel usersmodel)
         {
 
             if (ModelState.IsValid)
