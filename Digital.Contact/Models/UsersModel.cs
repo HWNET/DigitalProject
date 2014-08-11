@@ -12,6 +12,7 @@ namespace Digital.Contact.Models
         [Key]
         public int ID { get; set; }
         [Required(ErrorMessage = "必填")]
+        [DataType(DataType.EmailAddress)]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "{1}到{0}个字")]
         [Display(Name = "用户名")]
         public string Name { get; set; }
