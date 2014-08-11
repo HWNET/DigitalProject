@@ -19,6 +19,21 @@ namespace Digital.Contact.BLL
            
         }
 
+        public bool Login(string UserName, string Password)
+        {
+            using (var db = new CommunicationContext())
+            {
+                var User=db.UsersModels.Where(o => o.Name == UserName && o.Passwords == Password).FirstOrDefault();
+                if (User!=null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         
 
         public bool IsLogin(UsersModel Users)

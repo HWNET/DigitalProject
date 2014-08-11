@@ -20,15 +20,21 @@ namespace Digital.Contact.DAL
                 new IdeaModel{Name="idea3"},
                 new IdeaModel{Name="idea4"}
             };
+            var Ideas3 = new List<IdeaModel>{
+                new IdeaModel{Name="idea5"},
+                new IdeaModel{Name="idea6"}
+            };
 
             var Users = new List<UsersModel>
             {
-                new UsersModel{Name="xjb",RegisterDate=DateTime.Now,IdeaModelList=Ideas1},
-                new UsersModel{Name="yyq",RegisterDate=DateTime.Now,IdeaModelList=Ideas2},
+                new UsersModel{Name="xjb",RegisterDate=DateTime.Now,IdeaModelList=Ideas1,Passwords="1"},
+                new UsersModel{Name="yyq",RegisterDate=DateTime.Now,IdeaModelList=Ideas2,Passwords="1"},
+                 new UsersModel{Name="1",RegisterDate=DateTime.Now,IdeaModelList=Ideas3,Passwords="1"},
             };
 
             Ideas1.ForEach(c => context.IdeaModels.Add(c));
             Ideas2.ForEach(c => context.IdeaModels.Add(c));
+            Ideas3.ForEach(c => context.IdeaModels.Add(c));
             Users.ForEach(c => context.UsersModels.Add(c));
             context.SaveChanges();
 

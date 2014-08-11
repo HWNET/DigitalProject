@@ -43,13 +43,17 @@ namespace Digital.Web.Controllers
 
         public ActionResult Login()
         {
+            //TempDataDictionary viewBag=null;
+            //string ss = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<UsersModel>(this.ControllerContext, "~/Views/Users/Login.cshtml", base.BaseFind(1), viewBag);
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string UserName, string Password)
         {
-            if (UserName == Password)
+            UsersService bll = new UsersService();
+            if (bll.Login(UserName, Password))
             {
                 return Content("true");
             }
@@ -57,6 +61,14 @@ namespace Digital.Web.Controllers
             {
                 return Content("false");
             }
+            //if (UserName == Password)
+            //{
+            //    return Content("true");
+            //}
+            //else
+            //{
+            //    return Content("false");
+            //}
         }
 
         private ActionResult SearchFun(int? PageIndex)
