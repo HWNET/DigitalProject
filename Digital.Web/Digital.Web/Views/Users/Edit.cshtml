@@ -22,8 +22,8 @@
             <div class="widget-content">
                 <div class="padd">
                     <div class="form quick-post">
-                        
-                        @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal" }))
+
+                        @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal", Id = "registerForm" }))
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)
@@ -32,19 +32,26 @@
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.Name)</label>
                                 <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", Id = "Name" })
-                                    @Html.ValidationMessageFor(model => model.Name)
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", Id = "Name", placeholder = "Email" })
+                                    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "help-inline" })
 
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.Passwords)</label>
+                                <div class="col-md-9">
+                                    @Html.PasswordFor(model => model.Passwords, new { @class = "form-control", Id = "Passwords", placeholder = "密码" })
+                                    @Html.ValidationMessageFor(model => model.Passwords, null, new { @class = "help-inline" })
 
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.RegisterDate)</label>
                                 <div class="col-md-9">
 
-                                    <div id="datetimepicker1" class="input-append" >
+                                    <div id="datetimepicker1" class="input-append">
                                         <input data-format="yyyy/MM/dd" type="text" value="@Model.RegisterDate.ToString("yyyy/MM/dd")" class="form-control dtpicker" name="RegisterDate">
-                                        @Html.ValidationMessageFor(model => model.RegisterDate)
+                                        @Html.ValidationMessageFor(model => model.RegisterDate, null, new { @class = "help-inline" })
                                         <span class="add-on">
                                             <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="btn btn-info btn-lg"></i>
                                         </span>
@@ -64,9 +71,10 @@
 
                         }
                     </div>
-                    
+
                 </div>
                 <div class="widget-foot">
+                  
                     <!-- Footer goes here -->
                 </div>
             </div>
