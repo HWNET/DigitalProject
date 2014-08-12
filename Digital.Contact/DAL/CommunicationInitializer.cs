@@ -27,14 +27,11 @@ namespace Digital.Contact.DAL
 
             var Users = new List<UsersModel>
             {
-                new UsersModel{Name="xjb",RegisterDate=DateTime.Now,IdeaModelList=Ideas1,Passwords="1"},
-                new UsersModel{Name="yyq",RegisterDate=DateTime.Now,IdeaModelList=Ideas2,Passwords="1"},
-                 new UsersModel{Name="1",RegisterDate=DateTime.Now,IdeaModelList=Ideas3,Passwords="1"},
+               
+                 new UsersModel{Name="1",RegisterDate=DateTime.Now,Passwords="4eNgC+ewzLk=",LoginIP="",LoginTime=DateTime.Now,Status=1,IdeaModelList=Ideas2},
             };
 
-            Ideas1.ForEach(c => context.IdeaModels.Add(c));
             Ideas2.ForEach(c => context.IdeaModels.Add(c));
-            Ideas3.ForEach(c => context.IdeaModels.Add(c));
             Users.ForEach(c => context.UsersModels.Add(c));
             context.SaveChanges();
 

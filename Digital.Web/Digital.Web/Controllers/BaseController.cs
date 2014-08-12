@@ -18,11 +18,20 @@ namespace Digital.Web.Controllers
         private bool GetUserLogin()
         {
             UsersModel Models = new UsersModel();
+            
             if (UserBll == null)
             {
                 UserBll = new UsersService();
             }
-            return UserBll.IsLogin(Models);
+            var _user = UserBll.FindByName(User.Identity.Name);
+            if (_user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public ActionResult BaseList<S>(int? PageIndex, Func<T, bool> where, bool IsAsc, Func<T, S> orderByLambda)

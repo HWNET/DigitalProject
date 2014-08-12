@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="widget-foot">
-                            没有注册? <a href="#">点击注册</a>
+                            没有注册? <a href="../Users/Register">点击注册</a>
                         </div>
                         <div id="AlertDiv" class="alert alert-warning hide">
                             用户名或密码错误！请重新输入。
@@ -93,22 +93,22 @@
         function TLogin() {
             $.ajaxAntiForgery({
                 type: "post",
-                data: { UserName: $("#inputEmail").val(), Password: $("#Password").val() },
+                data: { UserName: $("#inputEmail").val(), Password: $("#Password").val(),returnUrl: @ViewBag.returnUrl },
                 url: "/Users/Login",
                 success: function (data) {
                    
-                    if (data == "true") {
-                        window.location.href = "Users/Index";
+                    if (data.toString().indexOf("Sites")!= -1) {
+                        window.location.href = "../"+data.toString().replace("Sites:","");
                     }
                     else {
-                        $("#AlertDiv").attr("class", "alert alert-warning");
+                        AlertMsg(data.toString().replace("error:",""))
                     }
                 }
             })
         }
-        function AlertMsg(type, msg) {
-            $("#AlertContent").text(msg);
-            $("#AlertModal").modal("show");
+        function AlertMsg( msg) {
+            $("#AlertDiv").text(msg);
+            $("#AlertDiv").attr("class", "alert alert-warning");        
         }
     </script>
 

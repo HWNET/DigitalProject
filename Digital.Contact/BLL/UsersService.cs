@@ -1,10 +1,13 @@
 ﻿using Digital.Common.Logging;
 using Digital.Contact.DAL;
 using Digital.Contact.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +22,16 @@ namespace Digital.Contact.BLL
            
         }
 
+
+        public ClaimsIdentity CreateIdentity(UsersModel user, string authenticationType)
+        {
+            ClaimsIdentity _identity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
+            _identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
+            _identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()));
+            _identity.AddClaim(new Claim("http://www.yy2xx.com", "longdream"));
+            return _identity;
+        }
+
         public bool Login(string UserName, string Password)
         {
             using (var db = new CommunicationContext())
@@ -31,6 +44,22 @@ namespace Digital.Contact.BLL
                 else
                 {
                     return false;
+                }
+            }
+        }
+
+        public UsersModel FindByName(string UserName)
+        {
+            using (var db = new CommunicationContext())
+            {
+                var User = db.UsersModels.Where(o => o.Name == UserName).FirstOrDefault();
+                if (User != null)
+                {
+                    return User;
+                }
+                else
+                {
+                    return null;
                 }
             }
         }
@@ -106,17 +135,24 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                if (usersmodel != null && usersmodel.ID != 0)
+                try
                 {
-                    db.Entry(usersmodel).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return true;
+                    if (usersmodel != null && usersmodel.ID != 0)
+                    {
+                        db.Entry(usersmodel).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        db.UsersModels.Add(usersmodel);
+                        db.SaveChanges();
+                        return true;
+                    }
                 }
-                else
+                catch(DbEntityValidationException dbEx )
                 {
-                    db.UsersModels.Add(usersmodel);
-                    db.SaveChanges();
-                    return true;
+                    return false;
                 }
             }
         }
