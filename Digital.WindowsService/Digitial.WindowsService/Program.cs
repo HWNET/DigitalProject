@@ -14,6 +14,7 @@ namespace Digitial.WindowsService
         /// </summary>
         static void Main()
         {
+            //T4 地址
             //E:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\Extensions\Microsoft\Web\Mvc\Scaffolding\Templates\MvcView
             //view template path
             //Install-Package Rabbit.Bootstrap.MVC
