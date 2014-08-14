@@ -53,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,6 +68,7 @@
     <Compile Include="BLLtest1\EFRepository.cs" />
     <Compile Include="BLLtest1\IEFRepository.cs" />
     <Compile Include="BLL\BaseService.cs" />
+    <Compile Include="BLL\TempColumnService.cs" />
     <Compile Include="BLL\TemplateService.cs" />
     <Compile Include="BLL\UsersService.cs" />
     <Compile Include="DAL\CommunicationContext.cs" />
@@ -77,8 +79,8 @@
     <Compile Include="Models\NewsSourceModels.cs" />
     <Compile Include="Models\RelationTableModels.cs" />
     <Compile Include="Models\SectionModels.cs" />
-    <Compile Include="Models\TempColumnModels.cs" />
-    <Compile Include="Models\TemplateModels.cs" />
+    <Compile Include="Models\TempColumnModel.cs" />
+    <Compile Include="Models\TemplateModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

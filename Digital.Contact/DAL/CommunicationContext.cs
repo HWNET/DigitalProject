@@ -16,7 +16,9 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.UsersModel> UsersModels { get; set; }
 
-        public DbSet<Digital.Contact.Models.TemplateModels> TemplateModels { get; set; }
+        public DbSet<Digital.Contact.Models.TemplateModel> TemplateModels { get; set; }
+
+        public DbSet<Digital.Contact.Models.TempColumnModel> TempColumnModels { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

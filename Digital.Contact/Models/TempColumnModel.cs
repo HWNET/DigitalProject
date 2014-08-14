@@ -7,9 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Digital.Contact.Models
 {
-    public  class TempColumnModels
+    public class TempColumnModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "必填")]
+        [Display(Name = "是否为主键")]
+        public bool IsPrimaryKey { get; set; }
         [Required(ErrorMessage = "必填")]
         [Display(Name = "显示字段名称")]
         public string ColumnDisplayName { get; set; }
@@ -27,7 +30,7 @@ namespace Digital.Contact.Models
         public bool IsMultiSelected { get; set; }
         [Required(ErrorMessage = "必填")]
         [Display(Name = "是否单选")]
-        public bool IsOnlyOneCheck { get;set; }
+        public bool IsOnlyOneCheck { get; set; }
         [Required(ErrorMessage = "必填")]
         [Display(Name = "是否关联属性")]
         public bool IsRelation { get; set; }

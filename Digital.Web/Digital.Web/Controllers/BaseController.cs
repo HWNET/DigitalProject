@@ -9,9 +9,9 @@ using System.Web.Mvc;
 
 namespace Digital.Web.Controllers
 {
-    public class BaseController<T> : Controller where T:new()
+    public class BaseController : Controller 
     {
-        IBaseService<T> bll = GetBLLInstance();
+       
 
         private static UsersService UserBll=null;
 
@@ -34,8 +34,9 @@ namespace Digital.Web.Controllers
             }
         }
 
-        public ActionResult BaseList<S>(int? PageIndex, Func<T, bool> where, bool IsAsc, Func<T, S> orderByLambda)
+        public ActionResult BaseList<T, S>(int? PageIndex, Func<T, bool> where, bool IsAsc, Func<T, S> orderByLambda) where T : new()
         {
+            IBaseService<T> bll = GetBLLInstance<T>();
             if (GetUserLogin())
             {
                 if (PageIndex == null)
@@ -57,7 +58,7 @@ namespace Digital.Web.Controllers
             }
         }
 
-        public ActionResult BaseList(int? PageIndex)
+        public ActionResult BaseList<T>(int? PageIndex) where T : new()
         {
             if (GetUserLogin())
             {
@@ -67,7 +68,7 @@ namespace Digital.Web.Controllers
                 }
                 int TotalCount = 0;
                 int PageCount = 0;
-
+                IBaseService<T> bll = GetBLLInstance<T>();
                 var Modelist = bll.PageList(PageIndex.Value, 10, out TotalCount, out PageCount).ToList();
                 ViewBag.TotalCount = TotalCount;
                 ViewBag.PageCount = PageCount;
@@ -80,8 +81,9 @@ namespace Digital.Web.Controllers
             }
         }
 
-        public T BaseFind(int? id)
+        public T BaseFind<T>(int? id)  where T : new()
         {
+            IBaseService<T> bll = GetBLLInstance<T>();
             if (GetUserLogin())
             {
                 if (id != null)
@@ -100,8 +102,9 @@ namespace Digital.Web.Controllers
             }
         }
 
-        public bool BaseEdit(T model)
+        public bool BaseEdit<T>(T model) where T : new()
         {
+            IBaseService<T> bll = GetBLLInstance<T>();
             if (GetUserLogin())
             {
                 return bll.Edit(model);
@@ -112,8 +115,9 @@ namespace Digital.Web.Controllers
             }
         }
 
-        public bool BaseDelete(int Id)
+        public bool BaseDelete<T>(int Id) where T : new()
         {
+            IBaseService<T> bll = GetBLLInstance<T>();
             if (GetUserLogin())
             {
                 return bll.Delete(Id);
@@ -124,9 +128,9 @@ namespace Digital.Web.Controllers
             }
         }
 
-       
 
-        private static IBaseService<T> GetBLLInstance()
+
+        private static IBaseService<T> GetBLLInstance<T>()
         {
             string ClassName = typeof(T).ToString().Replace("Models", "BLL").Replace("Model", "Service");
             IBaseService<T> bll = OperatorFactory.CreateDBOperator<T>(ClassName);

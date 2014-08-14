@@ -14,7 +14,7 @@ using Microsoft.Owin.Security;
 
 namespace Digital.Web.Controllers
 {
-    public class UsersController : BaseController<UsersModel>
+    public class UsersController : BaseController
     {
 
         // GET: /Users/
@@ -25,7 +25,7 @@ namespace Digital.Web.Controllers
             {
                 return SearchFun(PageIndex);
             }
-            return base.BaseList(PageIndex);
+            return base.BaseList<UsersModel>(PageIndex);
         }
 
 
@@ -120,7 +120,7 @@ namespace Digital.Web.Controllers
             Func<UsersModel, bool> where = o => o.Name == Request["name"];
             ViewBag.Search = Request["name"];
             Func<UsersModel, int> orderByLambda = o => o.ID;
-            return base.BaseList<int>(PageIndex, where, true, orderByLambda);
+            return base.BaseList<UsersModel,int>(PageIndex, where, true, orderByLambda);
         }
 
 
@@ -146,8 +146,8 @@ namespace Digital.Web.Controllers
             if (id != null)
             {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                var userModel = base.BaseFind(id);
-                if (userModel == null)
+                var userModel = base.BaseFind<UsersModel>(id);
+                if (userModel == null || userModel.ID==0)
                 {
                     return HttpNotFound();
                 }
@@ -164,11 +164,12 @@ namespace Digital.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,RegisterDate,Passwords")] UsersModel usersmodel)
+        public ActionResult Edit([Bind(Include = "ID,Name,Passwords,Status")] UsersModel usersmodel)
         {
             usersmodel.RegisterDate = DateTime.Now;
             usersmodel.LoginTime = System.DateTime.Now;
             usersmodel.LoginIP = Request.UserHostAddress;
+            usersmodel.Passwords = Common.CryptoService.MD5Encrypt(usersmodel.Passwords);
             if (ModelState.IsValid)
             {
                 if (base.BaseEdit(usersmodel))
@@ -186,7 +187,7 @@ namespace Digital.Web.Controllers
         {
             try
             {
-                if (base.BaseDelete(id))
+                if (base.BaseDelete<UsersModel>(id))
                 {
                     return Content("true");
                 }

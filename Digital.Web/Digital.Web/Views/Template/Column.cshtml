@@ -1,0 +1,132 @@
+﻿@model Digital.Contact.Models.TempColumnModel
+
+@{
+    ViewBag.Title = "Column";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+
+
+        <div class="widget">
+            <div class="widget-head">
+                <div class="pull-left">Quick Posts</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-content">
+                <div class="padd">
+                    <div class="form quick-post">
+                        @using (Html.BeginForm("Column", "TempColumn", FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+
+
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.Id)
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsPrimaryKey)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.IsPrimaryKey, new { @class = "form-control", Id = "IsPrimaryKey" })
+                                    @Html.ValidationMessageFor(model => model.IsPrimaryKey, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.ColumnDisplayName)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.ColumnDisplayName, new { @class = "form-control", Id = "ColumnDisplayName" })
+                                    @Html.ValidationMessageFor(model => model.ColumnDisplayName, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.ColumnName)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.ColumnName, new { @class = "form-control", Id = "ColumnName" })
+                                    @Html.ValidationMessageFor(model => model.ColumnName, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.Type)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.Type, new { @class = "form-control", Id = "Type" })
+                                    @Html.ValidationMessageFor(model => model.Type, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.ColumnLength)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.ColumnLength, new { @class = "form-control", Id = "ColumnLength" })
+                                    @Html.ValidationMessageFor(model => model.ColumnLength, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsMultiSelected)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.IsMultiSelected, new { @class = "form-control", Id = "IsMultiSelected" })
+                                    @Html.ValidationMessageFor(model => model.IsMultiSelected, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsOnlyOneCheck)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.IsOnlyOneCheck, new { @class = "form-control", Id = "IsOnlyOneCheck" })
+                                    @Html.ValidationMessageFor(model => model.IsOnlyOneCheck, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsRelation)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.IsRelation, new { @class = "form-control", Id = "IsRelation" })
+                                    @Html.ValidationMessageFor(model => model.IsRelation, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.RelationTable)</label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.RelationTable, new { @class = "form-control", Id = "RelationTable" })
+                                    @Html.ValidationMessageFor(model => model.RelationTable, null, new { @class = "help-inline" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <!-- Buttons -->
+                                <div class="col-lg-offset-2 col-lg-9">
+                                    <button type="submit" class="btn btn-danger">保 存</button>
+                                </div>
+                            </div>
+
+
+
+                        }
+                    </div>
+                </div>
+                <div class="widget-foot">
+                    <!-- Footer goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

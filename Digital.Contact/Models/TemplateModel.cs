@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Digital.Contact.Models
 {
-    public class TemplateModels
+    public class TemplateModel
     {
         [Key]
         public int ID { get; set; }
@@ -20,6 +20,6 @@ namespace Digital.Contact.Models
         [Display(Name = "是否创建")]
         public bool IsCreate { get; set; }
 
-        public virtual ICollection<TempColumnModels> ColumnModelList { get; set; }
+        public virtual ICollection<TempColumnModel> ColumnModelList { get; set; }
     }
 }

@@ -11,8 +11,18 @@ using Digital.Contact.DAL;
 
 namespace Digital.Web.Controllers
 {
-    public class TemplateController : BaseController<TemplateModels>
+    public class TemplateController : BaseController
     {
+
+
+        public ActionResult ColumnList(int? PageIndex)
+        {
+            if (!string.IsNullOrEmpty(Request["name"]))
+            {
+                return SearchFun(PageIndex);
+            }
+            return base.BaseList<TempColumnModel>(PageIndex);
+        }
 
 
         // GET: /Template/
@@ -23,7 +33,7 @@ namespace Digital.Web.Controllers
             {
                 return SearchFun(PageIndex);
             }
-            return base.BaseList(PageIndex);
+            return base.BaseList<TemplateModel>(PageIndex);
         }
 
         [HttpPost, ActionName("Index")]
@@ -42,10 +52,10 @@ namespace Digital.Web.Controllers
 
         private ActionResult SearchFun(int? PageIndex)
         {
-            Func<TemplateModels, bool> where = o => o.Name == Request["name"];
+            Func<TemplateModel, bool> where = o => o.Name == Request["name"];
             ViewBag.Search = Request["name"];
-            Func<TemplateModels, int> orderByLambda = o => o.ID;
-            return base.BaseList<int>(PageIndex, where, true, orderByLambda);
+            Func<TemplateModel, int> orderByLambda = o => o.ID;
+            return base.BaseList<TemplateModel,int>(PageIndex, where, true, orderByLambda);
         }
 
 
@@ -54,7 +64,7 @@ namespace Digital.Web.Controllers
             if (id != null)
             {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                var templatemodels = base.BaseFind(id);
+                var templatemodels = base.BaseFind<TemplateModel>(id);
                 if (templatemodels == null)
                 {
                     return HttpNotFound();
@@ -63,7 +73,7 @@ namespace Digital.Web.Controllers
             }
             else
             {
-                return View(new TemplateModels());
+                return View(new TemplateModel());
             }
         }
 
@@ -73,7 +83,7 @@ namespace Digital.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,TableName,IsCreate")] TemplateModels templatemodels)
+        public ActionResult Edit([Bind(Include = "ID,Name,TableName,IsCreate")] TemplateModel templatemodels)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +104,7 @@ namespace Digital.Web.Controllers
         {
             try
             {
-                if (base.BaseDelete(id))
+                if (base.BaseDelete<TemplateModel>(id))
                 {
                     return Content("true");
                 }

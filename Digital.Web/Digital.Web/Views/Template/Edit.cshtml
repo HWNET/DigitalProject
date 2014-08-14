@@ -1,6 +1,7 @@
-﻿@model Digital.Contact.Models.TemplateModels
+﻿@model Digital.Contact.Models.TemplateModel
 
 @{
+    ViewBag.IsTemplate = "class=open";
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
@@ -21,7 +22,7 @@
                 <div class="widget-content">
                   <div class="padd">
                     <div class="form quick-post">
-@using (Html.BeginForm("Edit","Templates",FormMethod.Post,new{@class="form-horizontal"}))
+@using (Html.BeginForm("Edit","Template",FormMethod.Post,new{@class="form-horizontal"}))
 {
     @Html.AntiForgeryToken()
     
@@ -31,8 +32,8 @@
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.Name)</label>
-            <div class="col-md-9">
+            <label class="control-label col-lg-1" for="title">@Html.DisplayNameFor(model => model.Name)</label>
+            <div class="col-md-8">
 				@Html.TextBoxFor(model => model.Name, new { @class = "form-control", Id = "Name" })
 				 @Html.ValidationMessageFor(model => model.Name)
                
@@ -40,23 +41,23 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.TableName)</label>
-            <div class="col-md-9">
+            <label class="control-label col-lg-1" for="title">@Html.DisplayNameFor(model => model.TableName)</label>
+            <div class="col-md-8">
 				@Html.TextBoxFor(model => model.TableName, new { @class = "form-control", Id = "TableName" })
 				 @Html.ValidationMessageFor(model => model.TableName)
                
             </div>
         </div>
-
+       if(Model.ID!=0)
+       { 
         <div class="form-group">
-            <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsCreate)</label>
-            <div class="col-md-9">
-				@Html.TextBoxFor(model => model.IsCreate, new { @class = "form-control", Id = "IsCreate" })
-				 @Html.ValidationMessageFor(model => model.IsCreate)
+            <label class="control-label col-lg-1" for="title"></label>
+            <div class="col-md-8">
+                <button type="button" onclick="javascript:window.location.href='../Template/ColumnList'" class="btn btn-primary">字段编辑</button>
                
             </div>
         </div>
-
+       }
          <div class="form-group">
                <!-- Buttons -->
 				<div class="col-lg-offset-2 col-lg-9">

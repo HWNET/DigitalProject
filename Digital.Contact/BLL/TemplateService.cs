@@ -3,19 +3,67 @@ using Digital.Contact.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Digital.Contact.BLL
 {
-    public class TemplateService : IBaseService<TemplateModels>
+    public class TemplateService : IBaseService<TemplateModel>
     {
+        const string CREATE_TABLE_START = @"create table {0} (";
+        const string CREATE_TABLE_END = @");";
+
         public TemplateService()
         {
-           
+
         }
-        public IList<TemplateModels> PageList(int pageIndex, int pageSize, out int TotalCount, out int PageCount)
+
+
+        public void MakeTable(TemplateModel TemplateModel, List<TempColumnModel> columns)
+        {
+            var sb = new StringBuilder();
+            sb.Append(string.Format(CREATE_TABLE_START, TemplateModel.TableName));
+            foreach (var column in columns)
+            {
+                if (column.IsPrimaryKey)
+                    sb.Append(string.Format("[{0}] {1} not null,", column.ColumnName, column.Type));
+                else
+                    sb.Append(string.Format("[{0}] {1},", column.ColumnName, column.Type));
+            }
+            sb.Append(CREATE_TABLE_END);
+            var sql = sb.ToString();
+            var ConnectionStrings = System.Configuration.ConfigurationManager.ConnectionStrings["CommunicationContext"].ToString();
+            using (SqlConnection c = new SqlConnection(ConnectionStrings))
+            {
+                c.Open();
+                using (SqlTransaction tx = c.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand cmd = c.CreateCommand())
+                        {
+                            cmd.Transaction = tx;
+                            cmd.CommandType = System.Data.CommandType.Text;
+                            cmd.CommandText = sql;
+                            cmd.ExecuteNonQuery();
+                            //cmd.CommandText = string.Format(@"CREATE NONCLUSTERED INDEX [SourceTime] ON [dbo].[{0}] ([SourceTime] DESC) ON [PRIMARY];", table_name);
+                            //cmd.ExecuteNonQuery();
+                            tx.Commit();
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+                        tx.Rollback();
+                        throw exc;
+                    }
+                }
+            }
+
+        }
+
+        public IList<TemplateModel> PageList(int pageIndex, int pageSize, out int TotalCount, out int PageCount)
         {
             using (var db = new CommunicationContext())
             {
@@ -26,39 +74,39 @@ namespace Digital.Contact.BLL
             }
         }
 
-        public IList<TemplateModels> PageList<S>(int pageIndex, int pageSize, out int TotalCount, out int PageCount, 
-            Func<TemplateModels, bool> whereLambda, bool isAsc, Func<TemplateModels, S> orderByLambda)
+        public IList<TemplateModel> PageList<S>(int pageIndex, int pageSize, out int TotalCount, out int PageCount,
+            Func<TemplateModel, bool> whereLambda, bool isAsc, Func<TemplateModel, S> orderByLambda)
         {
             using (var db = new CommunicationContext())
             {
-                IEnumerable<TemplateModels> tempData = null;
+                IEnumerable<TemplateModel> tempData = null;
                 if (whereLambda != null)
                 {
-                    tempData = db.Set<TemplateModels>().Where<TemplateModels>(whereLambda);
+                    tempData = db.Set<TemplateModel>().Where<TemplateModel>(whereLambda);
                 }
                 else
                 {
-                    tempData = db.Set<TemplateModels>();
+                    tempData = db.Set<TemplateModel>();
                 }
                 TotalCount = tempData.Count();
                 PageCount = (int)Math.Round((double)TotalCount / pageSize);
                 if (isAsc)
                 {
-                    tempData = tempData.OrderBy<TemplateModels, S>(orderByLambda).
-                          Skip<TemplateModels>(pageSize * (pageIndex - 1)).
-                          Take<TemplateModels>(pageSize).AsQueryable();
+                    tempData = tempData.OrderBy<TemplateModel, S>(orderByLambda).
+                          Skip<TemplateModel>(pageSize * (pageIndex - 1)).
+                          Take<TemplateModel>(pageSize).AsQueryable();
                 }
                 else
                 {
-                    tempData = tempData.OrderByDescending<TemplateModels, S>(orderByLambda).
-                         Skip<TemplateModels>(pageSize * (pageIndex - 1)).
-                         Take<TemplateModels>(pageSize).AsQueryable();
+                    tempData = tempData.OrderByDescending<TemplateModel, S>(orderByLambda).
+                         Skip<TemplateModel>(pageSize * (pageIndex - 1)).
+                         Take<TemplateModel>(pageSize).AsQueryable();
                 }
                 return tempData.AsQueryable().ToList();
             }
-        }  
+        }
 
-        public TemplateModels Find(int? Id)
+        public TemplateModel Find(int? Id)
         {
             using (var db = new CommunicationContext())
             {
@@ -69,13 +117,13 @@ namespace Digital.Contact.BLL
                 catch (Exception ex)
                 {
                     //log
-                    return new TemplateModels();
+                    return new TemplateModel();
                 }
             }
         }
 
 
-        public bool Edit(TemplateModels templateModels)
+        public bool Edit(TemplateModel templateModels)
         {
             using (var db = new CommunicationContext())
             {
@@ -100,7 +148,7 @@ namespace Digital.Contact.BLL
             {
                 try
                 {
-                    TemplateModels templateModels = db.TemplateModels.Find(Id);
+                    TemplateModel templateModels = db.TemplateModels.Find(Id);
                     db.TemplateModels.Remove(templateModels);
                     db.SaveChanges();
                     return true;
@@ -113,6 +161,6 @@ namespace Digital.Contact.BLL
             }
         }
 
-        
+
     }
 }

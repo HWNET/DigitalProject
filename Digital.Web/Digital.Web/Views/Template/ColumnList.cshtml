@@ -1,12 +1,12 @@
-﻿@model IEnumerable<Digital.Contact.Models.TemplateModel>
+﻿@model IEnumerable<Digital.Contact.Models.TempColumnModel>
 
 @{
-    ViewBag.Title = "Index";
-    ViewBag.IsTemplate = "class=open";
+    ViewBag.Title = "ColumnList";
+    ViewBag.IsColumnList = "class=open";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
-<h2>Index</h2>
+<h2>ColumnList</h2>
 
 <div class="row">
 
@@ -14,23 +14,14 @@
 
         <div class="widget">
             <div class="widget-head">
-			    <div class="pull-left">
-                    @using (Html.BeginForm("Index", "Template", FormMethod.Post, new { @class = "form-inline" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="用户名" name="name" value="@ViewBag.Search" />
-
-                        </div>
-                        <button type="submit" class="btn btn-default">搜 索</button>
-
-                    }
+               
+                <div class="pull-right">
+                    <a href="~/TempColumn/Edit" class="btn btn-danger">
+                        创建
+                    </a>
                 </div>
-                <div class="pull-right"><a href="~/Template/Edit" class="btn btn-danger">
-    创建
-</a></div>
                 <div class="widget-icons pull-right">
-                  
+
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -39,41 +30,78 @@
 
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TableName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsCreate)
-        </th>
-        <th>控制</th>
-    </tr>
-	 </thead>
-	 <tbody>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TableName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsCreate)
-        </td>
-        <td>
-             <a href="~/Template/Edit?Id=@item.ID" class="btn btn-xs btn-warning"><i class="icon-pencil"></i> </a>
-             <button onclick="javascript:Delete(@item.ID)" data-toggle="modal" class="btn btn-xs btn-danger"><i class="icon-remove"></i> </button>
-		  
-        </td>
-    </tr>
-}
-</tbody>
-</table>
- <input type="hidden" id="DataId" />
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsPrimaryKey)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ColumnDisplayName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ColumnName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ColumnLength)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsMultiSelected)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsOnlyOneCheck)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsRelation)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RelationTable)
+                            </th>
+                            <th>控制</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsPrimaryKey)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ColumnDisplayName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ColumnName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ColumnLength)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsMultiSelected)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsOnlyOneCheck)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsRelation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RelationTable)
+                                </td>
+                                <td>
+                                    <a href="~/TempColumn/Edit?Id=@item.Id" class="btn btn-xs btn-warning"><i class="icon-pencil"></i> </a>
+                                    <button onclick="javascript:Delete(@item.Id)" data-toggle="modal" class="btn btn-xs btn-danger"><i class="icon-remove"></i> </button>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <input type="hidden" id="DataId" />
                 @Html.AntiForgeryToken()
                 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -132,9 +160,9 @@
                         $.ajaxAntiForgery({
                             type: "post",
                             data: { Id: $("#DataId").val() },
-                            url: "/Template/Delete",
+                            url: "/TempColumn/Delete",
                             success: function (data) {
-                                if (data) {
+                                if (data=="true") {
                                     IsRefresh = true;
                                     AlertMsg("ok", "删除成功");
 
@@ -150,20 +178,14 @@
 
 
                     function AlertMsg(type, msg) {
-                        if (type == "error") {
-                            $("#AlertDiv").attr("class", "alert alert-success");
-                        }
-                        else {
-                            $("#AlertDiv").attr("class", "alert alert-warning");
-                        }
                         $("#AlertContent").text(msg);
                         $("#AlertModal").modal("show");
                     }
 
                 </script>
-<div class="widget-foot">
-                     <ul class="pagination pull-right">
-					 @{int PrevIndex = 1; int NextIndex = 1;}
+                <div class="widget-foot">
+                    <ul class="pagination pull-right">
+                        @{int PrevIndex = 1; int NextIndex = 1;}
                         @{
                             if (@ViewBag.PageIndex == 1)
                             {
@@ -179,33 +201,33 @@
                             }
                             else
                             {
-                                NextIndex = @ViewBag.PageIndex+1;
+                                NextIndex = @ViewBag.PageIndex + 1;
                             }
                         }
-						 @if (@ViewBag.PageCount > 1)
+                        @if (@ViewBag.PageCount > 1)
                         {
-                           <li><a href="~/Template/Index/@PrevIndex?name=@ViewBag.Search">上一页</a></li>
-						}
+                            <li><a href="~/TempColumn/Index/@PrevIndex?name=@ViewBag.Search">上一页</a></li>
+                        }
                         @for (int i = 1; i <= @ViewBag.PageCount; i++)
                         {
                             if (ViewBag.PageIndex == i)
                             {
                                 <li class="active">
-                                    <a href="~/Template/Index/@i?name=@ViewBag.Search">@i</a>
+                                    <a href="~/TempColumn/Index/@i?name=@ViewBag.Search">@i</a>
                                 </li>
                             }
                             else
                             {
                                 <li>
-                                    <a href="~/Template/Index/@i?name=@ViewBag.Search">@i</a>
+                                    <a href="~/TempColumn/Index/@i?name=@ViewBag.Search">@i</a>
                                 </li>
                             }
 
                         }
-						@if (@ViewBag.PageCount > 1 && ViewBag.PageIndex != @ViewBag.PageCount)
+                        @if (@ViewBag.PageCount > 1 && ViewBag.PageIndex != @ViewBag.PageCount)
                         {
-                           <li><a href="~/Template/Index/@NextIndex?name=@ViewBag.Search">下一页</a></li>
-						}
+                            <li><a href="~/TempColumn/Index/@NextIndex?name=@ViewBag.Search">下一页</a></li>
+                        }
                     </ul>
                     <div class="clearfix"></div>
                 </div>
