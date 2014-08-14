@@ -123,9 +123,26 @@ namespace Digital.Web.Controllers
             return base.BaseList<int>(PageIndex, where, true, orderByLambda);
         }
 
+
+        public static SelectList GenerateList()
+        {
+            List<SelectListItem> items = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text="正常", Value="0"},
+                new SelectListItem(){Text="已锁定", Value="1"},
+                new SelectListItem(){Text="未通过邮件验证", Value="2"},
+                new SelectListItem(){Text="未通过管理员确认", Value="3"},
+            };
+
+            SelectList generateList = new SelectList(items, "Value", "Text");
+
+            return generateList;
+        }
+
         // GET: /Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewData["VStatus"] = GenerateList();
             if (id != null)
             {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -149,7 +166,9 @@ namespace Digital.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,RegisterDate,Passwords")] UsersModel usersmodel)
         {
-
+            usersmodel.RegisterDate = DateTime.Now;
+            usersmodel.LoginTime = System.DateTime.Now;
+            usersmodel.LoginIP = Request.UserHostAddress;
             if (ModelState.IsValid)
             {
                 if (base.BaseEdit(usersmodel))

@@ -64,7 +64,7 @@
                                    
                                         
                                     <div class="col-lg-9 col-lg-offset-2">
-                                        <button type="button" onclick="TLogin()" class="btn btn-danger">登 陆</button>
+                                        <button id="Login" type="button" onclick="TLogin()" data-loading-text="正在提交..." class="btn btn-danger">登 陆</button>
 
                                     </div>
                                     <br />
@@ -91,6 +91,7 @@
     
     <script>
         function TLogin() {
+            $("#Login").button('loading')
             $.ajaxAntiForgery({
                 type: "post",
                 data: { UserName: $("#inputEmail").val(), Password: $("#Password").val(),returnUrl: @ViewBag.returnUrl },
@@ -101,6 +102,7 @@
                         window.location.href = "../"+data.toString().replace("Sites:","");
                     }
                     else {
+                        $("#Login").button('reset')
                         AlertMsg(data.toString().replace("error:",""))
                     }
                 }

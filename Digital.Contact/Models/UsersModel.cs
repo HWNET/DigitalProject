@@ -65,6 +65,9 @@ namespace Digital.Contact.Models
             }
         }
 
+
+
+
         public virtual ICollection<IdeaModel> IdeaModelList { get; set; }
     }
 }

@@ -65,11 +65,6 @@ namespace Digital.Contact.BLL
         }
         
 
-        public bool IsLogin(UsersModel Users)
-        {
-            //check user login
-            return true;
-        }
 
         public IList<UsersModel> PageList(int pageIndex, int pageSize, out int TotalCount, out int PageCount)
         {
@@ -152,6 +147,7 @@ namespace Digital.Contact.BLL
                 }
                 catch(DbEntityValidationException dbEx )
                 {
+                    Logger.Error(dbEx.InnerException.ToString());
                     return false;
                 }
             }
