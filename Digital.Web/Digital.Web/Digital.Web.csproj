@@ -355,8 +355,8 @@
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Template\Column.cshtml" />
     <Content Include="Views\Template\ColumnList.cshtml" />
+    <Content Include="Views\Template\Column.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

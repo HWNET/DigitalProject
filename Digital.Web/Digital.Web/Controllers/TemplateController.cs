@@ -15,11 +15,13 @@ namespace Digital.Web.Controllers
     {
 
 
+
         public ActionResult ColumnList(int? PageIndex)
         {
-            if (!string.IsNullOrEmpty(Request["name"]))
+           
+            if (!string.IsNullOrEmpty(Request["TempId"]))
             {
-                return SearchFun(PageIndex);
+                ViewBag.TempId = Request["TempId"];
             }
             return base.BaseList<TempColumnModel>(PageIndex);
         }
@@ -58,6 +60,28 @@ namespace Digital.Web.Controllers
             return base.BaseList<TemplateModel,int>(PageIndex, where, true, orderByLambda);
         }
 
+        public ActionResult Column(int? id)
+        {
+            if (!string.IsNullOrEmpty(Request["TempId"]))
+            {
+                ViewBag.TempId = Request["TempId"];
+            }
+            if (id != null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                
+                var templatemodels = base.BaseFind<TempColumnModel>(id);
+                if (templatemodels == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(templatemodels);
+            }
+            else
+            {
+                return View(new TempColumnModel());
+            }
+        }
 
         public ActionResult Edit(int? id)
         {
@@ -95,6 +119,29 @@ namespace Digital.Web.Controllers
             return View(templatemodels);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Column([Bind(Include = "Id,IsPrimaryKey,ColumnDisplayName,ColumnName,Type,ColumnLength,IsMultiSelected,IsOnlyOneCheck,TempId")] TempColumnModel TempColumnmodels)
+        {
+            if (TempColumnmodels.RelationTableModelslList == null)
+            {
+                TempColumnmodels.RelationTableModelslList = new List<RelationTableModels>();
+            }
+            if (!string.IsNullOrEmpty(Request["TempId"]))
+            {
+                
+                TempColumnmodels.TemplateModel =  base.BaseFind<TemplateModel>(int.Parse(Request["TempId"]));
+            }
+            if (ModelState.IsValid)
+            {
+                if (base.BaseEdit(TempColumnmodels))
+                {
+                    return RedirectToAction("ColumnList");
+                }
+            }
+            return View(TempColumnmodels);
+        }
+
 
 
         // POST: /Template/Delete/5
@@ -105,6 +152,27 @@ namespace Digital.Web.Controllers
             try
             {
                 if (base.BaseDelete<TemplateModel>(id))
+                {
+                    return Content("true");
+                }
+                else
+                {
+                    return Content("false");
+                }
+            }
+            catch
+            {
+                return Content("");
+            }
+        }
+
+        [HttpPost, ActionName("ColumnDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ColumnDelete(int id)
+        {
+            try
+            {
+                if (base.BaseDelete<TempColumnModel>(id))
                 {
                     return Content("true");
                 }

@@ -16,7 +16,7 @@
             <div class="widget-head">
                
                 <div class="pull-right">
-                    <a href="~/TempColumn/Edit" class="btn btn-danger">
+                    <a href="~/Template/Column?TempId=@ViewBag.TempId" class="btn btn-danger">
                         创建
                     </a>
                 </div>
@@ -55,9 +55,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.IsRelation)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.RelationTable)
-                            </th>
+                           
                             <th>控制</th>
                         </tr>
                     </thead>
@@ -89,11 +87,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.IsRelation)
                                 </td>
+                               
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.RelationTable)
-                                </td>
-                                <td>
-                                    <a href="~/TempColumn/Edit?Id=@item.Id" class="btn btn-xs btn-warning"><i class="icon-pencil"></i> </a>
+                                    <a href="~/Template/Column?Id=@item.Id&TempId=@ViewBag.TempId" class="btn btn-xs btn-warning"><i class="icon-pencil"></i> </a>
                                     <button onclick="javascript:Delete(@item.Id)" data-toggle="modal" class="btn btn-xs btn-danger"><i class="icon-remove"></i> </button>
 
                                 </td>
@@ -160,7 +156,7 @@
                         $.ajaxAntiForgery({
                             type: "post",
                             data: { Id: $("#DataId").val() },
-                            url: "/TempColumn/Delete",
+                            url: "/Template/ColumnDelete",
                             success: function (data) {
                                 if (data=="true") {
                                     IsRefresh = true;

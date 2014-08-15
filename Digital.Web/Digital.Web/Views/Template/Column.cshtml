@@ -1,5 +1,5 @@
 ﻿@model Digital.Contact.Models.TempColumnModel
-
+@using Digital.Common.Mvc.Extensions
 @{
     ViewBag.Title = "Column";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
@@ -21,7 +21,7 @@
             <div class="widget-content">
                 <div class="padd">
                     <div class="form quick-post">
-                        @using (Html.BeginForm("Column", "TempColumn", FormMethod.Post, new { @class = "form-horizontal" }))
+                        @using (Html.BeginForm("Column", "Template", FormMethod.Post, new { @class = "form-horizontal" }))
                         {
                             @Html.AntiForgeryToken()
 
@@ -29,13 +29,13 @@
 
                             @Html.ValidationSummary(true)
                             @Html.HiddenFor(model => model.Id)
-
+    <input value="@ViewBag.TempId" type="hidden" name="TempId" />
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsPrimaryKey)</label>
                                 <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.IsPrimaryKey, new { @class = "form-control", Id = "IsPrimaryKey" })
-                                    @Html.ValidationMessageFor(model => model.IsPrimaryKey, null, new { @class = "help-inline" })
-
+                                    <div class="make-switch" data-on="primary" data-off="info">
+                                        <input type="checkbox" @Html.IsChecked(Model.IsPrimaryKey) name="IsPrimaryKey">
+                                    </div>
                                 </div>
                             </div>
 
@@ -78,8 +78,9 @@
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsMultiSelected)</label>
                                 <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.IsMultiSelected, new { @class = "form-control", Id = "IsMultiSelected" })
-                                    @Html.ValidationMessageFor(model => model.IsMultiSelected, null, new { @class = "help-inline" })
+                                    <div class="make-switch" data-on="primary" data-off="info">
+                                        <input type="checkbox" @Html.IsChecked(Model.IsMultiSelected) name="IsMultiSelected">
+                                    </div>
 
                                 </div>
                             </div>
@@ -87,30 +88,21 @@
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsOnlyOneCheck)</label>
                                 <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.IsOnlyOneCheck, new { @class = "form-control", Id = "IsOnlyOneCheck" })
-                                    @Html.ValidationMessageFor(model => model.IsOnlyOneCheck, null, new { @class = "help-inline" })
+                                    <div class="make-switch" data-on="primary" data-off="info">
+                                        <input type="checkbox" id="IsRelationCheck" onclick="IsRelation()" @Html.IsChecked(Model.IsOnlyOneCheck) name="IsMultiSelected">
+                                    </div>
 
                                 </div>
                             </div>
+                            
+                                <div class="form-group @Html.ShowClass(Model.IsOnlyOneCheck)" id="IsRelationgroup" >
+                                    <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsRelation)</label>
+                                    <div class="col-md-9">
+                                        <button type="button" onclick="javascript:window.location.href='../Template/ColumnList'" class="btn btn-primary">字段编辑</button>
 
-                            <div class="form-group">
-                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.IsRelation)</label>
-                                <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.IsRelation, new { @class = "form-control", Id = "IsRelation" })
-                                    @Html.ValidationMessageFor(model => model.IsRelation, null, new { @class = "help-inline" })
-
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-lg-3" for="title">@Html.DisplayNameFor(model => model.RelationTable)</label>
-                                <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.RelationTable, new { @class = "form-control", Id = "RelationTable" })
-                                    @Html.ValidationMessageFor(model => model.RelationTable, null, new { @class = "help-inline" })
-
-                                </div>
-                            </div>
-
+                            
                             <div class="form-group">
                                 <!-- Buttons -->
                                 <div class="col-lg-offset-2 col-lg-9">
@@ -130,3 +122,14 @@
         </div>
     </div>
 </div>
+<script>
+    function IsRelation()
+    {
+        if ($("#IsCheck").is(':checked')) {
+            $("#IsRelationgroup").show();
+        }
+        else {
+            $("#IsRelationgroup").hide();
+        }
+    }
+</script>

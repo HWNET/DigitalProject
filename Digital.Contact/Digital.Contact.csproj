@@ -68,6 +68,7 @@
     <Compile Include="BLLtest1\EFRepository.cs" />
     <Compile Include="BLLtest1\IEFRepository.cs" />
     <Compile Include="BLL\BaseService.cs" />
+    <Compile Include="BLL\RelationTableService.cs" />
     <Compile Include="BLL\TempColumnService.cs" />
     <Compile Include="BLL\TemplateService.cs" />
     <Compile Include="BLL\UsersService.cs" />

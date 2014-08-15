@@ -36,7 +36,9 @@ namespace Digital.Contact.Models
         public bool IsRelation { get; set; }
         [Required(ErrorMessage = "必填")]
         [Display(Name = "关联属性")]
-        public string RelationTable { get; set; }
+        public virtual ICollection<RelationTableModels> RelationTableModelslList { get; set; }
+
+        public virtual TemplateModel TemplateModel { get; set; }
 
     }
 }

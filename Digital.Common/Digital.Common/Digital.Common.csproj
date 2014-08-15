@@ -76,6 +76,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mvc\Extensions\ControllerExtensions.cs" />
+    <Compile Include="Mvc\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Security\CryptoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\NPOI\ColumnBuilder.cs" />

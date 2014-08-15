@@ -20,6 +20,8 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.TempColumnModel> TempColumnModels { get; set; }
 
+        public DbSet<Digital.Contact.Models.RelationTableModels> RelationTableModels { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
