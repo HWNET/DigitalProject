@@ -10,7 +10,7 @@ namespace Digital.Contact.Models
     public class TemplateModel
     {
         [Key]
-        public int ID { get; set; }
+        public int TemplateID { get; set; }
         [Required(ErrorMessage = "必填")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "{1}到{0}个字")]
         [Display(Name = "行业名称")]

@@ -70,7 +70,7 @@ namespace Digital.Contact.BLL
                 var Modelist = db.TemplateModels;
                 TotalCount = Modelist.Count();
                 PageCount = (int)Math.Round((double)TotalCount / pageSize);
-                return Modelist.OrderBy(o => o.ID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                return Modelist.OrderBy(o => o.TemplateID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             }
         }
 
@@ -127,7 +127,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                if (templateModels != null && templateModels.ID != 0)
+                if (templateModels != null && templateModels.TemplateID != 0)
                 {
                     db.Entry(templateModels).State = EntityState.Modified;
                     db.SaveChanges();

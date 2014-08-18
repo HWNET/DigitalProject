@@ -29,7 +29,7 @@
 
 
                             @Html.ValidationSummary(true)
-                            @Html.HiddenFor(model => model.ID)
+                            @Html.HiddenFor(model => model.TemplateID)
 
                             <div class="form-group">
                                 <label class="control-label col-lg-1" for="title">@Html.DisplayNameFor(model => model.Name)</label>
@@ -48,12 +48,12 @@
 
                                 </div>
                             </div>
-                            if (Model.ID != 0)
+                            if (Model.TemplateID != 0)
                             {
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="title"></label>
                                     <div class="col-md-8">
-                                        <button type="button" onclick="javascript:window.location.href='../Template/ColumnList?TempId=@Model.ID'" class="btn btn-primary">字段编辑</button>
+                                        <button type="button" onclick="javascript:window.location.href='../Template/ColumnList?TempId=@Model.TemplateID'" class="btn btn-primary">字段编辑</button>
 
                                     </div>
                                 </div>

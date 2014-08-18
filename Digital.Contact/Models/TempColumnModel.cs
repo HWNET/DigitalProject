@@ -34,10 +34,10 @@ namespace Digital.Contact.Models
         [Required(ErrorMessage = "必填")]
         [Display(Name = "是否关联属性")]
         public bool IsRelation { get; set; }
-        [Required(ErrorMessage = "必填")]
         [Display(Name = "关联属性")]
         public virtual ICollection<RelationTableModels> RelationTableModelslList { get; set; }
 
+        public int TemplateID { get; set; }
         public virtual TemplateModel TemplateModel { get; set; }
 
     }

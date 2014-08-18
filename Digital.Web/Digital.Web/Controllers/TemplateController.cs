@@ -56,7 +56,7 @@ namespace Digital.Web.Controllers
         {
             Func<TemplateModel, bool> where = o => o.Name == Request["name"];
             ViewBag.Search = Request["name"];
-            Func<TemplateModel, int> orderByLambda = o => o.ID;
+            Func<TemplateModel, int> orderByLambda = o => o.TemplateID;
             return base.BaseList<TemplateModel,int>(PageIndex, where, true, orderByLambda);
         }
 
@@ -121,17 +121,17 @@ namespace Digital.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Column([Bind(Include = "Id,IsPrimaryKey,ColumnDisplayName,ColumnName,Type,ColumnLength,IsMultiSelected,IsOnlyOneCheck,TempId")] TempColumnModel TempColumnmodels)
+        public ActionResult Column([Bind(Include = "Id,IsPrimaryKey,ColumnDisplayName,ColumnName,Type,ColumnLength,IsMultiSelected,IsOnlyOneCheck,TemplateID")] TempColumnModel TempColumnmodels)
         {
-            if (TempColumnmodels.RelationTableModelslList == null)
-            {
-                TempColumnmodels.RelationTableModelslList = new List<RelationTableModels>();
-            }
-            if (!string.IsNullOrEmpty(Request["TempId"]))
-            {
+            //if (TempColumnmodels.RelationTableModelslList == null)
+            //{
+            //    TempColumnmodels.RelationTableModelslList = new List<RelationTableModels>();
+            //}
+            //if (!string.IsNullOrEmpty(Request["TempId"]))
+            //{
                 
-                TempColumnmodels.TemplateModel =  base.BaseFind<TemplateModel>(int.Parse(Request["TempId"]));
-            }
+            //    TempColumnmodels.TemplateID =  int.Parse(Request["TempId"]);
+            //}
             if (ModelState.IsValid)
             {
                 if (base.BaseEdit(TempColumnmodels))
