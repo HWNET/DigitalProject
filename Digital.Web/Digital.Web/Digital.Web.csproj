@@ -184,13 +184,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Antlr3.Runtime.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="EntityFramework.dll" />
-    <Content Include="EntityFramework.SqlServer.dll" />
-    <Content Include="EntityFramework.SqlServer.xml" />
-    <Content Include="EntityFramework.xml" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -293,19 +288,6 @@
     <Content Include="js\layouts\topRight.js" />
     <Content Include="js\sparklines.js" />
     <Content Include="js\themes\default.js" />
-    <Content Include="Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="Microsoft.AspNet.Identity.EntityFramework.dll" />
-    <Content Include="Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="Microsoft.Owin.dll" />
-    <Content Include="Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="Microsoft.Owin.Security.dll" />
-    <Content Include="Microsoft.Owin.Security.Facebook.dll" />
-    <Content Include="Microsoft.Owin.Security.Google.dll" />
-    <Content Include="Microsoft.Owin.Security.MicrosoftAccount.dll" />
-    <Content Include="Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="Owin.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="font\fontawesome-webfont.woff" />
