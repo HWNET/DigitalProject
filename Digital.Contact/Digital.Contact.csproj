@@ -102,13 +102,6 @@
       <Name>Digital.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="EntityFramework.dll" />
-    <Content Include="EntityFramework.SqlServer.dll" />
-    <Content Include="Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="Microsoft.AspNet.Identity.EntityFramework.dll" />
-    <Content Include="Microsoft.AspNet.Identity.Owin.dll" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
