@@ -15,11 +15,11 @@ namespace Digital.Contact.BLL
 {
     public class UsersService : IBaseService<UsersModel>
     {
-     
+
 
         public UsersService()
         {
-           
+
         }
 
 
@@ -36,8 +36,8 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                var User=db.UsersModels.Where(o => o.Name == UserName && o.Passwords == Password).FirstOrDefault();
-                if (User!=null)
+                var User = db.UsersModels.Where(o => o.Name == UserName && o.Passwords == Password).FirstOrDefault();
+                if (User != null)
                 {
                     return true;
                 }
@@ -52,6 +52,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
+
                 var User = db.UsersModels.Where(o => o.Name == UserName).FirstOrDefault();
                 if (User != null)
                 {
@@ -61,9 +62,10 @@ namespace Digital.Contact.BLL
                 {
                     return null;
                 }
+
             }
         }
-        
+
 
 
         public IList<UsersModel> PageList(int pageIndex, int pageSize, out int TotalCount, out int PageCount)
@@ -77,7 +79,7 @@ namespace Digital.Contact.BLL
             }
         }
 
-        public IList<UsersModel> PageList<S>(int pageIndex, int pageSize, out int TotalCount, out int PageCount, 
+        public IList<UsersModel> PageList<S>(int pageIndex, int pageSize, out int TotalCount, out int PageCount,
             Func<UsersModel, bool> whereLambda, bool isAsc, Func<UsersModel, S> orderByLambda)
         {
             using (var db = new CommunicationContext())
@@ -107,7 +109,7 @@ namespace Digital.Contact.BLL
                 }
                 return tempData.AsQueryable().ToList();
             }
-        }  
+        }
 
         public UsersModel Find(int? Id)
         {
@@ -145,7 +147,7 @@ namespace Digital.Contact.BLL
                         return true;
                     }
                 }
-                catch(DbEntityValidationException dbEx )
+                catch (DbEntityValidationException dbEx)
                 {
                     Logger.Error(dbEx.InnerException.ToString());
                     return false;
@@ -164,7 +166,7 @@ namespace Digital.Contact.BLL
                     db.SaveChanges();
                     return true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Logger.Error(ex);
                     return false;
@@ -172,7 +174,7 @@ namespace Digital.Contact.BLL
             }
         }
 
-        
+
 
     }
 }

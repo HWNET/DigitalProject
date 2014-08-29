@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using MySql.Data.Entity;
 
 namespace Digital.Contact.DAL
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class CommunicationContext:DbContext
     {
         public CommunicationContext():base("CommunicationContext"){}
@@ -24,6 +26,7 @@ namespace Digital.Contact.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());  
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 

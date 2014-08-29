@@ -44,6 +44,9 @@ namespace Digital.Contact.Models
         /// </summary>
         public string LoginIP { get; set; }
 
+
+        
+
         /// <summary>
         /// 用户状态文字说明
         /// </summary>
