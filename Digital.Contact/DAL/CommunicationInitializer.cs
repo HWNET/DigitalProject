@@ -28,7 +28,7 @@ namespace Digital.Contact.DAL
             var Users = new List<UsersModel>
             {
                
-                 new UsersModel{Name="1",RegisterDate=DateTime.Now,Passwords="4eNgC+ewzLk=",LoginIP="",LoginTime=DateTime.Now,Status=1,IdeaModelList=Ideas2},
+                 new UsersModel{Name="1",RegisterDate=DateTime.Now,Passwords="4eNgC+ewzLk=",LoginIP="",LastLoginTime=DateTime.Now,Status=1,IdeaModelList=Ideas2},
             };
 
             Ideas2.ForEach(c => context.IdeaModels.Add(c));

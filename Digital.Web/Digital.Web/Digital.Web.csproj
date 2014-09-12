@@ -289,6 +289,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="font\fontawesome-webfont.woff" />
+    <Content Include="xml\City.xml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -355,7 +356,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutDigital.cshtml" />
     <Content Include="Views\Users\Edit1.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\Edit2.cshtml" />
     <Content Include="Views\Template\Edit.cshtml" />
     <Content Include="Views\Template\Index.cshtml" />
@@ -365,6 +366,7 @@
     <Content Include="Views\Template\ColumnList.cshtml" />
     <Content Include="Views\Template\Column.cshtml" />
     <Content Include="Views\Users\View1.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

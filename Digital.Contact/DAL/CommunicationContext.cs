@@ -24,9 +24,15 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.RelationTableModels> RelationTableModels { get; set; }
 
+        public DbSet<Digital.Contact.Models.SkillsModel> SkillsModel { get; set; }
+
+        public DbSet<Digital.Contact.Models.UsersInfoModel> UsersInfoModel { get; set; }
+
+        public DbSet<Digital.Contact.Models.GoodAtWhatModel> GoodAtWhatModel { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());  
+            //Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());  
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 

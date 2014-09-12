@@ -74,7 +74,7 @@ namespace Digital.Web.Controllers
             else 
             {
                 _user = new UsersModel();
-                _user.LoginTime = System.DateTime.Now;
+                _user.LastLoginTime = System.DateTime.Now;
                 _user.LoginIP = Request.UserHostAddress;
                 _user.RegisterDate = DateTime.Now;
                 _user.Name = UserName;
@@ -102,7 +102,7 @@ namespace Digital.Web.Controllers
             if (_user == null) return Content("error:" + "用户名不存在");
             else if (_user.Passwords == Common.CryptoService.MD5Encrypt(Password))
             {
-                _user.LoginTime = System.DateTime.Now;
+                _user.LastLoginTime = System.DateTime.Now;
                 _user.LoginIP = Request.UserHostAddress;
                 bll.Edit(_user);
                 var _identity = bll.CreateIdentity(_user, DefaultAuthenticationTypes.ApplicationCookie);
@@ -167,7 +167,7 @@ namespace Digital.Web.Controllers
         public ActionResult Edit([Bind(Include = "ID,Name,Passwords,Status")] UsersModel usersmodel)
         {
             usersmodel.RegisterDate = DateTime.Now;
-            usersmodel.LoginTime = System.DateTime.Now;
+            usersmodel.LastLoginTime = System.DateTime.Now;
             usersmodel.LoginIP = Request.UserHostAddress;
             usersmodel.Passwords = Common.CryptoService.MD5Encrypt(usersmodel.Passwords);
             if (ModelState.IsValid)

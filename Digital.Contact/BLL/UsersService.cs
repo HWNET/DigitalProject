@@ -52,17 +52,23 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-
-                var User = db.UsersModels.Where(o => o.Name == UserName).FirstOrDefault();
-                if (User != null)
+                try
                 {
-                    return User;
+
+                    var User = db.UsersModels.Where(o => o.Name == UserName).FirstOrDefault();
+                    if (User != null)
+                    {
+                        return User;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
+                catch (DbEntityValidationException dbEx)
                 {
                     return null;
                 }
-
             }
         }
 

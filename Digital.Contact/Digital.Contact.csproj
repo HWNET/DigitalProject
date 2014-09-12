@@ -82,14 +82,13 @@
     <Compile Include="BLL\UsersService.cs" />
     <Compile Include="DAL\CommunicationContext.cs" />
     <Compile Include="DAL\CommunicationInitializer.cs" />
-    <Compile Include="Models\BrowseRightModel.cs" />
+    <Compile Include="Models\GoodAtWhatModel.cs" />
     <Compile Include="Models\IdeaModel.cs" />
-    <Compile Include="Models\NewsModels.cs" />
-    <Compile Include="Models\NewsSourceModels.cs" />
     <Compile Include="Models\RelationTableModels.cs" />
-    <Compile Include="Models\SectionModels.cs" />
+    <Compile Include="Models\SkillsModel.cs" />
     <Compile Include="Models\TempColumnModel.cs" />
     <Compile Include="Models\TemplateModel.cs" />
+    <Compile Include="Models\UsersInfoModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

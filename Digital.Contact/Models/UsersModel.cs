@@ -29,6 +29,25 @@ namespace Digital.Contact.Models
 
 
         /// <summary>
+        /// 用户类型，1企业用户  2 个人用户  3  政府用户
+        /// </summary>
+        public int UserTypeID { get; set; }
+
+
+
+        /// <summary>
+        /// 用户信息ID
+        /// </summary>
+        public int? UsersInfoID { get; set; }
+        public virtual UsersInfoModel UsersInfoModel { get; set; }
+
+        /// <summary>
+        /// 企业ID 如果为空则为非企业用户
+        /// </summary>
+        public int? CompanyID { get; set; }
+
+
+        /// <summary>
         /// 用户状态<br />
         /// 0正常，1锁定，2未通过邮件验证，3未通过管理员确认
         /// </summary>
@@ -37,7 +56,7 @@ namespace Digital.Contact.Models
         /// <summary>
         /// 上次登陆时间
         /// </summary>
-        public Nullable<DateTime> LoginTime { get; set; }
+        public Nullable<DateTime> LastLoginTime { get; set; }
 
         /// <summary>
         /// 上次登陆IP
