@@ -9,7 +9,7 @@ using MySql.Data.Entity;
 
 namespace Digital.Contact.DAL
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class CommunicationContext:DbContext
     {
         public CommunicationContext():base("CommunicationContext"){}

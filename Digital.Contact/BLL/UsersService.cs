@@ -55,7 +55,7 @@ namespace Digital.Contact.BLL
                 try
                 {
 
-                    var User = db.UsersModels.Where(o => o.Name == UserName).FirstOrDefault();
+                    var User = db.UsersModels.Include(o=>o.UsersInfoModel).Where(o => o.Name == UserName).SingleOrDefault();
                     if (User != null)
                     {
                         return User;
