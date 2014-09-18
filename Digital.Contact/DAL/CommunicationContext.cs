@@ -30,9 +30,13 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.GoodAtWhatModel> GoodAtWhatModel { get; set; }
 
+        public DbSet<Digital.Contact.Models.CompanyModel> CompanyModel { get; set; }
+
+        public DbSet<Digital.Contact.Models.MenuModel> MenuModel { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());  
+            Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());  
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 

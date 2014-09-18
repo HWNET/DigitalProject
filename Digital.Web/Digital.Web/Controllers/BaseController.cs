@@ -34,6 +34,24 @@ namespace Digital.Web.Controllers
             }
         }
 
+        public MenuModel GetMenu(int Id)
+        {
+           var MenuBll = new MenuService();
+           return MenuBll.GetMenuModel(Id);
+        }
+
+        public UsersModel GetUser()
+        {
+            UsersModel Models = new UsersModel();
+
+            if (UserBll == null)
+            {
+                UserBll = new UsersService();
+            }
+            var _user = UserBll.FindByName(User.Identity.Name);
+            return _user;
+        }
+
         public ActionResult BaseList<T, S>(int? PageIndex, Func<T, bool> where, bool IsAsc, Func<T, S> orderByLambda) where T : new()
         {
             IBaseService<T> bll = GetBLLInstance<T>();

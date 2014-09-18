@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@*<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -116,4 +116,132 @@
 
 </body>
 
+</html>*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+
+    <title>登录</title>
+
+    <link href="DigitalStyle/css/style.default.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js" ></script>
+    <script src="js/respond.min.js" ></script>
+    <![endif]-->
+</head>
+
+<body class="signin">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+
+    <section>
+
+        <div class="signinpanel">
+           
+            <div class="row">
+
+                <div class="col-md-7">
+
+                    <div class="signin-info">
+                        <div class="logopanel">
+                            <h1><span>[</span> 微距平台 <span>]</span></h1>
+                        </div><!-- logopanel -->
+
+                        <div class="mb20"></div>
+
+                        <h5><strong>XXXXXXXXXXXXXXXX!</strong></h5>
+                        <ul>
+                            <li><i class="fa fa-arrow-circle-o-right mr5"></i> XXXXXX</li>
+                            <li><i class="fa fa-arrow-circle-o-right mr5"></i> XXXXXX</li>
+                            <li><i class="fa fa-arrow-circle-o-right mr5"></i> XXXXXX</li>
+                            <li><i class="fa fa-arrow-circle-o-right mr5"></i> XXXXXX</li>
+                            <li><i class="fa fa-arrow-circle-o-right mr5"></i> XXXXXX</li>
+                        </ul>
+                        <div class="mb20"></div>
+                        <strong>没有注册? <a href="../Users/Register">点击注册</a></strong>
+                    </div><!-- signin0-info -->
+
+                </div><!-- col-sm-7 -->
+
+                <div class="col-md-5">
+
+                    <form id="Form1" onsubmit="javascript:return false;" >
+                        @Html.AntiForgeryToken()
+                        <h4 class="nomargin">登 录</h4>
+                        <p class="mt5 mb20">通过邮箱名登录.</p>
+
+                        <input type="text" class="form-control uname"  id="inputEmail" placeholder="Email" />
+                        <input type="password" class="form-control pword" data-content="用户名不存在" data-placement="left" data-toggle="popover" data-container="body" data-original-title="" title="提示" id="Password" placeholder="Password" />
+                        <a href=""><small>忘记密码?</small></a>
+                        <button onclick="TLogin()" id="Login" class="btn btn-success btn-block" data-loading-text="正在提交...">登 录</button>
+
+                    </form>
+                </div><!-- col-sm-5 -->
+
+            </div><!-- row -->
+
+            <div class="signup-footer">
+                <div class="pull-left">
+                    &copy; 2014. All Rights Reserved. 
+                </div>
+                
+            </div>
+
+        </div><!-- signin -->
+
+    </section>
+
+
+    <script src="DigitalStyle/js/jquery-1.10.2.min.js"></script>
+    <script src="DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="DigitalStyle/js/bootstrap.min.js"></script>
+    <script src="DigitalStyle/js/modernizr.min.js"></script>
+    <script src="DigitalStyle/js/retina.min.js"></script>
+    <script>
+        function TLogin() {
+
+            $("#Login").button('loading')
+            $("#inputEmail").attr("disabled","disabled");
+            $("#Password").attr("disabled","disabled");
+            $.ajaxAntiForgery({
+                type: "post",
+                data: { UserName: $("#inputEmail").val(), Password: $("#Password").val(),returnUrl: @ViewBag.returnUrl },
+                url: "/Users/Login",
+                success: function (data) {
+
+                    if (data.toString().indexOf("Sites")!= -1) {
+                       
+                        window.location.href = "../"+data.toString().replace("Sites:","");
+                    }
+                    else {
+                        $("#Login").button('reset')
+                        $("#inputEmail").attr("disabled","enable");
+                        $("#Password").attr("disabled","enable");
+                        AlertMsg(data.toString().replace("error:",""))
+                    }
+                }
+            })
+        }
+        function AlertMsg( msg) {
+            $('#Password').attr("data-content",msg);
+            $('#Password').popover('show');
+        }
+    </script>
+    <script src="DigitalStyle/js/jquery.cookies.js"></script>
+    <script src="DigitalStyle/js/jquery.sparkline.min.js"></script>
+    <script src="DigitalStyle/js/toggles.min.js"></script>
+    <script src="DigitalStyle/js/custom.js"></script>
+    <script src="DigitalStyle/js/JqueryToken.js"></script>
+
+</body>
 </html>

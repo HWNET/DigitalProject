@@ -20,12 +20,13 @@ namespace Digital.Web.Controllers
         // GET: /Users/
         public ActionResult Index(int? PageIndex)
         {
-
-            if (!string.IsNullOrEmpty(Request["name"]))
-            {
-                return SearchFun(PageIndex);
-            }
-            return base.BaseList<UsersModel>(PageIndex);
+            ViewBag.MenuModel = base.GetMenu(2);
+            return View(base.GetUser());
+            //if (!string.IsNullOrEmpty(Request["name"]))
+            //{
+            //    return SearchFun(PageIndex);
+            //}
+            //return base.BaseList<UsersModel>(PageIndex);
         }
 
 

@@ -1,365 +1,556 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@using Digital.Contact.BLL
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <!-- Title and other stuffs -->
-    <title>用户管理系统</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Stylesheets -->
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/js")
-    <!-- HTML5 Support for IE -->
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+
+    <title>微距平台会员管理</title>
+
+    <link href="../DigitalStyle/css/style.default.css" rel="stylesheet">
+    <link href="../DigitalStyle/css/jquery.datatables.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="../js/html5shim.js"></script>
+    <script src="js/html5shiv.js" tppabs="http://themepixels.com/demo/webpage/bracket/js/html5shiv.js"></script>
+    <script src="js/respond.min.js" tppabs="http://themepixels.com/demo/webpage/bracket/js/respond.min.js"></script>
     <![endif]-->
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon/favicon.png">
 </head>
 
 <body>
+    @{
+        MenuService MenuServices = new MenuService();
+        var MenuList = MenuServices.MenuList(int.Parse(User.Identity.GetUserId()));
+    }
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
 
-    <div class="navbar navbar-fixed-top bs-docs-nav" role="banner">
+    <section>
 
-        <div class="conjtainer">
-            <!-- Menu button for smallar screens -->
-            <div class="navbar-header">
-                <button class="navbar-toggle btn-navbar" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span>菜单</span>
-                </button>
-                <!-- Site name for smallar screens -->
-                <a href="index.html" class="navbar-brand hidden-lg">首页</a>
-            </div>
+        <div class="leftpanel">
 
+            <div class="logopanel">
+                <h1><span>[</span> 微距平台 <span>]</span></h1>
+            </div><!-- logopanel -->
 
+            <div class="leftpanelinner">
 
-            <!-- Navigation starts -->
-            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-                <!-- Links -->
-                <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown pull-right">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-user"></i> 管理员 <b class="caret"></b>
-                        </a>
+                <!-- This is only visible to small devices -->
+                <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                    <div class="media userlogged">
+                        <img alt="" src="../DigitalStyle/images/photos/loggeduser.png" class="media-object">
+                        <div class="media-body">
+                            <h4>用户名</h4>
+                            <span>"签名详细"</span>
+                        </div>
+                    </div>
 
-                        <!-- Dropdown menu -->
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-user"></i> 资料</a></li>
-                            <li><a href="#"><i class="icon-cogs"></i> 设置</a></li>
-                            <li><a href="login.html"><i class="icon-off"></i> 退出</a></li>
-                        </ul>
-                    </li>
+                    <h5 class="sidebartitle actitle">账 户</h5>
+                    <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+                        <li><a href="profile.html"><i class="fa fa-user"></i> <span>用 户</span></a></li>
+                        <li><a href=""><i class="fa fa-cog"></i> <span>账户设置</span></a></li>
+                        <li><a href=""><i class="fa fa-question-circle"></i> <span>帮 助</span></a></li>
+                        <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>登 出</span></a></li>
+                    </ul>
+                </div>
 
+                <h5 class="sidebartitle">导 航</h5>
+                <ul class="nav nav-pills nav-stacked nav-bracket">
+                    @{
+                        foreach (var MenuModel in MenuList)
+                        {
+                            if (MenuModel.ID == MenuModel.ParentId)
+                            {
+                                var StyleClass = string.Empty;
+                                var UlDisplay = string.Empty;
+                                if (MenuModel.ID == ((Digital.Contact.Models.MenuModel)ViewBag.MenuModel).ParentId)
+                                {
+                                    StyleClass = "nav-parent nav-active active";
+                                    UlDisplay="style=\"display:block\"";
+                                }
+                                else
+                                {
+                                    StyleClass = "nav-parent";
+                                }
+                                <li class="@StyleClass">
+                                    <a href=""><i class="@MenuModel.Style"></i> <span>@MenuModel.MenuName</span></a>
+                                    <ul class="children" @Html.Raw(UlDisplay)>
+                                        @{
+                                foreach (var SubModel in MenuList.Where(o => o.ParentId == MenuModel.ID&&o.ID!=MenuModel.ID))
+                                {
+                                    var SubStyleClass = string.Empty;
+                                    if (SubModel.ID == ((Digital.Contact.Models.MenuModel)ViewBag.MenuModel).ID)
+                                    {
+                                        SubStyleClass = "class=\"active\"";
+                                    }
+                                    <li @Html.Raw(SubStyleClass)><a href="@SubModel.Url"><i class="@SubModel.Style"></i> @SubModel.MenuName</a></li>
+                                }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    }
+                   
                 </ul>
-            </nav>
 
-        </div>
-    </div>
+            </div><!-- leftpanelinner -->
+        </div><!-- leftpanel -->
 
+        <div class="mainpanel">
 
-    <!-- Header starts -->
-    <header>
-        <div class="container">
-            <div class="row">
+            <div class="headerbar">
 
-                <!-- Logo section -->
-                <div class="col-md-4">
-                    <!-- Logo. -->
-                    <div class="logo">
-                        <h1><a href="#">XXXX系统<span class="bold"></span></a></h1>
-                        <p class="meta">后台管理系统</p>
-                    </div>
-                    <!-- Logo ends -->
-                </div>
+                <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
-                <!-- Button section -->
-                <div class="col-md-4">
+                <form class="searchform" action="http://themepixels.com/demo/webpage/bracket/index.html" method="post">
+                    <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
+                </form>
 
-                    <!-- Buttons -->
-                    <ul class="nav nav-pills">
-
-                        <!-- Comment button with number of latest comments count -->
-                        <li class="dropdown dropdown-big">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                                <i class="icon-comments"></i> 聊天 <span class="label label-info">6</span>
-                            </a>
-
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <!-- Heading - h5 -->
-                                    <h5><i class="icon-comments"></i> 聊天</h5>
-                                    <!-- Use hr tag to add border -->
-                                    <hr />
-                                </li>
-                                <li>
-                                    <!-- List item heading h6 -->
-                                    <h6><a href="#">你好 :)</a> <span class="label label-warning pull-right">10:42</span></h6>
-                                    <div class="clearfix"></div>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <h6><a href="#">你怎么样?</a> <span class="label label-warning pull-right">20:42</span></h6>
-                                    <div class="clearfix"></div>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <h6><a href="#">你在干撒呢?</a> <span class="label label-warning pull-right">14:42</span></h6>
-                                    <div class="clearfix"></div>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <div class="drop-foot">
-                                        <a href="#">查看所有</a>
-                                    </div>
-                                </li>
-                            </ul>
+                <div class="header-right">
+                    <ul class="headermenu">
+                        <li>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span class="badge">2</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-head pull-right">
+                                    <h5 class="title">2 Newly Registered Users</h5>
+                                    <ul class="dropdown-list user-list">
+                                        <li class="new">
+                                            <div class="thumb"><a href=""><img src="images/photos/user1.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user1.png" alt="" /></a></div>
+                                            <div class="desc">
+                                                <h5><a href="">Draniem Daamul (draniem)</a> <span class="badge badge-success">new</span></h5>
+                                            </div>
+                                        </li>
+                                        <li class="new">
+                                            <div class="thumb"><a href=""><img src="images/photos/user2.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user2.png" alt="" /></a></div>
+                                            <div class="desc">
+                                                <h5><a href="">Zaham Sindilmaca (zaham)</a> <span class="badge badge-success">new</span></h5>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="thumb"><a href=""><img src="images/photos/user3.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user3.png" alt="" /></a></div>
+                                            <div class="desc">
+                                                <h5><a href="">Weno Carasbong (wenocar)</a></h5>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="thumb"><a href=""><img src="images/photos/user4.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user4.png" alt="" /></a></div>
+                                            <div class="desc">
+                                                <h5><a href="">Nusja Nawancali (nusja)</a></h5>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="thumb"><a href=""><img src="images/photos/user5.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user5.png" alt="" /></a></div>
+                                            <div class="desc">
+                                                <h5><a href="">Lane Kitmari (lane_kitmare)</a></h5>
+                                            </div>
+                                        </li>
+                                        <li class="new"><a href="">See All Users</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
-
-                        <!-- Message button with number of latest messages count-->
-                        <li class="dropdown dropdown-big">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                                <i class="icon-envelope-alt"></i> 收件箱 <span class="label label-primary">6</span>
-                            </a>
-
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <!-- Heading - h5 -->
-                                    <h5><i class="icon-envelope-alt"></i> 消息</h5>
-                                    <!-- Use hr tag to add border -->
-                                    <hr />
-                                </li>
-                                <li>
-                                    <!-- List item heading h6 -->
-                                    <h6><a href="#">你好啊?</a></h6>
-                                    <!-- List item para -->
-                                    <p>最近咋样啊...</p>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <h6><a href="#">今天很好啊?</a></h6>
-                                    <p>相当好...</p>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <div class="drop-foot">
-                                        <a href="#">查看所有</a>
-                                    </div>
-                                </li>
-                            </ul>
+                        <li>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    <span class="badge">1</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-head pull-right">
+                                    <h5 class="title">You Have 1 New Message</h5>
+                                    <ul class="dropdown-list gen-list">
+                                        <li class="new">
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user1.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user1.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Draniem Daamul <span class="badge badge-success">new</span></span>
+                                                    <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user2.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user2.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Nusja Nawancali</span>
+                                                    <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user3.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user3.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Weno Carasbong</span>
+                                                    <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user4.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user4.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Zaham Sindilmaca</span>
+                                                    <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user5.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user5.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Veno Leongal</span>
+                                                    <span class="msg">Lorem ipsum dolor sit amet...</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="new"><a href="">Read All Messages</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
-
-                        <!-- Members button with number of latest members count -->
-                        <li class="dropdown dropdown-big">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                                <i class="icon-user"></i> 用户 <span class="label label-success">6</span>
-                            </a>
-
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <!-- Heading - h5 -->
-                                    <h5><i class="icon-user"></i> 用户</h5>
-                                    <!-- Use hr tag to add border -->
-                                    <hr />
-                                </li>
-                                <li>
-                                    <!-- List item heading h6-->
-                                    <h6><a href="#">Ravi Kumar</a> <span class="label label-warning pull-right">免费</span></h6>
-                                    <div class="clearfix"></div>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <h6><a href="#">Balaji</a> <span class="label label-important pull-right">高级</span></h6>
-                                    <div class="clearfix"></div>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <h6><a href="#">Kumarasamy</a> <span class="label label-warning pull-right">免费</span></h6>
-                                    <div class="clearfix"></div>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <div class="drop-foot">
-                                        <a href="#">查看所有</a>
-                                    </div>
-                                </li>
-                            </ul>
+                        <li>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown">
+                                    <i class="glyphicon glyphicon-globe"></i>
+                                    <span class="badge">5</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-head pull-right">
+                                    <h5 class="title">You Have 5 New Notifications</h5>
+                                    <ul class="dropdown-list gen-list">
+                                        <li class="new">
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user4.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user4.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Zaham Sindilmaca <span class="badge badge-success">new</span></span>
+                                                    <span class="msg">is now following you</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="new">
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user5.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user5.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Weno Carasbong <span class="badge badge-success">new</span></span>
+                                                    <span class="msg">is now following you</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="new">
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user3.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user3.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Veno Leongal <span class="badge badge-success">new</span></span>
+                                                    <span class="msg">likes your recent status</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="new">
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user3.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user3.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Nusja Nawancali <span class="badge badge-success">new</span></span>
+                                                    <span class="msg">downloaded your work</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="new">
+                                            <a href="">
+                                                <span class="thumb"><img src="images/photos/user3.png" tppabs="http://themepixels.com/demo/webpage/bracket/images/photos/user3.png" alt="" /></span>
+                                                <span class="desc">
+                                                    <span class="name">Nusja Nawancali <span class="badge badge-success">new</span></span>
+                                                    <span class="msg">send you 2 messages</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="new"><a href="">See All Notifications</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
-
+                        <li>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <img src="../DigitalStyle/images/photos/loggeduser.png" alt="" />
+                                    John Doe
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                    <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
+                                    <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a></li>
+                                    <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+                                    <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <button id="chatview" class="btn btn-default tp-icon chat-icon">
+                                <i class="glyphicon glyphicon-comment"></i>
+                            </button>
+                        </li>
                     </ul>
+                </div><!-- header-right -->
 
-                </div>
+            </div><!-- headerbar -->
+            @RenderBody()
 
-                <!-- Data section -->
+        </div><!-- mainpanel -->
 
-                <div class="col-md-4">
-                    <div class="header-data">
-
-                        <!-- Traffic data -->
-                        <div class="hdata">
-                            <div class="mcol-left">
-                                <!-- Icon with red background -->
-                                <i class="icon-signal bred"></i>
-                            </div>
-                            <div class="mcol-right">
-                                <!-- Number of visitors -->
-                                <p><a href="#">7000</a> <em>访问</em></p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-
-                        <!-- Members data -->
-                        <div class="hdata">
-                            <div class="mcol-left">
-                                <!-- Icon with blue background -->
-                                <i class="icon-user bblue"></i>
-                            </div>
-                            <div class="mcol-right">
-                                <!-- Number of visitors -->
-                                <p><a href="#">3000</a> <em>用户</em></p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-
-                        <!-- revenue data -->
-                        <div class="hdata">
-                            <div class="mcol-left">
-                                <!-- Icon with green background -->
-                                <i class="icon-money bgreen"></i>
-                            </div>
-                            <div class="mcol-right">
-                                <!-- Number of visitors -->
-                                <p><a href="#">5000</a><em>订单</em></p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </header>
-
-    <!-- Header ends -->
-    <!-- Main content starts -->
-
-    <div class="content">
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-dropdown"><a href="#">导航</a></div>
-
-            <!--- Sidebar navigation -->
-            <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
-            <ul id="nav">
-                <!-- Main menu with font awesome icon -->
-                <li>
-                    <a href="~/Users/Index" @ViewBag.IsIndex><i class="icon-home"></i> 首页</a>
-                </li> 
-                <li class="has_sub">
-                    <a href="#"><i class="icon-list-alt"></i> 插件页面  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
-                    <ul>
-                        <a href="~/Users/Index" @ViewBag.IsIndex><i class="icon-home"></i> 首页</a>
-                        <a href="~/Template/Index" @ViewBag.IsTemplate><i class="icon-home"></i> 模版创建</a>
-                        <li><a href="widgets3.html">插件页面 #3</a></li>
-                    </ul>
-                </li>
-                <li class="has_sub">
-                    <a href="#"><i class="icon-file-alt"></i> 页面模块1 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
-                    <ul>
-                        <li><a href="post.html">表单Post</a></li>
-                        <li><a href="login.html">登录页</a></li>
-                        <li><a href="register.html">注册页面</a></li>
-                        <li><a href="support.html">帮助页</a></li>
-                        <li><a href="invoice.html">购物清单</a></li>
-                        <li><a href="profile.html">个人资料</a></li>
-                        <li><a href="gallery.html">相册页面</a></li>
-                    </ul>
-                </li>
-                <li class="has_sub">
-                    <a href="#"><i class="icon-file-alt"></i> 页面模块2  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
-                    <ul>
-                        <li><a href="media.html">媒体</a></li>
-                        <li><a href="statement.html">描述</a></li>
-                        <li><a href="error.html">错误</a></li>
-                        <li><a href="error-log.html">错误日志</a></li>
-                        <li><a href="calendar.html">日历</a></li>
-                        <li><a href="grid.html">网格</a></li>
-                    </ul>
-                </li>
-                <li><a href="charts.html"><i class="icon-bar-chart"></i>图表</a></li>
-                <li><a href="tables.html"><i class="icon-table"></i>表格</a></li>
-                <li><a href="forms.html"><i class="icon-tasks"></i>表单</a></li>
-                <li><a href="ui.html"><i class="icon-magic"></i>UI图标</a></li>
-                <li><a href="calendar.html"><i class="icon-calendar"></i>日历</a></li>
+        <div class="rightpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+                <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+                <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+                <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
             </ul>
-        </div>
 
-        <!-- Sidebar ends -->
-        <!-- Main bar -->
-        <div class="mainbar">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="rp-alluser">
+                    <h5 class="sidebartitle">在线好友</h5>
+                    <ul class="chatuserlist">
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/userprofile.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Los Angeles, CA</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user1.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <span class="pull-right badge badge-danger">2</span>
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>San Francisco, CA</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                    </ul>
 
-            <!-- Page heading -->
-            <div class="page-head">
-                <h2 class="pull-left"><i class="icon-home"></i> 首页</h2>
+                    <div class="mb30"></div>
 
-                <!-- Breadcrumb -->
-                <div class="bread-crumb pull-right">
-                    <a href="index.html"><i class="icon-home"></i> 首页</a>
-                    <!-- Divider -->
-                    <span class="divider">/</span>
-                    <a href="#" class="bread-current">控制台</a>
+                    <h5 class="sidebartitle">离线好友</h5>
+                    <ul class="chatuserlist">
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user5.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Los Angeles, CA</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>San Francisco, CA</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user3.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Nusja Nawancali</strong>
+                                    <small>Bangkok, Thailand</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Renov Leongal</strong>
+                                    <small>Cebu City, Philippines</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user5.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Weno Carasbong</strong>
+                                    <small>Tokyo, Japan</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Renov Leongal</strong>
+                                    <small>Cebu City, Philippines</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+
+                    </ul>
                 </div>
+                <div class="tab-pane" id="rp-favorites">
+                    <h5 class="sidebartitle">我的收藏</h5>
+                    <ul class="chatuserlist">
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Los Angeles, CA</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user1.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>San Francisco, CA</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user3.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Nusja Nawancali</strong>
+                                    <small>Bangkok, Thailand</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Renov Leongal</strong>
+                                    <small>Cebu City, Philippines</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
 
-                <div class="clearfix"></div>
-
-            </div>
-            <!-- Page heading ends -->
-            <!-- Matter -->
-
-            <div class="matter">
-                <div class="container">
-
-
-                    @RenderBody()
-
+                    </ul>
                 </div>
-            </div>
-
-            <!-- Matter ends -->
-
-        </div>
-
-        <!-- Mainbar ends -->
-        <div class="clearfix"></div>
-
-    </div>
-    <!-- Content ends -->
-    <!-- Footer starts -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Copyright info -->
-                    <p class="copy">Copyright &copy; 2012 | <a href="#">Your Site</a> </p>
+                <div class="tab-pane" id="rp-history">
+                    <h5 class="sidebartitle">历史记录</h5>
+                    <ul class="chatuserlist">
+                        <li class="online">
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user4.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Eileen Sideways</strong>
+                                    <small>Hi hello, ctc?... would you mind if I go to your...</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user2.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Zaham Sindilmaca</strong>
+                                    <small>This is to inform you that your product that we...</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                        <li>
+                            <div class="media">
+                                <a href="#" class="pull-left media-thumb">
+                                    <img alt="" src="images/photos/user3.png" class="media-object">
+                                </a>
+                                <div class="media-body">
+                                    <strong>Nusja Nawancali</strong>
+                                    <small>Are you willing to have a long term relat...</small>
+                                </div>
+                            </div><!-- media -->
+                        </li>
+                    </ul>
                 </div>
-            </div>
-        </div>
-    </footer>
+                <div class="tab-pane pane-settings" id="rp-settings">
 
-    <!-- Footer ends -->
-    <!-- Scroll to top -->
-    <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
+                    <h5 class="sidebartitle mb20">设 置</h5>
+                    <div class="form-group">
+                        <label class="col-xs-8 control-label">显示离线好友</label>
+                        <div class="col-xs-4 control-label">
+                            <div class="toggle toggle-success"></div>
+                        </div>
+                    </div>
 
-   
-    @Scripts.Render("~/bundles/Flot")
-    @Scripts.Render("~/bundles/Noty")
-    @Scripts.Render("~/bundles/Common")
-    @RenderSection("scripts", required: false)
-    <!-- Script for this page -->
+                    <div class="form-group">
+                        <label class="col-xs-8 control-label">开启历史记录</label>
+                        <div class="col-xs-4 control-label">
+                            <div class="toggle toggle-success"></div>
+                        </div>
+                    </div>
+
+                </div><!-- tab-pane -->
+
+            </div><!-- tab-content -->
+        </div><!-- rightpanel -->
+
+
+    </section>
+
+
+    <script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
+    <script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../DigitalStyle/js/jquery-ui-1.10.3.min.js"></script>
+    <script src="../DigitalStyle/js/bootstrap.min.js"></script>
+    <script src="../DigitalStyle/js/modernizr.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
+    <script src="../DigitalStyle/js/toggles.min.js"></script>
+    <script src="../DigitalStyle/js/retina.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.cookies.js"></script>
+
+    <script src="../DigitalStyle/js/flot/flot.min.js"></script>
+    <script src="../DigitalStyle/js/flot/flot.resize.min.js"></script>
+    <script src="../DigitalStyle/js/morris.min.js"></script>
+    <script src="../DigitalStyle/js/raphael-2.1.0.min.js"></script>
+
+    <script src="../DigitalStyle/js/jquery.datatables.min.js"></script>
+    <script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
+
+    <script src="../DigitalStyle/js/custom.js"></script>
+    @*<script src="../DigitalStyle/js/dashboard.js"></script>*@
 
 </body>
 </html>

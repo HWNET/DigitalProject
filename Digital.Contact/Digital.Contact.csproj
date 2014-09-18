@@ -76,14 +76,17 @@
     <Compile Include="BLLtest1\EFRepository.cs" />
     <Compile Include="BLLtest1\IEFRepository.cs" />
     <Compile Include="BLL\BaseService.cs" />
+    <Compile Include="BLL\MenuService.cs" />
     <Compile Include="BLL\RelationTableService.cs" />
     <Compile Include="BLL\TempColumnService.cs" />
     <Compile Include="BLL\TemplateService.cs" />
     <Compile Include="BLL\UsersService.cs" />
     <Compile Include="DAL\CommunicationContext.cs" />
     <Compile Include="DAL\CommunicationInitializer.cs" />
+    <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\GoodAtWhatModel.cs" />
     <Compile Include="Models\IdeaModel.cs" />
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\RelationTableModels.cs" />
     <Compile Include="Models\SkillsModel.cs" />
     <Compile Include="Models\TempColumnModel.cs" />
