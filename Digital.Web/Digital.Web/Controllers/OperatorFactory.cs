@@ -15,27 +15,43 @@ namespace Digital.Web.Controllers
         public static IBaseService<T> CreateDBOperator<T>(string classname)
         {
             object objType = null;
-            if (objType == null)
+
+            try
             {
-                try
+                var obj = HttpContext.Current.Cache.Get(classname);
+                if (obj == null)
                 {
-                   var obj=  HttpContext.Current.Cache.Get(classname);
-                   if (obj == null)
-                   {
-                       //objType = Assembly.Load(AssemblyPath).CreateInstance(ClassNamespace);//反射创建
-                       var Ass = Assembly.Load("Digital.Contact");
-                       objType = Ass.CreateInstance(classname);
-                       HttpContext.Current.Cache.Insert(classname, objType);
-                   }
-                   else
-                   {
-                       return (IBaseService<T>)obj;
-                   }
+                    //objType = Assembly.Load(AssemblyPath).CreateInstance(ClassNamespace);//反射创建
+                    var Ass = Assembly.Load("Digital.Contact");
+                    objType = Ass.CreateInstance(classname);
+                    HttpContext.Current.Cache.Insert(classname, objType);
                 }
-                catch
-                { }
+                else
+                {
+                    return (IBaseService<T>)obj;
+                }
             }
+            catch
+            { }
+
             return (IBaseService<T>)objType;
+        }
+
+
+        public static void InsertCache<T>(T Model,string Key)
+        {
+
+            var obj = HttpContext.Current.Cache.Get(Key);
+            if (obj == null)
+            {
+                HttpContext.Current.Cache.Insert(Key, Model);
+            }
+        }
+
+        public static T GetCache<T>(string Key)
+        {
+            var obj = HttpContext.Current.Cache.Get(Key);
+            return (T)obj;
         }
 
     }

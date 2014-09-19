@@ -12,5 +12,6 @@ namespace Digital.Contact.Models
         [Key]
         public int CompanyID { get; set; }
         public string CompanyName { get; set; }
+        public string Website { get; set; }
     }
 }

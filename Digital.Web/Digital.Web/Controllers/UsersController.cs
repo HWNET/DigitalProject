@@ -100,12 +100,14 @@ namespace Digital.Web.Controllers
             UsersService bll = new UsersService();
 
             var _user = bll.FindByName(UserName);
+            base._user = _user;
             if (_user == null) return Content("error:" + "用户名不存在");
             else if (_user.Passwords == Common.CryptoService.MD5Encrypt(Password))
             {
                 _user.LastLoginTime = System.DateTime.Now;
                 _user.LoginIP = Request.UserHostAddress;
                 bll.Edit(_user);
+                OperatorFactory.InsertCache<UsersModel>(_user, base.CacheUserKey + _user.ID);
                 var _identity = bll.CreateIdentity(_user, DefaultAuthenticationTypes.ApplicationCookie);
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, _identity);

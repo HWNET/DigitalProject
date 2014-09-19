@@ -41,6 +41,8 @@ namespace Digital.Contact.Models
         /// </summary>
         public int ProvinceID { get; set; }
 
+
+
         /// <summary>
         /// 从XML中获取城市ID
         /// </summary>
@@ -74,7 +76,12 @@ namespace Digital.Contact.Models
         public virtual ICollection<GoodAtWhatModel> GoodAtWhatModels { get; set; }
 
 
+        public string[] ProvinceNameAndCityName()
+        {
+            
+            return Digital.Common.Utilities.XmlUtil.ReadPCityNameXml(ProvinceID, CityID);
 
+        }
 
 
 

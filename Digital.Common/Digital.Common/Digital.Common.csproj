@@ -84,6 +84,7 @@
     <Compile Include="Utilities\NPOI\ExcelReporter.cs" />
     <Compile Include="Utilities\Pdf\PdfHelper.cs" />
     <Compile Include="Utilities\Serializer.cs" />
+    <Compile Include="Utilities\XmlUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\Excel\NPOI.dll" />

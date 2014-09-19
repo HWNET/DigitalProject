@@ -29,38 +29,41 @@
             <ul class="profile-social-list">
                 <li><i class="fa fa-qq"></i>@Model.UsersInfoModel.QQ</li>
                 <li><i class="fa fa-envelope"></i>@Model.UsersInfoModel.Email</li>
-                <li><i class="glyphicon glyphicon-phone"></i>@Model.UsersInfoModel.Tel</li>
+                <li><i class="fa fa-phone"></i>@Model.UsersInfoModel.Tel</li>
                 <li><i class="fa fa-envelope-o"></i>@Model.UsersInfoModel.Zip</li>
             </ul>
 
             <div class="mb30"></div>
 
-            <h5 class="subtitle">地 区</h5>
-            <address>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                <abbr title="Phone">P:</abbr> (123) 456-7890
-            </address>
+
 
         </div><!-- col-sm-3 -->
         <div class="col-sm-9">
 
             <div class="profile-header">
                 <h2 class="profile-name">@Model.UsersInfoModel.NickName</h2>
-                <div class="profile-location"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-                <div class="profile-position"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">SomeCompany, Inc.</a></div>
+                @{
+                    string[] PCModelList = Model.UsersInfoModel.ProvinceNameAndCityName();
+                    string Skills = string.Empty;
+                    foreach (var WhatModel in Model.UsersInfoModel.GoodAtWhatModels)
+                    {
+                        Skills += WhatModel.SkillsModel.Name + ",";
+                    }
+                    
+                    Skills = Skills.Trim(',');
+                }
+                <div class="profile-location"><i class="fa fa-map-marker"></i> @PCModelList[0], @PCModelList[1]</div>
+                <div class="profile-position"><i class="fa fa-briefcase"></i> @Skills</div>
 
                 <div class="mb20"></div>
 
-                <button class="btn btn-success mr5"><i class="fa fa-user"></i> Follow</button>
-                <button class="btn btn-white"><i class="fa fa-envelope-o"></i> Message</button>
+                <button class="btn btn-success mr5"><i class="fa fa-user"></i>申请企业资质</button>
             </div><!-- profile-header -->
             <!-- Nav tabs -->
             <ul class="nav nav-tabs nav-justified nav-profile">
-                <li class="active"><a href="#activities" data-toggle="tab"><strong>Activities</strong></a></li>
-                <li><a href="#followers" data-toggle="tab"><strong>Followers</strong></a></li>
-                <li><a href="#following" data-toggle="tab"><strong>Following</strong></a></li>
-                <li><a href="#events" data-toggle="tab"><strong>My Events</strong></a></li>
+                <li class="active"><a href="#activities" data-toggle="tab"><strong>我的项目</strong></a></li>
+                <li><a href="#followers" data-toggle="tab"><strong>中标项目</strong></a></li>
+                <li><a href="#following" data-toggle="tab"><strong>我的创意</strong></a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -437,130 +440,6 @@
 
                     <button class="btn btn-white btn-block">Show More</button>
 
-                </div>
-                <div class="tab-pane" id="events">
-                    <div class="events">
-                        <h5 class="subtitle">Upcoming Events</h5>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Free Living Trust Seminar</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> Silicon Valley, San Francisco, CA</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Sunday, January 15, 2014 at 11:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Serious Games Seminar</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> New York City</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Monday, January 14, 2014 at 8:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Travel &amp; Adventure Show</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> Los Angeles, CA</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Friday, January 12, 2014 at 8:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Mobile Games Summit</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> Bay Area, San Francisco</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Saturday, January 10, 2014 at 8:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-                        </div>
-
-                        <br />
-
-                        <h5 class="subtitle">Past Events</h5>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Free Living Trust Seminar</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> Silicon Valley, San Francisco, CA</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Sunday, January 15, 2014 at 11:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Serious Games Seminar</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> New York City</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Monday, January 14, 2014 at 8:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Travel &amp; Adventure Show</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> Los Angeles, CA</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Friday, January 12, 2014 at 8:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="holder.js/100x120" tppabs="http://themepixels.com/demo/webpage/bracket/holder.js/100x120" alt="" />
-                                    </a>
-                                    <div class="media-body event-body">
-                                        <h4 class="event-title"><a href="">Mobile Games Summit</a></h4>
-                                        <small class="text-muted"><i class="fa fa-map-marker"></i> Bay Area, San Francisco</small>
-                                        <small class="text-muted"><i class="fa fa-calendar"></i> Saturday, January 10, 2014 at 8:00am</small>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                                    </div>
-                                </div><!-- media -->
-                            </div><!-- col-sm-6 -->
-                        </div>
-
-                    </div><!-- events -->
                 </div>
             </div><!-- tab-content -->
 

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Digital.Web.Controllers
 {
@@ -14,16 +16,12 @@ namespace Digital.Web.Controllers
        
 
         private static UsersService UserBll=null;
+        public string CacheUserKey = "Users.";
+        public UsersModel _user { get; set; }
 
         private bool GetUserLogin()
         {
-            UsersModel Models = new UsersModel();
-            
-            if (UserBll == null)
-            {
-                UserBll = new UsersService();
-            }
-            var _user = UserBll.FindByName(User.Identity.Name);
+            _user= GetUser();
             if (_user != null)
             {
                 return true;
@@ -42,14 +40,20 @@ namespace Digital.Web.Controllers
 
         public UsersModel GetUser()
         {
-            UsersModel Models = new UsersModel();
+            #region
+            //UsersModel Models = new UsersModel();
 
-            if (UserBll == null)
-            {
-                UserBll = new UsersService();
-            }
-            var _user = UserBll.FindByName(User.Identity.Name);
-            return _user;
+            //if (UserBll == null)
+            //{
+            //    UserBll = new UsersService();
+            //}
+            //if (_user == null)
+            //{
+            //    _user = UserBll.FindByName(User.Identity.Name);
+            //}
+            //return _user;
+            #endregion
+            return OperatorFactory.GetCache<UsersModel>(CacheUserKey + User.Identity.GetUserId());
         }
 
         public ActionResult BaseList<T, S>(int? PageIndex, Func<T, bool> where, bool IsAsc, Func<T, S> orderByLambda) where T : new()
