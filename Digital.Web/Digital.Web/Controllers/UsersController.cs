@@ -21,7 +21,15 @@ namespace Digital.Web.Controllers
         public ActionResult Index(int? PageIndex)
         {
             ViewBag.MenuModel = base.GetMenu(2);
-            return View(base.GetUser());
+           var UserModel=  OperatorFactory.GetUser(User.Identity.GetUserId());
+           if (UserModel != null)
+           {
+               return View(UserModel);
+           }
+           else
+           {
+               return HttpNotFound();
+           }
             //if (!string.IsNullOrEmpty(Request["name"]))
             //{
             //    return SearchFun(PageIndex);

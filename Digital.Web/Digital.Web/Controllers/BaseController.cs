@@ -21,7 +21,7 @@ namespace Digital.Web.Controllers
 
         private bool GetUserLogin()
         {
-            _user= GetUser();
+            _user = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (_user != null)
             {
                 return true;
@@ -38,23 +38,7 @@ namespace Digital.Web.Controllers
            return MenuBll.GetMenuModel(Id);
         }
 
-        public UsersModel GetUser()
-        {
-            #region
-            //UsersModel Models = new UsersModel();
-
-            //if (UserBll == null)
-            //{
-            //    UserBll = new UsersService();
-            //}
-            //if (_user == null)
-            //{
-            //    _user = UserBll.FindByName(User.Identity.Name);
-            //}
-            //return _user;
-            #endregion
-            return OperatorFactory.GetCache<UsersModel>(CacheUserKey + User.Identity.GetUserId());
-        }
+       
 
         public ActionResult BaseList<T, S>(int? PageIndex, Func<T, bool> where, bool IsAsc, Func<T, S> orderByLambda) where T : new()
         {

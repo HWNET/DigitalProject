@@ -1,4 +1,5 @@
 ﻿using Digital.Contact.BLL;
+using Digital.Contact.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,7 +12,7 @@ namespace Digital.Web.Controllers
     public class OperatorFactory
     {
 
-
+        public static string CacheUserKey = "Users.";
         public static IBaseService<T> CreateDBOperator<T>(string classname)
         {
             object objType = null;
@@ -36,6 +37,13 @@ namespace Digital.Web.Controllers
 
             return (IBaseService<T>)objType;
         }
+
+
+        public static UsersModel GetUser(string UserId)
+        {
+            return GetCache<UsersModel>(CacheUserKey + UserId);
+        }
+
 
 
         public static void InsertCache<T>(T Model,string Key)
