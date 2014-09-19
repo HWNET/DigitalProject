@@ -54,10 +54,32 @@ namespace Digital.Contact.BLL
             {
                 try
                 {
-                    var User = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").Where(o => o.Name == UserName).SingleOrDefault();
-                    if (User != null)
+                    //ar User = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").Where(o => o.Name == UserName).SingleOrDefault();
+
+                    var User = db.UsersModels.Join(db.UsersInfoModel, a => a.UsersInfoID.Value, b => b.UsersInfoID,
+                        (a, b) => new { a, b }).Join(db.GoodAtWhatModel, c => c.b.GoodAtWhatID, d => d.GoodAtWhatID,
+                        (c, d) => new { c,d }).Join(db.SkillsModel,e=>e.d.SkillId,f=>f.SkillId,
+                        (e, f) => new { e, f }).Where(g => g.e.c.a.Name == UserName).SingleOrDefault();
+
+                    //UsersModel  User.e.c.a.
+                    var UsersModel = new UsersModel
                     {
-                        return User;
+                               CompanyID=User.e.c.a.CompanyID.Value,
+                                ID=User.e.c.a.ID,
+                                 IdeaModelList=User.e.c.a.IdeaModelList,
+                                  LastLoginTime=User.e.c.a.LastLoginTime,
+                                   LoginIP=User.e.c.a.LoginIP,
+                                    Name=User.e.c.a.Name,
+                                     Passwords=User.e.c.a.Passwords,
+                                      RegisterDate=User.e.c.a.RegisterDate,
+                                       Status=User.e.c.a.Status,
+                                        UsersInfoID=User.e.c.a.UsersInfoID,
+                                         UsersInfoModel=User.e.c.a.UsersInfoModel,
+                                          UserTypeID=User.e.c.a.UserTypeID,
+                    };
+                    if (UsersModel != null)
+                    {
+                        return UsersModel;
                     }
                     else
                     {
