@@ -54,45 +54,23 @@ namespace Digital.Contact.BLL
             {
                 try
                 {
-                    //ar User = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").Where(o => o.Name == UserName).SingleOrDefault();
-                    var UserToInfo = db.UsersModels.Join(db.UsersInfoModel, a => a.UsersInfoID.Value, b => b.UsersInfoID,
-                        (a, b) => new { a, b }).ToList().Select(p => { p.a.UsersInfoModel = p.b; return p.a; });
-                    var UserToInfoToGood = UserToInfo.Join(db.GoodAtWhatModel, a => a.UsersInfoModel.GoodAtWhatID, b => b.GoodAtWhatID,
-                        (a, b) => new { a, b }).ToList().Select(p => { p.a.UsersInfoModel.GoodAtWhatModels.Add(
-                                new GoodAtWhatModel{ GoodAtWhatID=p.b.GoodAtWhatID, SkillId=p.b.SkillId, SkillsModel=p.b.SkillsModel}
-                            ); return p.a;
-                        });
-                    var SkillToGood=db.SkillsModel.Join(db.GoodAtWhatModel,a=>a.SkillId,b=>b.SkillId,
-                        (a, b) => new { a,b}).ToList().Select(p=>{p.b.SkillsModel=p.a;return p.a;});
+                    var UsersModel = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").Where(o => o.Name == UserName).SingleOrDefault();
 
-                    var lstGoods=db.GoodAtWhatModel.ToList();
-                    var lstSkills=SkillToGood.ToList();
+                    //var UserToInfo = (from a in db.UsersModels
+                    //                 join b in db.UsersInfoModel
+                    //                 on a.UsersInfoID equals b.UsersInfoID
+                    //                 select new { a, b,a.UsersInfoModel }).ToList();
+                    //var UserToInfoToGood = (from c in UserToInfo
+                    //                       join d in db.GoodAtWhatModel
+                    //                       on c.a.UsersInfoModel.GoodAtWhatID equals d.GoodAtWhatID
+                    //                       select new { c, d }).ToList();
+                    //var UserToInfoToGoodToSkill = (from e in UserToInfoToGood
+                    //                              join f in db.SkillsModel
+                    //                              on e.d.SkillId equals f.SkillId
+                    //                              select new { e, f }).ToList();
 
-                    //var UserToInfoToGoodToSkill
-                    var UsersModel = UserToInfoToGood.Where(t => t.Name == UserName && lstSkills.Where(s => s.SkillId == (lstGoods.Where(g => g.GoodAtWhatID == t.UsersInfoModel.GoodAtWhatID).SingleOrDefault()).SkillId).SingleOrDefault() != null).SingleOrDefault();
+                    //var UsersModel = UserToInfoToGoodToSkill.ToList().Where(p => p.e.c.a.Name == UserName).SingleOrDefault();
 
-
-                    //var User = db.UsersModels.Join(db.UsersInfoModel, a => a.UsersInfoID.Value, b => b.UsersInfoID,
-                    //    (a, b) => new { a, b }).Join(db.GoodAtWhatModel, c => c.b.GoodAtWhatID, d => d.GoodAtWhatID,
-                    //    (c, d) => new { c,d }).Join(db.SkillsModel,e=>e.d.SkillId,f=>f.SkillId,
-                    //    (e, f) => new { e, f }).Where(g => g.e.c.a.Name == UserName).SingleOrDefault();
-
-                    ////UsersModel  User.e.c.a.
-                    //var UsersModel = new UsersModel
-                    //{
-                    //           CompanyID=User.e.c.a.CompanyID.Value,
-                    //            ID=User.e.c.a.ID,
-                    //             IdeaModelList=User.e.c.a.IdeaModelList,
-                    //              LastLoginTime=User.e.c.a.LastLoginTime,
-                    //               LoginIP=User.e.c.a.LoginIP,
-                    //                Name=User.e.c.a.Name,
-                    //                 Passwords=User.e.c.a.Passwords,
-                    //                  RegisterDate=User.e.c.a.RegisterDate,
-                    //                   Status=User.e.c.a.Status,
-                    //                    UsersInfoID=User.e.c.a.UsersInfoID,
-                    //                     UsersInfoModel=User.e.c.a.UsersInfoModel,
-                    //                      UserTypeID=User.e.c.a.UserTypeID,
-                    //};
                     if (UsersModel != null)
                     {
                         return UsersModel;
