@@ -37,6 +37,20 @@ namespace Digital.Web.Controllers
             //return base.BaseList<UsersModel>(PageIndex);
         }
 
+        public ActionResult UserSafe()
+        {
+            ViewBag.MenuModel = base.GetMenu(3);
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null)
+            {
+                return View(UserModel);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
 
         [HttpPost, ActionName("Index")]
         [ValidateAntiForgeryToken]

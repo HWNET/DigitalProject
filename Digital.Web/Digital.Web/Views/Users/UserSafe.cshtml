@@ -1,0 +1,210 @@
+﻿@model Digital.Contact.Models.UsersModel
+@{
+    ViewBag.Title = "UserSafe";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+<script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 个人中心 <span>安全设置</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">个人中心</a></li>
+            <li class="active">安全设置</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+
+                    </div>
+                    <h4 class="panel-title">个人信息设置</h4>
+                </div>
+                <div class="panel-body panel-body-nopadding">
+
+                    <!-- BASIC WIZARD -->
+                    <div id="validationWizard" class="basic-wizard">
+
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="#vtab2" data-toggle="tab"> 基本信息</a></li>
+                            <li><a href="#vtab3" data-toggle="tab"> 个人介绍</a></li>
+                            <li><a href="#vtab4" data-toggle="tab"> 擅长技能</a></li>
+                        </ul>
+
+                        <form class="form" id="firstForm">
+                            <div class="tab-content">
+                                <div class="tab-pane" id="vtab2">
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">真实姓名</label>
+                                        <div class="col-md-2">
+                                            <input type="text" name="TrueName" value="@Model.UsersInfoModel.TrueName" class="form-control" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">昵称</label>
+                                        <div class="col-md-2">
+                                            <input type="text" name="NickName" value="@Model.UsersInfoModel.NickName" class="form-control" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                      
+
+                                            <label class="col-sm-1 control-label">性别</label>
+                                            <div class="col-sm-5">
+                                                <div class="rdio rdio-primary">
+                                                    <input type="radio" name="radio" value="0" id="radioPrimary" />
+                                                    <label for="radioPrimary">男</label>
+                                                </div>
+                                                <div class="rdio rdio-primary">
+                                                    <input type="radio" name="radio" value="1" id="radioPrimary1" />
+                                                    <label for="radioPrimary1">女</label>
+                                                </div>
+                                            </div>
+
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">电话</label>
+                                        <div class="col-md-2">
+                                            <input type="text" name="NickName" value="@Model.UsersInfoModel.Tel" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">地区</label>
+                                        <div class="col-md-4">
+                                            <label class="col-md-1 control-label">省</label>
+                                            <div class="col-md-5">
+                                                <select style="display: none;" class="form-control chosen-select">
+                                                    <option value="0">男</option>
+                                                    <option value="1">女</option>
+                                                </select>
+                                            </div>
+                                            <label class="col-md-1 control-label">市</label>
+                                            <div class="col-md-5">
+                                                <select style="display: none;" class="form-control chosen-select">
+                                                    <option value="0">男</option>
+                                                    <option value="1">女</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">QQ</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="QQ" value="@Model.UsersInfoModel.QQ" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">Email</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="Email" value="@Model.UsersInfoModel.Email" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">邮编</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" name="Zip" value="@Model.UsersInfoModel.Zip" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="vtab3">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Card No</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="cardno" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Expiration</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control">
+                                                <option value="">Month</option>
+                                                <option value="">January</option>
+                                                <option value="">February</option>
+                                                <option value="">March</option>
+                                                <option value="">...</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <select class="form-control">
+                                                <option value="">Year</option>
+                                                <option value="">2013</option>
+                                                <option value="">2014</option>
+                                                <option value="">2015</option>
+                                                <option value="">...</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">CSV</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="csv" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div><!-- tab-content -->
+                        </form>
+
+                        <ul class="pager wizard">
+
+                            <li class="next"><a href="javascript:void(0)">保 存</a></li>
+                        </ul>
+
+                    </div><!-- #validationWizard -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function () {
+
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+        jQuery('#validationWizard').bootstrapWizard();
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+
+        jQuery('#validationWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
+                return false;
+            },
+            onNext: function (tab, navigation, index) {
+                var $valid = jQuery('#firstForm').valid();
+                if (!$valid) {
+
+                    $validator.focusInvalid();
+                    return false;
+                }
+            }
+        });
+
+
+    });
+</script>
