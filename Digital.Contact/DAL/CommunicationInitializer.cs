@@ -44,16 +44,18 @@ namespace Digital.Contact.DAL
                   new GoodAtWhatModel{SkillsModel= new SkillsModel{Name="mysql"}},
                   new GoodAtWhatModel{SkillsModel= new SkillsModel{Name="oracle"}},
             };
-            var Users = new List<UsersModel>
+            var Users = new List<UsersModel>();
+            //var UserModel1 = new UsersModel { Name = "1", RegisterDate = DateTime.Now, Passwords = "4eNgC+ewzLk=", LoginIP = "", LastLoginTime = DateTime.Now, Status = 1, IdeaModelList = Ideas2, UsersInfoModel = new UsersInfoModel { DisplayPicture = "../DigitalStyle/images/photos/profile-1.png", QQ = "49718751", Email = "49718751@QQ.com", NickName = "路西法", Sex = 0, TrueName = "龙俊", Zip = "430062", BeGoodAtIntroduction = "好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍", CityID = 1, ProvinceID = 1, Tel = "15071410434", GoodAtWhatModels = GoodAtWhat } };
+            for (int i = 1; i < 2; i++)
             {
-               
-                 new UsersModel{Name="1",RegisterDate=DateTime.Now,Passwords="4eNgC+ewzLk=",LoginIP="",LastLoginTime=DateTime.Now,Status=1,IdeaModelList=Ideas2,UsersInfoModel=new UsersInfoModel{DisplayPicture="../DigitalStyle/images/photos/profile-1.png",QQ="49718751",Email="49718751@QQ.com",NickName="路西法",Sex=0,TrueName="龙俊",Zip="430062",BeGoodAtIntroduction="好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍",CityID=1,ProvinceID=1,Tel="15071410434",GoodAtWhatModels=GoodAtWhat}},
-            };
+                Users.Add(new UsersModel { Name = i.ToString(), RegisterDate = DateTime.Now, Passwords = "4eNgC+ewzLk=", LoginIP = "", LastLoginTime = DateTime.Now, Status = 1, IdeaModelList = Ideas2, UsersInfoModel = new UsersInfoModel { DisplayPicture = "../DigitalStyle/images/photos/profile-1.png", QQ = "49718751", Email = "49718751@QQ.com", NickName = "路西法", Sex = 0, TrueName = "龙俊", Zip = "430062", BeGoodAtIntroduction = "好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍好多好多好多好介绍", CityID = 1, ProvinceID = 1, Tel = "15071410434", GoodAtWhatModels = GoodAtWhat } });
+            }
+           
 
             var Menus = new List<MenuModel> { 
                 new MenuModel{ID=1 ,MenuName="用户中心",Style="fa fa-user", OtherName="",ParentId=1,Url="../Users/Index"},
                 new MenuModel{ID=2 ,MenuName="个人资料",Style="fa fa-edit",OtherName="",ParentId=1,Url="../Users/Index"},
-                 new MenuModel{ID=3 ,MenuName="安全设置",Style="fa fa-lock",OtherName="",ParentId=1,Url=""},
+                 new MenuModel{ID=3 ,MenuName="安全设置",Style="fa fa-lock",OtherName="",ParentId=1,Url="../Users/UserSafe"},
                   new MenuModel{ID=4 ,MenuName="收货地址",Style="fa fa-truck",OtherName="",ParentId=1,Url=""},
                    new MenuModel{ID=5 ,MenuName="威客交易",Style="fa fa-money",OtherName="",ParentId=5,Url=""},
                     new MenuModel{ID=6 ,MenuName="我的项目",Style="fa fa-cube",OtherName="",ParentId=5,Url=""},

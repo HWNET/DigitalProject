@@ -70,11 +70,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLLTEST\IRepository.cs" />
-    <Compile Include="BLLTEST\ObjectContextRepositoryBase.cs" />
-    <Compile Include="BLLTEST\RepositoryBase.cs" />
-    <Compile Include="BLLtest1\EFRepository.cs" />
-    <Compile Include="BLLtest1\IEFRepository.cs" />
     <Compile Include="BLL\BaseService.cs" />
     <Compile Include="BLL\MenuService.cs" />
     <Compile Include="BLL\RelationTableService.cs" />
