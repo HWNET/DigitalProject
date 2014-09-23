@@ -1,4 +1,5 @@
 ﻿@model Digital.Contact.Models.UsersModel
+@using Digital.Common.Mvc.Extensions
 @{
     ViewBag.Title = "UserSafe";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
@@ -56,19 +57,19 @@
 
                                     <div class="form-group">
 
-                                      
 
-                                            <label class="col-sm-1 control-label">性别</label>
-                                            <div class="col-sm-5">
-                                                <div class="rdio rdio-primary">
-                                                    <input type="radio" name="radio" value="0" id="radioPrimary" />
-                                                    <label for="radioPrimary">男</label>
-                                                </div>
-                                                <div class="rdio rdio-primary">
-                                                    <input type="radio" name="radio" value="1" id="radioPrimary1" />
-                                                    <label for="radioPrimary1">女</label>
-                                                </div>
+
+                                        <label class="col-sm-1 control-label">性别</label>
+                                        <div class="col-sm-5">
+                                            <div class="rdio rdio-primary">
+                                                <input type="radio" @Html.IsChecked(Model.UsersInfoModel.Sex==0) name="radio" value="0" id="radioPrimary" />
+                                                <label for="radioPrimary">男</label>
                                             </div>
+                                            <div class="rdio rdio-primary">
+                                                <input type="radio" @Html.IsChecked(Model.UsersInfoModel.Sex == 1) name="radio" value="1" id="radioPrimary1" />
+                                                <label for="radioPrimary1">女</label>
+                                            </div>
+                                        </div>
 
 
 
@@ -84,16 +85,14 @@
                                         <div class="col-md-4">
                                             <label class="col-md-1 control-label">省</label>
                                             <div class="col-md-5">
-                                                <select style="display: none;" class="form-control chosen-select">
-                                                    <option value="0">男</option>
-                                                    <option value="1">女</option>
+                                                <select id="Province" style="display: none;" class="form-control chosen-select">
+                                                    <option value="0">请选择</option>
                                                 </select>
                                             </div>
                                             <label class="col-md-1 control-label">市</label>
                                             <div class="col-md-5">
-                                                <select style="display: none;" class="form-control chosen-select">
-                                                    <option value="0">男</option>
-                                                    <option value="1">女</option>
+                                                <select id="City" style="display: none;" class="form-control chosen-select">
+                                                    <option value="0">请选择</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -177,8 +176,85 @@
 </div>
 <script>
     jQuery(document).ready(function () {
+        @{
+              string IsProvince = "";
+              if (Model.UsersInfoModel.ProvinceID != null && Model.UsersInfoModel.ProvinceID != 0)
+              {
+                  IsProvince = Model.UsersInfoModel.ProvinceID.ToString();
+              }
+              else
+              {
+                  IsProvince = "0";
+              }
+              string IsCity = "";
+              if (Model.UsersInfoModel.CityID != null && Model.UsersInfoModel.CityID != 0)
+              {
+                  IsCity = Model.UsersInfoModel.CityID.ToString();
+              }
+              else
+              {
+                  IsCity = "0";
+              }
+          }
+        function City(selectvalue)
+        {
+            jQuery.ajax({
+                url: "../XML/City.xml",
+                type: "get",
+                datatype: "xml",
+                success: function (xmldoc) {
+                    jQuery("#City").find("option").remove();
+                    jQuery("#City").append("<option  value='0'>请选择</option>");
+                    jQuery(xmldoc).find("Root>Province[ID="+selectvalue+"]").each(function(){
+                        jQuery(this).find("City").each(function(){
+                            if(@IsCity==jQuery(this).attr("ID"))
+                            {
+                                jQuery("#City").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                            }
+                            else
+                            {
+                                jQuery("#City").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                            }
+                        })
+                    })
 
-        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                    jQuery("#City").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                    $("#City").trigger("chosen:updated");
+                }
+            });
+        }
+        jQuery.ajax({
+            url: "../XML/City.xml",
+            type: "get",
+            datatype: "xml",
+            success: function (xmldoc) {
+
+                var valueList = jQuery(xmldoc).find("Province");
+                jQuery(valueList).each(function () {
+
+                    if(@IsProvince == jQuery(this).attr("ID"))
+                    {
+                        jQuery("#Province").append("<option selected value='" + jQuery(this).attr("ID") + "'>" + jQuery(this).attr("Name") + "</option>");
+                        City(jQuery(this).attr("ID"));
+                    }
+                    else
+                    {
+                        jQuery("#Province").append("<option value='" + jQuery(this).attr("ID") + "'>" + jQuery(this).attr("Name") + "</option>");
+                    }
+                })
+                jQuery("#Province").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                $("#Province").trigger("chosen:updated");
+            }
+        });
+
+
+
+        jQuery("#Province").change(function(){
+            var selectvalue = jQuery(this).val();
+            City(selectvalue);
+        });
+
+
         jQuery('#validationWizard').bootstrapWizard();
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
@@ -201,6 +277,32 @@
 
                     $validator.focusInvalid();
                     return false;
+                }
+                else
+                {
+                    jQuery.ajax({
+                        url: "../XML/City.xml",
+                        type: "get",
+                        datatype: "xml",
+                        success: function (xmldoc) {
+
+                            var valueList = jQuery(xmldoc).find("Province");
+                            jQuery(valueList).each(function () {
+
+                                if(@IsProvince == jQuery(this).attr("ID"))
+                                {
+                                    jQuery("#Province").append("<option selected value='" + jQuery(this).attr("ID") + "'>" + jQuery(this).attr("Name") + "</option>");
+                                    City(jQuery(this).attr("ID"));
+                                }
+                                else
+                                {
+                                    jQuery("#Province").append("<option value='" + jQuery(this).attr("ID") + "'>" + jQuery(this).attr("Name") + "</option>");
+                                }
+                            })
+                            jQuery("#Province").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                            $("#Province").trigger("chosen:updated");
+                        }
+                    });
                 }
             }
         });
