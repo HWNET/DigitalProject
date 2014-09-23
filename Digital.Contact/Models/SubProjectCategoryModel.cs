@@ -7,11 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Digital.Contact.Models
 {
-    public class DepartmentModel
+    public class SubProjectCategoryModel
     {
         [Key]
-        public int DepartmentID { get; set; }
-        public string DepartmentName { get; set; }
+        public int SubProjectCateID { get; set; }
+        public string SubProjectCateName { get; set; }
 
+        public virtual ICollection<SubProjectModel> SubProjectModels { get; set; }
     }
 }

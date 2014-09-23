@@ -54,26 +54,11 @@ namespace Digital.Contact.BLL
             {
                 try
                 {
-                    var UsersModel = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").Where(o => o.Name == UserName).SingleOrDefault();
+                    var Users = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").Where(o => o.Name == UserName).SingleOrDefault();
 
-                    //var UserToInfo = (from a in db.UsersModels
-                    //                 join b in db.UsersInfoModel
-                    //                 on a.UsersInfoID equals b.UsersInfoID
-                    //                 select new { a, b,a.UsersInfoModel }).ToList();
-                    //var UserToInfoToGood = (from c in UserToInfo
-                    //                       join d in db.GoodAtWhatModel
-                    //                       on c.a.UsersInfoModel.GoodAtWhatID equals d.GoodAtWhatID
-                    //                       select new { c, d }).ToList();
-                    //var UserToInfoToGoodToSkill = (from e in UserToInfoToGood
-                    //                              join f in db.SkillsModel
-                    //                              on e.d.SkillId equals f.SkillId
-                    //                              select new { e, f }).ToList();
-
-                    //var UsersModel = UserToInfoToGoodToSkill.ToList().Where(p => p.e.c.a.Name == UserName).SingleOrDefault();
-
-                    if (UsersModel != null)
+                    if (Users != null)
                     {
-                        return UsersModel;
+                        return Users;
                     }
                     else
                     {
