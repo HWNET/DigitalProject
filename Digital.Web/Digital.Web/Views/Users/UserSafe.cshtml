@@ -4,8 +4,11 @@
     ViewBag.Title = "UserSafe";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
+<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
 <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
 <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
+<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 个人中心 <span>安全设置</span></h2>
     <div class="breadcrumb-wrapper">
@@ -28,7 +31,7 @@
                     <h4 class="panel-title">个人信息设置</h4>
                 </div>
                 <div class="panel-body panel-body-nopadding">
-
+                    @Html.AntiForgeryToken()
                     <!-- BASIC WIZARD -->
                     <div id="validationWizard" class="basic-wizard">
 
@@ -44,14 +47,14 @@
                                     <div class="form-group">
                                         <label class="col-md-1 control-label">真实姓名</label>
                                         <div class="col-md-2">
-                                            <input type="text" name="TrueName" value="@Model.UsersInfoModel.TrueName" class="form-control" required />
+                                            <input type="text" id="TrueName" value="@Model.UsersInfoModel.TrueName" class="form-control" required />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-1 control-label">昵称</label>
                                         <div class="col-md-2">
-                                            <input type="text" name="NickName" value="@Model.UsersInfoModel.NickName" class="form-control" required />
+                                            <input type="text" id="NickName" value="@Model.UsersInfoModel.NickName" class="form-control" required />
                                         </div>
                                     </div>
 
@@ -62,11 +65,11 @@
                                         <label class="col-sm-1 control-label">性别</label>
                                         <div class="col-sm-5">
                                             <div class="rdio rdio-primary">
-                                                <input type="radio" @Html.IsChecked(Model.UsersInfoModel.Sex==0) name="radio" value="0" id="radioPrimary" />
+                                                <input type="radio" @Html.IsChecked(Model.UsersInfoModel.Sex == 0) name="sex" value="0" id="radioPrimary" />
                                                 <label for="radioPrimary">男</label>
                                             </div>
                                             <div class="rdio rdio-primary">
-                                                <input type="radio" @Html.IsChecked(Model.UsersInfoModel.Sex == 1) name="radio" value="1" id="radioPrimary1" />
+                                                <input type="radio" @Html.IsChecked(Model.UsersInfoModel.Sex == 1) name="sex" value="1" id="radioPrimary1" />
                                                 <label for="radioPrimary1">女</label>
                                             </div>
                                         </div>
@@ -77,7 +80,7 @@
                                     <div class="form-group">
                                         <label class="col-md-1 control-label">电话</label>
                                         <div class="col-md-2">
-                                            <input type="text" name="NickName" value="@Model.UsersInfoModel.Tel" class="form-control" required />
+                                            <input type="text" id="Tel" value="@Model.UsersInfoModel.Tel" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -100,61 +103,34 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label">QQ</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="QQ" value="@Model.UsersInfoModel.QQ" class="form-control" required />
+                                            <input type="text" id="QQ" value="@Model.UsersInfoModel.QQ" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label">Email</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="Email" value="@Model.UsersInfoModel.Email" class="form-control" required />
+                                            <input type="text" id="Email" value="@Model.UsersInfoModel.Email" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label">邮编</label>
                                         <div class="col-sm-5">
-                                            <input type="text" name="Zip" value="@Model.UsersInfoModel.Zip" class="form-control" required />
+                                            <input type="text" id="Zip" value="@Model.UsersInfoModel.Zip" class="form-control" required />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="tab-pane" id="vtab3">
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Card No</label>
+                                        <label class="col-sm-1 control-label">个人介绍</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="cardno" class="form-control" />
+                                            <textarea rows="5" class="form-control"  name="BeGoodAtIntroduction">@Model.UsersInfoModel.BeGoodAtIntroduction</textarea>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Expiration</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control">
-                                                <option value="">Month</option>
-                                                <option value="">January</option>
-                                                <option value="">February</option>
-                                                <option value="">March</option>
-                                                <option value="">...</option>
-                                            </select>
-                                        </div>
+                                   
 
-                                        <div class="col-sm-4">
-                                            <select class="form-control">
-                                                <option value="">Year</option>
-                                                <option value="">2013</option>
-                                                <option value="">2014</option>
-                                                <option value="">2015</option>
-                                                <option value="">...</option>
-                                            </select>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">CSV</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="csv" class="form-control" />
-                                        </div>
-                                    </div>
+                                   
 
                                 </div>
 
@@ -164,7 +140,7 @@
 
                         <ul class="pager wizard">
 
-                            <li class="next"><a href="javascript:void(0)">保 存</a></li>
+                            <li><a class="btn btn-info" href="javascript:Save()">保 存</a></li>
                         </ul>
 
                     </div><!-- #validationWizard -->
@@ -255,7 +231,7 @@
         });
 
 
-        jQuery('#validationWizard').bootstrapWizard();
+        //jQuery('#validationWizard').bootstrapWizard();
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
             highlight: function (element) {
@@ -266,47 +242,83 @@
             }
         });
 
-        jQuery('#validationWizard').bootstrapWizard({
-            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
-            onTabClick: function (tab, navigation, index) {
-                return false;
-            },
-            onNext: function (tab, navigation, index) {
-                var $valid = jQuery('#firstForm').valid();
-                if (!$valid) {
+        //jQuery('#validationWizard').bootstrapWizard({
+        //    tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+        //    onTabClick: function(tab, navigation, index) {
+        //        return true;
+        //    },
+        //    onNext: function(tab, navigation, index) {
+        //        return false;
+        //    }
+        //});
 
-                    $validator.focusInvalid();
-                    return false;
-                }
-                else
-                {
-                    jQuery.ajax({
-                        url: "../XML/City.xml",
-                        type: "get",
-                        datatype: "xml",
-                        success: function (xmldoc) {
-
-                            var valueList = jQuery(xmldoc).find("Province");
-                            jQuery(valueList).each(function () {
-
-                                if(@IsProvince == jQuery(this).attr("ID"))
-                                {
-                                    jQuery("#Province").append("<option selected value='" + jQuery(this).attr("ID") + "'>" + jQuery(this).attr("Name") + "</option>");
-                                    City(jQuery(this).attr("ID"));
-                                }
-                                else
-                                {
-                                    jQuery("#Province").append("<option value='" + jQuery(this).attr("ID") + "'>" + jQuery(this).attr("Name") + "</option>");
-                                }
-                            })
-                            jQuery("#Province").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                            $("#Province").trigger("chosen:updated");
-                        }
-                    });
-                }
-            }
-        });
+        jQuery('#validationWizard').bootstrapWizard();
 
 
     });
+
+    function Save()
+    {
+        var $valid = jQuery('#firstForm').valid();
+
+        if (!$valid) {
+
+            $validator.focusInvalid();
+            return false;
+        }
+        else
+        {
+            var TabIndex=  $('#validationWizard').bootstrapWizard('currentIndex');
+            var val=$('input:radio[name="sex"]:checked').val();
+         
+            if(TabIndex==0)
+            {
+   
+                $.ajaxAntiForgery({
+                    type: "post",
+                    data: { UsersInfoID:@Model.UsersInfoModel.UsersInfoID,TrueName:$("#TrueName").val(),NickName:$("#NickName").val(),Sex:val,ProvinceID:$("#Province").val(),CityID:$("#City").val(),QQ:$("#QQ").val(),Email:$("#Email").val(),Zip:$("#Zip").val(),Tel:$("#Tel").val()},
+                    url: "/Users/UserSafe",
+                    success: function (data) {
+                        SaveInfo(true,"基础信息");
+                        $('#validationWizard').bootstrapWizard('show',1);
+                    }
+                })
+            }
+            else if(TabIndex==1)
+            {
+                $.ajaxAntiForgery({
+                    type: "post",
+                    data: { UsersInfoID:@Model.UsersInfoModel.UsersInfoID,BeGoodAtIntroduction:$("#BeGoodAtIntroduction").val()},
+                    url: "/Users/UserSafeIntroduction",
+                    success: function (data) {
+                        SaveInfo(true,"个人介绍");
+                        $('#validationWizard').bootstrapWizard('show',2);
+                    }
+                })
+            }
+        }
+    }
+
+    function SaveInfo(IsSuccess,msg)
+    {
+        if(IsSuccess)
+        {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg+'保存成功.',
+                sticky: false,
+                time: ''
+            });
+        }
+        else
+        {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg+'保存失败.',
+                sticky: false,
+                time: ''
+            });
+        }
+
+    }
 </script>

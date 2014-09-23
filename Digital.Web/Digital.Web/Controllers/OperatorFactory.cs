@@ -38,10 +38,30 @@ namespace Digital.Web.Controllers
             return (IBaseService<T>)objType;
         }
 
-
+        /// <summary>
+        /// 获取用户缓存
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
         public static UsersModel GetUser(string UserId)
         {
             return GetCache<UsersModel>(CacheUserKey + UserId);
+        }
+
+        /// <summary>
+        /// 更新用户缓存
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="UserModel"></param>
+        public static void UpdateUserModelCache(string UserId,UsersModel UserModel)
+        {
+            string Key=CacheUserKey + UserId;
+            var obj = HttpContext.Current.Cache.Get(Key);
+            if (obj != null)
+            {
+                HttpContext.Current.Cache.Remove(Key);
+            }
+             HttpContext.Current.Cache.Insert(Key,UserModel);
         }
 
 

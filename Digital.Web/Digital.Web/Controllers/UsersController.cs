@@ -37,6 +37,8 @@ namespace Digital.Web.Controllers
             //return base.BaseList<UsersModel>(PageIndex);
         }
 
+        
+
         public ActionResult UserSafe()
         {
             ViewBag.MenuModel = base.GetMenu(3);
@@ -50,6 +52,77 @@ namespace Digital.Web.Controllers
                 return HttpNotFound();
             }
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserSafe(int UsersInfoID, string TrueName, string NickName, int Sex, int ProvinceID, int CityID, string QQ, string Email, string Zip, string Tel)
+        {
+            if (UsersInfoID != 0)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var userInfosModel = base.BaseFind<UsersInfoModel>(UsersInfoID);
+                userInfosModel.TrueName = TrueName;
+                userInfosModel.NickName = NickName;
+                userInfosModel.Sex = Sex;
+                userInfosModel.ProvinceID = ProvinceID;
+                userInfosModel.CityID = CityID;
+                userInfosModel.QQ = QQ;
+                userInfosModel.Email = Email;
+                userInfosModel.Zip = Zip;
+                userInfosModel.Tel = Tel;
+                if (base.BaseEdit(userInfosModel))
+                {
+                    UsersService bll = new UsersService();
+                    var UserModel = bll.FindByName(User.Identity.GetUserName());
+                    OperatorFactory.UpdateUserModelCache(User.Identity.GetUserId(), UserModel);
+                    return Content("OK");
+                }
+                else 
+                {
+                    return Content("NOK");
+                }
+        
+            }
+            else
+            {
+                return Content("NOK");
+            }
+
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserSafeIntroduction(int UsersInfoID, string BeGoodAtIntroduction)
+        {
+            if (UsersInfoID != 0)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var userInfosModel = base.BaseFind<UsersInfoModel>(UsersInfoID);
+                userInfosModel.BeGoodAtIntroduction = BeGoodAtIntroduction;
+                if (base.BaseEdit(userInfosModel))
+                {
+                    UsersService bll = new UsersService();
+                    var UserModel = bll.FindByName(User.Identity.GetUserName());
+                    OperatorFactory.UpdateUserModelCache(User.Identity.GetUserId(), UserModel);
+                    return Content("OK");
+                }
+                else
+                {
+                    return Content("NOK");
+                }
+
+            }
+            else
+            {
+                return Content("NOK");
+            }
+
+        }
+
+        //UsersInfoID:@Model.UsersInfoModel.UsersInfoID,TrueName:$("#TrueName").val(),NickName:$("#NickName").val(),Sex:val,ProvinceID:$("#Province").val(),CityID:$("#City").val(),QQ:$("#QQ").val(),Email:$("#Email").val(),Zip:$("#Zip").val()
+        
 
 
         [HttpPost, ActionName("Index")]
