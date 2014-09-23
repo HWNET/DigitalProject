@@ -75,6 +75,7 @@
     <Compile Include="BLL\RelationTableService.cs" />
     <Compile Include="BLL\TempColumnService.cs" />
     <Compile Include="BLL\TemplateService.cs" />
+    <Compile Include="BLL\UsersInfoService.cs" />
     <Compile Include="BLL\UsersService.cs" />
     <Compile Include="DAL\CommunicationContext.cs" />
     <Compile Include="DAL\CommunicationInitializer.cs" />
