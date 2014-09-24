@@ -42,6 +42,9 @@ namespace Digital.Web.Controllers
         public ActionResult UserSafe()
         {
             ViewBag.MenuModel = base.GetMenu(3);
+            UsersService bll = new UsersService();
+            var SkillList=  bll.GetSkillList();
+            ViewBag.SkillList = SkillList;
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null)
             {
@@ -121,7 +124,35 @@ namespace Digital.Web.Controllers
 
         }
 
-        //UsersInfoID:@Model.UsersInfoModel.UsersInfoID,TrueName:$("#TrueName").val(),NickName:$("#NickName").val(),Sex:val,ProvinceID:$("#Province").val(),CityID:$("#City").val(),QQ:$("#QQ").val(),Email:$("#Email").val(),Zip:$("#Zip").val()
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserSafeSkill(int UsersInfoID, string SkillStr)
+        {
+            if (UsersInfoID != 0)
+            {
+                UsersService bll = new UsersService();
+                if( bll.UpdateGoodAt(SkillStr.Trim(','),UsersInfoID))
+                {
+                  
+                    var UserModel = bll.FindByName(User.Identity.GetUserName());
+                    OperatorFactory.UpdateUserModelCache(User.Identity.GetUserId(), UserModel);
+                    return Content("OK");
+                }
+                else
+                {
+                    return Content("NOK");
+                }
+
+            }
+            else
+            {
+                return Content("NOK");
+            }
+
+        }
+
+       
         
 
 

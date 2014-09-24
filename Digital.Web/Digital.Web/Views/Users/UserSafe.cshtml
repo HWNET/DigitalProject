@@ -124,16 +124,34 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label">个人介绍</label>
                                         <div class="col-sm-8">
-                                            <textarea rows="5" class="form-control"  name="BeGoodAtIntroduction">@Model.UsersInfoModel.BeGoodAtIntroduction</textarea>
+                                            <textarea rows="5" class="form-control" name="BeGoodAtIntroduction">@Model.UsersInfoModel.BeGoodAtIntroduction</textarea>
                                         </div>
                                     </div>
-
-                                   
-
-                                   
-
                                 </div>
+                                <div class="tab-pane" id="vtab4">
+                                    <div class="form-group">
 
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                @{
+                                                    foreach (var SkillModel in (List<Digital.Contact.Models.SkillsModel>)ViewBag.SkillList)
+                                                    {
+                                                        var IsCheck =string.Empty;
+                                                        if (@Model.UsersInfoModel.GoodAtWhatModels.Any(o => o.SkillId == SkillModel.SkillId))
+                                                        {
+                                                            IsCheck = "Checked=Checked";
+                                                        }
+                                                            
+                                                        <div class="col-sm-3">
+                                                            <div class="checkbox block"><label><input type="checkbox" @IsCheck name="Skill" value="@SkillModel.SkillId"> @SkillModel.Name</label></div>
+                                                        </div>
+                                                    }
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div><!-- tab-content -->
                         </form>
@@ -270,10 +288,10 @@
         {
             var TabIndex=  $('#validationWizard').bootstrapWizard('currentIndex');
             var val=$('input:radio[name="sex"]:checked').val();
-         
+
             if(TabIndex==0)
             {
-   
+
                 $.ajaxAntiForgery({
                     type: "post",
                     data: { UsersInfoID:@Model.UsersInfoModel.UsersInfoID,TrueName:$("#TrueName").val(),NickName:$("#NickName").val(),Sex:val,ProvinceID:$("#Province").val(),CityID:$("#City").val(),QQ:$("#QQ").val(),Email:$("#Email").val(),Zip:$("#Zip").val(),Tel:$("#Tel").val()},
@@ -293,6 +311,25 @@
                     success: function (data) {
                         SaveInfo(true,"个人介绍");
                         $('#validationWizard').bootstrapWizard('show',2);
+                    }
+                })
+            }
+            else if(TabIndex==2)
+            {
+                var SkillStr="";
+                $("[name='Skill']").each(function(){
+   
+                    if( $(this).prop('checked'))
+                    {
+                        SkillStr+=$(this).val()+",";
+                    }
+                })
+                $.ajaxAntiForgery({
+                    type: "post",
+                    data: { UsersInfoID:@Model.UsersInfoModel.UsersInfoID,SkillStr:SkillStr},
+                    url: "/Users/UserSafeSkill",
+                    success: function (data) {
+                        SaveInfo(true,"个人技能");
                     }
                 })
             }

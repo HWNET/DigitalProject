@@ -35,7 +35,14 @@ namespace Digital.Web.Controllers
         public MenuModel GetMenu(int Id)
         {
            var MenuBll = new MenuService();
-           return MenuBll.GetMenuModel(Id);
+           //return MenuBll.GetMenuModel(Id);
+           var MenuList = OperatorFactory.GetCache<List<MenuModel>>("Menu");
+           if (MenuList == null)
+           {
+               MenuList = MenuBll.MenuList();
+               OperatorFactory.InsertCache<List<MenuModel>>(MenuList,"Menu");
+           }
+           return MenuList.Where(o => o.ID == Id).FirstOrDefault();
         }
 
        
@@ -142,5 +149,7 @@ namespace Digital.Web.Controllers
             IBaseService<T> bll = OperatorFactory.CreateDBOperator<T>(ClassName);
             return bll;
         }
+
+       
     }
 }

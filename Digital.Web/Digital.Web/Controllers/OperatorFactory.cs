@@ -38,6 +38,31 @@ namespace Digital.Web.Controllers
             return (IBaseService<T>)objType;
         }
 
+        public static T GreateDBBll<T>(string classname)
+        {
+            object objType = null;
+
+            try
+            {
+                var obj = HttpContext.Current.Cache.Get(classname);
+                if (obj == null)
+                {
+                    //objType = Assembly.Load(AssemblyPath).CreateInstance(ClassNamespace);//反射创建
+                    var Ass = Assembly.Load("Digital.Contact");
+                    objType = Ass.CreateInstance(classname);
+                    HttpContext.Current.Cache.Insert(classname, objType);
+                }
+                else
+                {
+                    return (T)obj;
+                }
+            }
+            catch
+            { }
+
+            return (T)objType;
+        }
+
         /// <summary>
         /// 获取用户缓存
         /// </summary>

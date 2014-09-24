@@ -42,7 +42,12 @@
 <body>
     @{
         MenuService MenuServices = new MenuService();
-        var MenuList = MenuServices.MenuList(int.Parse(User.Identity.GetUserId()));
+        var MenuList= Digital.Web.Controllers.OperatorFactory.GetCache<List< Digital.Contact.Models.MenuModel>>("Menu");
+        if(MenuList==null)
+        { 
+            MenuList = MenuServices.MenuList();
+            Digital.Web.Controllers.OperatorFactory.InsertCache<List<Digital.Contact.Models.MenuModel>>(MenuList, "Menu");
+        }
     }
     <!-- Preloader -->
     <div id="preloader">
