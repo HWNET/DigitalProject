@@ -87,12 +87,10 @@
     <Compile Include="Models\NewsCategoryModel.cs" />
     <Compile Include="Models\NewsCommentModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
-    <Compile Include="Models\ProjectCategoryModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\ProjectProgressModel.cs" />
     <Compile Include="Models\RelationTableModels.cs" />
     <Compile Include="Models\SkillsModel.cs" />
-    <Compile Include="Models\SubProjectCategoryModel.cs" />
     <Compile Include="Models\SubProjectModel.cs" />
     <Compile Include="Models\SupplierModel.cs" />
     <Compile Include="Models\TempColumnModel.cs" />

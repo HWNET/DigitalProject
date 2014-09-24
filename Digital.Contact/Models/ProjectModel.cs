@@ -18,9 +18,9 @@ namespace Digital.Contact.Models
         public string ProjectName { get; set; }
         public string Requirements { get; set; } //项目需求概述
         public string Details { get; set; } //项目详情
-        //???设置隐藏项目详情
-        //隐藏后，发布方该信息可以对固定的人或者人群开放浏览
+        public bool IsVisibleNext { get; set; }//是否让直属下级公开流程
 
+        public DateTime ExpectedStartTime { get; set; } //希望开始日期
         public DateTime ExpectedEndTime { get; set; } //希望完成日期
         public decimal EstimatedMoney { get; set; } //预估开发资金-即开发资金预算
         public int EstimatedQuantity { get; set; } //预计采购数量-（开发完成量产后）
@@ -34,6 +34,6 @@ namespace Digital.Contact.Models
         public int Status { get; set; } // 项目状态 : 1 已发布, 2 已承接 , 3 研发中, 4 等待评估 , 5 已评估 
 
         //外包 子项目
-        public virtual ICollection<SubProjectCategoryModel> SubProjectCategoryModels { get; set; }
+        public virtual ICollection<SubProjectModel> SubProjectModels { get; set; }
     }
 }
