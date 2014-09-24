@@ -11,6 +11,7 @@ namespace Digital.Contact.Models
     {
         [Key]
         public int GoodAtWhatID { get; set; }
+        public int UsersInfoID { get; set; }
         public int SkillId { get; set; }
         public virtual SkillsModel SkillsModel { get; set; }
 

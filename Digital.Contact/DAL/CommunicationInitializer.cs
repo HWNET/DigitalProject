@@ -81,7 +81,6 @@ namespace Digital.Contact.DAL
                                     new MenuModel{ID=26 ,MenuName="进度表",Style="fa fa-tasks",OtherName="",ParentId=21,Url=""}
             };
           
-            Menus.ForEach(c => context.MenuModel.Add(c));
             Ideas2.ForEach(c => context.IdeaModels.Add(c));
             Users.ForEach(c => context.UsersModels.Add(c));
             context.SaveChanges();

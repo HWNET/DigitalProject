@@ -48,6 +48,49 @@ namespace Digital.Contact.BLL
             }
         }
 
+        public List<SkillsModel> GetSkillList()
+        {
+            using (var db = new CommunicationContext())
+            {
+                return db.SkillsModel.ToList();
+            }
+        }
+
+        public bool UpdateGoodAt(string SkillStr, int UsersInfoID)
+        {
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    string[] SkillIds = SkillStr.Split(',');
+                    var SkillList= db.SkillsModel.ToList();
+                    foreach (var SkillModel in SkillList)
+                    {
+                       bool IsInclude=SkillIds.Any(e => e.ToString() == SkillModel.SkillId.ToString());
+                       var GoodModel = db.GoodAtWhatModel.Where(o => o.UsersInfoID == UsersInfoID && o.SkillId == SkillModel.SkillId ).FirstOrDefault();
+                       if (GoodModel != null && !IsInclude)
+                       {
+                           db.GoodAtWhatModel.Remove(GoodModel);
+                       }
+                       else
+                       {
+
+                           if (GoodModel == null && IsInclude)
+                           {
+                               db.GoodAtWhatModel.Add(new GoodAtWhatModel { SkillId = SkillModel.SkillId, UsersInfoID = UsersInfoID });
+                           }
+                       }
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
         public UsersModel FindByName(string UserName)
         {
             using (var db = new CommunicationContext())

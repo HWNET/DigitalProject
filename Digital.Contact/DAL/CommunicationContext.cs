@@ -32,7 +32,6 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.CompanyModel> CompanyModel { get; set; }
 
-        public DbSet<Digital.Contact.Models.MenuModel> MenuModel { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
