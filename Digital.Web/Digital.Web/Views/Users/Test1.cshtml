@@ -45,13 +45,11 @@
     </style>
 
     <div id="holder"></div>
-      <div id="item1" class="item" data-item='{"nodeId":"1","nextNode":"2"}' title="方案">方案</div>
-      <div id="item2" class="item" data-item='{"nodeId":"2","nextNode":"3"}' title="模具">模具</div>
-      <div id="item3" class="item" data-item='{"nodeId":"3","nextNode":"4"}' title="AP">AP</div>
-      <div id="item4" class="item" data-item='{"nodeId":"4","nextNode":""}' title="其他">其他</div>
-      <div id="item5" class="item" data-item='{"nodeId":"5","nextNode":"1"}' title="原理图">原理图</div>
-      <div id="item6" class="item" data-item='{"nodeId":"6","nextNode":"1"}' title="LAYOUT">LAYOUT</div>
-      <div id="item7" class="item" data-item='{"nodeId":"7","nextNode":"1"}' title="制版">制版</div>
+      <div id="item1" class="item" data-item='{"nodeId":"1","nextNode":""}' title="方案">方案</div>
+   
+      @*<div id="item3" class="item" data-item='{"nodeId":"3","nextNode":"4"}' title="AP">AP</div>
+      <div id="item4" class="item" data-item='{"nodeId":"4","nextNode":""}' title="其他">其他</div>*@
+   
     <script type="text/javascript">
         $(function () {
             //用来存储节点的顺序
@@ -88,7 +86,7 @@
             $nodeList.each(function (index, item) {
                 _w = $(item).width(); //元素的宽
                 _h = $(item).height(); //元素的高
-                var r_y = (_h + 30) * index + 20;
+                var r_y = (_h + 30) * index + 100;
                 //节点json数据
                 var data_item = $.parseJSON($(item).attr("data-item"));
                 shapes[data_item.nodeId] = r.rect(10, r_y, _w, _h, 4);
@@ -96,11 +94,20 @@
                 //为节点添加样式和事件，并且绘制节点之间的箭头
                 this.Label = r.text(10 + _w / 2, r_y + _h / 2, item.title).attr({ fill: "#fff","font-family":"宋体","font-size":20 });
                 var color = Raphael.getColor();
-                shapes[data_item.nodeId].attr({ fill: "#1588e0",  "fill-opacity": 0.9, "stroke-width": 0 ,  cursor: "move" });
+                shapes[data_item.nodeId].attr({ fill: "#1588e0",  "fill-opacity": 0.9, "stroke-width": 0  });
                 shapes[data_item.nodeId].id = index + 1;
-                shapes[data_item.nodeId].drag(move, dragger, up).data("cooperative", this.Label).toBack();; //拖动节点事件
+                shapes[data_item.nodeId].data("cooperative", this.Label).toBack();; //拖动节点事件
                 shapes[data_item.nodeId].dblclick(function () { alert(this.id) }); //绑定双击节点事件
                 shapes[data_item.nodeId].attr("title", item.title);
+                for(var i=5;i<8;i++)
+                {
+                    shapes[i] = r.rect(10 + _w + 60, r_y + (i-6) * _h+20*(i-6) , _w, _h, 4);
+                    shapes[i].attr({ fill: "#1588e0", "fill-opacity": 0.9, "stroke-width": 0 });
+                    shapes[i].id = index + 1;
+                    shapes[i].data("cooperative", this.Label).toBack();; //拖动节点事件
+                    shapes[i].dblclick(function () { alert(this.id) }); //绑定双击节点事件
+                    shapes[i].attr("title", "测试子节点");
+                }
                 //shapes[data_item.nodeId].glow().attr({ 'stroke': color,'stroke-width': 6});
                 //.text(x,y,"text");
                 item.innerHTML = "";
@@ -113,11 +120,15 @@
                     connections.push(r.drawArr({ obj1: shapes[data_item.nodeId], obj2: shapes[data_item.nextNode] }));
                 }
             });
+            connections.push(r.drawArr({ obj1: shapes[1], obj2: shapes[5] }));
+            connections.push(r.drawArr({ obj1: shapes[1], obj2: shapes[6] }));
+            connections.push(r.drawArr({ obj1: shapes[1], obj2: shapes[7] }));
+           
         });
         //随着节点位置的改变动态改变箭头
         Raphael.fn.drawArr = function (obj) {
             var point = getStartEnd(obj.obj1, obj.obj2);
-            var path1 = getArr(point.start.x, point.start.y, point.end.x, point.end.y, 8);
+            var path1 = getArrzhixian(point.start.x, point.start.y, point.end.x, point.end.y, 8);
             if (obj.arrPath) {
                 obj.arrPath.attr({ path: path1, "stroke-width": 2 });
             } else {
@@ -182,7 +193,20 @@
             var y2a = y2 + Math.sin(a45) * size;
             var x2b = x2 + Math.cos(a45m) * size;
             var y2b = y2 + Math.sin(a45m) * size;
-            var result = ["M", x1, y1, "L", x2, y2, "L", x2a, y2a, "M", x2, y2, "L", x2b, y2b];
+            //var result = ["M", x1, y1, "L", x2, y2, "L", x2a, y2a, "M", x2, y2, "L", x2b, y2b];
+            var result = ["M", x1, y1, "L", x2, y2];
+            return result;
+        }
+
+        function getArrzhixian(x1, y1, x2, y2, size) {
+            var angle = Raphael.angle(x1, y1, x2, y2); //得到两点之间的角度
+            var a45 = Raphael.rad(angle - 45); //角度转换成弧度
+            var a45m = Raphael.rad(angle + 45);
+            var x2a = x1 + 30
+            var y2a = y1;
+            var x2b = x1 + 30;
+            var y2b = y2;
+            var result = ["M", x1, y1, "L", x2a, y2a, "M", x2a, y2a, "L", x2b, y2b, "M", x2b, y2b, "L", x2, y2];
             return result;
         }
     </script>
