@@ -1018,9 +1018,9 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Template\ColumnList.cshtml" />
     <Content Include="Views\Template\Column.cshtml" />
-    <Content Include="Views\Users\View1.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\UserSafe.cshtml" />
+    <Content Include="Views\Users\Test1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

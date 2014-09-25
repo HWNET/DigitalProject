@@ -152,6 +152,12 @@ namespace Digital.Web.Controllers
 
         }
 
+        public ActionResult Test1()
+        {
+            ViewBag.MenuModel = base.GetMenu(3);
+            return View();
+        }
+
        
         
 
