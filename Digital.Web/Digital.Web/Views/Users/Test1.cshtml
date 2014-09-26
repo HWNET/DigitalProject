@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Test1";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
@@ -14,15 +13,11 @@
         </ol>
     </div>
 </div>
-  <div class="contentpanel">
+<div class="contentpanel">
+    <link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/raphael-2.1.0.min.js" type="text/javascript"> </script>
     <style type="text/css">
-        fieldet, legend, div, span, a {
-            margin: 0;
-            padding: 0;
-        }
-
-
         #holder {
             top: 0px;
             left: 0px;
@@ -34,7 +29,6 @@
         }
 
         .item {
-            color: #F00;
             position: absolute;
             top: 0px;
             z-index: 0;
@@ -45,26 +39,90 @@
     </style>
 
     <div id="holder"></div>
-      <div id="item1" class="item" data-item='{"nodeId":"1","nextNode":""}' title="方案">方案</div>
-   
-      @*<div id="item3" class="item" data-item='{"nodeId":"3","nextNode":"4"}' title="AP">AP</div>
-      <div id="item4" class="item" data-item='{"nodeId":"4","nextNode":""}' title="其他">其他</div>*@
-   
+    <div id="item1" class="item" data-item='{"nodeId":"1","ParentNode":"","level":"1"}' title="方案"></div>
+    <div id="item2" class="item" data-item='{"nodeId":"2","ParentNode":"1","level":"2"}' title="方案"></div>
+    <div id="item3" class="item" data-item='{"nodeId":"3","ParentNode":"1","level":"2"}' title="模具"></div>
+    <div id="item4" class="item" data-item='{"nodeId":"4","ParentNode":"1","level":"2"}' title="AP"></div>
+    <div id="item5" class="item" data-item='{"nodeId":"5","ParentNode":"1","level":"2"}' title="其他"></div>
+    <div id="item6" class="item" data-item='{"nodeId":"6","ParentNode":"2","level":"3"}' title="子节点测试1"></div>
+    <div id="item7" class="item" data-item='{"nodeId":"7","ParentNode":"2","level":"3"}' title="子节点测试2"></div>
+    <div id="item8" class="item" data-item='{"nodeId":"8","ParentNode":"2","level":"3"}' title="子节点测试3"></div>
+    <div id="item9" class="item" data-item='{"nodeId":"9","ParentNode":"2","level":"3"}' title="子节点测试4"></div>
+    <div id="item10" class="item" data-item='{"nodeId":"10","ParentNode":"2","level":"3"}' title="子节点测试5"></div>
+    <div id="item11" class="item" data-item='{"nodeId":"11","ParentNode":"2","level":"3"}' title="子节点测试6"></div>
+    <div id="item12" class="item" data-item='{"nodeId":"12","ParentNode":"2","level":"3"}' title="子节点测试7"></div>
+    <div id="item13" class="item" data-item='{"nodeId":"13","ParentNode":"2","level":"3"}' title="子节点测试8"></div>
+    <div id="item14" class="item" data-item='{"nodeId":"14","ParentNode":"2","level":"3"}' title="子节点测试9"></div>
+    <div id="item15" class="item" data-item='{"nodeId":"15","ParentNode":"2","level":"3"}' title="子节点测试10"></div>
+    <div id="item16" class="item" data-item='{"nodeId":"16","ParentNode":"2","level":"3"}' title="子节点测试11"></div>
+    <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                    <h4 class="modal-title">流程设置</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">主节点:</label>
+                        <div class="col-md-4">
+                            <input type="hidden" id="NodeId" />
+                            <label id="NodeName" class="control-label"></label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">下级节点名称:</label>
+                        <div class="col-md-5">
+                            <input type="text" id="NextNodeName" value="" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="form-group  ">
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-3">
+                                <a class="btn btn-success btn-block" data-loading-text="正在提交..." href="javascript:AddNode()">添加新子节点</a>
+
+                            </div>
+                            <div class="col-md-3">
+
+                                <a class="btn btn-success btn-block" data-loading-text="正在提交..." href="javascript:DeleteNode()">删除节点</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
+        var _w, _h, r
+        _h = 30; _w = 200;
+        var shapes = new Object(); //节点集合
+        var connections = [];
+        var Level2x = _w + 10 + 60;
+        var Level2y;
+        //C#
+        var Level2Count = 4;
+        var Level3Count = 11;
+        
+        var OldShapesCount = $(".item").length;
+
         $(function () {
-            //用来存储节点的顺序
-            var connections = [];
-            //拖动节点开始时的事件
+            InitElements();
+
+        });
+
+       
+        function InitElements() {
             var dragger = function () {
                 this.ox = this.attr("x");
                 this.oy = this.attr("y");
                 this.animate({ "fill-opacity": 1 }, 500);
             };
             var $nodeList = $(".item"); //节点集合jquery对象
-            var _x, _y, _w, _h, shapeLen;
-            var shapes = new Object(); //节点集合
+            var _x, _y, shapeLen;
+            
             shapeLen = $nodeList.length; //节点数量
-            _x = $(".contentpanel").offset().left; _y = $(".contentpanel").offset().top; _h = 60; _w = 40;
+
+            _x = $(".contentpanel").offset().left; _y = $(".contentpanel").offset().top;
             //拖动事件
             var move = function (dx, dy) {
                 var att = { x: this.ox + dx, y: this.oy + dy };
@@ -78,65 +136,199 @@
             //拖动结束后的事件
             var up = function () { this.animate({ "fill-opacity": 0.9 }, 500); };
             //创建绘图对象
-            var r = Raphael("holder", $(".contentpanel").width(), $(window).height());
+            if ("undefined" == typeof r) {
+                r = Raphael("holder", $(".contentpanel").width(), $(window).height());
+            }
             //定义元素坐标高宽
-           
-           
-            
+
+
+            Level2y = $(window).height() / 2 - _h / 2 - (Level2Count / 2) * (_h + 30)
+            var Level1y = $(window).height() / 2 - _h / 2;
+            //Main Node
+
+           var level3Num = 1;
+           var level2Num = 1;
+           var testcount = 0;
+
+           for (var i = 0; i <= OldShapesCount; i++) {
+                if ("undefined" != typeof shapes[i + 1]) {
+                    if (shapes[i + 1][0] != null)
+                        {
+                        shapes[i + 1].data("cooperative").remove();
+                        shapes[i + 1].data("Shadow").remove();
+                        shapes[i + 1].remove();
+                        testcount++;
+                    }
+                }
+            }
+        
+
+
+            for (var i = 0; i < connections.length; i++) {
+                connections[i].arrPath.remove();
+            }
+
             $nodeList.each(function (index, item) {
-                _w = $(item).width(); //元素的宽
-                _h = $(item).height(); //元素的高
-                var r_y = (_h + 30) * index + 100;
+
+                var r_y = (level2Num) * (_h + 30) + Level2y;
+                //(_h + 30) * level2Num + Level2y;
                 //节点json数据
                 var data_item = $.parseJSON($(item).attr("data-item"));
-                shapes[data_item.nodeId] = r.rect(10, r_y, _w, _h, 4);
-                $(item).offset({ top: r_y + 6 + _y, left: _x + 20 });
-                //为节点添加样式和事件，并且绘制节点之间的箭头
-                this.Label = r.text(10 + _w / 2, r_y + _h / 2, item.title).attr({ fill: "#fff","font-family":"宋体","font-size":20 });
-                var color = Raphael.getColor();
-                shapes[data_item.nodeId].attr({ fill: "#1588e0",  "fill-opacity": 0.9, "stroke-width": 0  });
-                shapes[data_item.nodeId].id = index + 1;
-                shapes[data_item.nodeId].data("cooperative", this.Label).toBack();; //拖动节点事件
-                shapes[data_item.nodeId].dblclick(function () { alert(this.id) }); //绑定双击节点事件
-                shapes[data_item.nodeId].attr("title", item.title);
-                for(var i=5;i<8;i++)
-                {
-                    shapes[i] = r.rect(10 + _w + 60, r_y + (i-6) * _h+20*(i-6) , _w, _h, 4);
-                    shapes[i].attr({ fill: "#1588e0", "fill-opacity": 0.9, "stroke-width": 0 });
-                    shapes[i].id = index + 1;
-                    shapes[i].data("cooperative", this.Label).toBack();; //拖动节点事件
-                    shapes[i].dblclick(function () { alert(this.id) }); //绑定双击节点事件
-                    shapes[i].attr("title", "测试子节点");
+                if (data_item.level == 1) {
+                    this.Label = r.text(10 + _w / 2, Level1y + _h / 2, "项目编号").attr({ fill: "#fff", "font-family": "宋体", "font-size": 20, "text-rendering": "inherit", "cursor": "default" });
+                    shapes[1] = r.rect(10, Level1y, _w, _h, 4);
+                    shapes[1].attr({ fill: "#1588e0", "fill-opacity": 1, "stroke": "none" });
+                    shapes[1].id = 1;
+                    this.shadow = r.rect(10 + 3, Level1y + 3, _w, _h, 4).attr({ fill: "#000000", "fill-opacity": 0.25, "stroke-width": 0 });
+                    shapes[1].data("cooperative", this.Label).toFront(); //拖动节点事件
+                    shapes[1].data("ry", Level1y);
+                    this.Label.toFront();
+                    shapes[1].data("Shadow", this.shadow);
+                    shapes[1].dblclick(function () { ShowModel(this.id, "项目编号") }); //绑定双击节点事件
+                    shapes[1].attr("title", "项目编号");
                 }
-                //shapes[data_item.nodeId].glow().attr({ 'stroke': color,'stroke-width': 6});
-                //.text(x,y,"text");
-                item.innerHTML = "";
+
+                if (data_item.level == 2) {
+                    //为节点添加样式和事件，并且绘制节点之间的箭头ffcc00
+                    this.Label1 = r.text(10 + _w / 2 + Level2x, r_y + _h / 2, item.title).attr({ fill: "#fff", "font-family": "宋体", "font-size": 20, "text-rendering": "inherit", "cursor": "default" });
+                    shapes[data_item.nodeId] = r.rect(10 + Level2x, r_y, _w, _h, 4);
+                    shapes[data_item.nodeId].attr({ fill: "#1588e0", "fill-opacity": 1, "stroke": "none" });
+                    shapes[data_item.nodeId].id = data_item.nodeId;
+                    this.shadow1 = r.rect(10 + 3 + Level2x, r_y + 3, _w, _h, 4).attr({ fill: "#000000", "fill-opacity": 0.25, "stroke-width": 0 });
+                    shapes[data_item.nodeId].data("cooperative", this.Label1).toFront(); //拖动节点事件
+                    shapes[data_item.nodeId].data("ry", r_y);
+                    this.Label1.toFront();
+                    shapes[data_item.nodeId].data("Shadow", this.shadow1);
+                    shapes[data_item.nodeId].dblclick(function () { ShowModel(this.id, item.title) }); //绑定双击节点事件
+                    shapes[data_item.nodeId].attr("title", item.title);
+                    level2Num++;
+                }
+                if (data_item.level == 3) {
+                    //Level3Count
+                    var r_y = shapes[data_item.ParentNode].data("ry");
+                    var ChildId = data_item.nodeId;
+                    var Level3yNum = level3Num - Level3Count / 2;
+
+                    var SubShadow = r.rect(10 + _w + 60 + 3 + Level2x, r_y + (Level3yNum) * _h + 20 * (Level3yNum) + 3, _w, _h, 4).attr({ fill: "#000000", "fill-opacity": 0.25, "stroke-width": 0 }).toBack();
+                    shapes[ChildId] = r.rect(10 + _w + 60 + Level2x, r_y + (Level3yNum) * _h + 20 * (Level3yNum), _w, _h, 4);
+                    this.Label = r.text(10 + _w + _w / 2 + 60 + Level2x, r_y + (Level3yNum) * _h + 20 * (Level3yNum) + _h / 2, item.title).attr({ fill: "#fff", "font-family": "宋体", "font-size": 20, "text-rendering": "inherit", "cursor": "default" });
+                    shapes[ChildId].attr({ fill: "#1588e0", "fill-opacity": 1, "stroke-width": 0 });
+                    shapes[ChildId].id = ChildId;
+                    shapes[ChildId].data("cooperative", this.Label).toFront();; //拖动节点事件
+                    shapes[ChildId].data("Shadow", SubShadow);
+                    this.Label.toFront();
+                    shapes[ChildId].dblclick(function () { ShowModel(this.id, item.title) }); //绑定双击节点事件
+                    shapes[ChildId].attr("title", item.title);
+                    level3Num++;
+                }
             });
             //存储节点间的顺序
             $nodeList.each(function (i, item) {
                 //节点json数据
                 var data_item = $.parseJSON($(item).attr("data-item"));
-                if (data_item.nextNode) {
-                    connections.push(r.drawArr({ obj1: shapes[data_item.nodeId], obj2: shapes[data_item.nextNode] }));
+                if (data_item.ParentNode) {
+                    connections.push(r.drawArr({ obj1: shapes[data_item.ParentNode], obj2: shapes[data_item.nodeId] }));
                 }
             });
-            connections.push(r.drawArr({ obj1: shapes[1], obj2: shapes[5] }));
-            connections.push(r.drawArr({ obj1: shapes[1], obj2: shapes[6] }));
-            connections.push(r.drawArr({ obj1: shapes[1], obj2: shapes[7] }));
-           
-        });
+        }
+
+
         //随着节点位置的改变动态改变箭头
         Raphael.fn.drawArr = function (obj) {
             var point = getStartEnd(obj.obj1, obj.obj2);
             var path1 = getArrzhixian(point.start.x, point.start.y, point.end.x, point.end.y, 8);
             if (obj.arrPath) {
-                obj.arrPath.attr({ path: path1, "stroke-width": 2 });
+                obj.arrPath.attr({ path: path1, "stroke-width": 2, "fill": "none", "stroke": "black" });
             } else {
                 obj.arrPath = this.path(path1);
-                obj.arrPath.attr({  "stroke-width": 2 });
+                obj.arrPath.attr({ "stroke-width": 2, "fill": "none", "stroke": "black" });
             }
             return obj;
         };
+
+        function ShowModel(Id, Name) {
+            $("#NodeId").val(Id);
+            $("#NodeName").text(Name);
+            $(".bs-example-modal-static").modal("show");
+        }
+
+        function DeleteNode()
+        {
+            var Id = $("#NodeId").val();
+            var data_item = $.parseJSON($("#item" + Id).attr("data-item"));
+            var $nodeList = $(".item");
+            var IsHasChild = false;
+            var IsLevel1 = false;
+            $nodeList.each(function (index, item) {
+                var data_item = $.parseJSON($(item).attr("data-item"));
+                if (data_item.ParentNode == Id)
+                {
+                    IsHasChild = true;
+                }
+                if (data_item.level == 1 && data_item.nodeId == Id)
+                {
+                    IsLevel1 = true;
+                }
+            });
+            if (IsHasChild) {
+                jQuery.gritter.add({
+                    title: '系统提示!',
+                    text: '这个节点下有子节点，请先删除子节点',
+                    sticky: false,
+                    time: ''
+                });
+            }
+            else if (IsLevel1)
+            {
+                jQuery.gritter.add({
+                    title: '系统提示!',
+                    text: '主节点不能删除',
+                    sticky: false,
+                    time: ''
+                });
+            }
+            else {
+                if (data_item.level == 2) {
+                    Level2Count--;
+                }
+                else {
+                    Level3Count--;
+                }
+                $("#item" + Id).remove();
+                $(".bs-example-modal-static").modal("hide");
+                InitElements();
+            }
+        }
+
+        //添加子节点
+        function AddNode() {
+            var ParentId = $("#NodeId").val();
+            var NodeName = $("#NextNodeName").val();
+            var data_item = $.parseJSON($("#item" + ParentId).attr("data-item"));
+            
+            if (data_item.level != 3) {
+                if (data_item.level == 2) {
+                    Level3Count++;
+                }
+                else {
+                    Level2Count++;
+                }
+                var Id = $(".item").length + 1;
+                var level = data_item.level*1 + 1;
+                //alert(Id + ParentId + NodeName);
+                $("#item" + ParentId.toString()).after("<div id=\"item" + Id + "\" class=\"item\" data-item='{\"nodeId\":\"" + Id + "\",\"ParentNode\":\"" + ParentId + "\",\"level\":\"" + level + "\"}' title=\"" + NodeName + "\"></div>");
+                $(".bs-example-modal-static").modal("hide");
+                InitElements();
+            }
+            else {
+                jQuery.gritter.add({
+                    title: '系统提示!',
+                    text: '不能在三级节点上增加新的子节点',
+                    sticky: false,
+                    time: ''
+                });
+            }
+        }
 
         function getStartEnd(obj1, obj2) {
             var bb1 = obj1.getBBox(),
@@ -199,6 +391,7 @@
         }
 
         function getArrzhixian(x1, y1, x2, y2, size) {
+
             var angle = Raphael.angle(x1, y1, x2, y2); //得到两点之间的角度
             var a45 = Raphael.rad(angle - 45); //角度转换成弧度
             var a45m = Raphael.rad(angle + 45);
@@ -206,10 +399,17 @@
             var y2a = y1;
             var x2b = x1 + 30;
             var y2b = y2;
-            var result = ["M", x1, y1, "L", x2a, y2a, "M", x2a, y2a, "L", x2b, y2b, "M", x2b, y2b, "L", x2, y2];
+            var result;
+            if (x1 != x2) {
+                result = ["M", x1, y1, "L", x2a, y2a, "M", x2a, y2a, "L", x2b, y2b, "M", x2b, y2b, "L", x2, y2];
+            }
+            else {
+                result = ["M", x1, y1, "L", x2, y2];
+
+            }
             return result;
         }
     </script>
 
-      </div>
+</div>
 
