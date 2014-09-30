@@ -21,7 +21,6 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyInfo()
         {
             ViewBag.MenuModel = base.GetMenu(2);
-            // this  can  show this view  in  your page   ,u know?Y   now show this page  in debugger statusO ok wait   OK?OK
             return View();
         }
 
@@ -30,7 +29,6 @@ namespace Digital.Web.Controllers
         public ActionResult AccountInfo()
         {
             ViewBag.MenuModel = base.GetMenu(2);
-            // this  can  show this view  in  your page   ,u know?Y   now show this page  in debugger statusO ok wait   OK?OK
             return View();
         }
 
