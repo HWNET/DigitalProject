@@ -1,0 +1,316 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+    <title>子账号管理</title>
+
+    <link href="css/style.default.css" rel="stylesheet">
+
+    <link href="css/jquery.gritter.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap-fileupload.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" href="css/jquery.tagsinput.css" />
+    <link rel="stylesheet" href="css/colorpicker.css" />
+    <link rel="stylesheet" href="css/dropzone.css" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+    <div class="pageheader">
+        <h2><i class="fa fa-user"></i> 部门子账号管理 <span>账号中心</span></h2>
+        <div class="breadcrumb-wrapper">
+            <span class="label">你的位置:</span>
+            <ol class="breadcrumb">
+                <li><a href="">企业中心</a></li>
+                <li class="active">账号中心</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="contentpanel">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-info mb30">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>部门</th>
+                                <th>负责人</th>
+                                <th>账号</th>
+                                <th>密码</th>
+                                <th>最后登录</th>
+                                <th>修改</th>
+                                <th>管理</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>项目部</td>
+                                <td>王方</td>
+                                <td>szwfb</td>
+                                <td>2014-6-19</td>
+                                <td>2014-6-19</td>
+                                <td>停用</td>
+                                <td>删除  更改</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>业务部</td>
+                                <td>王方</td>
+                                <td>szwfb</td>
+                                <td>2014-6-19</td>
+                                <td>2014-6-19</td>
+                                <td>停用</td>
+                                <td>删除  更改</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>采购部</td>
+                                <td>叶志梅</td>
+                                <td>szwfb</td>
+                                <td>2014-6-19</td>
+                                <td>2014-6-19</td>
+                                <td>停用</td>
+                                <td>删除  更改</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div><!-- table-responsive -->
+            </div>
+
+
+
+
+            <div class="col-md-12">
+                <form id="basicForm" action="form-validation.html" class="form-horizontal">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+                            <h4 class="panel-title">添加子账户</h4>
+                            <p>您可以在此处添加各部门负责人账号，该账号拥有其所属部门的管理权限，通常我们不建议其拥有多个部门的管理权限</p>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">子账户类型 </label>
+                                <div class="col-sm-6">
+                                    <div class="rdio rdio-primary">
+                                        <input type="radio" id="male" value="m" name="gender" required />
+                                        <label for="male">创建新的账户</label>
+                                    </div><!-- rdio -->
+                                    <div class="rdio rdio-primary">
+                                        <input type="radio" value="f" id="female" name="gender">
+                                        <label for="female">绑定已有账户</label>
+                                    </div><!-- rdio -->
+                                    <label class="error" for="gender"></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">账户 <span class="asterisk">*</span></label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="name" class="form-control" placeholder="请输入登录账户ID..." required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">密码 <span class="asterisk">*</span></label>
+                                <div class="col-sm-6">
+                                    <input type="email" name="email" class="form-control" placeholder="请输入密码..." required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">重复 <span class="asterisk">*</span></label>
+                                <div class="col-sm-6">
+                                    <input type="email" name="email" class="form-control" placeholder="请再次输入您的密码..." required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">所属部门</label>
+                                <div class="col-sm-6">
+                                    <select id="fruits" class="form-control" required>
+                                        <option value="">选择部门</option>
+                                        <option value="">业务部</option>
+                                        <option value="">财务部</option>
+                                        <option value="">项目部</option>
+                                        <option value="">采购部</option>
+                                        <option value="">市场部</option>
+                                    </select>
+                                    <label class="error" for="fruits"></label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">性别 </label>
+                                <div class="col-sm-6">
+                                    <div class="rdio rdio-primary">
+                                        <input type="radio" id="male" value="m" name="gender" required />
+                                        <label for="male">先生</label>
+                                    </div><!-- rdio -->
+                                    <div class="rdio rdio-primary">
+                                        <input type="radio" value="f" id="female" name="gender">
+                                        <label for="female">女士</label>
+                                    </div><!-- rdio -->
+                                    <label class="error" for="gender"></label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">姓名 <span class="asterisk">*</span></label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="name" class="form-control" placeholder="请输入子账户真实姓氏或姓名..." required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">邮箱</label>
+                                <div class="col-sm-6">
+                                    <input type="url" name="url" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">手机</label>
+                                <div class="col-sm-6">
+                                    <input type="url" name="url" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">额外权限分配</label>
+                                <div class="col-sm-6">
+                                    <select class="chosen-select" multiple data-placeholder="请选择还需要将哪些部门的权限赋予该账户.">
+
+                                        <option value="">业务部</option>
+                                        <option value="">财务部</option>
+                                        <option value="">项目部</option>
+                                        <option value="">采购部</option>
+                                        <option value="">市场部</option>
+
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div><!-- panel-body -->
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <button class="btn btn-primary">确认</button>
+                                    <button type="reset" class="btn btn-default">重置</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- panel -->
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/modernizr.min.js"></script>
+    <script src="js/jquery.sparkline.min.js"></script>
+    <script src="js/toggles.min.js"></script>
+    <script src="js/retina.min.js"></script>
+    <script src="js/jquery.cookies.js"></script>
+
+    <script src="js/jquery.autogrow-textarea.js"></script>
+    <script src="js/bootstrap-fileupload.min.js"></script>
+    <script src="js/bootstrap-timepicker.min.js"></script>
+    <script src="js/jquery.maskedinput.min.js"></script>
+    <script src="js/jquery.tagsinput.min.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/chosen.jquery.min.js"></script>
+    <script src="js/dropzone.min.js"></script>
+    <script src="js/colorpicker.js"></script>
+
+
+    <script src="js/custom.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+
+            // Chosen Select
+            jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+            // Tags Input
+            jQuery('#tags').tagsInput({ width: 'auto' });
+
+            // Textarea Autogrow
+            jQuery('#autoResizeTA').autogrow();
+
+            // Color Picker
+            if (jQuery('#colorpicker').length > 0) {
+                jQuery('#colorSelector').ColorPicker({
+                    onShow: function (colpkr) {
+                        jQuery(colpkr).fadeIn(500);
+                        return false;
+                    },
+                    onHide: function (colpkr) {
+                        jQuery(colpkr).fadeOut(500);
+                        return false;
+                    },
+                    onChange: function (hsb, hex, rgb) {
+                        jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
+                        jQuery('#colorpicker').val('#' + hex);
+                    }
+                });
+            }
+
+            // Color Picker Flat Mode
+            jQuery('#colorpickerholder').ColorPicker({
+                flat: true,
+                onChange: function (hsb, hex, rgb) {
+                    jQuery('#colorpicker3').val('#' + hex);
+                }
+            });
+
+            // Date Picker
+            jQuery('#datepicker').datepicker();
+
+            jQuery('#datepicker-inline').datepicker();
+
+            jQuery('#datepicker-multiple').datepicker({
+                numberOfMonths: 3,
+                showButtonPanel: true
+            });
+
+            // Spinner
+            var spinner = jQuery('#spinner').spinner();
+            spinner.spinner('value', 0);
+
+            // Input Masks
+            jQuery("#date").mask("99/99/9999");
+            jQuery("#phone").mask("(999) 999-9999");
+            jQuery("#ssn").mask("999-99-9999");
+
+            // Time Picker
+            jQuery('#timepicker').timepicker({ defaultTIme: false });
+            jQuery('#timepicker2').timepicker({ showMeridian: false });
+            jQuery('#timepicker3').timepicker({ minuteStep: 15 });
+
+
+        });
+    </script>
