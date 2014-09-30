@@ -62,7 +62,7 @@ namespace Digital.Contact.BLL
                 }
                 catch (DbEntityValidationException dbEx)
                 {
-                    Logger.Error(dbEx.InnerException.ToString());
+                    Logger.Error(dbEx.ToString());
                     return false;
                 }
             }

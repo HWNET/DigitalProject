@@ -103,14 +103,14 @@ namespace Digital.Contact.BLL
                 new MenuModel{ID=310 ,MenuName="渠道管理",Style="fa fa-sort-amount-desc",OtherName="",ParentId=300,Url=""},
                 new MenuModel{ID=311 ,MenuName="在线客服",Style="fa fa-sort-amount-desc",OtherName="",ParentId=300,Url=""},
 
-                new MenuModel{ID=350 ,MenuName="市场部",Style="glyphicon fa-bullhorn",OtherName="",ParentId=350,Url=""},
+                new MenuModel{ID=350 ,MenuName="市场部",Style="fa fa-bullhorn",OtherName="",ParentId=350,Url=""},
                 new MenuModel{ID=351 ,MenuName="企业店铺管理",Style="fa fa-send",OtherName="",ParentId=350,Url=""},
                 new MenuModel{ID=352 ,MenuName="投放广告",Style="fa fa-star",OtherName="",ParentId=350,Url=""},
                 new MenuModel{ID=353 ,MenuName="广告管理",Style="fa fa-star-o",OtherName="",ParentId=350,Url=""},
                 new MenuModel{ID=354 ,MenuName="排名服务",Style="fa fa-sort-amount-desc",OtherName="",ParentId=350,Url=""},
                 new MenuModel{ID=355 ,MenuName="增值应用",Style="fa fa-sort-amount-desc",OtherName="",ParentId=350,Url=""},
 
-                new MenuModel{ID=400 ,MenuName="采购部",Style="glyphicon fa-shopping-cart",OtherName="",ParentId=400,Url=""},
+                new MenuModel{ID=400 ,MenuName="采购部",Style="fa fa-shopping-cart",OtherName="",ParentId=400,Url=""},
                 new MenuModel{ID=401 ,MenuName="发送采购订单",Style="fa fa-send",OtherName="",ParentId=400,Url=""},
                 new MenuModel{ID=402 ,MenuName="挑选供应商",Style="fa fa-star",OtherName="",ParentId=400,Url=""},
                 new MenuModel{ID=403 ,MenuName="供应商列表",Style="fa fa-star",OtherName="",ParentId=400,Url=""},
@@ -118,29 +118,29 @@ namespace Digital.Contact.BLL
                 new MenuModel{ID=405 ,MenuName="已收到的报价单",Style="fa fa-star-o",OtherName="",ParentId=400,Url=""},
                 new MenuModel{ID=406 ,MenuName="需求管理",Style="fa fa-sort-amount-desc",OtherName="",ParentId=400,Url=""},
 
-                new MenuModel{ID=450 ,MenuName="人事部",Style="glyphicon fa-users",OtherName="",ParentId=450,Url=""},
+                new MenuModel{ID=450 ,MenuName="人事部",Style="fa fa-users",OtherName="",ParentId=450,Url=""},
                 new MenuModel{ID=451 ,MenuName="发布招贤榜",Style="fa fa-send",OtherName="",ParentId=450,Url=""},
                 new MenuModel{ID=452 ,MenuName="已收到的简历",Style="fa fa-star",OtherName="",ParentId=450,Url=""},
                 new MenuModel{ID=453 ,MenuName="委托寻找高端人才",Style="fa fa-star-o",OtherName="",ParentId=450,Url=""},
                 new MenuModel{ID=454 ,MenuName="聘请临时专家",Style="fa fa-sort-amount-desc",OtherName="",ParentId=450,Url=""},
                 new MenuModel{ID=455 ,MenuName="聘请临时项目团队",Style="fa fa-sort-amount-desc",OtherName="",ParentId=450,Url=""},
                 
-                new MenuModel{ID=500 ,MenuName="隐私设置",Style="glyphicon fa-unlock-alt",OtherName="",ParentId=500,Url=""},
+                new MenuModel{ID=500 ,MenuName="隐私设置",Style="fa fa-unlock-alt",OtherName="",ParentId=500,Url=""},
                 new MenuModel{ID=501 ,MenuName="发布产品",Style="fa fa-send",OtherName="",ParentId=500,Url=""},
                 new MenuModel{ID=502 ,MenuName="销售产品",Style="fa fa-star",OtherName="",ParentId=500,Url=""},
                 new MenuModel{ID=503 ,MenuName="未上架产品",Style="fa fa-star-o",OtherName="",ParentId=500,Url=""},
                 new MenuModel{ID=504 ,MenuName="商品分类",Style="fa fa-sort-amount-desc",OtherName="",ParentId=500,Url=""},
 
-                new MenuModel{ID=550 ,MenuName="消息及通知",Style="glyphicon fa-envelope",OtherName="",ParentId=550,Url=""},
+                new MenuModel{ID=550 ,MenuName="消息及通知",Style="fa fa-envelope",OtherName="",ParentId=550,Url=""},
                 new MenuModel{ID=551 ,MenuName="项目浏览权限",Style="fa fa-send",OtherName="",ParentId=550,Url=""},
                 new MenuModel{ID=552 ,MenuName="企业信息查看权限",Style="fa fa-star",OtherName="",ParentId=550,Url=""},
                 new MenuModel{ID=553 ,MenuName="其它",Style="fa fa-star-o",OtherName="",ParentId=550,Url=""},
 
-                new MenuModel{ID=600 ,MenuName="举报及维权",Style="glyphicon fa-bell",OtherName="",ParentId=600,Url=""},
+                new MenuModel{ID=600 ,MenuName="举报及维权",Style="fa fa-bell",OtherName="",ParentId=600,Url=""},
                 new MenuModel{ID=601 ,MenuName="我收到的举报",Style="fa fa-send",OtherName="",ParentId=600,Url=""},
                 new MenuModel{ID=602 ,MenuName="我发起的举报",Style="fa fa-star",OtherName="",ParentId=600,Url=""},
 
-                new MenuModel{ID=650 ,MenuName="帮助中心",Style="glyphicon fa-question-circle",OtherName="",ParentId=650,Url=""},
+                new MenuModel{ID=650 ,MenuName="帮助中心",Style="fa fa-question-circle",OtherName="",ParentId=650,Url=""},
                 new MenuModel{ID=651 ,MenuName="平台介绍",Style="fa fa-send",OtherName="",ParentId=650,Url=""},
                 new MenuModel{ID=652 ,MenuName="常见问题",Style="fa fa-star",OtherName="",ParentId=650,Url=""}
 

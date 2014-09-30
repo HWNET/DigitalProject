@@ -7,6 +7,7 @@
 <link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
 <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
 <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/messages_cn.js"></script>
 <script src="../DigitalStyle/js/JqueryToken.js"></script>
 <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
 <div class="pageheader">
@@ -41,7 +42,7 @@
                             <li><a href="#vtab4" data-toggle="tab"> 擅长技能</a></li>
                         </ul>
 
-                        <form class="form" id="firstForm">
+                        <form class="form" id="firstForm" onsubmit="return false">
                             <div class="tab-content">
                                 <div class="tab-pane" id="vtab2">
                                     <div class="form-group">
@@ -136,12 +137,12 @@
                                                 @{
                                                     foreach (var SkillModel in (List<Digital.Contact.Models.SkillsModel>)ViewBag.SkillList)
                                                     {
-                                                        var IsCheck =string.Empty;
+                                                        var IsCheck = string.Empty;
                                                         if (@Model.UsersInfoModel.GoodAtWhatModels.Any(o => o.SkillId == SkillModel.SkillId))
                                                         {
                                                             IsCheck = "Checked=Checked";
                                                         }
-                                                            
+
                                                         <div class="col-sm-3">
                                                             <div class="checkbox block"><label><input type="checkbox" @IsCheck name="Skill" value="@SkillModel.SkillId"> @SkillModel.Name</label></div>
                                                         </div>
@@ -158,7 +159,7 @@
 
                         <ul class="pager wizard">
 
-                            <li><a class="btn btn-info" href="javascript:Save()">保 存</a></li>
+                            <li><button class="btn btn-primary" onclick="javascript:Save()">保 存</button></li>
                         </ul>
 
                     </div><!-- #validationWizard -->
@@ -253,9 +254,12 @@
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
             highlight: function (element) {
+                alert("1");
                 jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
             success: function (element) {
+                debugger;
+                alert("2");
                 jQuery(element).closest('.form-group').removeClass('has-error');
             }
         });
@@ -278,7 +282,7 @@
     function Save()
     {
         var $valid = jQuery('#firstForm').valid();
-
+        alert( $valid);
         if (!$valid) {
 
             $validator.focusInvalid();
