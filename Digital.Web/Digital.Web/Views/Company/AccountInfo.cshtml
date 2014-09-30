@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+
+    <title>账号信息管理</title>
+
+    <link href="css/style.default.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body style="background-color:rgb(227,227,227); overflow: visible;">
+    <div class="pageheader">
+        <h2><i class="fa fa-user"></i> 账号信息 <span>账号设置</span></h2>
+        <div class="breadcrumb-wrapper">
+            <span class="label">你的位置:</span>
+            <ol class="breadcrumb">
+                <li><a href="">企业中心</a></li>
+                <li class="active">账号设置</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="contentpanel">
+        <div class="row">
+            <div class="col-md-12 mb30">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#home" data-toggle="tab"><strong>基本信息</strong></a></li>
+                    <li><a href="#profile" data-toggle="tab"><strong>详细信息</strong></a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content mb30">
+                    <div class="tab-pane active" id="home">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+
+                                <h4 class="panel-title">账户个人信息</h4>
+                                <p>以下信息将用于您日后的交易及管理</p>
+                            </div>
+                            <div class="panel-body panel-body-nopadding">
+                                <div class="alert alert-info">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <strong>提示：</strong> * 表示该项必填
+                                </div>
+                                <form class="form-horizontal form-bordered">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> * 姓名</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="请输入您的全名或姓氏" class="form-control" />
+                                            <span class="help-block"><a href="">点此进入个人实名认证</a></span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> * 性别</label>
+                                        <div class="col-sm-6">
+                                            <div class="radio"><label><input type="radio"> 男</label></div>
+                                            <div class="radio"><label><input type="radio"> 女</label></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body panel-body-nopadding">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label"> * 账号身份</label>
+                                            <div class="col-sm-5">
+
+                                                <select class="form-control mb15">
+                                                    <option>企业单位</option>
+                                                    <option>个人</option>
+                                                    <option>事业单位或个人团体</option>
+                                                    <option>个体经营</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">业务联系手机</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="手机号码" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">业务联系邮箱</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="邮箱" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">固定电话</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="邮箱" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">传真</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="传真" class="form-control" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">联系地址</label>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-3">
+                                                <select class="form-control chosen-select" data-placeholder="Choose a Country...">
+                                                    <option value="">湖北省</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <select class="form-control chosen-select" data-placeholder="Choose a Country...">
+                                                    <option value="">武汉市</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <select class="form-control chosen-select" data-placeholder="Choose a Country...">
+                                                    <option value="">洪山区</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" placeholder="请输入详细街道地址" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div><!-- panel-body -->
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <button class="btn btn-primary">保存</button>&nbsp;
+                                        <button class="btn btn-default">取消</button>
+                                    </div>
+                                </div>
+                            </div><!-- panel-footer -->
+
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane" id="profile">
+                        <div class="row">
+                            <div class="col-sm-3">
+
+                            </div>
+                            <div class="col-sm-9">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/modernizr.min.js"></script>
+    <script src="../js/jquery.sparkline.min.js"></script>
+    <script src="../js/toggles.min.js"></script>
+    <script src="../js/retina.min.js"></script>
+    <script src="../js/jquery.cookies.js"></script>
+
+    <script src="../js/custom.js"></script>
+
+</body>
+
+
