@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+    <div class="pageheader">
+        <h2><i class="fa fa-user"></i> 账户安全 <span>账号中心</span></h2>
+        <div class="breadcrumb-wrapper">
+            <span class="label">你的位置:</span>
+            <ol class="breadcrumb">
+                <li><a href="">企业中心</a></li>
+                <li class="active">账号中心</li>
+            </ol>
+        </div>
+    </div>
+
+<div class="contentpanel">
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-btns">
+                    <a href="" class="minimize">&minus;</a>
+                </div><!-- panel-btns -->
+                <h3 class="panel-title">基础信息</h3>
+                <p>登录手机和登录邮箱只用于登录，不会展示在您的联系方式中；一个阿里巴巴中国站帐号，只能对应绑定一个登录手机和登录邮箱；绑定登陆手机、邮箱，可享受通过绑定手机或邮箱找回密码等服务。<.</p>
+            </div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+
+                    <form class="form-horizontal form-bordered">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="readonlyinput">登陆账号：</label>
+                            <div class="col-sm-6">
+                                <input type="text" value="wxsff" id="readonlyinput" class="form-control" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">登陆手机</label>
+                            <div class="col-sm-2">
+                                <input type="text" placeholder="请输入手机号码" class="form-control" />
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" placeholder="请输入您收到的6位数字验证码" class="form-control" />
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-default">发送验证码</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">登陆邮箱</label>
+                            <div class="col-sm-2">
+                                <input type="text" placeholder="请输入邮箱地址" class="form-control" />
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" placeholder="请输入您收到的6位验证码" class="form-control" />
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-default">发送验证码</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">账号安全</h3>
+                    <p>您可以通过以下设置来保证账户的安全性.</p>
+                </div>
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+                        <table class="table" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>安全类型</th>
+                                    <th>功能描述</th>
+                                    <th>当前状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX">
+                                    <td>身份认证</td>
+                                    <td>身份认证是指通过工商信息，或银行卡信息和身份证信息的核实，来证明会员身份的真实性和类型。包括企业认证和个人实名认证。</td>
+                                    <td>未进行任何认证</td>
+                                    <td class="center"><a class="active">查看详情</a></td>
+                                </tr>
+                                <tr class="even gradeC">
+                                    <td>登录密码</td>
+                                    <td>修改更高级别的密码能提高帐号的安全性。</td>
+                                    <td></td>
+                                    <td class="center"><a class="active">修改</a></td>
+
+                                </tr>
+                                <tr class="odd gradeA">
+                                    <td>密保问题管理</td>
+                                    <td>新一代密码保护问题由3个问题以及对应的答案组成，专门用于您忘记密码时取回密码。与之前的密码保护问题相比，采用最新的问题验证，更加安全。</td>
+                                    <td>未设置</td>
+                                    <td class="center"><a class="active">添加</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div><!-- panel-body -->
+            </div>
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">账号保护</h3>
+                    <p>帐号保护，是对会员的一些关键操作进行保护的服务。当会员设置保护后，可以在登录网站、修改个人信息等操作时，通过手机短信方式进行身份校验，以更好地保障帐号安全。.</p>
+                </div>
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+                        <table class="table" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>保护方式</th>
+                                    <th>描述</th>
+                                    <th>当前状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX">
+                                    <td>登录保护</td>
+                                    <td>对会员网站和旺旺登录进行验证。</td>
+                                    <td>未开通</td>
+                                    <td class="center"><a class="btn btn-default">开通</a></td>
+                                </tr>
+                                <tr class="even gradeC">
+                                    <td>密码修改保护</td>
+                                    <td>对会员密码修改进行验证。</td>
+                                    <td>未开通</td>
+                                    <td class="center"><a class="btn btn-default">开通</a></td>
+
+                                </tr>
+                                <tr class="odd gradeA">
+                                    <td>信息修改保护</td>
+                                    <td>对会员信息修改进行验证。</td>
+                                    <td>未开通</td>
+                                    <td class="center"><a class="btn btn-default">开通</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- panel-body -->
+            </div>
+
+        </div>
+
+</div>
