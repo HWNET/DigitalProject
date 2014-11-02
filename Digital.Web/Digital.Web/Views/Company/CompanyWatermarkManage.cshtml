@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+
+<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 水印设置 <span>企业文件柜</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">企业中心</a></li>
+            <li class="active">企业文件柜</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+    <div class="row">
+
+        <div class="col-sm-3">
+            <img src="../DigitalStyle/images/photos/profile-1.png" class="thumbnail img-responsive" alt="" />
+        </div>
+
+        <div class="col-sm-9">
+            <div class="col-md-9">
+                <div class="ckbox ckbox-primary">
+                    <input type="checkbox" value="1" id="checkboxPrimary" checked="checked" />
+                    <label for="checkboxPrimary">显示企业名称</label>
+                </div>
+                <div class="ckbox ckbox-success">
+                    <input type="checkbox" id="checkboxSuccess" checked="checked" />
+                    <label for="checkboxSuccess">显示企业店铺网址</label>
+                </div>
+            </div><!-- col-md-6 -->
+
+            <div class="col-md-9">
+                <div class="rdio rdio-default">
+                    <input type="radio" name="radio" id="radioDefault" value="1" checked="checked" />
+                    <label for="radioDefault">正中间</label>
+                </div>
+
+                <div class="rdio rdio-primary">
+                    <input type="radio" name="radio" value="2" id="radioPrimary" />
+                    <label for="radioPrimary">左上角</label>
+                </div>
+
+                <div class="rdio rdio-warning">
+                    <input type="radio" name="radio" value="3" id="radioWarning" />
+                    <label for="radioWarning">右下角</label>
+                </div>
+
+                <div class="rdio rdio-success">
+                    <input type="radio" name="radio" value="4" id="radioSuccess" />
+                    <label for="radioSuccess">左右边角</label>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <button class="btn btn-primary">保存</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

@@ -1,0 +1,845 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+
+<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 信息设置 <span>企业中心</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">企业中心</a></li>
+            <li class="active">信息设置</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="contentpanel">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div>
+                    <h4 class="panel-title">企业信息</h4>
+                    <p>完善企业信息，让客户更了解您.</p>
+                </div>
+                <div class="panel-body panel-body-nopadding">
+
+                    <!-- BASIC WIZARD -->
+                    <div id="progressWizard" class="basic-wizard">
+
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="#ptab1" data-toggle="tab"><span>1:</span> 基本信息</a></li>
+                            <li><a href="#ptab2" data-toggle="tab"><span>2:</span> 生产能力</a></li>
+                            <li><a href="#ptab3" data-toggle="tab"><span>3:</span> 更多信息</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="tab-pane" id="ptab1">
+                                <form class="form">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">* 公司名称</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="请用中文完整填写在工商局注册的公司全称" class="form-control">
+                                            <span class="help-block">
+                                                地区、字号、经营行业、公司体制，如：广州市格列服装有限公司；<br>
+                                                个体经营者请按照“经营者姓名”+“个体经营”字样，如：“张三（个体经营）”<br>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">* 工商注册号</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="请用工商局注册号" class="form-control" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">企业类型</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control mb15">
+                                                <option value=""> --请选择-- </option>
+                                                <optgroup label="----------------------">
+                                                    <option value="24">个体经营</option>
+                                                </optgroup>
+                                                <optgroup label="----------------------">
+                                                    <option value="3" selected>私营独资企业</option>
+                                                    <option value="8">私营合伙企业</option>
+                                                    <option value="9">私营有限责任公司</option>
+                                                    <option value="10">私营股份有限公司</option>
+                                                    <option value="4">国有企业</option>
+                                                    <option value="11">集体企业</option>
+                                                    <option value="12">股份合作企业</option>
+                                                    <option value="13">联营企业</option>
+                                                    <option value="29">有限责任公司</option>
+                                                    <option value="14">有限责任公司(国有独资或控股)</option>
+                                                    <option value="30">有限责任公司(自然人投资或控股)</option>
+                                                    <option value="27">一人有限责任公司</option>
+                                                    <option value="15">其他有限责任公司</option>
+                                                    <option value="16">股份有限公司</option>
+                                                    <option value="17">其他内资企业</option>
+                                                </optgroup>
+                                                <optgroup label="----------------------">
+                                                    <option value="25">三来一补</option>
+                                                    <option value="26">法人分支机构</option>
+                                                    <option value="31">农民专业合作经济组织</option>
+                                                </optgroup>
+                                                <optgroup label="----------------------">
+                                                    <option value="18">合资经营企业(港或澳、台资)</option>
+                                                    <option value="19">合作经营企业(港或澳、台资)</option>
+                                                    <option value="20">港、澳、台商独资经营企业</option>
+                                                    <option value="21">港、澳、台商投资股份有限公司</option>
+                                                    <option value="2">中外合资经营企业</option>
+                                                    <option value="22">中外合作经营企业</option>
+                                                    <option value="1">外资企业</option>
+                                                    <option value="23">外商投资股份有限公司</option>
+                                                </optgroup>
+                                                <optgroup label="----------------------">
+                                                    <option value="7">其他</option>
+                                                </optgroup>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">企业人数</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control mb15">
+                                                <option value=""> -- 请选择 --</option>
+                                                <option value="1"> 5 人以下 </option>
+                                                <option value="2"> 5 - 10 人 </option>
+                                                <option value="3"> 11 - 50 人 </option>
+                                                <option value="4"> 51 - 100 人 </option>
+                                                <option value="8" selected> 101 - 200 人 </option>
+                                                <option value="5"> 201 - 300 人 </option>
+                                                <option value="9"> 301 - 500 人 </option>
+                                                <option value="6"> 501 - 1000 人 </option>
+                                                <option value="7"> 1000 人以上 </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">经营模式</label>
+                                        <div class="col-sm-5">
+
+                                            <div class="rdio rdio-default">
+                                                <input type="radio" name="radio" id="radioDefault" value="1" checked="checked" />
+                                                <label for="radioDefault">生产厂家</label>
+                                            </div>
+
+                                            <div class="rdio rdio-primary">
+                                                <input type="radio" name="radio" value="2" id="radioPrimary" />
+                                                <label for="radioPrimary">经营批发</label>
+                                            </div>
+
+                                            <div class="rdio rdio-warning">
+                                                <input type="radio" name="radio" value="3" id="radioWarning" />
+                                                <label for="radioWarning">商业服务</label>
+                                            </div>
+
+                                            <div class="rdio rdio-success">
+                                                <input type="radio" name="radio" value="4" id="radioSuccess" />
+                                                <label for="radioSuccess">招商代理</label>
+                                            </div>
+
+                                            <div class="rdio rdio-danger">
+                                                <input type="radio" name="radio" value="5" id="radioDanger" />
+                                                <label for="radioDanger">其它</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">是否提供OEM、ODM</label>
+                                        <div class="col-sm-5">
+
+                                            <div class="rdio rdio-default">
+                                                <input type="radio" name="radio" id="radioDefault" value="1" checked="checked" />
+                                                <label for="radioDefault">是</label>
+                                            </div>
+
+                                            <div class="rdio rdio-primary">
+                                                <input type="radio" name="radio" value="2" id="radioPrimary" />
+                                                <label for="radioPrimary">否</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">主营行业</label>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-3">
+                                                <select class="form-control">
+                                                    <option value="">生产制造</option>
+                                                    <option value="">设计开发</option>
+                                                    <option value="">原材料供应</option>
+                                                    <option value="">策划销售及推广</option>
+                                                    <option value="">其它</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <select class="form-control">
+                                                    <option value="">-------------</option>
+                                                    <option value="">PCB制造</option>
+                                                    <option value="">SMT加工</option>
+                                                    <option value="">模具制造</option>
+                                                    <option value="">成品组装代工</option>
+                                                    <option value="">其它制造</option>
+                                                    <option value="">-------------</option>
+                                                    <option value="">系统开发</option>
+                                                    <option value="">板卡方案开发</option>
+                                                    <option value="">应用软件开发</option>
+                                                    <option value="">ID设计、结构设计</option>
+                                                    <option value="">其它</option>
+                                                    <option value="">-------------</option>
+                                                    <option value="">元器件供应</option>
+                                                    <option value="">公模</option>
+                                                    <option value="">辅材包装</option>
+                                                    <option value="">周边配件</option>
+                                                    <option value="">其它</option>
+                                                    <option value="">-------------</option>
+                                                    <option value="">广告策划</option>
+                                                    <option value="">内贸分销</option>
+                                                    <option value="">外贸渠道销售</option>
+                                                    <option value="">其它</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">主营产品</label>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">主要销售区域</label>
+                                        <div class="col-sm-5">
+                                            <select class="chosen-select" multiple data-placeholder="Choose a Country...">
+                                                <option value=""></option>
+                                                <option value="United States">成品</option>
+                                                <option value="United Kingdom">主板</option>
+                                                <option value="Afghanistan">模具</option>
+                                                <option value="Aland Islands">IC</option>
+                                                <option value="Albania">五金</option>
+                                                <option value="Algeria">软件</option>
+                                                <option value="American Samoa">其它</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">* 经营地址</label>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-2">
+                                                <select class="form-control">
+                                                    <option value="">广东</option>
+                                                    <option value="">January</option>
+                                                    <option value="">February</option>
+                                                    <option value="">March</option>
+                                                    <option value="">...</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <select class="form-control">
+                                                    <option value="">深圳</option>
+                                                    <option value="">2013</option>
+                                                    <option value="">2014</option>
+                                                    <option value="">2015</option>
+                                                    <option value="">...</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <select class="form-control">
+                                                    <option value="">南山区</option>
+                                                    <option value="">2013</option>
+                                                    <option value="">2014</option>
+                                                    <option value="">2015</option>
+                                                    <option value="">...</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col-sm-6">
+                                                <input type="text" placeholder="" class="form-control" />
+                                                <span class="help-block">
+                                                    你可以使用地图定位查看或修改位置。地图定位
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">* 公司简介</label>
+                                        <div class="col-sm-6">
+                                            <textarea class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="ptab2">
+                                <form class="form">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">生产形式</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control mb15">
+                                                <option value=""> -- 请如实填写您的生产形式，以便客户确认合作形式 --</option>
+                                                <option value="1"> 自有生产线 </option>
+                                                <option value="2"> 外包生产 </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">服务领域</label>
+                                        <div class="col-sm-5">
+                                            <select class="chosen-select" multiple data-placeholder="Choose a Country...">
+                                                <option value=""></option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">加工方式</label>
+                                        <div class="col-sm-5">
+                                            <select class="chosen-select" multiple data-placeholder="Choose a Country...">
+                                                <option value=""></option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">加工工艺</label>
+                                        <div class="col-sm-5">
+                                            <select class="chosen-select" multiple data-placeholder="Choose a Country...">
+                                                <option value=""></option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">设备介绍</label>
+                                        <div class="col-sm-5">
+                                            <select class="chosen-select" multiple data-placeholder="Choose a Country...">
+                                                <option value=""></option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">研发部门人数</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control mb15">
+                                                <option value=""> -- 请选择 --</option>
+                                                <option value="1"> 5 人以下 </option>
+                                                <option value="2"> 5 - 10 人 </option>
+                                                <option value="3"> 11 - 50 人 </option>
+                                                <option value="4"> 51 - 100 人 </option>
+                                                <option value="8" selected> 101 - 200 人 </option>
+                                                <option value="5"> 201 - 300 人 </option>
+                                                <option value="9"> 301 - 500 人 </option>
+                                                <option value="6"> 501 - 1000 人 </option>
+                                                <option value="7"> 1000 人以上 </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产能介绍</label>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-2">
+                                                <input type="text" placeholder="" class="form-control" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <select class="form-control mb4">
+                                                    <option value=""> -- 请选择 --</option>
+                                                    <option value="1"> 片 </option>
+                                                    <option value="2"> 颗 </option>
+                                                    <option value="3"> 个 </option>
+                                                    <option value="4"> 台 </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">年营业额</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control mb4">
+                                                <option value=""> --请选择-- </option>
+                                                <option value="8">人民币 10 万元/年以下</option>
+                                                <option value="9">人民币 10 万元/年 - 30 万元/年</option>
+                                                <option value="10">人民币 31 万元/年 - 50 万元/年</option>
+                                                <option value="11">人民币 51 万元/年 - 100 万元/年</option>
+                                                <option value="2">人民币 101 万元/年 - 200 万元/年</option>
+                                                <option value="12">人民币 201 万元/年 - 300 万元/年</option>
+                                                <option value="3">人民币 301 万元/年 - 500 万元/年</option>
+                                                <option value="13">人民币 501 万元/年 - 700 万元/年</option>
+                                                <option value="14">人民币 701 万元/年 - 1000 万元/年</option>
+                                                <option value="15">人民币 1001 万元/年 - 2000 万元/年</option>
+                                                <option value="16">人民币 2001 万元/年 - 3000 万元/年</option>
+                                                <option value="17">人民币 3001 万元/年 - 5000 万元/年</option>
+                                                <option value="6">人民币 5001 万元/年 - 1 亿元/年</option>
+                                                <option value="7">人民币 1 亿元/年以上</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">年出口额</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control mb4">
+                                                <option value="">--请选择--</option>
+                                                <option value="8">人民币 10 万元以下</option>
+                                                <option value="9">人民币 10 万元 - 30 万元</option>
+                                                <option value="10">人民币 31 万元 - 50 万元</option>
+                                                <option value="11">人民币 51 万元 - 100 万元</option>
+                                                <option value="2">人民币 101 万元 - 200 万元</option>
+                                                <option value="12">人民币 201 万元 - 300 万元</option>
+                                                <option value="3">人民币 301 万元 - 500 万元</option>
+                                                <option value="13">人民币 501 万元 - 700 万元</option>
+                                                <option value="14">人民币 701 万元 - 1000 万元</option>
+                                                <option value="15">人民币 1001 万元 - 2000 万元</option>
+                                                <option value="16" selected>人民币 2001 万元 - 3000 万元</option>
+                                                <option value="17">人民币 3001 万元 - 5000 万元</option>
+                                                <option value="6">人民币 5001 万元 - 1 亿元</option>
+                                                <option value="7">人民币 1 亿元以上</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">管理体系认证</label>
+                                        <div class="col-sm-5">
+                                            <select class="chosen-select" multiple data-placeholder="Choose a Country...">
+                                                <option value=""></option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品质量认证</label>
+                                        <div class="col-sm-5">
+                                            <select class="chosen-select" multiple data-placeholder="Choose a Country...">
+                                                <option value=""></option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">质量控制</label>
+                                        <div class="col-sm-5">
+
+                                            <div class="rdio rdio-default">
+                                                <input type="radio" name="radio" id="radioDefault" value="1" checked="checked" />
+                                                <label for="radioDefault">内部</label>
+                                            </div>
+
+                                            <div class="rdio rdio-primary">
+                                                <input type="radio" name="radio" value="2" id="radioPrimary" />
+                                                <label for="radioPrimary">第三方</label>
+                                            </div>
+
+                                            <div class="rdio rdio-warning">
+                                                <input type="radio" name="radio" value="3" id="radioWarning" />
+                                                <label for="radioWarning">无</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">* 厂房面积</label>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-4">
+                                                <input type="text" placeholder="Default Input" class="form-control" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                平方米
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">主要设备</label>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="ptab3">
+                                <form class="form">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">企业成立年份</label>
+                                        <div class="col-sm-1">
+                                            <select class="form-control mb15">
+                                                <option value=""> --请选择-- </option>
+                                                <option value="3" selected>1949</option>
+                                                <option value="8">私营合伙企业</option>
+                                                <option value="9">私营有限责任公司</option>
+                                                <option value="10">私营股份有限公司</option>
+                                                <option value="4">国有企业</option>
+                                                <option value="11">集体企业</option>
+                                                <option value="12">股份合作企业</option>
+                                                <option value="13">联营企业</option>
+                                                <option value="29">有限责任公司</option>
+                                                <option value="14">有限责任公司(国有独资或控股)</option>
+                                                <option value="30">有限责任公司(自然人投资或控股)</option>
+                                                <option value="27">一人有限责任公司</option>
+                                                <option value="15">其他有限责任公司</option>
+                                                <option value="16">股份有限公司</option>
+                                                <option value="17">2014</option>
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> 企业网址</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="如：http://www.abc.com" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> 注册资本</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" placeholder="请根据营业执照如实填写，无需验资请填写0" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <select class="form-control">
+                                                <option value="RMB">人民币</option>
+                                                <option value="HKD">港币</option>
+                                                <option value="EUR">欧元</option>
+                                                <option value="USD">美元</option>
+                                                <option value="JPY">日元</option>
+                                                <option value="SGD">新加坡元</option>
+                                                <option value="GBP">英镑</option>
+                                                <option value="FRF">法国法郎</option>
+                                                <option value="DEM">德国马克</option>
+                                                <option value="NLG">荷兰盾</option>
+                                                <option value="ITL">意大利里拉</option>
+                                                <option value="CAD">加拿大元</option>
+                                                <option value="AUD">澳大利亚元</option>
+                                                <option value="ESP">西班牙比塞塔</option>
+                                                <option value="THB">泰国铢</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> 企业注册地</label>
+                                        <div class="col-sm-6">
+                                            <div class="col-sm-2">
+                                                <select class="form-control">
+                                                    <option value="">广东</option>
+                                                    <option value="">January</option>
+                                                    <option value="">February</option>
+                                                    <option value="">March</option>
+                                                    <option value="">...</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <select class="form-control">
+                                                    <option value="">深圳</option>
+                                                    <option value="">2013</option>
+                                                    <option value="">2014</option>
+                                                    <option value="">2015</option>
+                                                    <option value="">...</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <select class="form-control">
+                                                    <option value="">南山区</option>
+                                                    <option value="">2013</option>
+                                                    <option value="">2014</option>
+                                                    <option value="">2015</option>
+                                                    <option value="">...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> 法人代表</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> 开户行</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="请选择开户行" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"> 账号</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="请输入企业账号" class="form-control" />
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+                            </div>
+
+
+
+
+                        </div><!-- tab-content -->
+
+                        <ul class="pager wizard">
+                            <li class="previous"><a href="javascript:void(0)">Previous</a></li>
+                            <li class="next"><a href="javascript:void(0)">Next</a></li>
+                        </ul>
+
+                    </div><!-- #basicWizard -->
+
+                </div><!-- panel-body -->
+            </div><!-- panel -->
+        </div>
+
+
+
+    </div>
+</div>
+
+<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
+<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../DigitalStyle/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap.min.js"></script>
+<script src="../DigitalStyle/js/modernizr.min.js"></script>
+<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
+<script src="../DigitalStyle/js/toggles.min.js"></script>
+<script src="../DigitalStyle/js/retina.min.js"></script>
+<script src="../DigitalStyle/js/jquery.cookies.js"></script>
+
+<script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+<script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
+<script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
+<script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
+<script src="../DigitalStyle/js/jquery.mousewheel.js"></script>
+<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
+<script src="../DigitalStyle/js/dropzone.min.js"></script>
+<script src="../DigitalStyle/js/colorpicker.js"></script>
+
+
+<script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+
+<script src="../DigitalStyle/js/custom.js"></script>
+<script>
+    jQuery(document).ready(function () {
+
+        // Basic Wizard
+        jQuery('#basicWizard').bootstrapWizard();
+
+        // Progress Wizard
+        $('#progressWizard').bootstrapWizard({
+            'nextSelector': '.next',
+            'previousSelector': '.previous',
+            onNext: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            },
+            onPrevious: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            }
+        });
+
+        // Disabled Tab Click Wizard
+        jQuery('#disabledTabWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
+                return false;
+            }
+        });
+
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+
+        jQuery('#validationWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
+                return false;
+            },
+            onNext: function (tab, navigation, index) {
+                var $valid = jQuery('#firstForm').valid();
+                if (!$valid) {
+
+                    $validator.focusInvalid();
+                    return false;
+                }
+            }
+        });
+
+
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+
+        // Chosen Select
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+        // Tags Input
+        jQuery('#tags').tagsInput({ width: 'auto' });
+
+        // Textarea Autogrow
+        jQuery('#autoResizeTA').autogrow();
+
+        // Color Picker
+        if (jQuery('#colorpicker').length > 0) {
+            jQuery('#colorSelector').ColorPicker({
+                onShow: function (colpkr) {
+                    jQuery(colpkr).fadeIn(500);
+                    return false;
+                },
+                onHide: function (colpkr) {
+                    jQuery(colpkr).fadeOut(500);
+                    return false;
+                },
+                onChange: function (hsb, hex, rgb) {
+                    jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
+                    jQuery('#colorpicker').val('#' + hex);
+                }
+            });
+        }
+
+        // Color Picker Flat Mode
+        jQuery('#colorpickerholder').ColorPicker({
+            flat: true,
+            onChange: function (hsb, hex, rgb) {
+                jQuery('#colorpicker3').val('#' + hex);
+            }
+        });
+
+        // Date Picker
+        jQuery('#datepicker').datepicker();
+
+        jQuery('#datepicker-inline').datepicker();
+
+        jQuery('#datepicker-multiple').datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        // Spinner
+        var spinner = jQuery('#spinner').spinner();
+        spinner.spinner('value', 0);
+
+        // Input Masks
+        jQuery("#date").mask("99/99/9999");
+        jQuery("#phone").mask("(999) 999-9999");
+        jQuery("#ssn").mask("999-99-9999");
+
+        // Time Picker
+        jQuery('#timepicker').timepicker({ defaultTIme: false });
+        jQuery('#timepicker2').timepicker({ showMeridian: false });
+        jQuery('#timepicker3').timepicker({ minuteStep: 15 });
+
+
+    });
+</script>

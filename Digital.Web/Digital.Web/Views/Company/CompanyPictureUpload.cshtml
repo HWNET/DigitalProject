@@ -1,0 +1,472 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
+
+
+<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 上传图片 <span>企业文件柜</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">企业中心</a></li>
+            <li class="active">企业文件柜</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+    <div class="row">
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-btns">
+                    <a href="" class="panel-close">&times;</a>
+                    <a href="" class="minimize">&minus;</a>
+                </div>
+                <h4 class="panel-title">上传图片</h4>
+                <p>您需要先选择产品分类.</p>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">选择目标相册</label>
+                        <div class="col-sm-4">
+                            <select class="form-control chosen-select" data-placeholder="选择分类...">
+                                <option value="United States">免费发样</option>
+                                <option value="United States">押金测样</option>
+                                <option value="United States">需购买样品，不返还</option>
+                                <option value="United States">其它</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="" class="btn btn-primary mr5 mb10" id="growl-primary">新建上册</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-body panel-body-nopadding">
+
+                <!-- BASIC WIZARD -->
+                <div id="basicWizard" class="basic-wizard">
+
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="#tab1" data-toggle="tab">批量上传</a></li>
+                        <li><a href="#tab2" data-toggle="tab">单个上传</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab1">
+                            <div class="panel-body panel-body-nopadding">
+
+
+
+                                <div class="col-md-6">
+                                    <div class="col-sm-12">
+                                        <form action="files" class="form-horizontal dropzone">
+                                            <div class="fallback">
+                                                <input name="file" type="file" multiple />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="alert alert-warning">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <p>
+                                            <strong>上传规则</strong> ：<br>
+                                            每个相册最多上传500张图片<br>
+                                            普通上传一次最多可上传50张<br>
+                                            单张最大5M<br>
+                                            原始图片宽高超过1024像素时，系统会自动对图片进行等比例压缩<br>
+                                            支持格式：<br>
+                                            jpg,jpeg,bmp,png,gif（超过2M的gif图片将会丢失动画效果）<br>
+                                            特别提醒：<br>
+                                            为了更好的上传体验，IE浏览器用户推荐使用“高速上传”<br>
+
+                                        </p>
+                                        <p>
+
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-6">
+                                    <span class="sublabel">5M/200M (您的图片管家享有 200 MB容量)</span>
+                                    <div class="progress progress-sm">
+                                        <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-primary"></div>
+                                    </div><!-- progress -->
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane" id="tab2">
+                            <div class="panel-body panel-body-nopadding">
+                                <form class="form-horizontal form-bordered">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">选择文件</label>
+                                        <div class="col-sm-9">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="input-append">
+                                                    <div class="uneditable-input">
+                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                                        <span class="fileupload-preview"></span>
+                                                    </div>
+                                                    <span class="btn btn-default btn-file">
+                                                        <span class="fileupload-new">选择图片</span>
+                                                        <span class="fileupload-exists">Change</span>
+                                                        <input type="file" />
+                                                    </span>
+                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">选择文件</label>
+                                        <div class="col-sm-9">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="input-append">
+                                                    <div class="uneditable-input">
+                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                                        <span class="fileupload-preview"></span>
+                                                    </div>
+                                                    <span class="btn btn-default btn-file">
+                                                        <span class="fileupload-new">选择图片</span>
+                                                        <span class="fileupload-exists">Change</span>
+                                                        <input type="file" />
+                                                    </span>
+                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">选择文件</label>
+                                        <div class="col-sm-9">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="input-append">
+                                                    <div class="uneditable-input">
+                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                                        <span class="fileupload-preview"></span>
+                                                    </div>
+                                                    <span class="btn btn-default btn-file">
+                                                        <span class="fileupload-new">选择图片</span>
+                                                        <span class="fileupload-exists">Change</span>
+                                                        <input type="file" />
+                                                    </span>
+                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">选择文件</label>
+                                        <div class="col-sm-9">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="input-append">
+                                                    <div class="uneditable-input">
+                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                                        <span class="fileupload-preview"></span>
+                                                    </div>
+                                                    <span class="btn btn-default btn-file">
+                                                        <span class="fileupload-new">选择图片</span>
+                                                        <span class="fileupload-exists">Change</span>
+                                                        <input type="file" />
+                                                    </span>
+                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">水印设置</label>
+                                        <div class="col-sm-9">
+                                            <div class="ckbox ckbox-success">
+                                                <input type="checkbox" value="1" id="checkboxDefault" checked="checked" />
+                                                <label for="checkboxDefault">为上传的图片设置水印</label>
+                                            </div>
+
+                                            <div class="ckbox ckbox-danger">
+                                                <a href="" class="mr5 mb10" id="growl-primary">水印设置</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </form>
+                            </div>
+
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <button class="btn btn-primary">开始上传</button>&nbsp;
+                                        <button class="btn btn-default">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div><!-- tab-content -->
+
+            <ul class="pager wizard">
+                <li class="previous"><a href="javascript:void(0)">上一步</a></li>
+                <li class="next"><a href="javascript:void(0)">下一步</a></li>
+            </ul>
+
+        </div><!-- #basicWizard -->
+
+    </div><!-- panel-body -->
+</div>
+
+
+
+  </div>
+</div>
+
+
+<!-- common js -->
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../js/jquery-ui-1.10.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/modernizr.min.js"></script>
+<script src="../js/jquery.sparkline.min.js"></script>
+<script src="../js/toggles.min.js"></script>
+<script src="../js/retina.min.js"></script>
+<script src="../js/jquery.cookies.js"></script>
+
+<!-- CKEditor -->
+<script src="../js/wysihtml5-0.3.0.min.js"></script>
+<script src="../js/bootstrap-wysihtml5.js"></script>
+<script src="../js/ckeditor/ckeditor.js"></script>
+<script src="../js/ckeditor/adapters/jquery.js"></script>
+
+<!-- commom form js -->
+<script src="../js/jquery.autogrow-textarea.js"></script>
+<script src="../js/bootstrap-fileupload.min.js"></script>
+<script src="../js/bootstrap-timepicker.min.js"></script>
+<script src="../js/jquery.maskedinput.min.js"></script>
+<script src="../js/jquery.tagsinput.min.js"></script>
+<script src="../js/jquery.mousewheel.js"></script>
+<script src="../js/chosen.jquery.min.js"></script>
+<script src="../js/dropzone.min.js"></script>
+<script src="../js/colorpicker.js"></script>
+
+<script src="../js/bootstrap-wizard.min.js"></script>
+<script src="../js/jquery.validate.min.js"></script>
+
+<script src="js/custom.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+
+        // Chosen Select
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+        // Tags Input
+        jQuery('#tags').tagsInput({ width: 'auto' });
+
+        // Tags Input
+        jQuery('#keywords').tagsInput({ width: 'auto' });
+
+        // Textarea Autogrow
+        jQuery('#autoResizeTA').autogrow();
+
+        // Color Picker
+        if (jQuery('#colorpicker').length > 0) {
+            jQuery('#colorSelector').ColorPicker({
+                onShow: function (colpkr) {
+                    jQuery(colpkr).fadeIn(500);
+                    return false;
+                },
+                onHide: function (colpkr) {
+                    jQuery(colpkr).fadeOut(500);
+                    return false;
+                },
+                onChange: function (hsb, hex, rgb) {
+                    jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
+                    jQuery('#colorpicker').val('#' + hex);
+                }
+            });
+        }
+
+        // Color Picker Flat Mode
+        jQuery('#colorpickerholder').ColorPicker({
+            flat: true,
+            onChange: function (hsb, hex, rgb) {
+                jQuery('#colorpicker3').val('#' + hex);
+            }
+        });
+
+        // Date Picker
+        jQuery('#datepicker').datepicker();
+
+        jQuery('#datepicker-inline').datepicker();
+
+        jQuery('#datepicker-multiple').datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        // Spinner
+        var spinner = jQuery('#spinner').spinner();
+        spinner.spinner('value', 0);
+
+        // Input Masks
+        jQuery("#date").mask("99/99/9999");
+        jQuery("#phone").mask("(999) 999-9999");
+        jQuery("#ssn").mask("999-99-9999");
+
+        // Time Picker
+        jQuery('#timepicker').timepicker({ defaultTIme: false });
+        jQuery('#timepicker2').timepicker({ showMeridian: false });
+        jQuery('#timepicker3').timepicker({ minuteStep: 15 });
+
+
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+
+        // HTML5 WYSIWYG Editor
+        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
+
+        // CKEditor
+        jQuery('#ckeditor').ckeditor();
+
+        jQuery('#inlineedit1, #inlineedit2').ckeditor();
+
+        // Uncomment the following code to test the "Timeout Loading Method".
+        // CKEDITOR.loadFullCoreTimeout = 5;
+
+        window.onload = function () {
+            // Listen to the double click event.
+            if (window.addEventListener)
+                document.body.addEventListener('dblclick', onDoubleClick, false);
+            else if (window.attachEvent)
+                document.body.attachEvent('ondblclick', onDoubleClick);
+        };
+
+        function onDoubleClick(ev) {
+            // Get the element which fired the event. This is not necessarily the
+            // element to which the event has been attached.
+            var element = ev.target || ev.srcElement;
+
+            // Find out the div that holds this element.
+            var name;
+
+            do {
+                element = element.parentNode;
+            }
+            while (element && (name = element.nodeName.toLowerCase()) &&
+                (name != 'div' || element.className.indexOf('editable') == -1) && name != 'body');
+
+            if (name == 'div' && element.className.indexOf('editable') != -1)
+                replaceDiv(element);
+        }
+
+        var editor;
+
+        function replaceDiv(div) {
+            if (editor)
+                editor.destroy();
+            editor = CKEDITOR.replace(div);
+        }
+
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+
+        // Basic Wizard
+        jQuery('#basicWizard').bootstrapWizard();
+
+        // Progress Wizard
+        $('#progressWizard').bootstrapWizard({
+            'nextSelector': '.next',
+            'previousSelector': '.previous',
+            onNext: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            },
+            onPrevious: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            }
+        });
+
+        // Disabled Tab Click Wizard
+        jQuery('#disabledTabWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
+                return false;
+            }
+        });
+
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+
+        jQuery('#validationWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
+                return false;
+            },
+            onNext: function (tab, navigation, index) {
+                var $valid = jQuery('#firstForm').valid();
+                if (!$valid) {
+
+                    $validator.focusInvalid();
+                    return false;
+                }
+            }
+        });
+
+
+    });
+</script>
+
+
+
+

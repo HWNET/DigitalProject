@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
+<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+
+
+<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 单独页面管理 <span>部门子账户管理</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">企业中心</a></li>
+            <li class="active">子账号管理</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+    <div class="row">
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>提示：</strong> 类似企业介绍的关于我们、联系我们、荣誉证书等统称为单独页面，页面标示的作用用于将 指定的页面聚合在一起 形成链接.<br> 单独页面添加上限为30页。
+        </div>
+
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-info mb30">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>页面名称</th>
+                            <th>聚合标示</th>
+                            <th>修改时间</th>
+                            <th>管理</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>关于我们</td>
+                            <td>about-us</td>
+                            <td>2014-8-15</td>
+                            <td>预览   删除  更改</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>联系我们</td>
+                            <td>about-us</td>
+                            <td>2014-8-15</td>
+                            <td>预览   删除  更改</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>企业资质</td>
+                            <td>about-us</td>
+                            <td>2014-8-15</td>
+                            <td>预览   删除  更改</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>品质保证</td>
+                            <td>about-us</td>
+                            <td>2014-8-15</td>
+                            <td>预览   删除  更改</td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div><!-- table-responsive -->
+        </div>
+
+    </div>
+</div>
+
+
+<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
+<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap.min.js"></script>
+<script src="../DigitalStyle/js/modernizr.min.js"></script>
+<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
+<script src="../DigitalStyle/js/toggles.min.js"></script>
+<script src="../DigitalStyle/js/retina.min.js"></script>
+<script src="../DigitalStyle/js/jquery.cookies.js"></script>
+
+<script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
+<script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
+<script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+
+<script src="../DigitalStyle/js/custom.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+
+        // HTML5 WYSIWYG Editor
+        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
+
+        // CKEditor
+        jQuery('#ckeditor').ckeditor();
+
+        jQuery('#inlineedit1, #inlineedit2').ckeditor();
+
+        // Uncomment the following code to test the "Timeout Loading Method".
+        // CKEDITOR.loadFullCoreTimeout = 5;
+
+        window.onload = function () {
+            // Listen to the double click event.
+            if (window.addEventListener)
+                document.body.addEventListener('dblclick', onDoubleClick, false);
+            else if (window.attachEvent)
+                document.body.attachEvent('ondblclick', onDoubleClick);
+        };
+
+        function onDoubleClick(ev) {
+            // Get the element which fired the event. This is not necessarily the
+            // element to which the event has been attached.
+            var element = ev.target || ev.srcElement;
+
+            // Find out the div that holds this element.
+            var name;
+
+            do {
+                element = element.parentNode;
+            }
+            while (element && (name = element.nodeName.toLowerCase()) &&
+                (name != 'div' || element.className.indexOf('editable') == -1) && name != 'body');
+
+            if (name == 'div' && element.className.indexOf('editable') != -1)
+                replaceDiv(element);
+        }
+
+        var editor;
+
+        function replaceDiv(div) {
+            if (editor)
+                editor.destroy();
+            editor = CKEDITOR.replace(div);
+        }
+
+    });
+</script>
+
+

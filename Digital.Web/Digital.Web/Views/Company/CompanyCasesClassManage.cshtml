@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "案例分类管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+
+<link href="../DigitalStyle/css/jquery.datatables.css" rel="stylesheet">
+
+<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 案例分类管理 <span>案例中心</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">企业中心</a></li>
+            <li class="active">案例管理</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">分类管理</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="btn-demo mr10">
+                        <a class="btn btn-primary"><i class="fa fa-pencil mr5"></i> 添加顶级分类</a>
+                        <a class="btn btn-primary"><i class="fa fa-comments mr5"></i> 保存</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hidaction table-hover mb30">
+                            <thead>
+                                <tr>
+                                    <th>排序</th>
+                                    <th>分类名称</th>
+                                    <th>子类</th>
+                                    <th>分类图片</th>
+                                    <th>分类内容</th>
+                                    <th>管理</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="name" class="form-control width30" placeholder="10" /></td>
+                                    <td><input type="text" name="name" class="form-control " placeholder="X86主板" /></td>
+                                    <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
+                                    <td>--</td>
+                                    <td>内容列表</td>
+                                    <td class="table-action-hide">
+                                        <a href=""><i class="fa fa-pencil"></i></a>
+                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="text" name="name" class="form-control width30" placeholder="1" /></td>
+                                    <td><input type="text" name="name" class="form-control" placeholder="子类：intel X86工控板" /></td>
+                                    <td></td>
+                                    <td>--</td>
+                                    <td>内容列表</td>
+                                    <td class="table-action-hide">
+                                        <a href=""><i class="fa fa-pencil"></i></a>
+                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td><input type="text" name="name" class="form-control width30" placeholder="10" /></td>
+                                    <td><input type="text" name="name" class="form-control " placeholder="ARM工控板" /></td>
+                                    <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
+                                    <td>--</td>
+                                    <td>内容列表</td>
+                                    <td class="table-action-hide">
+                                        <a href=""><i class="fa fa-pencil"></i></a>
+                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="name" class="form-control width30" placeholder="30" /></td>
+                                    <td><input type="text" name="name" class="form-control " placeholder="ARM工控板" /></td>
+                                    <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
+                                    <td>--</td>
+                                    <td>产品列表</td>
+                                    <td class="table-action-hide">
+                                        <a href=""><i class="fa fa-pencil"></i></a>
+                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                    <div class="btn-demo mr10">
+                        <button class="btn btn-primary mr5" type="button"><i class="fa fa-pencil mr5"></i> 添加顶级分类</button>
+                        <button class="btn btn-primary mr5" type="button"><i class="fa fa-comments mr5"></i> 保存</button>
+                    </div>
+
+
+
+
+                </div>
+            </div><!-- panel -->
+        </div><!-- col-sm-6 -->
+
+
+
+    </div>
+</div>
+
+<div class="alert alert-warning fade in nomargin">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
+    <h4>温馨提示</h4>
+    <p>
+        1、如果您的信息较多，建议设置二级分类，方便用户查找；<br>
+        2、建议尽量控制每个分类下的供应产品数量，用户查看更方便；<br>
+        3、您设置成功的自定义分类，在您企业店铺显示会有一定时间的延迟。<br>
+        4、超过10个自定义分类不允许一次性清空
+    </p>
+
+</div>
+
+<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
+<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap.min.js"></script>
+<script src="../DigitalStyle/js/modernizr.min.js"></script>
+<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
+<script src="../DigitalStyle/js/toggles.min.js"></script>
+<script src="../DigitalStyle/js/retina.min.js"></script>
+<script src="../DigitalStyle/js/jquery.cookies.js"></script>
+
+<script src="../DigitalStyle/js/holder.js"></script>
+<script src="../DigitalStyle/js/morris.min.js"></script>
+<script src="../DigitalStyle/js/raphael-2.1.0.min.js"></script>
+
+<script src="../DigitalStyle/js/jquery.datatables.min.js"></script>
+<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
+
+<script src="../DigitalStyle/js/custom.js"></script>
+<script>
+    jQuery(document).ready(function () {
+
+        jQuery('#table1').dataTable();
+
+        jQuery('#table2').dataTable({
+            "sPaginationType": "full_numbers"
+        });
+
+        // Chosen Select
+        jQuery("select").chosen({
+            'min-width': '100px',
+            'white-space': 'nowrap',
+            disable_search_threshold: 10
+        });
+
+        // Delete row in a table
+        jQuery('.delete-row').click(function () {
+            var c = confirm("Continue delete?");
+            if (c)
+                jQuery(this).closest('tr').fadeOut(function () {
+                    jQuery(this).remove();
+                });
+
+            return false;
+        });
+
+        // Show aciton upon row hover
+        jQuery('.table-hidaction tbody tr').hover(function () {
+            jQuery(this).find('.table-action-hide a').animate({ opacity: 1 });
+        }, function () {
+            jQuery(this).find('.table-action-hide a').animate({ opacity: 0 });
+        });
+
+
+    });
+</script>
+
+

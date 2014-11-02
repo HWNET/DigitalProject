@@ -1,0 +1,309 @@
+﻿@{
+    ViewBag.Title = "账户信息管理";
+    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
+}
+
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
+
+<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 添加专利 <span>专利中心</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">企业中心</a></li>
+            <li class="active">专利中心</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">专利管理</h3>
+                </div>
+
+
+                <div class="panel-body panel-body-nopadding">
+                    <form class="form-horizontal form-bordered">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">专利号</label>
+                            <div class="col-sm-6">
+                                <input type="text" placeholder="项目号" class="form-control" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">专利名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" placeholder="项目名称" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">概述</label>
+                            <div class="col-sm-6">
+                                <textarea id="autoResizeTA" class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">专利证书</label>
+                            <div class="col-sm-6">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="input-append">
+                                        <div class="uneditable-input">
+                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">选择专利证书文件</span>
+                                            <span class="fileupload-exists">更改</span>
+                                            <input type="file" />
+                                        </span>
+                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">删除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">专利日期</label>
+                            <div class="col-sm-4 ">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">技术领域</label>
+
+                            <div class="col-sm-4 ">
+                                <select class="form-control chosen-select" data-placeholder="选择分类...">
+                                    <option value="United States">X86工控板</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">开发状态</label>
+
+                            <div class="col-sm-4 ">
+                                <select class="form-control chosen-select" data-placeholder="选择状态...">
+                                    <option value="United States">研发阶段</option>
+                                    <option value="United States">待转让</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">排序值</label>
+                            <div class="col-sm-4">
+                                <input type="text" placeholder="50" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标签</label>
+                            <div class="col-sm-4">
+                                <input name="tags" id="tags" class="form-control" value="标签1,标签2" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="checkbox">专利简介</label>
+                            <div class="col-sm-6">
+                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button class="btn btn-primary">提交</button>&nbsp;
+                            <button class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div><!-- panel -->
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<!-- common js -->
+<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
+<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../DigitalStyle/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap.min.js"></script>
+<script src="../DigitalStyle/js/modernizr.min.js"></script>
+<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
+<script src="../DigitalStyle/js/toggles.min.js"></script>
+<script src="../DigitalStyle/js/retina.min.js"></script>
+<script src="../DigitalStyle/js/jquery.cookies.js"></script>
+
+<!-- CKEditor -->
+<script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
+<script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
+<script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+
+<!-- commom form js -->
+<script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+<script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
+<script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
+<script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
+<script src="../DigitalStyle/js/jquery.mousewheel.js"></script>
+<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
+<script src="../DigitalStyle/js/dropzone.min.js"></script>
+<script src="../DigitalStyle/js/colorpicker.js"></script>
+
+
+<script src="js/custom.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+
+        // Chosen Select
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+        // Tags Input
+        jQuery('#tags').tagsInput({ width: 'auto' });
+
+        // Textarea Autogrow
+        jQuery('#autoResizeTA').autogrow();
+
+        // Color Picker
+        if (jQuery('#colorpicker').length > 0) {
+            jQuery('#colorSelector').ColorPicker({
+                onShow: function (colpkr) {
+                    jQuery(colpkr).fadeIn(500);
+                    return false;
+                },
+                onHide: function (colpkr) {
+                    jQuery(colpkr).fadeOut(500);
+                    return false;
+                },
+                onChange: function (hsb, hex, rgb) {
+                    jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
+                    jQuery('#colorpicker').val('#' + hex);
+                }
+            });
+        }
+
+        // Color Picker Flat Mode
+        jQuery('#colorpickerholder').ColorPicker({
+            flat: true,
+            onChange: function (hsb, hex, rgb) {
+                jQuery('#colorpicker3').val('#' + hex);
+            }
+        });
+
+        // Date Picker
+        jQuery('#datepicker').datepicker();
+
+        jQuery('#datepicker-inline').datepicker();
+
+        jQuery('#datepicker-multiple').datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        // Spinner
+        var spinner = jQuery('#spinner').spinner();
+        spinner.spinner('value', 0);
+
+        // Input Masks
+        jQuery("#date").mask("99/99/9999");
+        jQuery("#phone").mask("(999) 999-9999");
+        jQuery("#ssn").mask("999-99-9999");
+
+        // Time Picker
+        jQuery('#timepicker').timepicker({ defaultTIme: false });
+        jQuery('#timepicker2').timepicker({ showMeridian: false });
+        jQuery('#timepicker3').timepicker({ minuteStep: 15 });
+
+
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+
+        // HTML5 WYSIWYG Editor
+        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
+
+        // CKEditor
+        jQuery('#ckeditor').ckeditor();
+
+        jQuery('#inlineedit1, #inlineedit2').ckeditor();
+
+        // Uncomment the following code to test the "Timeout Loading Method".
+        // CKEDITOR.loadFullCoreTimeout = 5;
+
+        window.onload = function () {
+            // Listen to the double click event.
+            if (window.addEventListener)
+                document.body.addEventListener('dblclick', onDoubleClick, false);
+            else if (window.attachEvent)
+                document.body.attachEvent('ondblclick', onDoubleClick);
+        };
+
+        function onDoubleClick(ev) {
+            // Get the element which fired the event. This is not necessarily the
+            // element to which the event has been attached.
+            var element = ev.target || ev.srcElement;
+
+            // Find out the div that holds this element.
+            var name;
+
+            do {
+                element = element.parentNode;
+            }
+            while (element && (name = element.nodeName.toLowerCase()) &&
+                (name != 'div' || element.className.indexOf('editable') == -1) && name != 'body');
+
+            if (name == 'div' && element.className.indexOf('editable') != -1)
+                replaceDiv(element);
+        }
+
+        var editor;
+
+        function replaceDiv(div) {
+            if (editor)
+                editor.destroy();
+            editor = CKEDITOR.replace(div);
+        }
+
+    });
+</script>
+
+
+
