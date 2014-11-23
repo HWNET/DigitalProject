@@ -1025,6 +1025,24 @@
     <Content Include="Views\Users\Test1.cshtml" />
     <Content Include="Views\Company\AccountInfo.cshtml" />
     <Content Include="Views\Company\SubUserManage.cshtml" />
+    <Content Include="Views\Company\AccountSecurity.cshtml" />
+    <Content Include="Views\Company\AccountTransactionInfo.cshtml" />
+    <Content Include="Views\Company\CompanyBaseInfo.cshtml" />
+    <Content Include="Views\Company\CompanyCasesAdd.cshtml" />
+    <Content Include="Views\Company\CompanyCasesClassManage.cshtml" />
+    <Content Include="Views\Company\CompanyCasesList.cshtml" />
+    <Content Include="Views\Company\CompanyCredibility.cshtml" />
+    <Content Include="Views\Company\CompanyFiles.cshtml" />
+    <Content Include="Views\Company\CompanyNewsAdd.cshtml" />
+    <Content Include="Views\Company\CompanyNewsClassManage.cshtml" />
+    <Content Include="Views\Company\CompanyNewsList.cshtml" />
+    <Content Include="Views\Company\CompanyPatentAdd.cshtml" />
+    <Content Include="Views\Company\CompanyPatentList.cshtml" />
+    <Content Include="Views\Company\CompanyPictureUpload.cshtml" />
+    <Content Include="Views\Company\CompanyQualificationCertificateList.cshtml" />
+    <Content Include="Views\Company\CompanySinglePage.cshtml" />
+    <Content Include="Views\Company\CompanySinglePageAdd.cshtml" />
+    <Content Include="Views\Company\CompanyWatermarkManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
