@@ -56,7 +56,7 @@ namespace Digital.Web.Controllers
         /// <returns></returns>
         public ActionResult SubUserManage()
         {
-            ViewBag.MenuModel = base.GetMenu(103);
+            ViewBag.MenuModel = base.GetMenu(102);
             return View();
         }
 
