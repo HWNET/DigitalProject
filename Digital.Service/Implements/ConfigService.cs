@@ -21,6 +21,12 @@ namespace Digital.Service.Implements
                 return null;
             }
         }
+
+        public List<Digital.Contact.Models.UsersModel> GetUserList()
+        {
+            Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+            return UserService.GetAllUserList();
+        }
     }
     
 }

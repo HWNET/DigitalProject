@@ -9,5 +9,6 @@ namespace Digital.Service
     public  class CacheModel
     {
         public  List<Digital.Contact.Models.MenuModel> MenuModellist { get; set; }
+        public List<Digital.Contact.Models.UsersModel> UserModellist { get; set; }
     }
 }

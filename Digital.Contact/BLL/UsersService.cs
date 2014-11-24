@@ -116,6 +116,23 @@ namespace Digital.Contact.BLL
         }
 
 
+        public List<UsersModel> GetAllUserList()
+        {
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    var UserList = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").ToList();
+                    return UserList;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+
 
         public IList<UsersModel> PageList(int pageIndex, int pageSize, out int TotalCount, out int PageCount)
         {

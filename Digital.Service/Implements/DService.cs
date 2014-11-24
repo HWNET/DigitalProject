@@ -22,7 +22,9 @@ namespace Digital.Service.Implements
         }
 
         public Task _CheckReloadXml;
+        public Task _CHeckReloadDB;
         public CancellationToken _cancelToken;
+        public CancellationToken _cancelDBToken;
         private int delayTime = 10000;
 
         public Digital.Contact.Models.MenuModel MenuList { get; set; }
@@ -41,6 +43,55 @@ namespace Digital.Service.Implements
                 }
             });
             _CheckReloadXml.Start();
+            _CHeckReloadDB = new Task(() =>
+            {
+                try
+                {
+                    CheckDBStatus(_cancelDBToken);
+                }
+                catch (Exception ex)
+                {
+                    //log
+                }
+            });
+        }
+
+
+        private object CacheLock;
+
+        private void CheckDBStatus(CancellationToken token)
+        {
+            var ct = token;
+            while (true)
+            {
+                try
+                {
+                    if (ct.IsCancellationRequested)
+                        break;
+                    lock (CacheLock)
+                    {
+                        if (GenericList.CacheModelObj != null)
+                        {
+                            UserCacheList();
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+                _CHeckReloadDB.Wait(delayTime * 1000);
+            }
+        }
+
+        private  void UserCacheList()
+        {
+            if (GenericList.CacheModelObj.UserModellist == null)
+            {
+                Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+                GenericList.CacheModelObj.UserModellist = UserService.GetAllUserList();
+            }
         }
 
 
@@ -68,12 +119,15 @@ namespace Digital.Service.Implements
                     }
                     List<XmlModel> XmlList = GetXmlConfig.GetNeedReloadXml(IsAll);
                     GenericList InitList = new GenericList();
-                    foreach (var xmlMode in XmlList)
+                    lock (CacheLock)
                     {
-                        //反射不了 只能写死
-                        if (xmlMode.Name == "Menu")
+                        foreach (var xmlMode in XmlList)
                         {
-                            InitList.InitModel<Digital.Contact.Models.MenuModel>(xmlMode.Name, xmlMode.Model);
+                            //反射不了 只能写死
+                            if (xmlMode.Name == "Menu")
+                            {
+                                InitList.InitModel<Digital.Contact.Models.MenuModel>(xmlMode.Name, xmlMode.Model);
+                            }
                         }
                     }
                 }
