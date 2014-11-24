@@ -19,7 +19,5 @@ namespace Digital.Contact.Models
         public int ParentId { get; set; }
         public string Url { get; set; }
         public string Style { get; set; }
-        public virtual MenuModel ParentModel { get; set; }
-
     }
 }

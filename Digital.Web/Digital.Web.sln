@@ -11,9 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digitial.WindowsService", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Common", "..\Digital.Common\Digital.Common\Digital.Common.csproj", "{52A3E388-E058-4CFA-B065-78ED1C86FDC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Service", "..\Digital.Service\Digital.Service.csproj", "{AE0F6DAE-ACBA-4801-98DB-7A515DD4D2A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.ServiceHost", "..\Digital.ServiceHost\Digital.ServiceHost.csproj", "{13290D7D-2C44-43B4-B593-6DA1EB3A9D66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.WCFClient", "..\Digital.WCFClient\Digital.WCFClient.csproj", "{08858B92-A2BE-4FA9-96BE-3947AEDC99C2}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs21
 		SccLocalPath0 = .
@@ -29,6 +35,15 @@ Global
 		SccProjectUniqueName4 = ..\\Digital.Common\\Digital.Common\\Digital.Common.csproj
 		SccProjectName4 = ../Digital.Common/Digital.Common
 		SccLocalPath4 = ..\\Digital.Common\\Digital.Common
+		SccProjectUniqueName5 = ..\\Digital.Service\\Digital.Service.csproj
+		SccProjectName5 = ../Digital.Service
+		SccLocalPath5 = ..\\Digital.Service
+		SccProjectUniqueName6 = ..\\Digital.ServiceHost\\Digital.ServiceHost.csproj
+		SccProjectName6 = ../Digital.ServiceHost
+		SccLocalPath6 = ..\\Digital.ServiceHost
+		SccProjectUniqueName7 = ..\\Digital.WCFClient\\Digital.WCFClient.csproj
+		SccProjectName7 = ../Digital.WCFClient
+		SccLocalPath7 = ..\\Digital.WCFClient
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +66,18 @@ Global
 		{52A3E388-E058-4CFA-B065-78ED1C86FDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52A3E388-E058-4CFA-B065-78ED1C86FDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52A3E388-E058-4CFA-B065-78ED1C86FDC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0F6DAE-ACBA-4801-98DB-7A515DD4D2A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0F6DAE-ACBA-4801-98DB-7A515DD4D2A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0F6DAE-ACBA-4801-98DB-7A515DD4D2A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0F6DAE-ACBA-4801-98DB-7A515DD4D2A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13290D7D-2C44-43B4-B593-6DA1EB3A9D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13290D7D-2C44-43B4-B593-6DA1EB3A9D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13290D7D-2C44-43B4-B593-6DA1EB3A9D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13290D7D-2C44-43B4-B593-6DA1EB3A9D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08858B92-A2BE-4FA9-96BE-3947AEDC99C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08858B92-A2BE-4FA9-96BE-3947AEDC99C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08858B92-A2BE-4FA9-96BE-3947AEDC99C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08858B92-A2BE-4FA9-96BE-3947AEDC99C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

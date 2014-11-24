@@ -11,6 +11,8 @@ using Digital.Contact.DAL;
 using Digital.Contact.BLL;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using Digital.WCFClient;
+using Digital.WCFClient.ConfigService;
 
 namespace Digital.Web.Controllers
 {
@@ -22,6 +24,7 @@ namespace Digital.Web.Controllers
         {
             ViewBag.MenuModel = base.GetMenu(2);
            var UserModel=  OperatorFactory.GetUser(User.Identity.GetUserId());
+         
            if (UserModel != null)
            {
                return View(UserModel);
@@ -30,6 +33,7 @@ namespace Digital.Web.Controllers
            {
                return HttpNotFound();
            }
+        
             //if (!string.IsNullOrEmpty(Request["name"]))
             //{
             //    return SearchFun(PageIndex);
@@ -179,6 +183,8 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            var client = ServiceHub.GetCommonServiceClient<ConfigServiceClient>("localhost", "4502");
+            var MenuModelIist = client.GetMenuList();
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             //TempDataDictionary viewBag=null;
             //string ss = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<UsersModel>(this.ControllerContext, "~/Views/Users/Login.cshtml", base.BaseFind(1), viewBag);

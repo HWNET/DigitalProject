@@ -107,6 +107,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1062,6 +1064,10 @@
     <ProjectReference Include="..\..\Digital.Contact\Digital.Contact.csproj">
       <Project>{c4d9ac59-be05-4abc-b047-dbfed29ba671}</Project>
       <Name>Digital.Contact</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Digital.WCFClient\Digital.WCFClient.csproj">
+      <Project>{08858b92-a2be-4fa9-96be-3947aedc99c2}</Project>
+      <Name>Digital.WCFClient</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

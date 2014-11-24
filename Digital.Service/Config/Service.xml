@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <ReloadAll>1</ReloadAll>
+  <XmlFile>
+    <Item Name="Menu" Model="MenuModel">1</Item>
+  </XmlFile>
+</Root>
