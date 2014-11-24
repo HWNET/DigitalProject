@@ -69,5 +69,25 @@ namespace Digital.Service
             return doc.SelectNodes("Root/Item");
         }
 
+        public static void UpdateStatus(string XmlName, string Value)
+        {
+            var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
+            var doc = new XmlDocument();
+            var path = ServicePath + "\\Config\\Service.xml";
+            doc.Load(path);
+            if (XmlName != "ReloadAll")
+            {
+                XmlNodeList ItemModelList = doc.SelectNodes("Root/XmlFile/Item");
+                foreach (XmlNode ItemMode in ItemModelList)
+                {
+                    if (ItemMode.Attributes["Name"].Value == XmlName)
+                    {
+                        ItemMode.Value = Value;
+                    }
+                }
+               
+            }
+        }
+
     }
 }
