@@ -275,8 +275,7 @@ namespace Digital.Web.Controllers
         {
             string ErrorMessage = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<UserServiceClient>(); ;
-            var client1 = ServiceHub.GetCommonServiceClient<ConfigServiceClient>(); ;
-            var Test= client1.GetMenuList();
+           
             var _user = client.GetUserInfoByName(UserName);
             base._user = _user;
             if (_user == null) return Content("error:" + "用户名不存在");
