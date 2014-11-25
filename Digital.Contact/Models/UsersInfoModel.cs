@@ -75,14 +75,8 @@ namespace Digital.Contact.Models
 
         public virtual ICollection<GoodAtWhatModel> GoodAtWhatModels { get; set; }
 
-
-        public string[] ProvinceNameAndCityName()
-        {
-            
-            return Digital.Common.Utilities.XmlUtil.ReadPCityNameXml(ProvinceID, CityID);
-
-        }
-
+        public CityModel CityModels { get; set; }
+       
         public int UpdateStatus { get; set; }
 
 

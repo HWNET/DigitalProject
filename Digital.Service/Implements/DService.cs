@@ -70,22 +70,21 @@ namespace Digital.Service.Implements
             if (GenericList.CacheModelObj.UserModellist == null)
             {
                 Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+                //Skill cache
+                
                 GenericList.CacheModelObj.UserModellist = UserService.GetAllUserList();
+                foreach (var Usermodel in GenericList.CacheModelObj.UserModellist)
+                {
+                    foreach (var goodat in Usermodel.UsersInfoModel.GoodAtWhatModels)
+                    {
+                        goodat.SkillsModel = GenericList.CacheModelObj.SkillsModellist.Where(o => o.SkillId == goodat.SkillId).FirstOrDefault();
+                    }
+                }
             }
         }
 
 
-        /// <summary>
-        /// Skill cache
-        /// </summary>
-        private void SkillCacheList()
-        {
-            if (GenericList.CacheModelObj.UserModellist == null)
-            {
-                Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
-                GenericList.CacheModelObj.SkillsModellist = UserService.GetSkillList();
-            }
-        }
+       
         #endregion
 
 
@@ -157,6 +156,10 @@ namespace Digital.Service.Implements
                             if (xmlMode.Name == "Skills")
                             {
                                 InitList.InitModel<Digital.Contact.Models.SkillsModel>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "City")
+                            {
+                                InitList.GetCityModel();
                             }
                             GetXmlConfig.UpdateStatus(xmlMode.Name, "0");
                         }

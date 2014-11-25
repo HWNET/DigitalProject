@@ -11,6 +11,7 @@ namespace Digital.Service
     {
         public string Name { get; set; }
         public string Model { get; set; }
+        public string Ref { get; set; }
     }
 
     public class GetXmlConfig
@@ -45,6 +46,7 @@ namespace Digital.Service
                 {
                     XModel.Name = ItemMode.Attributes["Name"].Value;
                     XModel.Model = ItemMode.Attributes["Model"].Value;
+                    XModel.Ref = ItemMode.Attributes["ref"].Value;
                     NeedReloadXmlList.Add(XModel);
                 }
                 else
@@ -53,6 +55,7 @@ namespace Digital.Service
                     {
                         XModel.Name = ItemMode.Attributes["Name"].Value;
                         XModel.Model = ItemMode.Attributes["Model"].Value;
+                        XModel.Ref = ItemMode.Attributes["ref"].Value;
                         NeedReloadXmlList.Add(XModel);
                     }
                 }

@@ -81,6 +81,7 @@
     <Compile Include="DAL\CommunicationInitializer.cs" />
     <Compile Include="Models\CasesCategoryModel.cs" />
     <Compile Include="Models\CasesModel.cs" />
+    <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\GoodAtWhatModel.cs" />

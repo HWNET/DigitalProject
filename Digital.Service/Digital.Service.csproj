@@ -60,6 +60,9 @@
     <Compile Include="UpdateDB\UpdateUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\City.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Menu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -41,13 +41,13 @@ namespace Digital.Contact.BLL
             }
         }
 
-        public List<SkillsModel> GetSkillList()
-        {
-            using (var db = new CommunicationContext())
-            {
-                return db.SkillsModel.ToList();
-            }
-        }
+        //public List<SkillsModel> GetSkillList()
+        //{
+        //    using (var db = new CommunicationContext())
+        //    {
+        //        return db.SkillsModel.ToList();
+        //    }
+        //}
 
         public bool UpdateGoodAt(ICollection<GoodAtWhatModel> GoodAtList)
         {
@@ -74,6 +74,7 @@ namespace Digital.Contact.BLL
                     }
                     foreach (var Add in AddList)
                     {
+                        Add.UpdateStatus = 0;
                         db.GoodAtWhatModel.Add(Add);
                     }
                     db.SaveChanges();
@@ -87,40 +88,40 @@ namespace Digital.Contact.BLL
             
         }
 
-        public bool UpdateGoodAt(string SkillStr, int UsersInfoID)
-        {
-            using (var db = new CommunicationContext())
-            {
-                try
-                {
-                    string[] SkillIds = SkillStr.Split(',');
-                    var SkillList= db.SkillsModel.ToList();
-                    foreach (var SkillModel in SkillList)
-                    {
-                       bool IsInclude=SkillIds.Any(e => e.ToString() == SkillModel.SkillId.ToString());
-                       var GoodModel = db.GoodAtWhatModel.Where(o => o.UsersInfoID == UsersInfoID && o.SkillId == SkillModel.SkillId ).FirstOrDefault();
-                       if (GoodModel != null && !IsInclude)
-                       {
-                           db.GoodAtWhatModel.Remove(GoodModel);
-                       }
-                       else
-                       {
+        //public bool UpdateGoodAt(string SkillStr, int UsersInfoID)
+        //{
+        //    using (var db = new CommunicationContext())
+        //    {
+        //        try
+        //        {
+        //            string[] SkillIds = SkillStr.Split(',');
+        //            var SkillList= db.SkillsModel.ToList();
+        //            foreach (var SkillModel in SkillList)
+        //            {
+        //               bool IsInclude=SkillIds.Any(e => e.ToString() == SkillModel.SkillId.ToString());
+        //               var GoodModel = db.GoodAtWhatModel.Where(o => o.UsersInfoID == UsersInfoID && o.SkillId == SkillModel.SkillId ).FirstOrDefault();
+        //               if (GoodModel != null && !IsInclude)
+        //               {
+        //                   db.GoodAtWhatModel.Remove(GoodModel);
+        //               }
+        //               else
+        //               {
 
-                           if (GoodModel == null && IsInclude)
-                           {
-                               db.GoodAtWhatModel.Add(new GoodAtWhatModel { SkillId = SkillModel.SkillId, UsersInfoID = UsersInfoID });
-                           }
-                       }
-                    }
-                    db.SaveChanges();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            }
-        }
+        //                   if (GoodModel == null && IsInclude)
+        //                   {
+        //                       db.GoodAtWhatModel.Add(new GoodAtWhatModel { SkillId = SkillModel.SkillId, UsersInfoID = UsersInfoID });
+        //                   }
+        //               }
+        //            }
+        //            db.SaveChanges();
+        //            return true;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //}
 
         public UsersModel FindByName(string UserName)
         {
@@ -153,7 +154,8 @@ namespace Digital.Contact.BLL
             {
                 try
                 {
-                    var UserList = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").Include("UsersInfoModel.GoodAtWhatModels.SkillsModel").ToList();
+                    //Include("UsersInfoModel.GoodAtWhatModels.SkillsModel")
+                    var UserList = db.UsersModels.Include(o => o.UsersInfoModel).Include("UsersInfoModel.GoodAtWhatModels").ToList();
                     return UserList;
                 }
                 catch (Exception ex)

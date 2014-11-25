@@ -19,6 +19,31 @@ namespace Digital.Service
             }
         }
 
+        public void GetCityModel()
+        {
+            if (CacheModelObj.ProvinceModellist == null)
+            {
+                CacheModelObj.ProvinceModellist = new List<Contact.Models.ProvinceModel>();
+            }
+            var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
+            var doc = new XmlDocument();
+            var path = ServicePath + "\\Config\\City.xml";
+            doc.Load(path);
+            XmlNodeList ItemModelList = doc.SelectNodes("Root/Province");
+            foreach (XmlNode ItemModel in ItemModelList)
+            {
+                List<Contact.Models.CityModel> CityListModel = new List<Contact.Models.CityModel>();
+                var PModel = new Contact.Models.ProvinceModel { ID = int.Parse(ItemModel.Attributes["ID"].Value), Name = ItemModel.Attributes["Name"].Value};
+                foreach (XmlNode ChildNode in ItemModel.ChildNodes)
+                {
+                    CityListModel.Add(new Contact.Models.CityModel { ID = int.Parse(ChildNode.Attributes["ID"].Value), Name = ChildNode.InnerText, ProvinceModels = PModel });
+                }
+                PModel.CityList = CityListModel;
+               
+                CacheModelObj.ProvinceModellist.Add(PModel);
+            }
+        }
+
         public  void InitModel<T>(string xmlName,string ModelName) 
         {
             Type type = typeof(CacheModel);

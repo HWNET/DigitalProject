@@ -2,7 +2,8 @@
 <Root>
   <ReloadAll>1</ReloadAll>
   <XmlFile>
-    <Item Name="Menu" Model="MenuModel">1</Item>
-    <Item Name="Skills" Model="SkillsModel">1</Item>
+    <Item Name="Menu" Model="MenuModel" ref="0">1</Item>
+    <Item Name="Skills" Model="SkillsModel" ref="0">1</Item>
+    <Item Name="City" Model="CityModel" ref="0">1</Item>
   </XmlFile>
 </Root>

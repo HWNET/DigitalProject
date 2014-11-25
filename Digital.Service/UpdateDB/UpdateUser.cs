@@ -29,15 +29,23 @@ namespace Digital.Service
                     //Update UserModel
                     if (UserModel == null || UserModel.ID == 0 || UserModel.UpdateStatus == 2)
                     {
+                        UserModel.UpdateStatus = 0;
                         UserService.Edit(UserModel);
                     }
                     //Update UserInfo
                     if (UserModel.UsersInfoModel == null || UserModel.UsersInfoModel.UsersInfoID == 0 || UserModel.UsersInfoModel.UpdateStatus == 2)
                     {
+                        UserModel.UsersInfoModel.UpdateStatus = 0;
                         UserInfoService.Edit(UserModel.UsersInfoModel);
                     }
                     //Update GoodAt
                     UserService.UpdateGoodAt(UserModel.UsersInfoModel.GoodAtWhatModels);
+                    //delete gooda
+                    var DeleteList=UserModel.UsersInfoModel.GoodAtWhatModels.Where(o=>o.UpdateStatus==3).ToList();
+                    foreach (var DelGoodat in DeleteList)
+                    {
+                        UserModel.UsersInfoModel.GoodAtWhatModels.Remove(DelGoodat);
+                    }
                 }
                 foreach (var UserModel in UserModellist)
                 {
