@@ -11,13 +11,17 @@ namespace Digital.Contact.Models
     {
         [Key]
         public int NewsID { get; set; }
-        public string NewsTitle { get; set; }
-        public string NewsThumb { get; set; }
-        public string NewsBody { get; set; }
-        public string Keywords { get; set; }//关联 新闻关键字
-        public string Tags { get; set; }
-        public int ViewsCount { get; set; }
-        public DateTime ReleaseTime { get; set; }
+        public string NewsTitle { get; set; } //文章标题
+        public string NewsAbstract { get; set; } //文章摘要
+        public string NewsThumbnail { get; set; } //文章缩略图
+        public int NewsCategoryID { get; set; } //所属类别ID
+        public int NewsOrderID { get; set; } //文章排序值
+        public string NewsKeywords { get; set; }//关键字
+        public string NewsLabels { get; set; } //标签
+        public string NewsBody { get; set; } //文章内容
+        
+        public int ViewsCount { get; set; } //文章 被浏览数
+        public DateTime ReleaseTime { get; set; } //发布日期
 
         public virtual ICollection<NewsCommentModel> NewsCommentModels { get; set; }
     }

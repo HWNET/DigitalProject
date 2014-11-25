@@ -79,6 +79,8 @@
     <Compile Include="BLL\UsersService.cs" />
     <Compile Include="DAL\CommunicationContext.cs" />
     <Compile Include="DAL\CommunicationInitializer.cs" />
+    <Compile Include="Models\CasesCategoryModel.cs" />
+    <Compile Include="Models\CasesModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\GoodAtWhatModel.cs" />
@@ -87,9 +89,11 @@
     <Compile Include="Models\NewsCategoryModel.cs" />
     <Compile Include="Models\NewsCommentModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Models\PatentModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\ProjectProgressModel.cs" />
     <Compile Include="Models\RelationTableModels.cs" />
+    <Compile Include="Models\SinglePageModel.cs" />
     <Compile Include="Models\SkillsModel.cs" />
     <Compile Include="Models\SubProjectModel.cs" />
     <Compile Include="Models\SupplierModel.cs" />
