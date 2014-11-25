@@ -75,6 +75,7 @@ namespace Digital.Service.Implements
                 GenericList.CacheModelObj.UserModellist = UserService.GetAllUserList();
                 foreach (var Usermodel in GenericList.CacheModelObj.UserModellist)
                 {
+                    Usermodel.UsersInfoModel.CityModels = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.UsersInfoModel.ProvinceID).FirstOrDefault().CityList.Where(o => o.ID == Usermodel.UsersInfoModel.CityID).FirstOrDefault();
                     foreach (var goodat in Usermodel.UsersInfoModel.GoodAtWhatModels)
                     {
                         goodat.SkillsModel = GenericList.CacheModelObj.SkillsModellist.Where(o => o.SkillId == goodat.SkillId).FirstOrDefault();
