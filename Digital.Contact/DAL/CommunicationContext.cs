@@ -12,7 +12,7 @@ namespace Digital.Contact.DAL
     //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class CommunicationContext:DbContext
     {
-        public CommunicationContext():base("CommunicationContext"){}
+        public CommunicationContext() : base("CommunicationContext") { this.Configuration.ProxyCreationEnabled = false; }
 
         public DbSet<Digital.Contact.Models.IdeaModel> IdeaModels { get; set; }
 

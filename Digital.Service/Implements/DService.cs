@@ -25,7 +25,7 @@ namespace Digital.Service.Implements
         public Task _CHeckReloadDB;
         public CancellationToken _cancelToken;
         public CancellationToken _cancelDBToken;
-        private int delayTime = 10000;
+        private int delayTime = 10;
 
         public Digital.Contact.Models.MenuModel MenuList { get; set; }
 
@@ -47,45 +47,25 @@ namespace Digital.Service.Implements
             {
                 try
                 {
-                    CheckDBStatus(_cancelDBToken);
+                    UpdateDB(_cancelDBToken);
                 }
                 catch (Exception ex)
                 {
                     //log
                 }
             });
+            _CHeckReloadDB.Start();
         }
 
 
-        private object CacheLock;
+        private object CacheLock = new object();
 
-        private void CheckDBStatus(CancellationToken token)
-        {
-            var ct = token;
-            while (true)
-            {
-                try
-                {
-                    if (ct.IsCancellationRequested)
-                        break;
-                    lock (CacheLock)
-                    {
-                        if (GenericList.CacheModelObj != null)
-                        {
-                            UserCacheList();
-                        }
-                    }
 
-                }
-                catch (Exception ex)
-                {
-
-                }
-                _CHeckReloadDB.Wait(delayTime * 1000);
-            }
-        }
-
-        private  void UserCacheList()
+        #region DBCache function
+        /// <summary>
+        /// User cache
+        /// </summary>
+        private void UserCacheList()
         {
             if (GenericList.CacheModelObj.UserModellist == null)
             {
@@ -95,9 +75,22 @@ namespace Digital.Service.Implements
         }
 
 
-        private void CheckReloadStatus(CancellationToken token)
+        /// <summary>
+        /// Skill cache
+        /// </summary>
+        private void SkillCacheList()
         {
-            //根据Service.xml中的配置来查看xml是否被重新加载
+            if (GenericList.CacheModelObj.UserModellist == null)
+            {
+                Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+                GenericList.CacheModelObj.SkillsModellist = UserService.GetSkillList();
+            }
+        }
+        #endregion
+
+
+        private void UpdateDB(CancellationToken token)
+        {
             var ct = token;
             while (true)
             {
@@ -105,7 +98,38 @@ namespace Digital.Service.Implements
                 {
                     if (ct.IsCancellationRequested)
                         break;
+                    if (GenericList.CacheModelObj != null)
+                    {
+                        //UserModel
+                        UpdateUser.UpdateUserALLTable();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    //log
+                }
+                _CHeckReloadDB.Wait(delayTime * 1000);
+            }
+
+        }
+
+
+
+
+        private void CheckReloadStatus(CancellationToken token)
+        {
+            //根据Service.xml中的配置来查看xml是否被重新加载
+            var ct = token;
+            bool IsFirst = true;
+            while (true)
+            {
+                try
+                {
+                    if (ct.IsCancellationRequested)
+                        break;
                     bool IsAll = false;
+                    
                     if (GetXmlConfig.GetXmlValue("ReloadAll") == "1")
                     {
                         //更新xml放入内存的方法
@@ -117,6 +141,8 @@ namespace Digital.Service.Implements
                         IsAll = false;
 
                     }
+                    //debugger
+                    IsAll = true;
                     List<XmlModel> XmlList = GetXmlConfig.GetNeedReloadXml(IsAll);
                     GenericList InitList = new GenericList();
                     lock (CacheLock)
@@ -128,7 +154,21 @@ namespace Digital.Service.Implements
                             {
                                 InitList.InitModel<Digital.Contact.Models.MenuModel>(xmlMode.Name, xmlMode.Model);
                             }
+                            if (xmlMode.Name == "Skills")
+                            {
+                                InitList.InitModel<Digital.Contact.Models.SkillsModel>(xmlMode.Name, xmlMode.Model);
+                            }
+                            GetXmlConfig.UpdateStatus(xmlMode.Name, "0");
                         }
+                        if (IsFirst)
+                        {
+                            DBCache();
+                            IsFirst = false;
+                        }
+                    }
+                    if (IsAll)
+                    {
+                        GetXmlConfig.UpdateStatus("ReloadAll", "0");
                     }
                 }
                 catch (Exception ex)
@@ -141,12 +181,18 @@ namespace Digital.Service.Implements
         }
 
         /// <summary>
-        /// Insert into Object
+        /// 数据缓存
         /// </summary>
-        private void InsertIntoObject()
+        private void DBCache()
         {
+            if (GenericList.CacheModelObj != null)
+            {
+                UserCacheList();
+            }
 
         }
+
+
 
         public void Dispose()
         {

@@ -10,5 +10,6 @@ namespace Digital.Service
     {
         public  List<Digital.Contact.Models.MenuModel> MenuModellist { get; set; }
         public List<Digital.Contact.Models.UsersModel> UserModellist { get; set; }
+        public List<Digital.Contact.Models.SkillsModel> SkillsModellist { get; set; }
     }
 }

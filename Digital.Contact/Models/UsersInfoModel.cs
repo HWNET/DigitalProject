@@ -83,7 +83,7 @@ namespace Digital.Contact.Models
 
         }
 
-
+        public int UpdateStatus { get; set; }
 
 
         /// <summary>

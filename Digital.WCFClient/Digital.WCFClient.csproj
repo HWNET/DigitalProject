@@ -61,6 +61,15 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.MenuModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.SkillsModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.UsersInfoModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.UsersModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\item.xsd">
       <SubType>Designer</SubType>
     </None>

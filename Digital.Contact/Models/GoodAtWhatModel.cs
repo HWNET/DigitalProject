@@ -13,7 +13,8 @@ namespace Digital.Contact.Models
         public int GoodAtWhatID { get; set; }
         public int UsersInfoID { get; set; }
         public int SkillId { get; set; }
-        public virtual SkillsModel SkillsModel { get; set; }
+        public int UpdateStatus { get; set; }
+        public SkillsModel SkillsModel { get; set; }
 
     }
 }

@@ -23,14 +23,7 @@ namespace Digital.Contact.BLL
         }
 
 
-        public ClaimsIdentity CreateIdentity(UsersModel user, string authenticationType)
-        {
-            ClaimsIdentity _identity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
-            _identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
-            _identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()));
-            _identity.AddClaim(new Claim("http://www.yy2xx.com", "longdream"));
-            return _identity;
-        }
+       
 
         public bool Login(string UserName, string Password)
         {
@@ -54,6 +47,44 @@ namespace Digital.Contact.BLL
             {
                 return db.SkillsModel.ToList();
             }
+        }
+
+        public bool UpdateGoodAt(ICollection<GoodAtWhatModel> GoodAtList)
+        {
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    //var OldGoodAtList= db.GoodAtWhatModel.Where(o => o.UsersInfoID == UsersInfoModel.UsersInfoID).ToList();
+                    //var RemoveList= OldGoodAtList.Where(o => GoodAtList.Any(j => j.GoodAtWhatID != o.GoodAtWhatID)).ToList();
+                    //foreach(var Remove in RemoveList)
+                    //{
+                    //    db.GoodAtWhatModel.Remove(Remove);
+                    //}
+                    //var AddList = GoodAtList.Where(o => OldGoodAtList.Any(j => j.GoodAtWhatID != o.GoodAtWhatID)).ToList();
+                    //foreach (var Add in AddList)
+                    //{
+                    //    db.GoodAtWhatModel.Add(Add);
+                    //}
+                    var RemoveList = GoodAtList.Where(o => o.UpdateStatus == 3).ToList();
+                    var AddList = GoodAtList.Where(o => o.UpdateStatus == 1).ToList();
+                    foreach (var Remove in RemoveList)
+                    {
+                        db.GoodAtWhatModel.Remove(Remove);
+                    }
+                    foreach (var Add in AddList)
+                    {
+                        db.GoodAtWhatModel.Add(Add);
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+            
         }
 
         public bool UpdateGoodAt(string SkillStr, int UsersInfoID)

@@ -18,6 +18,37 @@ namespace Digital.WCFClient
     public static class ServiceHub
     {
         #region Common Service
+
+
+        // <summary>
+        /// Create the first plant common service client, port is 4502
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="serverIP"></param>
+        /// <returns></returns>
+        public static T GetCommonServiceClient<T>() where T : ICommunicationObject
+        {
+            var clientType = typeof(T);
+            var clientName = clientType.Name.Replace("Client", "");
+            object serviceClient;
+
+            TcpTransportBindingElement tt = new TcpTransportBindingElement();
+            tt.MaxBufferSize = 10485760 * 4;
+            tt.MaxReceivedMessageSize = 10485760 * 4;
+
+
+            dynamic binding = new CustomBinding(new BinaryMessageEncodingBindingElement(), tt)
+            {
+                ReceiveTimeout = new TimeSpan(0, 20, 0),
+                SendTimeout = new TimeSpan(0, 10, 0),
+                OpenTimeout = new TimeSpan(0, 10, 0),
+                CloseTimeout = new TimeSpan(0, 10, 0)
+            };
+            var endpointAddress = new EndpointAddress(String.Format("net.tcp://{0}:{1}/{2}", "localhost", "4502", clientName));
+            serviceClient = Activator.CreateInstance(typeof(T), binding, endpointAddress);
+            return (T)serviceClient;
+        }
+
         /// <summary>
         /// Create the first plant common service client, port is 4502
         /// </summary>

@@ -69,6 +69,11 @@ namespace Digital.Service
             return doc.SelectNodes("Root/Item");
         }
 
+        /// <summary>
+        /// 更新xml状态
+        /// </summary>
+        /// <param name="XmlName"></param>
+        /// <param name="Value"></param>
         public static void UpdateStatus(string XmlName, string Value)
         {
             var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
@@ -82,11 +87,17 @@ namespace Digital.Service
                 {
                     if (ItemMode.Attributes["Name"].Value == XmlName)
                     {
-                        ItemMode.Value = Value;
+                        ItemMode.InnerText = Value;
                     }
                 }
-               
+
             }
+            else
+            {
+                XmlNode ItemNodeModel = doc.SelectSingleNode("Root/ReloadAll");
+                ItemNodeModel.InnerText = Value;
+            }
+            doc.Save(path);
         }
 
     }

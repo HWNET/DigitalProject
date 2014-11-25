@@ -8,6 +8,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IUserService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -21,10 +29,92 @@
   <wsdl:message name="IConfigService_GetMenuList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMenuListResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetSkillList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSkillList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetSkillList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSkillListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUsersInfoModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsersInfoModel" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUsersInfoModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsersInfoModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateGoodAtWhat_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGoodAtWhat" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateGoodAtWhat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGoodAtWhatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUsersModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsersModel" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUsersModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsersModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserInfoByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByName" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserInfoByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IConfigService/GetMenuListResponse" message="tns:IConfigService_GetMenuList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="IUserService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginResponse" message="tns:IUserService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserInfo" message="tns:IUserService_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserInfoResponse" message="tns:IUserService_GetUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetSkillList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetSkillList" message="tns:IUserService_GetSkillList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetSkillListResponse" message="tns:IUserService_GetSkillList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateUsersInfoModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateUsersInfoModel" message="tns:IUserService_UpdateUsersInfoModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateUsersInfoModelResponse" message="tns:IUserService_UpdateUsersInfoModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateGoodAtWhat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateGoodAtWhat" message="tns:IUserService_UpdateGoodAtWhat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateGoodAtWhatResponse" message="tns:IUserService_UpdateGoodAtWhat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateUsersModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateUsersModel" message="tns:IUserService_UpdateUsersModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateUsersModelResponse" message="tns:IUserService_UpdateUsersModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetUserInfoByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserInfoByName" message="tns:IUserService_GetUserInfoByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserInfoByNameResponse" message="tns:IUserService_GetUserInfoByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Register">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Register" message="tns:IUserService_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RegisterResponse" message="tns:IUserService_Register_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -40,11 +130,93 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IUserService" type="tns:IUserService">
+    <wsp:PolicyReference URI="#CustomBinding_IUserService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSkillList">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetSkillList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsersInfoModel">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdateUsersInfoModel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGoodAtWhat">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdateGoodAtWhat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsersModel">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdateUsersModel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByName">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetUserInfoByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/Register" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/ConfigService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IUserService" binding="tns:CustomBinding_IUserService">
+      <soap12:address location="net.tcp://localhost:4502/UserService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/UserService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

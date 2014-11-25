@@ -17,4 +17,85 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MenuModel" nillable="true" type="tns:MenuModel" />
+  <xs:complexType name="UsersModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IdeaModelList" nillable="true" type="tns:ArrayOfIdeaModel" />
+      <xs:element minOccurs="0" name="LastLoginTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LoginIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Passwords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegisterDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+      <xs:element minOccurs="0" name="UserTypeID" type="xs:int" />
+      <xs:element minOccurs="0" name="UsersInfoID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UsersInfoModel" nillable="true" type="tns:UsersInfoModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsersModel" nillable="true" type="tns:UsersModel" />
+  <xs:complexType name="ArrayOfIdeaModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IdeaModel" nillable="true" type="tns:IdeaModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfIdeaModel" nillable="true" type="tns:ArrayOfIdeaModel" />
+  <xs:complexType name="IdeaModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IdeaModel" nillable="true" type="tns:IdeaModel" />
+  <xs:complexType name="UsersInfoModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BeGoodAtIntroduction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CityID" type="xs:int" />
+      <xs:element minOccurs="0" name="DisplayPicture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GoodAtWhatID" type="xs:int" />
+      <xs:element minOccurs="0" name="GoodAtWhatModels" nillable="true" type="tns:ArrayOfGoodAtWhatModel" />
+      <xs:element minOccurs="0" name="NickName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProvinceID" type="xs:int" />
+      <xs:element minOccurs="0" name="QQ" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sex" type="xs:int" />
+      <xs:element minOccurs="0" name="Tel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrueName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+      <xs:element minOccurs="0" name="UsersInfoID" type="xs:int" />
+      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsersInfoModel" nillable="true" type="tns:UsersInfoModel" />
+  <xs:complexType name="ArrayOfGoodAtWhatModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GoodAtWhatModel" nillable="true" type="tns:GoodAtWhatModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGoodAtWhatModel" nillable="true" type="tns:ArrayOfGoodAtWhatModel" />
+  <xs:complexType name="GoodAtWhatModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GoodAtWhatID" type="xs:int" />
+      <xs:element minOccurs="0" name="SkillId" type="xs:int" />
+      <xs:element minOccurs="0" name="SkillsModel" nillable="true" type="tns:SkillsModel" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+      <xs:element minOccurs="0" name="UsersInfoID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GoodAtWhatModel" nillable="true" type="tns:GoodAtWhatModel" />
+  <xs:complexType name="SkillsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SkillId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SkillsModel" nillable="true" type="tns:SkillsModel" />
+  <xs:complexType name="ArrayOfSkillsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SkillsModel" nillable="true" type="tns:SkillsModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSkillsModel" nillable="true" type="tns:ArrayOfSkillsModel" />
 </xs:schema>

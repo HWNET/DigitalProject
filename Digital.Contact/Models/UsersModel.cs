@@ -63,7 +63,7 @@ namespace Digital.Contact.Models
         /// </summary>
         public string LoginIP { get; set; }
 
-
+        public int UpdateStatus { get; set; }
         
 
         /// <summary>

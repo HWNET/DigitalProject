@@ -138,6 +138,759 @@ namespace Digital.WCFClient.ConfigService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UsersModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class UsersModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> CompanyIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.IdeaModel> IdeaModelListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> LastLoginTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginIPField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime RegisterDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UpdateStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserTypeIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> UsersInfoIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.UsersInfoModel UsersInfoModelField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> CompanyID {
+            get {
+                return this.CompanyIDField;
+            }
+            set {
+                if ((this.CompanyIDField.Equals(value) != true)) {
+                    this.CompanyIDField = value;
+                    this.RaisePropertyChanged("CompanyID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.IdeaModel> IdeaModelList {
+            get {
+                return this.IdeaModelListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdeaModelListField, value) != true)) {
+                    this.IdeaModelListField = value;
+                    this.RaisePropertyChanged("IdeaModelList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> LastLoginTime {
+            get {
+                return this.LastLoginTimeField;
+            }
+            set {
+                if ((this.LastLoginTimeField.Equals(value) != true)) {
+                    this.LastLoginTimeField = value;
+                    this.RaisePropertyChanged("LastLoginTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LoginIP {
+            get {
+                return this.LoginIPField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginIPField, value) != true)) {
+                    this.LoginIPField = value;
+                    this.RaisePropertyChanged("LoginIP");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Passwords {
+            get {
+                return this.PasswordsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordsField, value) != true)) {
+                    this.PasswordsField = value;
+                    this.RaisePropertyChanged("Passwords");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime RegisterDate {
+            get {
+                return this.RegisterDateField;
+            }
+            set {
+                if ((this.RegisterDateField.Equals(value) != true)) {
+                    this.RegisterDateField = value;
+                    this.RaisePropertyChanged("RegisterDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UpdateStatus {
+            get {
+                return this.UpdateStatusField;
+            }
+            set {
+                if ((this.UpdateStatusField.Equals(value) != true)) {
+                    this.UpdateStatusField = value;
+                    this.RaisePropertyChanged("UpdateStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserTypeID {
+            get {
+                return this.UserTypeIDField;
+            }
+            set {
+                if ((this.UserTypeIDField.Equals(value) != true)) {
+                    this.UserTypeIDField = value;
+                    this.RaisePropertyChanged("UserTypeID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> UsersInfoID {
+            get {
+                return this.UsersInfoIDField;
+            }
+            set {
+                if ((this.UsersInfoIDField.Equals(value) != true)) {
+                    this.UsersInfoIDField = value;
+                    this.RaisePropertyChanged("UsersInfoID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.UsersInfoModel UsersInfoModel {
+            get {
+                return this.UsersInfoModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsersInfoModelField, value) != true)) {
+                    this.UsersInfoModelField = value;
+                    this.RaisePropertyChanged("UsersInfoModel");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UsersInfoModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class UsersInfoModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BeGoodAtIntroductionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CityIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DisplayPictureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GoodAtWhatIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.GoodAtWhatModel> GoodAtWhatModelsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NickNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProvinceIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string QQField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SexField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TrueNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UpdateStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UsersInfoIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ZipField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BeGoodAtIntroduction {
+            get {
+                return this.BeGoodAtIntroductionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BeGoodAtIntroductionField, value) != true)) {
+                    this.BeGoodAtIntroductionField = value;
+                    this.RaisePropertyChanged("BeGoodAtIntroduction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CityID {
+            get {
+                return this.CityIDField;
+            }
+            set {
+                if ((this.CityIDField.Equals(value) != true)) {
+                    this.CityIDField = value;
+                    this.RaisePropertyChanged("CityID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DisplayPicture {
+            get {
+                return this.DisplayPictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DisplayPictureField, value) != true)) {
+                    this.DisplayPictureField = value;
+                    this.RaisePropertyChanged("DisplayPicture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GoodAtWhatID {
+            get {
+                return this.GoodAtWhatIDField;
+            }
+            set {
+                if ((this.GoodAtWhatIDField.Equals(value) != true)) {
+                    this.GoodAtWhatIDField = value;
+                    this.RaisePropertyChanged("GoodAtWhatID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.GoodAtWhatModel> GoodAtWhatModels {
+            get {
+                return this.GoodAtWhatModelsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GoodAtWhatModelsField, value) != true)) {
+                    this.GoodAtWhatModelsField = value;
+                    this.RaisePropertyChanged("GoodAtWhatModels");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NickName {
+            get {
+                return this.NickNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NickNameField, value) != true)) {
+                    this.NickNameField = value;
+                    this.RaisePropertyChanged("NickName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProvinceID {
+            get {
+                return this.ProvinceIDField;
+            }
+            set {
+                if ((this.ProvinceIDField.Equals(value) != true)) {
+                    this.ProvinceIDField = value;
+                    this.RaisePropertyChanged("ProvinceID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string QQ {
+            get {
+                return this.QQField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QQField, value) != true)) {
+                    this.QQField = value;
+                    this.RaisePropertyChanged("QQ");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sex {
+            get {
+                return this.SexField;
+            }
+            set {
+                if ((this.SexField.Equals(value) != true)) {
+                    this.SexField = value;
+                    this.RaisePropertyChanged("Sex");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Tel {
+            get {
+                return this.TelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TelField, value) != true)) {
+                    this.TelField = value;
+                    this.RaisePropertyChanged("Tel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TrueName {
+            get {
+                return this.TrueNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TrueNameField, value) != true)) {
+                    this.TrueNameField = value;
+                    this.RaisePropertyChanged("TrueName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UpdateStatus {
+            get {
+                return this.UpdateStatusField;
+            }
+            set {
+                if ((this.UpdateStatusField.Equals(value) != true)) {
+                    this.UpdateStatusField = value;
+                    this.RaisePropertyChanged("UpdateStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UsersInfoID {
+            get {
+                return this.UsersInfoIDField;
+            }
+            set {
+                if ((this.UsersInfoIDField.Equals(value) != true)) {
+                    this.UsersInfoIDField = value;
+                    this.RaisePropertyChanged("UsersInfoID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Zip {
+            get {
+                return this.ZipField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ZipField, value) != true)) {
+                    this.ZipField = value;
+                    this.RaisePropertyChanged("Zip");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IdeaModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class IdeaModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UpdateStatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UpdateStatus {
+            get {
+                return this.UpdateStatusField;
+            }
+            set {
+                if ((this.UpdateStatusField.Equals(value) != true)) {
+                    this.UpdateStatusField = value;
+                    this.RaisePropertyChanged("UpdateStatus");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GoodAtWhatModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class GoodAtWhatModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GoodAtWhatIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SkillIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.SkillsModel SkillsModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UpdateStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UsersInfoIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GoodAtWhatID {
+            get {
+                return this.GoodAtWhatIDField;
+            }
+            set {
+                if ((this.GoodAtWhatIDField.Equals(value) != true)) {
+                    this.GoodAtWhatIDField = value;
+                    this.RaisePropertyChanged("GoodAtWhatID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SkillId {
+            get {
+                return this.SkillIdField;
+            }
+            set {
+                if ((this.SkillIdField.Equals(value) != true)) {
+                    this.SkillIdField = value;
+                    this.RaisePropertyChanged("SkillId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.SkillsModel SkillsModel {
+            get {
+                return this.SkillsModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SkillsModelField, value) != true)) {
+                    this.SkillsModelField = value;
+                    this.RaisePropertyChanged("SkillsModel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UpdateStatus {
+            get {
+                return this.UpdateStatusField;
+            }
+            set {
+                if ((this.UpdateStatusField.Equals(value) != true)) {
+                    this.UpdateStatusField = value;
+                    this.RaisePropertyChanged("UpdateStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UsersInfoID {
+            get {
+                return this.UsersInfoIDField;
+            }
+            set {
+                if ((this.UsersInfoIDField.Equals(value) != true)) {
+                    this.UsersInfoIDField = value;
+                    this.RaisePropertyChanged("UsersInfoID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SkillsModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class SkillsModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SkillIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SkillId {
+            get {
+                return this.SkillIdField;
+            }
+            set {
+                if ((this.SkillIdField.Equals(value) != true)) {
+                    this.SkillIdField = value;
+                    this.RaisePropertyChanged("SkillId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.IConfigService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IConfigService {
@@ -182,6 +935,151 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>> GetMenuListAsync() {
             return base.Channel.GetMenuListAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.IUserService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface IUserService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
+        Digital.WCFClient.ConfigService.UsersModel Login(string UserName, string Password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> LoginAsync(string UserName, string Password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserInfo", ReplyAction="http://tempuri.org/IUserService/GetUserInfoResponse")]
+        Digital.WCFClient.ConfigService.UsersModel GetUserInfo(int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserInfo", ReplyAction="http://tempuri.org/IUserService/GetUserInfoResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> GetUserInfoAsync(int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetSkillList", ReplyAction="http://tempuri.org/IUserService/GetSkillListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SkillsModel> GetSkillList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetSkillList", ReplyAction="http://tempuri.org/IUserService/GetSkillListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SkillsModel>> GetSkillListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUsersInfoModel", ReplyAction="http://tempuri.org/IUserService/UpdateUsersInfoModelResponse")]
+        Digital.WCFClient.ConfigService.UsersInfoModel UpdateUsersInfoModel(Digital.WCFClient.ConfigService.UsersModel UserModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUsersInfoModel", ReplyAction="http://tempuri.org/IUserService/UpdateUsersInfoModelResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersInfoModel> UpdateUsersInfoModelAsync(Digital.WCFClient.ConfigService.UsersModel UserModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateGoodAtWhat", ReplyAction="http://tempuri.org/IUserService/UpdateGoodAtWhatResponse")]
+        bool UpdateGoodAtWhat(Digital.WCFClient.ConfigService.UsersModel UserModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateGoodAtWhat", ReplyAction="http://tempuri.org/IUserService/UpdateGoodAtWhatResponse")]
+        System.Threading.Tasks.Task<bool> UpdateGoodAtWhatAsync(Digital.WCFClient.ConfigService.UsersModel UserModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUsersModel", ReplyAction="http://tempuri.org/IUserService/UpdateUsersModelResponse")]
+        Digital.WCFClient.ConfigService.UsersModel UpdateUsersModel(Digital.WCFClient.ConfigService.UsersModel UserModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUsersModel", ReplyAction="http://tempuri.org/IUserService/UpdateUsersModelResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> UpdateUsersModelAsync(Digital.WCFClient.ConfigService.UsersModel UserModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserInfoByName", ReplyAction="http://tempuri.org/IUserService/GetUserInfoByNameResponse")]
+        Digital.WCFClient.ConfigService.UsersModel GetUserInfoByName(string UserName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserInfoByName", ReplyAction="http://tempuri.org/IUserService/GetUserInfoByNameResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> GetUserInfoByNameAsync(string UserName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Register", ReplyAction="http://tempuri.org/IUserService/RegisterResponse")]
+        bool Register(Digital.WCFClient.ConfigService.UsersModel UserModel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Register", ReplyAction="http://tempuri.org/IUserService/RegisterResponse")]
+        System.Threading.Tasks.Task<bool> RegisterAsync(Digital.WCFClient.ConfigService.UsersModel UserModel);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUserServiceChannel : Digital.WCFClient.ConfigService.IUserService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.IUserService>, Digital.WCFClient.ConfigService.IUserService {
+        
+        public UserServiceClient() {
+        }
+        
+        public UserServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public UserServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UserServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UserServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.UsersModel Login(string UserName, string Password) {
+            return base.Channel.Login(UserName, Password);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> LoginAsync(string UserName, string Password) {
+            return base.Channel.LoginAsync(UserName, Password);
+        }
+        
+        public Digital.WCFClient.ConfigService.UsersModel GetUserInfo(int UserId) {
+            return base.Channel.GetUserInfo(UserId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> GetUserInfoAsync(int UserId) {
+            return base.Channel.GetUserInfoAsync(UserId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SkillsModel> GetSkillList() {
+            return base.Channel.GetSkillList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SkillsModel>> GetSkillListAsync() {
+            return base.Channel.GetSkillListAsync();
+        }
+        
+        public Digital.WCFClient.ConfigService.UsersInfoModel UpdateUsersInfoModel(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.UpdateUsersInfoModel(UserModel);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersInfoModel> UpdateUsersInfoModelAsync(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.UpdateUsersInfoModelAsync(UserModel);
+        }
+        
+        public bool UpdateGoodAtWhat(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.UpdateGoodAtWhat(UserModel);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateGoodAtWhatAsync(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.UpdateGoodAtWhatAsync(UserModel);
+        }
+        
+        public Digital.WCFClient.ConfigService.UsersModel UpdateUsersModel(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.UpdateUsersModel(UserModel);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> UpdateUsersModelAsync(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.UpdateUsersModelAsync(UserModel);
+        }
+        
+        public Digital.WCFClient.ConfigService.UsersModel GetUserInfoByName(string UserName) {
+            return base.Channel.GetUserInfoByName(UserName);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.UsersModel> GetUserInfoByNameAsync(string UserName) {
+            return base.Channel.GetUserInfoByNameAsync(UserName);
+        }
+        
+        public bool Register(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.Register(UserModel);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterAsync(Digital.WCFClient.ConfigService.UsersModel UserModel) {
+            return base.Channel.RegisterAsync(UserModel);
         }
     }
 }
