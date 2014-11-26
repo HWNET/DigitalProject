@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Root>
   <Item ID="1" MenuName="用户中心" Style="fa fa-user"  OtherName="" ParentId="1" Url="../Users/Index"/>
-  <Item ID="1"  MenuName="用户中心" Style="fa fa-user"  OtherName="" ParentId="1" Url="../Users/Index" />
   <Item ID="2"  MenuName="个人资料" Style="fa fa-edit" OtherName="" ParentId="1" Url="../Users/Index" />
   <Item ID="3"  MenuName="安全设置" Style="fa fa-lock" OtherName="" ParentId="1" Url="../Users/UserSafe" />
   <Item ID="4"  MenuName="隐私设置" Style="fa fa-lock" OtherName="" ParentId="1" Url="../Users/UserSafe" />
