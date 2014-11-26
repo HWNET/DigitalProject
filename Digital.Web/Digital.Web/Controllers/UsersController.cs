@@ -45,7 +45,7 @@ namespace Digital.Web.Controllers
         public ActionResult UserSafe()
         {
             ViewBag.MenuModel = base.GetMenu(3);
-            
+
             var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
             var SkillList = client.GetSkillList();
             ViewBag.SkillList = SkillList;
@@ -66,6 +66,7 @@ namespace Digital.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UserSafe(int UsersInfoID, string TrueName, string NickName, int Sex, int ProvinceID, int CityID, string QQ, string Email, string Zip, string Tel)
         {
+
             if (UsersInfoID != 0)
             {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -277,7 +278,7 @@ namespace Digital.Web.Controllers
         {
             string ErrorMessage = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<UserServiceClient>(); ;
-           
+
             var _user = client.GetUserInfoByName(UserName);
             base._user = _user;
             if (_user == null) return Content("error:" + "用户名不存在");
@@ -356,14 +357,14 @@ namespace Digital.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Passwords,Status")] UsersModel usersmodel)
         {
-            var client = ServiceHub.GetCommonServiceClient<UserServiceClient>(); 
+            var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
             usersmodel.RegisterDate = DateTime.Now;
             usersmodel.LastLoginTime = System.DateTime.Now;
             usersmodel.LoginIP = Request.UserHostAddress;
             usersmodel.Passwords = Common.CryptoService.MD5Encrypt(usersmodel.Passwords);
             if (ModelState.IsValid)
             {
-                if (client.UpdateUsersModel(usersmodel)!=null)
+                if (client.UpdateUsersModel(usersmodel) != null)
                 {
                     return RedirectToAction("Index");
                 }
