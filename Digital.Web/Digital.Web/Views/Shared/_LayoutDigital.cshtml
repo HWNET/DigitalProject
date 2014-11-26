@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@using Digital.Contact.BLL
+@using Digital.WCFClient
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,12 +43,14 @@
 
 <body>
     @{
-        MenuService MenuServices = new MenuService();
-        var MenuList= Digital.Web.Controllers.OperatorFactory.GetCache<List< Digital.Contact.Models.MenuModel>>("Menu");
+       
+        var MenuList = Digital.Web.Controllers.OperatorFactory.GetCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>>("Menu");
         if(MenuList==null)
-        { 
-            MenuList = MenuServices.MenuList();
-            Digital.Web.Controllers.OperatorFactory.InsertCache<List<Digital.Contact.Models.MenuModel>>(MenuList, "Menu");
+        {
+            var client = ServiceHub.GetCommonServiceClient<Digital.WCFClient.ConfigService.ConfigServiceClient>();
+            MenuList = client.GetMenuList();
+            client.Close();
+            Digital.Web.Controllers.OperatorFactory.InsertCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>>(MenuList, "Menu");
         }
     }
     <!-- Preloader -->
@@ -94,7 +96,7 @@
                             {
                                 var StyleClass = string.Empty;
                                 var UlDisplay = string.Empty;
-                                if (MenuModel.ID == ((Digital.Contact.Models.MenuModel)ViewBag.MenuModel).ParentId)
+                                if (MenuModel.ID == ((Digital.WCFClient.ConfigService.MenuModel)ViewBag.MenuModel).ParentId)
                                 {
                                     StyleClass = "nav-parent nav-active active";
                                     UlDisplay="style=\"display:block\"";
@@ -110,7 +112,7 @@
                                 foreach (var SubModel in MenuList.Where(o => o.ParentId == MenuModel.ID&&o.ID!=MenuModel.ID))
                                 {
                                     var SubStyleClass = string.Empty;
-                                    if (SubModel.ID == ((Digital.Contact.Models.MenuModel)ViewBag.MenuModel).ID)
+                                    if (SubModel.ID == ((Digital.WCFClient.ConfigService.MenuModel)ViewBag.MenuModel).ID)
                                     {
                                         SubStyleClass = "class=\"active\"";
                                     }

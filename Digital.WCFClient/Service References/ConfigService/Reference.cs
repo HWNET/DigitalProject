@@ -391,6 +391,9 @@ namespace Digital.WCFClient.ConfigService {
         private int CityIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CityModel CityModelsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DisplayPictureField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -461,6 +464,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((this.CityIDField.Equals(value) != true)) {
                     this.CityIDField = value;
                     this.RaisePropertyChanged("CityID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CityModel CityModels {
+            get {
+                return this.CityModelsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityModelsField, value) != true)) {
+                    this.CityModelsField = value;
+                    this.RaisePropertyChanged("CityModels");
                 }
             }
         }
@@ -707,6 +723,83 @@ namespace Digital.WCFClient.ConfigService {
                 if ((this.UpdateStatusField.Equals(value) != true)) {
                     this.UpdateStatusField = value;
                     this.RaisePropertyChanged("UpdateStatus");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CityModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class CityModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ProvinceNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProvinceName {
+            get {
+                return this.ProvinceNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProvinceNameField, value) != true)) {
+                    this.ProvinceNameField = value;
+                    this.RaisePropertyChanged("ProvinceName");
                 }
             }
         }

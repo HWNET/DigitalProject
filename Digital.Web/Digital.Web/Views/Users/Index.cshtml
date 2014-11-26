@@ -43,7 +43,7 @@
             <div class="profile-header">
                 <h2 class="profile-name">@Model.UsersInfoModel.NickName</h2>
                 @{
-                    string[] PCModelList = Model.UsersInfoModel.ProvinceNameAndCityName();
+                    //string[] PCModelList = Model.UsersInfoModel.ProvinceNameAndCityName();
                     string Skills = string.Empty;
                     foreach (var WhatModel in Model.UsersInfoModel.GoodAtWhatModels)
                     {
@@ -52,7 +52,7 @@
                     
                     Skills = Skills.Trim(',');
                 }
-                <div class="profile-location"><i class="fa fa-map-marker"></i> @PCModelList[0], @PCModelList[1]</div>
+                <div class="profile-location"><i class="fa fa-map-marker"></i> @Model.UsersInfoModel.CityModels.ProvinceName,@Model.UsersInfoModel.CityModels.Name </div>
                 <div class="profile-position"><i class="fa fa-briefcase"></i> @Skills</div>
 
                 <div class="mb20"></div>

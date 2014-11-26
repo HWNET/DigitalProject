@@ -53,6 +53,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="BeGoodAtIntroduction" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CityID" type="xs:int" />
+      <xs:element minOccurs="0" name="CityModels" nillable="true" type="tns:CityModel" />
       <xs:element minOccurs="0" name="DisplayPicture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="GoodAtWhatID" type="xs:int" />
@@ -69,6 +70,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UsersInfoModel" nillable="true" type="tns:UsersInfoModel" />
+  <xs:complexType name="CityModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProvinceName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CityModel" nillable="true" type="tns:CityModel" />
   <xs:complexType name="ArrayOfGoodAtWhatModel">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="GoodAtWhatModel" nillable="true" type="tns:GoodAtWhatModel" />

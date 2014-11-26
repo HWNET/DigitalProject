@@ -45,6 +45,7 @@ namespace Digital.Web.Controllers
         public ActionResult UserSafe()
         {
             ViewBag.MenuModel = base.GetMenu(3);
+            
             var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
             var SkillList = client.GetSkillList();
             ViewBag.SkillList = SkillList;

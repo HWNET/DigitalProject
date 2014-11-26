@@ -36,7 +36,7 @@ namespace Digital.Service
                 var PModel = new Contact.Models.ProvinceModel { ID = int.Parse(ItemModel.Attributes["ID"].Value), Name = ItemModel.Attributes["Name"].Value};
                 foreach (XmlNode ChildNode in ItemModel.ChildNodes)
                 {
-                    CityListModel.Add(new Contact.Models.CityModel { ID = int.Parse(ChildNode.Attributes["ID"].Value), Name = ChildNode.InnerText, ProvinceModels = PModel });
+                    CityListModel.Add(new Contact.Models.CityModel { ID = int.Parse(ChildNode.Attributes["ID"].Value), Name = ChildNode.InnerText, ProvinceName = PModel.Name });
                 }
                 PModel.CityList = CityListModel;
                

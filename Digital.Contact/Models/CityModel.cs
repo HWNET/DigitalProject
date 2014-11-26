@@ -17,6 +17,6 @@ namespace Digital.Contact.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public ProvinceModel ProvinceModels { get; set; }
+        public string  ProvinceName { get; set; }
     }
 }
