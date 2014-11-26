@@ -102,7 +102,10 @@ namespace Digital.Service.Implements
        
         #endregion
 
-
+        /// <summary>
+        /// buffer monitor 
+        /// </summary>
+        /// <param name="param"></param>
         private void UpdateDB(object param)
         {
             while (true)
