@@ -15,10 +15,11 @@ namespace Digital.Service.Implements
 
         public UsersModel Login(string UserName, string Password)
         {
-            var User = GenericList.CacheModelObj.UserModellist.Where(o => o.Name == UserName && o.Passwords == Password).FirstOrDefault();
-            if (User != null)
+            var User = GenericList.CacheModelObj.UserModellist.Where(o => o.Value.Name == UserName && o.Value.Passwords == Password).FirstOrDefault();
+            //var User = GenericList.CacheModelObj.UserModellist.Where(o => o.Name == UserName && o.Passwords == Password).FirstOrDefault();
+            if (User.Value != null)
             {
-                return User;
+                return User.Value;
             }
             else
             {
@@ -28,10 +29,11 @@ namespace Digital.Service.Implements
 
         public UsersModel GetUserInfoByName(string UserName)
         {
-            UsersModel User = GenericList.CacheModelObj.UserModellist.Where(o => o.Name == UserName).FirstOrDefault();
-            if (User != null)
+            var User = GenericList.CacheModelObj.UserModellist.Where(o => o.Value.Name == UserName ).FirstOrDefault();
+            //UsersModel User = GenericList.CacheModelObj.UserModellist.Where(o => o.Name == UserName).FirstOrDefault();
+            if (User.Value != null)
             {
-                return User;
+                return User.Value;
             }
             else
             {
@@ -41,14 +43,19 @@ namespace Digital.Service.Implements
 
         public UsersModel GetUserInfo(int UserId)
         {
-            UsersModel User = GenericList.CacheModelObj.UserModellist.Where(o => o.ID == UserId).FirstOrDefault();
-            if (User != null)
+            if (GenericList.CacheModelObj.UserModellist.ContainsKey(UserId))
             {
-                return User;
+                 return GenericList.CacheModelObj.UserModellist[UserId];        
             }
             else
             {
-                return null;
+                Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+                var User= UserService.Find(UserId);
+                if (User != null)
+                {
+                    GenericList.CacheModelObj.UserModellist.Add(UserId, User);
+                }
+                return User;
             }
         }
 
@@ -83,7 +90,7 @@ namespace Digital.Service.Implements
                 UserInfoModels.UpdateStatus = 2;
             }
             //更新缓存
-            GenericList.CacheModelObj.UserModellist.Where(o => o.ID == UserModel.ID).FirstOrDefault().UsersInfoModel = CurrentUserInfo;
+            GenericList.CacheModelObj.UserModellist[UserModel.ID].UsersInfoModel = CurrentUserInfo;
             //插入buffer
             GenericList.InsertBuffer(UserModel, UserInfoModels);
             return UserInfoModels;
@@ -124,8 +131,8 @@ namespace Digital.Service.Implements
             UserModel.UpdateStatus = 1;
             //插入buffer
             GenericList.InsertBuffer(null, UserModel);
-            //更新缓存
-            GenericList.CacheModelObj.UserModellist.Add(UserModel);
+            //因为UserId 是0 ，所以不添加到缓存中，当重新获取时将被从数据库中获取并存入缓存
+            //GenericList.CacheModelObj.UserModellist.Add(UserModel);
             return true;
         }
 

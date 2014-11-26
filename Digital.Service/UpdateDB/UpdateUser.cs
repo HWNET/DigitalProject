@@ -21,7 +21,7 @@ namespace Digital.Service
             UserService.UpdateGoodAt(goodat);
             if (goodat.UpdateStatus == 3)
             {
-                var UserModel = GenericList.CacheModelObj.UserModellist.Where(o => o.ID == User.ID).FirstOrDefault();
+                var UserModel = GenericList.CacheModelObj.UserModellist[User.ID];
                 var GoodAtWhat = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.GoodAtWhatID == goodat.GoodAtWhatID).FirstOrDefault();
                 if (GoodAtWhat != null)
                 {
@@ -33,7 +33,7 @@ namespace Digital.Service
         public static void UpdateUserModel(UsersModel User)
         {
             Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
-            var UserModel = GenericList.CacheModelObj.UserModellist.Where(o => o.ID == User.ID).FirstOrDefault();
+            var UserModel = GenericList.CacheModelObj.UserModellist[User.ID];
             UserModel.UpdateStatus = 0;
             UserService.Edit(UserModel);
            
@@ -41,10 +41,11 @@ namespace Digital.Service
 
         public static void UpdateUserInfoModel(UsersModel User,UsersInfoModel UserInfo)
         {
-            var UserModel = GenericList.CacheModelObj.UserModellist.Where(o => o.ID == User.ID).FirstOrDefault();
+            var UserModel = GenericList.CacheModelObj.UserModellist[User.ID];
             Digital.Contact.BLL.UsersInfoService UserInfoService = new Contact.BLL.UsersInfoService();
-            UserInfoService.Edit(UserInfo);
             UserModel.UsersInfoModel.UpdateStatus = 0;
+            UserInfoService.Edit(UserInfo);
+           
         }
 
         //public static void UpdateUserALLTable(BufferFormat TempBuffer)

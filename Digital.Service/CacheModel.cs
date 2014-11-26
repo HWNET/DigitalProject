@@ -12,8 +12,8 @@ namespace Digital.Service
         /// ModelName+"list"
         /// </summary>
         public  List<Digital.Contact.Models.MenuModel> MenuModellist { get; set; }
-        public List<Digital.Contact.Models.UsersModel> UserModellist { get; set; }
-        public List<Digital.Contact.Models.SkillsModel> SkillsModellist { get; set; }
+        public Dictionary<int ,Digital.Contact.Models.UsersModel> UserModellist { get; set; }
+        public  List<Digital.Contact.Models.SkillsModel> SkillsModellist { get; set; }
         public List<Digital.Contact.Models.ProvinceModel> ProvinceModellist { get; set; }
 
         public List<Digital.Contact.Models.CompanyModel> CompanyModelList { get; set; }

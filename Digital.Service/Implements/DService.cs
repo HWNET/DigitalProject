@@ -85,12 +85,15 @@ namespace Digital.Service.Implements
             {
                 Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
                 //Skill cache
-                
-                GenericList.CacheModelObj.UserModellist = UserService.GetAllUserList();
+                var UserList = UserService.GetAllUserList();
+                foreach (var User in UserList)
+                {
+                    GenericList.CacheModelObj.UserModellist.Add(User.ID, User);
+                }
                 foreach (var Usermodel in GenericList.CacheModelObj.UserModellist)
                 {
-                    Usermodel.UsersInfoModel.CityModels = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.UsersInfoModel.ProvinceID).FirstOrDefault().CityList.Where(o => o.ID == Usermodel.UsersInfoModel.CityID).FirstOrDefault();
-                    foreach (var goodat in Usermodel.UsersInfoModel.GoodAtWhatModels)
+                    Usermodel.Value.UsersInfoModel.CityModels = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.Value.UsersInfoModel.ProvinceID).FirstOrDefault().CityList.Where(o => o.ID == Usermodel.Value.UsersInfoModel.CityID).FirstOrDefault();
+                    foreach (var goodat in Usermodel.Value.UsersInfoModel.GoodAtWhatModels)
                     {
                         goodat.SkillsModel = GenericList.CacheModelObj.SkillsModellist.Where(o => o.SkillId == goodat.SkillId).FirstOrDefault();
                     }
