@@ -152,6 +152,7 @@ namespace Digital.Service.Implements
                 }
                 catch (Exception ex)
                 {
+                    
                     //log
                 }
          
