@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BaseService.cs" />
+    <Compile Include="BLL\CompanyService.cs" />
     <Compile Include="BLL\MenuService.cs" />
     <Compile Include="BLL\RelationTableService.cs" />
     <Compile Include="BLL\TempColumnService.cs" />

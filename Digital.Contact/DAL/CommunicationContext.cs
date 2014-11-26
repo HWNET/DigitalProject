@@ -28,8 +28,13 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.GoodAtWhatModel> GoodAtWhatModel { get; set; }
 
-        public DbSet<Digital.Contact.Models.CompanyModel> CompanyModel { get; set; }
-
+        public DbSet<Digital.Contact.Models.CompanyModel> CompanyModels { get; set; }
+        public DbSet<Digital.Contact.Models.CasesCategoryModel> CasesCategoryModels { get; set; }
+        public DbSet<Digital.Contact.Models.CasesModel> CasesModels { get; set; }
+        public DbSet<Digital.Contact.Models.NewsCategoryModel> NewsCategoryModels { get; set; }
+        public DbSet<Digital.Contact.Models.NewsModel> NewsModels { get; set; }
+        public DbSet<Digital.Contact.Models.PatentModel> PatentModels { get; set; }
+        public DbSet<Digital.Contact.Models.SinglePageModel> SinglePageModels { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
