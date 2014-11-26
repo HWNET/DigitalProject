@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffer\BufferManager.cs" />
+    <Compile Include="Buffer\TaskUtil.cs" />
     <Compile Include="CacheModel.cs" />
     <Compile Include="Implements\DService.cs" />
     <Compile Include="GenericList.cs" />

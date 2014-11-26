@@ -49,7 +49,7 @@ namespace Digital.Contact.BLL
         //    }
         //}
 
-        public bool UpdateGoodAt(ICollection<GoodAtWhatModel> GoodAtList)
+        public bool UpdateGoodAt(GoodAtWhatModel GoodAtList)
         {
             using (var db = new CommunicationContext())
             {
@@ -66,17 +66,19 @@ namespace Digital.Contact.BLL
                     //{
                     //    db.GoodAtWhatModel.Add(Add);
                     //}
-                    var RemoveList = GoodAtList.Where(o => o.UpdateStatus == 3).ToList();
-                    var AddList = GoodAtList.Where(o => o.UpdateStatus == 1).ToList();
-                    foreach (var Remove in RemoveList)
+                    //var RemoveList = GoodAtList.Where(o => o.UpdateStatus == 3).ToList();
+                    //var AddList = GoodAtList.Where(o => o.UpdateStatus == 1).ToList();
+                    if (GoodAtList.UpdateStatus == 3)
                     {
-                        db.GoodAtWhatModel.Remove(Remove);
+                        var RemoveEntity = db.GoodAtWhatModel.Where(O => O.GoodAtWhatID == GoodAtList.GoodAtWhatID).FirstOrDefault();
+                        db.GoodAtWhatModel.Remove(RemoveEntity);
                     }
-                    foreach (var Add in AddList)
+                    if (GoodAtList.UpdateStatus == 1)
                     {
-                        Add.UpdateStatus = 0;
-                        db.GoodAtWhatModel.Add(Add);
+                        GoodAtList.UpdateStatus = 0;
+                        db.GoodAtWhatModel.Add(GoodAtList);
                     }
+                  
                     db.SaveChanges();
                     return true;
                 }

@@ -1,4 +1,4 @@
-﻿@model Digital.Contact.Models.UsersModel
+﻿@model Digital.WCFClient.ConfigService.UsersModel
 @using Digital.Common.Mvc.Extensions
 @{
     ViewBag.Title = "UserSafe";
@@ -125,7 +125,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label">个人介绍</label>
                                         <div class="col-sm-8">
-                                            <textarea rows="5" class="form-control" name="BeGoodAtIntroduction">@Model.UsersInfoModel.BeGoodAtIntroduction</textarea>
+                                            <textarea rows="5" class="form-control" id="BeGoodAtIntroduction">@Model.UsersInfoModel.BeGoodAtIntroduction</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -135,10 +135,10 @@
                                         <div class="col-sm-12">
                                             <div class="row">
                                                 @{
-                                                    foreach (var SkillModel in (List<Digital.Contact.Models.SkillsModel>)ViewBag.SkillList)
+                                                    foreach (var SkillModel in (System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SkillsModel>)ViewBag.SkillList)
                                                     {
                                                         var IsCheck = string.Empty;
-                                                        if (@Model.UsersInfoModel.GoodAtWhatModels.Any(o => o.SkillId == SkillModel.SkillId))
+                                                        if (@Model.UsersInfoModel.GoodAtWhatModels.Any(o => o.SkillId == SkillModel.SkillId&&o.UpdateStatus!=3))
                                                         {
                                                             IsCheck = "Checked=Checked";
                                                         }
@@ -254,12 +254,11 @@
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
             highlight: function (element) {
-                alert("1");
+                
                 jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
             success: function (element) {
-                debugger;
-                alert("2");
+               
                 jQuery(element).closest('.form-group').removeClass('has-error');
             }
         });
@@ -308,6 +307,7 @@
             }
             else if(TabIndex==1)
             {
+                debugger;
                 $.ajaxAntiForgery({
                     type: "post",
                     data: { UsersInfoID:@Model.UsersInfoModel.UsersInfoID,BeGoodAtIntroduction:$("#BeGoodAtIntroduction").val()},

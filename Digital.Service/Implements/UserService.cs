@@ -74,6 +74,7 @@ namespace Digital.Service.Implements
             {
                 CurrentUserInfo.UpdateStatus = 1;
                 GetUserInfo(UserModel.ID).UsersInfoModel = CurrentUserInfo;
+               
 
             }
             else if(UserInfoModels != CurrentUserInfo)
@@ -81,6 +82,8 @@ namespace Digital.Service.Implements
                 UserInfoModels = CurrentUserInfo;
                 UserInfoModels.UpdateStatus = 2;
             }
+            GenericList.CacheModelObj.UserModellist.Where(o => o.ID == UserModel.ID).FirstOrDefault().UsersInfoModel = CurrentUserInfo;
+            GenericList.InsertBuffer(UserModel, UserInfoModels);
             return UserInfoModels;
         }
 
@@ -91,19 +94,21 @@ namespace Digital.Service.Implements
             {
 
                 //新添加的goodatwhatModel
-                var AddModels = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => UserModels.UsersInfoModel.GoodAtWhatModels.Any(j => j.GoodAtWhatID != o.GoodAtWhatID)).FirstOrDefault();
+                var AddModels = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.GoodAtWhatID==0).FirstOrDefault();
                 if (AddModels != null)
                 {
                     //增加
                     AddModels.UpdateStatus = 1;
                     UserModels.UsersInfoModel.GoodAtWhatModels.Add(AddModels);
-                   
+                    GenericList.InsertBuffer(UserModels, AddModels);
                 }
-                var DelModels = UserModels.UsersInfoModel.GoodAtWhatModels.Where(o => UserModel.UsersInfoModel.GoodAtWhatModels.Any(j => j.GoodAtWhatID != o.GoodAtWhatID)).FirstOrDefault();
+                var DelModels = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.UpdateStatus == 3).FirstOrDefault();
                 if (DelModels != null)
                 {
                     //删除
-                    DelModels.UpdateStatus = 3;
+                     UserModels.UsersInfoModel.GoodAtWhatModels.Where(o => o.GoodAtWhatID == DelModels.GoodAtWhatID).FirstOrDefault().UpdateStatus = 3;
+                     GenericList.InsertBuffer(UserModels, DelModels);
+                    //DelModels.UpdateStatus = 3;
                 }
             }
             return true;
@@ -112,6 +117,7 @@ namespace Digital.Service.Implements
         public bool Register(UsersModel UserModel)
         {
             UserModel.UpdateStatus = 1;
+            GenericList.InsertBuffer(null, UserModel);
             GenericList.CacheModelObj.UserModellist.Add(UserModel);
             return true;
         }
@@ -129,6 +135,7 @@ namespace Digital.Service.Implements
             //UserModels.IdeaModelList = UserModel.IdeaModelList;
             //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
             UserModels.UpdateStatus = 2;
+            GenericList.InsertBuffer(null, UserModels);
             return UserModels;
         }
     }

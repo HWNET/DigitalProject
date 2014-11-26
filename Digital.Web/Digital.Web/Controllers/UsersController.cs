@@ -152,7 +152,8 @@ namespace Digital.Web.Controllers
                     var GoodModel = userModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.UsersInfoID == UsersInfoID && o.SkillId == SkillModel.SkillId).FirstOrDefault();
                     if (GoodModel != null && !IsInclude)
                     {
-                        userModel.UsersInfoModel.GoodAtWhatModels.Remove(GoodModel);
+                        GoodModel.UpdateStatus = 3;
+                        //userModel.UsersInfoModel.GoodAtWhatModels.Remove(GoodModel);
                     }
                     else
                     {

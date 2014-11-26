@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Digital.Contact.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -24,7 +25,8 @@ namespace Digital.Service.Implements
         public Task _CheckReloadXml;
         public Task _CHeckReloadDB;
         public CancellationToken _cancelToken;
-        public CancellationToken _cancelDBToken;
+        private CancellationTokenSource _cancelDBToken;
+        
         private int delayTime = 10;
 
         public Digital.Contact.Models.MenuModel MenuList { get; set; }
@@ -43,19 +45,31 @@ namespace Digital.Service.Implements
                 }
             });
             _CheckReloadXml.Start();
-            _CHeckReloadDB = new Task(() =>
-            {
-                try
-                {
-                    UpdateDB(_cancelDBToken);
-                }
-                catch (Exception ex)
-                {
-                    //log
-                }
-            });
-            _CHeckReloadDB.Start();
+            //_CHeckReloadDB = new Task(() =>
+            //{
+            //    try
+            //    {
+            //        UpdateDB(_cancelDBToken);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        //log
+            //    }
+            //});
+            //_CHeckReloadDB.Start();
+            _cancelDBToken = new CancellationTokenSource();
+            CreateDBMonitor(_cancelDBToken.Token);
         }
+
+       
+
+        private void CreateDBMonitor(CancellationToken token)
+        {
+            //_tagMonitorTask = Task.Factory.StartNew(DAServiceTripMonitor, token, token);
+            Task.Factory.StartNew(UpdateDB, token, token).IgnoreExceptions();
+        }
+
+
 
 
         private object CacheLock = new object();
@@ -89,19 +103,47 @@ namespace Digital.Service.Implements
         #endregion
 
 
-        private void UpdateDB(CancellationToken token)
+        private void UpdateDB(object param)
         {
-            var ct = token;
             while (true)
             {
+                var cToken = (CancellationToken)param;
+                if (cToken.IsCancellationRequested)
+                {
+                    
+                    break;
+                }
                 try
                 {
-                    if (ct.IsCancellationRequested)
-                        break;
-                    if (GenericList.CacheModelObj != null)
+                    //get db event from queue
+                    if (GenericList.MessageBuffer != null)
                     {
+                        //Goodat
+                        var _Buffer = GenericList.MessageBuffer.Get(cToken);
+                        if (_Buffer!=null&&_Buffer.MainObject as GoodAtWhatModel != null)
+                        {
+                            UsersModel UserModel = _Buffer.RootObject as UsersModel;
+                            GoodAtWhatModel goodatModel = _Buffer.MainObject as GoodAtWhatModel;
+                            UpdateUser.UpdateGoodAtWhatModel(UserModel, goodatModel);
+                            continue;
+                        }
+                        //UserInfor
+                        if (_Buffer != null && _Buffer.MainObject as UsersInfoModel != null)
+                        {
+                            UsersModel UserModel = _Buffer.RootObject as UsersModel;
+                            UsersInfoModel UserInfoModel = _Buffer.MainObject as UsersInfoModel;
+                            UpdateUser.UpdateUserInfoModel(UserModel, UserInfoModel);
+                            continue;
+                        }
                         //UserModel
-                        UpdateUser.UpdateUserALLTable();
+                        if (_Buffer != null && _Buffer.MainObject as UsersModel != null)
+                        {
+                            //UsersModel UserModel = _Buffer.RootObject as UsersModel;
+                            UsersModel UserModel = _Buffer.MainObject as UsersModel;
+                            UpdateUser.UpdateUserModel(UserModel);
+                            continue;
+                        }
+                      
                     }
 
                 }
@@ -109,7 +151,7 @@ namespace Digital.Service.Implements
                 {
                     //log
                 }
-                _CHeckReloadDB.Wait(delayTime * 1000);
+         
             }
 
         }
