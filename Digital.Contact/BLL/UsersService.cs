@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Digital.Contact.BLL
 {
-    public class UsersService : IBaseService<UsersModel>
+    public class UsersService 
     {
 
 
@@ -23,7 +23,7 @@ namespace Digital.Contact.BLL
         }
 
 
-       
+
 
         public bool Login(string UserName, string Password)
         {
@@ -78,7 +78,7 @@ namespace Digital.Contact.BLL
                         GoodAtList.UpdateStatus = 0;
                         db.GoodAtWhatModel.Add(GoodAtList);
                     }
-                  
+
                     db.SaveChanges();
                     return true;
                 }
@@ -87,7 +87,7 @@ namespace Digital.Contact.BLL
                     return false;
                 }
             }
-            
+
         }
 
         //public bool UpdateGoodAt(string SkillStr, int UsersInfoID)
@@ -229,7 +229,7 @@ namespace Digital.Contact.BLL
         }
 
 
-        public bool Edit(UsersModel usersmodel)
+        public UsersModel Edit(UsersModel usersmodel)
         {
             using (var db = new CommunicationContext())
             {
@@ -239,19 +239,19 @@ namespace Digital.Contact.BLL
                     {
                         db.Entry(usersmodel).State = EntityState.Modified;
                         db.SaveChanges();
-                        return true;
+                        return usersmodel;
                     }
                     else
                     {
-                        db.UsersModels.Add(usersmodel);
+                        usersmodel = db.UsersModels.Add(usersmodel);
                         db.SaveChanges();
-                        return true;
+                        return usersmodel;
                     }
                 }
                 catch (DbEntityValidationException dbEx)
                 {
                     Logger.Error(dbEx.InnerException.ToString());
-                    return false;
+                    return null;
                 }
             }
         }

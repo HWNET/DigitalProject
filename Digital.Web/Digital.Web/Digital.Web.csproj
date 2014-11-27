@@ -332,6 +332,7 @@
     <Content Include="DigitalStyle\images\photos\user4.png" />
     <Content Include="DigitalStyle\images\photos\user5.png" />
     <Content Include="DigitalStyle\images\photos\userprofile.png" />
+    <Content Include="DigitalStyle\images\pic-none.png" />
     <Content Include="DigitalStyle\images\plus-white.png" />
     <Content Include="DigitalStyle\images\plus.png" />
     <Content Include="DigitalStyle\images\prettyPhoto\dark_rounded\btnNext.png" />

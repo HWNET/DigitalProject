@@ -50,6 +50,19 @@ namespace Digital.Common.Mvc.Extensions
             return isDisabled ? "disabled = 'disabled'" : string.Empty;
         }
 
+
+        public static object IsNull(this HtmlHelper helper, object obj, object IsNullobj,object IsNotNullObj)
+        {
+            if (obj == null)
+            {
+                return IsNullobj;
+            }
+            else
+            {
+                return IsNotNullObj;
+            }
+        }
+
         public static string IsDisplay(this HtmlHelper helper, bool isDisplay)
         {
             return isDisplay ? "display:block" : "display:none";

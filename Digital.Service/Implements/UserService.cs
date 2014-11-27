@@ -29,7 +29,7 @@ namespace Digital.Service.Implements
 
         public UsersModel GetUserInfoByName(string UserName)
         {
-            var User = GenericList.CacheModelObj.UserModellist.Where(o => o.Value.Name == UserName ).FirstOrDefault();
+            var User = GenericList.CacheModelObj.UserModellist.Where(o => o.Value.Name == UserName).FirstOrDefault();
             //UsersModel User = GenericList.CacheModelObj.UserModellist.Where(o => o.Name == UserName).FirstOrDefault();
             if (User.Value != null)
             {
@@ -45,12 +45,12 @@ namespace Digital.Service.Implements
         {
             if (GenericList.CacheModelObj.UserModellist.ContainsKey(UserId))
             {
-                 return GenericList.CacheModelObj.UserModellist[UserId];        
+                return GenericList.CacheModelObj.UserModellist[UserId];
             }
             else
             {
                 Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
-                var User= UserService.Find(UserId);
+                var User = UserService.Find(UserId);
                 if (User != null)
                 {
                     GenericList.CacheModelObj.UserModellist.Add(UserId, User);
@@ -81,10 +81,10 @@ namespace Digital.Service.Implements
             {
                 CurrentUserInfo.UpdateStatus = 1;
                 GetUserInfo(UserModel.ID).UsersInfoModel = CurrentUserInfo;
-               
+
 
             }
-            else if(UserInfoModels != CurrentUserInfo)
+            else if (UserInfoModels != CurrentUserInfo)
             {
                 UserInfoModels = CurrentUserInfo;
                 UserInfoModels.UpdateStatus = 2;
@@ -103,24 +103,30 @@ namespace Digital.Service.Implements
             {
 
                 //新添加的goodatwhatModel
-                var AddModels = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.GoodAtWhatID==0).FirstOrDefault();
+                var AddModels = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.GoodAtWhatID == 0).ToList();
                 if (AddModels != null)
                 {
-                    //增加
-                    AddModels.UpdateStatus = 1;
-                    //更新缓存
-                    UserModels.UsersInfoModel.GoodAtWhatModels.Add(AddModels);
-                    //插入buffer
-                    GenericList.InsertBuffer(UserModels, AddModels);
+                    foreach (var Add in AddModels)
+                    {
+                        //增加
+                        Add.UpdateStatus = 1;
+                        //更新缓存
+                        UserModels.UsersInfoModel.GoodAtWhatModels.Add(Add);
+                        //插入buffer
+                        GenericList.InsertBuffer(UserModels, Add);
+                    }
                 }
-                var DelModels = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.UpdateStatus == 3).FirstOrDefault();
+                var DelModels = UserModel.UsersInfoModel.GoodAtWhatModels.Where(o => o.UpdateStatus == 3).ToList();
                 if (DelModels != null)
                 {
                     //删除
-                     UserModels.UsersInfoModel.GoodAtWhatModels.Where(o => o.GoodAtWhatID == DelModels.GoodAtWhatID).FirstOrDefault().UpdateStatus = 3;
-                    //插入buffer
-                     GenericList.InsertBuffer(UserModels, DelModels);
-                    //DelModels.UpdateStatus = 3;
+                    foreach (var Del in DelModels)
+                    {
+                        UserModels.UsersInfoModel.GoodAtWhatModels.Where(o => o.GoodAtWhatID == Del.GoodAtWhatID).FirstOrDefault().UpdateStatus = 3;
+                        //插入buffer
+                        GenericList.InsertBuffer(UserModels, Del);
+                        //DelModels.UpdateStatus = 3;
+                    }
                 }
             }
             return true;
@@ -129,10 +135,13 @@ namespace Digital.Service.Implements
         public bool Register(UsersModel UserModel)
         {
             UserModel.UpdateStatus = 1;
+            Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+          //  UserModel.UsersInfoModel = new UsersInfoModel { DisplayPicture = "../DigitalStyle/images/pic-none.png" };
+            UserModel = UserService.Edit(UserModel);
             //插入buffer
-            GenericList.InsertBuffer(null, UserModel);
+            //GenericList.InsertBuffer(null, UserModel);
             //因为UserId 是0 ，所以不添加到缓存中，当重新获取时将被从数据库中获取并存入缓存
-            //GenericList.CacheModelObj.UserModellist.Add(UserModel);
+            GenericList.CacheModelObj.UserModellist.Add(UserModel.ID, UserModel);
             return true;
         }
 
@@ -144,7 +153,7 @@ namespace Digital.Service.Implements
             UserModels.LoginIP = UserModel.LoginIP;
             UserModels.Passwords = UserModel.Passwords;
             UserModels.Status = UserModel.Status;
-            UserModels.UsersInfoID = UserModel.UsersInfoID; 
+            UserModels.UsersInfoID = UserModel.UsersInfoID;
             UserModels.UserTypeID = UserModel.UserTypeID;
             //UserModels.IdeaModelList = UserModel.IdeaModelList;
             //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 

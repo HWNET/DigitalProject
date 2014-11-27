@@ -73,7 +73,7 @@ namespace Digital.Contact.Models
 
         public int GoodAtWhatID { get; set; }
 
-        public virtual ICollection<GoodAtWhatModel> GoodAtWhatModels { get; set; }
+        public virtual List<GoodAtWhatModel> GoodAtWhatModels { get; set; }
 
         public CityModel CityModels { get; set; }
        

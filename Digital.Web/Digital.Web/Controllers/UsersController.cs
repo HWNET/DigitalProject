@@ -26,7 +26,14 @@ namespace Digital.Web.Controllers
 
             if (UserModel != null)
             {
-                return View(UserModel);
+                if (UserModel.UsersInfoModel != null)
+                {
+                    return View(UserModel);
+                }
+                else
+                {
+                    return Redirect("../Users/UserSafe");
+                }
             }
             else
             {
@@ -161,7 +168,7 @@ namespace Digital.Web.Controllers
 
                         if (GoodModel == null && IsInclude)
                         {
-                            userModel.UsersInfoModel.GoodAtWhatModels.Add(new GoodAtWhatModel { SkillId = SkillModel.SkillId, UsersInfoID = UsersInfoID });
+                            userModel.UsersInfoModel.GoodAtWhatModels.Add(new GoodAtWhatModel { SkillId = SkillModel.SkillId, UsersInfoID = UsersInfoID, SkillsModel = SkillModel });
                         }
                     }
                 }

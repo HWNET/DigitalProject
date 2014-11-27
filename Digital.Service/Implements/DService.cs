@@ -83,6 +83,7 @@ namespace Digital.Service.Implements
         {
             if (GenericList.CacheModelObj.UserModellist == null)
             {
+                GenericList.CacheModelObj.UserModellist = new Dictionary<int, UsersModel>();
                 Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
                 //Skill cache
                 var UserList = UserService.GetAllUserList();

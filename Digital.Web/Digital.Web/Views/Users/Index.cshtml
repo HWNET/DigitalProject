@@ -1,4 +1,5 @@
 ﻿@model Digital.WCFClient.ConfigService.UsersModel
+@using Digital.Common.Mvc.Extensions
 @{
     ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
@@ -18,7 +19,7 @@
 <div class="contentpanel">
     <div class="row">
         <div class="col-sm-3">
-            <img src="@Model.UsersInfoModel.DisplayPicture" class="thumbnail img-responsive" alt="" />
+            <img src="@Html.IsNull(@Model.UsersInfoModel.DisplayPicture, "../DigitalStyle/images/pic-none.png", @Model.UsersInfoModel.DisplayPicture)" class="thumbnail img-responsive" alt="" />
 
             <div class="mb30"></div>
 
@@ -45,14 +46,24 @@
                 @{
                     //string[] PCModelList = Model.UsersInfoModel.ProvinceNameAndCityName();
                     string Skills = string.Empty;
-                    foreach (var WhatModel in Model.UsersInfoModel.GoodAtWhatModels)
+                    if (Model.UsersInfoModel.GoodAtWhatModels != null)
                     {
-                        Skills += WhatModel.SkillsModel.Name + ",";
+                        foreach (var WhatModel in Model.UsersInfoModel.GoodAtWhatModels)
+                        {
+                            Skills += WhatModel.SkillsModel.Name + ",";
+                        }
                     }
-                    
                     Skills = Skills.Trim(',');
                 }
-                <div class="profile-location"><i class="fa fa-map-marker"></i> @Model.UsersInfoModel.CityModels.ProvinceName,@Model.UsersInfoModel.CityModels.Name </div>
+                <div class="profile-location"><i class="fa fa-map-marker"></i> 
+                @{
+                    if (@Model.UsersInfoModel.CityModels != null)
+                    {
+                       @Html.Raw(Model.UsersInfoModel.CityModels.ProvinceName+","+@Model.UsersInfoModel.CityModels.Name)   
+                    }
+                    
+                }
+                </div>
                 <div class="profile-position"><i class="fa fa-briefcase"></i> @Skills</div>
 
                 <div class="mb20"></div>
@@ -73,7 +84,7 @@
 
                         <div class="media">
                             <a class="pull-left" href="#">
-                               
+
                             </a>
                             <div class="media-body">
                                 <h3 class="follower-name">项目名称</h3>
@@ -87,7 +98,7 @@
                         </div><!-- media -->
                         <div class="media">
                             <a class="pull-left" href="#">
-                               
+
                             </a>
                             <div class="media-body">
                                 <h3 class="follower-name">项目名称</h3>
@@ -99,7 +110,7 @@
                                 <button class="btn btn-sm btn-success mr5"><i class="fa fa-user"></i> 查看项目</button>
                             </div>
                         </div><!-- media -->
-                     
+
 
                     </div><!-- activity-list -->
 
@@ -109,7 +120,7 @@
 
                     <div class="follower-list">
 
-                       
+
 
                     </div><!--follower-list -->
 
@@ -118,7 +129,7 @@
 
                     <div class="activity-list">
 
-                        
+
 
                     </div><!-- activity-list -->
 
