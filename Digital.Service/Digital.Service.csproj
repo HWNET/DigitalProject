@@ -50,11 +50,17 @@
     <Compile Include="Buffer\BufferManager.cs" />
     <Compile Include="Buffer\TaskUtil.cs" />
     <Compile Include="CacheModel.cs" />
+    <Compile Include="Implements\CasesCategoryService.cs" />
+    <Compile Include="Implements\CasesService.cs" />
     <Compile Include="Implements\CompanyService.cs" />
     <Compile Include="Implements\DService.cs" />
     <Compile Include="GenericList.cs" />
     <Compile Include="GetXmlConfig.cs" />
     <Compile Include="Implements\ConfigService.cs" />
+    <Compile Include="Implements\NewsCategoryService.cs" />
+    <Compile Include="Implements\NewsService.cs" />
+    <Compile Include="Implements\PatentService.cs" />
+    <Compile Include="Implements\SinglePageService.cs" />
     <Compile Include="Implements\UserService.cs" />
     <Compile Include="Interfaces\ICasesCategoryService.cs" />
     <Compile Include="Interfaces\ICasesService.cs" />
@@ -73,6 +79,7 @@
     <Content Include="Config\City.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\CompanyType.xml" />
     <Content Include="Config\Menu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

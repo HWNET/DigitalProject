@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BaseService.cs" />
+    <Compile Include="BLL\CasesCategoryService.cs" />
+    <Compile Include="BLL\CasesService.cs" />
     <Compile Include="BLL\CompanyService.cs" />
     <Compile Include="BLL\MenuService.cs" />
     <Compile Include="BLL\RelationTableService.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Models\CasesModel.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\CompanyUIModes.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\GoodAtWhatModel.cs" />
     <Compile Include="Models\IdeaModel.cs" />

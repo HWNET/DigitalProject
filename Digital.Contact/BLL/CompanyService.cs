@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Digital.Common.Logging;
 using Digital.Contact.DAL;
 using Digital.Contact.Models;
+using System.Data.Entity;
 
 namespace Digital.Contact.BLL
 {
     public class CompanyService
     {
+        #region IsModelExist
         private bool IsModelExist(CompanyModel Model)
         {
             using (var db = new CommunicationContext())
@@ -23,6 +25,9 @@ namespace Digital.Contact.BLL
                 return true;
             }
         }
+        #endregion
+
+        #region CompanyInsert
         public bool CompanyInsert(CompanyModel Model)
         {
             using (var db = new CommunicationContext())
@@ -47,35 +52,144 @@ namespace Digital.Contact.BLL
                 }
             }
         }
+        #endregion
 
+        #region CompanyUpdate
         public CompanyModel CompanyUpdate(CompanyModel Model)
         {
-            throw new NotImplementedException();
+            using(var db=new CommunicationContext())
+            {
+                try
+                {
+                    if (IsModelExist(Model))
+                    {
+                        db.Entry(Model).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return Model;
+                    }
+                    else
+                    {
+                        return new CompanyModel();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return new CompanyModel();
+                }
+            }
         }
+        #endregion
 
+        #region CompanyQueryById
         public CompanyModel CompanyQueryById(int CompanyId)
         {
-            throw new NotImplementedException();
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    return db.CompanyModels.Find(CompanyId);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return new CompanyModel();
+                }
+            }
         }
+        #endregion
 
+        #region CompanyQueryByName
         public CompanyModel CompanyQueryByName(string CompanyName)
         {
-            throw new NotImplementedException();
+            using(var db=new CommunicationContext())
+            {
+                try
+                {
+                    var model = db.CompanyModels.Where(o => o.CompanyName == CompanyName).SingleOrDefault();
+                    return model;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return new CompanyModel();
+                }
+            }
         }
+        #endregion
 
+        #region CompanyDeleteById
         public bool CompanyDeleteById(int CompanyId)
         {
-            throw new NotImplementedException();
+            using(var db=new CommunicationContext())
+            {
+                try
+                {
+                    var model = db.CompanyModels.Find(CompanyId);
+                    if (model!=null)
+                    {
+                        db.CompanyModels.Remove(model);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return false;
+                }
+            }
         }
+        #endregion
 
+        #region CompanyDisposeByNo
         public bool CompanyDisposeByNo(string CompanyRegisteredNO)
         {
-            throw new NotImplementedException();
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    var model = db.CompanyModels.Where(o=>o.CompanyRegisteredNO==CompanyRegisteredNO).SingleOrDefault();
+                    if (model != null)
+                    {
+                        db.CompanyModels.Remove(model);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return false;
+                }
+            }
         }
+        #endregion
 
+        #region CompanyQueryList
         public List<CompanyModel> CompanyQueryList()
         {
-            throw new NotImplementedException();
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    return db.CompanyModels.ToList();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return null;
+                }
+            }
         }
+        #endregion
     }
 }

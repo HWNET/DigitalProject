@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Root>
+  <Item Id="1" Name="LINE"/> 
+  <Item Id="2" Name="个体经营"/> 
+  <Item Id="3" Name="LINE"/> 
+<Item Id="4" Name="私营独资企业"/> 
+<Item Id="5" Name="私营合伙企业"/> 
+<Item Id="6" Name="私营有限责任公司"/> 
+<Item Id="7" Name="私营股份有限公司"/> 
+<Item Id="8" Name="国有企业"/> 
+<Item Id="9" Name="集体企业"/> 
+<Item Id="10" Name="股份合作企业"/> 
+<Item Id="11" Name="联营企业"/> 
+<Item Id="12" Name="有限责任公司"/> 
+<Item Id="13" Name="有限责任公司(国有独资或控股)"/> 
+<Item Id="14" Name="有限责任公司(自然人投资或控股)"/> 
+<Item Id="15" Name="一人有限责任公司"/> 
+<Item Id="16" Name="其他有限责任公司"/> 
+<Item Id="17" Name="股份有限公司"/> 
+<Item Id="18" Name="其他内资企业"/> 
+<Item Id="19" Name="LINE"/> 
+<Item Id="20" Name="三来一补"/> 
+<Item Id="21" Name="法人分支机构"/> 
+<Item Id="22" Name="农民专业合作经济组织"/> 
+<Item Id="23" Name="LINE"/> 
+<Item Id="24" Name="合资经营企业(港或澳、台资)"/> 
+<Item Id="25" Name="合作经营企业(港或澳、台资)"/> 
+<Item Id="26" Name="港、澳、台商独资经营企业"/> 
+<Item Id="27" Name="港、澳、台商投资股份有限公司"/> 
+<Item Id="28" Name="中外合资经营企业"/> 
+<Item Id="29" Name="中外合作经营企业"/> 
+<Item Id="30" Name="外资企业"/> 
+<Item Id="31" Name="外商投资股份有限公司"/> 
+<Item Id="32" Name="LINE"/> 
+<Item Id="33" Name="其他"/> 
+<Item Id="34" Name="LINE"/> 
+</Root>
