@@ -107,4 +107,310 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSkillsModel" nillable="true" type="tns:ArrayOfSkillsModel" />
+  <xs:complexType name="CompanyModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AnnualBusinessVolume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AnnualExportsVolume" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CapacityIntro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesCategoryModels" nillable="true" type="tns:ArrayOfCasesCategoryModel" />
+      <xs:element minOccurs="0" name="CompanyBankAccount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyBankDeposit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyBusinessAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyBusinessModel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyCorporateRepresentative" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyIntro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyMembers" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyRegisteredAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyRegisteredAssets" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyRegisteredNO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyTypeNO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyWebsite" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyYearEstablished" type="xs:int" />
+      <xs:element minOccurs="0" name="DepartmentModels" nillable="true" type="tns:ArrayOfDepartmentModel" />
+      <xs:element minOccurs="0" name="EquipmentIntro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FactoryArea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsProvideOEM" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ManagementSystemCertification" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsCategoryModels" nillable="true" type="tns:ArrayOfNewsCategoryModel" />
+      <xs:element minOccurs="0" name="PatentModels" nillable="true" type="tns:ArrayOfPatentModel" />
+      <xs:element minOccurs="0" name="PrimaryBusiness" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryEquipments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryProduct" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimarySalesArea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessingCraft" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessingMethod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductQualityCertification" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductionForm" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QualityAssurance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResearchDepartMembers" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServicesDomain" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SinglePageModels" nillable="true" type="tns:ArrayOfSinglePageModel" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompanyModel" nillable="true" type="tns:CompanyModel" />
+  <xs:complexType name="ArrayOfCasesCategoryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CasesCategoryModel" nillable="true" type="tns:CasesCategoryModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCasesCategoryModel" nillable="true" type="tns:ArrayOfCasesCategoryModel" />
+  <xs:complexType name="CasesCategoryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CasesCategoryContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="CasesCategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesCategoryOrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="CasesCategoryParentID" type="xs:int" />
+      <xs:element minOccurs="0" name="CasesCategoryPicture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesModels" nillable="true" type="tns:ArrayOfCasesModel" />
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CasesCategoryModel" nillable="true" type="tns:CasesCategoryModel" />
+  <xs:complexType name="ArrayOfCasesModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CasesModel" nillable="true" type="tns:CasesModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCasesModel" nillable="true" type="tns:ArrayOfCasesModel" />
+  <xs:complexType name="CasesModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CasesAbstract" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="CasesDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CasesDetails" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesID" type="xs:int" />
+      <xs:element minOccurs="0" name="CasesLabels" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesOrderBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CasesThumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CasesModel" nillable="true" type="tns:CasesModel" />
+  <xs:complexType name="ArrayOfDepartmentModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DepartmentModel" nillable="true" type="tns:DepartmentModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDepartmentModel" nillable="true" type="tns:ArrayOfDepartmentModel" />
+  <xs:complexType name="DepartmentModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DepartmentID" type="xs:int" />
+      <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DepartmentModel" nillable="true" type="tns:DepartmentModel" />
+  <xs:complexType name="ArrayOfNewsCategoryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NewsCategoryModel" nillable="true" type="tns:NewsCategoryModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNewsCategoryModel" nillable="true" type="tns:ArrayOfNewsCategoryModel" />
+  <xs:complexType name="NewsCategoryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsCategoryContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsCategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsCategoryOrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsCategoryParentID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsCategoryPicture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsModels" nillable="true" type="tns:ArrayOfNewsModel" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NewsCategoryModel" nillable="true" type="tns:NewsCategoryModel" />
+  <xs:complexType name="ArrayOfNewsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NewsModel" nillable="true" type="tns:NewsModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNewsModel" nillable="true" type="tns:ArrayOfNewsModel" />
+  <xs:complexType name="NewsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NewsAbstract" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsCommentModels" nillable="true" type="tns:ArrayOfNewsCommentModel" />
+      <xs:element minOccurs="0" name="NewsID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsKeywords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsLabels" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsOrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsThumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReleaseTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ViewsCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NewsModel" nillable="true" type="tns:NewsModel" />
+  <xs:complexType name="ArrayOfNewsCommentModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NewsCommentModel" nillable="true" type="tns:NewsCommentModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNewsCommentModel" nillable="true" type="tns:ArrayOfNewsCommentModel" />
+  <xs:complexType name="NewsCommentModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CommentID" type="xs:int" />
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsClosed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NewsID" type="xs:int" />
+      <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ToUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NewsCommentModel" nillable="true" type="tns:NewsCommentModel" />
+  <xs:complexType name="ArrayOfPatentModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PatentModel" nillable="true" type="tns:PatentModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPatentModel" nillable="true" type="tns:ArrayOfPatentModel" />
+  <xs:complexType name="PatentModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDisabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsTransferred" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PatentAbstract" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentCerificate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentDevelopmentStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentID" type="xs:int" />
+      <xs:element minOccurs="0" name="PatentIntro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentLabels" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentOrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="PatentTechnologyDomain" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PatentModel" nillable="true" type="tns:PatentModel" />
+  <xs:complexType name="ArrayOfSinglePageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SinglePageModel" nillable="true" type="tns:SinglePageModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSinglePageModel" nillable="true" type="tns:ArrayOfSinglePageModel" />
+  <xs:complexType name="SinglePageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="ModifiedTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PageBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageID" type="xs:int" />
+      <xs:element minOccurs="0" name="PageKeyWords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageRelationFlag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SinglePageModel" nillable="true" type="tns:SinglePageModel" />
+  <xs:complexType name="ArrayOfCompanyModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompanyModel" nillable="true" type="tns:CompanyModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompanyModel" nillable="true" type="tns:ArrayOfCompanyModel" />
+  <xs:complexType name="ArrayOfCompanyTypeMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompanyTypeMode" nillable="true" type="tns:CompanyTypeMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompanyTypeMode" nillable="true" type="tns:ArrayOfCompanyTypeMode" />
+  <xs:complexType name="CompanyTypeMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompanyTypeMode" nillable="true" type="tns:CompanyTypeMode" />
+  <xs:complexType name="BaseNameValueMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseNameValueMode" nillable="true" type="tns:BaseNameValueMode" />
+  <xs:complexType name="ArrayOfCompanyMemberMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompanyMemberMode" nillable="true" type="tns:CompanyMemberMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompanyMemberMode" nillable="true" type="tns:ArrayOfCompanyMemberMode" />
+  <xs:complexType name="CompanyMemberMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompanyMemberMode" nillable="true" type="tns:CompanyMemberMode" />
+  <xs:complexType name="ArrayOfCompanyBusinessMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompanyBusinessMode" nillable="true" type="tns:CompanyBusinessMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompanyBusinessMode" nillable="true" type="tns:ArrayOfCompanyBusinessMode" />
+  <xs:complexType name="CompanyBusinessMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompanyBusinessMode" nillable="true" type="tns:CompanyBusinessMode" />
+  <xs:complexType name="ArrayOfPrimaryBusinessCategoryMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PrimaryBusinessCategoryMode" nillable="true" type="tns:PrimaryBusinessCategoryMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrimaryBusinessCategoryMode" nillable="true" type="tns:ArrayOfPrimaryBusinessCategoryMode" />
+  <xs:complexType name="PrimaryBusinessCategoryMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PrimaryBusinessList" nillable="true" type="tns:ArrayOfPrimaryBusinessMode" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PrimaryBusinessCategoryMode" nillable="true" type="tns:PrimaryBusinessCategoryMode" />
+  <xs:complexType name="ArrayOfPrimaryBusinessMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PrimaryBusinessMode" nillable="true" type="tns:PrimaryBusinessMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrimaryBusinessMode" nillable="true" type="tns:ArrayOfPrimaryBusinessMode" />
+  <xs:complexType name="PrimaryBusinessMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BusinessCategoryName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PrimaryBusinessMode" nillable="true" type="tns:PrimaryBusinessMode" />
+  <xs:complexType name="ArrayOfPrimarySalesAreaMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PrimarySalesAreaMode" nillable="true" type="tns:PrimarySalesAreaMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrimarySalesAreaMode" nillable="true" type="tns:ArrayOfPrimarySalesAreaMode" />
+  <xs:complexType name="PrimarySalesAreaMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PrimarySalesAreaMode" nillable="true" type="tns:PrimarySalesAreaMode" />
 </xs:schema>

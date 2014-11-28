@@ -16,6 +16,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_ICompanyService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -77,6 +85,78 @@
   <wsdl:message name="IUserService_Register_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterResponse" />
   </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyInsert" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyQueryById" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyDisposeByNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyDisposeByNo" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyDisposeByNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyDisposeByNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyQueryList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_CompanyQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyTypeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyTypeList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyTypeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyTypeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyMemberList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyMemberList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyMemberList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyMemberListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyBusinessList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyBusinessList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyBusinessList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyBusinessListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetPrimaryBusinessList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrimaryBusinessList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetPrimaryBusinessList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrimaryBusinessListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetPrimarySalesAreaList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrimarySalesAreaList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetPrimarySalesAreaList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrimarySalesAreaListResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -115,6 +195,56 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Register" message="tns:IUserService_Register_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RegisterResponse" message="tns:IUserService_Register_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="ICompanyService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/CompanyInsert" message="tns:ICompanyService_CompanyInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/CompanyInsertResponse" message="tns:ICompanyService_CompanyInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/CompanyUpdate" message="tns:ICompanyService_CompanyUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/CompanyUpdateResponse" message="tns:ICompanyService_CompanyUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/CompanyQueryById" message="tns:ICompanyService_CompanyQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/CompanyQueryByIdResponse" message="tns:ICompanyService_CompanyQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/CompanyQueryByName" message="tns:ICompanyService_CompanyQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/CompanyQueryByNameResponse" message="tns:ICompanyService_CompanyQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/CompanyDeleteById" message="tns:ICompanyService_CompanyDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/CompanyDeleteByIdResponse" message="tns:ICompanyService_CompanyDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyDisposeByNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/CompanyDisposeByNo" message="tns:ICompanyService_CompanyDisposeByNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/CompanyDisposeByNoResponse" message="tns:ICompanyService_CompanyDisposeByNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/CompanyQueryList" message="tns:ICompanyService_CompanyQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/CompanyQueryListResponse" message="tns:ICompanyService_CompanyQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCompanyTypeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyTypeList" message="tns:ICompanyService_GetCompanyTypeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyTypeListResponse" message="tns:ICompanyService_GetCompanyTypeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCompanyMemberList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyMemberList" message="tns:ICompanyService_GetCompanyMemberList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyMemberListResponse" message="tns:ICompanyService_GetCompanyMemberList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCompanyBusinessList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyBusinessList" message="tns:ICompanyService_GetCompanyBusinessList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyBusinessListResponse" message="tns:ICompanyService_GetCompanyBusinessList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPrimaryBusinessList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetPrimaryBusinessList" message="tns:ICompanyService_GetPrimaryBusinessList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetPrimaryBusinessListResponse" message="tns:ICompanyService_GetPrimaryBusinessList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPrimarySalesAreaList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetPrimarySalesAreaList" message="tns:ICompanyService_GetPrimarySalesAreaList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetPrimarySalesAreaListResponse" message="tns:ICompanyService_GetPrimarySalesAreaList_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -206,6 +336,118 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_ICompanyService" type="tns:ICompanyService">
+    <wsp:PolicyReference URI="#CustomBinding_ICompanyService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CompanyInsert">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/CompanyInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/CompanyUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyQueryById">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/CompanyQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/CompanyQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/CompanyDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyDisposeByNo">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/CompanyDisposeByNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyQueryList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/CompanyQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyTypeList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetCompanyTypeList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyMemberList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetCompanyMemberList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyBusinessList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetCompanyBusinessList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrimaryBusinessList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetPrimaryBusinessList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrimarySalesAreaList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetPrimarySalesAreaList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
@@ -217,6 +459,12 @@
       <soap12:address location="net.tcp://localhost:4502/UserService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/UserService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_ICompanyService" binding="tns:CustomBinding_ICompanyService">
+      <soap12:address location="net.tcp://localhost:4502/CompanyService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/CompanyService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
