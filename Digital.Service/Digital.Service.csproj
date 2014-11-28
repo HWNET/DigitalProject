@@ -76,19 +76,35 @@
     <Compile Include="UpdateDB\UpdateUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\AnnualVolume.xml" />
+    <Content Include="Config\AssetsUnit.xml" />
+    <Content Include="Config\CapacityUnit.xml" />
     <Content Include="Config\City.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\CompanyBusiness.xml" />
+    <Content Include="Config\CompanyMember.xml" />
     <Content Include="Config\CompanyType.xml" />
+    <Content Include="Config\EquipmentIntro.xml" />
+    <Content Include="Config\SystemCertification.xml" />
     <Content Include="Config\Menu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\PrimaryBusiness.xml" />
+    <Content Include="Config\PrimarySalesArea.xml" />
+    <Content Include="Config\ProcessingCraft.xml" />
+    <Content Include="Config\ProcessingMethod.xml" />
+    <Content Include="Config\ProductionForm.xml" />
+    <Content Include="Config\QualityCertification.xml" />
+    <Content Include="Config\QualityAssurance.xml" />
     <Content Include="Config\Service.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\ServicesDomain.xml" />
     <Content Include="Config\Skills.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\Year.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Digital.Common\Digital.Common\Digital.Common.csproj">

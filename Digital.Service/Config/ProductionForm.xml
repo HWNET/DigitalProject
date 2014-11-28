@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Item Id="1" Name="-- 请如实填写您的生产形式，以便客户确认合作形式 --"/>
+  <Item Id="2" Name="自有生产线"/>
+  <Item Id="3" Name="外包生产"/>
+</Root>

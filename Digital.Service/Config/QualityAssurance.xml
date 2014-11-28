@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Item Id="1" Name="内部"/>
+  <Item Id="2" Name="第三方"/>
+  <Item Id="3" Name="无"/>
+</Root>
