@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Digital.WCFClient;
+using Digital.WCFClient.ConfigService;
 
 namespace Digital.Web.Controllers
 {
@@ -68,9 +70,54 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyBaseInfo()
         {
             ViewBag.MenuModel = base.GetMenu(151);
+
+            //drop down 企业类型
+            SetCompanyTypes();
+            //drop down 企业人数
+            SetCompanyMembers();
+            //radio group 经营模式
+            SetCompanyBusinessList();
+            //drop down cascading 主营行业
+            //drop down 销售区域
+            SetPrimarySalesAreaList();
+
             return View();
         }
 
+        #region UI Modes For Company Base Informations
+        public void SetCompanyTypes()
+        {
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            var CompanyTypeList = client.GetCompanyTypeList();
+            ViewBag.CompanyTypeList = CompanyTypeList;
+            client.Close();
+        }
+        public void SetCompanyMembers()
+        {
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            var CompanyMemberList = client.GetCompanyMemberList();
+            ViewBag.CompanyMemberList = CompanyMemberList;
+            client.Close();
+        }
+        public void SetCompanyBusinessList()
+        {
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            var CompanyBusinessList = client.GetCompanyBusinessList();
+            ViewBag.CompanyBusinessList = CompanyBusinessList;
+            client.Close();
+        }
+        public void SetPrimaryBusinessList()
+        {
+            ViewBag.PrimaryBusinessList = null;
+        }
+        public void SetPrimarySalesAreaList()
+        {
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            var PrimarySalesAreaList = client.GetPrimarySalesAreaList();
+            ViewBag.PrimarySalesAreaList = PrimarySalesAreaList;
+            client.Close();
+        }
+        #endregion
 
         public ActionResult CompanyBusinessDemand()
         {
