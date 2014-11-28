@@ -212,6 +212,29 @@ namespace Digital.Service.Implements
                             {
                                 InitList.GetCityModel();
                             }
+                            #region For Company Base Informations
+                            if (xmlMode.Name == "CompanyType")
+                            {
+                                InitList.InitModel<CompanyTypeMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "CompanyMember")
+                            {
+                                InitList.InitModel<CompanyMemberMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "CompanyBusiness")
+                            {
+                                InitList.InitModel<CompanyBusinessMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "PrimaryBusiness") // PrimaryBusinessCategoryMode , PrimaryBusinessMode
+                            {
+                                //follow province - city implements
+                                InitList.GetPrimaryBusinessModel();
+                            }
+                            if (xmlMode.Name == "PrimarySalesArea")
+                            {
+                                InitList.InitModel<PrimarySalesAreaMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            #endregion
                             GetXmlConfig.UpdateStatus(xmlMode.Name, "0");
                         }
                         if (IsFirst)

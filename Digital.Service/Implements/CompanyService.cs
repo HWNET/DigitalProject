@@ -45,5 +45,72 @@ namespace Digital.Service.Implements
         {
             throw new NotImplementedException();
         }
+
+        #region UI Modes For Company Base Informations
+        public List<CompanyTypeMode> GetCompanyTypeList()
+        {
+            var modes = GenericList.CacheModelObj.CompanyTypeModelist;
+            if (modes!=null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<CompanyMemberMode> GetCompanyMemberList()
+        {
+            var modes = GenericList.CacheModelObj.CompanyMemberModelist;
+            if (modes!=null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<CompanyBusinessMode> GetCompanyBusinessList()
+        {
+            var modes = GenericList.CacheModelObj.CompanyBusinessModelist;
+            if (modes!=null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<PrimaryBusinessCategoryMode> GetPrimaryBusinessList()
+        {
+            var modes = GenericList.CacheModelObj.PrimaryBusinessCategoryModelist;
+            if (modes!=null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<PrimarySalesAreaMode> GetPrimarySalesAreaList()
+        {
+            var modes = GenericList.CacheModelObj.PrimarySalesAreaModelist;
+            if (modes!=null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

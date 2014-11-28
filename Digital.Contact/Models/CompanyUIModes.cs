@@ -28,9 +28,13 @@ namespace Digital.Contact.Models
     //for radiogroup CompanyBusiness
     public class CompanyBusinessMode : BaseNameValueMode { }
     //for dropdown1 PrimaryBusinessCategory
-    public class PrimaryBusinessCategoryMode : BaseNameValueMode { }
+    public class PrimaryBusinessCategoryMode : BaseNameValueMode {
+        public List<PrimaryBusinessMode> PrimaryBusinessList { get; set; }
+    }
     //for dropdown2 PrimaryBusiness
-    public class PrimaryBusinessMode : BaseNameValueMode { }
+    public class PrimaryBusinessMode : BaseNameValueMode {
+        public string BusinessCategoryName { get; set; }
+    }
     //for selectlist PrimarySalesArea
     public class PrimarySalesAreaMode : BaseNameValueMode { }
     //--------CompanyBusinessAddress

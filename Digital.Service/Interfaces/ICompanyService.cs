@@ -25,5 +25,16 @@ namespace Digital.Service.Interfaces
         bool CompanyDisposeByNo(string CompanyRegisteredNO);
         [OperationContract]
         List<CompanyModel> CompanyQueryList();
+
+        [OperationContract]
+        List<CompanyTypeMode> GetCompanyTypeList();
+        [OperationContract]
+        List<CompanyMemberMode> GetCompanyMemberList();
+        [OperationContract]
+        List<CompanyBusinessMode> GetCompanyBusinessList();
+        [OperationContract]
+        List<PrimaryBusinessCategoryMode> GetPrimaryBusinessList();
+        [OperationContract]
+        List<PrimarySalesAreaMode> GetPrimarySalesAreaList();
     }
 }

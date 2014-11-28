@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Digital.Contact.Models;
 
 namespace Digital.Service
 {
@@ -46,7 +47,6 @@ namespace Digital.Service
                 MessageBuffer.Put(Buffer);
             }
         }
-
 
         public void GetCityModel()
         {
@@ -109,7 +109,44 @@ namespace Digital.Service
             pi.SetValue(CacheModelObj, List);
         }
 
+        #region For Company Base Informations
+        public void GetPrimaryBusinessModel()
+        {
+            if (CacheModelObj.PrimaryBusinessCategoryModelist==null)
+            {
+                CacheModelObj.PrimaryBusinessCategoryModelist = new List<PrimaryBusinessCategoryMode>();
+            }
 
+            var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
+            var doc = new XmlDocument();
+            var path = ServicePath + "\\Config\\PrimaryBusiness.xml";
+            doc.Load(path);
+            XmlNodeList ItemModelList = doc.SelectNodes("Root/PrimaryBusinessCategory");
+
+            foreach (XmlNode ParentNode in ItemModelList) // Node : PrimaryBusinessCategory
+            {
+                var BusinessCategoryMode = new PrimaryBusinessCategoryMode { 
+                     Value=ParentNode.Attributes["Id"].Value,
+                     Name=ParentNode.Attributes["Name"].Value
+                };
+
+                List<PrimaryBusinessMode> BusinessModeList = new List<PrimaryBusinessMode>();
+                foreach (XmlNode ChildNode in ParentNode.ChildNodes)// Node : PrimaryBusiness
+                {
+                    BusinessModeList.Add(new PrimaryBusinessMode
+                    {
+                        Value=ChildNode.Attributes["Id"].Value,
+                        Name=ChildNode.Attributes["Name"].Value
+                    });
+                }
+                BusinessCategoryMode.PrimaryBusinessList = BusinessModeList;
+
+                // Cache : PrimaryBusinessCategoryModelist
+                CacheModelObj.PrimaryBusinessCategoryModelist.Add(BusinessCategoryMode);
+            }
+
+        }
+        #endregion
 
 
 
