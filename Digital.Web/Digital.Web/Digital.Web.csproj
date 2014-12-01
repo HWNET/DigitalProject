@@ -824,7 +824,6 @@
     <Content Include="style\profile.css" />
     <Content Include="style\style-metro.css" />
     <Content Include="xml\City.xml" />
-    <Content Include="xml\CompanyAddress.xml" />
     <Content Include="xml\PrimaryBusiness.xml" />
     <None Include="DigitalStyle\fonts\fontawesome-webfont.eot" />
     <Content Include="DigitalStyle\fonts\fontawesome-webfont.svg" />
