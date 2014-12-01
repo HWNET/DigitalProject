@@ -16,8 +16,9 @@ namespace Digital.Contact.Models
 
     public class BaseNameValueMode
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Value { get; set; }
+        //public string Value { get; set; }
     }
 
     //---------------1.Tab Base Infos
@@ -73,6 +74,8 @@ namespace Digital.Contact.Models
     //for dropdown CompanyYearEstablished
     public class CompanyYearEstablishedMode : BaseNameValueMode { }
     //for dropdown CompanyRegisteredAssets
-    public class CompanyRegisteredAssetsUnitMode : BaseNameValueMode { }
+    public class CompanyRegisteredAssetsUnitMode : BaseNameValueMode {
+        public string Value { get; set; }
+    }
 
 }
