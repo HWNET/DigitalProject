@@ -58,6 +58,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.AnnualBusinessVolumeMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.AnnualExportsVolumeMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CapacityUnitMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CompanyBusinessMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -67,7 +76,19 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CompanyModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CompanyRegisteredAssetsUnitMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CompanyTypeMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CompanyYearEstablishedMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.EquipmentIntroMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ManagementSystemCertificationMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.MenuModel.datasource">
@@ -77,6 +98,24 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.PrimarySalesAreaMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ProcessingCraftMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ProcessingMethodMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ProductionFormMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ProductQualityCertificationMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.QualityAssuranceMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ServicesDomainMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.SkillsModel.datasource">

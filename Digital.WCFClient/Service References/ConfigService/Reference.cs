@@ -3053,6 +3053,19 @@ namespace Digital.WCFClient.ConfigService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.PrimaryBusinessCategoryMode))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.PrimaryBusinessMode))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.PrimarySalesAreaMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.ProductionFormMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.ServicesDomainMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.ProcessingMethodMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.ProcessingCraftMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.EquipmentIntroMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.CapacityUnitMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.AnnualBusinessVolumeMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.AnnualExportsVolumeMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.ManagementSystemCertificationMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.ProductQualityCertificationMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.QualityAssuranceMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.CompanyYearEstablishedMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.CompanyRegisteredAssetsUnitMode))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.CompanyTypeMode))]
     public partial class BaseNameValueMode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -3060,10 +3073,10 @@ namespace Digital.WCFClient.ConfigService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ValueField;
+        private string NameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -3076,6 +3089,19 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
                 return this.NameField;
@@ -3084,19 +3110,6 @@ namespace Digital.WCFClient.ConfigService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value {
-            get {
-                return this.ValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
-                    this.ValueField = value;
-                    this.RaisePropertyChanged("Value");
                 }
             }
         }
@@ -3176,6 +3189,113 @@ namespace Digital.WCFClient.ConfigService {
     [System.Runtime.Serialization.DataContractAttribute(Name="PrimarySalesAreaMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
     [System.SerializableAttribute()]
     public partial class PrimarySalesAreaMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProductionFormMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class ProductionFormMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServicesDomainMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class ServicesDomainMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProcessingMethodMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class ProcessingMethodMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProcessingCraftMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class ProcessingCraftMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EquipmentIntroMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class EquipmentIntroMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CapacityUnitMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class CapacityUnitMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AnnualBusinessVolumeMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class AnnualBusinessVolumeMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AnnualExportsVolumeMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class AnnualExportsVolumeMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ManagementSystemCertificationMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class ManagementSystemCertificationMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProductQualityCertificationMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class ProductQualityCertificationMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="QualityAssuranceMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class QualityAssuranceMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompanyYearEstablishedMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class CompanyYearEstablishedMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompanyRegisteredAssetsUnitMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class CompanyRegisteredAssetsUnitMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ValueField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3445,6 +3565,84 @@ namespace Digital.WCFClient.ConfigService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetPrimarySalesAreaList", ReplyAction="http://tempuri.org/ICompanyService/GetPrimarySalesAreaListResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PrimarySalesAreaMode>> GetPrimarySalesAreaListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProductionFormList", ReplyAction="http://tempuri.org/ICompanyService/GetProductionFormListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductionFormMode> GetProductionFormList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProductionFormList", ReplyAction="http://tempuri.org/ICompanyService/GetProductionFormListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductionFormMode>> GetProductionFormListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetServicesDomainList", ReplyAction="http://tempuri.org/ICompanyService/GetServicesDomainListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ServicesDomainMode> GetServicesDomainList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetServicesDomainList", ReplyAction="http://tempuri.org/ICompanyService/GetServicesDomainListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ServicesDomainMode>> GetServicesDomainListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProcessingMethodList", ReplyAction="http://tempuri.org/ICompanyService/GetProcessingMethodListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingMethodMode> GetProcessingMethodList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProcessingMethodList", ReplyAction="http://tempuri.org/ICompanyService/GetProcessingMethodListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingMethodMode>> GetProcessingMethodListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProcessingCraftList", ReplyAction="http://tempuri.org/ICompanyService/GetProcessingCraftListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingCraftMode> GetProcessingCraftList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProcessingCraftList", ReplyAction="http://tempuri.org/ICompanyService/GetProcessingCraftListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingCraftMode>> GetProcessingCraftListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetEquipmentIntroList", ReplyAction="http://tempuri.org/ICompanyService/GetEquipmentIntroListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.EquipmentIntroMode> GetEquipmentIntroList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetEquipmentIntroList", ReplyAction="http://tempuri.org/ICompanyService/GetEquipmentIntroListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.EquipmentIntroMode>> GetEquipmentIntroListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetCapacityUnitList", ReplyAction="http://tempuri.org/ICompanyService/GetCapacityUnitListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CapacityUnitMode> GetCapacityUnitList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetCapacityUnitList", ReplyAction="http://tempuri.org/ICompanyService/GetCapacityUnitListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CapacityUnitMode>> GetCapacityUnitListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetAnnualBusinessVolumeList", ReplyAction="http://tempuri.org/ICompanyService/GetAnnualBusinessVolumeListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualBusinessVolumeMode> GetAnnualBusinessVolumeList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetAnnualBusinessVolumeList", ReplyAction="http://tempuri.org/ICompanyService/GetAnnualBusinessVolumeListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualBusinessVolumeMode>> GetAnnualBusinessVolumeListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetAnnualExportsVolumeList", ReplyAction="http://tempuri.org/ICompanyService/GetAnnualExportsVolumeListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualExportsVolumeMode> GetAnnualExportsVolumeList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetAnnualExportsVolumeList", ReplyAction="http://tempuri.org/ICompanyService/GetAnnualExportsVolumeListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualExportsVolumeMode>> GetAnnualExportsVolumeListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetManagementSystemCertificationList", ReplyAction="http://tempuri.org/ICompanyService/GetManagementSystemCertificationListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ManagementSystemCertificationMode> GetManagementSystemCertificationList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetManagementSystemCertificationList", ReplyAction="http://tempuri.org/ICompanyService/GetManagementSystemCertificationListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ManagementSystemCertificationMode>> GetManagementSystemCertificationListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProductQualityCertificationList", ReplyAction="http://tempuri.org/ICompanyService/GetProductQualityCertificationListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductQualityCertificationMode> GetProductQualityCertificationList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetProductQualityCertificationList", ReplyAction="http://tempuri.org/ICompanyService/GetProductQualityCertificationListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductQualityCertificationMode>> GetProductQualityCertificationListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetQualityAssuranceList", ReplyAction="http://tempuri.org/ICompanyService/GetQualityAssuranceListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.QualityAssuranceMode> GetQualityAssuranceList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetQualityAssuranceList", ReplyAction="http://tempuri.org/ICompanyService/GetQualityAssuranceListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.QualityAssuranceMode>> GetQualityAssuranceListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetCompanyYearEstablishedList", ReplyAction="http://tempuri.org/ICompanyService/GetCompanyYearEstablishedListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyYearEstablishedMode> GetCompanyYearEstablishedList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetCompanyYearEstablishedList", ReplyAction="http://tempuri.org/ICompanyService/GetCompanyYearEstablishedListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyYearEstablishedMode>> GetCompanyYearEstablishedListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitList", ReplyAction="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyRegisteredAssetsUnitMode> GetCompanyRegisteredAssetsUnitList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitList", ReplyAction="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyRegisteredAssetsUnitMode>> GetCompanyRegisteredAssetsUnitListAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3568,6 +3766,110 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PrimarySalesAreaMode>> GetPrimarySalesAreaListAsync() {
             return base.Channel.GetPrimarySalesAreaListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductionFormMode> GetProductionFormList() {
+            return base.Channel.GetProductionFormList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductionFormMode>> GetProductionFormListAsync() {
+            return base.Channel.GetProductionFormListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ServicesDomainMode> GetServicesDomainList() {
+            return base.Channel.GetServicesDomainList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ServicesDomainMode>> GetServicesDomainListAsync() {
+            return base.Channel.GetServicesDomainListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingMethodMode> GetProcessingMethodList() {
+            return base.Channel.GetProcessingMethodList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingMethodMode>> GetProcessingMethodListAsync() {
+            return base.Channel.GetProcessingMethodListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingCraftMode> GetProcessingCraftList() {
+            return base.Channel.GetProcessingCraftList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProcessingCraftMode>> GetProcessingCraftListAsync() {
+            return base.Channel.GetProcessingCraftListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.EquipmentIntroMode> GetEquipmentIntroList() {
+            return base.Channel.GetEquipmentIntroList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.EquipmentIntroMode>> GetEquipmentIntroListAsync() {
+            return base.Channel.GetEquipmentIntroListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CapacityUnitMode> GetCapacityUnitList() {
+            return base.Channel.GetCapacityUnitList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CapacityUnitMode>> GetCapacityUnitListAsync() {
+            return base.Channel.GetCapacityUnitListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualBusinessVolumeMode> GetAnnualBusinessVolumeList() {
+            return base.Channel.GetAnnualBusinessVolumeList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualBusinessVolumeMode>> GetAnnualBusinessVolumeListAsync() {
+            return base.Channel.GetAnnualBusinessVolumeListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualExportsVolumeMode> GetAnnualExportsVolumeList() {
+            return base.Channel.GetAnnualExportsVolumeList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.AnnualExportsVolumeMode>> GetAnnualExportsVolumeListAsync() {
+            return base.Channel.GetAnnualExportsVolumeListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ManagementSystemCertificationMode> GetManagementSystemCertificationList() {
+            return base.Channel.GetManagementSystemCertificationList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ManagementSystemCertificationMode>> GetManagementSystemCertificationListAsync() {
+            return base.Channel.GetManagementSystemCertificationListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductQualityCertificationMode> GetProductQualityCertificationList() {
+            return base.Channel.GetProductQualityCertificationList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.ProductQualityCertificationMode>> GetProductQualityCertificationListAsync() {
+            return base.Channel.GetProductQualityCertificationListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.QualityAssuranceMode> GetQualityAssuranceList() {
+            return base.Channel.GetQualityAssuranceList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.QualityAssuranceMode>> GetQualityAssuranceListAsync() {
+            return base.Channel.GetQualityAssuranceListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyYearEstablishedMode> GetCompanyYearEstablishedList() {
+            return base.Channel.GetCompanyYearEstablishedList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyYearEstablishedMode>> GetCompanyYearEstablishedListAsync() {
+            return base.Channel.GetCompanyYearEstablishedListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyRegisteredAssetsUnitMode> GetCompanyRegisteredAssetsUnitList() {
+            return base.Channel.GetCompanyRegisteredAssetsUnitList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CompanyRegisteredAssetsUnitMode>> GetCompanyRegisteredAssetsUnitListAsync() {
+            return base.Channel.GetCompanyRegisteredAssetsUnitListAsync();
         }
     }
 }

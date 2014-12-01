@@ -280,4 +280,160 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetProductionFormList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductionFormListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProductionFormListResult" nillable="true" type="q23:ArrayOfProductionFormMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServicesDomainList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServicesDomainListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetServicesDomainListResult" nillable="true" type="q24:ArrayOfServicesDomainMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProcessingMethodList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProcessingMethodListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProcessingMethodListResult" nillable="true" type="q25:ArrayOfProcessingMethodMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProcessingCraftList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProcessingCraftListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProcessingCraftListResult" nillable="true" type="q26:ArrayOfProcessingCraftMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEquipmentIntroList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEquipmentIntroListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetEquipmentIntroListResult" nillable="true" type="q27:ArrayOfEquipmentIntroMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCapacityUnitList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCapacityUnitListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCapacityUnitListResult" nillable="true" type="q28:ArrayOfCapacityUnitMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAnnualBusinessVolumeList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAnnualBusinessVolumeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetAnnualBusinessVolumeListResult" nillable="true" type="q29:ArrayOfAnnualBusinessVolumeMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAnnualExportsVolumeList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAnnualExportsVolumeListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetAnnualExportsVolumeListResult" nillable="true" type="q30:ArrayOfAnnualExportsVolumeMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetManagementSystemCertificationList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetManagementSystemCertificationListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetManagementSystemCertificationListResult" nillable="true" type="q31:ArrayOfManagementSystemCertificationMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductQualityCertificationList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductQualityCertificationListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProductQualityCertificationListResult" nillable="true" type="q32:ArrayOfProductQualityCertificationMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetQualityAssuranceList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetQualityAssuranceListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetQualityAssuranceListResult" nillable="true" type="q33:ArrayOfQualityAssuranceMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCompanyYearEstablishedList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCompanyYearEstablishedListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyYearEstablishedListResult" nillable="true" type="q34:ArrayOfCompanyYearEstablishedMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCompanyRegisteredAssetsUnitList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCompanyRegisteredAssetsUnitListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyRegisteredAssetsUnitListResult" nillable="true" type="q35:ArrayOfCompanyRegisteredAssetsUnitMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

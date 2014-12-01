@@ -334,8 +334,8 @@
   <xs:element name="CompanyTypeMode" nillable="true" type="tns:CompanyTypeMode" />
   <xs:complexType name="BaseNameValueMode">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BaseNameValueMode" nillable="true" type="tns:BaseNameValueMode" />
@@ -413,4 +413,188 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PrimarySalesAreaMode" nillable="true" type="tns:PrimarySalesAreaMode" />
+  <xs:complexType name="ArrayOfProductionFormMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductionFormMode" nillable="true" type="tns:ProductionFormMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductionFormMode" nillable="true" type="tns:ArrayOfProductionFormMode" />
+  <xs:complexType name="ProductionFormMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProductionFormMode" nillable="true" type="tns:ProductionFormMode" />
+  <xs:complexType name="ArrayOfServicesDomainMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServicesDomainMode" nillable="true" type="tns:ServicesDomainMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServicesDomainMode" nillable="true" type="tns:ArrayOfServicesDomainMode" />
+  <xs:complexType name="ServicesDomainMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ServicesDomainMode" nillable="true" type="tns:ServicesDomainMode" />
+  <xs:complexType name="ArrayOfProcessingMethodMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProcessingMethodMode" nillable="true" type="tns:ProcessingMethodMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProcessingMethodMode" nillable="true" type="tns:ArrayOfProcessingMethodMode" />
+  <xs:complexType name="ProcessingMethodMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProcessingMethodMode" nillable="true" type="tns:ProcessingMethodMode" />
+  <xs:complexType name="ArrayOfProcessingCraftMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProcessingCraftMode" nillable="true" type="tns:ProcessingCraftMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProcessingCraftMode" nillable="true" type="tns:ArrayOfProcessingCraftMode" />
+  <xs:complexType name="ProcessingCraftMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProcessingCraftMode" nillable="true" type="tns:ProcessingCraftMode" />
+  <xs:complexType name="ArrayOfEquipmentIntroMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EquipmentIntroMode" nillable="true" type="tns:EquipmentIntroMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEquipmentIntroMode" nillable="true" type="tns:ArrayOfEquipmentIntroMode" />
+  <xs:complexType name="EquipmentIntroMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EquipmentIntroMode" nillable="true" type="tns:EquipmentIntroMode" />
+  <xs:complexType name="ArrayOfCapacityUnitMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CapacityUnitMode" nillable="true" type="tns:CapacityUnitMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCapacityUnitMode" nillable="true" type="tns:ArrayOfCapacityUnitMode" />
+  <xs:complexType name="CapacityUnitMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CapacityUnitMode" nillable="true" type="tns:CapacityUnitMode" />
+  <xs:complexType name="ArrayOfAnnualBusinessVolumeMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AnnualBusinessVolumeMode" nillable="true" type="tns:AnnualBusinessVolumeMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAnnualBusinessVolumeMode" nillable="true" type="tns:ArrayOfAnnualBusinessVolumeMode" />
+  <xs:complexType name="AnnualBusinessVolumeMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AnnualBusinessVolumeMode" nillable="true" type="tns:AnnualBusinessVolumeMode" />
+  <xs:complexType name="ArrayOfAnnualExportsVolumeMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AnnualExportsVolumeMode" nillable="true" type="tns:AnnualExportsVolumeMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAnnualExportsVolumeMode" nillable="true" type="tns:ArrayOfAnnualExportsVolumeMode" />
+  <xs:complexType name="AnnualExportsVolumeMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AnnualExportsVolumeMode" nillable="true" type="tns:AnnualExportsVolumeMode" />
+  <xs:complexType name="ArrayOfManagementSystemCertificationMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ManagementSystemCertificationMode" nillable="true" type="tns:ManagementSystemCertificationMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfManagementSystemCertificationMode" nillable="true" type="tns:ArrayOfManagementSystemCertificationMode" />
+  <xs:complexType name="ManagementSystemCertificationMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ManagementSystemCertificationMode" nillable="true" type="tns:ManagementSystemCertificationMode" />
+  <xs:complexType name="ArrayOfProductQualityCertificationMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductQualityCertificationMode" nillable="true" type="tns:ProductQualityCertificationMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductQualityCertificationMode" nillable="true" type="tns:ArrayOfProductQualityCertificationMode" />
+  <xs:complexType name="ProductQualityCertificationMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProductQualityCertificationMode" nillable="true" type="tns:ProductQualityCertificationMode" />
+  <xs:complexType name="ArrayOfQualityAssuranceMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QualityAssuranceMode" nillable="true" type="tns:QualityAssuranceMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQualityAssuranceMode" nillable="true" type="tns:ArrayOfQualityAssuranceMode" />
+  <xs:complexType name="QualityAssuranceMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QualityAssuranceMode" nillable="true" type="tns:QualityAssuranceMode" />
+  <xs:complexType name="ArrayOfCompanyYearEstablishedMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompanyYearEstablishedMode" nillable="true" type="tns:CompanyYearEstablishedMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompanyYearEstablishedMode" nillable="true" type="tns:ArrayOfCompanyYearEstablishedMode" />
+  <xs:complexType name="CompanyYearEstablishedMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompanyYearEstablishedMode" nillable="true" type="tns:CompanyYearEstablishedMode" />
+  <xs:complexType name="ArrayOfCompanyRegisteredAssetsUnitMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompanyRegisteredAssetsUnitMode" nillable="true" type="tns:CompanyRegisteredAssetsUnitMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompanyRegisteredAssetsUnitMode" nillable="true" type="tns:ArrayOfCompanyRegisteredAssetsUnitMode" />
+  <xs:complexType name="CompanyRegisteredAssetsUnitMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompanyRegisteredAssetsUnitMode" nillable="true" type="tns:CompanyRegisteredAssetsUnitMode" />
 </xs:schema>

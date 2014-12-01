@@ -157,6 +157,84 @@
   <wsdl:message name="ICompanyService_GetPrimarySalesAreaList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPrimarySalesAreaListResponse" />
   </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProductionFormList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductionFormList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProductionFormList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductionFormListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetServicesDomainList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServicesDomainList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetServicesDomainList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServicesDomainListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProcessingMethodList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessingMethodList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProcessingMethodList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessingMethodListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProcessingCraftList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessingCraftList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProcessingCraftList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessingCraftListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetEquipmentIntroList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEquipmentIntroList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetEquipmentIntroList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEquipmentIntroListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCapacityUnitList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCapacityUnitList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCapacityUnitList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCapacityUnitListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetAnnualBusinessVolumeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAnnualBusinessVolumeList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetAnnualBusinessVolumeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAnnualBusinessVolumeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetAnnualExportsVolumeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAnnualExportsVolumeList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetAnnualExportsVolumeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAnnualExportsVolumeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetManagementSystemCertificationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetManagementSystemCertificationList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetManagementSystemCertificationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetManagementSystemCertificationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProductQualityCertificationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductQualityCertificationList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetProductQualityCertificationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductQualityCertificationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetQualityAssuranceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetQualityAssuranceList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetQualityAssuranceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetQualityAssuranceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyYearEstablishedList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyYearEstablishedList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyYearEstablishedList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyYearEstablishedListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyRegisteredAssetsUnitList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyRegisteredAssetsUnitList" />
+  </wsdl:message>
+  <wsdl:message name="ICompanyService_GetCompanyRegisteredAssetsUnitList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyRegisteredAssetsUnitListResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -245,6 +323,58 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPrimarySalesAreaList">
       <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetPrimarySalesAreaList" message="tns:ICompanyService_GetPrimarySalesAreaList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetPrimarySalesAreaListResponse" message="tns:ICompanyService_GetPrimarySalesAreaList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetProductionFormList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetProductionFormList" message="tns:ICompanyService_GetProductionFormList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetProductionFormListResponse" message="tns:ICompanyService_GetProductionFormList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetServicesDomainList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetServicesDomainList" message="tns:ICompanyService_GetServicesDomainList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetServicesDomainListResponse" message="tns:ICompanyService_GetServicesDomainList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetProcessingMethodList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetProcessingMethodList" message="tns:ICompanyService_GetProcessingMethodList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetProcessingMethodListResponse" message="tns:ICompanyService_GetProcessingMethodList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetProcessingCraftList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetProcessingCraftList" message="tns:ICompanyService_GetProcessingCraftList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetProcessingCraftListResponse" message="tns:ICompanyService_GetProcessingCraftList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetEquipmentIntroList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetEquipmentIntroList" message="tns:ICompanyService_GetEquipmentIntroList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetEquipmentIntroListResponse" message="tns:ICompanyService_GetEquipmentIntroList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCapacityUnitList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetCapacityUnitList" message="tns:ICompanyService_GetCapacityUnitList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetCapacityUnitListResponse" message="tns:ICompanyService_GetCapacityUnitList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetAnnualBusinessVolumeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetAnnualBusinessVolumeList" message="tns:ICompanyService_GetAnnualBusinessVolumeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetAnnualBusinessVolumeListResponse" message="tns:ICompanyService_GetAnnualBusinessVolumeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetAnnualExportsVolumeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetAnnualExportsVolumeList" message="tns:ICompanyService_GetAnnualExportsVolumeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetAnnualExportsVolumeListResponse" message="tns:ICompanyService_GetAnnualExportsVolumeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetManagementSystemCertificationList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetManagementSystemCertificationList" message="tns:ICompanyService_GetManagementSystemCertificationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetManagementSystemCertificationListResponse" message="tns:ICompanyService_GetManagementSystemCertificationList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetProductQualityCertificationList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetProductQualityCertificationList" message="tns:ICompanyService_GetProductQualityCertificationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetProductQualityCertificationListResponse" message="tns:ICompanyService_GetProductQualityCertificationList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetQualityAssuranceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetQualityAssuranceList" message="tns:ICompanyService_GetQualityAssuranceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetQualityAssuranceListResponse" message="tns:ICompanyService_GetQualityAssuranceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCompanyYearEstablishedList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyYearEstablishedList" message="tns:ICompanyService_GetCompanyYearEstablishedList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyYearEstablishedListResponse" message="tns:ICompanyService_GetCompanyYearEstablishedList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCompanyRegisteredAssetsUnitList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitList" message="tns:ICompanyService_GetCompanyRegisteredAssetsUnitList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitListResponse" message="tns:ICompanyService_GetCompanyRegisteredAssetsUnitList_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -440,6 +570,123 @@
     </wsdl:operation>
     <wsdl:operation name="GetPrimarySalesAreaList">
       <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetPrimarySalesAreaList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductionFormList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetProductionFormList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServicesDomainList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetServicesDomainList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessingMethodList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetProcessingMethodList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessingCraftList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetProcessingCraftList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipmentIntroList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetEquipmentIntroList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCapacityUnitList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetCapacityUnitList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAnnualBusinessVolumeList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetAnnualBusinessVolumeList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAnnualExportsVolumeList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetAnnualExportsVolumeList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagementSystemCertificationList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetManagementSystemCertificationList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductQualityCertificationList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetProductQualityCertificationList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityAssuranceList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetQualityAssuranceList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyYearEstablishedList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetCompanyYearEstablishedList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyRegisteredAssetsUnitList">
+      <soap12:operation soapAction="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
