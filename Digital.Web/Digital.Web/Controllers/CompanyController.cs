@@ -72,51 +72,121 @@ namespace Digital.Web.Controllers
             ViewBag.MenuModel = base.GetMenu(151);
 
             //drop down 企业类型
-            SetCompanyTypes();
-            //drop down 企业人数
-            SetCompanyMembers();
+            //drop down 企业人数,研发部门人数
             //radio group 经营模式
-            SetCompanyBusinessList();
             //drop down cascading 主营行业
             //drop down 销售区域
-            SetPrimarySalesAreaList();
+            SetCompanyTabOne();
 
-            return View();
+            //drop down 生产形式
+            //drop down 服务领域
+            //drop down 加工方式
+            //drop down 加工工艺
+            //drop down 设备介绍
+            //drop down 研发部门人数
+            //drop down 产能介绍
+            //drop down 年营业额
+            //drop down 年出口额
+            //drop down 管理体系认证
+            //drop down 产品质量认证
+            //radio group 质量控制
+            SetCompanyTabTwo();
+
+            //drop down 企业成立年份
+            //drop down 注册资本
+            SetCompanyTabThree();
+
+            //drop down cascading 经营地址,企业注册地
+
+            var CompanyModel = new CompanyModel {
+                CompanyName = "CompanyName1111",
+                CompanyRegisteredNO = "CompanyRegisteredNO1111",
+                IsProvideOEM = true,
+                CompanyBusinessAddress = "CompanyBusinessAddress1111",
+                CompanyIntro = "CompanyIntro111111"
+            };
+            return View(CompanyModel);
         }
 
         #region UI Modes For Company Base Informations
-        public void SetCompanyTypes()
+        #region TAB ONE
+        public void SetCompanyTabOne()
         {
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
             var CompanyTypeList = client.GetCompanyTypeList();
             ViewBag.CompanyTypeList = CompanyTypeList;
-            client.Close();
-        }
-        public void SetCompanyMembers()
-        {
-            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+
             var CompanyMemberList = client.GetCompanyMemberList();
             ViewBag.CompanyMemberList = CompanyMemberList;
-            client.Close();
-        }
-        public void SetCompanyBusinessList()
-        {
-            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+
             var CompanyBusinessList = client.GetCompanyBusinessList();
             ViewBag.CompanyBusinessList = CompanyBusinessList;
+
+            var PrimarySalesAreaList = client.GetPrimarySalesAreaList();
+            ViewBag.PrimarySalesAreaList = PrimarySalesAreaList;
+
             client.Close();
         }
         public void SetPrimaryBusinessList()
         {
             ViewBag.PrimaryBusinessList = null;
         }
-        public void SetPrimarySalesAreaList()
+        #endregion
+
+        #region TAB TWO
+        public void SetCompanyTabTwo()
         {
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
-            var PrimarySalesAreaList = client.GetPrimarySalesAreaList();
-            ViewBag.PrimarySalesAreaList = PrimarySalesAreaList;
+            var ProductionFormList = client.GetProductionFormList();
+            ViewBag.ProductionFormList = ProductionFormList;
+
+            var ServicesDomainList=client.GetServicesDomainList();
+            ViewBag.ServicesDomainList = ServicesDomainList;
+
+            var ProcessingMethodList = client.GetProcessingMethodList();
+            ViewBag.ProcessingMethodList = ProcessingMethodList;
+
+            var ProcessingCraftList = client.GetProcessingCraftList();
+            ViewBag.ProcessingCraftList = ProcessingCraftList;
+
+            var EquipmentIntroList = client.GetEquipmentIntroList();
+            ViewBag.EquipmentIntroList = EquipmentIntroList;
+
+            var CapacityUnitList = client.GetCapacityUnitList();
+            ViewBag.CapacityUnitList = CapacityUnitList;
+
+            var AnnualBusinessVolumeList = client.GetAnnualBusinessVolumeList();
+            ViewBag.AnnualBusinessVolumeList = AnnualBusinessVolumeList;
+
+            var AnnualExportsVolumeList = client.GetAnnualExportsVolumeList();
+            ViewBag.AnnualExportsVolumeList = AnnualExportsVolumeList;
+
+            var ManagementSystemCertificationList = client.GetManagementSystemCertificationList();
+            ViewBag.ManagementSystemCertificationList = ManagementSystemCertificationList;
+
+            var ProductQualityCertificationList = client.GetProductQualityCertificationList();
+            ViewBag.ProductQualityCertificationList = ProductQualityCertificationList;
+
+            var QualityAssuranceList = client.GetQualityAssuranceList();
+            ViewBag.QualityAssuranceList = QualityAssuranceList;
+
             client.Close();
         }
+        #endregion
+
+        #region TAB THREE
+        public void SetCompanyTabThree()
+        {
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            var CompanyYearEstablishedList = client.GetCompanyYearEstablishedList();
+            ViewBag.CompanyYearEstablishedList = CompanyYearEstablishedList;
+
+            var RegisteredAssetsUnitList=client.GetCompanyRegisteredAssetsUnitList();
+            ViewBag.RegisteredAssetsUnitList = RegisteredAssetsUnitList;
+            client.Close();
+        }
+        #endregion
+        
         #endregion
 
         public ActionResult CompanyBusinessDemand()

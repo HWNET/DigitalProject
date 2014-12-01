@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PrimaryBusinessCategory Id="1" Name="生产制造">
+    <PrimaryBusiness Id="1" Name="PCB制造"/>
+    <PrimaryBusiness Id="2" Name="SMT加工"/>
+    <PrimaryBusiness Id="3" Name="模具制造"/>
+    <PrimaryBusiness Id="4" Name="成品组装代工"/>
+    <PrimaryBusiness Id="5" Name="其它制造"/>
+  </PrimaryBusinessCategory>
+  <PrimaryBusinessCategory Id="2" Name="设计开发">
+    <PrimaryBusiness Id="6" Name="系统开发"/>
+    <PrimaryBusiness Id="7" Name="板卡方案开发"/>
+    <PrimaryBusiness Id="8" Name="应用软件开发"/>
+    <PrimaryBusiness Id="9" Name="ID设计、结构设计"/>
+    <PrimaryBusiness Id="10" Name="其它"/>
+  </PrimaryBusinessCategory>
+  <PrimaryBusinessCategory Id="3" Name="原材料供应">
+    <PrimaryBusiness Id="11" Name="元器件供应"/>
+    <PrimaryBusiness Id="12" Name="公模"/>
+    <PrimaryBusiness Id="13" Name="辅材包装"/>
+    <PrimaryBusiness Id="14" Name="周边配件"/>
+    <PrimaryBusiness Id="15" Name="其它"/>
+  </PrimaryBusinessCategory>
+  <PrimaryBusinessCategory Id="4" Name="策划销售及推广">
+    <PrimaryBusiness Id="16" Name="广告策划"/>
+    <PrimaryBusiness Id="17" Name="内贸分销"/>
+    <PrimaryBusiness Id="18" Name="外贸渠道销售"/>
+    <PrimaryBusiness Id="19" Name="其它"/>
+  </PrimaryBusinessCategory>
+  <PrimaryBusinessCategory Id="5" Name="其它">
+    <PrimaryBusiness Id="20" Name="其它"/>
+  </PrimaryBusinessCategory>
+</Root>
