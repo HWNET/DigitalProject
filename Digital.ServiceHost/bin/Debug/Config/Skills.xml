@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Item SkillId="1" Name=".net" />
+  <Item SkillId="2" Name="java" />
+  <Item SkillId="3" Name="php" />
+  <Item SkillId="4" Name="vb" />
+  <Item SkillId="5" Name="sql" />
+  <Item SkillId="6" Name="mysql" />
+  <Item SkillId="7" Name="oracle" />
+</Root>
