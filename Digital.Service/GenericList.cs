@@ -126,7 +126,7 @@ namespace Digital.Service
             foreach (XmlNode ParentNode in ItemModelList) // Node : PrimaryBusinessCategory
             {
                 var BusinessCategoryMode = new PrimaryBusinessCategoryMode { 
-                     Value=ParentNode.Attributes["Id"].Value,
+                     Id=int.Parse(ParentNode.Attributes["Id"].Value),
                      Name=ParentNode.Attributes["Name"].Value
                 };
 
@@ -135,7 +135,7 @@ namespace Digital.Service
                 {
                     BusinessModeList.Add(new PrimaryBusinessMode
                     {
-                        Value=ChildNode.Attributes["Id"].Value,
+                        Id=int.Parse(ChildNode.Attributes["Id"].Value),
                         Name=ChildNode.Attributes["Name"].Value
                     });
                 }

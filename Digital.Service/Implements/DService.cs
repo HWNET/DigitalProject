@@ -213,6 +213,7 @@ namespace Digital.Service.Implements
                                 InitList.GetCityModel();
                             }
                             #region For Company Base Informations
+                            #region TAB ONE
                             if (xmlMode.Name == "CompanyType")
                             {
                                 InitList.InitModel<CompanyTypeMode>(xmlMode.Name, xmlMode.Model);
@@ -234,6 +235,70 @@ namespace Digital.Service.Implements
                             {
                                 InitList.InitModel<PrimarySalesAreaMode>(xmlMode.Name, xmlMode.Model);
                             }
+                            #endregion
+
+                            #region TAB TWO
+                            if (xmlMode.Name == "ProductionForm")
+                            {
+                                InitList.InitModel<ProductionFormMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "ServicesDomain")
+                            {
+                                InitList.InitModel<ServicesDomainMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "ProcessingMethod")
+                            {
+                                InitList.InitModel<ProcessingMethodMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "ProcessingCraft")
+                            {
+                                InitList.InitModel<ProcessingCraftMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "EquipmentIntro")
+                            {
+                                InitList.InitModel<EquipmentIntroMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "CapacityUnit")
+                            {
+                                InitList.InitModel<CapacityUnitMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "AnnualVolume")
+                            {
+                                if (xmlMode.Model == "AnnualBusinessVolumeMode")
+                                {
+                                    InitList.InitModel<AnnualBusinessVolumeMode>(xmlMode.Name, xmlMode.Model);
+                                }
+                                else if (xmlMode.Model == "AnnualExportsVolumeMode")
+                                {
+                                    InitList.InitModel<AnnualExportsVolumeMode>(xmlMode.Name, xmlMode.Model);
+                                }
+                            }
+                            if (xmlMode.Name == "SystemCertification")
+                            {
+                                InitList.InitModel<ManagementSystemCertificationMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "QualityCertification")
+                            {
+                                InitList.InitModel<ProductQualityCertificationMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "QualityAssurance")
+                            {
+                                InitList.InitModel<QualityAssuranceMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            
+                            #endregion
+
+                            #region TAB THREE
+                            if (xmlMode.Name == "Year")
+                            {
+                                InitList.InitModel<CompanyYearEstablishedMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            if (xmlMode.Name == "AssetsUnit")
+                            {
+                                InitList.InitModel<CompanyRegisteredAssetsUnitMode>(xmlMode.Name, xmlMode.Model);
+                            }
+                            #endregion
+
                             #endregion
                             GetXmlConfig.UpdateStatus(xmlMode.Name, "0");
                         }

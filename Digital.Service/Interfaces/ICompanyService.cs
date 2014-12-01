@@ -36,5 +36,35 @@ namespace Digital.Service.Interfaces
         List<PrimaryBusinessCategoryMode> GetPrimaryBusinessList();
         [OperationContract]
         List<PrimarySalesAreaMode> GetPrimarySalesAreaList();
+
+        [OperationContract]
+        List<ProductionFormMode> GetProductionFormList();
+        [OperationContract]
+        List<ServicesDomainMode> GetServicesDomainList();
+        [OperationContract]
+        List<ProcessingMethodMode> GetProcessingMethodList();
+        [OperationContract]
+        List<ProcessingCraftMode> GetProcessingCraftList();
+        [OperationContract]
+        List<EquipmentIntroMode> GetEquipmentIntroList();
+
+        [OperationContract]
+        List<CapacityUnitMode> GetCapacityUnitList();
+        [OperationContract]
+        List<AnnualBusinessVolumeMode> GetAnnualBusinessVolumeList();
+        [OperationContract]
+        List<AnnualExportsVolumeMode> GetAnnualExportsVolumeList();
+        [OperationContract]
+        List<ManagementSystemCertificationMode> GetManagementSystemCertificationList();
+        [OperationContract]
+        List<ProductQualityCertificationMode> GetProductQualityCertificationList();
+        [OperationContract]
+        List<QualityAssuranceMode> GetQualityAssuranceList();
+
+        [OperationContract]
+        List<CompanyYearEstablishedMode> GetCompanyYearEstablishedList();
+        [OperationContract]
+        List<CompanyRegisteredAssetsUnitMode> GetCompanyRegisteredAssetsUnitList();
+
     }
 }

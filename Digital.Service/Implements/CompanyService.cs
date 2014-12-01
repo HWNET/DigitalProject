@@ -47,6 +47,7 @@ namespace Digital.Service.Implements
         }
 
         #region UI Modes For Company Base Informations
+        #region TAB ONE
         public List<CompanyTypeMode> GetCompanyTypeList()
         {
             var modes = GenericList.CacheModelObj.CompanyTypeModelist;
@@ -112,5 +113,185 @@ namespace Digital.Service.Implements
             }
         }
         #endregion
+
+        #region TAB TWO
+        public List<ProductionFormMode> GetProductionFormList()
+        {
+            var modes = GenericList.CacheModelObj.ProductionFormModelist;
+            if (modes!=null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ServicesDomainMode> GetServicesDomainList()
+        {
+            var modes = GenericList.CacheModelObj.ServicesDomainModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ProcessingMethodMode> GetProcessingMethodList()
+        {
+            var modes = GenericList.CacheModelObj.ProcessingMethodModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ProcessingCraftMode> GetProcessingCraftList()
+        {
+            var modes = GenericList.CacheModelObj.ProcessingCraftModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<EquipmentIntroMode> GetEquipmentIntroList()
+        {
+            var modes = GenericList.CacheModelObj.EquipmentIntroModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<CapacityUnitMode> GetCapacityUnitList()
+        {
+            var modes = GenericList.CacheModelObj.CapacityUnitModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<AnnualBusinessVolumeMode> GetAnnualBusinessVolumeList()
+        {
+            var modes = GenericList.CacheModelObj.AnnualBusinessVolumeModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<AnnualExportsVolumeMode> GetAnnualExportsVolumeList()
+        {
+            var modes = GenericList.CacheModelObj.AnnualExportsVolumeModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ManagementSystemCertificationMode> GetManagementSystemCertificationList()
+        {
+            var modes = GenericList.CacheModelObj.ManagementSystemCertificationModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ProductQualityCertificationMode> GetProductQualityCertificationList()
+        {
+            var modes = GenericList.CacheModelObj.ProductQualityCertificationModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<QualityAssuranceMode> GetQualityAssuranceList()
+        {
+            var modes = GenericList.CacheModelObj.QualityAssuranceModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region TAB THREE
+        public List<CompanyYearEstablishedMode> GetCompanyYearEstablishedList()
+        {
+            var modes = GenericList.CacheModelObj.CompanyYearEstablishedModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<CompanyRegisteredAssetsUnitMode> GetCompanyRegisteredAssetsUnitList()
+        {
+            var modes = GenericList.CacheModelObj.CompanyRegisteredAssetsUnitModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
+        
+        #endregion
+
+
+
+
+
     }
 }

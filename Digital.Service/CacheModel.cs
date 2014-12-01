@@ -22,6 +22,21 @@ namespace Digital.Service
         public List<PrimaryBusinessCategoryMode> PrimaryBusinessCategoryModelist { get; set; }
         public List<PrimarySalesAreaMode> PrimarySalesAreaModelist { get; set; }
 
+        public List<ProductionFormMode> ProductionFormModelist { get; set; }
+        public List<ServicesDomainMode> ServicesDomainModelist { get; set; }
+        public List<ProcessingMethodMode> ProcessingMethodModelist { get; set; }
+        public List<ProcessingCraftMode> ProcessingCraftModelist { get; set; }
+        public List<EquipmentIntroMode> EquipmentIntroModelist { get; set; }
+        public List<CapacityUnitMode> CapacityUnitModelist { get; set; }
+        public List<AnnualBusinessVolumeMode> AnnualBusinessVolumeModelist { get; set; }
+        public List<AnnualExportsVolumeMode> AnnualExportsVolumeModelist { get; set; }
+        public List<ManagementSystemCertificationMode> ManagementSystemCertificationModelist { get; set; }
+        public List<ProductQualityCertificationMode> ProductQualityCertificationModelist { get; set; }
+        public List<QualityAssuranceMode> QualityAssuranceModelist { get; set; }
+
+        public List<CompanyYearEstablishedMode> CompanyYearEstablishedModelist { get; set; }
+        public List<CompanyRegisteredAssetsUnitMode> CompanyRegisteredAssetsUnitModelist { get; set; }
+
         public List<Digital.Contact.Models.CompanyModel> CompanyModelList { get; set; }
         public List<Digital.Contact.Models.CasesCategoryModel> CasesCategoryModelList { get; set; }
         public List<Digital.Contact.Models.CasesModel> CasesModelList { get; set; }

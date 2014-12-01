@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Root>
-  <Item Id="" Name=""/>
-  <Item Id="" Name=""/>
-  <Item Id="" Name=""/>
-  <Item Id="" Name=""/>
-  <Item Id="" Name=""/>
+  <Item Id="1" Name="craft01"/>
+  <Item Id="2" Name="craft02"/>
+  <Item Id="3" Name="craft03"/>
+  <Item Id="4" Name="craft04"/>
+  <Item Id="5" Name="craft05"/>
 </Root>
