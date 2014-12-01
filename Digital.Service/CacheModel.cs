@@ -15,6 +15,8 @@ namespace Digital.Service
         public Dictionary<int ,Digital.Contact.Models.UsersModel> UserModellist { get; set; }
         public  List<Digital.Contact.Models.SkillsModel> SkillsModellist { get; set; }
         public List<Digital.Contact.Models.ProvinceModel> ProvinceModellist { get; set; }
+        public List<Digital.Contact.Models.CommonRightModel> CommonRightModellist { get; set; }
+
 
         public List<CompanyTypeMode> CompanyTypeModelist { get; set; }
         public List<CompanyMemberMode> CompanyMemberModelist { get; set; }

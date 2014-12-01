@@ -17,6 +17,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MenuModel" nillable="true" type="tns:MenuModel" />
+  <xs:complexType name="ArrayOfCommonRightModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CommonRightModel" nillable="true" type="tns:CommonRightModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCommonRightModel" nillable="true" type="tns:ArrayOfCommonRightModel" />
+  <xs:complexType name="CommonRightModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="MenuModels" nillable="true" type="tns:ArrayOfMenuModel" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CommonRightModel" nillable="true" type="tns:CommonRightModel" />
   <xs:complexType name="UsersModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:int" />

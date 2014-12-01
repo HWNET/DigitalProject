@@ -5,6 +5,7 @@
     <Item Name="Menu" Model="MenuModel" ref="0">1</Item>
     <Item Name="Skills" Model="SkillsModel" ref="0">1</Item>
     <Item Name="City" Model="CityModel" ref="0">1</Item>
+    <Item Name="CommonRight" Model="CommonRightModel" ref="0">1</Item>
     <Item Name="CompanyType" Model="CompanyTypeMode" ref="0">1</Item>
     <Item Name="CompanyMember" Model="CompanyMemberMode" ref="0">1</Item>
     <Item Name="CompanyBusiness" Model="CompanyBusinessMode" ref="0">1</Item>

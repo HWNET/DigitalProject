@@ -79,6 +79,9 @@
     <Content Include="Config\AnnualVolume.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\CommonRight.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\AssetsUnit.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

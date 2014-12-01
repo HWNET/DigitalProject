@@ -109,6 +109,41 @@ namespace Digital.Service
             pi.SetValue(CacheModelObj, List);
         }
 
+
+        #region For Common Right
+        public void GetCommonRightModel()
+        {
+            var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
+            var doc = new XmlDocument();
+            var path = ServicePath + "\\Config\\CommonRight.xml";
+            doc.Load(path);
+            if (CacheModelObj.CommonRightModellist == null)
+            {
+                CacheModelObj.CommonRightModellist = new List<CommonRightModel>();
+            }
+            //CommonRightModellist
+            XmlNodeList ItemModelList = doc.SelectNodes("Root/Right");
+            foreach (XmlNode XmlModels in ItemModelList)
+            {
+                var MenuList = new List<MenuModel>();
+                foreach (XmlNode MenuNodelId in XmlModels.ChildNodes)
+                {
+                    try
+                    {
+                        var Menu = CacheModelObj.MenuModellist.Where(o => o.ID == int.Parse(MenuNodelId.Attributes["ID"].Value)).FirstOrDefault();
+
+                        MenuList.Add(Menu);
+                    }
+                    catch (Exception ex)
+                    {
+ 
+                    }
+                }
+                CacheModelObj.CommonRightModellist.Add(new CommonRightModel() { ID = int.Parse(XmlModels.Attributes["ID"].Value), Name = XmlModels.Attributes["Name"].Value, MenuModels = MenuList });
+            }
+        }
+        #endregion
+
         #region For Company Base Informations
         public void GetPrimaryBusinessModel()
         {

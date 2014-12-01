@@ -1,4 +1,5 @@
-﻿using Digital.Service.Interfaces;
+﻿using Digital.Contact.Models;
+using Digital.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,20 @@ namespace Digital.Service.Implements
             if (GenericList.CacheModelObj != null)
             {
                 return GenericList.CacheModelObj.MenuModellist;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public List<CommonRightModel> GetCommonRightList()
+        {
+            var Commrightlist = GenericList.CacheModelObj.CommonRightModellist.ToList();
+            if (Commrightlist != null)
+            {
+                return Commrightlist;
             }
             else
             {

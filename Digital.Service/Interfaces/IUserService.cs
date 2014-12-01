@@ -27,6 +27,7 @@ namespace Digital.Service.Interfaces
         UsersModel GetUserInfoByName(string UserName);
         [OperationContract]
         bool Register(UsersModel UserModel);
+     
 
     }
 }

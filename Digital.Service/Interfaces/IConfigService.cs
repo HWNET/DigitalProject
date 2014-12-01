@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Digital.Contact.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -13,5 +14,8 @@ namespace Digital.Service.Interfaces
     {
         [OperationContract]
         List<Digital.Contact.Models.MenuModel> GetMenuList();
+
+        [OperationContract]
+        List<CommonRightModel> GetCommonRightList();
     }
 }

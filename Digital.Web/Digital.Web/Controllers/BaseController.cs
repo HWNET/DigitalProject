@@ -38,14 +38,23 @@ namespace Digital.Web.Controllers
          
            //return MenuBll.GetMenuModel(Id);
             var MenuList = OperatorFactory.GetCache<ObservableCollection<MenuModel>>("Menu");
+            var CommonRigthList = OperatorFactory.GetCache<ObservableCollection<CommonRightModel>>("CommonRight");
            if (MenuList == null)
            {
-               var client = ServiceHub.GetCommonServiceClient<ConfigServiceClient>("localhost", "4502");
+               var client = ServiceHub.GetCommonServiceClient<ConfigServiceClient>();
                var MenuModelIist = client.GetMenuList();
+               if (CommonRigthList == null)
+               {
+                   var CommonRigthModelList = client.GetCommonRightList();
+                   OperatorFactory.InsertCache<ObservableCollection<CommonRightModel>>(CommonRigthModelList, "CommonRight");
+               }
                client.Close();
                MenuList = MenuModelIist;
                OperatorFactory.InsertCache<ObservableCollection<MenuModel>>(MenuList, "Menu");
            }
+
+            
+
            return MenuList.Where(o => o.ID == Id).FirstOrDefault();
         }
 

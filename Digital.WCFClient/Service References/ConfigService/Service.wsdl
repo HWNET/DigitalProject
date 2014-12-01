@@ -37,6 +37,12 @@
   <wsdl:message name="IConfigService_GetMenuList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMenuListResponse" />
   </wsdl:message>
+  <wsdl:message name="IConfigService_GetCommonRightList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommonRightList" />
+  </wsdl:message>
+  <wsdl:message name="IConfigService_GetCommonRightList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommonRightListResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_Login_InputMessage">
     <wsdl:part name="parameters" element="tns:Login" />
   </wsdl:message>
@@ -240,6 +246,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IConfigService/GetMenuListResponse" message="tns:IConfigService_GetMenuList_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCommonRightList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetCommonRightList" message="tns:IConfigService_GetCommonRightList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfigService/GetCommonRightListResponse" message="tns:IConfigService_GetCommonRightList_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="IUserService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Login">
@@ -382,6 +392,15 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetMenuList">
       <soap12:operation soapAction="http://tempuri.org/IConfigService/GetMenuList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonRightList">
+      <soap12:operation soapAction="http://tempuri.org/IConfigService/GetCommonRightList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

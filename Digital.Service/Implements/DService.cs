@@ -212,6 +212,11 @@ namespace Digital.Service.Implements
                             {
                                 InitList.GetCityModel();
                             }
+                            //用户通用权限
+                            if (xmlMode.Name == "CommonRight")
+                            {
+                                InitList.GetCommonRightModel();
+                            }
                             #region For Company Base Informations
                             #region TAB ONE
                             if (xmlMode.Name == "CompanyType")
