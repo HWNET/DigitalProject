@@ -76,35 +76,69 @@
     <Compile Include="UpdateDB\UpdateUser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\AnnualVolume.xml" />
-    <Content Include="Config\AssetsUnit.xml" />
-    <Content Include="Config\CapacityUnit.xml" />
+    <Content Include="Config\AnnualVolume.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\AssetsUnit.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\CapacityUnit.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\City.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\CompanyBusiness.xml" />
-    <Content Include="Config\CompanyMember.xml" />
-    <Content Include="Config\CompanyType.xml" />
-    <Content Include="Config\EquipmentIntro.xml" />
-    <Content Include="Config\SystemCertification.xml" />
+    <Content Include="Config\CompanyBusiness.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\CompanyMember.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\CompanyType.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\EquipmentIntro.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\SystemCertification.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Menu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\PrimaryBusiness.xml" />
-    <Content Include="Config\PrimarySalesArea.xml" />
-    <Content Include="Config\ProcessingCraft.xml" />
-    <Content Include="Config\ProcessingMethod.xml" />
-    <Content Include="Config\ProductionForm.xml" />
-    <Content Include="Config\QualityCertification.xml" />
-    <Content Include="Config\QualityAssurance.xml" />
+    <Content Include="Config\PrimaryBusiness.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\PrimarySalesArea.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\ProcessingCraft.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\ProcessingMethod.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\ProductionForm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\QualityCertification.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\QualityAssurance.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Service.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\ServicesDomain.xml" />
+    <Content Include="Config\ServicesDomain.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Skills.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\Year.xml" />
+    <Content Include="Config\Year.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Digital.Common\Digital.Common\Digital.Common.csproj">
