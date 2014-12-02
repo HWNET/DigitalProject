@@ -73,6 +73,7 @@
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceContext.cs" />
+    <Compile Include="UpdateDB\UpdateCompany.cs" />
     <Compile Include="UpdateDB\UpdateUser.cs" />
   </ItemGroup>
   <ItemGroup>

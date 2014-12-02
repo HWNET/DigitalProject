@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using Digital.Contact.BLL;
 
 namespace Digital.Service.Implements
 {
@@ -120,8 +121,51 @@ namespace Digital.Service.Implements
                 }
             }
         }
+        /// <summary>
+        /// Company Cache
+        /// </summary>
+        private void CompanyCacheList()
+        {
+            if (GenericList.CacheModelObj.CompanyModellist==null)
+            {
+                GenericList.CacheModelObj.CompanyModellist = new List<CompanyModel>();
+                CompanyService CompanyService = new CompanyService();
 
+                var CompanyList = CompanyService.CompanyQueryList();
+                foreach (var Company in CompanyList)
+                {
+                    GenericList.CacheModelObj.CompanyModellist.Add(Company);
+                }
+            }
+        }
+        /// <summary>
+        /// CasesCategory Cache
+        /// </summary>
+        private void CasesCategoryCacheList()
+        {
+            if (GenericList.CacheModelObj.CasesCategoryModellist==null)
+            {
+                GenericList.CacheModelObj.CasesCategoryModellist = new List<CasesCategoryModel>();
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
 
+                var CasesCategoryList = CasesCategoryService.CasesCategoryQueryList();
+                CasesCategoryList.ForEach(c => GenericList.CacheModelObj.CasesCategoryModellist.Add(c));
+            }
+        }
+        /// <summary>
+        /// Cases Cache
+        /// </summary>
+        private void CasesCacheList()
+        {
+            if (GenericList.CacheModelObj.CasesModellist==null)
+            {
+                GenericList.CacheModelObj.CasesModellist = new List<CasesModel>();
+                CasesService CasesService = new CasesService();
+
+                var CasesList = CasesService.CasesQueryList();
+                CasesList.ForEach(c => GenericList.CacheModelObj.CasesModellist.Add(c));
+            }
+        }
        
         #endregion
 
@@ -169,7 +213,20 @@ namespace Digital.Service.Implements
                             UpdateUser.UpdateUserModel(UserModel);
                             continue;
                         }
-                      
+                        //CompanyModel
+                        if (_Buffer!=null&&_Buffer.MainObject as CompanyModel !=null)
+                        {
+                            CompanyModel CompanyModelBuffer = _Buffer.MainObject as CompanyModel;
+                            if (CompanyModelBuffer.UpdateStatus == 2) //update model on DB
+                            {
+                                UpdateCompany.UpdateCompanyModel(CompanyModelBuffer);
+                            }
+                            else if (CompanyModelBuffer.UpdateStatus == 3) //delete model on DB
+                            {
+                                UpdateCompany.DeleteCompanyModel(CompanyModelBuffer);
+                            }
+                            continue;
+                        }
                     }
 
                 }
@@ -355,6 +412,10 @@ namespace Digital.Service.Implements
             if (GenericList.CacheModelObj != null)
             {
                 UserCacheList();
+
+                CompanyCacheList();
+                CasesCategoryCacheList();
+                CasesCacheList();
             }
 
         }

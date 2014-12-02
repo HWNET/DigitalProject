@@ -23,6 +23,8 @@ namespace Digital.Service
         public List<CompanyBusinessMode> CompanyBusinessModelist { get; set; }
         public List<PrimaryBusinessCategoryMode> PrimaryBusinessCategoryModelist { get; set; }
         public List<PrimarySalesAreaMode> PrimarySalesAreaModelist { get; set; }
+        public List<CompanyBusinessProvinceMode> CompanyBusinessProvinceModelist { get; set; }
+        public List<CompanyBusinessCityMode> CompanyBusinessCityModelist { get; set; }
 
         public List<ProductionFormMode> ProductionFormModelist { get; set; }
         public List<ServicesDomainMode> ServicesDomainModelist { get; set; }
@@ -38,10 +40,14 @@ namespace Digital.Service
 
         public List<CompanyYearEstablishedMode> CompanyYearEstablishedModelist { get; set; }
         public List<CompanyRegisteredAssetsUnitMode> CompanyRegisteredAssetsUnitModelist { get; set; }
+        public List<CompanyBusinessProvinceMode> CompanyRegisteredProvinceModelist { get; set; }
+        public List<CompanyBusinessCityMode> CompanyRegisteredCityModelist { get; set; }
 
-        public List<Digital.Contact.Models.CompanyModel> CompanyModelList { get; set; }
-        public List<Digital.Contact.Models.CasesCategoryModel> CasesCategoryModelList { get; set; }
-        public List<Digital.Contact.Models.CasesModel> CasesModelList { get; set; }
+        public List<CompanyModel> CompanyModellist { get; set; }
+
+        public List<CasesCategoryModel> CasesCategoryModellist { get; set; }
+        public List<CasesModel> CasesModellist { get; set; }
+
         public List<Digital.Contact.Models.NewsCategoryModel> NewsCategoryModelList { get; set; }
         public List<Digital.Contact.Models.NewsModel> NewsModelList { get; set; }
         public List<Digital.Contact.Models.PatentModel> PatentModelList { get; set; }

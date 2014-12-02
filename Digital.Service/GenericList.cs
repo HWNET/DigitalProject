@@ -145,6 +145,10 @@ namespace Digital.Service
         #endregion
 
         #region For Company Base Informations
+        //for company business address , Province - City
+        //for company registered address , Province - City
+
+        #region GetPrimaryBusinessModel - no use
         public void GetPrimaryBusinessModel()
         {
             if (CacheModelObj.PrimaryBusinessCategoryModelist==null)
@@ -181,6 +185,8 @@ namespace Digital.Service
             }
 
         }
+        #endregion
+
         #endregion
 
 
