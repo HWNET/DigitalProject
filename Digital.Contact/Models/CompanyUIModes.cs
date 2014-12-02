@@ -40,9 +40,13 @@ namespace Digital.Contact.Models
     public class PrimarySalesAreaMode : BaseNameValueMode { }
     //--------CompanyBusinessAddress
     //for dropdown1 CompanyBusinessProvince
-    public class CompanyBusinessProvinceMode : BaseNameValueMode { }
+    public class CompanyBusinessProvinceMode : BaseNameValueMode {
+        public List<CompanyBusinessCityMode> CompanyBusinessCityModeList { get; set; }
+    }
     //for dropdown2 CompanyBusinessCity
-    public class CompanyBusinessCityMode : BaseNameValueMode { }
+    public class CompanyBusinessCityMode : BaseNameValueMode {
+        public string BusinessProvinceName { get; set; }
+    }
     //for dropdown3 CompanyBusinessArea
     public class CompanyBusinessAreaMode : BaseNameValueMode { }
 
