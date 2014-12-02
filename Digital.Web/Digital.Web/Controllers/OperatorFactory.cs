@@ -69,7 +69,15 @@ namespace Digital.Web.Controllers
         /// <returns></returns>
         public static UsersModel GetUser(string UserId)
         {
-            return GetCache<UsersModel>(CacheUserKey + UserId);
+            var UserModels= GetCache<UsersModel>(CacheUserKey + UserId);
+            if (UserModels != null)
+            {
+                return UserModels;
+            }
+            else
+            {
+                
+            }
         }
 
         /// <summary>

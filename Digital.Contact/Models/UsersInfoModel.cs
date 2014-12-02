@@ -11,22 +11,18 @@ namespace Digital.Contact.Models
     {
         [Key]
         public int UsersInfoID { get; set; }
-        [Required(ErrorMessage = "必填")]
-        [StringLength(20, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+       
         [Display(Name = "真实姓名")]
         public string TrueName { get; set; }
 
-        [Required(ErrorMessage = "必填")]
-        [StringLength(20, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+       
         [Display(Name = "昵称")]
         public string NickName { get; set; }
 
-        [Required(ErrorMessage = "必填")]
-        [Display(Name = "性别")]
+      
         public int Sex { get; set; }
 
-        [Required(ErrorMessage = "必填")]
-        [StringLength(20, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+      
         [Display(Name = "电话")]
         [DataType(DataType.PhoneNumber)]
         public string Tel { get; set; }

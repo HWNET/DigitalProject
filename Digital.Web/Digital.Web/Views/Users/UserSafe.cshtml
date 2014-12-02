@@ -138,9 +138,12 @@
                                                     foreach (var SkillModel in (System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SkillsModel>)ViewBag.SkillList)
                                                     {
                                                         var IsCheck = string.Empty;
-                                                        if (@Model.UsersInfoModel.GoodAtWhatModels.Any(o => o.SkillId == SkillModel.SkillId&&o.UpdateStatus!=3))
+                                                        if (@Model.UsersInfoModel.GoodAtWhatModels != null)
                                                         {
-                                                            IsCheck = "Checked=Checked";
+                                                            if (@Model.UsersInfoModel.GoodAtWhatModels.Any(o => o.SkillId == SkillModel.SkillId && o.UpdateStatus != 3))
+                                                            {
+                                                                IsCheck = "Checked=Checked";
+                                                            }
                                                         }
 
                                                         <div class="col-sm-3">
@@ -254,11 +257,11 @@
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
             highlight: function (element) {
-                
+
                 jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
             success: function (element) {
-               
+
                 jQuery(element).closest('.form-group').removeClass('has-error');
             }
         });
@@ -322,7 +325,7 @@
             {
                 var SkillStr="";
                 $("[name='Skill']").each(function(){
-   
+
                     if( $(this).prop('checked'))
                     {
                         SkillStr+=$(this).val()+",";

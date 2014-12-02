@@ -1,4 +1,5 @@
-﻿using Digital.Contact.Models;
+﻿using Digital.Common.Logging;
+using Digital.Contact.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,12 @@ namespace Digital.Service.Implements
 
         public Digital.Contact.Models.MenuModel MenuList { get; set; }
 
+        public NLogHelper logger { get; set; }
+
         public void Init()
         {
+            logger = new NLogHelper();
+            logger.WriteInfo("1111");
             _CheckReloadXml = new Task(() =>
             {
                 try
@@ -41,7 +46,7 @@ namespace Digital.Service.Implements
                 }
                 catch (Exception ex)
                 {
-                    //log
+                    logger.WriteInfo("_CheckReloadXml:Error"+ex.ToString());
                 }
             });
             _CheckReloadXml.Start();
@@ -83,21 +88,35 @@ namespace Digital.Service.Implements
         {
             if (GenericList.CacheModelObj.UserModellist == null)
             {
-                GenericList.CacheModelObj.UserModellist = new Dictionary<int, UsersModel>();
-                Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
-                //Skill cache
-                var UserList = UserService.GetAllUserList();
-                foreach (var User in UserList)
+                try
                 {
-                    GenericList.CacheModelObj.UserModellist.Add(User.ID, User);
-                }
-                foreach (var Usermodel in GenericList.CacheModelObj.UserModellist)
-                {
-                    Usermodel.Value.UsersInfoModel.CityModels = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.Value.UsersInfoModel.ProvinceID).FirstOrDefault().CityList.Where(o => o.ID == Usermodel.Value.UsersInfoModel.CityID).FirstOrDefault();
-                    foreach (var goodat in Usermodel.Value.UsersInfoModel.GoodAtWhatModels)
+                    GenericList.CacheModelObj.UserModellist = new Dictionary<int, UsersModel>();
+                    Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+                    //Skill cache
+                    var UserList = UserService.GetAllUserList();
+                    foreach (var User in UserList)
                     {
-                        goodat.SkillsModel = GenericList.CacheModelObj.SkillsModellist.Where(o => o.SkillId == goodat.SkillId).FirstOrDefault();
+                        GenericList.CacheModelObj.UserModellist.Add(User.ID, User);
                     }
+                    foreach (var Usermodel in GenericList.CacheModelObj.UserModellist)
+                    {
+                        var ProvinceModel = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.Value.UsersInfoModel.ProvinceID).FirstOrDefault();
+                        if (ProvinceModel != null && Usermodel.Value.UsersInfoModel.CityID != null)
+                        {
+                            Usermodel.Value.UsersInfoModel.CityModels = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.Value.UsersInfoModel.ProvinceID).FirstOrDefault().CityList.Where(o => o.ID == Usermodel.Value.UsersInfoModel.CityID).FirstOrDefault();
+                        }
+                        if (Usermodel.Value.UsersInfoModel.GoodAtWhatModels != null)
+                        {
+                            foreach (var goodat in Usermodel.Value.UsersInfoModel.GoodAtWhatModels)
+                            {
+                                goodat.SkillsModel = GenericList.CacheModelObj.SkillsModellist.Where(o => o.SkillId == goodat.SkillId).FirstOrDefault();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.WriteInfo("UserCacheList:Error:"+ex.ToString());
                 }
             }
         }
@@ -156,7 +175,7 @@ namespace Digital.Service.Implements
                 }
                 catch (Exception ex)
                 {
-                    
+                    logger.WriteInfo("UpdateDB:Error:" + ex.ToString());
                     //log
                 }
          
@@ -320,6 +339,7 @@ namespace Digital.Service.Implements
                 }
                 catch (Exception ex)
                 {
+                    logger.WriteInfo("CheckReloadStatus:error:" + ex.ToString());
                     //log
                 }
                 _CheckReloadXml.Wait(delayTime * 1000);

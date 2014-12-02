@@ -26,7 +26,7 @@ namespace Digital.Web.Controllers
 
             if (UserModel != null)
             {
-                if (UserModel.UsersInfoModel != null)
+                if (!string.IsNullOrEmpty( UserModel.UsersInfoModel.TrueName))
                 {
                     return View(UserModel);
                 }

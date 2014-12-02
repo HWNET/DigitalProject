@@ -139,7 +139,7 @@ namespace Digital.Service.Implements
         {
             UserModel.UpdateStatus = 1;
             Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
-          //  UserModel.UsersInfoModel = new UsersInfoModel { DisplayPicture = "../DigitalStyle/images/pic-none.png" };
+            UserModel.UsersInfoModel = new UsersInfoModel { DisplayPicture = "../DigitalStyle/images/pic-none.png" };
             UserModel = UserService.Edit(UserModel);
             //插入buffer
             //GenericList.InsertBuffer(null, UserModel);
