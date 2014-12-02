@@ -33,7 +33,6 @@
   <Item ID="60"  MenuName="增值应用" Style="fa fa-cloud-download" OtherName="" ParentId="60" Url="" />
   <Item ID="61"  MenuName="我的创意" Style="fa fa-lightbulb-o" OtherName="" ParentId="60" Url="" />
   <Item ID="62"  MenuName="参与讨论" Style="fa fa-comment-o" OtherName="" ParentId="60" Url="" />
-  <!--user menu   ParentId value begin from 100--> 
   <Item ID="100"  MenuName="账户中心" Style="glyphicon glyphicon-info-sign" OtherName="" ParentId="100" Url="../Company/IndexAccount" />
   <Item ID="101"  MenuName="账户信息" Style="glyphicon glyphicon-info-sign" OtherName="" ParentId="100" Url="../Company/AccountInfo" />
   <Item ID="102"  MenuName="子账户管理" Style="glyphicon glyphicon-info-sign" OtherName="" ParentId="100" Url="../Company/AccountSubUserManage" />
