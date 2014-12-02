@@ -101,12 +101,12 @@
                                                             LineEnd = "</optgroup>";
                                                         }
 
-                                                        @LineBegin
+                                                        @Html.Raw(LineBegin)
                                                         if (TypeMode.Id != -1)
                                                         {
                                                             <option value="@TypeMode.Id" @IsSelected>@TypeMode.Name</option>
                                                         }
-                                                        @LineEnd
+                                                        @Html.Raw(LineEnd)
                                                     }
                                                 }
                                             </select>
@@ -171,7 +171,7 @@
                                                     }
 
                                                     <div class="@RadioClass">
-                                                        <input type="radio" name="radio" id="@RadioId" value="@BusinessMode.Id" @Html.IsChecked(BusinessMode.Id == 1) />
+                                                        <input type="radio" name="radioBusiness" id="@RadioId" value="@BusinessMode.Id" @Html.IsChecked(BusinessMode.Id == 1) />
                                                         <label for="@RadioId">@BusinessMode.Name</label>
                                                     </div>
                                                 }
@@ -184,12 +184,12 @@
                                         <div class="col-sm-5">
 
                                             <div class="rdio rdio-default">
-                                                <input type="radio" name="radio" id="radioDefault" value="0" @Html.IsChecked(Model.IsProvideOEM) />
+                                                <input type="radio" name="radioOEM" id="radioDefault" value="0" @Html.IsChecked(Model.IsProvideOEM) />
                                                 <label for="radioDefault">是</label>
                                             </div>
 
                                             <div class="rdio rdio-primary">
-                                                <input type="radio" name="radio" value="1" id="radioPrimary" @Html.IsChecked(!Model.IsProvideOEM) />
+                                                <input type="radio" name="radioOEM" value="1" id="radioPrimary" @Html.IsChecked(!Model.IsProvideOEM) />
                                                 <label for="radioPrimary">否</label>
                                             </div>
 
@@ -261,11 +261,11 @@
                                                     <option value=""> --请选择-- </option>
                                                 </select>
                                             </div>
-                                            <div class="col-sm-2">
+                                            @*<div class="col-sm-2">
                                                 <select id="BusinessArea" class="form-control">
                                                     <option value=""> --请选择-- </option>
                                                 </select>
-                                            </div>
+                                            </div>*@
 
                                             <div class="col-sm-6">
                                                 <input type="text" placeholder="" value="@Model.CompanyBusinessAddress" class="form-control" required />
@@ -574,23 +574,15 @@
                                         <div class="col-sm-6">
                                             <div class="col-sm-2">
                                                 <select id="RegisteredProvince" class="form-control">
-                                                    <option value="">广东</option>
-                                                    <option value="">January</option>
-                                                    <option value="">February</option>
-                                                    <option value="">March</option>
-                                                    <option value="">...</option>
+                                                    <option value=""> --请选择-- </option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-2">
                                                 <select id="RegisteredCity" class="form-control">
-                                                    <option value="">深圳</option>
-                                                    <option value="">2013</option>
-                                                    <option value="">2014</option>
-                                                    <option value="">2015</option>
-                                                    <option value="">...</option>
+                                                    <option value=""> --请选择-- </option>
                                                 </select>
                                             </div>
-                                            <div class="col-sm-2">
+                                            @*<div class="col-sm-2">
                                                 <select id="RegisteredArea" class="form-control">
                                                     <option value="">南山区</option>
                                                     <option value="">2013</option>
@@ -598,7 +590,7 @@
                                                     <option value="">2015</option>
                                                     <option value="">...</option>
                                                 </select>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
 
@@ -670,11 +662,26 @@
 <script>
     jQuery(document).ready(function () {
         @{
+            // for drop down cascading [ PrimaryBusiness ]
             var IsBusinessCategory = string.Empty;
             IsBusinessCategory = "1";
 
             var IsBusiness = string.Empty;
             IsBusiness = "1";
+
+            //for drop down cascading [ CompanyBusinessAddress ]
+            var IsBusinessProvince = string.Empty;
+            IsBusinessProvince = "1";
+
+            var IsBusinessCity = string.Empty;
+            IsBusinessCity = "1";
+            
+            //for drop down cascading [ CompanyRegisteredAddress ]
+            var IsRegisteredProvince = string.Empty;
+            IsRegisteredProvince = "1";
+
+            var IsRegisteredCity = string.Empty;
+            IsRegisteredCity = "1";
         }
         //------------for drop down cascading [ PrimaryBusiness ]-------------
         jQuery.ajax({
@@ -725,6 +732,94 @@
             });
         }
         //--------------------------------------------------------------
+
+        //------------for drop down cascading [ CompanyBusinessAddress ]------
+        // <select> id : BusinessProvince , BusinessCity
+        // <select> id : RegisteredProvince , RegisteredCity
+        jQuery.ajax({
+            url: "../xml/City.xml",
+            type: "get",
+            datatype: "xml",
+            success: function (xmldoc) {
+                jQuery(xmldoc).find("Province").each(function () {
+                    //for drop down CompanyBusinessAddress
+                    if (@IsBusinessProvince == jQuery(this).attr("ID")) {
+                        jQuery("#BusinessProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                        CompanyBusinessCity(jQuery(this).attr("ID"),1);
+                    }
+                    else{
+                        jQuery("#BusinessProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                    }
+                    //for drop down CompanyRegisteredAddress
+                    if (@IsRegisteredProvince == jQuery(this).attr("ID")) {
+                        jQuery("#RegisteredProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                        CompanyBusinessCity(jQuery(this).attr("ID"),0);
+                    }
+                    else{
+                        jQuery("#RegisteredProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                    }
+                })
+
+                jQuery("#BusinessProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                jQuery("#BusinessProvince").trigger("chosen:updated");
+
+                jQuery("#RegisteredProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                jQuery("#RegisteredProvince").trigger("chosen:updated");
+            }
+        });
+
+        jQuery("#BusinessProvince").change(function(){
+            var selectvalue = jQuery(this).val();
+            CompanyBusinessCity(selectvalue,1);
+        });
+
+        jQuery("#RegisteredProvince").change(function(){
+            var selectvalue = jQuery(this).val();
+            CompanyBusinessCity(selectvalue,0);
+        });
+
+        function CompanyBusinessCity(selectProvince,isBusiness) {
+            jQuery.ajax({
+                url:"../xml/City.xml",
+                type:"get",
+                datatype:"xml",
+                success:function (xmldoc) {
+                    if (isBusiness==1) {
+                        //for drop down BusinessCity
+                        jQuery("#BusinessCity").find("option").remove();
+                        jQuery("#BusinessCity").append("<option  value='0'> --请选择-- </option>");
+                        jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
+                            if (@IsBusinessCity == jQuery(this).attr("ID")) {
+                                jQuery("#BusinessCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                            }
+                            else{
+                                jQuery("#BusinessCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                            }
+                        });
+
+                        jQuery("#BusinessCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                        jQuery("#BusinessCity").trigger("chosen:updated");
+                    }
+                    else if (isBusiness==0) {
+                        //for drop down  RegisteredCity
+                        jQuery("#RegisteredCity").find("option").remove();
+                        jQuery("#RegisteredCity").append("<option  value='0'> --请选择-- </option>");
+                        jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
+                            if (@IsRegisteredCity == jQuery(this).attr("ID")) {
+                                jQuery("#RegisteredCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                            }
+                            else{
+                                jQuery("#RegisteredCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                            }
+                        });
+
+                        jQuery("#RegisteredCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                        jQuery("#RegisteredCity").trigger("chosen:updated");
+                    }
+                }
+            });
+        }
+        //--------------------------------------------------------------------
 
         // Basic Wizard
         jQuery('#basicWizard').bootstrapWizard();

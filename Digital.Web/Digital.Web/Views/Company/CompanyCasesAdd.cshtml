@@ -1,5 +1,9 @@
-﻿@{
-    ViewBag.Title = "账户信息管理";
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@model Digital.WCFClient.ConfigService.CasesModel
+@{
+    ViewBag.Title = "添加案例";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
@@ -36,18 +40,19 @@
 
 
                 <div class="panel-body panel-body-nopadding">
+                    @Html.AntiForgeryToken()
                     <form class="form-horizontal form-bordered">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">案例名称</label>
                             <div class="col-sm-6">
-                                <input type="text" placeholder="项目名称" class="form-control" />
+                                <input type="text" placeholder="项目名称" value="@Model.CasesName" class="form-control" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">概述</label>
                             <div class="col-sm-6">
-                                <textarea id="autoResizeTA" class="form-control" rows="5"></textarea>
+                                <textarea id="autoResizeTA" class="form-control" rows="5">@Model.CasesAbstract</textarea>
                             </div>
                         </div>
 
@@ -65,7 +70,7 @@
                                         <span class="btn btn-default btn-file">
                                             <span class="fileupload-new">Select file</span>
                                             <span class="fileupload-exists">Change</span>
-                                            <input type="file" />
+                                            <input type="file"  value="@Model.CasesThumbnail"/>
                                         </span>
                                         <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
                                     </div>
@@ -78,7 +83,7 @@
                             <label class="col-sm-3 control-label">案例日期</label>
                             <div class="col-sm-4 ">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                    <input type="text" value="@Model.CasesDate" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -98,14 +103,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">排序值</label>
                             <div class="col-sm-4">
-                                <input type="text" placeholder="50" class="form-control" />
+                                <input type="text" placeholder="50" value="@Model.CasesOrderBy" class="form-control" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">标签</label>
                             <div class="col-sm-4">
-                                <input name="tags" id="tags" class="form-control" value="标签1,标签2" />
+                                <input name="tags" id="tags" class="form-control" value="@Model.CasesLabels" />
                             </div>
                         </div>
 
@@ -114,7 +119,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="checkbox">详细描述</label>
                             <div class="col-sm-6">
-                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10"></textarea>
+                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.CasesDetails</textarea>
                             </div>
                         </div>
                     </form>
