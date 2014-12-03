@@ -95,10 +95,14 @@ namespace Digital.Service.Implements
                     Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
                     //Skill cache
                     var UserList = UserService.GetAllUserList();
-                    foreach (var User in UserList)
+                    if (UserList!=null)
                     {
-                        GenericList.CacheModelObj.UserModellist.Add(User.ID, User);
+                        foreach (var User in UserList)
+                        {
+                            GenericList.CacheModelObj.UserModellist.Add(User.ID, User);
+                        }
                     }
+                    
                     foreach (var Usermodel in GenericList.CacheModelObj.UserModellist)
                     {
                         var ProvinceModel = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.Value.UsersInfoModel.ProvinceID).FirstOrDefault();
@@ -132,9 +136,12 @@ namespace Digital.Service.Implements
                 CompanyService CompanyService = new CompanyService();
 
                 var CompanyList = CompanyService.CompanyQueryList();
-                foreach (var Company in CompanyList)
+                if (CompanyList!=null)
                 {
-                    GenericList.CacheModelObj.CompanyModellist.Add(Company);
+                    foreach (var Company in CompanyList)
+                    {
+                        GenericList.CacheModelObj.CompanyModellist.Add(Company);
+                    }
                 }
             }
         }
@@ -149,7 +156,10 @@ namespace Digital.Service.Implements
                 CasesCategoryService CasesCategoryService = new CasesCategoryService();
 
                 var CasesCategoryList = CasesCategoryService.CasesCategoryQueryList();
-                CasesCategoryList.ForEach(c => GenericList.CacheModelObj.CasesCategoryModellist.Add(c));
+                if (CasesCategoryList!=null)
+                {
+                    CasesCategoryList.ForEach(c => GenericList.CacheModelObj.CasesCategoryModellist.Add(c));
+                }
             }
         }
         /// <summary>
@@ -163,7 +173,10 @@ namespace Digital.Service.Implements
                 CasesService CasesService = new CasesService();
 
                 var CasesList = CasesService.CasesQueryList();
-                CasesList.ForEach(c => GenericList.CacheModelObj.CasesModellist.Add(c));
+                if (CasesList!=null)
+                {
+                    CasesList.ForEach(c => GenericList.CacheModelObj.CasesModellist.Add(c));
+                }
             }
         }
        
