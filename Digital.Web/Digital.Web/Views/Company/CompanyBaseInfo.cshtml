@@ -1,6 +1,8 @@
 ﻿@using Digital.WCFClient.ConfigService
 @using System.Collections.ObjectModel
 @using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
 @model Digital.WCFClient.ConfigService.CompanyModel
 @{
     ViewBag.Title = "账户信息管理";
@@ -59,7 +61,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">* 公司名称</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="请用中文完整填写在工商局注册的公司全称" value="@Model.CompanyName" class="form-control" required>
+                                            <input type="text" placeholder="请用中文完整填写在工商局注册的公司全称" id="CompanyName" value="@Model.CompanyName" class="form-control" required>
                                             <span class="help-block">
                                                 地区、字号、经营行业、公司体制，如：广州市格列服装有限公司；<br>
                                                 个体经营者请按照“经营者姓名”+“个体经营”字样，如：“张三（个体经营）”<br>
@@ -70,7 +72,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">* 工商注册号</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="请用工商局注册号" value="@Model.CompanyRegisteredNO" class="form-control" required />
+                                            <input type="text" placeholder="请用工商局注册号" id="CompanyRegisteredNO" value="@Model.CompanyRegisteredNO" class="form-control" required />
                                         </div>
                                     </div>
 
@@ -78,7 +80,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">企业类型</label>
                                         <div class="col-sm-5">
-                                            <select class="form-control mb15">
+                                            <select id="CompanyTypeNO" class="form-control mb15">
                                                 <option value=""> --请选择-- </option>
                                                 @{
                                                     foreach (var TypeMode in (ObservableCollection<CompanyTypeMode>)ViewBag.CompanyTypeList)
@@ -116,7 +118,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">企业人数</label>
                                         <div class="col-sm-5">
-                                            <select class="form-control mb15">
+                                            <select id="CompanyMembers" class="form-control mb15">
                                                 <option value=""> -- 请选择 --</option>
                                                 @{
                                                     foreach (var MemberMode in (ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList)
@@ -216,19 +218,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">主营产品</label>
                                         <div class="col-sm-1">
-                                            <input type="text" value="@Model.PrimaryProduct" class="form-control">
+                                            <input type="text" id="PrimaryProduct1" value="@Model.PrimaryProduct" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryProduct2" value="@Model.PrimaryProduct" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryProduct3" value="@Model.PrimaryProduct" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryProduct4" value="@Model.PrimaryProduct" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryProduct5" value="@Model.PrimaryProduct" class="form-control">
                                         </div>
 
                                     </div>
@@ -236,7 +238,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">主要销售区域</label>
                                         <div class="col-sm-5">
-                                            <select class="chosen-select" multiple data-placeholder="Choose an area...">
+                                            <select id="PrimarySalesArea" class="chosen-select" multiple data-placeholder="Choose an area...">
                                                 @{
                                                     foreach (var AreaMode in (ObservableCollection<PrimarySalesAreaMode>)ViewBag.PrimarySalesAreaList)
                                                     {
@@ -268,7 +270,7 @@
                                             </div>*@
 
                                             <div class="col-sm-6">
-                                                <input type="text" placeholder="" value="@Model.CompanyBusinessAddress" class="form-control" required />
+                                                <input type="text" id="BusinessAddress" placeholder="" value="@ViewBag.BusinessAddress" class="form-control" required />
                                                 <span class="help-block">
                                                     你可以使用地图定位查看或修改位置。地图定位
                                                 </span>
@@ -279,7 +281,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">* 公司简介</label>
                                         <div class="col-sm-6">
-                                            <textarea class="form-control" rows="5">@Model.CompanyIntro</textarea>
+                                            <textarea id="CompanyIntro" class="form-control" rows="5">@Model.CompanyIntro</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -287,7 +289,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">生产形式</label>
                                         <div class="col-sm-5">
-                                            <select class="form-control mb15">
+                                            <select id="ProductionForm" class="form-control mb15">
                                                 <option value=""> -- 请如实填写您的生产形式，以便客户确认合作形式 --</option>
                                                 @{
                                                     foreach (var FormMode in (ObservableCollection<ProductionFormMode>)ViewBag.ProductionFormList)
@@ -302,7 +304,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">服务领域</label>
                                         <div class="col-sm-5">
-                                            <select class="chosen-select" multiple data-placeholder="Choose a service domain...">
+                                            <select id="ServicesDomain" class="chosen-select" multiple data-placeholder="Choose a service domain...">
                                                 @{
                                                     foreach (var DomainMode in (ObservableCollection<ServicesDomainMode>)ViewBag.ServicesDomainList)
                                                     {
@@ -316,7 +318,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">加工方式</label>
                                         <div class="col-sm-5">
-                                            <select class="chosen-select" multiple data-placeholder="Choose a processing method...">
+                                            <select id="ProcessingMethod" class="chosen-select" multiple data-placeholder="Choose a processing method...">
                                                 @{
                                                     foreach (var MethodMode in (ObservableCollection<ProcessingMethodMode>)ViewBag.ProcessingMethodList)
                                                     {
@@ -331,7 +333,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">加工工艺</label>
                                         <div class="col-sm-5">
-                                            <select class="chosen-select" multiple data-placeholder="Choose a processing craft...">
+                                            <select id="ProcessingCraft" class="chosen-select" multiple data-placeholder="Choose a processing craft...">
                                                 @{
                                                     foreach (var CraftMode in (ObservableCollection<ProcessingCraftMode>)ViewBag.ProcessingCraftList)
                                                     {
@@ -346,7 +348,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">设备介绍</label>
                                         <div class="col-sm-5">
-                                            <select class="chosen-select" multiple data-placeholder="Choose a equipment intro...">
+                                            <select id="EquipmentIntro" class="chosen-select" multiple data-placeholder="Choose a equipment intro...">
                                                 @{
                                                     foreach (var EquipMode in (ObservableCollection<EquipmentIntroMode>)ViewBag.EquipmentIntroList)
                                                     {
@@ -360,7 +362,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">研发部门人数</label>
                                         <div class="col-sm-5">
-                                            <select class="form-control mb15">
+                                            <select  id="ResearchDepartMembers" class="form-control mb15">
                                                 <option value=""> -- 请选择 --</option>
                                                 @{
                                                     foreach (var MemberMode in (ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList)
@@ -381,10 +383,10 @@
                                         <label class="col-sm-3 control-label">产能介绍</label>
                                         <div class="col-sm-6">
                                             <div class="col-sm-2">
-                                                <input type="text" placeholder="" value="@Model.CapacityIntro" class="form-control" />
+                                                <input type="text" id="CapacityIntro" placeholder="" value="@Model.CapacityIntro" class="form-control" />
                                             </div>
                                             <div class="col-sm-2">
-                                                <select class="form-control mb4">
+                                                <select id="CapacityIntroUnit" class="form-control mb4">
                                                     <option value=""> -- 请选择 --</option>
                                                     @{
                                                         foreach (var UnitMode in (ObservableCollection<CapacityUnitMode>)ViewBag.CapacityUnitList)
@@ -400,7 +402,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">年营业额</label>
                                         <div class="col-sm-6">
-                                            <select class="form-control mb4">
+                                            <select id="AnnualBusinessVolume" class="form-control mb4">
                                                 <option value=""> --请选择-- </option>
                                                 @{
                                                     foreach (var BVolumeMode in (ObservableCollection<AnnualBusinessVolumeMode>)ViewBag.AnnualBusinessVolumeList)
@@ -416,7 +418,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">年出口额</label>
                                         <div class="col-sm-6">
-                                            <select class="form-control mb4">
+                                            <select id="AnnualExportsVolume" class="form-control mb4">
                                                 <option value="">--请选择--</option>
                                                 @{
                                                     foreach (var EVolumeMode in (ObservableCollection<AnnualExportsVolumeMode>)ViewBag.AnnualExportsVolumeList)
@@ -437,7 +439,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">管理体系认证</label>
                                         <div class="col-sm-5">
-                                            <select class="chosen-select" multiple data-placeholder="Choose a system certification...">
+                                            <select id="ManagementSystemCertification" class="chosen-select" multiple data-placeholder="Choose a system certification...">
                                                 @{
                                                     foreach (var SystemMode in (ObservableCollection<ManagementSystemCertificationMode>)ViewBag.ManagementSystemCertificationList)
                                                     {
@@ -452,7 +454,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">产品质量认证</label>
                                         <div class="col-sm-5">
-                                            <select class="chosen-select" multiple data-placeholder="Choose a quality certification...">
+                                            <select id="ProductQualityCertification" class="chosen-select" multiple data-placeholder="Choose a quality certification...">
                                                 @{
                                                     foreach (var QualityMode in (ObservableCollection<ProductQualityCertificationMode>)ViewBag.ProductQualityCertificationList)
                                                     {
@@ -489,7 +491,7 @@
                                                     }
 
                                                     <div class="@radioClass">
-                                                        <input type="radio" name="radio" id="@radioId" value="@QAMode.Id" @Html.IsChecked(QAMode.Id == 1) />
+                                                        <input type="radio" name="radioQualityAssurance" id="@radioId" value="@QAMode.Id" @Html.IsChecked(QAMode.Id == 1) />
                                                         <label for="@radioId">@QAMode.Name</label>
                                                     </div>
                                                 }
@@ -501,7 +503,7 @@
                                         <label class="col-sm-3 control-label">* 厂房面积</label>
                                         <div class="col-sm-6">
                                             <div class="col-sm-4">
-                                                <input type="text" placeholder="Default Input" value="@Model.FactoryArea" class="form-control" required />
+                                                <input type="text" id="FactoryArea" placeholder="Default Input" value="@Model.FactoryArea" class="form-control" required />
                                             </div>
                                             <div class="col-sm-2">
                                                 平方米
@@ -513,19 +515,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">主要设备</label>
                                         <div class="col-sm-1">
-                                            <input type="text" value="@Model.PrimaryEquipments" class="form-control">
+                                            <input type="text" id="PrimaryEquipments1" value="@Model.PrimaryEquipments" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryEquipments2" value="@Model.PrimaryEquipments" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryEquipments3" value="@Model.PrimaryEquipments" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryEquipments4" value="@Model.PrimaryEquipments" class="form-control">
                                         </div>
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="PrimaryEquipments5" value="@Model.PrimaryEquipments" class="form-control">
                                         </div>
 
                                     </div>
@@ -534,7 +536,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">企业成立年份</label>
                                         <div class="col-sm-1">
-                                            <select class="form-control mb15">
+                                            <select id="CompanyYearEstablished" class="form-control mb15">
                                                 <option value=""> --请选择-- </option>
                                                 @{
                                                     foreach (var YearMode in (ObservableCollection<CompanyYearEstablishedMode>)ViewBag.CompanyYearEstablishedList)
@@ -549,16 +551,16 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 企业网址</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="eg：http://www.abc.com" value="@Model.CompanyWebsite" class="form-control" />
+                                            <input type="text" id="CompanyWebsite" placeholder="eg：http: //www.abc.com" value="@Model.CompanyWebsite" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 注册资本</label>
                                         <div class="col-sm-2">
-                                            <input type="text" placeholder="请根据营业执照如实填写，无需验资请填写" value="@Model.CompanyRegisteredAssets" class="form-control" />
+                                            <input type="text" id="CompanyRegisteredAssets" placeholder="请根据营业执照如实填写，无需验资请填写" value="@Model.CompanyRegisteredAssets" class="form-control" />
                                         </div>
                                         <div class="col-sm-3">
-                                            <select class="form-control">
+                                            <select id="CompanyRegisteredAssetsUnit" class="form-control">
                                                 @{
                                                     foreach (var AssetUnitMode in (ObservableCollection<CompanyRegisteredAssetsUnitMode>)ViewBag.RegisteredAssetsUnitList)
                                                     {
@@ -597,20 +599,20 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 法人代表</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="" value="@Model.CompanyCorporateRepresentative" class="form-control" />
+                                            <input type="text" id="CompanyCorporateRepresentative" placeholder="" value="@Model.CompanyCorporateRepresentative" class="form-control" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 开户行</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="请选择开户行" value="@Model.CompanyBankDeposit" class="form-control" />
+                                            <input type="text" id="CompanyBankDeposit" placeholder="请选择开户行" value="@Model.CompanyBankDeposit" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 账号</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="请输入企业账号" value="@Model.CompanyBankAccount" class="form-control" />
+                                            <input type="text" id="CompanyBankAccount" placeholder="请输入企业账号" value="@Model.CompanyBankAccount" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -620,7 +622,7 @@
                         <ul class="pager wizard">
                             <li class="previous"><a href="javascript:void(0)">Previous</a></li>
                             <li class="next"><a href="javascript:void(0)">Next</a></li>
-                            <li><button class="btn btn-primary" onclick="javascript:Save()">保 存</button></li>
+                            <li><button id="BtnSave"class="btn btn-primary" style="display:none" onclick="javascript:Save()">保 存</button></li>
                         </ul>
 
                     </div><!-- #basicWizard -->
@@ -848,6 +850,12 @@
             }
         });
 
+        //Display Save Button
+        var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
+        if (TabIndex==2) {
+            $("#BtnSave").attr('style','display:block');
+        }
+
         // Disabled Tab Click Wizard
         jQuery('#disabledTabWizard').bootstrapWizard({
             tabClass: 'nav nav-pills nav-justified nav-disabled-click',
@@ -880,6 +888,21 @@
             }
         });
     });
+
+
+    function StringCombine(element)
+    {
+        var stringTemp="";
+        var strIndex=0;
+        $(element).each(function(){
+            if (strIndex>0) {
+                stringTemp+=",";
+            }
+            stringTemp+=$(this).val();
+            ++strIndex;
+        });
+        return stringTemp;
+    }
 
     function Save()
     {
@@ -916,14 +939,99 @@
                 //})
             }
             else if(TabIndex==2){
-                //$.ajaxAntiForgery({
-                //    type: "post",
-                //    data: { ID:1},
-                //    url: "/Users/CompanyBaseInfo",
-                //    success: function (data) {
-                //        SaveInfo(true,"更多信息");
-                //    }
-                //})
+                @{
+                    var IsInsert = true; // default option : insert new company model 
+                    var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                    if (UserModel != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                    {
+                        IsInsert = false;
+                    }
+                }
+                var valCompanyTypeNO=$("#CompanyTypeNO  option:selected").val();
+                var valCompanyMembers=$("#CompanyMembers option:selected").val();
+                var valCompanyBusinessModel=$('input:radio[name="radioBusiness"]:checked').val();
+                var valIsProvideOEM=$('input:radio[name="radioOEM"]:checked').val();
+                var valPrimaryBusinessCategory=$("#PrimaryBusinessCategory option:selected").val();
+                var valPrimaryBusiness=$("#PrimaryBusiness option:selected").val();
+                //---------------PrimaryProduct 1,,,,5
+                var stringPrimaryProduct="";
+                var ProdIndex=0;
+                $('input[id*="PrimaryProduct"]').each(function(){
+                    if (ProdIndex>0) {
+                        stringPrimaryProduct+=",";
+                    }
+                    stringPrimaryProduct+=$(this).val();
+                    ++ProdIndex;
+                });
+                var valPrimaryProduct=stringPrimaryProduct;
+                //---------------PrimarySalesArea
+                var valPrimarySalesArea=StringCombine("#PrimarySalesArea option:selected");
+                //---------------
+                var valBusinessProvince=$("#BusinessProvince option:selected").val();
+                var valBusinessCity=$("#BusinessCity option:selected").val();
+                var valCompanyIntro=$("#CompanyIntro").val();
+                var valProductionForm=$("#ProductionForm option:selected").val();
+                //---------------ServicesDomain
+                var valServicesDomain=StringCombine("#ServicesDomain option:selected");
+                //--------------ProcessingMethod
+                var valProcessingMethod=StringCombine("#ProcessingMethod option:selected");
+                //-------------ProcessingCraft
+                var valProcessingCraft=StringCombine("#ProcessingCraft option:selected");
+                //-------------EquipmentIntro
+                var valEquipmentIntro=StringCombine("#EquipmentIntro option:selected");;
+                
+                var valResearchDepartMembers=$("#ResearchDepartMembers option:selected").val();
+                var valCapacityIntro=$("#CapacityIntro").val();
+                var valCapacityIntroUnit=$("#CapacityIntroUnit option:selected").val();
+                var valAnnualBusinessVolume=$("#AnnualBusinessVolume option:selected").val();
+                var valAnnualExportsVolume=$("#AnnualExportsVolume option:selected").val();
+                //-------------ManagementSystemCertification
+                var valManagementSystemCertification=StringCombine("#ManagementSystemCertification option:selected");//$("#ManagementSystemCertification option:selected").val();
+                //-------------ProductQualityCertification
+                var valProductQualityCertification=StringCombine("#ProductQualityCertification option:selected");//$("#ProductQualityCertification option:selected").val();
+                
+                var valQualityAssuranc=$("#QualityAssurance option:selected").val();
+                var valFactoryArea=$("#FactoryArea").val();
+
+                //-------------PrimaryEquipments 1,,,,5
+                var stringPrimaryEquipments="";
+                var EquipIndex=0;
+                $('input[id*="PrimaryEquipments"]').each(function(){
+                    if (EquipIndex>0) {
+                        stringPrimaryEquipments+=",";
+                    }
+                    stringPrimaryEquipments+=$(this).val();
+                    ++EquipIndex;
+                });
+                var valPrimaryEquipments=stringPrimaryEquipments;
+
+                var valCompanyYearEstablished=$("#CompanyYearEstablished option:selected").val();
+                var valCompanyWebsite=$("#CompanyWebsite").val();
+                var valCompanyRegisteredAssets=$("#CompanyRegisteredAssets").val();
+                var valCompanyRegisteredAssetsUnit=$("#CompanyRegisteredAssetsUnit option:selected").val();
+                var valCompanyRegisteredProvince=$("#RegisteredProvince option:selected").val();
+                var valCompanyRegisteredCity=$("#RegisteredCity option:selected").val();
+                var valCompanyCorporateRepresentative=$('input[id="CompanyCorporateRepresentative"]').val();
+                var valCompanyBankDeposit=$('input[id="CompanyBankDeposit"]').val();
+                var valCompanyBankAccount=$('input[id="CompanyBankAccount"]').val();
+
+                $.ajaxAntiForgery({
+                    type: "post",
+                    data: { IsInsert:@IsInsert,CompanyName:$("#CompanyName").val(),CompanyRegisteredNO:$("#CompanyRegisteredNO").val(),CompanyTypeNO:valCompanyTypeNO,
+                        CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,PrimaryBusinessCategory:valPrimaryBusinessCategory,
+                        PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,CompanyBusinessProvince:valBusinessProvince,
+                        CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
+                        ProcessingCraft:valProcessingCraft,EquipmentIntro:valEquipmentIntro,ResearchDepartMembers:valResearchDepartMembers,CapacityIntro:valCapacityIntro,CapacityIntroUnit:valCapacityIntroUnit,
+                        AnnualBusinessVolume:valAnnualBusinessVolume,AnnualExportsVolume:valAnnualExportsVolume,ManagementSystemCertification:valManagementSystemCertification,
+                        ProductQualityCertification:valProductQualityCertification,QualityAssurance:valQualityAssuranc,FactoryArea:valFactoryArea,PrimaryEquipments:valPrimaryEquipments,
+                        CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,
+                        CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,CompanyCorporateRepresentative:valCompanyCorporateRepresentative,
+                        CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount},
+                    url: "/Users/CompanyBaseInfo",
+                    success: function (data) {
+                        SaveInfo(true,"更多信息");
+                    }
+                })
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Digital.WCFClient;
 using Digital.WCFClient.ConfigService;
+using Microsoft.AspNet.Identity;
 
 namespace Digital.Web.Controllers
 {
@@ -98,14 +99,110 @@ namespace Digital.Web.Controllers
 
             //drop down cascading 经营地址,企业注册地
 
-            var CompanyModel = new CompanyModel {
-                CompanyName = "CompanyName1111",
-                CompanyRegisteredNO = "CompanyRegisteredNO1111",
-                IsProvideOEM = true,
-                CompanyBusinessAddress = "CompanyBusinessAddress1111",
-                CompanyIntro = "CompanyIntro111111"
-            };
-            return View(CompanyModel);
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            ViewBag.CurrentUser = CurrentUser;
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                var CompanyModel = new CompanyModel
+                {
+                    CompanyName = "CompanyName1111",
+                    CompanyRegisteredNO = "CompanyRegisteredNO1111",
+                    IsProvideOEM = true,
+                    //CompanyBusinessAddress = "CompanyBusinessAddress1111",
+                    CompanyIntro = "CompanyIntro111111"
+                };
+                //ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
+                ViewBag.BusinessAddress = "BusinessAddress1111";
+                return View(CompanyModel);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyBaseInfo(bool IsInsert, string CompanyName, string CompanyRegisteredNO, int CompanyTypeNO, int CompanyMembers,
+            int CompanyBusinessModel, bool IsProvideOEM, int PrimaryBusinessCategory, int PrimaryBusiness, string PrimaryProduct,
+            int PrimarySalesArea, int CompanyBusinessProvince, int CompanyBusinessCity, string CompanyIntro, int ProductionForm,
+            int ServicesDomain, int ProcessingMethod, int ProcessingCraft, int EquipmentIntro, int ResearchDepartMembers, int CapacityIntro, int CapacityIntroUnit,
+            int AnnualBusinessVolume, int AnnualExportsVolume, int ManagementSystemCertification, int ProductQualityCertification,
+            int QualityAssurance, float FactoryArea,  string PrimaryEquipments,int CompanyYearEstablished, string CompanyWebsite, float CompanyRegisteredAssets,
+            int CompanyRegisteredAssetsUnit, int CompanyRegisteredProvince, int CompanyRegisteredCity, string CompanyCorporateRepresentative,
+            string CompanyBankDeposit, string CompanyBankAccount)
+        {
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                if (IsInsert) // new model -- do insert
+                {
+                    var NewModel = new CompanyModel
+                    {
+                        CompanyName = CompanyName,
+                        CompanyRegisteredNO = CompanyRegisteredNO,
+                        CompanyTypeNO = CompanyTypeNO,
+                        CompanyMembers = CompanyMembers,
+                        CompanyBusinessModel = CompanyBusinessModel,
+                        IsProvideOEM = IsProvideOEM,
+                        PrimaryBusinessCategory = PrimaryBusinessCategory,
+                        PrimaryBusiness = PrimaryBusiness,
+                        PrimaryProduct = PrimaryProduct,
+                        PrimarySalesArea = PrimarySalesArea,
+                        CompanyBusinessProvince = CompanyBusinessProvince,
+                        CompanyBusinessCity = CompanyBusinessCity,
+                        CompanyIntro = CompanyIntro,
+                        ProductionForm = ProductionForm,
+                        ServicesDomain = ServicesDomain,
+                        ProcessingMethod = ProcessingMethod,
+                        ProcessingCraft = ProcessingCraft,
+                        EquipmentIntro = EquipmentIntro,
+                        ResearchDepartMembers=ResearchDepartMembers,
+                        CapacityIntro = CapacityIntro,
+                        CapacityIntroUnit = CapacityIntroUnit,
+                        AnnualBusinessVolume = AnnualBusinessVolume,
+                        AnnualExportsVolume = AnnualExportsVolume,
+                        ManagementSystemCertification = ManagementSystemCertification,
+                        ProductQualityCertification = ProductQualityCertification,
+                        QualityAssurance = QualityAssurance,
+                        FactoryArea = FactoryArea,
+                        PrimaryEquipments=PrimaryEquipments,
+                        CompanyYearEstablished = CompanyYearEstablished,
+                        CompanyWebsite = CompanyWebsite,
+                        CompanyRegisteredAssets = CompanyRegisteredAssets,
+                        CompanyRegisteredAssetsUnit = CompanyRegisteredAssetsUnit,
+                        CompanyRegisteredProvince = CompanyRegisteredProvince,
+                        CompanyRegisteredCity = CompanyRegisteredCity,
+                        CompanyCorporateRepresentative = CompanyCorporateRepresentative,
+                        CompanyBankDeposit = CompanyBankDeposit,
+                        CompanyBankAccount = CompanyBankAccount
+                    };
+                    var Result = client.CompanyInsert(NewModel); // update DB
+                    if (Result) // update web cache
+                    {
+                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), NewModel);
+                        client.Close();
+                        return Content("OK");
+                    }
+                    else
+                    {
+                        return Content("NOK");
+                    }
+                }
+                else // old existing model -- do update
+                {
+                    return Content("OK");
+                }
+            }
+            else
+            {
+                return Content("NOK");
+            }
+
         }
 
         #region UI Modes For Company Base Informations
@@ -140,7 +237,7 @@ namespace Digital.Web.Controllers
             var ProductionFormList = client.GetProductionFormList();
             ViewBag.ProductionFormList = ProductionFormList;
 
-            var ServicesDomainList=client.GetServicesDomainList();
+            var ServicesDomainList = client.GetServicesDomainList();
             ViewBag.ServicesDomainList = ServicesDomainList;
 
             var ProcessingMethodList = client.GetProcessingMethodList();
@@ -181,12 +278,12 @@ namespace Digital.Web.Controllers
             var CompanyYearEstablishedList = client.GetCompanyYearEstablishedList();
             ViewBag.CompanyYearEstablishedList = CompanyYearEstablishedList;
 
-            var RegisteredAssetsUnitList=client.GetCompanyRegisteredAssetsUnitList();
+            var RegisteredAssetsUnitList = client.GetCompanyRegisteredAssetsUnitList();
             ViewBag.RegisteredAssetsUnitList = RegisteredAssetsUnitList;
             client.Close();
         }
         #endregion
-        
+
         #endregion
 
         public ActionResult CompanyBusinessDemand()
@@ -346,5 +443,5 @@ namespace Digital.Web.Controllers
             return View();
         }
 
-	}
+    }
 }

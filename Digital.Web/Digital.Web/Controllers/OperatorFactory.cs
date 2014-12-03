@@ -12,6 +12,7 @@ namespace Digital.Web.Controllers
     {
 
         public static string CacheUserKey = "Users.";
+        public static string CacheCompanyKey = "Company.";
         //public static IBaseService<T> CreateDBOperator<T>(string classname)
         //{
         //    object objType = null;
@@ -96,7 +97,30 @@ namespace Digital.Web.Controllers
             HttpContext.Current.Cache.Insert(Key, UserModel);
         }
 
-
+        #region Data Cache For Company Base Informations
+        public static CompanyModel GetCompanyCache(string UserId)
+        {
+            var CompanyModel = GetCache<CompanyModel>(CacheCompanyKey + UserId);
+            if (CompanyModel!=null)
+            {
+                return CompanyModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static void UpdateCompanyCache(string UserId, CompanyModel CompanyModel)
+        {
+            var key = CacheCompanyKey + UserId;
+            var obj = HttpContext.Current.Cache.Get(key);
+            if (obj!=null)
+            {
+                HttpContext.Current.Cache.Remove(key);
+            }
+            HttpContext.Current.Cache.Insert(key, CompanyModel);
+        }
+        #endregion
 
         public static void InsertCache<T>(T Model,string Key)
         {
