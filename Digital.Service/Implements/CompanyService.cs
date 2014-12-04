@@ -17,10 +17,10 @@ namespace Digital.Service.Implements
             Model.UpdateStatus = 1;
             CompanyService CompanyService = new CompanyService();
             //Insert DB
-            CompanyService.CompanyInsert(Model);
+            var Result=CompanyService.CompanyInsert(Model);
             //Insert Cache
             GenericList.CacheModelObj.CompanyModellist.Add(Model);
-            return true;
+            return Result;
         }
         #endregion
         
