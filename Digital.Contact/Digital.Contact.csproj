@@ -75,7 +75,11 @@
     <Compile Include="BLL\CasesService.cs" />
     <Compile Include="BLL\CompanyService.cs" />
     <Compile Include="BLL\MenuService.cs" />
+    <Compile Include="BLL\NewsCategoryService.cs" />
+    <Compile Include="BLL\NewsService.cs" />
+    <Compile Include="BLL\PatentService.cs" />
     <Compile Include="BLL\RelationTableService.cs" />
+    <Compile Include="BLL\SinglePageService.cs" />
     <Compile Include="BLL\TempColumnService.cs" />
     <Compile Include="BLL\TemplateService.cs" />
     <Compile Include="BLL\UsersInfoService.cs" />
