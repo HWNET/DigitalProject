@@ -51,7 +51,7 @@ namespace Digital.Service.Implements
                 //directly update to DB
                 CasesCategoryService CasesCategoryService = new CasesCategoryService();
                 CasesCategoryService.CasesCategoryUpdate(Model);
-                return CategoryModel;
+                return Model;
             }
             else
             {

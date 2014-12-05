@@ -43,8 +43,8 @@ namespace Digital.Service.Implements
 
                 //directly update to DB
                 CasesService CasesService = new CasesService();
-                CasesService.CasesUpdate(CasesModel);
-                return CasesModel;
+                CasesService.CasesUpdate(Model);
+                return Model;
             }
             else
             {
