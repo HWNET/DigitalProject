@@ -659,7 +659,7 @@
 
 <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
 <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-
+<script src="../js/JqueryToken.js"></script>
 <script src="../DigitalStyle/js/custom.js"></script>
 <script>
     jQuery(document).ready(function () {
@@ -683,7 +683,7 @@
             IsRegisteredProvince = "1";
 
             var IsRegisteredCity = string.Empty;
-            IsRegisteredCity = "1";
+            IsRegisteredCity = "1"; 
         }
         //------------for drop down cascading [ PrimaryBusiness ]-------------
         jQuery.ajax({
@@ -823,8 +823,7 @@
         }
         //--------------------------------------------------------------------
 
-        // Basic Wizard
-        jQuery('#basicWizard').bootstrapWizard();
+       
 
         // Progress Wizard
         $('#progressWizard').bootstrapWizard({
@@ -835,6 +834,7 @@
                 var $current = index + 1;
                 var $percent = ($current / $total) * 100;
                 jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+               
             },
             onPrevious: function (tab, navigation, index) {
                 var $total = navigation.find('li').length;
@@ -847,14 +847,29 @@
                 var $current = index + 1;
                 var $percent = ($current / $total) * 100;
                 jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+               
+                if (index==2) {
+                    jQuery('#progressWizard').find('.next').attr('style','display:none');
+                    jQuery('#progressWizard').find('.previous').attr('style','display:none');
+                    $("#BtnSave").attr('style','display:block');
+                }
+                else if(index==0)
+                {
+                    $("#BtnSave").attr('style','display:none');
+                    jQuery('#progressWizard').find('.previous').attr('style','display:none');
+                    jQuery('#progressWizard').find('.next').attr('style','display:block');
+                }
+                else
+                {
+                    $("#BtnSave").attr('style','display:none');
+                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
+                    jQuery('#progressWizard').find('.next').attr('style','display:block');
+                }
+
             }
         });
 
-        //Display Save Button
-        var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
-        if (TabIndex==2) {
-            $("#BtnSave").attr('style','display:block');
-        }
+      
 
         // Disabled Tab Click Wizard
         jQuery('#disabledTabWizard').bootstrapWizard({
@@ -907,7 +922,6 @@
     function Save()
     {
         var $valid = jQuery('#firstForm').valid();
-        alert( $valid);
         if (!$valid) {
             $validator.focusInvalid();
             return false;
@@ -940,11 +954,11 @@
             }
             else if(TabIndex==2){
                 @{
-                    var IsInsert = true; // default option : insert new company model 
+                    var IsInsert = "true"; // default option : insert new company model 
                     var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-                    if (UserModel != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                    if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
                     {
-                        IsInsert = false;
+                        IsInsert = "false";
                     }
                 }
                 var valCompanyTypeNO=$("#CompanyTypeNO  option:selected").val();
@@ -1014,7 +1028,7 @@
                 var valCompanyCorporateRepresentative=$('input[id="CompanyCorporateRepresentative"]').val();
                 var valCompanyBankDeposit=$('input[id="CompanyBankDeposit"]').val();
                 var valCompanyBankAccount=$('input[id="CompanyBankAccount"]').val();
-
+                alert(1);
                 $.ajaxAntiForgery({
                     type: "post",
                     data: { IsInsert:@IsInsert,CompanyName:$("#CompanyName").val(),CompanyRegisteredNO:$("#CompanyRegisteredNO").val(),CompanyTypeNO:valCompanyTypeNO,

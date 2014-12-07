@@ -125,7 +125,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyBaseInfo(bool IsInsert, string CompanyName, string CompanyRegisteredNO, int CompanyTypeNO, int CompanyMembers,
+        public ActionResult CompanyBaseInfo(string IsInsert, string CompanyName, string CompanyRegisteredNO, int CompanyTypeNO, int CompanyMembers,
             int CompanyBusinessModel, bool IsProvideOEM, int PrimaryBusinessCategory, int PrimaryBusiness, string PrimaryProduct,
             int PrimarySalesArea, int CompanyBusinessProvince, int CompanyBusinessCity, string CompanyIntro, int ProductionForm,
             int ServicesDomain, int ProcessingMethod, int ProcessingCraft, int EquipmentIntro, int ResearchDepartMembers, int CapacityIntro, int CapacityIntroUnit,
@@ -139,7 +139,7 @@ namespace Digital.Web.Controllers
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
             if (!string.IsNullOrEmpty(CurrentUser))
             {
-                if (IsInsert) // new model -- do insert
+                if (IsInsert=="true") // new model -- do insert
                 {
                     var NewModel = new CompanyModel
                     {
