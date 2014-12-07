@@ -87,6 +87,7 @@ namespace Digital.Service.Implements
         /// </summary>
         private void UserCacheList()
         {
+            logger.WriteInfo("UserCacheList");
             if (GenericList.CacheModelObj.UserModellist == null)
             {
                 try
