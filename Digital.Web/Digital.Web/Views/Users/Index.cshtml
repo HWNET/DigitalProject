@@ -4,7 +4,20 @@
     ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
+@section PageSpecificJavascriptIncludes{
+    <script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
+    <script type="text/javascript">
+        $('#uploader').FileUpload({
+            'subfolder': 'cms',
+            'callback': function (msg) {
+                //msg.url为图片地址
+               alert(msg);
+            }
+        });
 
+       
+    </script>
+}
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 个人中心 <span>个人简介</span></h2>
     <div class="breadcrumb-wrapper">
@@ -19,7 +32,7 @@
 <div class="contentpanel">
     <div class="row">
         <div class="col-sm-3">
-            <img src="@Html.IsNull(@Model.UsersInfoModel.DisplayPicture, "../DigitalStyle/images/pic-none.png", @Model.UsersInfoModel.DisplayPicture)" class="thumbnail img-responsive" alt="" />
+            <img id="uploader" src="@Html.IsNull(@Model.UsersInfoModel.DisplayPicture, "../DigitalStyle/images/pic-none.png", @Model.UsersInfoModel.DisplayPicture)" class="thumbnail img-responsive" alt="" />
 
             <div class="mb30"></div>
 

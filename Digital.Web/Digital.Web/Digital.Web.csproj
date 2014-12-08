@@ -177,9 +177,13 @@
     <Compile Include="Controllers\OperatorFactory.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="FileUpload.ashx.cs">
+      <DependentUpon>FileUpload.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\StaticFileHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -678,6 +682,7 @@
     <Content Include="DigitalStyle\js\custom.js" />
     <Content Include="DigitalStyle\js\dashboard.js" />
     <Content Include="DigitalStyle\js\dropzone.min.js" />
+    <Content Include="DigitalStyle\js\flashupload.js" />
     <Content Include="DigitalStyle\js\flot\flot.categories.min.js" />
     <Content Include="DigitalStyle\js\flot\flot.crosshair.min.js" />
     <Content Include="DigitalStyle\js\flot\flot.min.js" />
@@ -715,6 +720,19 @@
     <Content Include="DigitalStyle\js\respond.min.js" />
     <Content Include="DigitalStyle\js\retina.min.js" />
     <Content Include="DigitalStyle\js\toggles.min.js" />
+    <Content Include="DigitalStyle\js\Uploadify\cancel.png" />
+    <Content Include="DigitalStyle\js\Uploadify\jquery-1.4.2.min.js" />
+    <Content Include="DigitalStyle\js\Uploadify\jquery.uploadify.v2.1.4.js" />
+    <Content Include="DigitalStyle\js\Uploadify\jquery.uploadify.v2.1.4.min.js" />
+    <Content Include="DigitalStyle\js\Uploadify\jquery.uploadify.v3.2.js" />
+    <Content Include="DigitalStyle\js\Uploadify\jquery.uploadify.v3.2.min.js" />
+    <Content Include="DigitalStyle\js\Uploadify\swfobject.js" />
+    <Content Include="DigitalStyle\js\Uploadify\uploadbutton.png" />
+    <Content Include="DigitalStyle\js\Uploadify\uploadify.cn.swf" />
+    <Content Include="DigitalStyle\js\Uploadify\uploadify.css" />
+    <Content Include="DigitalStyle\js\Uploadify\uploadify.swf" />
+    <Content Include="DigitalStyle\js\Uploadify\uploadify.v3.2.css" />
+    <Content Include="DigitalStyle\js\Uploadify\uploadify.v3.2.swf" />
     <Content Include="DigitalStyle\js\wysihtml5-0.3.0.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -950,6 +968,8 @@
     <Content Include="DigitalStyle\js\ckeditor\skins\moono\readme.md" />
     <Content Include="DigitalStyle\js\ckeditor\skins\themepixels\readme.md" />
     <Content Include="DigitalStyle\js\codemirror\.DS_Store" />
+    <Content Include="FileUpload.ashx" />
+    <Content Include="DigitalStyle\js\Uploadify\uploadify.fla" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

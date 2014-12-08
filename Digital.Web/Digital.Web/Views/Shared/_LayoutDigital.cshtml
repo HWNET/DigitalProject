@@ -32,7 +32,11 @@
     <script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
 
     <script src="../DigitalStyle/js/custom.js"></script>
-   
+    <script type="text/javascript">
+      var staticFileRoot = "@Url.StaticFile()";
+    </script>
+    @RenderSection("PageSpecificJavascriptIncludes", required: false)
+  
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

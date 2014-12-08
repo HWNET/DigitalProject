@@ -39,6 +39,18 @@ namespace Digital.Service.Implements
         {
             logger = new NLogHelper();
             logger.WriteInfo("1111");
+            try
+            {
+                TaskScheduler.UnobservedTaskException += (s, e) =>
+                {
+                    e.SetObserved();
+                    logger.WriteInfo( "Service"+e.Exception.InnerException.ToString());
+                };
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo( "Service"+ex.ToString());
+            }
             _CheckReloadXml = new Task(() =>
             {
                 try

@@ -162,7 +162,7 @@ namespace Digital.Contact.BLL
                 }
                 catch (Exception ex)
                 {
-                    return null;
+                    throw;
                 }
             }
         }
