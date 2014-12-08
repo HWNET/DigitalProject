@@ -28,7 +28,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region CompanyInsert
-        public bool CompanyInsert(CompanyModel Model)
+        public CompanyModel CompanyInsert(CompanyModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -36,19 +36,19 @@ namespace Digital.Contact.BLL
                 {
                     if (!IsModelExist(Model))
                     {
-                        db.CompanyModels.Add(Model);
+                        Model = db.CompanyModels.Add(Model);
                         db.SaveChanges();
-                        return true;
+                        return Model;
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex);
-                    return false;
+                    return null;
                 }
             }
         }
@@ -69,13 +69,13 @@ namespace Digital.Contact.BLL
                     }
                     else
                     {
-                        return new CompanyModel();
+                        return null;
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex);
-                    return new CompanyModel();
+                    return null;
                 }
             }
         }

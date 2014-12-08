@@ -12,7 +12,7 @@ namespace Digital.Service.Implements
     public partial class Service : ICompanyService
     {
         #region CompanyInsert
-        public bool CompanyInsert(CompanyModel Model)
+        public CompanyModel CompanyInsert(CompanyModel Model)
         {
             Model.UpdateStatus = 1;
             CompanyService CompanyService = new CompanyService();

@@ -12,7 +12,7 @@ namespace Digital.Service.Interfaces
     public interface ICompanyService
     {
         [OperationContract]
-        bool CompanyInsert(CompanyModel Model);
+        CompanyModel CompanyInsert(CompanyModel Model);
         [OperationContract]
         CompanyModel CompanyUpdate(CompanyModel Model);
         [OperationContract]
