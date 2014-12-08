@@ -43,6 +43,10 @@
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>lib\Practices\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Log\NLog.dll</HintPath>
@@ -54,6 +58,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Web" />
@@ -77,6 +82,13 @@
     <Compile Include="Captcha\Config.cs" />
     <Compile Include="Captcha\HtmlHelperExtensions.cs" />
     <Compile Include="Captcha\ImageBuilder.cs" />
+    <Compile Include="Utilities\Config\CachedConfigContext.cs" />
+    <Compile Include="Utilities\Config\ConfigContext.cs" />
+    <Compile Include="Utilities\Config\ConfigFileBase.cs" />
+    <Compile Include="Utilities\Config\ConfigNodeBase.cs" />
+    <Compile Include="Utilities\Config\FileConfigService.cs" />
+    <Compile Include="Utilities\Config\IConfigService.cs" />
+    <Compile Include="Utilities\Image\ThumbnailHandler.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Logging\CommonLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -86,11 +98,40 @@
     <Compile Include="Mvc\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Security\CryptoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AppSettings.cs" />
+    <Compile Include="Utilities\AssemblyHelper.cs" />
+    <Compile Include="Utilities\Collection.cs" />
+    <Compile Include="Utilities\Converter.cs" />
+    <Compile Include="Utilities\Cookie.cs" />
+    <Compile Include="Utilities\Diff.cs" />
+    <Compile Include="Utilities\Encrypt.cs" />
+    <Compile Include="Utilities\EnumHelper.cs" />
+    <Compile Include="Utilities\Exception.cs" />
+    <Compile Include="Utilities\Fetch.cs" />
+    <Compile Include="Utilities\FileWatchHelper.cs" />
+    <Compile Include="Utilities\GeoHelper.cs" />
+    <Compile Include="Utilities\ImageUtil.cs" />
+    <Compile Include="Utilities\JsUtil.cs" />
+    <Compile Include="Utilities\MailHelper.cs" />
+    <Compile Include="Utilities\NetHelper.cs" />
     <Compile Include="Utilities\NPOI\ColumnBuilder.cs" />
     <Compile Include="Utilities\NPOI\ColumnFactory.cs" />
     <Compile Include="Utilities\NPOI\ExcelReporter.cs" />
+    <Compile Include="Utilities\ObjectHelper.cs" />
     <Compile Include="Utilities\Pdf\PdfHelper.cs" />
+    <Compile Include="Utilities\PermutationAndCombination.cs" />
+    <Compile Include="Utilities\RegExp.cs" />
+    <Compile Include="Utilities\SerializationHelper.cs" />
+    <Compile Include="Utilities\SerializeHelper.cs" />
     <Compile Include="Utilities\Serializer.cs" />
+    <Compile Include="Utilities\StringHelper.cs" />
+    <Compile Include="Utilities\StringUtil.cs" />
+    <Compile Include="Utilities\Image\ThumbnailHelper.cs" />
+    <Compile Include="Utilities\Image\ThumbnailService.cs" />
+    <Compile Include="Utilities\Config\UploadConfig.cs" />
+    <Compile Include="Utilities\Config\UploadConfigContext.cs" />
+    <Compile Include="Utilities\Image\UploadHandler.cs" />
+    <Compile Include="Utilities\WcfServiceProxy.cs" />
     <Compile Include="Utilities\XmlUtil.cs" />
     <Compile Include="WCF\ContextPropagation\ContextPropagationBehavior.cs" />
     <Compile Include="WCF\ContextPropagation\ContextPropagationBehaviorElement.cs" />
@@ -103,6 +144,7 @@
   <ItemGroup>
     <Content Include="lib\Excel\NPOI.dll" />
     <Content Include="lib\Log\NLog.dll" />
+    <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="lib\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll" />
     <Content Include="lib\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.pdb" />
     <Content Include="lib\packages\bootstrap.3.0.0\Content\Content\bootstrap-theme.css" />
@@ -302,6 +344,7 @@
     <None Include="lib\packages\WebGrease.1.5.2\WebGrease.1.5.2.nupkg" />
     <None Include="lib\packages\WebGrease.1.5.2\WebGrease.1.5.2.nuspec" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
