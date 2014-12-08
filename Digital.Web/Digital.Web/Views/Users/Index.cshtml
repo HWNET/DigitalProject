@@ -6,17 +6,7 @@
 }
 @section PageSpecificJavascriptIncludes{
     <script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
-    <script type="text/javascript">
-        $('#uploader').FileUpload({
-            'subfolder': 'cms',
-            'callback': function (msg) {
-                //msg.url为图片地址
-               alert(msg);
-            }
-        });
-
-       
-    </script>
+    
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 个人中心 <span>个人简介</span></h2>
@@ -32,10 +22,10 @@
 <div class="contentpanel">
     <div class="row">
         <div class="col-sm-3">
-            <img id="uploader" src="@Html.IsNull(@Model.UsersInfoModel.DisplayPicture, "../DigitalStyle/images/pic-none.png", @Model.UsersInfoModel.DisplayPicture)" class="thumbnail img-responsive" alt="" />
-
+            <img  src="@Html.IsNull(@Model.UsersInfoModel.DisplayPicture, "../DigitalStyle/images/pic-none.png", @Model.UsersInfoModel.DisplayPicture)" class="thumbnail img-responsive" alt="" />
+            
             <div class="mb30"></div>
-
+            
             <h5 class="subtitle">我的介绍</h5>
             <p class="mb30">@Model.UsersInfoModel.BeGoodAtIntroduction ....<a href="">更多</a></p>
 
@@ -55,6 +45,19 @@
         <div class="col-sm-9">
 
             <div class="profile-header">
+                <div id="uploader">11111111111</div>
+                <div id="fileQueue"></div>
+                <script type="text/javascript">
+                    $('#uploader').FileUpload({
+                        'subfolder': 'cms',
+                        'callback': function (msg) {
+                            //msg.url为图片地址
+                            alert(msg);
+                        }
+                    });
+
+
+                </script>
                 <h2 class="profile-name">@Model.UsersInfoModel.NickName</h2>
                 @{
                     //string[] PCModelList = Model.UsersInfoModel.ProvinceNameAndCityName();
