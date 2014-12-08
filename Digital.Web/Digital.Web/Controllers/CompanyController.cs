@@ -122,88 +122,230 @@ namespace Digital.Web.Controllers
             }
         }
 
+        #region CompanyBaseInfo -- FOR TAB ONE
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyBaseInfo(string IsInsert, string CompanyName, string CompanyRegisteredNO, int CompanyTypeNO, int CompanyMembers,
-            int CompanyBusinessModel, bool IsProvideOEM, int PrimaryBusinessCategory, int PrimaryBusiness, string PrimaryProduct,
-            int PrimarySalesArea, int CompanyBusinessProvince, int CompanyBusinessCity, string CompanyIntro, int ProductionForm,
+        public ActionResult CompanyBaseInfo(int CompanyID, int IsInsert, string CompanyName, string CompanyRegisteredNO, int CompanyTypeNO, int CompanyMembers,
+            int CompanyBusinessModel, int IsProvideOEM, int PrimaryBusinessCategory, int PrimaryBusiness, string PrimaryProduct,
+            int PrimarySalesArea, int CompanyBusinessProvince, int CompanyBusinessCity, string CompanyIntro)
+        {
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            var ReturnResult = string.Empty;
+
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                var NewModel = new CompanyModel
+                {
+                    CompanyID=CompanyID,
+                    CompanyName = CompanyName,
+                    CompanyRegisteredNO = CompanyRegisteredNO,
+                    CompanyTypeNO = CompanyTypeNO,
+                    CompanyMembers = CompanyMembers,
+                    CompanyBusinessModel = CompanyBusinessModel,
+                    IsProvideOEM = IsProvideOEM==1?true:false,
+                    PrimaryBusinessCategory = PrimaryBusinessCategory,
+                    PrimaryBusiness = PrimaryBusiness,
+                    PrimaryProduct = PrimaryProduct,
+                    PrimarySalesArea = PrimarySalesArea,
+                    CompanyBusinessProvince = CompanyBusinessProvince,
+                    CompanyBusinessCity = CompanyBusinessCity,
+                    CompanyIntro = CompanyIntro,
+                };
+
+                if (IsInsert == 1) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.CompanyInsert(NewModel); // update DB
+                    if (ResultModel!=null&&ResultModel.CompanyID > 0) // update web cache
+                    {
+                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), ResultModel);
+
+                        //do user upgrade
+                        var UserUpgradeStatus = UpgradeUserToCompanyMember(ResultModel.CompanyID);
+                        ReturnResult = UserUpgradeStatus?"OK":"NOK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+                else // old existing model -- do update
+                {
+                    #region old existing model -- do update
+                    var CompanyModel = client.CompanyUpdate(NewModel); // update DB
+                    if (CompanyModel!=null&&CompanyModel.CompanyID > 0) // update web cache
+                    {
+                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            client.Close();
+            return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyBaseInfoCapacity -- FOR TAB TWO
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyBaseInfoCapacity(int CompanyID,int IsInsert, int ProductionForm,
             int ServicesDomain, int ProcessingMethod, int ProcessingCraft, int EquipmentIntro, int ResearchDepartMembers, int CapacityIntro, int CapacityIntroUnit,
             int AnnualBusinessVolume, int AnnualExportsVolume, int ManagementSystemCertification, int ProductQualityCertification,
-            int QualityAssurance, float FactoryArea,  string PrimaryEquipments,int CompanyYearEstablished, string CompanyWebsite, float CompanyRegisteredAssets,
+            int QualityAssurance, string FactoryArea, string PrimaryEquipments)
+        {
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var ReturnResult = string.Empty;
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                var NewModel = new CompanyModel
+                {
+                    CompanyID = CompanyID,
+                    ProductionForm = ProductionForm,
+                    ServicesDomain = ServicesDomain,
+                    ProcessingMethod = ProcessingMethod,
+                    ProcessingCraft = ProcessingCraft,
+                    EquipmentIntro = EquipmentIntro,
+                    ResearchDepartMembers = ResearchDepartMembers,
+                    CapacityIntro = CapacityIntro,
+                    CapacityIntroUnit = CapacityIntroUnit,
+                    AnnualBusinessVolume = AnnualBusinessVolume,
+                    AnnualExportsVolume = AnnualExportsVolume,
+                    ManagementSystemCertification = ManagementSystemCertification,
+                    ProductQualityCertification = ProductQualityCertification,
+                    QualityAssurance = QualityAssurance,
+                    FactoryArea =float.Parse(FactoryArea),
+                    PrimaryEquipments = PrimaryEquipments,
+                };
+                if (IsInsert == 1) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.CompanyInsert(NewModel); // update DB
+                    if (ResultModel !=null&& ResultModel.CompanyID > 0) // update web cache
+                    {
+                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), ResultModel);
+
+                        //do user upgrade
+                        var UserUpgradeStatus = UpgradeUserToCompanyMember(ResultModel.CompanyID);
+                        ReturnResult = UserUpgradeStatus ? "OK" : "NOK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+                else // old existing model -- do update
+                {
+                    #region old existing model -- do update
+                    var CompanyModel = client.CompanyUpdate(NewModel); // update DB
+                    if (CompanyModel != null && CompanyModel.CompanyID > 0) // update web cache
+                    {
+                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            client.Close();
+            return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyBaseInfoMore -- FOR TAB THREE
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyBaseInfoMore(int CompanyID, int IsInsert, int CompanyYearEstablished, string CompanyWebsite, string CompanyRegisteredAssets,
             int CompanyRegisteredAssetsUnit, int CompanyRegisteredProvince, int CompanyRegisteredCity, string CompanyCorporateRepresentative,
             string CompanyBankDeposit, string CompanyBankAccount)
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
+            var ReturnResult = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
             if (!string.IsNullOrEmpty(CurrentUser))
             {
-                if (IsInsert=="true") // new model -- do insert
+                var NewModel = new CompanyModel
                 {
-                    var NewModel = new CompanyModel
+                    CompanyID = CompanyID,
+                    CompanyYearEstablished = CompanyYearEstablished,
+                    CompanyWebsite = CompanyWebsite,
+                    CompanyRegisteredAssets = float.Parse(CompanyRegisteredAssets),
+                    CompanyRegisteredAssetsUnit = CompanyRegisteredAssetsUnit,
+                    CompanyRegisteredProvince = CompanyRegisteredProvince,
+                    CompanyRegisteredCity = CompanyRegisteredCity,
+                    CompanyCorporateRepresentative = CompanyCorporateRepresentative,
+                    CompanyBankDeposit = CompanyBankDeposit,
+                    CompanyBankAccount = CompanyBankAccount
+                };
+
+                if (IsInsert==1) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.CompanyInsert(NewModel); // update DB
+                    if (ResultModel !=null&& ResultModel.CompanyID > 0) // update web cache
                     {
-                        CompanyName = CompanyName,
-                        CompanyRegisteredNO = CompanyRegisteredNO,
-                        CompanyTypeNO = CompanyTypeNO,
-                        CompanyMembers = CompanyMembers,
-                        CompanyBusinessModel = CompanyBusinessModel,
-                        IsProvideOEM = IsProvideOEM,
-                        PrimaryBusinessCategory = PrimaryBusinessCategory,
-                        PrimaryBusiness = PrimaryBusiness,
-                        PrimaryProduct = PrimaryProduct,
-                        PrimarySalesArea = PrimarySalesArea,
-                        CompanyBusinessProvince = CompanyBusinessProvince,
-                        CompanyBusinessCity = CompanyBusinessCity,
-                        CompanyIntro = CompanyIntro,
-                        ProductionForm = ProductionForm,
-                        ServicesDomain = ServicesDomain,
-                        ProcessingMethod = ProcessingMethod,
-                        ProcessingCraft = ProcessingCraft,
-                        EquipmentIntro = EquipmentIntro,
-                        ResearchDepartMembers=ResearchDepartMembers,
-                        CapacityIntro = CapacityIntro,
-                        CapacityIntroUnit = CapacityIntroUnit,
-                        AnnualBusinessVolume = AnnualBusinessVolume,
-                        AnnualExportsVolume = AnnualExportsVolume,
-                        ManagementSystemCertification = ManagementSystemCertification,
-                        ProductQualityCertification = ProductQualityCertification,
-                        QualityAssurance = QualityAssurance,
-                        FactoryArea = FactoryArea,
-                        PrimaryEquipments=PrimaryEquipments,
-                        CompanyYearEstablished = CompanyYearEstablished,
-                        CompanyWebsite = CompanyWebsite,
-                        CompanyRegisteredAssets = CompanyRegisteredAssets,
-                        CompanyRegisteredAssetsUnit = CompanyRegisteredAssetsUnit,
-                        CompanyRegisteredProvince = CompanyRegisteredProvince,
-                        CompanyRegisteredCity = CompanyRegisteredCity,
-                        CompanyCorporateRepresentative = CompanyCorporateRepresentative,
-                        CompanyBankDeposit = CompanyBankDeposit,
-                        CompanyBankAccount = CompanyBankAccount
-                    };
-                    var Result = client.CompanyInsert(NewModel); // update DB
-                    if (Result) // update web cache
-                    {
-                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), NewModel);
-                        client.Close();
-                        return Content("OK");
+                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), ResultModel);
+
+                        //do user upgrade
+                        var UserUpgradeStatus = UpgradeUserToCompanyMember(ResultModel.CompanyID);
+                        ReturnResult = UserUpgradeStatus ? "OK" : "NOK";
                     }
                     else
                     {
-                        return Content("NOK");
+                        ReturnResult = "NOK";
                     }
+                    #endregion
                 }
                 else // old existing model -- do update
                 {
-                    return Content("OK");
+                    #region old existing model -- do update
+                    var CompanyModel = client.CompanyUpdate(NewModel); // update DB
+                    if (CompanyModel != null && CompanyModel.CompanyID > 0) // update web cache
+                    {
+                        OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
                 }
             }
             else
             {
-                return Content("NOK");
+                ReturnResult = "NOK";
             }
 
+            client.Close();
+            return Content(ReturnResult);
         }
+        #endregion
 
         #region UI Modes For Company Base Informations
         #region TAB ONE
@@ -285,6 +427,36 @@ namespace Digital.Web.Controllers
         #endregion
 
         #endregion
+
+        public bool UpgradeUserToCompanyMember(int CompanyID)
+        {
+            bool Result = false;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
+            if (UserModel != null)
+            {
+                if (UserModel.CompanyID == null || (UserModel.CompanyID != null && string.IsNullOrEmpty(UserModel.CompanyID.Value.ToString())))
+                {
+                    //update web cache for UserModel
+                    UserModel.CompanyID=CompanyID;
+                    OperatorFactory.UpdateUserModelCache(User.Identity.GetUserId(), UserModel);
+
+                    //update db cache for UserModel
+                    client.UpdateUsersModel(UserModel);
+                    Result = true;
+                }
+                else
+                {
+                    Result = false;
+                }
+            }
+            else
+            {
+                Result = false;
+            }
+            client.Close();
+            return Result;
+        }
 
         public ActionResult CompanyBusinessDemand()
         {

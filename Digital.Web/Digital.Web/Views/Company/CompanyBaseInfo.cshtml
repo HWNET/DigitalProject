@@ -242,7 +242,12 @@
                                                 @{
                                                     foreach (var AreaMode in (ObservableCollection<PrimarySalesAreaMode>)ViewBag.PrimarySalesAreaList)
                                                     {
-                                                        <option value="@AreaMode.Id">@AreaMode.Name</option>
+                                                        var IsSelected = string.Empty;
+                                                        if (AreaMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@AreaMode.Id" @IsSelected>@AreaMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -294,7 +299,12 @@
                                                 @{
                                                     foreach (var FormMode in (ObservableCollection<ProductionFormMode>)ViewBag.ProductionFormList)
                                                     {
-                                                        <option value="@FormMode.Id"> @FormMode.Name </option>
+                                                        var IsSelected = string.Empty;
+                                                        if (FormMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@FormMode.Id" @IsSelected> @FormMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -308,7 +318,12 @@
                                                 @{
                                                     foreach (var DomainMode in (ObservableCollection<ServicesDomainMode>)ViewBag.ServicesDomainList)
                                                     {
-                                                        <option value="@DomainMode.Id"> @DomainMode.Name </option>
+                                                        var IsSelected = string.Empty;
+                                                        if (DomainMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@DomainMode.Id" @IsSelected> @DomainMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -322,7 +337,12 @@
                                                 @{
                                                     foreach (var MethodMode in (ObservableCollection<ProcessingMethodMode>)ViewBag.ProcessingMethodList)
                                                     {
-                                                        <option value="@MethodMode.Id"> @MethodMode.Name </option>
+                                                        var IsSelected = string.Empty;
+                                                        if (MethodMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@MethodMode.Id" @IsSelected> @MethodMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -337,7 +357,12 @@
                                                 @{
                                                     foreach (var CraftMode in (ObservableCollection<ProcessingCraftMode>)ViewBag.ProcessingCraftList)
                                                     {
-                                                        <option value="@CraftMode.Id"> @CraftMode.Name </option>
+                                                        var IsSelected = string.Empty;
+                                                        if (CraftMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@CraftMode.Id" @IsSelected> @CraftMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -352,7 +377,12 @@
                                                 @{
                                                     foreach (var EquipMode in (ObservableCollection<EquipmentIntroMode>)ViewBag.EquipmentIntroList)
                                                     {
-                                                        <option value="@EquipMode.Id"> @EquipMode.Name </option>
+                                                        var IsSelected = string.Empty;
+                                                        if (EquipMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@EquipMode.Id" @IsSelected> @EquipMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -391,7 +421,12 @@
                                                     @{
                                                         foreach (var UnitMode in (ObservableCollection<CapacityUnitMode>)ViewBag.CapacityUnitList)
                                                         {
-                                                            <option value="@UnitMode.Id"> @UnitMode.Name </option>
+                                                            var IsSelected = string.Empty;
+                                                            if (UnitMode.Id == 1)
+                                                            {
+                                                                IsSelected = "selected";
+                                                            }
+                                                            <option value="@UnitMode.Id" @IsSelected> @UnitMode.Name </option>
                                                         }
                                                     }
                                                 </select>
@@ -407,7 +442,12 @@
                                                 @{
                                                     foreach (var BVolumeMode in (ObservableCollection<AnnualBusinessVolumeMode>)ViewBag.AnnualBusinessVolumeList)
                                                     {
-                                                        <option value="@BVolumeMode.Id">@BVolumeMode.Name</option>
+                                                        var IsSelected = string.Empty;
+                                                        if (BVolumeMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@BVolumeMode.Id" @IsSelected>@BVolumeMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -424,7 +464,7 @@
                                                     foreach (var EVolumeMode in (ObservableCollection<AnnualExportsVolumeMode>)ViewBag.AnnualExportsVolumeList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (EVolumeMode.Id == 11)
+                                                        if (EVolumeMode.Id == 1)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -443,7 +483,12 @@
                                                 @{
                                                     foreach (var SystemMode in (ObservableCollection<ManagementSystemCertificationMode>)ViewBag.ManagementSystemCertificationList)
                                                     {
-                                                        <option value="@SystemMode.Id">@SystemMode.Name</option>
+                                                        var IsSelected = string.Empty;
+                                                        if (SystemMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@SystemMode.Id" @IsSelected>@SystemMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -458,7 +503,12 @@
                                                 @{
                                                     foreach (var QualityMode in (ObservableCollection<ProductQualityCertificationMode>)ViewBag.ProductQualityCertificationList)
                                                     {
-                                                        <option value="@QualityMode.Id">@QualityMode.Name</option>
+                                                        var IsSelected = string.Empty;
+                                                        if (QualityMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@QualityMode.Id" @IsSelected>@QualityMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -541,7 +591,12 @@
                                                 @{
                                                     foreach (var YearMode in (ObservableCollection<CompanyYearEstablishedMode>)ViewBag.CompanyYearEstablishedList)
                                                     {
-                                                        <option value="@YearMode.Id">@YearMode.Name</option>
+                                                        var IsSelected = string.Empty;
+                                                        if (YearMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@YearMode.Id" @IsSelected>@YearMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -561,10 +616,16 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <select id="CompanyRegisteredAssetsUnit" class="form-control">
+                                                <option value=""> --请选择-- </option>
                                                 @{
                                                     foreach (var AssetUnitMode in (ObservableCollection<CompanyRegisteredAssetsUnitMode>)ViewBag.RegisteredAssetsUnitList)
                                                     {
-                                                        <option value="@AssetUnitMode.Value">@AssetUnitMode.Name</option>
+                                                        var IsSelected = string.Empty;
+                                                        if (AssetUnitMode.Id == 1)
+                                                        {
+                                                            IsSelected = "selected";
+                                                        }
+                                                        <option value="@AssetUnitMode.Value" @IsSelected>@AssetUnitMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -622,7 +683,7 @@
                         <ul class="pager wizard">
                             <li class="previous"><a href="javascript:void(0)">Previous</a></li>
                             <li class="next"><a href="javascript:void(0)">Next</a></li>
-                            <li><button id="BtnSave"class="btn btn-primary" style="display:none" onclick="javascript:Save()">保 存</button></li>
+                            <li><button id="BtnSave"class="btn btn-primary" style="display:block" onclick="javascript:Save()">保 存</button></li>
                         </ul>
 
                     </div><!-- #basicWizard -->
@@ -636,18 +697,7 @@
     </div>
 </div>
 
-<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
-<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../DigitalStyle/js/jquery-ui-1.10.3.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap.min.js"></script>
-<script src="../DigitalStyle/js/modernizr.min.js"></script>
-<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
-<script src="../DigitalStyle/js/toggles.min.js"></script>
-<script src="../DigitalStyle/js/retina.min.js"></script>
-<script src="../DigitalStyle/js/jquery.cookies.js"></script>
-
 <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
-<script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
 <script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
 <script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
 <script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
@@ -661,6 +711,7 @@
 <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
 <script src="../js/JqueryToken.js"></script>
 <script src="../DigitalStyle/js/custom.js"></script>
+
 <script>
     jQuery(document).ready(function () {
         @{
@@ -847,21 +898,22 @@
                 var $current = index + 1;
                 var $percent = ($current / $total) * 100;
                 jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-               
+                
+                $("#BtnSave").attr('style','display:block');
+
                 if (index==2) {
                     jQuery('#progressWizard').find('.next').attr('style','display:none');
-                    jQuery('#progressWizard').find('.previous').attr('style','display:none');
-                    $("#BtnSave").attr('style','display:block');
+                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
                 }
                 else if(index==0)
                 {
-                    $("#BtnSave").attr('style','display:none');
+                    //$("#BtnSave").attr('style','display:none');
                     jQuery('#progressWizard').find('.previous').attr('style','display:none');
                     jQuery('#progressWizard').find('.next').attr('style','display:block');
                 }
                 else
                 {
-                    $("#BtnSave").attr('style','display:none');
+                    //$("#BtnSave").attr('style','display:none');
                     jQuery('#progressWizard').find('.previous').attr('style','display:block');
                     jQuery('#progressWizard').find('.next').attr('style','display:block');
                 }
@@ -927,125 +979,166 @@
             return false;
         }
         else{
-            var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
-            //...
-            //......
-            if(TabIndex==0){
-                //$.ajaxAntiForgery({
-                //    type: "post",
-                //    data: { ID:1,TrueName:$("#TrueName").val()},
-                //    url: "/Users/CompanyBaseInfo",
-                //    success: function (data) {
-                //        SaveInfo(true,"基本信息");
-                //        $('#progressWizard').bootstrapWizard('show',1);
-                //    }
-                //})
-            }
-            else if(TabIndex==1){
-                //$.ajaxAntiForgery({
-                //    type: "post",
-                //    data: { ID:1},
-                //    url: "/Users/CompanyBaseInfo",
-                //    success: function (data) {
-                //        SaveInfo(true,"生产能力");
-                //        $('#progressWizard').bootstrapWizard('show',2);
-                //    }
-                //})
-            }
-            else if(TabIndex==2){
-                @{
-                    var IsInsert = "true"; // default option : insert new company model 
-                    var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-                    if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-                    {
-                        IsInsert = "false";
-                    }
+
+            @{
+                var IsInsert = 1; // default option : insert new company model
+                var CompanyID = 0;
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                {
+                    IsInsert = 0;
+                    CompanyID = UserModel.CompanyID.Value;
                 }
-                var valCompanyTypeNO=$("#CompanyTypeNO  option:selected").val();
-                var valCompanyMembers=$("#CompanyMembers option:selected").val();
-                var valCompanyBusinessModel=$('input:radio[name="radioBusiness"]:checked').val();
-                var valIsProvideOEM=$('input:radio[name="radioOEM"]:checked').val();
-                var valPrimaryBusinessCategory=$("#PrimaryBusinessCategory option:selected").val();
-                var valPrimaryBusiness=$("#PrimaryBusiness option:selected").val();
-                //---------------PrimaryProduct 1,,,,5
-                var stringPrimaryProduct="";
-                var ProdIndex=0;
-                $('input[id*="PrimaryProduct"]').each(function(){
-                    if (ProdIndex>0) {
+            }
+            
+            var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
+            //------------------TAB 01 : 基本信息
+            var valCompanyName=$("#CompanyName").val();
+            var valCompanyRegisteredNO=$("#CompanyRegisteredNO").val();
+            var valCompanyTypeNO=$("#CompanyTypeNO  option:selected").val();
+            var valCompanyMembers=$("#CompanyMembers option:selected").val();
+            var valCompanyBusinessModel=$('input:radio[name="radioBusiness"]:checked').val();
+            var valIsProvideOEM=$('input:radio[name="radioOEM"]:checked').val();
+            var valPrimaryBusinessCategory=$("#PrimaryBusinessCategory option:selected").val();
+            var valPrimaryBusiness=$("#PrimaryBusiness option:selected").val();
+            //---------------PrimaryProduct 1,,,,5
+            var stringPrimaryProduct="";
+            var ProdIndex=0;
+            $('input[id*="PrimaryProduct"]').each(function(){
+                if (ProdIndex>0) {
+                    if($(this).val()!=""){
                         stringPrimaryProduct+=",";
                     }
-                    stringPrimaryProduct+=$(this).val();
-                    ++ProdIndex;
-                });
-                var valPrimaryProduct=stringPrimaryProduct;
-                //---------------PrimarySalesArea
-                var valPrimarySalesArea=StringCombine("#PrimarySalesArea option:selected");
-                //---------------
-                var valBusinessProvince=$("#BusinessProvince option:selected").val();
-                var valBusinessCity=$("#BusinessCity option:selected").val();
-                var valCompanyIntro=$("#CompanyIntro").val();
-                var valProductionForm=$("#ProductionForm option:selected").val();
-                //---------------ServicesDomain
-                var valServicesDomain=StringCombine("#ServicesDomain option:selected");
-                //--------------ProcessingMethod
-                var valProcessingMethod=StringCombine("#ProcessingMethod option:selected");
-                //-------------ProcessingCraft
-                var valProcessingCraft=StringCombine("#ProcessingCraft option:selected");
-                //-------------EquipmentIntro
-                var valEquipmentIntro=StringCombine("#EquipmentIntro option:selected");;
-                
-                var valResearchDepartMembers=$("#ResearchDepartMembers option:selected").val();
-                var valCapacityIntro=$("#CapacityIntro").val();
-                var valCapacityIntroUnit=$("#CapacityIntroUnit option:selected").val();
-                var valAnnualBusinessVolume=$("#AnnualBusinessVolume option:selected").val();
-                var valAnnualExportsVolume=$("#AnnualExportsVolume option:selected").val();
-                //-------------ManagementSystemCertification
-                var valManagementSystemCertification=StringCombine("#ManagementSystemCertification option:selected");//$("#ManagementSystemCertification option:selected").val();
-                //-------------ProductQualityCertification
-                var valProductQualityCertification=StringCombine("#ProductQualityCertification option:selected");//$("#ProductQualityCertification option:selected").val();
-                
-                var valQualityAssuranc=$("#QualityAssurance option:selected").val();
-                var valFactoryArea=$("#FactoryArea").val();
+                }
+                stringPrimaryProduct+=$(this).val();
+                ++ProdIndex;
+            });
+            var valPrimaryProduct=stringPrimaryProduct;
+            //---------------PrimarySalesArea
+            var valPrimarySalesArea=StringCombine("#PrimarySalesArea option:selected");
+            //---------------
+            var valBusinessProvince=$("#BusinessProvince option:selected").val();
+            var valBusinessCity=$("#BusinessCity option:selected").val();
+            var valCompanyIntro=$("#CompanyIntro").val();
 
-                //-------------PrimaryEquipments 1,,,,5
-                var stringPrimaryEquipments="";
-                var EquipIndex=0;
-                $('input[id*="PrimaryEquipments"]').each(function(){
-                    if (EquipIndex>0) {
+            var stringTABONE=valCompanyName+"_"+valCompanyRegisteredNO+"_"+valCompanyTypeNO+"_"+valCompanyMembers+"_"+valCompanyBusinessModel+"_"+
+                valIsProvideOEM+"_"+valPrimaryBusinessCategory+"_"+valPrimaryBusiness+"_"+
+                valPrimaryProduct+"_"+valPrimarySalesArea+"_"+valBusinessProvince+"_"+
+                valBusinessCity+"_"+valCompanyIntro;
+            window.alert(stringTABONE);
+
+            //-----------------TAB 02 : 生产能力
+            var valProductionForm=$("#ProductionForm option:selected").val();
+            //---------------ServicesDomain
+            var valServicesDomain=StringCombine("#ServicesDomain option:selected");
+            //--------------ProcessingMethod
+            var valProcessingMethod=StringCombine("#ProcessingMethod option:selected");
+            //-------------ProcessingCraft
+            var valProcessingCraft=StringCombine("#ProcessingCraft option:selected");
+            //-------------EquipmentIntro
+            var valEquipmentIntro=StringCombine("#EquipmentIntro option:selected");;
+                
+            var valResearchDepartMembers=$("#ResearchDepartMembers option:selected").val();
+            var valCapacityIntro=$("#CapacityIntro").val();
+            var valCapacityIntroUnit=$("#CapacityIntroUnit option:selected").val();
+            var valAnnualBusinessVolume=$("#AnnualBusinessVolume option:selected").val();
+            var valAnnualExportsVolume=$("#AnnualExportsVolume option:selected").val();
+            //-------------ManagementSystemCertification
+            var valManagementSystemCertification=StringCombine("#ManagementSystemCertification option:selected");//$("#ManagementSystemCertification option:selected").val();
+            //-------------ProductQualityCertification
+            var valProductQualityCertification=StringCombine("#ProductQualityCertification option:selected");//$("#ProductQualityCertification option:selected").val();
+                
+            var valQualityAssurance=$('input:radio[name="radioQualityAssurance"]:checked').val();
+            var valFactoryArea=$("#FactoryArea").val();
+
+            //-------------PrimaryEquipments 1,,,,5
+            var stringPrimaryEquipments="";
+            var EquipIndex=0;
+            $('input[id*="PrimaryEquipments"]').each(function(){
+                if (EquipIndex>0) {
+                    if ($(this).val()!="") {
                         stringPrimaryEquipments+=",";
                     }
-                    stringPrimaryEquipments+=$(this).val();
-                    ++EquipIndex;
-                });
-                var valPrimaryEquipments=stringPrimaryEquipments;
+                }
+                stringPrimaryEquipments+=$(this).val();
+                ++EquipIndex;
+            });
+            var valPrimaryEquipments=stringPrimaryEquipments;
 
-                var valCompanyYearEstablished=$("#CompanyYearEstablished option:selected").val();
-                var valCompanyWebsite=$("#CompanyWebsite").val();
-                var valCompanyRegisteredAssets=$("#CompanyRegisteredAssets").val();
-                var valCompanyRegisteredAssetsUnit=$("#CompanyRegisteredAssetsUnit option:selected").val();
-                var valCompanyRegisteredProvince=$("#RegisteredProvince option:selected").val();
-                var valCompanyRegisteredCity=$("#RegisteredCity option:selected").val();
-                var valCompanyCorporateRepresentative=$('input[id="CompanyCorporateRepresentative"]').val();
-                var valCompanyBankDeposit=$('input[id="CompanyBankDeposit"]').val();
-                var valCompanyBankAccount=$('input[id="CompanyBankAccount"]').val();
+            var stringTABTWO=valProductionForm+"_"+valServicesDomain+"_"+valProcessingMethod+"_"+valProcessingCraft+"_"+
+                valEquipmentIntro+"_"+valResearchDepartMembers+"_"+valCapacityIntro+"_"+valCapacityIntroUnit+"_"+
+                valAnnualBusinessVolume+"_"+valAnnualExportsVolume+"_"+valManagementSystemCertification+"_"+
+                valProductQualityCertification+"_"+valQualityAssurance+"_"+valFactoryArea+"_"+valPrimaryEquipments;
+            window.alert(stringTABTWO);
+
+            //-----------------TAB 03 : 更多信息
+            var valCompanyYearEstablished=$("#CompanyYearEstablished option:selected").val();
+            var valCompanyWebsite=$("#CompanyWebsite").val();
+            var valCompanyRegisteredAssets=$("#CompanyRegisteredAssets").val();
+            var valCompanyRegisteredAssetsUnit=$("#CompanyRegisteredAssetsUnit option:selected").val();
+            var valCompanyRegisteredProvince=$("#RegisteredProvince option:selected").val();
+            var valCompanyRegisteredCity=$("#RegisteredCity option:selected").val();
+            var valCompanyCorporateRepresentative=$('input[id="CompanyCorporateRepresentative"]').val();
+            var valCompanyBankDeposit=$('input[id="CompanyBankDeposit"]').val();
+            var valCompanyBankAccount=$('input[id="CompanyBankAccount"]').val();
+
+            var stringTABTHREE=valCompanyYearEstablished+"_"+valCompanyWebsite+"_"+valCompanyRegisteredAssets+"_"+
+                valCompanyRegisteredAssetsUnit+"_"+valCompanyRegisteredProvince+"_"+valCompanyRegisteredCity+"_"+
+                valCompanyCorporateRepresentative+"_"+valCompanyBankDeposit+"_"+valCompanyBankAccount;
+            window.alert(stringTABTHREE);
+            //......
+            if(TabIndex==0){
                 alert(1);
+
                 $.ajaxAntiForgery({
                     type: "post",
-                    data: { IsInsert:@IsInsert,CompanyName:$("#CompanyName").val(),CompanyRegisteredNO:$("#CompanyRegisteredNO").val(),CompanyTypeNO:valCompanyTypeNO,
-                        CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,PrimaryBusinessCategory:valPrimaryBusinessCategory,
-                        PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,CompanyBusinessProvince:valBusinessProvince,
-                        CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
+                    data: { CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
+                        CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
+                        PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
+                        CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro},
+                    url: "/Company/CompanyBaseInfo",
+                    success: function (data) {
+                        SaveInfo(true,"基本信息");
+                        $('#progressWizard').bootstrapWizard('show',1);
+                    }
+                })
+
+                alert(1111);
+            }
+            else if(TabIndex==1){
+                alert(2);
+
+                $.ajaxAntiForgery({
+                    type: "post",
+                    data: { CompanyID:@CompanyID,IsInsert:@IsInsert,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
                         ProcessingCraft:valProcessingCraft,EquipmentIntro:valEquipmentIntro,ResearchDepartMembers:valResearchDepartMembers,CapacityIntro:valCapacityIntro,CapacityIntroUnit:valCapacityIntroUnit,
                         AnnualBusinessVolume:valAnnualBusinessVolume,AnnualExportsVolume:valAnnualExportsVolume,ManagementSystemCertification:valManagementSystemCertification,
-                        ProductQualityCertification:valProductQualityCertification,QualityAssurance:valQualityAssuranc,FactoryArea:valFactoryArea,PrimaryEquipments:valPrimaryEquipments,
-                        CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,
-                        CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,CompanyCorporateRepresentative:valCompanyCorporateRepresentative,
-                        CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount},
-                    url: "/Users/CompanyBaseInfo",
+                        ProductQualityCertification:valProductQualityCertification,QualityAssurance:valQualityAssurance,FactoryArea:valFactoryArea,PrimaryEquipments:valPrimaryEquipments},
+                    url: "/Company/CompanyBaseInfoCapacity",
+                    success: function (data) {
+                        SaveInfo(true,"生产能力");
+                        $('#progressWizard').bootstrapWizard('show',2);
+                    }
+                })
+
+                alert(2222);
+            }
+            else if(TabIndex==2){
+                
+                alert(3);
+                
+                $.ajaxAntiForgery({
+                    type: "post",
+                    data: { CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,
+                        CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,
+                        CompanyCorporateRepresentative:valCompanyCorporateRepresentative,CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount},
+                    url: "/Company/CompanyBaseInfoMore",
                     success: function (data) {
                         SaveInfo(true,"更多信息");
                     }
                 })
+
+                alert(3333);
             }
         }
     }
