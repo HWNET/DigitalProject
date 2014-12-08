@@ -2416,6 +2416,9 @@ namespace Digital.WCFClient.ConfigService {
         private int CompanyIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CompanyModel CompanyModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UpdateStatusField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -2533,6 +2536,19 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CompanyModel CompanyModel {
+            get {
+                return this.CompanyModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompanyModelField, value) != true)) {
+                    this.CompanyModelField = value;
+                    this.RaisePropertyChanged("CompanyModel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int UpdateStatus {
             get {
                 return this.UpdateStatusField;
@@ -2629,6 +2645,9 @@ namespace Digital.WCFClient.ConfigService {
         private int CompanyIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CompanyModel CompanyModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NewsCategoryContentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2671,6 +2690,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((this.CompanyIDField.Equals(value) != true)) {
                     this.CompanyIDField = value;
                     this.RaisePropertyChanged("CompanyID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CompanyModel CompanyModel {
+            get {
+                return this.CompanyModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompanyModelField, value) != true)) {
+                    this.CompanyModelField = value;
+                    this.RaisePropertyChanged("CompanyModel");
                 }
             }
         }
@@ -3336,6 +3368,9 @@ namespace Digital.WCFClient.ConfigService {
         private int CasesCategoryIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime CasesDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -3391,6 +3426,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((this.CasesCategoryIDField.Equals(value) != true)) {
                     this.CasesCategoryIDField = value;
                     this.RaisePropertyChanged("CasesCategoryID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryModel {
+            get {
+                return this.CasesCategoryModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CasesCategoryModelField, value) != true)) {
+                    this.CasesCategoryModelField = value;
+                    this.RaisePropertyChanged("CasesCategoryModel");
                 }
             }
         }
@@ -3528,6 +3576,9 @@ namespace Digital.WCFClient.ConfigService {
         private int NewsCategoryIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.NewsCategoryModel NewsCategoryModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsCommentModel> NewsCommentModelsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -3599,6 +3650,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((this.NewsCategoryIDField.Equals(value) != true)) {
                     this.NewsCategoryIDField = value;
                     this.RaisePropertyChanged("NewsCategoryID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.NewsCategoryModel NewsCategoryModel {
+            get {
+                return this.NewsCategoryModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NewsCategoryModelField, value) != true)) {
+                    this.NewsCategoryModelField = value;
+                    this.RaisePropertyChanged("NewsCategoryModel");
                 }
             }
         }
@@ -4082,10 +4146,10 @@ namespace Digital.WCFClient.ConfigService {
     public interface ICompanyService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/CompanyInsert", ReplyAction="http://tempuri.org/ICompanyService/CompanyInsertResponse")]
-        bool CompanyInsert(Digital.WCFClient.ConfigService.CompanyModel Model);
+        Digital.WCFClient.ConfigService.CompanyModel CompanyInsert(Digital.WCFClient.ConfigService.CompanyModel Model);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/CompanyInsert", ReplyAction="http://tempuri.org/ICompanyService/CompanyInsertResponse")]
-        System.Threading.Tasks.Task<bool> CompanyInsertAsync(Digital.WCFClient.ConfigService.CompanyModel Model);
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CompanyModel> CompanyInsertAsync(Digital.WCFClient.ConfigService.CompanyModel Model);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/CompanyUpdate", ReplyAction="http://tempuri.org/ICompanyService/CompanyUpdateResponse")]
         Digital.WCFClient.ConfigService.CompanyModel CompanyUpdate(Digital.WCFClient.ConfigService.CompanyModel Model);
@@ -4259,11 +4323,11 @@ namespace Digital.WCFClient.ConfigService {
                 base(binding, remoteAddress) {
         }
         
-        public bool CompanyInsert(Digital.WCFClient.ConfigService.CompanyModel Model) {
+        public Digital.WCFClient.ConfigService.CompanyModel CompanyInsert(Digital.WCFClient.ConfigService.CompanyModel Model) {
             return base.Channel.CompanyInsert(Model);
         }
         
-        public System.Threading.Tasks.Task<bool> CompanyInsertAsync(Digital.WCFClient.ConfigService.CompanyModel Model) {
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CompanyModel> CompanyInsertAsync(Digital.WCFClient.ConfigService.CompanyModel Model) {
             return base.Channel.CompanyInsertAsync(Model);
         }
         

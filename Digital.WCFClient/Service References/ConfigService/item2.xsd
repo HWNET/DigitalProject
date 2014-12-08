@@ -240,6 +240,7 @@
       <xs:element minOccurs="0" name="CasesCategoryPicture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CasesModels" nillable="true" type="tns:ArrayOfCasesModel" />
       <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyModel" nillable="true" type="tns:CompanyModel" />
       <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -254,6 +255,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="CasesAbstract" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CasesCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="CasesCategoryModel" nillable="true" type="tns:CasesCategoryModel" />
       <xs:element minOccurs="0" name="CasesDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CasesDetails" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CasesID" type="xs:int" />
@@ -363,6 +365,7 @@
   <xs:complexType name="NewsCategoryModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyModel" nillable="true" type="tns:CompanyModel" />
       <xs:element minOccurs="0" name="NewsCategoryContent" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NewsCategoryID" type="xs:int" />
       <xs:element minOccurs="0" name="NewsCategoryName" nillable="true" type="xs:string" />
@@ -385,6 +388,7 @@
       <xs:element minOccurs="0" name="NewsAbstract" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NewsBody" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NewsCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsCategoryModel" nillable="true" type="tns:NewsCategoryModel" />
       <xs:element minOccurs="0" name="NewsCommentModels" nillable="true" type="tns:ArrayOfNewsCommentModel" />
       <xs:element minOccurs="0" name="NewsID" type="xs:int" />
       <xs:element minOccurs="0" name="NewsKeywords" nillable="true" type="xs:string" />

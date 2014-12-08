@@ -146,21 +146,21 @@
   <xs:element name="CompanyInsertResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CompanyInsertResult" type="xs:boolean" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyInsertResult" nillable="true" type="q14:CompanyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CompanyUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q14:CompanyModel" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q15:CompanyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CompanyUpdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyUpdateResult" nillable="true" type="q15:CompanyModel" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyUpdateResult" nillable="true" type="q16:CompanyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -174,7 +174,7 @@
   <xs:element name="CompanyQueryByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyQueryByIdResult" nillable="true" type="q16:CompanyModel" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyQueryByIdResult" nillable="true" type="q17:CompanyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -188,7 +188,7 @@
   <xs:element name="CompanyQueryByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyQueryByNameResult" nillable="true" type="q17:CompanyModel" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyQueryByNameResult" nillable="true" type="q18:CompanyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -228,7 +228,7 @@
   <xs:element name="CompanyQueryListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyQueryListResult" nillable="true" type="q18:ArrayOfCompanyModel" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CompanyQueryListResult" nillable="true" type="q19:ArrayOfCompanyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -240,7 +240,7 @@
   <xs:element name="GetCompanyTypeListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyTypeListResult" nillable="true" type="q19:ArrayOfCompanyTypeMode" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyTypeListResult" nillable="true" type="q20:ArrayOfCompanyTypeMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -252,7 +252,7 @@
   <xs:element name="GetCompanyMemberListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyMemberListResult" nillable="true" type="q20:ArrayOfCompanyMemberMode" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyMemberListResult" nillable="true" type="q21:ArrayOfCompanyMemberMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -264,7 +264,7 @@
   <xs:element name="GetCompanyBusinessListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyBusinessListResult" nillable="true" type="q21:ArrayOfCompanyBusinessMode" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyBusinessListResult" nillable="true" type="q22:ArrayOfCompanyBusinessMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -276,7 +276,7 @@
   <xs:element name="GetPrimaryBusinessListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetPrimaryBusinessListResult" nillable="true" type="q22:ArrayOfPrimaryBusinessCategoryMode" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetPrimaryBusinessListResult" nillable="true" type="q23:ArrayOfPrimaryBusinessCategoryMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -288,7 +288,7 @@
   <xs:element name="GetPrimarySalesAreaListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetPrimarySalesAreaListResult" nillable="true" type="q23:ArrayOfPrimarySalesAreaMode" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetPrimarySalesAreaListResult" nillable="true" type="q24:ArrayOfPrimarySalesAreaMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -300,7 +300,7 @@
   <xs:element name="GetProductionFormListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProductionFormListResult" nillable="true" type="q24:ArrayOfProductionFormMode" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProductionFormListResult" nillable="true" type="q25:ArrayOfProductionFormMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -312,7 +312,7 @@
   <xs:element name="GetServicesDomainListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetServicesDomainListResult" nillable="true" type="q25:ArrayOfServicesDomainMode" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetServicesDomainListResult" nillable="true" type="q26:ArrayOfServicesDomainMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -324,7 +324,7 @@
   <xs:element name="GetProcessingMethodListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProcessingMethodListResult" nillable="true" type="q26:ArrayOfProcessingMethodMode" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProcessingMethodListResult" nillable="true" type="q27:ArrayOfProcessingMethodMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -336,7 +336,7 @@
   <xs:element name="GetProcessingCraftListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProcessingCraftListResult" nillable="true" type="q27:ArrayOfProcessingCraftMode" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProcessingCraftListResult" nillable="true" type="q28:ArrayOfProcessingCraftMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -348,7 +348,7 @@
   <xs:element name="GetEquipmentIntroListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetEquipmentIntroListResult" nillable="true" type="q28:ArrayOfEquipmentIntroMode" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetEquipmentIntroListResult" nillable="true" type="q29:ArrayOfEquipmentIntroMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -360,7 +360,7 @@
   <xs:element name="GetCapacityUnitListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCapacityUnitListResult" nillable="true" type="q29:ArrayOfCapacityUnitMode" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCapacityUnitListResult" nillable="true" type="q30:ArrayOfCapacityUnitMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -372,7 +372,7 @@
   <xs:element name="GetAnnualBusinessVolumeListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetAnnualBusinessVolumeListResult" nillable="true" type="q30:ArrayOfAnnualBusinessVolumeMode" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetAnnualBusinessVolumeListResult" nillable="true" type="q31:ArrayOfAnnualBusinessVolumeMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -384,7 +384,7 @@
   <xs:element name="GetAnnualExportsVolumeListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetAnnualExportsVolumeListResult" nillable="true" type="q31:ArrayOfAnnualExportsVolumeMode" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetAnnualExportsVolumeListResult" nillable="true" type="q32:ArrayOfAnnualExportsVolumeMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -396,7 +396,7 @@
   <xs:element name="GetManagementSystemCertificationListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetManagementSystemCertificationListResult" nillable="true" type="q32:ArrayOfManagementSystemCertificationMode" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetManagementSystemCertificationListResult" nillable="true" type="q33:ArrayOfManagementSystemCertificationMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -408,7 +408,7 @@
   <xs:element name="GetProductQualityCertificationListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProductQualityCertificationListResult" nillable="true" type="q33:ArrayOfProductQualityCertificationMode" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetProductQualityCertificationListResult" nillable="true" type="q34:ArrayOfProductQualityCertificationMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -420,7 +420,7 @@
   <xs:element name="GetQualityAssuranceListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetQualityAssuranceListResult" nillable="true" type="q34:ArrayOfQualityAssuranceMode" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetQualityAssuranceListResult" nillable="true" type="q35:ArrayOfQualityAssuranceMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -432,7 +432,7 @@
   <xs:element name="GetCompanyYearEstablishedListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyYearEstablishedListResult" nillable="true" type="q35:ArrayOfCompanyYearEstablishedMode" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyYearEstablishedListResult" nillable="true" type="q36:ArrayOfCompanyYearEstablishedMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -444,7 +444,7 @@
   <xs:element name="GetCompanyRegisteredAssetsUnitListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyRegisteredAssetsUnitListResult" nillable="true" type="q36:ArrayOfCompanyRegisteredAssetsUnitMode" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetCompanyRegisteredAssetsUnitListResult" nillable="true" type="q37:ArrayOfCompanyRegisteredAssetsUnitMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
