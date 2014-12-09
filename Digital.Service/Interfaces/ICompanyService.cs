@@ -14,7 +14,7 @@ namespace Digital.Service.Interfaces
         [OperationContract]
         CompanyModel CompanyInsert(CompanyModel Model);
         [OperationContract]
-        CompanyModel CompanyUpdate(CompanyModel Model);
+        CompanyModel CompanyUpdate(CompanyModel Model,int TabIndex);
         [OperationContract]
         CompanyModel CompanyQueryById(int CompanyId);
         [OperationContract]

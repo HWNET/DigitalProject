@@ -126,6 +126,16 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        public ActionResult CompanyBaseInfoTEST(string CompanyID)
+        {
+            return Content(CompanyID);
+        }
+
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult CompanyBaseInfo(int CompanyID, int IsInsert, string CompanyName, string CompanyRegisteredNO, int CompanyTypeNO, int CompanyMembers,
             int CompanyBusinessModel, int IsProvideOEM, int PrimaryBusinessCategory, int PrimaryBusiness, string PrimaryProduct,
             int PrimarySalesArea, int CompanyBusinessProvince, int CompanyBusinessCity, string CompanyIntro)
@@ -176,7 +186,7 @@ namespace Digital.Web.Controllers
                 else // old existing model -- do update
                 {
                     #region old existing model -- do update
-                    var CompanyModel = client.CompanyUpdate(NewModel); // update DB
+                    var CompanyModel = client.CompanyUpdate(NewModel,1); // update DB
                     if (CompanyModel!=null&&CompanyModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
@@ -253,7 +263,7 @@ namespace Digital.Web.Controllers
                 else // old existing model -- do update
                 {
                     #region old existing model -- do update
-                    var CompanyModel = client.CompanyUpdate(NewModel); // update DB
+                    var CompanyModel = client.CompanyUpdate(NewModel,2); // update DB
                     if (CompanyModel != null && CompanyModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
@@ -324,7 +334,7 @@ namespace Digital.Web.Controllers
                 else // old existing model -- do update
                 {
                     #region old existing model -- do update
-                    var CompanyModel = client.CompanyUpdate(NewModel); // update DB
+                    var CompanyModel = client.CompanyUpdate(NewModel,3); // update DB
                     if (CompanyModel != null && CompanyModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);

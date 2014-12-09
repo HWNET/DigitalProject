@@ -41,7 +41,7 @@
                     <p>完善企业信息，让客户更了解您.</p>
                 </div>
                 <div class="panel-body panel-body-nopadding">
-                    @Html.AntiForgeryToken()
+                   
                     <!-- BASIC WIZARD -->
                     <div id="progressWizard" class="basic-wizard">
 
@@ -51,6 +51,7 @@
                             <li><a href="#ptab3" data-toggle="tab"><span>3:</span> 更多信息</a></li>
                         </ul>
                         <form class="form" id="firstForm" onsubmit="return false">
+                            @Html.AntiForgeryToken()
                             <div class="tab-content">
 
                                 <div class="progress progress-striped active">
@@ -625,7 +626,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@AssetUnitMode.Value" @IsSelected>@AssetUnitMode.Name</option>
+                                                        <option value="@AssetUnitMode.Id" @IsSelected>@AssetUnitMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -709,7 +710,7 @@
 
 <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
 <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-<script src="../js/JqueryToken.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
 <script src="../DigitalStyle/js/custom.js"></script>
 
 <script>
@@ -1089,10 +1090,15 @@
             //......
             if(TabIndex==0){
                 alert(1);
-
+                /*
+                 data: { CompanyID:CompanyID,IsInsert:IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
+                        CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
+                        PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
+                        CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro},
+                */
                 $.ajaxAntiForgery({
                     type: "post",
-                    data: { CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
+                    data:{ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
                         CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
                         PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
                         CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro},

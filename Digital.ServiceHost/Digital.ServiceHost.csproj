@@ -66,27 +66,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Config\AnnualVolume.xml" />
-    <Content Include="bin\Debug\Config\AssetsUnit.xml" />
-    <Content Include="bin\Debug\Config\CapacityUnit.xml" />
-    <Content Include="bin\Debug\Config\City.xml" />
-    <Content Include="bin\Debug\Config\CompanyBusiness.xml" />
-    <Content Include="bin\Debug\Config\CompanyMember.xml" />
-    <Content Include="bin\Debug\Config\CompanyType.xml" />
-    <Content Include="bin\Debug\Config\EquipmentIntro.xml" />
-    <Content Include="bin\Debug\Config\Menu.xml" />
-    <Content Include="bin\Debug\Config\PrimaryBusiness.xml" />
-    <Content Include="bin\Debug\Config\PrimarySalesArea.xml" />
-    <Content Include="bin\Debug\Config\ProcessingCraft.xml" />
-    <Content Include="bin\Debug\Config\ProcessingMethod.xml" />
-    <Content Include="bin\Debug\Config\ProductionForm.xml" />
-    <Content Include="bin\Debug\Config\QualityAssurance.xml" />
-    <Content Include="bin\Debug\Config\QualityCertification.xml" />
-    <Content Include="bin\Debug\Config\Service.xml" />
-    <Content Include="bin\Debug\Config\ServicesDomain.xml" />
-    <Content Include="bin\Debug\Config\Skills.xml" />
-    <Content Include="bin\Debug\Config\SystemCertification.xml" />
-    <Content Include="bin\Debug\Config\Year.xml" />
+    <Folder Include="bin\Debug\Config\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

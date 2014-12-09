@@ -154,6 +154,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q15:CompanyModel" />
+        <xs:element minOccurs="0" name="TabIndex" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -14,14 +14,14 @@ namespace Digital.Contact.Models
         [Key]
         public int CompanyID { get; set; }
 
-        [Required(ErrorMessage = "必填")]
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "公司名称")]
+        //[Required(ErrorMessage = "必填")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "公司名称")]
         public string CompanyName { get; set; } //公司名称
 
-        [Required(ErrorMessage = "必填")]
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "工商注册号")]
+        //[Required(ErrorMessage = "必填")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "工商注册号")]
         public string CompanyRegisteredNO { get; set; } //工商注册号
 
         public int CompanyTypeNO { get; set; } //企业类型
@@ -45,8 +45,8 @@ namespace Digital.Contact.Models
         [NotMapped]
         public PrimaryBusinessMode PrimaryBusinessMode { get; set; }
 
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "主营产品")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "主营产品")]
         public string PrimaryProduct { get; set; } //主营产品,5个input value 拼接
 
         public int PrimarySalesArea { get; set; } //主要销售区域
@@ -60,9 +60,9 @@ namespace Digital.Contact.Models
         [NotMapped]
         public CompanyBusinessCityMode CompanyBusinessCityMode { get; set; }
 
-        [Required(ErrorMessage = "必填")]
-        [DataType(DataType.Text)]
-        [Display(Name = "公司简介")]
+        //[Required(ErrorMessage = "必填")]
+        //[DataType(DataType.Text)]
+        //[Display(Name = "公司简介")]
         public string CompanyIntro { get; set; } //公司简介
 
         public int ProductionForm { get; set; } //生产形式
@@ -115,11 +115,11 @@ namespace Digital.Contact.Models
         public QualityAssuranceMode QualityAssuranceMode { get; set; }
 
         public float FactoryArea { get; set; } //厂房面积
-        [Display(Name = "主要设备")]
+        //[Display(Name = "主要设备")]
         public string PrimaryEquipments { get; set; } //主要设备,5个input value 拼接
 
         public int CompanyYearEstablished { get; set; } //成立年份
-        [Display(Name = "企业网址")]
+        //[Display(Name = "企业网址")]
         public string CompanyWebsite { get; set; } //企业网址
         
         public float CompanyRegisteredAssets { get; set; } //注册资本
@@ -134,16 +134,16 @@ namespace Digital.Contact.Models
         [NotMapped]
         public CompanyBusinessCityMode CompanyRegisteredCityMode { get; set; }
 
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "法人代表")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "法人代表")]
         public string CompanyCorporateRepresentative { get; set; } //法人代表
 
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "开户行")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "开户行")]
         public string CompanyBankDeposit { get; set; } //开户行
 
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "账户")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "账户")]
         public string CompanyBankAccount { get; set; } //开户行 账户
 
         //企业用户类型 1 方案商  2 成品商  3  供应商

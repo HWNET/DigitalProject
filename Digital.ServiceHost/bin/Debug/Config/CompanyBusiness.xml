@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Root>
-  <Item Id="1" Name="生产厂家"/>
-  <Item Id="2" Name="经营批发"/>
-  <Item Id="3" Name="商业服务"/>
-  <Item Id="4" Name="招商代理"/>
-  <Item Id="5" Name="其它"/>
-</Root> 

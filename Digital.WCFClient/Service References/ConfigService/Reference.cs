@@ -4152,10 +4152,10 @@ namespace Digital.WCFClient.ConfigService {
         System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CompanyModel> CompanyInsertAsync(Digital.WCFClient.ConfigService.CompanyModel Model);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/CompanyUpdate", ReplyAction="http://tempuri.org/ICompanyService/CompanyUpdateResponse")]
-        Digital.WCFClient.ConfigService.CompanyModel CompanyUpdate(Digital.WCFClient.ConfigService.CompanyModel Model);
+        Digital.WCFClient.ConfigService.CompanyModel CompanyUpdate(Digital.WCFClient.ConfigService.CompanyModel Model, int TabIndex);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/CompanyUpdate", ReplyAction="http://tempuri.org/ICompanyService/CompanyUpdateResponse")]
-        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CompanyModel> CompanyUpdateAsync(Digital.WCFClient.ConfigService.CompanyModel Model);
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CompanyModel> CompanyUpdateAsync(Digital.WCFClient.ConfigService.CompanyModel Model, int TabIndex);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompanyService/CompanyQueryById", ReplyAction="http://tempuri.org/ICompanyService/CompanyQueryByIdResponse")]
         Digital.WCFClient.ConfigService.CompanyModel CompanyQueryById(int CompanyId);
@@ -4331,12 +4331,12 @@ namespace Digital.WCFClient.ConfigService {
             return base.Channel.CompanyInsertAsync(Model);
         }
         
-        public Digital.WCFClient.ConfigService.CompanyModel CompanyUpdate(Digital.WCFClient.ConfigService.CompanyModel Model) {
-            return base.Channel.CompanyUpdate(Model);
+        public Digital.WCFClient.ConfigService.CompanyModel CompanyUpdate(Digital.WCFClient.ConfigService.CompanyModel Model, int TabIndex) {
+            return base.Channel.CompanyUpdate(Model, TabIndex);
         }
         
-        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CompanyModel> CompanyUpdateAsync(Digital.WCFClient.ConfigService.CompanyModel Model) {
-            return base.Channel.CompanyUpdateAsync(Model);
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CompanyModel> CompanyUpdateAsync(Digital.WCFClient.ConfigService.CompanyModel Model, int TabIndex) {
+            return base.Channel.CompanyUpdateAsync(Model, TabIndex);
         }
         
         public Digital.WCFClient.ConfigService.CompanyModel CompanyQueryById(int CompanyId) {
