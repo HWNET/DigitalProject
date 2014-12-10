@@ -52,7 +52,18 @@ namespace Digital.Service.Implements
                 CompanyModel.CompanyMemberMode = new CompanyMemberMode { Id = CompanyModel.CompanyMembers, Name = GenericList.CacheModelObj.CompanyMemberModelist.Where(o => o.Id == CompanyModel.CompanyMembers).SingleOrDefault().Name };
                 CompanyModel.CompanyBusinessMode = new CompanyBusinessMode { Id = CompanyModel.CompanyBusinessModel, Name = GenericList.CacheModelObj.CompanyBusinessModelist.Where(o => o.Id == CompanyModel.CompanyBusinessModel).SingleOrDefault().Name };
 
-                CompanyModel.PrimaryBusinessCategoryMode = new PrimaryBusinessCategoryMode { Id = CompanyModel.PrimaryBusinessCategory, Name = GenericList.CacheModelObj.PrimaryBusinessCategoryModelist.Where(o => o.Id == CompanyModel.PrimaryBusinessCategory).SingleOrDefault().Name };
+
+                PrimaryBusinessCategoryMode BCategoryMode = null;
+                foreach (var BCMode in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
+                {
+                    if (BCMode.Id==CompanyModel.PrimaryBusinessCategory)
+                    {
+                        BCategoryMode = BCMode;
+                        break;
+                    }
+                }
+                CompanyModel.PrimaryBusinessCategoryMode = new PrimaryBusinessCategoryMode { Id = CompanyModel.PrimaryBusinessCategory, Name = BCategoryMode.Name };
+                
                 var PrimaryBusinessName = string.Empty;
                 foreach (var item in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
                 {
@@ -63,10 +74,21 @@ namespace Digital.Service.Implements
                         break;
                     }
                 }
-                CompanyModel.PrimaryBusinessMode = new PrimaryBusinessMode { Id = CompanyModel.PrimaryBusiness, Name = PrimaryBusinessName };
+                CompanyModel.PrimaryBusinessMode = new PrimaryBusinessMode { Id = CompanyModel.PrimaryBusiness, Name = PrimaryBusinessName, BusinessCategoryName = BCategoryMode.Name };
 
                 CompanyModel.PrimarySalesAreaMode = new PrimarySalesAreaMode { Id = CompanyModel.PrimarySalesArea, Name = GenericList.CacheModelObj.PrimarySalesAreaModelist.Where(o => o.Id == CompanyModel.PrimarySalesArea).SingleOrDefault().Name };
-                CompanyModel.CompanyBusinessProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyBusinessProvince, Name = GenericList.CacheModelObj.CompanyBusinessProvinceModelist.Where(o => o.Id == CompanyModel.CompanyBusinessProvince).SingleOrDefault().Name };
+
+                CompanyBusinessProvinceMode BusinessProvinceMode = null;
+                foreach (var BProvinceMode in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
+                {
+                    if (BProvinceMode.Id==CompanyModel.CompanyBusinessProvince)
+                    {
+                        BusinessProvinceMode = BProvinceMode;
+                        break;
+                    }
+                }
+                CompanyModel.CompanyBusinessProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyBusinessProvince, Name = BusinessProvinceMode.Name };
+                
                 var BusinessCityName = string.Empty;
                 foreach (var item in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
                 {
@@ -77,7 +99,7 @@ namespace Digital.Service.Implements
                         break;
                     }
                 }
-                CompanyModel.CompanyBusinessCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyBusinessCity, Name = BusinessCityName };
+                CompanyModel.CompanyBusinessCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyBusinessCity, Name = BusinessCityName, BusinessProvinceName = BusinessProvinceMode.Name };
                 #endregion
 
             }
@@ -132,8 +154,19 @@ namespace Digital.Service.Implements
 
                 #region TAB THREE -- UI Models
                 CompanyModel.CompanyRegisteredAssetsUnitMode = new CompanyRegisteredAssetsUnitMode { Id = CompanyModel.CompanyRegisteredAssetsUnit, Name = GenericList.CacheModelObj.CompanyRegisteredAssetsUnitModelist.Where(o => o.Id == CompanyModel.CompanyRegisteredAssetsUnit).SingleOrDefault().Name };
+                //var modeBTEST = GenericList.CacheModelObj.CompanyBusinessProvinceModelist.Where(o => o.Id == CompanyModel.CompanyBusinessProvince).ToList();
+                //var modeTEST = GenericList.CacheModelObj.CompanyRegisteredProvinceModelist.Where(o => o.Id == CompanyModel.CompanyRegisteredProvince).ToList();
+                CompanyBusinessProvinceMode RegisteredProvinceMode = null;
+                foreach (var RProvinceMode in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
+                {
+                    if (RProvinceMode.Id==CompanyModel.CompanyRegisteredProvince)
+                    {
+                        RegisteredProvinceMode = RProvinceMode;
+                        break;
+                    }
+                }
 
-                CompanyModel.CompanyRegisteredProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyRegisteredProvince, Name = GenericList.CacheModelObj.CompanyRegisteredProvinceModelist.Where(o => o.Id == CompanyModel.CompanyRegisteredProvince).SingleOrDefault().Name };
+                CompanyModel.CompanyRegisteredProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyRegisteredProvince, Name = RegisteredProvinceMode.Name };
                 var RegisteredCityName = string.Empty;
                 foreach (var item in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
                 {
@@ -144,7 +177,7 @@ namespace Digital.Service.Implements
                         break;
                     }
                 }
-                CompanyModel.CompanyRegisteredCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyRegisteredCity, Name = RegisteredCityName };
+                CompanyModel.CompanyRegisteredCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyRegisteredCity, Name = RegisteredCityName, BusinessProvinceName = RegisteredProvinceMode.Name };
                 #endregion
             }
             #endregion

@@ -143,19 +143,193 @@ namespace Digital.Service.Implements
         /// </summary>
         private void CompanyCacheList()
         {
+            logger.WriteInfo("CompanyCacheList");
             if (GenericList.CacheModelObj.CompanyModellist==null)
             {
-                GenericList.CacheModelObj.CompanyModellist = new List<CompanyModel>();
-                CompanyService CompanyService = new CompanyService();
-
-                var CompanyList = CompanyService.CompanyQueryList();
-                if (CompanyList!=null)
+                try
                 {
-                    foreach (var Company in CompanyList)
+                    GenericList.CacheModelObj.CompanyModellist = new List<CompanyModel>();
+                    CompanyService CompanyService = new CompanyService();
+
+                    var CompanyList = CompanyService.CompanyQueryList();
+                    if (CompanyList != null)
                     {
-                        GenericList.CacheModelObj.CompanyModellist.Add(Company);
+                        foreach (var CModel in CompanyList)
+                        {
+                            #region TAB ONE -- UI Models
+                            if (CModel.CompanyTypeNO>0)
+                            {
+                                CModel.CompanyTypeMode = new CompanyTypeMode { Id = CModel.CompanyTypeNO, Name = GenericList.CacheModelObj.CompanyTypeModelist.Where(o => o.Id == CModel.CompanyTypeNO).SingleOrDefault().Name };
+                            }
+                            if (CModel.CompanyMembers>0)
+                            {
+                                CModel.CompanyMemberMode = new CompanyMemberMode { Id = CModel.CompanyMembers, Name = GenericList.CacheModelObj.CompanyMemberModelist.Where(o => o.Id == CModel.CompanyMembers).SingleOrDefault().Name };
+                            }
+                            if (CModel.CompanyBusinessModel>0)
+                            {
+                                CModel.CompanyBusinessMode = new CompanyBusinessMode { Id = CModel.CompanyBusinessModel, Name = GenericList.CacheModelObj.CompanyBusinessModelist.Where(o => o.Id == CModel.CompanyBusinessModel).SingleOrDefault().Name };
+                            }
+
+                            PrimaryBusinessCategoryMode BCategoryMode = null;
+                            if (CModel.PrimaryBusinessCategory>0)
+                            {
+                                foreach (var BCMode in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
+                                {
+                                    if (BCMode.Id == CModel.PrimaryBusinessCategory)
+                                    {
+                                        BCategoryMode = BCMode;
+                                        break;
+                                    }
+                                }
+                                CModel.PrimaryBusinessCategoryMode = new PrimaryBusinessCategoryMode { Id = CModel.PrimaryBusinessCategory, Name = BCategoryMode.Name };
+                            }
+
+                            if (CModel.PrimaryBusiness>0)
+                            {
+                                var PrimaryBusinessName = string.Empty;
+                                foreach (var item in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
+                                {
+                                    var mode = item.PrimaryBusinessList.Where(o => o.Id == CModel.PrimaryBusiness).SingleOrDefault();
+                                    if (mode != null && mode.Id > 0)
+                                    {
+                                        PrimaryBusinessName = mode.Name;
+                                        break;
+                                    }
+                                }
+                                CModel.PrimaryBusinessMode = new PrimaryBusinessMode { Id = CModel.PrimaryBusiness, Name = PrimaryBusinessName, BusinessCategoryName = BCategoryMode.Name };
+                            }
+
+                            if (CModel.PrimarySalesArea>0)
+                            {
+                                CModel.PrimarySalesAreaMode = new PrimarySalesAreaMode { Id = CModel.PrimarySalesArea, Name = GenericList.CacheModelObj.PrimarySalesAreaModelist.Where(o => o.Id == CModel.PrimarySalesArea).SingleOrDefault().Name };
+                            }
+
+                            CompanyBusinessProvinceMode BusinessProvinceMode = null;
+                            if (CModel.CompanyBusinessProvince>0)
+                            {
+                                foreach (var BProvinceMode in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
+                                {
+                                    if (BProvinceMode.Id == CModel.CompanyBusinessProvince)
+                                    {
+                                        BusinessProvinceMode = BProvinceMode;
+                                        break;
+                                    }
+                                }
+                                CModel.CompanyBusinessProvinceMode = new CompanyBusinessProvinceMode { Id = CModel.CompanyBusinessProvince, Name = BusinessProvinceMode.Name };
+                            }
+
+                            if (CModel.CompanyBusinessCity>0)
+                            {
+                                var BusinessCityName = string.Empty;
+                                foreach (var item in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
+                                {
+                                    var mode = item.CompanyBusinessCityModeList.Where(o => o.Id == CModel.CompanyBusinessCity).SingleOrDefault();
+                                    if (mode != null && mode.Id > 0)
+                                    {
+                                        BusinessCityName = mode.Name;
+                                        break;
+                                    }
+                                }
+                                CModel.CompanyBusinessCityMode = new CompanyBusinessCityMode { Id = CModel.CompanyBusinessCity, Name = BusinessCityName, BusinessProvinceName = BusinessProvinceMode.Name };
+                            }
+                            #endregion
+
+                            #region TAB TWO -- UI Models
+                            if (CModel.ProductionForm>0)
+                            {
+                                CModel.ProductionFormMode = new ProductionFormMode { Id = CModel.ProductionForm, Name = GenericList.CacheModelObj.ProductionFormModelist.Where(o => o.Id == CModel.ProductionForm).SingleOrDefault().Name };
+                            }
+                            if (CModel.ServicesDomain>0)
+                            {
+                                CModel.ServicesDomainMode = new ServicesDomainMode { Id = CModel.ServicesDomain, Name = GenericList.CacheModelObj.ServicesDomainModelist.Where(o => o.Id == CModel.ServicesDomain).SingleOrDefault().Name };
+                            }
+                            if (CModel.ProcessingMethod>0)
+                            {
+                                CModel.ProcessingMethodMode = new ProcessingMethodMode { Id = CModel.ProcessingMethod, Name = GenericList.CacheModelObj.ProcessingMethodModelist.Where(o => o.Id == CModel.ProcessingMethod).SingleOrDefault().Name };
+                            }
+                            if (CModel.ProcessingCraft>0)
+                            {
+                                CModel.ProcessingCraftMode = new ProcessingCraftMode { Id = CModel.ProcessingCraft, Name = GenericList.CacheModelObj.ProcessingCraftModelist.Where(o => o.Id == CModel.ProcessingCraft).SingleOrDefault().Name };
+                            }
+                            if (CModel.EquipmentIntro>0)
+                            {
+                                CModel.EquipmentIntroMode = new EquipmentIntroMode { Id = CModel.EquipmentIntro, Name = GenericList.CacheModelObj.EquipmentIntroModelist.Where(o => o.Id == CModel.EquipmentIntro).SingleOrDefault().Name };
+                            }
+                            if (CModel.ResearchDepartMembers>0)
+                            {
+                                CModel.ResearchDepartMemberMode = new CompanyMemberMode { Id = CModel.ResearchDepartMembers, Name = GenericList.CacheModelObj.CompanyMemberModelist.Where(o => o.Id == CModel.ResearchDepartMembers).SingleOrDefault().Name };
+                            }
+                            if (CModel.CapacityIntroUnit>0)
+                            {
+                                CModel.CapacityUnitMode = new CapacityUnitMode { Id = CModel.CapacityIntroUnit, Name = GenericList.CacheModelObj.CapacityUnitModelist.Where(o => o.Id == CModel.CapacityIntroUnit).SingleOrDefault().Name };
+                            }
+                            if (CModel.AnnualBusinessVolume>0)
+                            {
+                                CModel.AnnualBusinessVolumeMode = new AnnualBusinessVolumeMode { Id = CModel.AnnualBusinessVolume, Name = GenericList.CacheModelObj.AnnualBusinessVolumeModelist.Where(o => o.Id == CModel.AnnualBusinessVolume).SingleOrDefault().Name };
+                            }
+                            if (CModel.AnnualExportsVolume>0)
+                            {
+                                CModel.AnnualExportsVolumeMode = new AnnualExportsVolumeMode { Id = CModel.AnnualExportsVolume, Name = GenericList.CacheModelObj.AnnualExportsVolumeModelist.Where(o => o.Id == CModel.AnnualExportsVolume).SingleOrDefault().Name };
+                            }
+                            if (CModel.ManagementSystemCertification>0)
+                            {
+                                CModel.ManagementSystemCertificationMode = new ManagementSystemCertificationMode { Id = CModel.ManagementSystemCertification, Name = GenericList.CacheModelObj.ManagementSystemCertificationModelist.Where(o => o.Id == CModel.ManagementSystemCertification).SingleOrDefault().Name };
+                            }
+                            if (CModel.ProductQualityCertification>0)
+                            {
+                                CModel.ProductQualityCertificationMode = new ProductQualityCertificationMode { Id = CModel.ProductQualityCertification, Name = GenericList.CacheModelObj.ProductQualityCertificationModelist.Where(o => o.Id == CModel.ProductQualityCertification).SingleOrDefault().Name };
+                            }
+                            if (CModel.QualityAssurance>0)
+                            {
+                                CModel.QualityAssuranceMode = new QualityAssuranceMode { Id = CModel.QualityAssurance, Name = GenericList.CacheModelObj.QualityAssuranceModelist.Where(o => o.Id == CModel.QualityAssurance).SingleOrDefault().Name };
+                            }
+                            #endregion
+
+                            #region TAB THREE -- UI Models
+                            if (CModel.CompanyRegisteredAssetsUnit>0)
+                            {
+                                CModel.CompanyRegisteredAssetsUnitMode = new CompanyRegisteredAssetsUnitMode { Id = CModel.CompanyRegisteredAssetsUnit, Name = GenericList.CacheModelObj.CompanyRegisteredAssetsUnitModelist.Where(o => o.Id == CModel.CompanyRegisteredAssetsUnit).SingleOrDefault().Name };    
+                            }
+                            CompanyBusinessProvinceMode RegisteredProvinceMode = null;
+                            if (CModel.CompanyRegisteredProvince>0)
+                            {
+                                foreach (var RProvinceMode in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
+                                {
+                                    if (RProvinceMode.Id == CModel.CompanyRegisteredProvince)
+                                    {
+                                        RegisteredProvinceMode = RProvinceMode;
+                                        break;
+                                    }
+                                }
+                                CModel.CompanyRegisteredProvinceMode = new CompanyBusinessProvinceMode { Id = CModel.CompanyRegisteredProvince, Name = RegisteredProvinceMode.Name };
+                            }
+
+                            if (CModel.CompanyRegisteredCity>0)
+                            {
+                                var RegisteredCityName = string.Empty;
+                                foreach (var item in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
+                                {
+                                    var mode = item.CompanyBusinessCityModeList.Where(o => o.Id == CModel.CompanyRegisteredCity).SingleOrDefault();
+                                    if (mode != null && mode.Id > 0)
+                                    {
+                                        RegisteredCityName = mode.Name;
+                                        break;
+                                    }
+                                }
+                                CModel.CompanyRegisteredCityMode = new CompanyBusinessCityMode { Id = CModel.CompanyRegisteredCity, Name = RegisteredCityName, BusinessProvinceName = RegisteredProvinceMode.Name };
+                            }
+
+                            #endregion
+
+                            GenericList.CacheModelObj.CompanyModellist.Add(CModel);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    logger.WriteInfo("CompanyCacheList:Error:" + ex.ToString());
+                }
+
             }
         }
         /// <summary>
@@ -163,16 +337,25 @@ namespace Digital.Service.Implements
         /// </summary>
         private void CasesCategoryCacheList()
         {
+            logger.WriteInfo("CasesCategoryCacheList");
             if (GenericList.CacheModelObj.CasesCategoryModellist==null)
             {
-                GenericList.CacheModelObj.CasesCategoryModellist = new List<CasesCategoryModel>();
-                CasesCategoryService CasesCategoryService = new CasesCategoryService();
-
-                var CasesCategoryList = CasesCategoryService.CasesCategoryQueryList();
-                if (CasesCategoryList!=null)
+                try
                 {
-                    CasesCategoryList.ForEach(c => GenericList.CacheModelObj.CasesCategoryModellist.Add(c));
+                    GenericList.CacheModelObj.CasesCategoryModellist = new List<CasesCategoryModel>();
+                    CasesCategoryService CasesCategoryService = new CasesCategoryService();
+
+                    var CasesCategoryList = CasesCategoryService.CasesCategoryQueryList();
+                    if (CasesCategoryList != null)
+                    {
+                        CasesCategoryList.ForEach(c => GenericList.CacheModelObj.CasesCategoryModellist.Add(c));
+                    }
                 }
+                catch (Exception ex)
+                {
+                    logger.WriteInfo("CasesCategoryCacheList:Error:" + ex.ToString());
+                }
+
             }
         }
         /// <summary>
@@ -180,15 +363,23 @@ namespace Digital.Service.Implements
         /// </summary>
         private void CasesCacheList()
         {
+            logger.WriteInfo("CasesCacheList");
             if (GenericList.CacheModelObj.CasesModellist==null)
             {
-                GenericList.CacheModelObj.CasesModellist = new List<CasesModel>();
-                CasesService CasesService = new CasesService();
-
-                var CasesList = CasesService.CasesQueryList();
-                if (CasesList!=null)
+                try
                 {
-                    CasesList.ForEach(c => GenericList.CacheModelObj.CasesModellist.Add(c));
+                    GenericList.CacheModelObj.CasesModellist = new List<CasesModel>();
+                    CasesService CasesService = new CasesService();
+
+                    var CasesList = CasesService.CasesQueryList();
+                    if (CasesList != null)
+                    {
+                        CasesList.ForEach(c => GenericList.CacheModelObj.CasesModellist.Add(c));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.WriteInfo("CasesCacheList:Error:" + ex.ToString());
                 }
             }
         }

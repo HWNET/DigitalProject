@@ -54,6 +54,18 @@ namespace Digital.Service
             {
                 CacheModelObj.ProvinceModellist = new List<Contact.Models.ProvinceModel>();
             }
+            //for company business address , Province - City
+            if (CacheModelObj.CompanyBusinessProvinceModelist==null)
+            {
+                CacheModelObj.CompanyBusinessProvinceModelist = new List<CompanyBusinessProvinceMode>();
+            }
+            
+            //for company registered address , Province - City
+            if (CacheModelObj.CompanyRegisteredProvinceModelist==null)
+            {
+                CacheModelObj.CompanyRegisteredProvinceModelist = new List<CompanyBusinessProvinceMode>();
+            }
+
             var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
             var doc = new XmlDocument();
             var path = ServicePath + "\\Config\\City.xml";
@@ -63,13 +75,25 @@ namespace Digital.Service
             {
                 List<Contact.Models.CityModel> CityListModel = new List<Contact.Models.CityModel>();
                 var PModel = new Contact.Models.ProvinceModel { ID = int.Parse(ItemModel.Attributes["ID"].Value), Name = ItemModel.Attributes["Name"].Value };
+
+                //for company business address , Province - City
+                var BProvinceModel = new CompanyBusinessProvinceMode { Id = int.Parse(ItemModel.Attributes["ID"].Value), Name = ItemModel.Attributes["Name"].Value };
+                List<CompanyBusinessCityMode> BCityList = new List<CompanyBusinessCityMode>();
+                //for company registered address , Province - City
                 foreach (XmlNode ChildNode in ItemModel.ChildNodes)
                 {
                     CityListModel.Add(new Contact.Models.CityModel { ID = int.Parse(ChildNode.Attributes["ID"].Value), Name = ChildNode.InnerText, ProvinceName = PModel.Name });
+                    BCityList.Add(new CompanyBusinessCityMode { Id = int.Parse(ChildNode.Attributes["ID"].Value), Name = ChildNode.InnerText , BusinessProvinceName=BProvinceModel.Name});
                 }
                 PModel.CityList = CityListModel;
 
+                BProvinceModel.CompanyBusinessCityModeList = BCityList;
+
                 CacheModelObj.ProvinceModellist.Add(PModel);
+                //for company business address , Province - City
+                CacheModelObj.CompanyBusinessProvinceModelist.Add(BProvinceModel);
+                //for company registered address , Province - City
+                CacheModelObj.CompanyRegisteredProvinceModelist.Add(BProvinceModel);
             }
         }
 

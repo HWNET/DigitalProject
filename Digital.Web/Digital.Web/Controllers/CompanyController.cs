@@ -100,11 +100,23 @@ namespace Digital.Web.Controllers
             //drop down cascading 经营地址,企业注册地
 
             //currnet log on user
-            var CurrentUser = User.Identity.Name;
-            ViewBag.CurrentUser = CurrentUser;
-            if (!string.IsNullOrEmpty(CurrentUser))
+            //var CurrentUser = User.Identity.Name;
+            //ViewBag.CurrentUser = CurrentUser;
+            var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            var CompanyID = 0;
+            CompanyModel CompanyModel = null;
+
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
             {
-                var CompanyModel = new CompanyModel
+                CompanyID = UserModel.CompanyID.Value;
+                CompanyModel=client.CompanyQueryById(CompanyID);
+
+                ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
+            }
+            else
+            {
+                CompanyModel = new CompanyModel
                 {
                     CompanyName = "CompanyName1111",
                     CompanyRegisteredNO = "CompanyRegisteredNO1111",
@@ -112,14 +124,12 @@ namespace Digital.Web.Controllers
                     //CompanyBusinessAddress = "CompanyBusinessAddress1111",
                     CompanyIntro = "CompanyIntro111111"
                 };
-                //ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
                 ViewBag.BusinessAddress = "BusinessAddress1111";
-                return View(CompanyModel);
+                //return HttpNotFound();
             }
-            else
-            {
-                return HttpNotFound();
-            }
+            
+            client.Close();
+            return View(CompanyModel);
         }
 
         #region CompanyBaseInfo -- FOR TAB ONE

@@ -87,7 +87,7 @@
                                                     foreach (var TypeMode in (ObservableCollection<CompanyTypeMode>)ViewBag.CompanyTypeList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (TypeMode.Id == 4)
+                                                        if (TypeMode.Id == Model.CompanyTypeNO)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -125,7 +125,7 @@
                                                     foreach (var MemberMode in (ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (MemberMode.Id == 5)
+                                                        if (MemberMode.Id == Model.CompanyMembers)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -174,7 +174,7 @@
                                                     }
 
                                                     <div class="@RadioClass">
-                                                        <input type="radio" name="radioBusiness" id="@RadioId" value="@BusinessMode.Id" @Html.IsChecked(BusinessMode.Id == 1) />
+                                                        <input type="radio" name="radioBusiness" id="@RadioId" value="@BusinessMode.Id" @Html.IsChecked(BusinessMode.Id == Model.CompanyBusinessModel) />
                                                         <label for="@RadioId">@BusinessMode.Name</label>
                                                     </div>
                                                 }
@@ -244,7 +244,7 @@
                                                     foreach (var AreaMode in (ObservableCollection<PrimarySalesAreaMode>)ViewBag.PrimarySalesAreaList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (AreaMode.Id == 1)
+                                                        if (AreaMode.Id == Model.PrimarySalesArea)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -301,7 +301,7 @@
                                                     foreach (var FormMode in (ObservableCollection<ProductionFormMode>)ViewBag.ProductionFormList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (FormMode.Id == 1)
+                                                        if (FormMode.Id == Model.ProductionForm)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -320,7 +320,7 @@
                                                     foreach (var DomainMode in (ObservableCollection<ServicesDomainMode>)ViewBag.ServicesDomainList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (DomainMode.Id == 1)
+                                                        if (DomainMode.Id == Model.ServicesDomain)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -339,7 +339,7 @@
                                                     foreach (var MethodMode in (ObservableCollection<ProcessingMethodMode>)ViewBag.ProcessingMethodList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (MethodMode.Id == 1)
+                                                        if (MethodMode.Id == Model.ProcessingMethod)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -359,7 +359,8 @@
                                                     foreach (var CraftMode in (ObservableCollection<ProcessingCraftMode>)ViewBag.ProcessingCraftList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (CraftMode.Id == 1)
+                                                        
+                                                        if (CraftMode.Id == Model.ProcessingCraft)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -379,7 +380,7 @@
                                                     foreach (var EquipMode in (ObservableCollection<EquipmentIntroMode>)ViewBag.EquipmentIntroList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (EquipMode.Id == 1)
+                                                        if (EquipMode.Id == Model.EquipmentIntro)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -399,7 +400,7 @@
                                                     foreach (var MemberMode in (ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (MemberMode.Id == 5)
+                                                        if (MemberMode.Id == Model.ResearchDepartMembers)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -423,7 +424,7 @@
                                                         foreach (var UnitMode in (ObservableCollection<CapacityUnitMode>)ViewBag.CapacityUnitList)
                                                         {
                                                             var IsSelected = string.Empty;
-                                                            if (UnitMode.Id == 1)
+                                                            if (UnitMode.Id == Model.CapacityIntro)
                                                             {
                                                                 IsSelected = "selected";
                                                             }
@@ -444,7 +445,7 @@
                                                     foreach (var BVolumeMode in (ObservableCollection<AnnualBusinessVolumeMode>)ViewBag.AnnualBusinessVolumeList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (BVolumeMode.Id == 1)
+                                                        if (BVolumeMode.Id == Model.AnnualBusinessVolume)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -465,7 +466,7 @@
                                                     foreach (var EVolumeMode in (ObservableCollection<AnnualExportsVolumeMode>)ViewBag.AnnualExportsVolumeList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (EVolumeMode.Id == 1)
+                                                        if (EVolumeMode.Id == Model.AnnualExportsVolume)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -485,7 +486,7 @@
                                                     foreach (var SystemMode in (ObservableCollection<ManagementSystemCertificationMode>)ViewBag.ManagementSystemCertificationList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (SystemMode.Id == 1)
+                                                        if (SystemMode.Id == Model.ManagementSystemCertification)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -505,7 +506,7 @@
                                                     foreach (var QualityMode in (ObservableCollection<ProductQualityCertificationMode>)ViewBag.ProductQualityCertificationList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (QualityMode.Id == 1)
+                                                        if (QualityMode.Id == Model.ProductQualityCertification)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -542,7 +543,7 @@
                                                     }
 
                                                     <div class="@radioClass">
-                                                        <input type="radio" name="radioQualityAssurance" id="@radioId" value="@QAMode.Id" @Html.IsChecked(QAMode.Id == 1) />
+                                                        <input type="radio" name="radioQualityAssurance" id="@radioId" value="@QAMode.Id" @Html.IsChecked(QAMode.Id == Model.QualityAssurance) />
                                                         <label for="@radioId">@QAMode.Name</label>
                                                     </div>
                                                 }
@@ -593,7 +594,7 @@
                                                     foreach (var YearMode in (ObservableCollection<CompanyYearEstablishedMode>)ViewBag.CompanyYearEstablishedList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (YearMode.Id == 1)
+                                                        if (YearMode.Id == Model.CompanyYearEstablished)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -622,7 +623,7 @@
                                                     foreach (var AssetUnitMode in (ObservableCollection<CompanyRegisteredAssetsUnitMode>)ViewBag.RegisteredAssetsUnitList)
                                                     {
                                                         var IsSelected = string.Empty;
-                                                        if (AssetUnitMode.Id == 1)
+                                                        if (AssetUnitMode.Id == Model.CompanyRegisteredAssetsUnit)
                                                         {
                                                             IsSelected = "selected";
                                                         }
@@ -718,24 +719,67 @@
         @{
             // for drop down cascading [ PrimaryBusiness ]
             var IsBusinessCategory = string.Empty;
-            IsBusinessCategory = "1";
-
+            if (Model.PrimaryBusinessCategory>0)
+            {
+                IsBusinessCategory = Model.PrimaryBusinessCategory.ToString();
+            }
+            else
+            {
+                IsBusinessCategory = "1";
+            }
+            
             var IsBusiness = string.Empty;
-            IsBusiness = "1";
+            if (Model.PrimaryBusiness>0)
+            {
+                IsBusiness = Model.PrimaryBusiness.ToString();
+            }
+            else
+            {
+                IsBusiness = "1";
+            }
 
             //for drop down cascading [ CompanyBusinessAddress ]
             var IsBusinessProvince = string.Empty;
-            IsBusinessProvince = "1";
-
+            if (Model.CompanyBusinessProvince>0)
+            {
+                IsBusinessProvince = Model.CompanyBusinessProvince.ToString();
+            }
+            else
+            {
+                IsBusinessProvince = "1";
+            }
+            
             var IsBusinessCity = string.Empty;
-            IsBusinessCity = "1";
+            if (Model.CompanyBusinessCity>0)
+            {
+                IsBusinessCity = Model.CompanyBusinessCity.ToString();
+            }
+            else
+            {
+                IsBusinessCity = "1";
+            }
             
             //for drop down cascading [ CompanyRegisteredAddress ]
             var IsRegisteredProvince = string.Empty;
-            IsRegisteredProvince = "1";
+            if (Model.CompanyRegisteredProvince>0)
+            {
+                IsRegisteredProvince = Model.CompanyRegisteredProvince.ToString();
+            }
+            else
+            {
+                IsRegisteredProvince = "1";
+            }
 
             var IsRegisteredCity = string.Empty;
-            IsRegisteredCity = "1"; 
+            if (Model.CompanyRegisteredCity>0)
+            {
+                IsRegisteredCity = Model.CompanyRegisteredCity.ToString();
+            }
+            else
+            {
+                IsRegisteredCity = "1"; 
+            }
+            
         }
         //------------for drop down cascading [ PrimaryBusiness ]-------------
         jQuery.ajax({
