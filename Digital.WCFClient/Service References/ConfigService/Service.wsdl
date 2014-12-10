@@ -24,6 +24,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_ICasesCategoryService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -241,6 +249,54 @@
   <wsdl:message name="ICompanyService_GetCompanyRegisteredAssetsUnitList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCompanyRegisteredAssetsUnitListResponse" />
   </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryInsert" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryById" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryList" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ICasesCategoryService_CasesCategoryQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesCategoryQueryListByCompanyResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -385,6 +441,40 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCompanyRegisteredAssetsUnitList">
       <wsdl:input wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitList" message="tns:ICompanyService_GetCompanyRegisteredAssetsUnitList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICompanyService/GetCompanyRegisteredAssetsUnitListResponse" message="tns:ICompanyService_GetCompanyRegisteredAssetsUnitList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="ICasesCategoryService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryInsert" message="tns:ICasesCategoryService_CasesCategoryInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryInsertResponse" message="tns:ICasesCategoryService_CasesCategoryInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryUpdate" message="tns:ICasesCategoryService_CasesCategoryUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryUpdateResponse" message="tns:ICasesCategoryService_CasesCategoryUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryById" message="tns:ICasesCategoryService_CasesCategoryQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByIdResponse" message="tns:ICasesCategoryService_CasesCategoryQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByName" message="tns:ICasesCategoryService_CasesCategoryQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByNameResponse" message="tns:ICasesCategoryService_CasesCategoryQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteById" message="tns:ICasesCategoryService_CasesCategoryDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByIdResponse" message="tns:ICasesCategoryService_CasesCategoryDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByCompany" message="tns:ICasesCategoryService_CasesCategoryDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByCompanyResponse" message="tns:ICasesCategoryService_CasesCategoryDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryList" message="tns:ICasesCategoryService_CasesCategoryQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListResponse" message="tns:ICasesCategoryService_CasesCategoryQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompany" message="tns:ICasesCategoryService_CasesCategoryQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompanyResponse" message="tns:ICasesCategoryService_CasesCategoryQueryListByCompany_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -714,6 +804,82 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_ICasesCategoryService" type="tns:ICasesCategoryService">
+    <wsp:PolicyReference URI="#CustomBinding_ICasesCategoryService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CasesCategoryInsert">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesCategoryUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesCategoryQueryById">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesCategoryQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesCategoryDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesCategoryDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesCategoryQueryList">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesCategoryQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
@@ -731,6 +897,12 @@
       <soap12:address location="net.tcp://localhost:4502/CompanyService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/CompanyService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_ICasesCategoryService" binding="tns:CustomBinding_ICasesCategoryService">
+      <soap12:address location="net.tcp://localhost:4502/CasesCategoryService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/CasesCategoryService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

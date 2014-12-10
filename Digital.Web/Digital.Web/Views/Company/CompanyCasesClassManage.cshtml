@@ -1,6 +1,7 @@
 ﻿@using Digital.WCFClient.ConfigService
 @using System.Collections.ObjectModel
 @using Digital.Common.Mvc.Extensions
+@using Microsoft.AspNet.Identity
 @model Digital.WCFClient.ConfigService.CasesCategoryModel
 @{
     ViewBag.Title = "案例分类管理";
@@ -34,8 +35,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="btn-demo mr10">
-                        <a class="btn btn-primary"><i class="fa fa-pencil mr5"></i> 添加顶级分类</a>
-                        <a class="btn btn-primary"><i class="fa fa-comments mr5"></i> 保存</a>
+                        <a class="btn btn-primary" onclick="javascript: alert('add category');"><i class="fa fa-pencil mr5"></i> 添加顶级分类</a>
+                        <a class="btn btn-primary" onclick="javascript: alert('save');"><i class="fa fa-comments mr5"></i> 保存</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hidaction table-hover mb30">
@@ -50,75 +51,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="text" name="name" class="form-control width30" placeholder="10" /></td>
-                                    <td><input type="text" name="name" class="form-control " placeholder="X86主板" /></td>
-                                    <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
-                                    <td>--</td>
-                                    <td>内容列表</td>
-                                    <td class="table-action-hide">
-                                        <a href=""><i class="fa fa-pencil"></i></a>
-                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
+                                @{
 
-                                <tr>
-                                    <td><input type="text" name="name" class="form-control width30" placeholder="1" /></td>
-                                    <td><input type="text" name="name" class="form-control" placeholder="子类：intel X86工控板" /></td>
-                                    <td></td>
-                                    <td>--</td>
-                                    <td>内容列表</td>
-                                    <td class="table-action-hide">
-                                        <a href=""><i class="fa fa-pencil"></i></a>
-                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
+                                    if (ViewBag.CategoryList != null && ((List<CasesCategoryModel>)ViewBag.CategoryList).Count > 0)
+                                    {
+                                        foreach (var CategoryMode in (List<CasesCategoryModel>)ViewBag.CategoryList)
+                                        {
+                                            <tr>
+                                                <td><input type="text" name="name" class="form-control width30" placeholder="10" value="@CategoryMode.CasesCategoryOrderID" /></td>
+                                                <td><input type="text" name="name" class="form-control " placeholder="X86主板" value="@CategoryMode.CasesCategoryName"/></td>
+                                                <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
+                                                <td>@CategoryMode.CasesCategoryPicture</td>
+                                                <td>@CategoryMode.CasesCategoryContent</td>
+                                                <td class="table-action-hide">
+                                                    <a href=""><i class="fa fa-pencil"></i></a>
+                                                    <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
 
-
-                                <tr>
-                                    <td><input type="text" name="name" class="form-control width30" placeholder="10" /></td>
-                                    <td><input type="text" name="name" class="form-control " placeholder="ARM工控板" /></td>
-                                    <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
-                                    <td>--</td>
-                                    <td>内容列表</td>
-                                    <td class="table-action-hide">
-                                        <a href=""><i class="fa fa-pencil"></i></a>
-                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="name" class="form-control width30" placeholder="30" /></td>
-                                    <td><input type="text" name="name" class="form-control " placeholder="ARM工控板" /></td>
-                                    <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
-                                    <td>--</td>
-                                    <td>产品列表</td>
-                                    <td class="table-action-hide">
-                                        <a href=""><i class="fa fa-pencil"></i></a>
-                                        <a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-
-
-
+                                }
                             </tbody>
                         </table>
 
                     </div>
-
 
                     <div class="btn-demo mr10">
                         <button class="btn btn-primary mr5" type="button"><i class="fa fa-pencil mr5"></i> 添加顶级分类</button>
                         <button class="btn btn-primary mr5" type="button"><i class="fa fa-comments mr5"></i> 保存</button>
                     </div>
 
-
-
-
                 </div>
             </div><!-- panel -->
         </div><!-- col-sm-6 -->
-
-
 
     </div>
 </div>

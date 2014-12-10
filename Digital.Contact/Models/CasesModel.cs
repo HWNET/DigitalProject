@@ -16,32 +16,32 @@ namespace Digital.Contact.Models
         [Key]
         public int CasesID { get; set; }
         
-        [Required(ErrorMessage = "必填")]
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "案例名称")]
+        //[Required(ErrorMessage = "必填")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "案例名称")]
         public string CasesName { get; set; } //案例名称
 
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "案例概述")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "案例概述")]
         public string CasesAbstract { get; set; } //案例概述
 
-        [Required(ErrorMessage = "必填")]
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "案例缩略图")]
+        //[Required(ErrorMessage = "必填")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "案例缩略图")]
         public string CasesThumbnail { get; set; } //案例缩略图
 
-        [Required]
-        [Display(Name = "案例日期")]
+        //[Required]
+        //[Display(Name = "案例日期")]
         public DateTime CasesDate { get; set; } //案例日期
 
-        [Required]
-        [Display(Name = "案例类别")]
+        //[Required]
+        //[Display(Name = "案例类别")]
         public int CasesCategoryID { get; set; } //案例所属分类
         [NotMapped]
         public virtual CasesCategoryModel CasesCategoryModel { get; set; }
 
-        [Required]
-        [Display(Name = "排序值")]
+        //[Required]
+        //[Display(Name = "排序值")]
         public string CasesOrderBy { get; set; } //排序值
 
         public string CasesLabels { get; set; } //标签

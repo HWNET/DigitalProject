@@ -12,7 +12,7 @@ namespace Digital.Service.Implements
     public partial class Service : IPatentService
     {
         #region PatentInsert
-        public bool PatentInsert(PatentModel Model)
+        public PatentModel PatentInsert(PatentModel Model)
         {
             Model.UpdateStatus = 1;
             PatentService PatentService = new PatentService();

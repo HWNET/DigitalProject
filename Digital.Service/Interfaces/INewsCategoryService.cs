@@ -12,7 +12,7 @@ namespace Digital.Service.Interfaces
     public interface INewsCategoryService
     {
         [OperationContract]
-        bool NewsCategoryInsert(NewsCategoryModel Model);
+        NewsCategoryModel NewsCategoryInsert(NewsCategoryModel Model);
         [OperationContract]
         NewsCategoryModel NewsCategoryUpdate(NewsCategoryModel Model);
         [OperationContract]

@@ -1,6 +1,7 @@
 ﻿@using Digital.WCFClient.ConfigService
 @using System.Collections.ObjectModel
 @using Digital.Common.Mvc.Extensions
+@using Microsoft.AspNet.Identity
 @model Digital.WCFClient.ConfigService.CasesModel
 @{
     ViewBag.Title = "添加案例";
@@ -40,7 +41,7 @@
 
 
                 <div class="panel-body panel-body-nopadding">
-                    @Html.AntiForgeryToken()
+                    @*@Html.AntiForgeryToken()*@
                     <form class="form-horizontal form-bordered">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">案例名称</label>

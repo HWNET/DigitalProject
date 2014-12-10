@@ -14,30 +14,31 @@ namespace Digital.Contact.Models
         [Key]
         public int CasesCategoryID { get; set; }
 
-        [Required(ErrorMessage = "必填")]
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "类别名称")]
+        //[Required(ErrorMessage = "必填")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "类别名称")]
         public string CasesCategoryName { get; set; } //案例类别 名称
 
-        [Required(ErrorMessage = "必填")]
-        [StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
-        [Display(Name = "类别图片")]
+        //[Required(ErrorMessage = "必填")]
+        //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
+        //[Display(Name = "类别图片")]
         public string CasesCategoryPicture { get; set; } //案例类别 图片
 
-        [DataType(DataType.Text)]
-        [Display(Name = "类别内容")]
+        //[DataType(DataType.Text)]
+        //[Display(Name = "类别内容")]
         public string CasesCategoryContent { get; set; } //案例类别 内容
 
-        [Required]
-        [Display(Name = "顶级类别")]
+        //[Required]
+        //[Display(Name = "顶级类别")]
         public int CasesCategoryParentID { get; set; } //案例类别 父子级 , 顶级类别 : CasesCategoryParentID=0
         
-        [Required]
-        [Display(Name = "排序值")]
+        //[Required]
+        //[Display(Name = "排序值")]
         public int CasesCategoryOrderID { get; set; } //排序值
 
-        [Required]
+        //[Required]
         public int CompanyID { get; set; } //所属企业ID
+
         [NotMapped]
         public virtual CompanyModel CompanyModel { get; set; }
 

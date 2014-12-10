@@ -111,8 +111,14 @@ namespace Digital.Web.Controllers
             {
                 CompanyID = UserModel.CompanyID.Value;
                 CompanyModel=client.CompanyQueryById(CompanyID);
-
-                ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
+                if (CompanyModel.CompanyBusinessProvinceMode != null && CompanyModel.CompanyBusinessCityMode!=null)
+                {
+                    ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
+                }
+                else
+                {
+                    ViewBag.BusinessAddress = "BusinessAddress1111";
+                }
             }
             else
             {
@@ -214,6 +220,11 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
+
+            if (IsInsert == 1 && ReturnResult == "OK")
+            {
+                return Redirect("../Users/Login");
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -291,6 +302,10 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
+            if (IsInsert == 1 && ReturnResult == "OK")
+            {
+                return Redirect("../Users/Login");
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -363,6 +378,10 @@ namespace Digital.Web.Controllers
             }
 
             client.Close();
+            if (IsInsert == 1 && ReturnResult == "OK")
+            {
+                return Redirect("../Users/Login");
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -448,6 +467,7 @@ namespace Digital.Web.Controllers
 
         #endregion
 
+        #region Upgrade UserToCompanyMember
         public bool UpgradeUserToCompanyMember(int CompanyID)
         {
             bool Result = false;
@@ -477,6 +497,7 @@ namespace Digital.Web.Controllers
             client.Close();
             return Result;
         }
+        #endregion
 
         public ActionResult CompanyBusinessDemand()
         {
@@ -501,6 +522,20 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyCasesClassManage()
         {
             ViewBag.MenuModel = base.GetMenu(157);
+
+            var CompanyID = 0;
+            List<CasesCategoryModel> CategoryList = null;
+            var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
+
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) 
+            {
+                CompanyID = UserModel.CompanyID.Value;
+                CategoryList = client.CasesCategoryQueryListByCompany(CompanyID).ToList();
+
+                ViewBag.CategoryList = CategoryList;
+            }
+            
             return View();
         }
 

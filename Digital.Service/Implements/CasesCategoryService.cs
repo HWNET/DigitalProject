@@ -12,7 +12,7 @@ namespace Digital.Service.Implements
     public partial class Service : ICasesCategoryService
     {
         #region CasesCategoryInsert
-        public bool CasesCategoryInsert(CasesCategoryModel Model)
+        public CasesCategoryModel CasesCategoryInsert(CasesCategoryModel Model)
         {
             Model.UpdateStatus = 1;
             CasesCategoryService CasesCategoryService = new CasesCategoryService();

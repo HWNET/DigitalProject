@@ -27,7 +27,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region SinglePageInsert
-        public bool SinglePageInsert(SinglePageModel Model)
+        public SinglePageModel SinglePageInsert(SinglePageModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -35,19 +35,19 @@ namespace Digital.Contact.BLL
                 {
                     if (!IsModelExist(Model))
                     {
-                        db.SinglePageModels.Add(Model);
+                        Model = db.SinglePageModels.Add(Model);
                         db.SaveChanges();
-                        return true;
+                        return Model;
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex);
-                    return false;
+                    return null;
                 }
             }
         }

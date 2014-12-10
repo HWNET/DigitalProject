@@ -12,7 +12,7 @@ namespace Digital.Service.Implements
     public partial class Service : INewsService
     {
         #region NewsInsert
-        public bool NewsInsert(NewsModel Model)
+        public NewsModel NewsInsert(NewsModel Model)
         {
             //Model.UpdateStatus = 1;
             NewsService NewsService = new NewsService();

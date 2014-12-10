@@ -12,7 +12,7 @@ namespace Digital.Service.Implements
     public partial class Service : ICasesService
     {
         #region CasesInsert
-        public bool CasesInsert(CasesModel Model)
+        public CasesModel CasesInsert(CasesModel Model)
         {
             Model.UpdateStatus = 1;
             CasesService CasesService = new CasesService();

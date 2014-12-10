@@ -67,6 +67,9 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CapacityUnitMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CasesCategoryModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CommonRightModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

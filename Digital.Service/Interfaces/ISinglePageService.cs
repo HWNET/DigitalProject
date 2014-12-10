@@ -12,7 +12,7 @@ namespace Digital.Service.Interfaces
     public interface ISinglePageService
     {
         [OperationContract]
-        bool SinglePageInsert(SinglePageModel Model);
+        SinglePageModel SinglePageInsert(SinglePageModel Model);
         [OperationContract]
         SinglePageModel SinglePageUpdate(SinglePageModel Model);
         [OperationContract]

@@ -28,7 +28,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region NewsCategoryInsert
-        public bool NewsCategoryInsert(NewsCategoryModel Model)
+        public NewsCategoryModel NewsCategoryInsert(NewsCategoryModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -36,19 +36,19 @@ namespace Digital.Contact.BLL
                 {
                     if (!IsModelExist(Model))
                     {
-                        db.NewsCategoryModels.Add(Model);
+                        Model = db.NewsCategoryModels.Add(Model);
                         db.SaveChanges();
-                        return true;
+                        return Model;
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex);
-                    return false;
+                    return null;
                 }
             }
         }

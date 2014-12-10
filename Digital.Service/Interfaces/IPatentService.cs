@@ -12,7 +12,7 @@ namespace Digital.Service.Interfaces
     public interface IPatentService
     {
         [OperationContract]
-        bool PatentInsert(PatentModel Model);
+        PatentModel PatentInsert(PatentModel Model);
         [OperationContract]
         PatentModel PatentUpdate(PatentModel Model);
         [OperationContract]

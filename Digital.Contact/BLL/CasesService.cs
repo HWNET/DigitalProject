@@ -28,7 +28,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region CasesInsert
-        public bool CasesInsert(CasesModel Model)
+        public CasesModel CasesInsert(CasesModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -36,19 +36,19 @@ namespace Digital.Contact.BLL
                 {
                     if (!IsModelExist(Model))
                     {
-                        db.CasesModels.Add(Model);
+                        Model = db.CasesModels.Add(Model);
                         db.SaveChanges();
-                        return true;
+                        return Model;
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex);
-                    return false;
+                    return null;
                 }
             }
         }

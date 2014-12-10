@@ -4523,4 +4523,149 @@ namespace Digital.WCFClient.ConfigService {
             return base.Channel.GetCompanyRegisteredAssetsUnitListAsync();
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.ICasesCategoryService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface ICasesCategoryService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryInsert", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryInsertResponse")]
+        Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryInsert(Digital.WCFClient.ConfigService.CasesCategoryModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryInsert", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryInsertResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryInsertAsync(Digital.WCFClient.ConfigService.CasesCategoryModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryUpdate", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryUpdateResponse")]
+        Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryUpdate(Digital.WCFClient.ConfigService.CasesCategoryModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryUpdate", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryUpdateResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryUpdateAsync(Digital.WCFClient.ConfigService.CasesCategoryModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryById", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByIdResponse")]
+        Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryQueryById(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryById", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByIdResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryByIdAsync(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByName", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByNameResponse")]
+        Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryQueryByName(string CasesCategoryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByName", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryByNameResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryByNameAsync(string CasesCategoryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteById", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByIdResponse")]
+        bool CasesCategoryDeleteById(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteById", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByIdResponse")]
+        System.Threading.Tasks.Task<bool> CasesCategoryDeleteByIdAsync(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByCompany", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByCompanyResponse")]
+        bool CasesCategoryDeleteByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByCompany", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryDeleteByCompanyResponse")]
+        System.Threading.Tasks.Task<bool> CasesCategoryDeleteByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryList", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryList", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel>> CasesCategoryQueryListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompany", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompanyResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryListByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompany", ReplyAction="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompanyResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel>> CasesCategoryQueryListByCompanyAsync(int CompanyId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICasesCategoryServiceChannel : Digital.WCFClient.ConfigService.ICasesCategoryService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CasesCategoryServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.ICasesCategoryService>, Digital.WCFClient.ConfigService.ICasesCategoryService {
+        
+        public CasesCategoryServiceClient() {
+        }
+        
+        public CasesCategoryServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CasesCategoryServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CasesCategoryServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CasesCategoryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryInsert(Digital.WCFClient.ConfigService.CasesCategoryModel Model) {
+            return base.Channel.CasesCategoryInsert(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryInsertAsync(Digital.WCFClient.ConfigService.CasesCategoryModel Model) {
+            return base.Channel.CasesCategoryInsertAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryUpdate(Digital.WCFClient.ConfigService.CasesCategoryModel Model) {
+            return base.Channel.CasesCategoryUpdate(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryUpdateAsync(Digital.WCFClient.ConfigService.CasesCategoryModel Model) {
+            return base.Channel.CasesCategoryUpdateAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryQueryById(int CasesCategoryId) {
+            return base.Channel.CasesCategoryQueryById(CasesCategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryByIdAsync(int CasesCategoryId) {
+            return base.Channel.CasesCategoryQueryByIdAsync(CasesCategoryId);
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesCategoryModel CasesCategoryQueryByName(string CasesCategoryName) {
+            return base.Channel.CasesCategoryQueryByName(CasesCategoryName);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryByNameAsync(string CasesCategoryName) {
+            return base.Channel.CasesCategoryQueryByNameAsync(CasesCategoryName);
+        }
+        
+        public bool CasesCategoryDeleteById(int CasesCategoryId) {
+            return base.Channel.CasesCategoryDeleteById(CasesCategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CasesCategoryDeleteByIdAsync(int CasesCategoryId) {
+            return base.Channel.CasesCategoryDeleteByIdAsync(CasesCategoryId);
+        }
+        
+        public bool CasesCategoryDeleteByCompany(int CompanyId) {
+            return base.Channel.CasesCategoryDeleteByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CasesCategoryDeleteByCompanyAsync(int CompanyId) {
+            return base.Channel.CasesCategoryDeleteByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryList() {
+            return base.Channel.CasesCategoryQueryList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel>> CasesCategoryQueryListAsync() {
+            return base.Channel.CasesCategoryQueryListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryQueryListByCompany(int CompanyId) {
+            return base.Channel.CasesCategoryQueryListByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel>> CasesCategoryQueryListByCompanyAsync(int CompanyId) {
+            return base.Channel.CasesCategoryQueryListByCompanyAsync(CompanyId);
+        }
+    }
 }

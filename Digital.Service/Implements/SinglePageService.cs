@@ -12,7 +12,7 @@ namespace Digital.Service.Implements
     public partial class Service : ISinglePageService
     {
         #region SinglePageInsert
-        public bool SinglePageInsert(SinglePageModel Model)
+        public SinglePageModel SinglePageInsert(SinglePageModel Model)
         {
             Model.UpdateStatus = 1;
             SinglePageService SinglePageService = new SinglePageService();

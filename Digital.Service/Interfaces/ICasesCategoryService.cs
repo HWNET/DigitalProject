@@ -12,7 +12,7 @@ namespace Digital.Service.Interfaces
     public interface ICasesCategoryService
     {
         [OperationContract]
-        bool CasesCategoryInsert(CasesCategoryModel Model);
+        CasesCategoryModel CasesCategoryInsert(CasesCategoryModel Model);
         [OperationContract]
         CasesCategoryModel CasesCategoryUpdate(CasesCategoryModel Model);
         [OperationContract]

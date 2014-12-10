@@ -12,7 +12,7 @@ namespace Digital.Service.Interfaces
     public interface ICasesService
     {
         [OperationContract]
-        bool CasesInsert(CasesModel Model);
+        CasesModel CasesInsert(CasesModel Model);
         [OperationContract]
         CasesModel CasesUpdate(CasesModel Model);
         [OperationContract]

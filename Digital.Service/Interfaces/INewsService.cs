@@ -12,7 +12,7 @@ namespace Digital.Service.Interfaces
     public interface INewsService
     {
         [OperationContract]
-        bool NewsInsert(NewsModel Model);
+        NewsModel NewsInsert(NewsModel Model);
         [OperationContract]
         NewsModel NewsUpdate(NewsModel Model);
         [OperationContract]

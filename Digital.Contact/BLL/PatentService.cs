@@ -28,7 +28,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region PatentInsert
-        public bool PatentInsert(PatentModel Model)
+        public PatentModel PatentInsert(PatentModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -36,19 +36,19 @@ namespace Digital.Contact.BLL
                 {
                     if (!IsModelExist(Model))
                     {
-                        db.PatentModels.Add(Model);
+                        Model = db.PatentModels.Add(Model);
                         db.SaveChanges();
-                        return true;
+                        return Model;
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex);
-                    return false;
+                    return null;
                 }
             }
         }
