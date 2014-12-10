@@ -64,6 +64,19 @@
 
     </div>
 </div>
+<script>
+    function Save() {
+        $.ajaxAntiForgery({
+            type: "post",
+            data: { UsersInfoID:@Model.UsersInfoModel.UsersInfoID,BeGoodAtIntroduction:$("#BeGoodAtIntroduction").val()},
+            url: "/Users/UserSafeIntroduction",
+            success: function (data) {
+                SaveInfo(true,"个人介绍");
+                $('#validationWizard').bootstrapWizard('show',2);
+            }
+        })
+    }
+</script>
 
 
 

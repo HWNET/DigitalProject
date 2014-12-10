@@ -93,9 +93,9 @@ namespace Digital.Common.Utilities
             else
             {
                 var folder = context.Request["subfolder"] ?? "default";
-                var uploadFolderConfig = UploadConfigContext.UploadConfig.UploadFolders.FirstOrDefault(u => string.Equals(folder, u.Path, StringComparison.OrdinalIgnoreCase));
-                var dirType = uploadFolderConfig == null ? DirType.Day : uploadFolderConfig.DirType;
-
+                //var uploadFolderConfig = UploadConfigContext.UploadConfig.UploadFolders.FirstOrDefault(u => string.Equals(folder, u.Path, StringComparison.OrdinalIgnoreCase));
+                //var dirType = uploadFolderConfig == null ? DirType.Day : uploadFolderConfig.DirType;
+                var dirType = DirType.Day;
                 //根据配置里的DirType决定子文件夹的层次（月，天，扩展名）
                 switch (dirType)
                 {

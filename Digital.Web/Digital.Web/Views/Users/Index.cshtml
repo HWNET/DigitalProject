@@ -22,7 +22,7 @@
 <div class="contentpanel">
     <div class="row">
         <div class="col-sm-3">
-            <img  src="@Html.IsNull(@Model.UsersInfoModel.DisplayPicture, "../DigitalStyle/images/pic-none.png", @Model.UsersInfoModel.DisplayPicture)" class="thumbnail img-responsive" alt="" />
+            <img id="PersonImage"  src="@Html.IsNull(@Model.UsersInfoModel.DisplayPicture, "../DigitalStyle/images/pic-none.png", @Model.UsersInfoModel.DisplayPicture)" class="thumbnail img-responsive" alt="" />
             <div id="uploader"></div>
             <div id="fileQueue"></div>
             <div class="mb30"></div>
@@ -53,7 +53,8 @@
                         'subfolder': 'cms',
                         'callback': function (msg) {
                             //msg.url为图片地址
-                            alert(msg);
+                            //alert(msg);
+                            $("#PersonImage")[0].src = msg.url;
                         }
                     });
 

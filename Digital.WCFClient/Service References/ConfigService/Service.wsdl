@@ -99,6 +99,18 @@
   <wsdl:message name="IUserService_Register_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_WaterEdit_InputMessage">
+    <wsdl:part name="parameters" element="tns:WaterEdit" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_WaterEdit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WaterEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_WaterFind_InputMessage">
+    <wsdl:part name="parameters" element="tns:WaterFind" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_WaterFind_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WaterFindResponse" />
+  </wsdl:message>
   <wsdl:message name="ICompanyService_CompanyInsert_InputMessage">
     <wsdl:part name="parameters" element="tns:CompanyInsert" />
   </wsdl:message>
@@ -340,6 +352,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Register" message="tns:IUserService_Register_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RegisterResponse" message="tns:IUserService_Register_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="WaterEdit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/WaterEdit" message="tns:IUserService_WaterEdit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/WaterEditResponse" message="tns:IUserService_WaterEdit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="WaterFind">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/WaterFind" message="tns:IUserService_WaterFind_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/WaterFindResponse" message="tns:IUserService_WaterFind_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="ICompanyService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CompanyInsert">
@@ -567,6 +587,24 @@
     </wsdl:operation>
     <wsdl:operation name="Register">
       <soap12:operation soapAction="http://tempuri.org/IUserService/Register" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WaterEdit">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/WaterEdit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WaterFind">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/WaterFind" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

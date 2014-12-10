@@ -121,6 +121,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSkillsModel" nillable="true" type="tns:ArrayOfSkillsModel" />
+  <xs:complexType name="WaterMarkModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsCompanyName" type="xs:int" />
+      <xs:element minOccurs="0" name="IsWebsite" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="WaterPostion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WaterMarkModel" nillable="true" type="tns:WaterMarkModel" />
   <xs:complexType name="CompanyModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="AnnualBusinessVolume" type="xs:int" />

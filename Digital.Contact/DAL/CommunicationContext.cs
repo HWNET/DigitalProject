@@ -36,6 +36,8 @@ namespace Digital.Contact.DAL
         public DbSet<Digital.Contact.Models.PatentModel> PatentModels { get; set; }
         public DbSet<Digital.Contact.Models.SinglePageModel> SinglePageModels { get; set; }
 
+        public DbSet<Digital.Contact.Models.WaterMarkModel> WaterMarkModels { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());  

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Digital.WCFClient;
 using Digital.WCFClient.ConfigService;
 using Microsoft.AspNet.Identity;
+using Digital.Common.Utilities;
 
 namespace Digital.Web.Controllers
 {
@@ -667,7 +668,31 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyWatermarkManage()
         {
             ViewBag.MenuModel = base.GetMenu(166);
-            return View();
+            var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
+            var WateModel = client.WaterFind(User.Identity.GetUserId().ToInt(0));
+            client.Close();
+            return View(WateModel);
+        }
+
+        public ActionResult CompanyWaterEdit(int IsCompanyName, int IsWebSite, int Postion)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
+                Digital.WCFClient.ConfigService.WaterMarkModel Water = new WaterMarkModel();
+                Water.UserId = User.Identity.GetUserId().ToInt(0);
+                Water.WaterPostion = Postion;
+                Water.IsCompanyName = IsCompanyName;
+                Water.IsWebsite = IsWebSite;
+                client.WaterEdit(Water);
+
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
         }
 
     }

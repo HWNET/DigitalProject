@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Digital.Contact.BLL
 {
-    public class UsersService 
+    public class UsersService
     {
 
 
@@ -24,7 +24,7 @@ namespace Digital.Contact.BLL
 
 
 
-
+        #region Users
         public bool Login(string UserName, string Password)
         {
             using (var db = new CommunicationContext())
@@ -274,7 +274,56 @@ namespace Digital.Contact.BLL
                 }
             }
         }
+        #endregion
 
+        #region WaterUser
+        public WaterMarkModel WaterEdit(WaterMarkModel WaterMark)
+        {
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    if (WaterMark != null && WaterMark.UserId != 0)
+                    {
+                        var Temp = db.WaterMarkModels.Where(o => o.UserId == WaterMark.UserId).FirstOrDefault();
+                        Temp.WaterPostion = WaterMark.WaterPostion;
+                        Temp.IsWebsite = WaterMark.IsWebsite;
+                        Temp.IsCompanyName = WaterMark.IsCompanyName;
+                        db.Entry(WaterMark).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return WaterMark;
+                    }
+                    else
+                    {
+                        WaterMark = db.WaterMarkModels.Add(WaterMark);
+                        db.SaveChanges();
+                        return WaterMark;
+                    }
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    Logger.Error(dbEx.InnerException.ToString());
+                    return null;
+                }
+            }
+        }
+
+        public WaterMarkModel WaterFind(int Userid)
+        {
+            using (var db = new CommunicationContext())
+            {
+                try
+                {
+                    return db.WaterMarkModels.Where(o => o.UserId == Userid).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return new WaterMarkModel();
+                }
+            }
+        }
+        #endregion
 
 
     }

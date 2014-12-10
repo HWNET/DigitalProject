@@ -12,7 +12,7 @@ namespace Digital.Service.Implements
     {
 
 
-
+        #region User
         public UsersModel Login(string UserName, string Password)
         {
             var User = GenericList.CacheModelObj.UserModellist.Where(o => o.Value.Name == UserName && o.Value.Passwords == Password).FirstOrDefault();
@@ -165,5 +165,20 @@ namespace Digital.Service.Implements
             GenericList.InsertBuffer(null, UserModels);
             return UserModels;
         }
+        #endregion
+
+        #region Water
+        public WaterMarkModel WaterEdit(WaterMarkModel WaterMark)
+        {
+            Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+            return UserService.WaterEdit(WaterMark);
+        }
+        public WaterMarkModel WaterFind(int Userid)
+        {
+            Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
+            return UserService.WaterFind(Userid);
+        }
+        #endregion
+
     }
 }
