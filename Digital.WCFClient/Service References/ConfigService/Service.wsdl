@@ -32,6 +32,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_INewsCategoryService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -309,6 +317,54 @@
   <wsdl:message name="ICasesCategoryService_CasesCategoryQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:CasesCategoryQueryListByCompanyResponse" />
   </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryInsert" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryUpdate" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryById" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryList" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="INewsCategoryService_NewsCategoryQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsCategoryQueryListByCompanyResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -495,6 +551,40 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesCategoryQueryListByCompany">
       <wsdl:input wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompany" message="tns:ICasesCategoryService_CasesCategoryQueryListByCompany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompanyResponse" message="tns:ICasesCategoryService_CasesCategoryQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="INewsCategoryService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryInsert" message="tns:INewsCategoryService_NewsCategoryInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryInsertResponse" message="tns:INewsCategoryService_NewsCategoryInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryUpdate" message="tns:INewsCategoryService_NewsCategoryUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryUpdateResponse" message="tns:INewsCategoryService_NewsCategoryUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryById" message="tns:INewsCategoryService_NewsCategoryQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryByIdResponse" message="tns:INewsCategoryService_NewsCategoryQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryByName" message="tns:INewsCategoryService_NewsCategoryQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryByNameResponse" message="tns:INewsCategoryService_NewsCategoryQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryDeleteById" message="tns:INewsCategoryService_NewsCategoryDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryDeleteByIdResponse" message="tns:INewsCategoryService_NewsCategoryDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryDeleteByCompany" message="tns:INewsCategoryService_NewsCategoryDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryDeleteByCompanyResponse" message="tns:INewsCategoryService_NewsCategoryDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryList" message="tns:INewsCategoryService_NewsCategoryQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryListResponse" message="tns:INewsCategoryService_NewsCategoryQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryListByCompany" message="tns:INewsCategoryService_NewsCategoryQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryListByCompanyResponse" message="tns:INewsCategoryService_NewsCategoryQueryListByCompany_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -918,6 +1008,82 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_INewsCategoryService" type="tns:INewsCategoryService">
+    <wsp:PolicyReference URI="#CustomBinding_INewsCategoryService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="NewsCategoryInsert">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsCategoryUpdate">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsCategoryQueryById">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsCategoryQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsCategoryDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsCategoryDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsCategoryQueryList">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsCategoryQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/INewsCategoryService/NewsCategoryQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
@@ -941,6 +1107,12 @@
       <soap12:address location="net.tcp://localhost:4502/CasesCategoryService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/CasesCategoryService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_INewsCategoryService" binding="tns:CustomBinding_INewsCategoryService">
+      <soap12:address location="net.tcp://localhost:4502/NewsCategoryService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/NewsCategoryService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

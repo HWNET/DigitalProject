@@ -64,7 +64,7 @@ namespace Digital.Web.Controllers
             return View();
         }
 
-
+        #region CompanyBaseInfo
         /// <summary>
         /// 企业信息中心/基础信息
         /// </summary>
@@ -138,6 +138,7 @@ namespace Digital.Web.Controllers
             client.Close();
             return View(CompanyModel);
         }
+        #endregion
 
         #region CompanyBaseInfo -- FOR TAB ONE
         [HttpPost]
@@ -513,7 +514,16 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyCasesAdd()
         {
             ViewBag.MenuModel = base.GetMenu(156);
-            return View();
+
+            CasesModel CategoryModel = new CasesModel {
+                CasesName = "CasesName1111",
+                CasesAbstract = "CasesAbstract1111",
+                CasesDate=DateTime.Now,
+                CasesOrderBy="1",
+                CasesLabels="CasesLabels1111",
+                CasesDetails="CasesDetails1111",
+            };
+            return View(CategoryModel);
         }
 
         /// <summary>
@@ -587,8 +597,154 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyNewsClassManage()
         {
             ViewBag.MenuModel = base.GetMenu(164);
-            return View();
+
+            var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
+            var CompanyID = 0;
+            List<NewsCategoryModel> CategoryList = null;
+
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                CompanyID = UserModel.CompanyID.Value;
+                CategoryList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
+            }
+            ViewBag.CategoryList = CategoryList;
+
+
+            NewsCategoryModel CategoryModel = new NewsCategoryModel {
+                NewsCategoryOrderID = 0,
+                NewsCategoryName = "NewsCategoryName0000",
+                NewsCategoryPicture = "NewsCategoryPicture0000",
+                NewsCategoryContent = "NewsCategoryContent0000",
+            };
+            return View(CategoryModel);
         }
+
+        #region CompanyNewsCategoryByID
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyNewsCategoryByID(int CategoryID)
+        {
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
+            NewsCategoryModel CategoryModel = null;
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                CategoryModel=client.NewsCategoryQueryById(CategoryID);
+                ViewBag.CategoryID = CategoryID;
+            }
+            else
+            {
+                CategoryModel = new NewsCategoryModel();
+                ViewBag.CategoryID = 0;
+            }
+
+            client.Close();
+            return Json(CategoryModel);
+        }
+        #endregion
+
+        #region CompanyNewsCategoryEdit
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyNewsCategoryEdit(int CategoryID,int CompanyID, int IsInsert, string NewsCategoryName, string NewsCategoryPicture, string NewsCategoryContent,
+            int NewsCategoryParentID, int NewsCategoryOrderID)
+        {
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
+            var ReturnResult = string.Empty;
+
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                var CategoryModel = new NewsCategoryModel
+                {
+                    NewsCategoryID=CategoryID,
+                    CompanyID = CompanyID,
+                    NewsCategoryName=NewsCategoryName,
+                    NewsCategoryPicture=NewsCategoryPicture,
+                    NewsCategoryContent=NewsCategoryContent,
+                    NewsCategoryParentID=NewsCategoryParentID,
+                    NewsCategoryOrderID=NewsCategoryOrderID, 
+                };
+
+                if (IsInsert == 1) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.NewsCategoryInsert(CategoryModel); // update DB
+                    if (ResultModel != null && ResultModel.CompanyID > 0) // update web cache
+                    {
+                        OperatorFactory.UpdateNewsCategoryCache(User.Identity.GetUserId(), ResultModel);
+
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+                else // old existing model -- do update
+                {
+                    #region old existing model -- do update
+                    var ResultModel = client.NewsCategoryUpdate(CategoryModel); // update DB
+                    if (ResultModel != null && ResultModel.CompanyID > 0) // update web cache
+                    {
+                        OperatorFactory.UpdateNewsCategoryCache(User.Identity.GetUserId(), ResultModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            client.Close();
+
+            return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyNewsCategoryDelete
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyNewsCategoryDelete(int CategoryID)
+        { 
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
+            var ReturnResult = string.Empty;
+
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                var result=client.NewsCategoryDeleteById(CategoryID); // update DB
+                if (result)
+                {
+                    // update web cache
+                    OperatorFactory.RemoveNewsCategoryCache(User.Identity.GetUserId());
+                    ReturnResult = "OK";
+                }
+                else
+                {
+                    ReturnResult = "NOK";
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            return Content(ReturnResult);
+        }
+        #endregion
 
         /// <summary>
         /// 企业播报列表

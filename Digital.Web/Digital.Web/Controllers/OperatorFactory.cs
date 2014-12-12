@@ -13,6 +13,7 @@ namespace Digital.Web.Controllers
 
         public static string CacheUserKey = "Users.";
         public static string CacheCompanyKey = "Company.";
+        public static string CacheNewsCategoryKey = "NewsCategory.";
         //public static IBaseService<T> CreateDBOperator<T>(string classname)
         //{
         //    object objType = null;
@@ -119,6 +120,40 @@ namespace Digital.Web.Controllers
                 HttpContext.Current.Cache.Remove(key);
             }
             HttpContext.Current.Cache.Insert(key, CompanyModel);
+        }
+        #endregion
+
+        #region Data Cache For Company News Category
+        public static NewsCategoryModel GetNewsCategoryCache(string UserId)
+        {
+            var CategoryModel = GetCache<NewsCategoryModel>(CacheNewsCategoryKey + UserId);
+            if (CategoryModel != null)
+            {
+                return CategoryModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static void UpdateNewsCategoryCache(string UserId, NewsCategoryModel CategoryModel)
+        {
+            var key = CacheNewsCategoryKey + UserId;
+            var obj = HttpContext.Current.Cache.Get(key);
+            if (obj != null)
+            {
+                HttpContext.Current.Cache.Remove(key);
+            }
+            HttpContext.Current.Cache.Insert(key, CategoryModel);
+        }
+        public static void RemoveNewsCategoryCache(string UserId)
+        {
+            var key = CacheNewsCategoryKey + UserId;
+            var obj = HttpContext.Current.Cache.Get(key);
+            if (obj != null)
+            {
+                HttpContext.Current.Cache.Remove(key);
+            }
         }
         #endregion
 

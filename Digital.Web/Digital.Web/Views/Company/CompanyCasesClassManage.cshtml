@@ -35,7 +35,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="btn-demo mr10">
-                        <a class="btn btn-primary" onclick="javascript: alert('add category');"><i class="fa fa-pencil mr5"></i> 添加顶级分类</a>
+                        @*<button class="btn btn-primary mr5" data-toggle="modal" data-target=".bs-example-modal-lg">Large Modal</button>*@
+                        <a class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-pencil mr5"></i> 添加顶级分类</a>
                         <a class="btn btn-primary" onclick="javascript: alert('save');"><i class="fa fa-comments mr5"></i> 保存</a>
                     </div>
                     <div class="table-responsive">
@@ -77,10 +78,10 @@
 
                     </div>
 
-                    <div class="btn-demo mr10">
+                    @*<div class="btn-demo mr10">
                         <button class="btn btn-primary mr5" type="button"><i class="fa fa-pencil mr5"></i> 添加顶级分类</button>
                         <button class="btn btn-primary mr5" type="button"><i class="fa fa-comments mr5"></i> 保存</button>
-                    </div>
+                    </div>*@
 
                 </div>
             </div><!-- panel -->
@@ -99,6 +100,72 @@
         4、超过10个自定义分类不允许一次性清空
     </p>
 
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title">添加顶级分类</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">排序值</label>
+                        <div class="col-sm-4">
+                            <input type="text" placeholder="排序值..." class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分类名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="分类名称..." class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分类图片</label>
+                        <div class="col-sm-6">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="input-append">
+                                    <div class="uneditable-input">
+                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                        <span class="fileupload-preview"></span>
+                                    </div>
+                                    <span class="btn btn-default btn-file">
+                                        <span class="fileupload-new">Select file</span>
+                                        <span class="fileupload-exists">Change</span>
+                                        <input type="file" value="" />
+                                    </span>
+                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分类内容</label>
+                        <div class="col-sm-6">
+                            <textarea id="autoResizeTA" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button class="btn btn-primary">提交</button>&nbsp;
+                                <button aria-hidden="true" data-dismiss="modal" class="close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+           </div>
+        </div>
+    </div>
 </div>
 
 <script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
