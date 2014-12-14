@@ -1,5 +1,97 @@
 
-jQuery(window).load(function() {
+function SaveInfo(IsSuccess, msg) {
+    if (IsSuccess) {
+        jQuery.gritter.add({
+            title: '系统提示!',
+            text: msg + '保存成功.',
+            sticky: false,
+            time: ''
+        });
+    }
+    else {
+        jQuery.gritter.add({
+            title: '系统提示!',
+            text: msg + '保存失败.',
+            sticky: false,
+            time: ''
+        });
+    }
+
+}
+
+function DropOption(objson, selectobj, SelectedId)
+{
+    var obj = eval(objson);
+    SelectedId = SelectedId > 0 ? SelectedId : 1;
+    $(obj).each(function (index) {
+        var val = obj[index];
+        if (val.Id == -1 && val.Name == "LINE") {
+            selectobj.append("<optgroup label=\"----------------------\">");
+        }
+        else if (val.Id == -1 && val.Name == "END")
+        {
+            
+            selectobj.append("</optgroup>");
+            //</optgroup>
+        }
+        else
+        {
+            var HtmlSelect = "";
+            if (SelectedId == val.Id)
+            {
+                HtmlSelect = "selected"
+            }
+            selectobj.append("<option value='" + val.Id + "' " + HtmlSelect + ">" + val.Name + "</option>");
+    }
+       
+    });
+}
+
+function RadioHtml(objson, selectobj, SelectedId,className,RadioName)
+{
+    var obj = eval(objson);
+    SelectedId = SelectedId > 0 ? SelectedId : 1;
+    $(obj).each(function (index) {
+        var val = obj[index];
+        
+            var HtmlSelect = "";
+            if (SelectedId == val.Id) {
+                HtmlSelect = "checked = 'checked'"
+            }
+            var RadioId=RadioName+index;
+        selectobj.append("<div class=\""+className+"\"><input type=\"radio\" name=\""+RadioName+"\" id=\""+RadioId+"\" value="+val.Id+" "+HtmlSelect+"/><label for=\""+RadioId+"\">"+val.Name+"</label></div>");
+        
+
+    });
+}
+
+function ComAjax(Url,datas,SaveMsg)
+{
+    $.ajaxAntiForgery({
+        type: "post",
+        data: datas,
+        url: Url,
+        success: function (data) {
+            if (data == "OK") {
+                SaveInfo(true, SaveMsg);
+            }
+            else {
+                SaveInfo(false, SaveMsg)
+            }
+        }
+    })
+}
+
+jQuery.jsparams = {
+    check: function (Id) {
+        return $("#"+Id).attr("checked") == "checked" ? true : false;
+    },
+    radio: function (name) {
+        return $('input:radio[name=' + name + ']:checked').val()
+    }
+};
+
+jQuery(window).load(function () {
    
    // Page Preloader
    jQuery('#status').fadeOut();

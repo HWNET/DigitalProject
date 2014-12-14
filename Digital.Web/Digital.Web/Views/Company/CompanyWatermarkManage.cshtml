@@ -1,8 +1,16 @@
-﻿@{
+﻿@model Digital.WCFClient.ConfigService.WaterMarkModel
+@using Digital.Common.Mvc.Extensions
+@{
     ViewBag.Title = "账户信息管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
-
+@section PageSpecificJavascriptIncludes{
+<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/messages_cn.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
+<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+}
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 水印设置 <span>企业文件柜</span></h2>
@@ -21,43 +29,43 @@
         <div class="col-sm-3">
             <img src="../DigitalStyle/images/photos/profile-1.png" class="thumbnail img-responsive" alt="" />
         </div>
-
+        @Html.AntiForgeryToken()
         <div class="col-sm-9">
             <div class="col-md-9">
                 <div class="ckbox ckbox-primary">
-                    <input type="checkbox" value="1" id="checkboxPrimary" checked="checked" />
-                    <label for="checkboxPrimary">显示企业名称</label>
+                    <input type="checkbox" value="1" id="IsCompanyName" @Html.IsChecked(Model.IsCompanyName)  />
+                    <label for="IsCompanyName">显示企业名称</label>
                 </div>
                 <div class="ckbox ckbox-success">
-                    <input type="checkbox" id="checkboxSuccess" checked="checked" />
-                    <label for="checkboxSuccess">显示企业店铺网址</label>
+                    <input type="checkbox" id="IsWebSite" @Html.IsChecked(Model.IsWebsite) />
+                    <label for="IsWebSite">显示企业店铺网址</label>
                 </div>
             </div><!-- col-md-6 -->
 
             <div class="col-md-9">
                 <div class="rdio rdio-default">
-                    <input type="radio" name="radio" id="radioDefault" value="1" checked="checked" />
+                    <input type="radio" name="Postion" id="radioDefault" value="1" @Html.IsChecked(Model.WaterPostion==1) />
                     <label for="radioDefault">正中间</label>
                 </div>
 
                 <div class="rdio rdio-primary">
-                    <input type="radio" name="radio" value="2" id="radioPrimary" />
+                    <input type="radio" name="Postion" value="2" id="radioPrimary" @Html.IsChecked(Model.WaterPostion == 2) />
                     <label for="radioPrimary">左上角</label>
                 </div>
 
                 <div class="rdio rdio-warning">
-                    <input type="radio" name="radio" value="3" id="radioWarning" />
+                    <input type="radio" name="Postion" value="3" id="radioWarning" @Html.IsChecked(Model.WaterPostion == 3) />
                     <label for="radioWarning">右下角</label>
                 </div>
 
                 <div class="rdio rdio-success">
-                    <input type="radio" name="radio" value="4" id="radioSuccess" />
+                    <input type="radio" name="Postion" value="4" id="radioSuccess" @Html.IsChecked(Model.WaterPostion == 4) />
                     <label for="radioSuccess">左右边角</label>
                 </div>
             </div>
 
             <div class="col-md-9">
-                <button class="btn btn-primary">保存</button>
+                <button class="btn btn-primary" onclick="javascript:Save()">保存</button>
             </div>
         </div>
 
@@ -66,15 +74,10 @@
 </div>
 <script>
     function Save() {
-        $.ajaxAntiForgery({
-            type: "post",
-            data: { UsersInfoID:@Model.UsersInfoModel.UsersInfoID,BeGoodAtIntroduction:$("#BeGoodAtIntroduction").val()},
-            url: "/Users/UserSafeIntroduction",
-            success: function (data) {
-                SaveInfo(true,"个人介绍");
-                $('#validationWizard').bootstrapWizard('show',2);
-            }
-        })
+        var IsCompanyNameval = $.jsparams.check("IsCompanyName");
+        var IsWebSiteval = $.jsparams.check("IsWebSite");
+        var Postionval = $.jsparams.radio("Postion");
+        ComAjax("/Company/CompanyWaterEdit", { IsCompanyName: IsCompanyNameval, IsWebSite: IsWebSiteval, Postion: Postionval }, "水印设置");
     }
 </script>
 

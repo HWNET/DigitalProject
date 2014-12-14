@@ -14,7 +14,7 @@ namespace Digital.Contact.Models
         public int ID { get; set; }
         public int UserId { get; set; }
         public int WaterPostion { get; set; }
-        public int IsCompanyName { get; set; }
-        public int IsWebsite { get; set; }
+        public bool IsCompanyName { get; set; }
+        public bool IsWebsite { get; set; }
     }
 }

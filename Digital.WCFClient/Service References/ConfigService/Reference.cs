@@ -1074,10 +1074,10 @@ namespace Digital.WCFClient.ConfigService {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IsCompanyNameField;
+        private bool IsCompanyNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IsWebsiteField;
+        private bool IsWebsiteField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIdField;
@@ -1109,7 +1109,7 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IsCompanyName {
+        public bool IsCompanyName {
             get {
                 return this.IsCompanyNameField;
             }
@@ -1122,7 +1122,7 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IsWebsite {
+        public bool IsWebsite {
             get {
                 return this.IsWebsiteField;
             }

@@ -283,13 +283,13 @@ namespace Digital.Contact.BLL
             {
                 try
                 {
-                    if (WaterMark != null && WaterMark.UserId != 0)
+                    if (WaterMark != null && WaterMark.UserId != 0&&WaterMark.ID!=0)
                     {
                         var Temp = db.WaterMarkModels.Where(o => o.UserId == WaterMark.UserId).FirstOrDefault();
                         Temp.WaterPostion = WaterMark.WaterPostion;
                         Temp.IsWebsite = WaterMark.IsWebsite;
                         Temp.IsCompanyName = WaterMark.IsCompanyName;
-                        db.Entry(WaterMark).State = EntityState.Modified;
+                        db.Entry(Temp).State = EntityState.Modified;
                         db.SaveChanges();
                         return WaterMark;
                     }
@@ -314,7 +314,15 @@ namespace Digital.Contact.BLL
             {
                 try
                 {
-                    return db.WaterMarkModels.Where(o => o.UserId == Userid).FirstOrDefault();
+                    var WateModel= db.WaterMarkModels.Where(o => o.UserId == Userid).FirstOrDefault();
+                    if (WateModel == null)
+                    {
+                        return new WaterMarkModel();
+                    }
+                    else
+                    {
+                        return WateModel;
+                    }
                 }
                 catch (Exception ex)
                 {

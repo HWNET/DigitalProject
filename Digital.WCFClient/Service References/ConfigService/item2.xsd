@@ -124,8 +124,8 @@
   <xs:complexType name="WaterMarkModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="IsCompanyName" type="xs:int" />
-      <xs:element minOccurs="0" name="IsWebsite" type="xs:int" />
+      <xs:element minOccurs="0" name="IsCompanyName" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsWebsite" type="xs:boolean" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
       <xs:element minOccurs="0" name="WaterPostion" type="xs:int" />
     </xs:sequence>

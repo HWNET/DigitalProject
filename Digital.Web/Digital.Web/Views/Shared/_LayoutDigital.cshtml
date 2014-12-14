@@ -31,12 +31,12 @@
     <script src="../DigitalStyle/js/jquery.datatables.min.js"></script>
     <script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
 
-    <script src="../DigitalStyle/js/custom.js"></script>
+    <script src="../DigitalStyle/js/custom.js" charset="gbk"></script>
     <script type="text/javascript">
-      var staticFileRoot = "@Url.StaticFile()";
+        var staticFileRoot = "@Url.StaticFile()";
     </script>
     @RenderSection("PageSpecificJavascriptIncludes", required: false)
-  
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -46,25 +46,22 @@
 </head>
 
 <body>
-    @{
+        @{
         var UserModel = Digital.Web.Controllers.OperatorFactory.GetUser(User.Identity.GetUserId());
-        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel> MenuList=new System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>();
-        //var MenuList = Digital.Web.Controllers.OperatorFactory.GetCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>>("Menu");
-        var CommonRigthList = Digital.Web.Controllers.OperatorFactory.GetCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CommonRightModel>>("CommonRight");
-        //if(MenuList==null)
-        //{
-            var client = ServiceHub.GetCommonServiceClient<Digital.WCFClient.ConfigService.ConfigServiceClient>();
-           // MenuList = client.GetMenuList();
-            
+    System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel> MenuList = new System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>();
+        if (UserModel != null)
+        {
+
+            //var MenuList = Digital.Web.Controllers.OperatorFactory.GetCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>>("Menu");
+            var CommonRigthList = Digital.Web.Controllers.OperatorFactory.GetCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CommonRightModel>>("CommonRight");
             if (CommonRigthList == null)
             {
-             
+                var client = ServiceHub.GetCommonServiceClient<Digital.WCFClient.ConfigService.ConfigServiceClient>();
                 var CommonRigthModelList = client.GetCommonRightList();
+                client.Close();
                 Digital.Web.Controllers.OperatorFactory.InsertCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CommonRightModel>>(CommonRigthModelList, "CommonRight");
             }
-            client.Close();
-           // Digital.Web.Controllers.OperatorFactory.InsertCache<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.MenuModel>>(MenuList, "Menu");
-        //}
+
             if (UserModel.CompanyID == null)
             {
                 MenuList = CommonRigthList.Where(o => o.ID == 1).FirstOrDefault().MenuModels;
@@ -73,7 +70,12 @@
             {
                 MenuList = CommonRigthList.Where(o => o.ID == 2).FirstOrDefault().MenuModels;
             }
-        
+        }
+        else
+        {
+            Response.Redirect(@Url.StaticFile());
+        }
+
     }
     <!-- Preloader -->
     <div id="preloader">
@@ -127,10 +129,10 @@
                                 {
                                     StyleClass = "nav-parent";
                                 }
-                                <li class="@StyleClass">
-                                    <a href=""><i class="@MenuModel.Style"></i> <span>@MenuModel.MenuName</span></a>
-                                    <ul class="children" @Html.Raw(UlDisplay)>
-                                        @{
+                        <li class="@StyleClass">
+                            <a href=""><i class="@MenuModel.Style"></i> <span>@MenuModel.MenuName</span></a>
+                            <ul class="children" @Html.Raw(UlDisplay)>
+                                @{
                                 foreach (var SubModel in MenuList.Where(o => o.ParentId == MenuModel.ID&&o.ID!=MenuModel.ID))
                                 {
                                     var SubStyleClass = string.Empty;
@@ -140,13 +142,13 @@
                                     }
                                     <li @Html.Raw(SubStyleClass)><a href="@SubModel.Url"><i class="@SubModel.Style"></i> @SubModel.MenuName</a></li>
                                 }
-                                        }
-                                    </ul>
-                                </li>
+                                }
+                            </ul>
+                        </li>
                             }
                         }
                     }
-                   
+
                 </ul>
 
             </div><!-- leftpanelinner -->

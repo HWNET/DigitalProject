@@ -14,7 +14,13 @@
 <link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
 <link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
 <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
-
+@section PageSpecificJavascriptIncludes{
+    <link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+}
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 信息设置 <span>企业中心</span></h2>
     <div class="breadcrumb-wrapper">
@@ -41,7 +47,7 @@
                     <p>完善企业信息，让客户更了解您.</p>
                 </div>
                 <div class="panel-body panel-body-nopadding">
-                   
+
                     <!-- BASIC WIZARD -->
                     <div id="progressWizard" class="basic-wizard">
 
@@ -80,40 +86,12 @@
 
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">企业类型</label>
+
                                         <div class="col-sm-5">
                                             <select id="CompanyTypeNO" class="form-control mb15">
                                                 <option value=""> --请选择-- </option>
-                                                @{
-                                                    foreach (var TypeMode in (ObservableCollection<CompanyTypeMode>)ViewBag.CompanyTypeList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.CompanyTypeNO > 0 ? Model.CompanyTypeNO : 1;
-                                                        if (TypeMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-
-                                                        var LineBegin = string.Empty;
-                                                        if (TypeMode.Id == -1 && TypeMode.Name == "LINE")
-                                                        {
-                                                            LineBegin = "<optgroup label=\"----------------------\">";
-                                                        }
-
-                                                        var LineEnd = string.Empty;
-                                                        if (TypeMode.Id == -1 && TypeMode.Name == "END")
-                                                        {
-                                                            LineEnd = "</optgroup>";
-                                                        }
-
-                                                        @Html.Raw(LineBegin)
-                                                        if (TypeMode.Id != -1)
-                                                        {
-                                                            <option value="@TypeMode.Id" @IsSelected>@TypeMode.Name</option>
-                                                        }
-                                                        @Html.Raw(LineEnd)
-                                                    }
-                                                }
                                             </select>
+
                                         </div>
                                     </div>
 
@@ -122,66 +100,12 @@
                                         <div class="col-sm-5">
                                             <select id="CompanyMembers" class="form-control mb15">
                                                 <option value=""> -- 请选择 --</option>
-                                                @{
-                                                    foreach (var MemberMode in (ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.CompanyMembers > 0 ? Model.CompanyMembers : 1;
-                                                        if (MemberMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                        <option value="@MemberMode.Id" @IsSelected> @MemberMode.Name </option>
-                                                    }
-                                                }
                                             </select>
-
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">经营模式</label>
-                                        <div class="col-sm-5">
-                                            @{
-                                                foreach (var BusinessMode in (ObservableCollection<CompanyBusinessMode>)ViewBag.CompanyBusinessList)
-                                                {
-                                                    //var IsChecked = string.Empty;
-                                                    var RadioClass = string.Empty;
-                                                    var RadioId = string.Empty;
-                                                    if (BusinessMode.Id == 1)
-                                                    {
-                                                        //IsChecked = "checked=checked";
-                                                        RadioClass = "rdio rdio-default";
-                                                        RadioId = "radioDefault";
-                                                    }
-                                                    if (BusinessMode.Id == 2)
-                                                    {
-                                                        RadioClass = "rdio rdio-primary";
-                                                        RadioId = "radioPrimary";
-                                                    }
-                                                    if (BusinessMode.Id == 3)
-                                                    {
-                                                        RadioClass = "rdio rdio-warning";
-                                                        RadioId = "radioWarning";
-                                                    }
-                                                    if (BusinessMode.Id == 4)
-                                                    {
-                                                        RadioClass = "rdio rdio-success";
-                                                        RadioId = "radioSuccess";
-                                                    }
-                                                    if (BusinessMode.Id == 5)
-                                                    {
-                                                        RadioClass = "rdio rdio-danger";
-                                                        RadioId = "radioDanger";
-                                                    }
-                                                    var SelectedId = Model.CompanyBusinessModel > 0 ? Model.CompanyBusinessModel : 1;
-                                                    <div class="@RadioClass">
-                                                        <input type="radio" name="radioBusiness" id="@RadioId" value="@BusinessMode.Id" @Html.IsChecked(BusinessMode.Id == SelectedId) />
-                                                        <label for="@RadioId">@BusinessMode.Name</label>
-                                                    </div>
-                                                }
-                                            }
-
+                                        <div class="col-sm-5" id="CompanyBusinessRadio">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -251,7 +175,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@AreaMode.Id" @IsSelected>@AreaMode.Name</option>
+                                                    <option value="@AreaMode.Id" @IsSelected>@AreaMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -273,10 +197,10 @@
                                                 </select>
                                             </div>
                                             @*<div class="col-sm-2">
-                                                <select id="BusinessArea" class="form-control">
-                                                    <option value=""> --请选择-- </option>
-                                                </select>
-                                            </div>*@
+                                                    <select id="BusinessArea" class="form-control">
+                                                        <option value=""> --请选择-- </option>
+                                                    </select>
+                                                </div>*@
 
                                             <div class="col-sm-6">
                                                 <input type="text" id="BusinessAddress" placeholder="" value="@ViewBag.BusinessAddress" class="form-control" required />
@@ -300,18 +224,6 @@
                                         <div class="col-sm-5">
                                             <select id="ProductionForm" class="form-control mb15">
                                                 <option value=""> -- 请如实填写您的生产形式，以便客户确认合作形式 --</option>
-                                                @{
-                                                    foreach (var FormMode in (ObservableCollection<ProductionFormMode>)ViewBag.ProductionFormList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.ProductionForm > 0 ? Model.ProductionForm : 1;
-                                                        if (FormMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                        <option value="@FormMode.Id" @IsSelected> @FormMode.Name </option>
-                                                    }
-                                                }
                                             </select>
                                         </div>
                                     </div>
@@ -329,7 +241,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@DomainMode.Id" @IsSelected> @DomainMode.Name </option>
+                                                    <option value="@DomainMode.Id" @IsSelected> @DomainMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -349,7 +261,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@MethodMode.Id" @IsSelected> @MethodMode.Name </option>
+                                                    <option value="@MethodMode.Id" @IsSelected> @MethodMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -370,7 +282,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@CraftMode.Id" @IsSelected> @CraftMode.Name </option>
+                                                    <option value="@CraftMode.Id" @IsSelected> @CraftMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -391,7 +303,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@EquipMode.Id" @IsSelected> @EquipMode.Name </option>
+                                                    <option value="@EquipMode.Id" @IsSelected> @EquipMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -401,7 +313,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">研发部门人数</label>
                                         <div class="col-sm-5">
-                                            <select  id="ResearchDepartMembers" class="form-control mb15">
+                                            <select id="ResearchDepartMembers" class="form-control mb15">
                                                 <option value=""> -- 请选择 --</option>
                                                 @{
                                                     foreach (var MemberMode in (ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList)
@@ -412,7 +324,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@MemberMode.Id" @IsSelected> @MemberMode.Name </option>
+                                                    <option value="@MemberMode.Id" @IsSelected> @MemberMode.Name </option>
                                                     }
                                                 }
                                             </select>
@@ -437,7 +349,7 @@
                                                             {
                                                                 IsSelected = "selected";
                                                             }
-                                                            <option value="@UnitMode.Id" @IsSelected> @UnitMode.Name </option>
+                                                        <option value="@UnitMode.Id" @IsSelected> @UnitMode.Name </option>
                                                         }
                                                     }
                                                 </select>
@@ -459,7 +371,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@BVolumeMode.Id" @IsSelected>@BVolumeMode.Name</option>
+                                                    <option value="@BVolumeMode.Id" @IsSelected>@BVolumeMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -481,7 +393,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@EVolumeMode.Id" @IsSelected>@EVolumeMode.Name</option>
+                                                    <option value="@EVolumeMode.Id" @IsSelected>@EVolumeMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -502,7 +414,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@SystemMode.Id" @IsSelected>@SystemMode.Name</option>
+                                                    <option value="@SystemMode.Id" @IsSelected>@SystemMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -523,7 +435,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@QualityMode.Id" @IsSelected>@QualityMode.Name</option>
+                                                    <option value="@QualityMode.Id" @IsSelected>@QualityMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -556,10 +468,10 @@
                                                     }
 
                                                     var SelectedId = Model.QualityAssurance > 0 ? Model.QualityAssurance : 1;
-                                                    <div class="@radioClass">
-                                                        <input type="radio" name="radioQualityAssurance" id="@radioId" value="@QAMode.Id" @Html.IsChecked(QAMode.Id == SelectedId) />
-                                                        <label for="@radioId">@QAMode.Name</label>
-                                                    </div>
+                                                <div class="@radioClass">
+                                                    <input type="radio" name="radioQualityAssurance" id="@radioId" value="@QAMode.Id" @Html.IsChecked(QAMode.Id == SelectedId) />
+                                                    <label for="@radioId">@QAMode.Name</label>
+                                                </div>
                                                 }
                                             }
                                         </div>
@@ -613,7 +525,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@YearMode.Id" @IsSelected>@YearMode.Name</option>
+                                                    <option value="@YearMode.Id" @IsSelected>@YearMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -643,7 +555,7 @@
                                                         {
                                                             IsSelected = "selected";
                                                         }
-                                                        <option value="@AssetUnitMode.Id" @IsSelected>@AssetUnitMode.Name</option>
+                                                    <option value="@AssetUnitMode.Id" @IsSelected>@AssetUnitMode.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -664,14 +576,14 @@
                                                 </select>
                                             </div>
                                             @*<div class="col-sm-2">
-                                                <select id="RegisteredArea" class="form-control">
-                                                    <option value="">南山区</option>
-                                                    <option value="">2013</option>
-                                                    <option value="">2014</option>
-                                                    <option value="">2015</option>
-                                                    <option value="">...</option>
-                                                </select>
-                                            </div>*@
+                                                    <select id="RegisteredArea" class="form-control">
+                                                        <option value="">南山区</option>
+                                                        <option value="">2013</option>
+                                                        <option value="">2014</option>
+                                                        <option value="">2015</option>
+                                                        <option value="">...</option>
+                                                    </select>
+                                                </div>*@
                                         </div>
                                     </div>
 
@@ -701,7 +613,7 @@
                         <ul class="pager wizard">
                             <li class="previous"><a href="javascript:void(0)">Previous</a></li>
                             <li class="next"><a href="javascript:void(0)">Next</a></li>
-                            <li><button id="BtnSave"class="btn btn-primary" style="display:block" onclick="javascript:Save()">保 存</button></li>
+                            <li><button id="BtnSave" class="btn btn-primary" style="display:block" onclick="javascript:Save()">保 存</button></li>
                         </ul>
 
                     </div><!-- #basicWizard -->
@@ -732,289 +644,301 @@
 
 <script>
     jQuery(document).ready(function () {
+        var CompanyTypejsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyTypeMode>)ViewBag.CompanyTypeList))
+        DropOption(CompanyTypejsons,$("#CompanyTypeNO"),@Model.CompanyTypeNO);
+        var CompanyMembersjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList))
+        DropOption(CompanyMembersjsons,$("#CompanyMembers"),@Model.CompanyMembers);
+        var CompanyBusinessjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyBusinessMode>)ViewBag.CompanyBusinessList))
+        RadioHtml(CompanyBusinessjsons, $("#CompanyBusinessRadio"), @Model.CompanyBusinessModel,"rdio rdio-primary","radioBusiness");
+        var ProductionFormjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProductionFormMode>)ViewBag.ProductionFormList))
+        DropOption(ProductionFormjsons,$("#ProductionForm"),@Model.ProductionForm );
         @{
-            // for drop down cascading [ PrimaryBusiness ]
-            var IsBusinessCategory = string.Empty;
-            if (Model.PrimaryBusinessCategory>0)
-            {
-                IsBusinessCategory = Model.PrimaryBusinessCategory.ToString();
-            }
-            else
-            {
-                IsBusinessCategory = "1";
-            }
-            
-            var IsBusiness = string.Empty;
-            if (Model.PrimaryBusiness>0)
-            {
-                IsBusiness = Model.PrimaryBusiness.ToString();
-            }
-            else
-            {
-                IsBusiness = "1";
-            }
 
-            //for drop down cascading [ CompanyBusinessAddress ]
-            var IsBusinessProvince = string.Empty;
-            if (Model.CompanyBusinessProvince>0)
-            {
-                IsBusinessProvince = Model.CompanyBusinessProvince.ToString();
-            }
-            else
-            {
-                IsBusinessProvince = "1";
-            }
-            
-            var IsBusinessCity = string.Empty;
-            if (Model.CompanyBusinessCity>0)
-            {
-                IsBusinessCity = Model.CompanyBusinessCity.ToString();
-            }
-            else
-            {
-                IsBusinessCity = "1";
-            }
-            
-            //for drop down cascading [ CompanyRegisteredAddress ]
-            var IsRegisteredProvince = string.Empty;
-            if (Model.CompanyRegisteredProvince>0)
-            {
-                IsRegisteredProvince = Model.CompanyRegisteredProvince.ToString();
-            }
-            else
-            {
-                IsRegisteredProvince = "1";
-            }
-
-            var IsRegisteredCity = string.Empty;
-            if (Model.CompanyRegisteredCity>0)
-            {
-                IsRegisteredCity = Model.CompanyRegisteredCity.ToString();
-            }
-            else
-            {
-                IsRegisteredCity = "1"; 
-            }
-            
-        }
-        //------------for drop down cascading [ PrimaryBusiness ]-------------
-        jQuery.ajax({
-            url: "../xml/PrimaryBusiness.xml",
-            type: "get",
-            datatype: "xml",
-            success: function (xmldoc) {
-                jQuery(xmldoc).find("PrimaryBusinessCategory").each(function () {
-                    if (@IsBusinessCategory == jQuery(this).attr("Id")) {
-                        jQuery("#PrimaryBusinessCategory").append("<option selected value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-                        PrimaryBusiness(jQuery(this).attr("Id"));
-                    }
-                    else{
-                        jQuery("#PrimaryBusinessCategory").append("<option value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-                    }
-                })
-
-                jQuery("#PrimaryBusinessCategory").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                jQuery("#PrimaryBusinessCategory").trigger("chosen:updated");
-            }
-        });
-
-        jQuery("#PrimaryBusinessCategory").change(function(){
-            var selectvalue = jQuery(this).val();
-            PrimaryBusiness(selectvalue);
-        });
-
-        function PrimaryBusiness(selectCategory) {
-            jQuery.ajax({
-                url:"../xml/PrimaryBusiness.xml",
-                type:"get",
-                datatype:"xml",
-                success:function (xmldoc) {
-                    jQuery("#PrimaryBusiness").find("option").remove();
-                    jQuery("#PrimaryBusiness").append("<option  value='0'> --请选择-- </option>");
-                    jQuery(xmldoc).find("Root>PrimaryBusinessCategory[Id="+selectCategory+"]>PrimaryBusiness").each(function() {
-                        if (@IsBusiness == jQuery(this).attr("Id")) {
-                            jQuery("#PrimaryBusiness").append("<option selected value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-                        }
-                        else{
-                            jQuery("#PrimaryBusiness").append("<option value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-                        }
-                    });
-
-                    jQuery("#PrimaryBusiness").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                    jQuery("#PrimaryBusiness").trigger("chosen:updated");
-                }
-            });
-        }
-        //--------------------------------------------------------------
-
-        //------------for drop down cascading [ CompanyBusinessAddress ]------
-        // <select> id : BusinessProvince , BusinessCity
-        // <select> id : RegisteredProvince , RegisteredCity
-        jQuery.ajax({
-            url: "../xml/City.xml",
-            type: "get",
-            datatype: "xml",
-            success: function (xmldoc) {
-                jQuery(xmldoc).find("Province").each(function () {
-                    //for drop down CompanyBusinessAddress
-                    if (@IsBusinessProvince == jQuery(this).attr("ID")) {
-                        jQuery("#BusinessProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                        CompanyBusinessCity(jQuery(this).attr("ID"),1);
-                    }
-                    else{
-                        jQuery("#BusinessProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                    }
-                    //for drop down CompanyRegisteredAddress
-                    if (@IsRegisteredProvince == jQuery(this).attr("ID")) {
-                        jQuery("#RegisteredProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                        CompanyBusinessCity(jQuery(this).attr("ID"),0);
-                    }
-                    else{
-                        jQuery("#RegisteredProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                    }
-                })
-
-                jQuery("#BusinessProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                jQuery("#BusinessProvince").trigger("chosen:updated");
-
-                jQuery("#RegisteredProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                jQuery("#RegisteredProvince").trigger("chosen:updated");
-            }
-        });
-
-        jQuery("#BusinessProvince").change(function(){
-            var selectvalue = jQuery(this).val();
-            CompanyBusinessCity(selectvalue,1);
-        });
-
-        jQuery("#RegisteredProvince").change(function(){
-            var selectvalue = jQuery(this).val();
-            CompanyBusinessCity(selectvalue,0);
-        });
-
-        function CompanyBusinessCity(selectProvince,isBusiness) {
-            jQuery.ajax({
-                url:"../xml/City.xml",
-                type:"get",
-                datatype:"xml",
-                success:function (xmldoc) {
-                    if (isBusiness==1) {
-                        //for drop down BusinessCity
-                        jQuery("#BusinessCity").find("option").remove();
-                        jQuery("#BusinessCity").append("<option  value='0'> --请选择-- </option>");
-                        jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
-                            if (@IsBusinessCity == jQuery(this).attr("ID")) {
-                                jQuery("#BusinessCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                            }
-                            else{
-                                jQuery("#BusinessCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                            }
-                        });
-
-                        jQuery("#BusinessCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                        jQuery("#BusinessCity").trigger("chosen:updated");
-                    }
-                    else if (isBusiness==0) {
-                        //for drop down  RegisteredCity
-                        jQuery("#RegisteredCity").find("option").remove();
-                        jQuery("#RegisteredCity").append("<option  value='0'> --请选择-- </option>");
-                        jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
-                            if (@IsRegisteredCity == jQuery(this).attr("ID")) {
-                                jQuery("#RegisteredCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                            }
-                            else{
-                                jQuery("#RegisteredCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                            }
-                        });
-
-                        jQuery("#RegisteredCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                        jQuery("#RegisteredCity").trigger("chosen:updated");
-                    }
-                }
-            });
-        }
-        //--------------------------------------------------------------------
-
-       
-
-        // Progress Wizard
-        $('#progressWizard').bootstrapWizard({
-            'nextSelector': '.next',
-            'previousSelector': '.previous',
-            onNext: function (tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index + 1;
-                var $percent = ($current / $total) * 100;
-                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-               
-            },
-            onPrevious: function (tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index + 1;
-                var $percent = ($current / $total) * 100;
-                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-            },
-            onTabShow: function (tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index + 1;
-                var $percent = ($current / $total) * 100;
-                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-                
-                $("#BtnSave").attr('style','display:block');
-
-                if (index==2) {
-                    jQuery('#progressWizard').find('.next').attr('style','display:none');
-                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
-                }
-                else if(index==0)
-                {
-                    //$("#BtnSave").attr('style','display:none');
-                    jQuery('#progressWizard').find('.previous').attr('style','display:none');
-                    jQuery('#progressWizard').find('.next').attr('style','display:block');
-                }
-                else
-                {
-                    //$("#BtnSave").attr('style','display:none');
-                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
-                    jQuery('#progressWizard').find('.next').attr('style','display:block');
-                }
-
-            }
-        });
 
       
 
-        // Disabled Tab Click Wizard
-        jQuery('#disabledTabWizard').bootstrapWizard({
-            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
-            onTabClick: function (tab, navigation, index) {
-                return false;
+        // for drop down cascading [ PrimaryBusiness ]
+        var IsBusinessCategory = string.Empty;
+        if (Model.PrimaryBusinessCategory>0)
+        {
+            IsBusinessCategory = Model.PrimaryBusinessCategory.ToString();
+        }
+        else
+        {
+            IsBusinessCategory = "1";
+        }
+
+        var IsBusiness = string.Empty;
+        if (Model.PrimaryBusiness>0)
+        {
+            IsBusiness = Model.PrimaryBusiness.ToString();
+        }
+        else
+        {
+            IsBusiness = "1";
+        }
+
+        //for drop down cascading [ CompanyBusinessAddress ]
+        var IsBusinessProvince = string.Empty;
+        if (Model.CompanyBusinessProvince>0)
+        {
+            IsBusinessProvince = Model.CompanyBusinessProvince.ToString();
+        }
+        else
+        {
+            IsBusinessProvince = "1";
+        }
+
+        var IsBusinessCity = string.Empty;
+        if (Model.CompanyBusinessCity>0)
+        {
+            IsBusinessCity = Model.CompanyBusinessCity.ToString();
+        }
+        else
+        {
+            IsBusinessCity = "1";
+        }
+
+        //for drop down cascading [ CompanyRegisteredAddress ]
+        var IsRegisteredProvince = string.Empty;
+        if (Model.CompanyRegisteredProvince>0)
+        {
+            IsRegisteredProvince = Model.CompanyRegisteredProvince.ToString();
+        }
+        else
+        {
+            IsRegisteredProvince = "1";
+        }
+
+        var IsRegisteredCity = string.Empty;
+        if (Model.CompanyRegisteredCity>0)
+        {
+            IsRegisteredCity = Model.CompanyRegisteredCity.ToString();
+        }
+        else
+        {
+            IsRegisteredCity = "1";
+        }
+
+    }
+        //------------for drop down cascading [ PrimaryBusiness ]-------------
+        jQuery.ajax({
+    url: "../xml/PrimaryBusiness.xml",
+    type: "get",
+    datatype: "xml",
+    success: function (xmldoc) {
+        jQuery(xmldoc).find("PrimaryBusinessCategory").each(function () {
+            if (@IsBusinessCategory == jQuery(this).attr("Id")) {
+                jQuery("#PrimaryBusinessCategory").append("<option selected value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
+                PrimaryBusiness(jQuery(this).attr("Id"));
+            }
+            else{
+                jQuery("#PrimaryBusinessCategory").append("<option value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
+            }
+        })
+
+        jQuery("#PrimaryBusinessCategory").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+        jQuery("#PrimaryBusinessCategory").trigger("chosen:updated");
+    }
+    });
+
+    jQuery("#PrimaryBusinessCategory").change(function(){
+        var selectvalue = jQuery(this).val();
+        PrimaryBusiness(selectvalue);
+    });
+
+    function PrimaryBusiness(selectCategory) {
+        jQuery.ajax({
+            url:"../xml/PrimaryBusiness.xml",
+            type:"get",
+            datatype:"xml",
+            success:function (xmldoc) {
+                jQuery("#PrimaryBusiness").find("option").remove();
+                jQuery("#PrimaryBusiness").append("<option  value='0'> --请选择-- </option>");
+                jQuery(xmldoc).find("Root>PrimaryBusinessCategory[Id="+selectCategory+"]>PrimaryBusiness").each(function() {
+                    if (@IsBusiness == jQuery(this).attr("Id")) {
+                        jQuery("#PrimaryBusiness").append("<option selected value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
+                    }
+                    else{
+                        jQuery("#PrimaryBusiness").append("<option value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
+                    }
+                });
+
+                jQuery("#PrimaryBusiness").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                jQuery("#PrimaryBusiness").trigger("chosen:updated");
             }
         });
+    }
+    //--------------------------------------------------------------
 
-        // With Form Validation Wizard
-        var $validator = jQuery("#firstForm").validate({
-            highlight: function (element) {
-                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-            },
-            success: function (element) {
-                jQuery(element).closest('.form-group').removeClass('has-error');
-            }
-        });
+    //------------for drop down cascading [ CompanyBusinessAddress ]------
+    // <select> id : BusinessProvince , BusinessCity
+    // <select> id : RegisteredProvince , RegisteredCity
+    jQuery.ajax({
+        url: "../xml/City.xml",
+        type: "get",
+        datatype: "xml",
+        success: function (xmldoc) {
+            jQuery(xmldoc).find("Province").each(function () {
+                //for drop down CompanyBusinessAddress
+                if (@IsBusinessProvince == jQuery(this).attr("ID")) {
+                    jQuery("#BusinessProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                    CompanyBusinessCity(jQuery(this).attr("ID"),1);
+                }
+                else{
+                    jQuery("#BusinessProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                }
+                //for drop down CompanyRegisteredAddress
+                if (@IsRegisteredProvince == jQuery(this).attr("ID")) {
+                    jQuery("#RegisteredProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                    CompanyBusinessCity(jQuery(this).attr("ID"),0);
+                }
+                else{
+                    jQuery("#RegisteredProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
+                }
+            })
 
-        jQuery('#progressWizard').bootstrapWizard({
-            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
-            onTabClick: function (tab, navigation, index) {
-                return false;
-            },
-            onNext: function (tab, navigation, index) {
-                var $valid = jQuery('#firstForm').valid();
-                if (!$valid) {
-                    $validator.focusInvalid();
-                    return false;
+            jQuery("#BusinessProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+            jQuery("#BusinessProvince").trigger("chosen:updated");
+
+            jQuery("#RegisteredProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+            jQuery("#RegisteredProvince").trigger("chosen:updated");
+        }
+    });
+
+    jQuery("#BusinessProvince").change(function(){
+        var selectvalue = jQuery(this).val();
+        CompanyBusinessCity(selectvalue,1);
+    });
+
+    jQuery("#RegisteredProvince").change(function(){
+        var selectvalue = jQuery(this).val();
+        CompanyBusinessCity(selectvalue,0);
+    });
+
+    function CompanyBusinessCity(selectProvince,isBusiness) {
+        jQuery.ajax({
+            url:"../xml/City.xml",
+            type:"get",
+            datatype:"xml",
+            success:function (xmldoc) {
+                if (isBusiness==1) {
+                    //for drop down BusinessCity
+                    jQuery("#BusinessCity").find("option").remove();
+                    jQuery("#BusinessCity").append("<option  value='0'> --请选择-- </option>");
+                    jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
+                        if (@IsBusinessCity == jQuery(this).attr("ID")) {
+                            jQuery("#BusinessCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                        }
+                        else{
+                            jQuery("#BusinessCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                        }
+                    });
+
+                    jQuery("#BusinessCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                    jQuery("#BusinessCity").trigger("chosen:updated");
+                }
+                else if (isBusiness==0) {
+                    //for drop down  RegisteredCity
+                    jQuery("#RegisteredCity").find("option").remove();
+                    jQuery("#RegisteredCity").append("<option  value='0'> --请选择-- </option>");
+                    jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
+                        if (@IsRegisteredCity == jQuery(this).attr("ID")) {
+                            jQuery("#RegisteredCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                        }
+                        else{
+                            jQuery("#RegisteredCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
+                        }
+                    });
+
+                    jQuery("#RegisteredCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+                    jQuery("#RegisteredCity").trigger("chosen:updated");
                 }
             }
         });
+    }
+    //--------------------------------------------------------------------
+
+
+
+    // Progress Wizard
+    $('#progressWizard').bootstrapWizard({
+        'nextSelector': '.next',
+        'previousSelector': '.previous',
+        onNext: function (tab, navigation, index) {
+            var $total = navigation.find('li').length;
+            var $current = index + 1;
+            var $percent = ($current / $total) * 100;
+            jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+
+        },
+        onPrevious: function (tab, navigation, index) {
+            var $total = navigation.find('li').length;
+            var $current = index + 1;
+            var $percent = ($current / $total) * 100;
+            jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+        },
+        onTabShow: function (tab, navigation, index) {
+            var $total = navigation.find('li').length;
+            var $current = index + 1;
+            var $percent = ($current / $total) * 100;
+            jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+
+            $("#BtnSave").attr('style','display:block');
+
+            if (index==2) {
+                jQuery('#progressWizard').find('.next').attr('style','display:none');
+                jQuery('#progressWizard').find('.previous').attr('style','display:block');
+            }
+            else if(index==0)
+            {
+                //$("#BtnSave").attr('style','display:none');
+                jQuery('#progressWizard').find('.previous').attr('style','display:none');
+                jQuery('#progressWizard').find('.next').attr('style','display:block');
+            }
+            else
+            {
+                //$("#BtnSave").attr('style','display:none');
+                jQuery('#progressWizard').find('.previous').attr('style','display:block');
+                jQuery('#progressWizard').find('.next').attr('style','display:block');
+            }
+
+        }
+    });
+
+
+
+    // Disabled Tab Click Wizard
+    jQuery('#disabledTabWizard').bootstrapWizard({
+        tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+        onTabClick: function (tab, navigation, index) {
+            return false;
+        }
+    });
+
+    // With Form Validation Wizard
+    var $validator = jQuery("#firstForm").validate({
+        highlight: function (element) {
+            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        success: function (element) {
+            jQuery(element).closest('.form-group').removeClass('has-error');
+        }
+    });
+
+    jQuery('#progressWizard').bootstrapWizard({
+        tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+        onTabClick: function (tab, navigation, index) {
+            return false;
+        },
+        onNext: function (tab, navigation, index) {
+            var $valid = jQuery('#firstForm').valid();
+            if (!$valid) {
+                $validator.focusInvalid();
+                return false;
+            }
+        }
+    });
     });
 
 
@@ -1051,7 +975,7 @@
                     CompanyID = UserModel.CompanyID.Value;
                 }
             }
-            
+
             var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
             //------------------TAB 01 : 基本信息
             var valCompanyName=$("#CompanyName").val();
@@ -1098,7 +1022,7 @@
             var valProcessingCraft=StringCombine("#ProcessingCraft option:selected");
             //-------------EquipmentIntro
             var valEquipmentIntro=StringCombine("#EquipmentIntro option:selected");;
-                
+
             var valResearchDepartMembers=$("#ResearchDepartMembers option:selected").val();
             var valCapacityIntro=$("#CapacityIntro").val();
             var valCapacityIntroUnit=$("#CapacityIntroUnit option:selected").val();
@@ -1108,7 +1032,7 @@
             var valManagementSystemCertification=StringCombine("#ManagementSystemCertification option:selected");//$("#ManagementSystemCertification option:selected").val();
             //-------------ProductQualityCertification
             var valProductQualityCertification=StringCombine("#ProductQualityCertification option:selected");//$("#ProductQualityCertification option:selected").val();
-                
+
             var valQualityAssurance=$('input:radio[name="radioQualityAssurance"]:checked').val();
             var valFactoryArea=$("#FactoryArea").val();
 
@@ -1190,9 +1114,9 @@
                 alert(2222);
             }
             else if(TabIndex==2){
-                
+
                 alert(3);
-                
+
                 $.ajaxAntiForgery({
                     type: "post",
                     data: { CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,

@@ -35,9 +35,9 @@ namespace Digital.Common.Mvc.Extensions
             return helper.OnDocumentReady(sb.ToString());
         }
 
-        public static string IsChecked(this HtmlHelper helper, bool isChecked)
+        public static System.Web.IHtmlString IsChecked(this HtmlHelper helper, bool isChecked)
         {
-            return isChecked ? "checked = 'checked'" : string.Empty;
+            return helper.Raw(isChecked ? "checked = 'checked'" : string.Empty);
         }
 
         public static string IsSelected(this HtmlHelper helper, bool isSelected)
@@ -51,7 +51,40 @@ namespace Digital.Common.Mvc.Extensions
         }
 
 
-        public static object IsNull(this HtmlHelper helper, object obj, object IsNullobj,object IsNotNullObj)
+        /// <summary>
+        /// comAjax
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="Url"></param>
+        /// <param name="FucntionName"></param>
+        /// <param name="FormatParam"></param>
+        /// <param name="Param"></param>
+        /// <returns></returns>
+        public static System.Web.IHtmlString ComAjax(this HtmlHelper helper, string Url, string FucntionName, string FormatParam, params string[] Param)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(" $.ajaxAntiForgery({");
+            sb.AppendLine("   type: \"post\",");
+            sb.AppendLine("   data: { " + string.Format(FormatParam, Param) + " },");
+            sb.AppendLine("   url: \"" + Url + "\",");
+            sb.AppendLine("   success: function (data) {");
+            sb.AppendLine("          if (data == \"OK\") {");
+            sb.AppendLine("             SaveInfo(true, \"" + FucntionName + "\");");
+            sb.AppendLine("            }");
+            sb.AppendLine("          else {");
+            sb.AppendLine("                SaveInfo(false, \"" + FucntionName + "\");");
+            sb.AppendLine("               }");
+            sb.AppendLine("   }");
+            sb.AppendLine("})");
+            return helper.Raw(sb.ToString());
+        }
+
+       
+
+
+
+
+        public static object IsNull(this HtmlHelper helper, object obj, object IsNullobj, object IsNotNullObj)
         {
             if (obj == null)
             {
