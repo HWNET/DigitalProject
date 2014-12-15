@@ -507,6 +507,7 @@ namespace Digital.Web.Controllers
             return View();
         }
 
+        #region CompanyCasesAdd
         /// <summary>
         /// 添加企业案例
         /// </summary>
@@ -525,7 +526,9 @@ namespace Digital.Web.Controllers
             };
             return View(CategoryModel);
         }
+        #endregion
 
+        #region CompanyCasesClassManage
         /// <summary>
         /// 企业案例分类管理
         /// </summary>
@@ -549,7 +552,9 @@ namespace Digital.Web.Controllers
             
             return View();
         }
+        #endregion
 
+        #region CompanyCasesList
         /// <summary>
         /// 企业案例列表
         /// </summary>
@@ -559,6 +564,7 @@ namespace Digital.Web.Controllers
             ViewBag.MenuModel = base.GetMenu(158);
             return View();
         }
+        #endregion
 
         /// <summary>
         /// 企业信誉
@@ -1020,6 +1026,7 @@ namespace Digital.Web.Controllers
             return View();
         }
 
+        #region CompanySinglePage
         /// <summary>
         /// 单页列表
         /// </summary>
@@ -1027,9 +1034,24 @@ namespace Digital.Web.Controllers
         public ActionResult CompanySinglePage()
         {
             ViewBag.MenuModel = base.GetMenu(160);
+
+            var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
+            var CompanyID = 0;
+            List<SinglePageModel> PageList = null;
+
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                CompanyID = UserModel.CompanyID.Value;
+                PageList = client.SinglePageQueryListByCompany(CompanyID).ToList();
+            }
+            ViewBag.PageList = PageList;
+
             return View();
         }
+        #endregion
 
+        #region CompanySinglePageAdd
         /// <summary>
         /// 添加单页
         /// </summary>
@@ -1037,8 +1059,70 @@ namespace Digital.Web.Controllers
         public ActionResult CompanySinglePageAdd()
         {
             ViewBag.MenuModel = base.GetMenu(159);
-            return View();
+
+            SinglePageModel SinglePageModel = new SinglePageModel
+            {
+                PageTitle = "PageTitle0000",
+                PageKeyWords = "PageKeyWords0000",
+                PageDescription = "PageDescription0000",
+                PageRelationFlag = "PageRelationFlag0000",
+                PageBody = "PageBody0000",
+                CompanyID=0,
+                ModifiedTime=DateTime.Now,
+            };
+            return View(SinglePageModel);
         }
+        #endregion
+
+        #region CompanySinglePageSave
+        public ActionResult CompanySinglePageSave(int CompanyID, int IsInsert, string PageTitle, string PageKeyWords,
+            string PageDescription, string PageRelationFlag, string PageBody)
+        { 
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
+            var ReturnResult = string.Empty;
+            if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
+            {
+                var SinglePageModel = new SinglePageModel
+                {
+                    PageTitle = PageTitle,
+                    PageKeyWords = PageKeyWords,
+                    PageDescription = PageDescription,
+                    PageRelationFlag = PageRelationFlag,
+                    PageBody = PageBody,
+                    CompanyID = CompanyID,
+                    ModifiedTime = DateTime.Now,
+                };
+                if (IsInsert == 1) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.SinglePageInsert(SinglePageModel); // update DB
+                    if (ResultModel != null && ResultModel.PageID > 0) // update web cache
+                    {
+                        //OperatorFactory.UpdateNewsCategoryCache(User.Identity.GetUserId(), ResultModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+                else // old existing model -- do update
+                {
+                    ReturnResult = "NOK";
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            client.Close();
+
+            return Content(ReturnResult);
+        }
+        #endregion
 
         /// <summary>
         /// 水印设置

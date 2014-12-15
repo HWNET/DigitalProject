@@ -1,5 +1,12 @@
-﻿@{
-    ViewBag.Title = "账户信息管理";
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@using Digital.Common.Utilities
+@model Digital.WCFClient.ConfigService.SinglePageModel
+@{
+    ViewBag.Title = "单页管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
@@ -8,12 +15,12 @@
 
 
 <div class="pageheader">
-    <h2><i class="fa fa-user"></i> 单独页面管理 <span>部门子账户管理</span></h2>
+    <h2><i class="fa fa-user"></i> 单独页面 <span>企业单页管理</span></h2>
     <div class="breadcrumb-wrapper">
         <span class="label">你的位置:</span>
         <ol class="breadcrumb">
             <li><a href="">企业中心</a></li>
-            <li class="active">子账号管理</li>
+            <li class="active">单页管理</li>
         </ol>
     </div>
 </div>
@@ -38,13 +45,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>关于我们</td>
-                            <td>about-us</td>
-                            <td>2014-8-15</td>
-                            <td>预览   删除  更改</td>
-                        </tr>
+                        @{
+                            if (ViewBag.PageList != null)
+                            {
+                                foreach (var PageMode in (List<SinglePageModel>)ViewBag.PageList)
+                                {
+                                    <tr>
+                                        <td>@PageMode.PageID</td>
+                                        <td>@PageMode.PageTitle</td>
+                                        <td>@PageMode.PageRelationFlag</td>
+                                        <td>@PageMode.ModifiedTime</td>
+                                        <td>预览   删除  更改</td>
+                                    </tr>
+                                }
+                            }
+
+                        }
+
                         <tr>
                             <td>1</td>
                             <td>联系我们</td>
@@ -66,8 +83,6 @@
                             <td>2014-8-15</td>
                             <td>预览   删除  更改</td>
                         </tr>
-
-
 
                     </tbody>
                 </table>
@@ -91,6 +106,7 @@
 <script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
 <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
 <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+
 
 <script src="../DigitalStyle/js/custom.js"></script>
 

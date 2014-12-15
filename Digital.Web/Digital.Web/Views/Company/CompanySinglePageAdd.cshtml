@@ -1,5 +1,12 @@
-﻿@{
-    ViewBag.Title = "账户信息管理";
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@using Digital.Common.Utilities
+@model Digital.WCFClient.ConfigService.SinglePageModel
+@{
+    ViewBag.Title = "添加单页";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
@@ -11,6 +18,8 @@
 <link rel="stylesheet" href="css/colorpicker.css" />
 <link rel="stylesheet" href="css/dropzone.css" />
 
+<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
 
 <div class="contentpanel">
     <div class="row">
@@ -24,13 +33,14 @@
                 <h4 class="panel-title">单独页面添加</h4>
                 <p>类似 关于我们、联系我们等页面均属于单独页面，您还可以自由增减相关信息，如：售后服务、企业资质等内容</p>
             </div>
-            <div class="panel-body">
-                <form class="form">
 
+            <div class="panel-body">
+                <form class="form" id="firstForm" onsubmit="return false">
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label class="col-sm-1 control-label">页面标题</label>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="" class="form-control">
+                            <input id="PageTitle" value="@Model.PageTitle" type="text" placeholder="" class="form-control">
                             <span class="help-block">
                                 标题信息将便于搜索引擎对该页面的判定，以确定排名
                             </span>
@@ -39,7 +49,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label">关键字</label>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="" class="form-control">
+                            <input id="PageKeyWords" value="@Model.PageKeyWords" type="text" placeholder="" class="form-control">
                             <span class="help-block">
                                 关键字信息将用于您的网站优化
                             </span>
@@ -48,7 +58,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label">页面描述</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea id="PageDescription" class="form-control" rows="5">@Model.PageDescription</textarea>
                             <span class="help-block">
                                 限100字内
                             </span>
@@ -59,7 +69,7 @@
                         <label class="col-sm-1 control-label">关联标示</label>
                         <div class="col-sm-6">
                             <div class="col-sm-3">
-                                <input type="text" placeholder="" class="form-control">
+                                <input id="PageRelationFlag" value="@Model.PageRelationFlag" type="text" placeholder="" class="form-control">
                             </div>
                             <div class="col-sm-3">
                                 <select class="form-control mb15">
@@ -70,11 +80,20 @@
                         </div>
                     </div>
 
-                    <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10"></textarea>
+                    <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.PageBody</textarea>
                 </form>
-
             </div>
-        </div>
+
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <button class="btn btn-primary" onclick="javascript: Save();">提交</button>&nbsp;
+                        <button class="btn btn-default">取消</button>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- panel -->
 
     </div>
 </div>
@@ -113,6 +132,7 @@
 <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
 <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
 
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
 <script src="../DigitalStyle/js/custom.js"></script>
 <script>
     jQuery(document).ready(function () {
@@ -299,4 +319,72 @@
         }
 
     });
+
+
+    // For SinglePage Add Operation , Submit Button
+    function Save() {
+        var $valid = jQuery('#firstForm').valid();
+        if (!$valid) {
+            $validator.focusInvalid();
+            return false;
+        }
+        else {
+            var IsInsert = 1; // default option : insert single page model
+            var SinglePageID = 0; // default option : insert single page model
+            @{
+
+                var CompanyID = 0;
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                {
+                    //IsInsert = 0;
+                    CompanyID = UserModel.CompanyID.Value;
+                }
+            }
+
+            //------------------TAB 01 : 单页信息
+            var valPageTitle = $("#PageTitle").val();
+            var valPageKeyWords = $("#PageKeyWords").val();
+            var valPageDescription = $("#PageDescription").text();
+            var valPageRelationFlag = $("#PageRelationFlag").val();
+            var valPageBody = $("#ckeditor").text();
+            var valCompanyID = @CompanyID;
+
+            var stringTABONE = valPageTitle + "_" + valPageKeyWords + "_" + valPageDescription + "_" +
+                valPageRelationFlag + "_" + valPageBody + "_" + valCompanyID;
+            alert(stringTABONE);
+
+            alert(1);
+            $.ajaxAntiForgery({
+                type: "post",
+                data: { CompanyID:@CompanyID,IsInsert:IsInsert,PageTitle:valPageTitle,PageKeyWords:valPageKeyWords,
+                    PageDescription:valPageDescription,PageRelationFlag:valPageRelationFlag,PageBody:valPageBody},
+                url: "/Company/CompanySinglePageSave",
+                success: function (data) {
+                    SaveInfo(true, "单页信息");
+                }
+            });
+            alert(1111);
+        }
+    }
+
+    function SaveInfo(IsSuccess, msg) {
+        if (IsSuccess) {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg + ',保存成功.',
+                sticky: false,
+                time: ''
+            });
+        }
+        else {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg + ',保存失败.',
+                sticky: false,
+                time: ''
+            });
+        }
+    }
+
 </script>
