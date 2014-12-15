@@ -587,31 +587,169 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CasesInsert">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q49:CasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesInsertResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CasesInsertResult" nillable="true" type="q50:CasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q51:CasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CasesUpdateResult" nillable="true" type="q52:CasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CasesQueryByIdResult" nillable="true" type="q53:CasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CasesQueryByNameResult" nillable="true" type="q54:CasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesDeleteById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesDeleteByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesDeleteByIdResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesDeleteByCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesCategoryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesDeleteByCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesDeleteByCategoryResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesDeleteByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesDeleteByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesDeleteByCompanyResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CasesQueryListResult" nillable="true" type="q55:ArrayOfCasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryListByCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesCategoryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryListByCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CasesQueryListByCategoryResult" nillable="true" type="q56:ArrayOfCasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryListByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesQueryListByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="CasesQueryListByCompanyResult" nillable="true" type="q57:ArrayOfCasesModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NewsCategoryInsert">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q49:NewsCategoryModel" />
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q58:NewsCategoryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NewsCategoryInsertResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryInsertResult" nillable="true" type="q50:NewsCategoryModel" />
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryInsertResult" nillable="true" type="q59:NewsCategoryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NewsCategoryUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q51:NewsCategoryModel" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q60:NewsCategoryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NewsCategoryUpdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryUpdateResult" nillable="true" type="q52:NewsCategoryModel" />
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryUpdateResult" nillable="true" type="q61:NewsCategoryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -625,7 +763,7 @@
   <xs:element name="NewsCategoryQueryByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryByIdResult" nillable="true" type="q53:NewsCategoryModel" />
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryByIdResult" nillable="true" type="q62:NewsCategoryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -639,7 +777,7 @@
   <xs:element name="NewsCategoryQueryByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryByNameResult" nillable="true" type="q54:NewsCategoryModel" />
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryByNameResult" nillable="true" type="q63:NewsCategoryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -679,7 +817,7 @@
   <xs:element name="NewsCategoryQueryListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryListResult" nillable="true" type="q55:ArrayOfNewsCategoryModel" />
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryListResult" nillable="true" type="q64:ArrayOfNewsCategoryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -693,7 +831,393 @@
   <xs:element name="NewsCategoryQueryListByCompanyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryListByCompanyResult" nillable="true" type="q56:ArrayOfNewsCategoryModel" />
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsCategoryQueryListByCompanyResult" nillable="true" type="q65:ArrayOfNewsCategoryModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsInsert">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q66:NewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsInsertResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsInsertResult" nillable="true" type="q67:NewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q68:NewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsUpdateResult" nillable="true" type="q69:NewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsQueryByIdResult" nillable="true" type="q70:NewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryByTitle">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsTitle" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryByTitleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsQueryByTitleResult" nillable="true" type="q71:NewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsDeleteById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsDeleteByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsDeleteByIdResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsDeleteByCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsCategoryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsDeleteByCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsDeleteByCategoryResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsDeleteByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsDeleteByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsDeleteByCompanyResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsQueryListResult" nillable="true" type="q72:ArrayOfNewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryListByCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewsCategoryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryListByCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsQueryListByCategoryResult" nillable="true" type="q73:ArrayOfNewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryListByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewsQueryListByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="NewsQueryListByCompanyResult" nillable="true" type="q74:ArrayOfNewsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentInsert">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q75:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentInsertResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="PatentInsertResult" nillable="true" type="q76:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q77:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="PatentUpdateResult" nillable="true" type="q78:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PatentId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="PatentQueryByIdResult" nillable="true" type="q79:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PatentName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="PatentQueryByNameResult" nillable="true" type="q80:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentDeleteById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PatentId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentDeleteByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PatentDeleteByIdResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentDeleteByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentDeleteByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PatentDeleteByCompanyResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="PatentQueryListResult" nillable="true" type="q81:ArrayOfPatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryListByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentQueryListByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="PatentQueryListByCompanyResult" nillable="true" type="q82:ArrayOfPatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentDisable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q83:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentDisableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PatentDisableResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentTransfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q84:PatentModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatentTransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PatentTransferResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageInsert">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q85:SinglePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageInsertResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageInsertResult" nillable="true" type="q86:SinglePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q87:SinglePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageUpdateResult" nillable="true" type="q88:SinglePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SinglePageId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryByIdResult" nillable="true" type="q89:SinglePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SinglePageName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryByNameResult" nillable="true" type="q90:SinglePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageDeleteById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SinglePageId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageDeleteByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SinglePageDeleteByIdResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageDeleteByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageDeleteByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SinglePageDeleteByCompanyResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryListResult" nillable="true" type="q91:ArrayOfSinglePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryListByCompany">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SinglePageQueryListByCompanyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryListByCompanyResult" nillable="true" type="q92:ArrayOfSinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

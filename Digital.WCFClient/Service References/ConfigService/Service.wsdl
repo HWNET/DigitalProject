@@ -32,7 +32,39 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_ICasesService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="CustomBinding_INewsCategoryService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_INewsService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IPatentService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_ISinglePageService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -317,6 +349,66 @@
   <wsdl:message name="ICasesCategoryService_CasesCategoryQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:CasesCategoryQueryListByCompanyResponse" />
   </wsdl:message>
+  <wsdl:message name="ICasesService_CasesInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesInsert" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryById" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteByCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryList" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryListByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryListByCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryListByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryListByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesQueryListByCompanyResponse" />
+  </wsdl:message>
   <wsdl:message name="INewsCategoryService_NewsCategoryInsert_InputMessage">
     <wsdl:part name="parameters" element="tns:NewsCategoryInsert" />
   </wsdl:message>
@@ -364,6 +456,174 @@
   </wsdl:message>
   <wsdl:message name="INewsCategoryService_NewsCategoryQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:NewsCategoryQueryListByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsInsert" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsUpdate" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryById" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryByTitle_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryByTitle" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryByTitle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryByTitleResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsDeleteByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsDeleteByCategory" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsDeleteByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsDeleteByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryList" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryListByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryListByCategory" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryListByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryListByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="INewsService_NewsQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewsQueryListByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentInsert" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryById" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryList" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentQueryListByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentDisable_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentDisable" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentDisable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentDisableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:PatentTransfer" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_PatentTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PatentTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageInsert" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryById" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryList" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ISinglePageService_SinglePageQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SinglePageQueryListByCompanyResponse" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
@@ -553,6 +813,48 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ICasesCategoryService/CasesCategoryQueryListByCompanyResponse" message="tns:ICasesCategoryService_CasesCategoryQueryListByCompany_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="ICasesService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesInsert" message="tns:ICasesService_CasesInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesInsertResponse" message="tns:ICasesService_CasesInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesUpdate" message="tns:ICasesService_CasesUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesUpdateResponse" message="tns:ICasesService_CasesUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesQueryById" message="tns:ICasesService_CasesQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesQueryByIdResponse" message="tns:ICasesService_CasesQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesQueryByName" message="tns:ICasesService_CasesQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesQueryByNameResponse" message="tns:ICasesService_CasesQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteById" message="tns:ICasesService_CasesDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteByIdResponse" message="tns:ICasesService_CasesDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesDeleteByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteByCategory" message="tns:ICasesService_CasesDeleteByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteByCategoryResponse" message="tns:ICasesService_CasesDeleteByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteByCompany" message="tns:ICasesService_CasesDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteByCompanyResponse" message="tns:ICasesService_CasesDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesQueryList" message="tns:ICasesService_CasesQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesQueryListResponse" message="tns:ICasesService_CasesQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesQueryListByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesQueryListByCategory" message="tns:ICasesService_CasesQueryListByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesQueryListByCategoryResponse" message="tns:ICasesService_CasesQueryListByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesQueryListByCompany" message="tns:ICasesService_CasesQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesQueryListByCompanyResponse" message="tns:ICasesService_CasesQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="INewsCategoryService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryInsert">
       <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryInsert" message="tns:INewsCategoryService_NewsCategoryInsert_InputMessage" />
@@ -585,6 +887,124 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsCategoryQueryListByCompany">
       <wsdl:input wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryListByCompany" message="tns:INewsCategoryService_NewsCategoryQueryListByCompany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INewsCategoryService/NewsCategoryQueryListByCompanyResponse" message="tns:INewsCategoryService_NewsCategoryQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="INewsService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsInsert" message="tns:INewsService_NewsInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsInsertResponse" message="tns:INewsService_NewsInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsUpdate" message="tns:INewsService_NewsUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsUpdateResponse" message="tns:INewsService_NewsUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsQueryById" message="tns:INewsService_NewsQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsQueryByIdResponse" message="tns:INewsService_NewsQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsQueryByTitle">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsQueryByTitle" message="tns:INewsService_NewsQueryByTitle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsQueryByTitleResponse" message="tns:INewsService_NewsQueryByTitle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsDeleteById" message="tns:INewsService_NewsDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsDeleteByIdResponse" message="tns:INewsService_NewsDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsDeleteByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsDeleteByCategory" message="tns:INewsService_NewsDeleteByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsDeleteByCategoryResponse" message="tns:INewsService_NewsDeleteByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsDeleteByCompany" message="tns:INewsService_NewsDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsDeleteByCompanyResponse" message="tns:INewsService_NewsDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsQueryList" message="tns:INewsService_NewsQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsQueryListResponse" message="tns:INewsService_NewsQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsQueryListByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsQueryListByCategory" message="tns:INewsService_NewsQueryListByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsQueryListByCategoryResponse" message="tns:INewsService_NewsQueryListByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewsQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/INewsService/NewsQueryListByCompany" message="tns:INewsService_NewsQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INewsService/NewsQueryListByCompanyResponse" message="tns:INewsService_NewsQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="IPatentService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentInsert" message="tns:IPatentService_PatentInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentInsertResponse" message="tns:IPatentService_PatentInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentUpdate" message="tns:IPatentService_PatentUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentUpdateResponse" message="tns:IPatentService_PatentUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentQueryById" message="tns:IPatentService_PatentQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentQueryByIdResponse" message="tns:IPatentService_PatentQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentQueryByName" message="tns:IPatentService_PatentQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentQueryByNameResponse" message="tns:IPatentService_PatentQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentDeleteById" message="tns:IPatentService_PatentDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentDeleteByIdResponse" message="tns:IPatentService_PatentDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentDeleteByCompany" message="tns:IPatentService_PatentDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentDeleteByCompanyResponse" message="tns:IPatentService_PatentDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentQueryList" message="tns:IPatentService_PatentQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentQueryListResponse" message="tns:IPatentService_PatentQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentQueryListByCompany" message="tns:IPatentService_PatentQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentQueryListByCompanyResponse" message="tns:IPatentService_PatentQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentDisable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentDisable" message="tns:IPatentService_PatentDisable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentDisableResponse" message="tns:IPatentService_PatentDisable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentTransfer" message="tns:IPatentService_PatentTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentTransferResponse" message="tns:IPatentService_PatentTransfer_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="ISinglePageService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageInsert" message="tns:ISinglePageService_SinglePageInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageInsertResponse" message="tns:ISinglePageService_SinglePageInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageUpdate" message="tns:ISinglePageService_SinglePageUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageUpdateResponse" message="tns:ISinglePageService_SinglePageUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryById" message="tns:ISinglePageService_SinglePageQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryByIdResponse" message="tns:ISinglePageService_SinglePageQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryByName" message="tns:ISinglePageService_SinglePageQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryByNameResponse" message="tns:ISinglePageService_SinglePageQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageDeleteById" message="tns:ISinglePageService_SinglePageDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageDeleteByIdResponse" message="tns:ISinglePageService_SinglePageDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageDeleteByCompany" message="tns:ISinglePageService_SinglePageDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageDeleteByCompanyResponse" message="tns:ISinglePageService_SinglePageDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryList" message="tns:ISinglePageService_SinglePageQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryListResponse" message="tns:ISinglePageService_SinglePageQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompany" message="tns:ISinglePageService_SinglePageQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompanyResponse" message="tns:ISinglePageService_SinglePageQueryListByCompany_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -1008,6 +1428,100 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_ICasesService" type="tns:ICasesService">
+    <wsp:PolicyReference URI="#CustomBinding_ICasesService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CasesInsert">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesQueryById">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesDeleteByCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesDeleteByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesQueryList">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesQueryListByCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesQueryListByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:binding name="CustomBinding_INewsCategoryService" type="tns:INewsCategoryService">
     <wsp:PolicyReference URI="#CustomBinding_INewsCategoryService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -1084,6 +1598,270 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_INewsService" type="tns:INewsService">
+    <wsp:PolicyReference URI="#CustomBinding_INewsService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="NewsInsert">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsUpdate">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsQueryById">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsQueryByTitle">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsQueryByTitle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsDeleteByCategory">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsDeleteByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsQueryList">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsQueryListByCategory">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsQueryListByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewsQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/INewsService/NewsQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IPatentService" type="tns:IPatentService">
+    <wsp:PolicyReference URI="#CustomBinding_IPatentService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="PatentInsert">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentUpdate">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentQueryById">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentQueryList">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentDisable">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentDisable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PatentTransfer">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_ISinglePageService" type="tns:ISinglePageService">
+    <wsp:PolicyReference URI="#CustomBinding_ISinglePageService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SinglePageInsert">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SinglePageUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SinglePageQueryById">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SinglePageQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SinglePageDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SinglePageDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SinglePageQueryList">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SinglePageQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
@@ -1109,10 +1887,34 @@
         <wsa10:Address>net.tcp://localhost:4502/CasesCategoryService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
+    <wsdl:port name="CustomBinding_ICasesService" binding="tns:CustomBinding_ICasesService">
+      <soap12:address location="net.tcp://localhost:4502/CasesService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/CasesService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
     <wsdl:port name="CustomBinding_INewsCategoryService" binding="tns:CustomBinding_INewsCategoryService">
       <soap12:address location="net.tcp://localhost:4502/NewsCategoryService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/NewsCategoryService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_INewsService" binding="tns:CustomBinding_INewsService">
+      <soap12:address location="net.tcp://localhost:4502/NewsService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/NewsService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IPatentService" binding="tns:CustomBinding_IPatentService">
+      <soap12:address location="net.tcp://localhost:4502/PatentService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/PatentService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_ISinglePageService" binding="tns:CustomBinding_ISinglePageService">
+      <soap12:address location="net.tcp://localhost:4502/SinglePageService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/SinglePageService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

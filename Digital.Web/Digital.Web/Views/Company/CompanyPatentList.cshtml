@@ -1,5 +1,11 @@
-﻿@{
-    ViewBag.Title = "账户信息管理";
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@using Digital.Common.Utilities
+@{
+    ViewBag.Title = "专利管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
@@ -22,7 +28,7 @@
 
         <div class="btn-group mr10">
             <button class="btn btn-white" type="button"><i class="fa fa-check mr5"></i> 全选</button>
-            <button class="btn btn-white" type="button"><i class="fa fa-minus-square mr5"></i> 取消</button>
+            @*<button class="btn btn-white" type="button"><i class="fa fa-minus-square mr5"></i> 取消</button>*@
         </div>
 
         <div class="btn-group mr10">
@@ -31,7 +37,7 @@
         </div>
 
         <div class="btn-group mr10">
-            <button class="btn btn-warning" type="button"><i class="fa fa-external-link mr5"></i> 更改浏览权限</button>
+            @*<button class="btn btn-warning" type="button"><i class="fa fa-external-link mr5"></i> 更改浏览权限</button>*@
         </div>
 
 
@@ -50,35 +56,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>11</td>
-                        <td><input type="checkbox" id="checkboxDanger" checked="" /></td>
-                        <td><a href="view-issue.html">所有人可浏览</a></td>
-                        <td>
-                            汽车驾驶人员安全及汽车防盗的综合系统<br>
-                            201120322216.1
-                        </td>
-                        <td>X86工控板</td>
-                        <td>否</td>
-                        <td>2014-8-18</td>
-                        <td>
-                            <div class="btn-group">
-                                <a data-toggle="dropdown" class="dropdown-toggle">
-                                    <i class="fa fa-cog"></i>
-                                </a>
-                                <ul role="menu" class="dropdown-menu pull-right">
-                                    <li><a href="#">预览</a></li>
-                                    <li><a href="#">公开转让</a></li>
-                                    <li><a href="#">查看权限</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">编辑</a></li>
-                                    <li><a href="#">删除</a></li>
-                                    <li><a href="#">停用</a></li>
-                                </ul>
-                            </div>
+                    @{
+                        if (ViewBag.PatentList != null)
+                        {
+                            var StringTransferred="否";
+                            foreach (var PatentMode in (List<PatentModel>)ViewBag.PatentList)
+                            {
+                                StringTransferred=PatentMode.IsTransferred?"是":"否";
+                                <tr>
+                                    <td>@PatentMode.PatentOrderID</td>
+                                    <td><input type="checkbox" id="checkboxDanger" checked="" /></td>
+                                    <td><a href="view-issue.html">所有人可浏览</a></td>
+                                    <td>
+                                        @PatentMode.PatentName<br/>@PatentMode.PatentNumber
+                                    </td>
+                                    <td>@PatentMode.PatentTechnologyDomain</td>
+                                    <td>@StringTransferred</td>
+                                    <td>@PatentMode.PatentDate</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a data-toggle="dropdown" class="dropdown-toggle">
+                                                <i class="fa fa-cog"></i>
+                                            </a>
+                                            <ul role="menu" class="dropdown-menu pull-right">
+                                                <li><a href="#">预览</a></li>
+                                                <li><a href="#">公开转让</a></li>
+                                                <li><a href="#">查看权限</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">编辑</a></li>
+                                                <li><a href="#">删除</a></li>
+                                                <li><a href="#">停用</a></li>
+                                            </ul>
+                                        </div>
 
-                        </td>
-                    </tr>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    }
+
                     <tr>
                         <td>12</td>
                         <td><input type="checkbox" id="checkboxDanger" checked="" /></td>
@@ -126,25 +143,24 @@
     </div>
 </div>
 
+<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
+<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../DigitalStyle/js/bootstrap.min.js"></script>
+<script src="../DigitalStyle/js/modernizr.min.js"></script>
+<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
+<script src="../DigitalStyle/js/toggles.min.js"></script>
+<script src="../DigitalStyle/js/retina.min.js"></script>
+<script src="../DigitalStyle/js/jquery.cookies.js"></script>
 
+<script src="../DigitalStyle/js/jquery.datatables.min.js"></script>
 
+<script src="../DigitalStyle/js/morris.min.js"></script>
+<script src="../DigitalStyle/js/raphael-2.1.0.min.js"></script>
+<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
 
-
-
-<script src="../js/jquery-1.10.2.min.js"></script>
-<script src="../js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/modernizr.min.js"></script>
-<script src="../js/jquery.sparkline.min.js"></script>
-<script src="../js/toggles.min.js"></script>
-<script src="../js/retina.min.js"></script>
-<script src="../js/jquery.cookies.js"></script>
-
-<script src="../js/jquery.datatables.min.js"></script>
-
-<script src="../js/morris.min.js"></script>
-<script src="../js/raphael-2.1.0.min.js"></script>
-<script src="../js/chosen.jquery.min.js"></script>
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
+<script src="../DigitalStyle/js/custom.js"></script>
 
 <script>
     jQuery(document).ready(function () {
@@ -184,8 +200,6 @@
     });
 </script>
 
-
-<script src="../js/custom.js"></script>
 <script>
     jQuery(document).ready(function () {
 
@@ -196,54 +210,54 @@
             disable_search: true
         });
 
-        new Morris.Bar({
-            // ID of the element in which to draw the chart.
-            element: 'bar-chart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
-            data: [
-                { y: '2006', a: 30, b: 20 },
-                { y: '2007', a: 75, b: 65 },
-                { y: '2008', a: 50, b: 40 },
-                { y: '2009', a: 75, b: 65 },
-                { y: '2010', a: 50, b: 40 },
-                { y: '2011', a: 75, b: 65 },
-                { y: '2012', a: 100, b: 90 }
-            ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Solved', 'Unresolved'],
-            barColors: ['#D9534F', '#F0AD4E'],
-            lineWidth: '1px',
-            fillOpacity: 0.8,
-            smooth: false,
-            hideHover: true
-        });
+        //new Morris.Bar({
+        //    // ID of the element in which to draw the chart.
+        //    element: 'bar-chart',
+        //    // Chart data records -- each entry in this array corresponds to a point on
+        //    // the chart.
+        //    data: [
+        //        { y: '2006', a: 30, b: 20 },
+        //        { y: '2007', a: 75, b: 65 },
+        //        { y: '2008', a: 50, b: 40 },
+        //        { y: '2009', a: 75, b: 65 },
+        //        { y: '2010', a: 50, b: 40 },
+        //        { y: '2011', a: 75, b: 65 },
+        //        { y: '2012', a: 100, b: 90 }
+        //    ],
+        //    xkey: 'y',
+        //    ykeys: ['a', 'b'],
+        //    labels: ['Solved', 'Unresolved'],
+        //    barColors: ['#D9534F', '#F0AD4E'],
+        //    lineWidth: '1px',
+        //    fillOpacity: 0.8,
+        //    smooth: false,
+        //    hideHover: true
+        //});
 
-        new Morris.Bar({
-            // ID of the element in which to draw the chart.
-            element: 'stacked-chart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
-            data: [
-                { y: '2006', a: 30, b: 20 },
-                { y: '2007', a: 75, b: 65 },
-                { y: '2008', a: 50, b: 40 },
-                { y: '2009', a: 75, b: 65 },
-                { y: '2010', a: 50, b: 40 },
-                { y: '2011', a: 75, b: 65 },
-                { y: '2012', a: 100, b: 90 }
-            ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Series A', 'Series B'],
-            barColors: ['#1CAF9A', '#428BCA'],
-            lineWidth: '1px',
-            fillOpacity: 0.8,
-            smooth: false,
-            stacked: true,
-            hideHover: true
-        });
+        //new Morris.Bar({
+        //    // ID of the element in which to draw the chart.
+        //    element: 'stacked-chart',
+        //    // Chart data records -- each entry in this array corresponds to a point on
+        //    // the chart.
+        //    data: [
+        //        { y: '2006', a: 30, b: 20 },
+        //        { y: '2007', a: 75, b: 65 },
+        //        { y: '2008', a: 50, b: 40 },
+        //        { y: '2009', a: 75, b: 65 },
+        //        { y: '2010', a: 50, b: 40 },
+        //        { y: '2011', a: 75, b: 65 },
+        //        { y: '2012', a: 100, b: 90 }
+        //    ],
+        //    xkey: 'y',
+        //    ykeys: ['a', 'b'],
+        //    labels: ['Series A', 'Series B'],
+        //    barColors: ['#1CAF9A', '#428BCA'],
+        //    lineWidth: '1px',
+        //    fillOpacity: 0.8,
+        //    smooth: false,
+        //    stacked: true,
+        //    hideHover: true
+        //});
 
     });
 </script>

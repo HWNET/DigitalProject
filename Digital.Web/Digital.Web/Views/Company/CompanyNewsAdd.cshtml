@@ -1,4 +1,11 @@
-﻿@{
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@using Digital.Common.Utilities
+@model Digital.WCFClient.ConfigService.NewsModel
+@{
     ViewBag.Title = "添加播报";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
@@ -10,6 +17,8 @@
 <link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
 <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
 <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
+<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 添加播报 <span>播报中心</span></h2>
@@ -31,16 +40,17 @@
                     <div class="panel-btns">
                         <a href="" class="minimize">&minus;</a>
                     </div><!-- panel-btns -->
-                    <h3 class="panel-title">文章管理</h3>
+                    <h3 class="panel-title">播报管理</h3>
                 </div>
 
 
                 <div class="panel-body panel-body-nopadding">
-                    <form class="form-horizontal form-bordered">
+                    <form class="form-horizontal form-bordered" id="firstForm" onsubmit="return false">
+                        @Html.AntiForgeryToken()
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章标题</label>
                             <div class="col-sm-4">
-                                <input type="text" placeholder="" class="form-control" />
+                                <input id="NewsTitle" value="@Model.NewsTitle" type="text" placeholder="" class="form-control" />
                             </div>
                             <div class="col-sm-2">
                                 <input type="text" name="colorpicker" class="form-control colorpicker-input" id="colorpicker" />
@@ -51,16 +61,12 @@
 
                         </div>
 
-
-
                         <div class="form-group">
                             <label class="col-sm-3 control-label">摘要</label>
                             <div class="col-sm-6">
-                                <textarea id="autoResizeTA" class="form-control" rows="3"></textarea>
+                                <textarea id="NewsAbstract" class="form-control" rows="3">@Model.NewsAbstract</textarea>
                             </div>
                         </div>
-
-
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章缩略图</label>
@@ -74,7 +80,7 @@
                                         <span class="btn btn-default btn-file">
                                             <span class="fileupload-new">Select file</span>
                                             <span class="fileupload-exists">Change</span>
-                                            <input type="file" />
+                                            <input id="NewsThumbnail" value="@Model.NewsThumbnail" type="file" />
                                         </span>
                                         <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
                                     </div>
@@ -84,10 +90,10 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">案例日期</label>
+                            <label class="col-sm-3 control-label">发布日期</label>
                             <div class="col-sm-4 ">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                    <input type="text" value="@Model.ReleaseTime" class="form-control" placeholder="mm/dd/yyyy" id="ReleaseTime">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -97,24 +103,36 @@
                             <label class="col-sm-3 control-label">所属分类</label>
 
                             <div class="col-sm-4 ">
-                                <select class="form-control chosen-select" data-placeholder="选择分类...">
-                                    <option value="United States">X86工控板</option>
+                                <select id="NewsCategory" class="form-control chosen-select" data-placeholder="选择分类...">
+                                    @{
+                                        if (ViewBag.CategoryList != null)
+                                        {
+                                            foreach (var CategoryMode in (List<NewsCategoryModel>)ViewBag.CategoryList)
+                                            {
+                                                var IsSelected = string.Empty;
+                                                if (CategoryMode.NewsCategoryID == 1)
+                                                {
+                                                    IsSelected = "selected";
+                                                }
+                                                <option value="@CategoryMode.NewsCategoryID" @IsSelected>@CategoryMode.NewsCategoryName</option>
+                                            }
+                                        }
+                                    }
                                 </select>
                             </div>
-
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章排序值</label>
                             <div class="col-sm-4">
-                                <input type="text" placeholder="数字、越小越靠前" class="form-control" />
+                                <input id="NewsOrderID" value="@Model.NewsOrderID" type="text" placeholder="数字、越小越靠前" class="form-control" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">关键字</label>
                             <div class="col-sm-4">
-                                <input name="keywords" id="keywords" class="form-control" value="关键字1,关键字2" />
+                                <input name="NewsKeywords" id="NewsKeywords" class="form-control" value="@Model.NewsKeywords" />
                             </div>
                         </div>
 
@@ -122,7 +140,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">标签</label>
                             <div class="col-sm-4">
-                                <input name="tags" id="tags" class="form-control" value="标签1,标签2" />
+                                <input name="NewsLabels" id="NewsLabels" class="form-control" value="@Model.NewsLabels" />
                             </div>
                         </div>
 
@@ -131,18 +149,17 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="checkbox">文章内容</label>
                             <div class="col-sm-6">
-                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10"></textarea>
+                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.NewsBody</textarea>
                             </div>
                         </div>
                     </form>
                 </div>
 
-
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button class="btn btn-primary">提交</button>&nbsp;
-                            <button class="btn btn-default">取消</button>
+                            <button class="btn btn-primary" onclick="javascript: Save();">提交</button>&nbsp;
+                            <button class="btn btn-default" onclick="javascript: location.reload();">取消</button>
                         </div>
                     </div>
                 </div>
@@ -185,7 +202,8 @@
 <script src="../DigitalStyle/js/dropzone.min.js"></script>
 <script src="../DigitalStyle/js/colorpicker.js"></script>
 
-
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
 <script src="js/custom.js"></script>
 
 <script>
@@ -195,13 +213,13 @@
         jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
 
         // Tags Input
-        jQuery('#tags').tagsInput({ width: 'auto' });
+        jQuery('#NewsLabels').tagsInput({ width: 'auto' });
 
         // Tags Input
-        jQuery('#keywords').tagsInput({ width: 'auto' });
+        jQuery('#NewsKeywords').tagsInput({ width: 'auto' });
 
         // Textarea Autogrow
-        jQuery('#autoResizeTA').autogrow();
+        jQuery('#NewsAbstract').autogrow();
 
         // Color Picker
         if (jQuery('#colorpicker').length > 0) {
@@ -230,11 +248,11 @@
         });
 
         // Date Picker
-        jQuery('#datepicker').datepicker();
+        jQuery('#ReleaseTime').datepicker();
 
-        jQuery('#datepicker-inline').datepicker();
+        jQuery('#ReleaseTime-inline').datepicker();
 
-        jQuery('#datepicker-multiple').datepicker({
+        jQuery('#ReleaseTime-multiple').datepicker({
             numberOfMonths: 3,
             showButtonPanel: true
         });
@@ -253,7 +271,15 @@
         jQuery('#timepicker2').timepicker({ showMeridian: false });
         jQuery('#timepicker3').timepicker({ minuteStep: 15 });
 
-
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
     });
 </script>
 <script>
@@ -305,6 +331,78 @@
         }
 
     });
+
+
+    // For News Add Operation , Submit Button
+    function Save() {
+        var $valid = jQuery('#firstForm').valid();
+        if (!$valid) {
+            $validator.focusInvalid();
+            return false;
+        }
+        else {
+            var IsInsert = 1; // default option : insert new company model
+            var NewsID = 0; // default option : insert new company model
+
+            @{
+
+                var CompanyID = 0;
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                {
+                    //IsInsert = 0;
+                    CompanyID = UserModel.CompanyID.Value;
+                }
+            }
+
+            //------------------TAB 01 : 播报信息
+            var valNewsTitle = $("#NewsTitle").val();
+            var valNewsAbstract = $("#NewsAbstract").val();
+            var valNewsThumbnail = $("#NewsThumbnail").val();
+            var valNewsCategoryID = $("#NewsCategory option:selected").val();
+            var valNewsOrderID = $("#NewsOrderID").val();
+            var valNewsKeywords = $("#NewsKeywords").val();
+            var valNewsLabels = $("#NewsLabels").val();
+            var valNewsBody = $("#ckeditor").html();
+
+            var stringTABONE = valNewsTitle + "_" + valNewsAbstract + "_" + valNewsThumbnail + "_" +
+                valNewsCategoryID + "_" + valNewsOrderID + "_" + valNewsKeywords + "_" + valNewsLabels + "_" +
+                valNewsBody;
+            alert(stringTABONE);
+
+            alert(1);
+            $.ajaxAntiForgery({
+                type: "post",
+                data: { CompanyID:@CompanyID,IsInsert:IsInsert,NewsTitle:valNewsTitle,NewsAbstract:valNewsAbstract,
+                    NewsThumbnail:valNewsThumbnail,NewsCategoryID:valNewsCategoryID,NewsOrderID:valNewsOrderID,
+                    NewsKeywords:valNewsKeywords,NewsLabels:valNewsLabels,NewsBody:valNewsBody},
+                url: "/Company/CompanyNewsSave",
+                success: function (data) {
+                    SaveInfo(true, "播报信息");
+                }
+            });
+            alert(1111);
+        }
+    }
+
+    function SaveInfo(IsSuccess, msg) {
+        if (IsSuccess) {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg + ',保存成功.',
+                sticky: false,
+                time: ''
+            });
+        }
+        else {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg + ',保存失败.',
+                sticky: false,
+                time: ''
+            });
+        }
+    }
 </script>
 
 

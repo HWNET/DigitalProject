@@ -250,7 +250,14 @@ namespace Digital.Contact.BLL
                 {
                     var CategoryList = db.NewsCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
                     List<NewsModel> NewsList = new List<NewsModel>();
-                    CategoryList.ForEach(c => NewsList.Add(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID).SingleOrDefault()));
+                    CategoryList.ForEach(c => NewsList.AddRange(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID)));
+
+                    //foreach (var mode in NewsList)
+                    //{
+                    //    var category = CategoryList.Where(o => o.NewsCategoryID == mode.NewsCategoryID).SingleOrDefault();
+                    //    mode.NewsCategoryModel = category;
+                    //}
+
                     return NewsList;
                 }
                 catch (Exception ex)

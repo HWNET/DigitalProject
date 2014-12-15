@@ -1,5 +1,12 @@
-﻿@{
-    ViewBag.Title = "账户信息管理";
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@using Digital.Common.Utilities
+@model Digital.WCFClient.ConfigService.PatentModel
+@{
+    ViewBag.Title = "添加专利";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
@@ -9,6 +16,8 @@
 <link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
 <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
 <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
+<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 添加专利 <span>专利中心</span></h2>
@@ -35,11 +44,12 @@
 
 
                 <div class="panel-body panel-body-nopadding">
-                    <form class="form-horizontal form-bordered">
+                    <form class="form-horizontal form-bordered" id="firstForm" onsubmit="return false">
+                        @Html.AntiForgeryToken()
                         <div class="form-group">
                             <label class="col-sm-3 control-label">专利号</label>
                             <div class="col-sm-6">
-                                <input type="text" placeholder="项目号" class="form-control" />
+                                <input id="PatentNumber" value="@Model.PatentNumber" type="text" placeholder="项目号" class="form-control" />
                             </div>
                         </div>
 
@@ -47,14 +57,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">专利名称</label>
                             <div class="col-sm-6">
-                                <input type="text" placeholder="项目名称" class="form-control" />
+                                <input id="PatentName" value="@Model.PatentName" type="text" placeholder="项目名称" class="form-control" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">概述</label>
                             <div class="col-sm-6">
-                                <textarea id="autoResizeTA" class="form-control" rows="5"></textarea>
+                                <textarea id="PatentAbstract" class="form-control" rows="5">@Model.PatentAbstract</textarea>
                             </div>
                         </div>
 
@@ -72,7 +82,7 @@
                                         <span class="btn btn-default btn-file">
                                             <span class="fileupload-new">选择专利证书文件</span>
                                             <span class="fileupload-exists">更改</span>
-                                            <input type="file" />
+                                            <input id="PatentCerificate" value="@Model.PatentCerificate" type="file" />
                                         </span>
                                         <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">删除</a>
                                     </div>
@@ -85,7 +95,7 @@
                             <label class="col-sm-3 control-label">专利日期</label>
                             <div class="col-sm-4 ">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                    <input id="PatentDate" value="@Model.PatentDate" type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -116,14 +126,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">排序值</label>
                             <div class="col-sm-4">
-                                <input type="text" placeholder="50" class="form-control" />
+                                <input id="PatentOrderID" value="@Model.PatentOrderID" type="text" placeholder="50" class="form-control" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">标签</label>
                             <div class="col-sm-4">
-                                <input name="tags" id="tags" class="form-control" value="标签1,标签2" />
+                                <input id="PatentLabels" name="PatentLabels" class="form-control" value="@Model.PatentLabels" />
                             </div>
                         </div>
 
@@ -132,7 +142,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="checkbox">专利简介</label>
                             <div class="col-sm-6">
-                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10"></textarea>
+                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.PatentIntro</textarea>
                             </div>
                         </div>
                     </form>
@@ -142,7 +152,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button class="btn btn-primary">提交</button>&nbsp;
+                            <button class="btn btn-primary" onclick="javascript: Save();">提交</button>&nbsp;
                             <button class="btn btn-default">取消</button>
                         </div>
                     </div>
@@ -186,7 +196,8 @@
 <script src="../DigitalStyle/js/dropzone.min.js"></script>
 <script src="../DigitalStyle/js/colorpicker.js"></script>
 
-
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
 <script src="js/custom.js"></script>
 
 <script>
@@ -196,10 +207,10 @@
         jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
 
         // Tags Input
-        jQuery('#tags').tagsInput({ width: 'auto' });
+        jQuery('#PatentLabels').tagsInput({ width: 'auto' });
 
         // Textarea Autogrow
-        jQuery('#autoResizeTA').autogrow();
+        jQuery('#PatentAbstract').autogrow();
 
         // Color Picker
         if (jQuery('#colorpicker').length > 0) {
@@ -251,6 +262,15 @@
         jQuery('#timepicker2').timepicker({ showMeridian: false });
         jQuery('#timepicker3').timepicker({ minuteStep: 15 });
 
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
 
     });
 </script>
@@ -303,6 +323,79 @@
         }
 
     });
+
+    // For Patent Add Operation , Submit Button
+    function Save() {
+        var $valid = jQuery('#firstForm').valid();
+        if (!$valid) {
+            $validator.focusInvalid();
+            return false;
+        }
+        else {
+            var IsInsert = 1; // default option : insert patent model
+            var PatentID = 0; // default option : insert patent model
+            @{
+
+                var CompanyID = 0;
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                {
+                    //IsInsert = 0;
+                    CompanyID = UserModel.CompanyID.Value;
+                }
+            }
+            //------------------TAB 01 : 专利信息
+            var valPatentNumber = $("#PatentNumber").val();
+            var valPatentName = $("#PatentName").val();
+            var valPatentAbstract = $("#PatentAbstract").val();
+            var valPatentCerificate = $("#PatentCerificate").val();
+            var valPatentDate = $("#PatentDate").val();
+            var valPatentTechnologyDomain = "TechnologyDomain01"; //select option:selected
+            var valPatentDevelopmentStatus = "Status01";//select option:selected
+            var valPatentOrderID = $("#PatentOrderID").val();
+            var valPatentLabels = $("#PatentLabels").val();
+            var valPatentIntro = $("#ckeditor").val();
+
+            var stringTABONE = valPatentNumber + "_" + valPatentName + "_" + valPatentAbstract + "_" +
+                valPatentCerificate + "_" + valPatentDate + "_" + valPatentTechnologyDomain + "_" +
+                valPatentDevelopmentStatus + "_" + valPatentOrderID + "_" + valPatentLabels + "_" +
+                valPatentIntro;
+            alert(stringTABONE);
+
+            alert(1);
+            $.ajaxAntiForgery({
+                type: "post",
+                data: { CompanyID:@CompanyID,IsInsert:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,
+                    PatentAbstract:valPatentAbstract,PatentCerificate:valPatentCerificate,PatentDate:valPatentDate,
+                    PatentTechnologyDomain:valPatentTechnologyDomain,PatentDevelopmentStatus:valPatentDevelopmentStatus,
+                    PatentOrderID:valPatentOrderID,PatentLabels:valPatentLabels,PatentIntro:valPatentIntro},
+                url: "/Company/CompanyPatentSave",
+                success: function (data) {
+                    SaveInfo(true, "专利信息");
+                }
+            });
+            alert(1111);
+        }
+    }
+
+    function SaveInfo(IsSuccess, msg) {
+        if (IsSuccess) {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg + ',保存成功.',
+                sticky: false,
+                time: ''
+            });
+        }
+        else {
+            jQuery.gritter.add({
+                title: '系统提示!',
+                text: msg + ',保存失败.',
+                sticky: false,
+                time: ''
+            });
+        }
+    }
 </script>
 
 

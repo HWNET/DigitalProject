@@ -580,6 +580,7 @@ namespace Digital.Web.Controllers
             return View();
         }
 
+        #region CompanyNewsAdd
         /// <summary>
         /// 添加企业播报
         /// </summary>
@@ -587,9 +588,96 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyNewsAdd()
         {
             ViewBag.MenuModel = base.GetMenu(163);
-            return View();
-        }
 
+            NewsModel NewsModel = new NewsModel {
+                NewsTitle = "NewsTitle0000",
+                NewsAbstract = "NewsAbstract0000",
+                NewsThumbnail = "NewsThumbnail0000",
+                NewsCategoryID=0,
+                NewsOrderID=0,
+                NewsKeywords = "NewsKeywords0000",
+                NewsLabels = "NewsLabels0000",
+                NewsBody = "NewsBody0000",
+                ReleaseTime=DateTime.Now,
+            };
+
+            var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
+            var CompanyID = 0;
+            List<NewsCategoryModel> CategoryList = null;
+
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                CompanyID = UserModel.CompanyID.Value;
+                CategoryList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
+            }
+            ViewBag.CategoryList = CategoryList;
+
+            return View(NewsModel);
+        }
+        #endregion
+
+        #region CompanyNewsSave
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyNewsSave(int CompanyID, int IsInsert, string NewsTitle, string NewsAbstract,
+            string NewsThumbnail, int NewsCategoryID, int NewsOrderID, string NewsKeywords, string NewsLabels,
+            string NewsBody)
+        {
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
+            var ReturnResult = string.Empty;
+            if (!string.IsNullOrEmpty(CurrentUser) && CompanyID>0)
+            {
+                var NewsModel = new NewsModel
+                { 
+                    NewsTitle=NewsTitle,
+                    NewsAbstract=NewsAbstract,
+                    NewsThumbnail = NewsThumbnail,
+                    NewsCategoryID = NewsCategoryID,
+                    NewsOrderID = NewsOrderID,
+                    NewsKeywords = NewsKeywords,
+                    NewsLabels = NewsLabels,
+                    NewsBody = NewsBody,
+                    ReleaseTime=DateTime.Now,
+                };
+                if (IsInsert == 1) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.NewsInsert(NewsModel); // update DB
+                    if (ResultModel != null && ResultModel.NewsID > 0) // update web cache
+                    {
+                        //OperatorFactory.UpdateNewsCategoryCache(User.Identity.GetUserId(), ResultModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+                else // old existing model -- do update
+                {
+                    ReturnResult = "NOK";
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            client.Close();
+
+            if (ReturnResult=="OK")
+            {
+                return RedirectToAction("CompanyNewsAdd", "Company");
+            }
+            return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyNewsClassManage
         /// <summary>
         /// 企业播报分类管理
         /// </summary>
@@ -619,6 +707,7 @@ namespace Digital.Web.Controllers
             };
             return View(CategoryModel);
         }
+        #endregion
 
         #region CompanyNewsCategoryByID
         [HttpPost]
@@ -729,6 +818,7 @@ namespace Digital.Web.Controllers
                 var result=client.NewsCategoryDeleteById(CategoryID); // update DB
                 if (result)
                 {
+                    // ??? consider whether remove the related news under newscategory
                     // update web cache
                     OperatorFactory.RemoveNewsCategoryCache(User.Identity.GetUserId());
                     ReturnResult = "OK";
@@ -746,6 +836,7 @@ namespace Digital.Web.Controllers
         }
         #endregion
 
+        #region CompanyNewsList
         /// <summary>
         /// 企业播报列表
         /// </summary>
@@ -753,29 +844,161 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyNewsList()
         {
             ViewBag.MenuModel = base.GetMenu(165);
+
+            var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
+            var clientCategory = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
+            var CompanyID = 0;
+            List<NewsModel> NewsList = null;
+            List<NewsCategoryModel> CategoryList = null;
+
+            List<NewsModel> NewsToCategoryList = null;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                CompanyID = UserModel.CompanyID.Value;
+
+                CategoryList = clientCategory.NewsCategoryQueryListByCompany(CompanyID).ToList();
+                NewsList = client.NewsQueryListByCompany(CompanyID).ToList();
+
+                if (NewsList!=null&&CategoryList!=null)
+                {
+                    NewsToCategoryList=CategoryList.Join(NewsList, c => c.NewsCategoryID, n => n.NewsCategoryID, (c, n) => new NewsModel
+                    { 
+                         NewsCategoryID=n.NewsCategoryID,
+                         NewsAbstract=n.NewsAbstract,
+                         NewsBody=n.NewsBody,
+                         NewsCategoryModel=c,
+                         NewsID=n.NewsID,
+                         NewsKeywords=n.NewsKeywords,
+                         NewsLabels=n.NewsLabels,
+                         NewsOrderID=n.NewsOrderID,
+                         NewsThumbnail=n.NewsThumbnail,
+                         NewsTitle=n.NewsTitle,
+                    }).ToList();
+                }
+            }
+            ViewBag.NewsList = NewsToCategoryList;
+
+            client.Close();
+            clientCategory.Close();
             return View();
         }
+        #endregion
 
-
+        #region CompanyPatentAdd
         /// <summary>
-        /// 添加企业案例
+        /// 添加企业专利
         /// </summary>
         /// <returns></returns>
         public ActionResult CompanyPatentAdd()
         {
             ViewBag.MenuModel = base.GetMenu(162);
-            return View();
-        }
 
+            PatentModel PatentModel = new PatentModel {
+                PatentNumber = "PatentNumber0000",
+                PatentName = "PatentName0000",
+                PatentAbstract = "PatentAbstract0000",
+                PatentCerificate = "PatentCerificate0000",
+                PatentDate=DateTime.Now.ToShortDateString(),
+                PatentTechnologyDomain = "PatentTechnologyDomain0000",
+                PatentDevelopmentStatus = "PatentDevelopmentStatus0000",
+                PatentOrderID = 0,
+                PatentLabels = "PatentLabels0000",
+                PatentIntro = "PatentIntro0000",
+                IsDisabled=false,
+                IsTransferred=false,
+                CompanyID=0,
+            };
+
+            return View(PatentModel);
+        }
+        #endregion
+
+        #region CompanyPatentSave
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyPatentSave(int CompanyID, int IsInsert, string PatentNumber, string PatentName,
+            string PatentAbstract, string PatentCerificate, string PatentDate, string PatentTechnologyDomain,
+            string PatentDevelopmentStatus, int PatentOrderID, string PatentLabels, string PatentIntro)
+        {
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+            var ReturnResult = string.Empty;
+            if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
+            {
+                var PatentModel = new PatentModel
+                {
+                    PatentNumber = PatentNumber,
+                    PatentName = PatentName,
+                    PatentAbstract = PatentAbstract,
+                    PatentCerificate = PatentCerificate,
+                    PatentDate = PatentDate,
+                    PatentTechnologyDomain = PatentTechnologyDomain,
+                    PatentDevelopmentStatus = PatentDevelopmentStatus,
+                    PatentOrderID = PatentOrderID,
+                    PatentLabels = PatentLabels,
+                    PatentIntro = PatentIntro,
+                    IsDisabled = false,
+                    IsTransferred = false,
+                    CompanyID = CompanyID,
+                };
+
+                if (IsInsert == 1) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.PatentInsert(PatentModel); // update DB
+                    if (ResultModel != null && ResultModel.PatentID > 0) // update web cache
+                    {
+                        //OperatorFactory.UpdateNewsCategoryCache(User.Identity.GetUserId(), ResultModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+                else // old existing model -- do update
+                {
+                    ReturnResult = "NOK";
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            client.Close();
+
+            return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyPatentList
         /// <summary>
-        /// 案例列表
+        /// 专利列表
         /// </summary>
         /// <returns></returns>
         public ActionResult CompanyPatentList()
         {
             ViewBag.MenuModel = base.GetMenu(161);
+
+            var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+            var CompanyID = 0;
+            List<PatentModel> PatentList = null;
+
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                CompanyID = UserModel.CompanyID.Value;
+                PatentList = client.PatentQueryListByCompany(CompanyID).ToList();
+            }
+            ViewBag.PatentList = PatentList;
+
             return View();
         }
+        #endregion
 
         /// <summary>
         /// 上传图片

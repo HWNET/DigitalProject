@@ -70,6 +70,9 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CasesCategoryModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CasesModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CommonRightModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -103,6 +106,12 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.NewsCategoryModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.NewsModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.PatentModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.PrimaryBusinessCategoryMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -125,6 +134,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ServicesDomainMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.SinglePageModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.SkillsModel.datasource">

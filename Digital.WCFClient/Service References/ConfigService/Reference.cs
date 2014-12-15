@@ -4807,6 +4807,179 @@ namespace Digital.WCFClient.ConfigService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.ICasesService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface ICasesService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesInsert", ReplyAction="http://tempuri.org/ICasesService/CasesInsertResponse")]
+        Digital.WCFClient.ConfigService.CasesModel CasesInsert(Digital.WCFClient.ConfigService.CasesModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesInsert", ReplyAction="http://tempuri.org/ICasesService/CasesInsertResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesInsertAsync(Digital.WCFClient.ConfigService.CasesModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesUpdate", ReplyAction="http://tempuri.org/ICasesService/CasesUpdateResponse")]
+        Digital.WCFClient.ConfigService.CasesModel CasesUpdate(Digital.WCFClient.ConfigService.CasesModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesUpdate", ReplyAction="http://tempuri.org/ICasesService/CasesUpdateResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesUpdateAsync(Digital.WCFClient.ConfigService.CasesModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryById", ReplyAction="http://tempuri.org/ICasesService/CasesQueryByIdResponse")]
+        Digital.WCFClient.ConfigService.CasesModel CasesQueryById(int CasesId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryById", ReplyAction="http://tempuri.org/ICasesService/CasesQueryByIdResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesQueryByIdAsync(int CasesId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryByName", ReplyAction="http://tempuri.org/ICasesService/CasesQueryByNameResponse")]
+        Digital.WCFClient.ConfigService.CasesModel CasesQueryByName(string CasesName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryByName", ReplyAction="http://tempuri.org/ICasesService/CasesQueryByNameResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesQueryByNameAsync(string CasesName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteById", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByIdResponse")]
+        bool CasesDeleteById(int CasesId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteById", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByIdResponse")]
+        System.Threading.Tasks.Task<bool> CasesDeleteByIdAsync(int CasesId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteByCategory", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByCategoryResponse")]
+        bool CasesDeleteByCategory(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteByCategory", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByCategoryResponse")]
+        System.Threading.Tasks.Task<bool> CasesDeleteByCategoryAsync(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteByCompany", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByCompanyResponse")]
+        bool CasesDeleteByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteByCompany", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByCompanyResponse")]
+        System.Threading.Tasks.Task<bool> CasesDeleteByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryList", ReplyAction="http://tempuri.org/ICasesService/CasesQueryListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CasesQueryList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryList", ReplyAction="http://tempuri.org/ICasesService/CasesQueryListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryListByCategory", ReplyAction="http://tempuri.org/ICasesService/CasesQueryListByCategoryResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CasesQueryListByCategory(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryListByCategory", ReplyAction="http://tempuri.org/ICasesService/CasesQueryListByCategoryResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListByCategoryAsync(int CasesCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryListByCompany", ReplyAction="http://tempuri.org/ICasesService/CasesQueryListByCompanyResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CasesQueryListByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryListByCompany", ReplyAction="http://tempuri.org/ICasesService/CasesQueryListByCompanyResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListByCompanyAsync(int CompanyId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICasesServiceChannel : Digital.WCFClient.ConfigService.ICasesService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CasesServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.ICasesService>, Digital.WCFClient.ConfigService.ICasesService {
+        
+        public CasesServiceClient() {
+        }
+        
+        public CasesServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CasesServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CasesServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CasesServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesModel CasesInsert(Digital.WCFClient.ConfigService.CasesModel Model) {
+            return base.Channel.CasesInsert(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesInsertAsync(Digital.WCFClient.ConfigService.CasesModel Model) {
+            return base.Channel.CasesInsertAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesModel CasesUpdate(Digital.WCFClient.ConfigService.CasesModel Model) {
+            return base.Channel.CasesUpdate(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesUpdateAsync(Digital.WCFClient.ConfigService.CasesModel Model) {
+            return base.Channel.CasesUpdateAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesModel CasesQueryById(int CasesId) {
+            return base.Channel.CasesQueryById(CasesId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesQueryByIdAsync(int CasesId) {
+            return base.Channel.CasesQueryByIdAsync(CasesId);
+        }
+        
+        public Digital.WCFClient.ConfigService.CasesModel CasesQueryByName(string CasesName) {
+            return base.Channel.CasesQueryByName(CasesName);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CasesModel> CasesQueryByNameAsync(string CasesName) {
+            return base.Channel.CasesQueryByNameAsync(CasesName);
+        }
+        
+        public bool CasesDeleteById(int CasesId) {
+            return base.Channel.CasesDeleteById(CasesId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CasesDeleteByIdAsync(int CasesId) {
+            return base.Channel.CasesDeleteByIdAsync(CasesId);
+        }
+        
+        public bool CasesDeleteByCategory(int CasesCategoryId) {
+            return base.Channel.CasesDeleteByCategory(CasesCategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CasesDeleteByCategoryAsync(int CasesCategoryId) {
+            return base.Channel.CasesDeleteByCategoryAsync(CasesCategoryId);
+        }
+        
+        public bool CasesDeleteByCompany(int CompanyId) {
+            return base.Channel.CasesDeleteByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CasesDeleteByCompanyAsync(int CompanyId) {
+            return base.Channel.CasesDeleteByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CasesQueryList() {
+            return base.Channel.CasesQueryList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListAsync() {
+            return base.Channel.CasesQueryListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CasesQueryListByCategory(int CasesCategoryId) {
+            return base.Channel.CasesQueryListByCategory(CasesCategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListByCategoryAsync(int CasesCategoryId) {
+            return base.Channel.CasesQueryListByCategoryAsync(CasesCategoryId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CasesQueryListByCompany(int CompanyId) {
+            return base.Channel.CasesQueryListByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListByCompanyAsync(int CompanyId) {
+            return base.Channel.CasesQueryListByCompanyAsync(CompanyId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.INewsCategoryService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface INewsCategoryService {
         
@@ -4948,6 +5121,497 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsCategoryModel>> NewsCategoryQueryListByCompanyAsync(int CompanyId) {
             return base.Channel.NewsCategoryQueryListByCompanyAsync(CompanyId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.INewsService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface INewsService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsInsert", ReplyAction="http://tempuri.org/INewsService/NewsInsertResponse")]
+        Digital.WCFClient.ConfigService.NewsModel NewsInsert(Digital.WCFClient.ConfigService.NewsModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsInsert", ReplyAction="http://tempuri.org/INewsService/NewsInsertResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsInsertAsync(Digital.WCFClient.ConfigService.NewsModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsUpdate", ReplyAction="http://tempuri.org/INewsService/NewsUpdateResponse")]
+        Digital.WCFClient.ConfigService.NewsModel NewsUpdate(Digital.WCFClient.ConfigService.NewsModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsUpdate", ReplyAction="http://tempuri.org/INewsService/NewsUpdateResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsUpdateAsync(Digital.WCFClient.ConfigService.NewsModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryById", ReplyAction="http://tempuri.org/INewsService/NewsQueryByIdResponse")]
+        Digital.WCFClient.ConfigService.NewsModel NewsQueryById(int NewsId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryById", ReplyAction="http://tempuri.org/INewsService/NewsQueryByIdResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsQueryByIdAsync(int NewsId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryByTitle", ReplyAction="http://tempuri.org/INewsService/NewsQueryByTitleResponse")]
+        Digital.WCFClient.ConfigService.NewsModel NewsQueryByTitle(string NewsTitle);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryByTitle", ReplyAction="http://tempuri.org/INewsService/NewsQueryByTitleResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsQueryByTitleAsync(string NewsTitle);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsDeleteById", ReplyAction="http://tempuri.org/INewsService/NewsDeleteByIdResponse")]
+        bool NewsDeleteById(int NewsId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsDeleteById", ReplyAction="http://tempuri.org/INewsService/NewsDeleteByIdResponse")]
+        System.Threading.Tasks.Task<bool> NewsDeleteByIdAsync(int NewsId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsDeleteByCategory", ReplyAction="http://tempuri.org/INewsService/NewsDeleteByCategoryResponse")]
+        bool NewsDeleteByCategory(int NewsCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsDeleteByCategory", ReplyAction="http://tempuri.org/INewsService/NewsDeleteByCategoryResponse")]
+        System.Threading.Tasks.Task<bool> NewsDeleteByCategoryAsync(int NewsCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsDeleteByCompany", ReplyAction="http://tempuri.org/INewsService/NewsDeleteByCompanyResponse")]
+        bool NewsDeleteByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsDeleteByCompany", ReplyAction="http://tempuri.org/INewsService/NewsDeleteByCompanyResponse")]
+        System.Threading.Tasks.Task<bool> NewsDeleteByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryList", ReplyAction="http://tempuri.org/INewsService/NewsQueryListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel> NewsQueryList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryList", ReplyAction="http://tempuri.org/INewsService/NewsQueryListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel>> NewsQueryListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryListByCategory", ReplyAction="http://tempuri.org/INewsService/NewsQueryListByCategoryResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel> NewsQueryListByCategory(int NewsCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryListByCategory", ReplyAction="http://tempuri.org/INewsService/NewsQueryListByCategoryResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel>> NewsQueryListByCategoryAsync(int NewsCategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryListByCompany", ReplyAction="http://tempuri.org/INewsService/NewsQueryListByCompanyResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel> NewsQueryListByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INewsService/NewsQueryListByCompany", ReplyAction="http://tempuri.org/INewsService/NewsQueryListByCompanyResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel>> NewsQueryListByCompanyAsync(int CompanyId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface INewsServiceChannel : Digital.WCFClient.ConfigService.INewsService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class NewsServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.INewsService>, Digital.WCFClient.ConfigService.INewsService {
+        
+        public NewsServiceClient() {
+        }
+        
+        public NewsServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public NewsServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public NewsServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public NewsServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.NewsModel NewsInsert(Digital.WCFClient.ConfigService.NewsModel Model) {
+            return base.Channel.NewsInsert(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsInsertAsync(Digital.WCFClient.ConfigService.NewsModel Model) {
+            return base.Channel.NewsInsertAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.NewsModel NewsUpdate(Digital.WCFClient.ConfigService.NewsModel Model) {
+            return base.Channel.NewsUpdate(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsUpdateAsync(Digital.WCFClient.ConfigService.NewsModel Model) {
+            return base.Channel.NewsUpdateAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.NewsModel NewsQueryById(int NewsId) {
+            return base.Channel.NewsQueryById(NewsId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsQueryByIdAsync(int NewsId) {
+            return base.Channel.NewsQueryByIdAsync(NewsId);
+        }
+        
+        public Digital.WCFClient.ConfigService.NewsModel NewsQueryByTitle(string NewsTitle) {
+            return base.Channel.NewsQueryByTitle(NewsTitle);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.NewsModel> NewsQueryByTitleAsync(string NewsTitle) {
+            return base.Channel.NewsQueryByTitleAsync(NewsTitle);
+        }
+        
+        public bool NewsDeleteById(int NewsId) {
+            return base.Channel.NewsDeleteById(NewsId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> NewsDeleteByIdAsync(int NewsId) {
+            return base.Channel.NewsDeleteByIdAsync(NewsId);
+        }
+        
+        public bool NewsDeleteByCategory(int NewsCategoryId) {
+            return base.Channel.NewsDeleteByCategory(NewsCategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> NewsDeleteByCategoryAsync(int NewsCategoryId) {
+            return base.Channel.NewsDeleteByCategoryAsync(NewsCategoryId);
+        }
+        
+        public bool NewsDeleteByCompany(int CompanyId) {
+            return base.Channel.NewsDeleteByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> NewsDeleteByCompanyAsync(int CompanyId) {
+            return base.Channel.NewsDeleteByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel> NewsQueryList() {
+            return base.Channel.NewsQueryList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel>> NewsQueryListAsync() {
+            return base.Channel.NewsQueryListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel> NewsQueryListByCategory(int NewsCategoryId) {
+            return base.Channel.NewsQueryListByCategory(NewsCategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel>> NewsQueryListByCategoryAsync(int NewsCategoryId) {
+            return base.Channel.NewsQueryListByCategoryAsync(NewsCategoryId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel> NewsQueryListByCompany(int CompanyId) {
+            return base.Channel.NewsQueryListByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.NewsModel>> NewsQueryListByCompanyAsync(int CompanyId) {
+            return base.Channel.NewsQueryListByCompanyAsync(CompanyId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.IPatentService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface IPatentService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentInsert", ReplyAction="http://tempuri.org/IPatentService/PatentInsertResponse")]
+        Digital.WCFClient.ConfigService.PatentModel PatentInsert(Digital.WCFClient.ConfigService.PatentModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentInsert", ReplyAction="http://tempuri.org/IPatentService/PatentInsertResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentInsertAsync(Digital.WCFClient.ConfigService.PatentModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentUpdate", ReplyAction="http://tempuri.org/IPatentService/PatentUpdateResponse")]
+        Digital.WCFClient.ConfigService.PatentModel PatentUpdate(Digital.WCFClient.ConfigService.PatentModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentUpdate", ReplyAction="http://tempuri.org/IPatentService/PatentUpdateResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentUpdateAsync(Digital.WCFClient.ConfigService.PatentModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryById", ReplyAction="http://tempuri.org/IPatentService/PatentQueryByIdResponse")]
+        Digital.WCFClient.ConfigService.PatentModel PatentQueryById(int PatentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryById", ReplyAction="http://tempuri.org/IPatentService/PatentQueryByIdResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentQueryByIdAsync(int PatentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryByName", ReplyAction="http://tempuri.org/IPatentService/PatentQueryByNameResponse")]
+        Digital.WCFClient.ConfigService.PatentModel PatentQueryByName(string PatentName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryByName", ReplyAction="http://tempuri.org/IPatentService/PatentQueryByNameResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentQueryByNameAsync(string PatentName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentDeleteById", ReplyAction="http://tempuri.org/IPatentService/PatentDeleteByIdResponse")]
+        bool PatentDeleteById(int PatentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentDeleteById", ReplyAction="http://tempuri.org/IPatentService/PatentDeleteByIdResponse")]
+        System.Threading.Tasks.Task<bool> PatentDeleteByIdAsync(int PatentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentDeleteByCompany", ReplyAction="http://tempuri.org/IPatentService/PatentDeleteByCompanyResponse")]
+        bool PatentDeleteByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentDeleteByCompany", ReplyAction="http://tempuri.org/IPatentService/PatentDeleteByCompanyResponse")]
+        System.Threading.Tasks.Task<bool> PatentDeleteByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryList", ReplyAction="http://tempuri.org/IPatentService/PatentQueryListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel> PatentQueryList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryList", ReplyAction="http://tempuri.org/IPatentService/PatentQueryListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel>> PatentQueryListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryListByCompany", ReplyAction="http://tempuri.org/IPatentService/PatentQueryListByCompanyResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel> PatentQueryListByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryListByCompany", ReplyAction="http://tempuri.org/IPatentService/PatentQueryListByCompanyResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel>> PatentQueryListByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentDisable", ReplyAction="http://tempuri.org/IPatentService/PatentDisableResponse")]
+        bool PatentDisable(Digital.WCFClient.ConfigService.PatentModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentDisable", ReplyAction="http://tempuri.org/IPatentService/PatentDisableResponse")]
+        System.Threading.Tasks.Task<bool> PatentDisableAsync(Digital.WCFClient.ConfigService.PatentModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentTransfer", ReplyAction="http://tempuri.org/IPatentService/PatentTransferResponse")]
+        bool PatentTransfer(Digital.WCFClient.ConfigService.PatentModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentTransfer", ReplyAction="http://tempuri.org/IPatentService/PatentTransferResponse")]
+        System.Threading.Tasks.Task<bool> PatentTransferAsync(Digital.WCFClient.ConfigService.PatentModel Model);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPatentServiceChannel : Digital.WCFClient.ConfigService.IPatentService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PatentServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.IPatentService>, Digital.WCFClient.ConfigService.IPatentService {
+        
+        public PatentServiceClient() {
+        }
+        
+        public PatentServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public PatentServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PatentServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PatentServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.PatentModel PatentInsert(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentInsert(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentInsertAsync(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentInsertAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.PatentModel PatentUpdate(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentUpdate(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentUpdateAsync(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentUpdateAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.PatentModel PatentQueryById(int PatentId) {
+            return base.Channel.PatentQueryById(PatentId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentQueryByIdAsync(int PatentId) {
+            return base.Channel.PatentQueryByIdAsync(PatentId);
+        }
+        
+        public Digital.WCFClient.ConfigService.PatentModel PatentQueryByName(string PatentName) {
+            return base.Channel.PatentQueryByName(PatentName);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.PatentModel> PatentQueryByNameAsync(string PatentName) {
+            return base.Channel.PatentQueryByNameAsync(PatentName);
+        }
+        
+        public bool PatentDeleteById(int PatentId) {
+            return base.Channel.PatentDeleteById(PatentId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> PatentDeleteByIdAsync(int PatentId) {
+            return base.Channel.PatentDeleteByIdAsync(PatentId);
+        }
+        
+        public bool PatentDeleteByCompany(int CompanyId) {
+            return base.Channel.PatentDeleteByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> PatentDeleteByCompanyAsync(int CompanyId) {
+            return base.Channel.PatentDeleteByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel> PatentQueryList() {
+            return base.Channel.PatentQueryList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel>> PatentQueryListAsync() {
+            return base.Channel.PatentQueryListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel> PatentQueryListByCompany(int CompanyId) {
+            return base.Channel.PatentQueryListByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel>> PatentQueryListByCompanyAsync(int CompanyId) {
+            return base.Channel.PatentQueryListByCompanyAsync(CompanyId);
+        }
+        
+        public bool PatentDisable(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentDisable(Model);
+        }
+        
+        public System.Threading.Tasks.Task<bool> PatentDisableAsync(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentDisableAsync(Model);
+        }
+        
+        public bool PatentTransfer(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentTransfer(Model);
+        }
+        
+        public System.Threading.Tasks.Task<bool> PatentTransferAsync(Digital.WCFClient.ConfigService.PatentModel Model) {
+            return base.Channel.PatentTransferAsync(Model);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.ISinglePageService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface ISinglePageService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageInsert", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageInsertResponse")]
+        Digital.WCFClient.ConfigService.SinglePageModel SinglePageInsert(Digital.WCFClient.ConfigService.SinglePageModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageInsert", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageInsertResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageInsertAsync(Digital.WCFClient.ConfigService.SinglePageModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageUpdate", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageUpdateResponse")]
+        Digital.WCFClient.ConfigService.SinglePageModel SinglePageUpdate(Digital.WCFClient.ConfigService.SinglePageModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageUpdate", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageUpdateResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageUpdateAsync(Digital.WCFClient.ConfigService.SinglePageModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryById", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryByIdResponse")]
+        Digital.WCFClient.ConfigService.SinglePageModel SinglePageQueryById(int SinglePageId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryById", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryByIdResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryByIdAsync(int SinglePageId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryByName", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryByNameResponse")]
+        Digital.WCFClient.ConfigService.SinglePageModel SinglePageQueryByName(string SinglePageName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryByName", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryByNameResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryByNameAsync(string SinglePageName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageDeleteById", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageDeleteByIdResponse")]
+        bool SinglePageDeleteById(int SinglePageId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageDeleteById", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageDeleteByIdResponse")]
+        System.Threading.Tasks.Task<bool> SinglePageDeleteByIdAsync(int SinglePageId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageDeleteByCompany", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageDeleteByCompanyResponse")]
+        bool SinglePageDeleteByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageDeleteByCompany", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageDeleteByCompanyResponse")]
+        System.Threading.Tasks.Task<bool> SinglePageDeleteByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryList", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryList", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel>> SinglePageQueryListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompany", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompanyResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryListByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompany", ReplyAction="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompanyResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel>> SinglePageQueryListByCompanyAsync(int CompanyId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ISinglePageServiceChannel : Digital.WCFClient.ConfigService.ISinglePageService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SinglePageServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.ISinglePageService>, Digital.WCFClient.ConfigService.ISinglePageService {
+        
+        public SinglePageServiceClient() {
+        }
+        
+        public SinglePageServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public SinglePageServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public SinglePageServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public SinglePageServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.SinglePageModel SinglePageInsert(Digital.WCFClient.ConfigService.SinglePageModel Model) {
+            return base.Channel.SinglePageInsert(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageInsertAsync(Digital.WCFClient.ConfigService.SinglePageModel Model) {
+            return base.Channel.SinglePageInsertAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.SinglePageModel SinglePageUpdate(Digital.WCFClient.ConfigService.SinglePageModel Model) {
+            return base.Channel.SinglePageUpdate(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageUpdateAsync(Digital.WCFClient.ConfigService.SinglePageModel Model) {
+            return base.Channel.SinglePageUpdateAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.SinglePageModel SinglePageQueryById(int SinglePageId) {
+            return base.Channel.SinglePageQueryById(SinglePageId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryByIdAsync(int SinglePageId) {
+            return base.Channel.SinglePageQueryByIdAsync(SinglePageId);
+        }
+        
+        public Digital.WCFClient.ConfigService.SinglePageModel SinglePageQueryByName(string SinglePageName) {
+            return base.Channel.SinglePageQueryByName(SinglePageName);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryByNameAsync(string SinglePageName) {
+            return base.Channel.SinglePageQueryByNameAsync(SinglePageName);
+        }
+        
+        public bool SinglePageDeleteById(int SinglePageId) {
+            return base.Channel.SinglePageDeleteById(SinglePageId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SinglePageDeleteByIdAsync(int SinglePageId) {
+            return base.Channel.SinglePageDeleteByIdAsync(SinglePageId);
+        }
+        
+        public bool SinglePageDeleteByCompany(int CompanyId) {
+            return base.Channel.SinglePageDeleteByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SinglePageDeleteByCompanyAsync(int CompanyId) {
+            return base.Channel.SinglePageDeleteByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryList() {
+            return base.Channel.SinglePageQueryList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel>> SinglePageQueryListAsync() {
+            return base.Channel.SinglePageQueryListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel> SinglePageQueryListByCompany(int CompanyId) {
+            return base.Channel.SinglePageQueryListByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.SinglePageModel>> SinglePageQueryListByCompanyAsync(int CompanyId) {
+            return base.Channel.SinglePageQueryListByCompanyAsync(CompanyId);
         }
     }
 }
