@@ -9,17 +9,23 @@
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
 @section PageSpecificJavascriptIncludes{
-    <link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+
     <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
+
+    <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+    <script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.mousewheel.js"></script>
+    <script src="../DigitalStyle/js/dropzone.min.js"></script>
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 信息设置 <span>企业中心</span></h2>
@@ -89,7 +95,7 @@
 
                                         <div class="col-sm-5">
                                             <select id="CompanyTypeNO" class="form-control mb15">
-                                                <option value=""> --请选择-- </option>
+                                                <option value="0"> --请选择-- </option>
                                             </select>
 
                                         </div>
@@ -99,7 +105,7 @@
                                         <label class="col-sm-3 control-label">企业人数</label>
                                         <div class="col-sm-5">
                                             <select id="CompanyMembers" class="form-control mb15">
-                                                <option value=""> -- 请选择 --</option>
+                                                <option value="0"> -- 请选择 --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -130,13 +136,13 @@
                                         <div class="col-sm-6">
                                             <div class="col-sm-3">
                                                 <select id="PrimaryBusinessCategory" class="form-control">
-                                                    <option value=""> -- 请选择 --</option>
+                                                    <option value="0"> -- 请选择 --</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <select id="PrimaryBusiness" class="form-control">
-                                                    <option value=""> -- 请选择 --</option>
+                                                    <option value="0"> -- 请选择 --</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -166,18 +172,7 @@
                                         <label class="col-sm-3 control-label">主要销售区域</label>
                                         <div class="col-sm-5">
                                             <select id="PrimarySalesArea" class="chosen-select" multiple data-placeholder="Choose an area...">
-                                                @{
-                                                    foreach (var AreaMode in (ObservableCollection<PrimarySalesAreaMode>)ViewBag.PrimarySalesAreaList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.PrimarySalesArea > 0 ? Model.PrimarySalesArea : 1;
-                                                        if (AreaMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@AreaMode.Id" @IsSelected>@AreaMode.Name</option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
                                         </div>
                                     </div>
@@ -187,13 +182,13 @@
                                         <div class="col-sm-6">
                                             <div class="col-sm-2">
                                                 <select id="BusinessProvince" class="form-control">
-                                                    <option value=""> --请选择-- </option>
+                                                    <option value="0"> --请选择-- </option>
                                                 </select>
                                             </div>
 
                                             <div class="col-sm-2">
                                                 <select id="BusinessCity" class="form-control">
-                                                    <option value=""> --请选择-- </option>
+                                                    <option value="0"> --请选择-- </option>
                                                 </select>
                                             </div>
                                             @*<div class="col-sm-2">
@@ -223,7 +218,7 @@
                                         <label class="col-sm-3 control-label">生产形式</label>
                                         <div class="col-sm-5">
                                             <select id="ProductionForm" class="form-control mb15">
-                                                <option value=""> -- 请如实填写您的生产形式，以便客户确认合作形式 --</option>
+                                                <option value="0"> -- 请如实填写您的生产形式，以便客户确认合作形式 --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -232,18 +227,7 @@
                                         <label class="col-sm-3 control-label">服务领域</label>
                                         <div class="col-sm-5">
                                             <select id="ServicesDomain" class="chosen-select" multiple data-placeholder="Choose a service domain...">
-                                                @{
-                                                    foreach (var DomainMode in (ObservableCollection<ServicesDomainMode>)ViewBag.ServicesDomainList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.ServicesDomain > 0 ? Model.ServicesDomain : 1;
-                                                        if (DomainMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@DomainMode.Id" @IsSelected> @DomainMode.Name </option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
                                         </div>
                                     </div>
@@ -252,18 +236,7 @@
                                         <label class="col-sm-3 control-label">加工方式</label>
                                         <div class="col-sm-5">
                                             <select id="ProcessingMethod" class="chosen-select" multiple data-placeholder="Choose a processing method...">
-                                                @{
-                                                    foreach (var MethodMode in (ObservableCollection<ProcessingMethodMode>)ViewBag.ProcessingMethodList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.ProcessingMethod > 0 ? Model.ProcessingMethod : 1;
-                                                        if (MethodMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@MethodMode.Id" @IsSelected> @MethodMode.Name </option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
                                         </div>
                                     </div>
@@ -273,18 +246,7 @@
                                         <label class="col-sm-3 control-label">加工工艺</label>
                                         <div class="col-sm-5">
                                             <select id="ProcessingCraft" class="chosen-select" multiple data-placeholder="Choose a processing craft...">
-                                                @{
-                                                    foreach (var CraftMode in (ObservableCollection<ProcessingCraftMode>)ViewBag.ProcessingCraftList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.ProcessingCraft > 0 ? Model.ProcessingCraft : 1;
-                                                        if (CraftMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@CraftMode.Id" @IsSelected> @CraftMode.Name </option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
                                         </div>
                                     </div>
@@ -294,18 +256,7 @@
                                         <label class="col-sm-3 control-label">设备介绍</label>
                                         <div class="col-sm-5">
                                             <select id="EquipmentIntro" class="chosen-select" multiple data-placeholder="Choose a equipment intro...">
-                                                @{
-                                                    foreach (var EquipMode in (ObservableCollection<EquipmentIntroMode>)ViewBag.EquipmentIntroList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.EquipmentIntro > 0 ? Model.EquipmentIntro : 1;
-                                                        if (EquipMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@EquipMode.Id" @IsSelected> @EquipMode.Name </option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
                                         </div>
                                     </div>
@@ -314,19 +265,7 @@
                                         <label class="col-sm-3 control-label">研发部门人数</label>
                                         <div class="col-sm-5">
                                             <select id="ResearchDepartMembers" class="form-control mb15">
-                                                <option value=""> -- 请选择 --</option>
-                                                @{
-                                                    foreach (var MemberMode in (ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.ResearchDepartMembers > 0 ? Model.ResearchDepartMembers : 1;
-                                                        if (MemberMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@MemberMode.Id" @IsSelected> @MemberMode.Name </option>
-                                                    }
-                                                }
+                                                <option value="0"> -- 请选择 --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -339,19 +278,7 @@
                                             </div>
                                             <div class="col-sm-2">
                                                 <select id="CapacityIntroUnit" class="form-control mb4">
-                                                    <option value=""> -- 请选择 --</option>
-                                                    @{
-                                                        foreach (var UnitMode in (ObservableCollection<CapacityUnitMode>)ViewBag.CapacityUnitList)
-                                                        {
-                                                            var IsSelected = string.Empty;
-                                                            var SelectedId = Model.CapacityIntroUnit > 0 ? Model.CapacityIntroUnit : 1;
-                                                            if (UnitMode.Id == SelectedId)
-                                                            {
-                                                                IsSelected = "selected";
-                                                            }
-                                                        <option value="@UnitMode.Id" @IsSelected> @UnitMode.Name </option>
-                                                        }
-                                                    }
+                                                    <option value="0"> -- 请选择 --</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -361,19 +288,7 @@
                                         <label class="col-sm-3 control-label">年营业额</label>
                                         <div class="col-sm-6">
                                             <select id="AnnualBusinessVolume" class="form-control mb4">
-                                                <option value=""> --请选择-- </option>
-                                                @{
-                                                    foreach (var BVolumeMode in (ObservableCollection<AnnualBusinessVolumeMode>)ViewBag.AnnualBusinessVolumeList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.AnnualBusinessVolume > 0 ? Model.AnnualBusinessVolume : 1;
-                                                        if (BVolumeMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@BVolumeMode.Id" @IsSelected>@BVolumeMode.Name</option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
 
                                         </div>
@@ -383,19 +298,7 @@
                                         <label class="col-sm-3 control-label">年出口额</label>
                                         <div class="col-sm-6">
                                             <select id="AnnualExportsVolume" class="form-control mb4">
-                                                <option value="">--请选择--</option>
-                                                @{
-                                                    foreach (var EVolumeMode in (ObservableCollection<AnnualExportsVolumeMode>)ViewBag.AnnualExportsVolumeList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.AnnualExportsVolume > 0 ? Model.AnnualExportsVolume : 1;
-                                                        if (EVolumeMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@EVolumeMode.Id" @IsSelected>@EVolumeMode.Name</option>
-                                                    }
-                                                }
+                                                <option value="0">--请选择--</option>
                                             </select>
 
                                         </div>
@@ -405,18 +308,7 @@
                                         <label class="col-sm-3 control-label">管理体系认证</label>
                                         <div class="col-sm-5">
                                             <select id="ManagementSystemCertification" class="chosen-select" multiple data-placeholder="Choose a system certification...">
-                                                @{
-                                                    foreach (var SystemMode in (ObservableCollection<ManagementSystemCertificationMode>)ViewBag.ManagementSystemCertificationList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.ManagementSystemCertification > 0 ? Model.ManagementSystemCertification : 1;
-                                                        if (SystemMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@SystemMode.Id" @IsSelected>@SystemMode.Name</option>
-                                                    }
-                                                }
+                                                <option value="0">--请选择--</option>
                                             </select>
                                         </div>
                                     </div>
@@ -426,54 +318,14 @@
                                         <label class="col-sm-3 control-label">产品质量认证</label>
                                         <div class="col-sm-5">
                                             <select id="ProductQualityCertification" class="chosen-select" multiple data-placeholder="Choose a quality certification...">
-                                                @{
-                                                    foreach (var QualityMode in (ObservableCollection<ProductQualityCertificationMode>)ViewBag.ProductQualityCertificationList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.ProductQualityCertification > 0 ? Model.ProductQualityCertification : 1;
-                                                        if (QualityMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@QualityMode.Id" @IsSelected>@QualityMode.Name</option>
-                                                    }
-                                                }
+                                                <option value="0">--请选择--</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">质量控制</label>
-                                        <div class="col-sm-5">
-                                            @{
-                                                foreach (var QAMode in (ObservableCollection<QualityAssuranceMode>)ViewBag.QualityAssuranceList)
-                                                {
-                                                    var radioClass = string.Empty;
-                                                    var radioId = string.Empty;
-
-                                                    if (QAMode.Id == 1)
-                                                    {
-                                                        radioClass = "rdio rdio-default";
-                                                        radioId = "radioDefault";
-                                                    }
-                                                    else if (QAMode.Id == 2)
-                                                    {
-                                                        radioClass = "rdio rdio-primary";
-                                                        radioId = "radioPrimary";
-                                                    }
-                                                    else if (QAMode.Id == 3)
-                                                    {
-                                                        radioClass = "rdio rdio-warning";
-                                                        radioId = "radioWarning";
-                                                    }
-
-                                                    var SelectedId = Model.QualityAssurance > 0 ? Model.QualityAssurance : 1;
-                                                <div class="@radioClass">
-                                                    <input type="radio" name="radioQualityAssurance" id="@radioId" value="@QAMode.Id" @Html.IsChecked(QAMode.Id == SelectedId) />
-                                                    <label for="@radioId">@QAMode.Name</label>
-                                                </div>
-                                                }
-                                            }
+                                        <div class="col-sm-5" id="QualityAssurance">
                                         </div>
                                     </div>
 
@@ -515,19 +367,7 @@
                                         <label class="col-sm-3 control-label">企业成立年份</label>
                                         <div class="col-sm-1">
                                             <select id="CompanyYearEstablished" class="form-control mb15">
-                                                <option value=""> --请选择-- </option>
-                                                @{
-                                                    foreach (var YearMode in (ObservableCollection<CompanyYearEstablishedMode>)ViewBag.CompanyYearEstablishedList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.CompanyYearEstablished > 0 ? Model.CompanyYearEstablished : 1;
-                                                        if (YearMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@YearMode.Id" @IsSelected>@YearMode.Name</option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
                                         </div>
                                     </div>
@@ -545,19 +385,7 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <select id="CompanyRegisteredAssetsUnit" class="form-control">
-                                                <option value=""> --请选择-- </option>
-                                                @{
-                                                    foreach (var AssetUnitMode in (ObservableCollection<CompanyRegisteredAssetsUnitMode>)ViewBag.RegisteredAssetsUnitList)
-                                                    {
-                                                        var IsSelected = string.Empty;
-                                                        var SelectedId = Model.CompanyRegisteredAssetsUnit > 0 ? Model.CompanyRegisteredAssetsUnit : 1;
-                                                        if (AssetUnitMode.Id == SelectedId)
-                                                        {
-                                                            IsSelected = "selected";
-                                                        }
-                                                    <option value="@AssetUnitMode.Id" @IsSelected>@AssetUnitMode.Name</option>
-                                                    }
-                                                }
+                                                <option value="0"> --请选择-- </option>
                                             </select>
                                         </div>
                                     </div>
@@ -567,12 +395,12 @@
                                         <div class="col-sm-6">
                                             <div class="col-sm-2">
                                                 <select id="RegisteredProvince" class="form-control">
-                                                    <option value=""> --请选择-- </option>
+                                                    <option value="0"> --请选择-- </option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-2">
                                                 <select id="RegisteredCity" class="form-control">
-                                                    <option value=""> --请选择-- </option>
+                                                    <option value="0"> --请选择-- </option>
                                                 </select>
                                             </div>
                                             @*<div class="col-sm-2">
@@ -622,339 +450,199 @@
             </div><!-- panel -->
         </div>
 
-
-
     </div>
 </div>
 
-<script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
-<script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
-<script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
-<script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
-<script src="../DigitalStyle/js/jquery.mousewheel.js"></script>
-<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
-<script src="../DigitalStyle/js/dropzone.min.js"></script>
-<script src="../DigitalStyle/js/colorpicker.js"></script>
 
-
-<script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
-<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-<script src="../DigitalStyle/js/JqueryToken.js"></script>
-<script src="../DigitalStyle/js/custom.js"></script>
 
 <script>
     jQuery(document).ready(function () {
+        //select option : CompanyTypeNO
         var CompanyTypejsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyTypeMode>)ViewBag.CompanyTypeList))
         DropOption(CompanyTypejsons,$("#CompanyTypeNO"),@Model.CompanyTypeNO);
+
+        //select option : CompanyMembers
         var CompanyMembersjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList))
         DropOption(CompanyMembersjsons,$("#CompanyMembers"),@Model.CompanyMembers);
+
+        //radio group : CompanyBusinessRadio
         var CompanyBusinessjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyBusinessMode>)ViewBag.CompanyBusinessList))
         RadioHtml(CompanyBusinessjsons, $("#CompanyBusinessRadio"), @Model.CompanyBusinessModel,"rdio rdio-primary","radioBusiness");
+
+        //select option : ProductionForm
         var ProductionFormjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProductionFormMode>)ViewBag.ProductionFormList))
-        DropOption(ProductionFormjsons,$("#ProductionForm"),@Model.ProductionForm );
-        @{
+        DropOption(ProductionFormjsons,$("#ProductionForm"),@Model.ProductionForm);
 
+        //select option : PrimarySalesArea , multiple
+        var PrimarySalesAreajsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<PrimarySalesAreaMode>)ViewBag.PrimarySalesAreaList))
+        DropOption(PrimarySalesAreajsons,$("#PrimarySalesArea"),@Model.PrimarySalesArea);
 
-      
+        //select option : ServicesDomain , multiple
+        var ServicesDomainjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ServicesDomainMode>)ViewBag.ServicesDomainList))
+        DropOption(ServicesDomainjsons,$("#ServicesDomain"),@Model.ServicesDomain);
 
+        //select option : ProcessingMethod , multiple
+        var ProcessingMethodjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProcessingMethodMode>)ViewBag.ProcessingMethodList))
+        DropOption(ProcessingMethodjsons,$("#ProcessingMethod"),@Model.ProcessingMethod);
+
+        //select option : ProcessingCraft , multiple
+        var ProcessingCraftjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProcessingCraftMode>)ViewBag.ProcessingCraftList))
+        DropOption(ProcessingCraftjsons,$("#ProcessingCraft"),@Model.ProcessingCraft);
+
+        //select option : EquipmentIntro , multiple
+        var EquipmentIntrojsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<EquipmentIntroMode>)ViewBag.EquipmentIntroList))
+        DropOption(EquipmentIntrojsons,$("#EquipmentIntro"),@Model.EquipmentIntro);
+
+        //select option : ResearchDepartMembers
+        var ResearchDepartMembersjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList))
+        DropOption(ResearchDepartMembersjsons,$("#ResearchDepartMembers"),@Model.ResearchDepartMembers);
+
+        //select option : CapacityIntroUnit
+        var CapacityIntroUnitjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CapacityUnitMode>)ViewBag.CapacityUnitList))
+        DropOption(CapacityIntroUnitjsons,$("#CapacityIntroUnit"),@Model.CapacityIntroUnit);
+
+        //select option : AnnualBusinessVolume
+        var AnnualBusinessVolumejsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<AnnualBusinessVolumeMode>)ViewBag.AnnualBusinessVolumeList))
+        DropOption(AnnualBusinessVolumejsons,$("#AnnualBusinessVolume"),@Model.AnnualBusinessVolume);
+
+        //select option : AnnualExportsVolume
+        var AnnualExportsVolumejsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<AnnualExportsVolumeMode>)ViewBag.AnnualExportsVolumeList))
+        DropOption(AnnualExportsVolumejsons,$("#AnnualExportsVolume"),@Model.AnnualExportsVolume);
+
+        //select option : ManagementSystemCertification , multiple
+        var ManagementSystemCertificationjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ManagementSystemCertificationMode>)ViewBag.ManagementSystemCertificationList))
+        DropOption(ManagementSystemCertificationjsons,$("#ManagementSystemCertification"),@Model.ManagementSystemCertification);
+
+        //select option : ProductQualityCertification , multiple
+        var ProductQualityCertificationjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProductQualityCertificationMode>)ViewBag.ProductQualityCertificationList))
+        DropOption(ProductQualityCertificationjsons,$("#ProductQualityCertification"),@Model.ProductQualityCertification);
+
+        //radio group : radioQualityAssurance
+        var radioQualityAssurancejsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<QualityAssuranceMode>)ViewBag.QualityAssuranceList))
+        RadioHtml(radioQualityAssurancejsons, $("#QualityAssurance"), @Model.QualityAssurance,"rdio rdio-primary","radioQualityAssurance");
+
+        //select option : CompanyYearEstablished
+        var CompanyYearEstablishedjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyYearEstablishedMode>)ViewBag.CompanyYearEstablishedList))
+        DropOption(CompanyYearEstablishedjsons,$("#CompanyYearEstablished"),@Model.CompanyYearEstablished);
+
+        //select option : CompanyRegisteredAssetsUnit
+        var CompanyRegisteredAssetsUnitjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyRegisteredAssetsUnitMode>)ViewBag.RegisteredAssetsUnitList))
+        DropOption(CompanyRegisteredAssetsUnitjsons,$("#CompanyRegisteredAssetsUnit"),@Model.CompanyRegisteredAssetsUnit);
+
+        //select default option
         // for drop down cascading [ PrimaryBusiness ]
-        var IsBusinessCategory = string.Empty;
-        if (Model.PrimaryBusinessCategory>0)
-        {
-            IsBusinessCategory = Model.PrimaryBusinessCategory.ToString();
-        }
-        else
-        {
-            IsBusinessCategory = "1";
-        }
-
-        var IsBusiness = string.Empty;
-        if (Model.PrimaryBusiness>0)
-        {
-            IsBusiness = Model.PrimaryBusiness.ToString();
-        }
-        else
-        {
-            IsBusiness = "1";
-        }
+        var IsBusinessCategory=DropOptionDefault(@Model.PrimaryBusinessCategory);
+        var IsBusiness=DropOptionDefault(@Model.PrimaryBusiness);
 
         //for drop down cascading [ CompanyBusinessAddress ]
-        var IsBusinessProvince = string.Empty;
-        if (Model.CompanyBusinessProvince>0)
-        {
-            IsBusinessProvince = Model.CompanyBusinessProvince.ToString();
-        }
-        else
-        {
-            IsBusinessProvince = "1";
-        }
-
-        var IsBusinessCity = string.Empty;
-        if (Model.CompanyBusinessCity>0)
-        {
-            IsBusinessCity = Model.CompanyBusinessCity.ToString();
-        }
-        else
-        {
-            IsBusinessCity = "1";
-        }
+        var IsBusinessProvince=DropOptionDefault(@Model.CompanyBusinessProvince);
+        var IsBusinessCity=DropOptionDefault(@Model.CompanyBusinessCity);
 
         //for drop down cascading [ CompanyRegisteredAddress ]
-        var IsRegisteredProvince = string.Empty;
-        if (Model.CompanyRegisteredProvince>0)
-        {
-            IsRegisteredProvince = Model.CompanyRegisteredProvince.ToString();
-        }
-        else
-        {
-            IsRegisteredProvince = "1";
-        }
+        var IsRegisteredProvince=DropOptionDefault(@Model.CompanyRegisteredProvince);
+        var IsRegisteredCity=DropOptionDefault(@Model.CompanyRegisteredCity);
 
-        var IsRegisteredCity = string.Empty;
-        if (Model.CompanyRegisteredCity>0)
-        {
-            IsRegisteredCity = Model.CompanyRegisteredCity.ToString();
-        }
-        else
-        {
-            IsRegisteredCity = "1";
-        }
-
-    }
         //------------for drop down cascading [ PrimaryBusiness ]-------------
-        jQuery.ajax({
-    url: "../xml/PrimaryBusiness.xml",
-    type: "get",
-    datatype: "xml",
-    success: function (xmldoc) {
-        jQuery(xmldoc).find("PrimaryBusinessCategory").each(function () {
-            if (@IsBusinessCategory == jQuery(this).attr("Id")) {
-                jQuery("#PrimaryBusinessCategory").append("<option selected value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-                PrimaryBusiness(jQuery(this).attr("Id"));
-            }
-            else{
-                jQuery("#PrimaryBusinessCategory").append("<option value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-            }
-        })
+        ComAjaxGet("../xml/PrimaryBusiness.xml","PrimaryBusinessCategory","PrimaryBusiness","PrimaryBusinessCategory",IsBusinessCategory,"PrimaryBusiness",IsBusiness,0);
+        jQuery("#PrimaryBusinessCategory").change(function(){
+            var selectvalue = jQuery(this).val();
+            ComAjaxGetForParent(selectvalue, "../xml/PrimaryBusiness.xml","PrimaryBusinessCategory","PrimaryBusiness","PrimaryBusiness", IsBusiness,0);
+        });
 
-        jQuery("#PrimaryBusinessCategory").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-        jQuery("#PrimaryBusinessCategory").trigger("chosen:updated");
-    }
-    });
+        //--------------------------------------------------------------
 
-    jQuery("#PrimaryBusinessCategory").change(function(){
-        var selectvalue = jQuery(this).val();
-        PrimaryBusiness(selectvalue);
-    });
+        //------------for drop down cascading [ CompanyBusinessAddress ]------
+        // <select> id : BusinessProvince , BusinessCity
+        ComAjaxGet("../xml/City.xml","Province","City","BusinessProvince",IsBusinessProvince,"BusinessCity",IsBusinessCity,1);
+        jQuery("#BusinessProvince").change(function(){
+            var selectvalue = jQuery(this).val();
+            ComAjaxGetForParent(selectvalue, "../xml/City.xml","Province","City","BusinessCity", IsBusinessCity,1);
+        });
 
-    function PrimaryBusiness(selectCategory) {
-        jQuery.ajax({
-            url:"../xml/PrimaryBusiness.xml",
-            type:"get",
-            datatype:"xml",
-            success:function (xmldoc) {
-                jQuery("#PrimaryBusiness").find("option").remove();
-                jQuery("#PrimaryBusiness").append("<option  value='0'> --请选择-- </option>");
-                jQuery(xmldoc).find("Root>PrimaryBusinessCategory[Id="+selectCategory+"]>PrimaryBusiness").each(function() {
-                    if (@IsBusiness == jQuery(this).attr("Id")) {
-                        jQuery("#PrimaryBusiness").append("<option selected value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-                    }
-                    else{
-                        jQuery("#PrimaryBusiness").append("<option value='"+jQuery(this).attr("Id")+"'>"+jQuery(this).attr("Name")+"</option>");
-                    }
-                });
+        ComAjaxGet("../xml/City.xml","Province","City","RegisteredProvince",IsRegisteredProvince,"RegisteredCity",IsRegisteredCity,1);
+        jQuery("#RegisteredProvince").change(function(){
+            var selectvalue = jQuery(this).val();
+            ComAjaxGetForParent(selectvalue, "../xml/City.xml","Province","City","RegisteredCity", IsRegisteredCity,1);
+        });
 
-                jQuery("#PrimaryBusiness").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                jQuery("#PrimaryBusiness").trigger("chosen:updated");
+        //--------------------------------------------------------------------
+
+        // Progress Wizard
+        $('#progressWizard').bootstrapWizard({
+            'nextSelector': '.next',
+            'previousSelector': '.previous',
+            onNext: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+
+            },
+            onPrevious: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+
+                $("#BtnSave").attr('style','display:block');
+
+                if (index==2) {
+                    jQuery('#progressWizard').find('.next').attr('style','display:none');
+                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
+                }
+                else if(index==0)
+                {
+                    //$("#BtnSave").attr('style','display:none');
+                    jQuery('#progressWizard').find('.previous').attr('style','display:none');
+                    jQuery('#progressWizard').find('.next').attr('style','display:block');
+                }
+                else
+                {
+                    //$("#BtnSave").attr('style','display:none');
+                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
+                    jQuery('#progressWizard').find('.next').attr('style','display:block');
+                }
+
             }
         });
-    }
-    //--------------------------------------------------------------
 
-    //------------for drop down cascading [ CompanyBusinessAddress ]------
-    // <select> id : BusinessProvince , BusinessCity
-    // <select> id : RegisteredProvince , RegisteredCity
-    jQuery.ajax({
-        url: "../xml/City.xml",
-        type: "get",
-        datatype: "xml",
-        success: function (xmldoc) {
-            jQuery(xmldoc).find("Province").each(function () {
-                //for drop down CompanyBusinessAddress
-                if (@IsBusinessProvince == jQuery(this).attr("ID")) {
-                    jQuery("#BusinessProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                    CompanyBusinessCity(jQuery(this).attr("ID"),1);
-                }
-                else{
-                    jQuery("#BusinessProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                }
-                //for drop down CompanyRegisteredAddress
-                if (@IsRegisteredProvince == jQuery(this).attr("ID")) {
-                    jQuery("#RegisteredProvince").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                    CompanyBusinessCity(jQuery(this).attr("ID"),0);
-                }
-                else{
-                    jQuery("#RegisteredProvince").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).attr("Name")+"</option>");
-                }
-            })
-
-            jQuery("#BusinessProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-            jQuery("#BusinessProvince").trigger("chosen:updated");
-
-            jQuery("#RegisteredProvince").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-            jQuery("#RegisteredProvince").trigger("chosen:updated");
-        }
-    });
-
-    jQuery("#BusinessProvince").change(function(){
-        var selectvalue = jQuery(this).val();
-        CompanyBusinessCity(selectvalue,1);
-    });
-
-    jQuery("#RegisteredProvince").change(function(){
-        var selectvalue = jQuery(this).val();
-        CompanyBusinessCity(selectvalue,0);
-    });
-
-    function CompanyBusinessCity(selectProvince,isBusiness) {
-        jQuery.ajax({
-            url:"../xml/City.xml",
-            type:"get",
-            datatype:"xml",
-            success:function (xmldoc) {
-                if (isBusiness==1) {
-                    //for drop down BusinessCity
-                    jQuery("#BusinessCity").find("option").remove();
-                    jQuery("#BusinessCity").append("<option  value='0'> --请选择-- </option>");
-                    jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
-                        if (@IsBusinessCity == jQuery(this).attr("ID")) {
-                            jQuery("#BusinessCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                        }
-                        else{
-                            jQuery("#BusinessCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                        }
-                    });
-
-                    jQuery("#BusinessCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                    jQuery("#BusinessCity").trigger("chosen:updated");
-                }
-                else if (isBusiness==0) {
-                    //for drop down  RegisteredCity
-                    jQuery("#RegisteredCity").find("option").remove();
-                    jQuery("#RegisteredCity").append("<option  value='0'> --请选择-- </option>");
-                    jQuery(xmldoc).find("Root>Province[ID="+selectProvince+"]>City").each(function() {
-                        if (@IsRegisteredCity == jQuery(this).attr("ID")) {
-                            jQuery("#RegisteredCity").append("<option selected value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                        }
-                        else{
-                            jQuery("#RegisteredCity").append("<option value='"+jQuery(this).attr("ID")+"'>"+jQuery(this).text()+"</option>");
-                        }
-                    });
-
-                    jQuery("#RegisteredCity").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-                    jQuery("#RegisteredCity").trigger("chosen:updated");
-                }
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
             }
         });
-    }
-    //--------------------------------------------------------------------
 
-
-
-    // Progress Wizard
-    $('#progressWizard').bootstrapWizard({
-        'nextSelector': '.next',
-        'previousSelector': '.previous',
-        onNext: function (tab, navigation, index) {
-            var $total = navigation.find('li').length;
-            var $current = index + 1;
-            var $percent = ($current / $total) * 100;
-            jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-
-        },
-        onPrevious: function (tab, navigation, index) {
-            var $total = navigation.find('li').length;
-            var $current = index + 1;
-            var $percent = ($current / $total) * 100;
-            jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-        },
-        onTabShow: function (tab, navigation, index) {
-            var $total = navigation.find('li').length;
-            var $current = index + 1;
-            var $percent = ($current / $total) * 100;
-            jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-
-            $("#BtnSave").attr('style','display:block');
-
-            if (index==2) {
-                jQuery('#progressWizard').find('.next').attr('style','display:none');
-                jQuery('#progressWizard').find('.previous').attr('style','display:block');
-            }
-            else if(index==0)
-            {
-                //$("#BtnSave").attr('style','display:none');
-                jQuery('#progressWizard').find('.previous').attr('style','display:none');
-                jQuery('#progressWizard').find('.next').attr('style','display:block');
-            }
-            else
-            {
-                //$("#BtnSave").attr('style','display:none');
-                jQuery('#progressWizard').find('.previous').attr('style','display:block');
-                jQuery('#progressWizard').find('.next').attr('style','display:block');
-            }
-
-        }
-    });
-
-
-
-    // Disabled Tab Click Wizard
-    jQuery('#disabledTabWizard').bootstrapWizard({
-        tabClass: 'nav nav-pills nav-justified nav-disabled-click',
-        onTabClick: function (tab, navigation, index) {
-            return false;
-        }
-    });
-
-    // With Form Validation Wizard
-    var $validator = jQuery("#firstForm").validate({
-        highlight: function (element) {
-            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-        },
-        success: function (element) {
-            jQuery(element).closest('.form-group').removeClass('has-error');
-        }
-    });
-
-    jQuery('#progressWizard').bootstrapWizard({
-        tabClass: 'nav nav-pills nav-justified nav-disabled-click',
-        onTabClick: function (tab, navigation, index) {
-            return false;
-        },
-        onNext: function (tab, navigation, index) {
-            var $valid = jQuery('#firstForm').valid();
-            if (!$valid) {
-                $validator.focusInvalid();
+        jQuery('#progressWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
                 return false;
+            },
+            onNext: function (tab, navigation, index) {
+                var $valid = jQuery('#firstForm').valid();
+                if (!$valid) {
+                    $validator.focusInvalid();
+                    return false;
+                }
             }
-        }
-    });
-    });
-
-
-    function StringCombine(element)
-    {
-        var stringTemp="";
-        var strIndex=0;
-        $(element).each(function(){
-            if (strIndex>0) {
-                stringTemp+=",";
-            }
-            stringTemp+=$(this).val();
-            ++strIndex;
         });
-        return stringTemp;
-    }
+
+        // Chosen Select
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+        // Textarea Autogrow
+        jQuery('#CompanyIntro').autogrow();
+
+    });
 
     function Save()
     {
@@ -978,33 +666,22 @@
 
             var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
             //------------------TAB 01 : 基本信息
-            var valCompanyName=$("#CompanyName").val();
-            var valCompanyRegisteredNO=$("#CompanyRegisteredNO").val();
-            var valCompanyTypeNO=$("#CompanyTypeNO  option:selected").val();
-            var valCompanyMembers=$("#CompanyMembers option:selected").val();
-            var valCompanyBusinessModel=$('input:radio[name="radioBusiness"]:checked').val();
-            var valIsProvideOEM=$('input:radio[name="radioOEM"]:checked').val();
-            var valPrimaryBusinessCategory=$("#PrimaryBusinessCategory option:selected").val();
-            var valPrimaryBusiness=$("#PrimaryBusiness option:selected").val();
+            var valCompanyName=$.jsparams.input("CompanyName");
+            var valCompanyRegisteredNO=$.jsparams.input("CompanyRegisteredNO");
+            var valCompanyTypeNO=$.jsparams.select("CompanyTypeNO");//$("#CompanyTypeNO  option:selected").val();
+            var valCompanyMembers=$.jsparams.select("CompanyMembers");//$("#CompanyMembers option:selected").val();
+            var valCompanyBusinessModel=$.jsparams.radio("radioBusiness");//$('input:radio[name="radioBusiness"]:checked').val();
+            var valIsProvideOEM=$.jsparams.radio("radioOEM");//$('input:radio[name="radioOEM"]:checked').val();
+            var valPrimaryBusinessCategory=$.jsparams.select("PrimaryBusinessCategory");//$("#PrimaryBusinessCategory option:selected").val();
+            var valPrimaryBusiness=$.jsparams.select("PrimaryBusiness");//$("#PrimaryBusiness option:selected").val();
             //---------------PrimaryProduct 1,,,,5
-            var stringPrimaryProduct="";
-            var ProdIndex=0;
-            $('input[id*="PrimaryProduct"]').each(function(){
-                if (ProdIndex>0) {
-                    if($(this).val()!=""){
-                        stringPrimaryProduct+=",";
-                    }
-                }
-                stringPrimaryProduct+=$(this).val();
-                ++ProdIndex;
-            });
-            var valPrimaryProduct=stringPrimaryProduct;
+            var valPrimaryProduct=$.jsparams.input_multiple("PrimaryProduct");
             //---------------PrimarySalesArea
-            var valPrimarySalesArea=StringCombine("#PrimarySalesArea option:selected");
+            var valPrimarySalesArea=$.jsparams.select_multiple("PrimarySalesArea");//StringCombine("#PrimarySalesArea option:selected");
             //---------------
-            var valBusinessProvince=$("#BusinessProvince option:selected").val();
-            var valBusinessCity=$("#BusinessCity option:selected").val();
-            var valCompanyIntro=$("#CompanyIntro").val();
+            var valBusinessProvince=$.jsparams.select("BusinessProvince");//$("#BusinessProvince option:selected").val();
+            var valBusinessCity=$.jsparams.select("BusinessCity");//$("#BusinessCity option:selected").val();
+            var valCompanyIntro=$.jsparams.input("CompanyIntro");//$("#CompanyIntro").val();
 
             var stringTABONE=valCompanyName+"_"+valCompanyRegisteredNO+"_"+valCompanyTypeNO+"_"+valCompanyMembers+"_"+valCompanyBusinessModel+"_"+
                 valIsProvideOEM+"_"+valPrimaryBusinessCategory+"_"+valPrimaryBusiness+"_"+
@@ -1013,42 +690,31 @@
             window.alert(stringTABONE);
 
             //-----------------TAB 02 : 生产能力
-            var valProductionForm=$("#ProductionForm option:selected").val();
+            var valProductionForm=$.jsparams.select("ProductionForm");//$("#ProductionForm option:selected").val();
             //---------------ServicesDomain
-            var valServicesDomain=StringCombine("#ServicesDomain option:selected");
+            var valServicesDomain=$.jsparams.select_multiple("ServicesDomain");//StringCombine("#ServicesDomain option:selected");
             //--------------ProcessingMethod
-            var valProcessingMethod=StringCombine("#ProcessingMethod option:selected");
+            var valProcessingMethod=$.jsparams.select_multiple("ProcessingMethod");//StringCombine("#ProcessingMethod option:selected");
             //-------------ProcessingCraft
-            var valProcessingCraft=StringCombine("#ProcessingCraft option:selected");
+            var valProcessingCraft=$.jsparams.select_multiple("ProcessingCraft");//StringCombine("#ProcessingCraft option:selected");
             //-------------EquipmentIntro
-            var valEquipmentIntro=StringCombine("#EquipmentIntro option:selected");;
+            var valEquipmentIntro=$.jsparams.select_multiple("EquipmentIntro");//StringCombine("#EquipmentIntro option:selected");;
 
-            var valResearchDepartMembers=$("#ResearchDepartMembers option:selected").val();
-            var valCapacityIntro=$("#CapacityIntro").val();
-            var valCapacityIntroUnit=$("#CapacityIntroUnit option:selected").val();
-            var valAnnualBusinessVolume=$("#AnnualBusinessVolume option:selected").val();
-            var valAnnualExportsVolume=$("#AnnualExportsVolume option:selected").val();
+            var valResearchDepartMembers=$.jsparams.select("ResearchDepartMembers");//$("#ResearchDepartMembers option:selected").val();
+            var valCapacityIntro=$.jsparams.input("CapacityIntro");//$("#CapacityIntro").val();
+            var valCapacityIntroUnit=$.jsparams.select("CapacityIntroUnit");//$("#CapacityIntroUnit option:selected").val();
+            var valAnnualBusinessVolume=$.jsparams.select("AnnualBusinessVolume");//$("#AnnualBusinessVolume option:selected").val();
+            var valAnnualExportsVolume=$.jsparams.select("AnnualExportsVolume");//$("#AnnualExportsVolume option:selected").val();
             //-------------ManagementSystemCertification
-            var valManagementSystemCertification=StringCombine("#ManagementSystemCertification option:selected");//$("#ManagementSystemCertification option:selected").val();
+            var valManagementSystemCertification=$.jsparams.select_multiple("ManagementSystemCertification");//StringCombine("#ManagementSystemCertification option:selected");//$("#ManagementSystemCertification option:selected").val();
             //-------------ProductQualityCertification
-            var valProductQualityCertification=StringCombine("#ProductQualityCertification option:selected");//$("#ProductQualityCertification option:selected").val();
+            var valProductQualityCertification=$.jsparams.select_multiple("ProductQualityCertification");//StringCombine("#ProductQualityCertification option:selected");//$("#ProductQualityCertification option:selected").val();
 
-            var valQualityAssurance=$('input:radio[name="radioQualityAssurance"]:checked').val();
-            var valFactoryArea=$("#FactoryArea").val();
+            var valQualityAssurance=$.jsparams.radio("radioQualityAssurance");//$('input:radio[name="radioQualityAssurance"]:checked').val();
+            var valFactoryArea=$.jsparams.input("FactoryArea");//$("#FactoryArea").val();
 
             //-------------PrimaryEquipments 1,,,,5
-            var stringPrimaryEquipments="";
-            var EquipIndex=0;
-            $('input[id*="PrimaryEquipments"]').each(function(){
-                if (EquipIndex>0) {
-                    if ($(this).val()!="") {
-                        stringPrimaryEquipments+=",";
-                    }
-                }
-                stringPrimaryEquipments+=$(this).val();
-                ++EquipIndex;
-            });
-            var valPrimaryEquipments=stringPrimaryEquipments;
+            var valPrimaryEquipments=$.jsparams.input_multiple("PrimaryEquipments");
 
             var stringTABTWO=valProductionForm+"_"+valServicesDomain+"_"+valProcessingMethod+"_"+valProcessingCraft+"_"+
                 valEquipmentIntro+"_"+valResearchDepartMembers+"_"+valCapacityIntro+"_"+valCapacityIntroUnit+"_"+
@@ -1057,15 +723,15 @@
             window.alert(stringTABTWO);
 
             //-----------------TAB 03 : 更多信息
-            var valCompanyYearEstablished=$("#CompanyYearEstablished option:selected").val();
-            var valCompanyWebsite=$("#CompanyWebsite").val();
-            var valCompanyRegisteredAssets=$("#CompanyRegisteredAssets").val();
-            var valCompanyRegisteredAssetsUnit=$("#CompanyRegisteredAssetsUnit option:selected").val();
-            var valCompanyRegisteredProvince=$("#RegisteredProvince option:selected").val();
-            var valCompanyRegisteredCity=$("#RegisteredCity option:selected").val();
-            var valCompanyCorporateRepresentative=$('input[id="CompanyCorporateRepresentative"]').val();
-            var valCompanyBankDeposit=$('input[id="CompanyBankDeposit"]').val();
-            var valCompanyBankAccount=$('input[id="CompanyBankAccount"]').val();
+            var valCompanyYearEstablished=$.jsparams.select("CompanyYearEstablished");//$("#CompanyYearEstablished option:selected").val();
+            var valCompanyWebsite=$.jsparams.input("CompanyWebsite");//$("#CompanyWebsite").val();
+            var valCompanyRegisteredAssets=$.jsparams.input("CompanyRegisteredAssets");//$("#CompanyRegisteredAssets").val();
+            var valCompanyRegisteredAssetsUnit=$.jsparams.select("CompanyRegisteredAssetsUnit");//$("#CompanyRegisteredAssetsUnit option:selected").val();
+            var valCompanyRegisteredProvince=$.jsparams.select("RegisteredProvince");//$("#RegisteredProvince option:selected").val();
+            var valCompanyRegisteredCity=$.jsparams.select("RegisteredCity");//$("#RegisteredCity option:selected").val();
+            var valCompanyCorporateRepresentative=$.jsparams.input("CompanyCorporateRepresentative");//$('input[id="CompanyCorporateRepresentative"]').val();
+            var valCompanyBankDeposit=$.jsparams.input("CompanyBankDeposit");//$('input[id="CompanyBankDeposit"]').val();
+            var valCompanyBankAccount=$.jsparams.input("CompanyBankAccount");//$('input[id="CompanyBankAccount"]').val();
 
             var stringTABTHREE=valCompanyYearEstablished+"_"+valCompanyWebsite+"_"+valCompanyRegisteredAssets+"_"+
                 valCompanyRegisteredAssetsUnit+"_"+valCompanyRegisteredProvince+"_"+valCompanyRegisteredCity+"_"+
@@ -1073,151 +739,34 @@
             window.alert(stringTABTHREE);
             //......
             if(TabIndex==0){
-                alert(1);
-                /*
-                 data: { CompanyID:CompanyID,IsInsert:IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
-                        CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
-                        PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
-                        CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro},
-                */
-                $.ajaxAntiForgery({
-                    type: "post",
-                    data:{ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
-                        CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
-                        PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
-                        CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro},
-                    url: "/Company/CompanyBaseInfo",
-                    success: function (data) {
-                        SaveInfo(true,"基本信息");
-                        $('#progressWizard').bootstrapWizard('show',1);
-                    }
-                })
-
-                alert(1111);
+                //alert(1);
+                var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
+                    CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
+                    PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
+                    CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro};
+                ComAjax("/Company/CompanyBaseInfo",datas,"基本信息");
+                //alert(1111);
             }
             else if(TabIndex==1){
-                alert(2);
-
-                $.ajaxAntiForgery({
-                    type: "post",
-                    data: { CompanyID:@CompanyID,IsInsert:@IsInsert,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
-                        ProcessingCraft:valProcessingCraft,EquipmentIntro:valEquipmentIntro,ResearchDepartMembers:valResearchDepartMembers,CapacityIntro:valCapacityIntro,CapacityIntroUnit:valCapacityIntroUnit,
-                        AnnualBusinessVolume:valAnnualBusinessVolume,AnnualExportsVolume:valAnnualExportsVolume,ManagementSystemCertification:valManagementSystemCertification,
-                        ProductQualityCertification:valProductQualityCertification,QualityAssurance:valQualityAssurance,FactoryArea:valFactoryArea,PrimaryEquipments:valPrimaryEquipments},
-                    url: "/Company/CompanyBaseInfoCapacity",
-                    success: function (data) {
-                        SaveInfo(true,"生产能力");
-                        $('#progressWizard').bootstrapWizard('show',2);
-                    }
-                })
-
-                alert(2222);
+                //alert(2);
+                var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
+                    ProcessingCraft:valProcessingCraft,EquipmentIntro:valEquipmentIntro,ResearchDepartMembers:valResearchDepartMembers,CapacityIntro:valCapacityIntro,CapacityIntroUnit:valCapacityIntroUnit,
+                    AnnualBusinessVolume:valAnnualBusinessVolume,AnnualExportsVolume:valAnnualExportsVolume,ManagementSystemCertification:valManagementSystemCertification,
+                    ProductQualityCertification:valProductQualityCertification,QualityAssurance:valQualityAssurance,FactoryArea:valFactoryArea,PrimaryEquipments:valPrimaryEquipments};
+                ComAjax("/Company/CompanyBaseInfoCapacity",datas,"生产能力");
+                //alert(2222);
             }
             else if(TabIndex==2){
+                //alert(3);
 
-                alert(3);
+                var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,
+                    CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,
+                    CompanyCorporateRepresentative:valCompanyCorporateRepresentative,CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount};
+                ComAjax("/Company/CompanyBaseInfoMore",datas,"生产能力");
 
-                $.ajaxAntiForgery({
-                    type: "post",
-                    data: { CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,
-                        CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,
-                        CompanyCorporateRepresentative:valCompanyCorporateRepresentative,CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount},
-                    url: "/Company/CompanyBaseInfoMore",
-                    success: function (data) {
-                        SaveInfo(true,"更多信息");
-                    }
-                })
-
-                alert(3333);
+                //alert(3333);
             }
         }
     }
-
-    function SaveInfo(IsSuccess,msg)
-    {
-        if(IsSuccess)
-        {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg+',保存成功.',
-                sticky: false,
-                time: ''
-            });
-        }
-        else
-        {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg+',保存失败.',
-                sticky: false,
-                time: ''
-            });
-        }
-    }
-</script>
-<script>
-    jQuery(document).ready(function () {
-
-        // Chosen Select
-        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
-
-        // Tags Input
-        jQuery('#tags').tagsInput({ width: 'auto' });
-
-        // Textarea Autogrow
-        jQuery('#autoResizeTA').autogrow();
-
-        // Color Picker
-        if (jQuery('#colorpicker').length > 0) {
-            jQuery('#colorSelector').ColorPicker({
-                onShow: function (colpkr) {
-                    jQuery(colpkr).fadeIn(500);
-                    return false;
-                },
-                onHide: function (colpkr) {
-                    jQuery(colpkr).fadeOut(500);
-                    return false;
-                },
-                onChange: function (hsb, hex, rgb) {
-                    jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
-                    jQuery('#colorpicker').val('#' + hex);
-                }
-            });
-        }
-
-        // Color Picker Flat Mode
-        jQuery('#colorpickerholder').ColorPicker({
-            flat: true,
-            onChange: function (hsb, hex, rgb) {
-                jQuery('#colorpicker3').val('#' + hex);
-            }
-        });
-
-        // Date Picker
-        jQuery('#datepicker').datepicker();
-
-        jQuery('#datepicker-inline').datepicker();
-
-        jQuery('#datepicker-multiple').datepicker({
-            numberOfMonths: 3,
-            showButtonPanel: true
-        });
-
-        // Spinner
-        var spinner = jQuery('#spinner').spinner();
-        spinner.spinner('value', 0);
-
-        // Input Masks
-        jQuery("#date").mask("99/99/9999");
-        jQuery("#phone").mask("(999) 999-9999");
-        jQuery("#ssn").mask("999-99-9999");
-
-        // Time Picker
-        jQuery('#timepicker').timepicker({ defaultTIme: false });
-        jQuery('#timepicker2').timepicker({ showMeridian: false });
-        jQuery('#timepicker3').timepicker({ minuteStep: 15 });
-
-
-    });
 
 </script>

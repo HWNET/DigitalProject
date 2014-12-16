@@ -19,6 +19,27 @@ function SaveInfo(IsSuccess, msg) {
 
 }
 
+function StringCombine(element) {
+    var stringTemp = "";
+    var strIndex = 0;
+    $(element).each(function () {
+        if (strIndex > 0) {
+            if ($(this).val() != "") {
+                stringTemp += ",";
+            }
+        }
+        stringTemp += $(this).val();
+        ++strIndex;
+    });
+    return stringTemp;
+}
+
+function DropOptionDefault(SelectedId)
+{
+    SelectedId = SelectedId > 0 ? SelectedId : 1;
+    return SelectedId.toString();
+}
+
 function DropOption(objson, selectobj, SelectedId)
 {
     var obj = eval(objson);
@@ -65,6 +86,71 @@ function RadioHtml(objson, selectobj, SelectedId,className,RadioName)
     });
 }
 
+function ComAjaxGet(Url, XmlNodeParent,XmlNodeChild,SelectObjId, SelectedObjOption, SelectObjChildId, SelectObjChildOption,IsCity)
+{
+    var AttributeID = IsCity == 1 ? "ID" : "Id";
+    var AttributeName = "Name";
+
+    jQuery.ajax({
+        url: Url, 
+        type: "get",
+        datatype: "xml",
+        success: function (xmldoc) {
+            jQuery(xmldoc).find(XmlNodeParent).each(function () {
+                if (SelectedObjOption == jQuery(this).attr(AttributeID)) {
+                    jQuery("#" + SelectObjId).append("<option selected value='" + jQuery(this).attr(AttributeID) + "'>" + jQuery(this).attr(AttributeName) + "</option>");
+                    ComAjaxGetForParent(jQuery(this).attr(AttributeID), Url, XmlNodeParent, XmlNodeChild, SelectObjChildId, SelectObjChildOption, IsCity);
+                }
+                else {
+                    jQuery("#" + SelectObjId).append("<option value='" + jQuery(this).attr(AttributeID) + "'>" + jQuery(this).attr(AttributeName) + "</option>");
+                }
+            })
+
+            jQuery("#" + SelectObjId).chosen({ 'width': '100%', 'white-space': 'nowrap' });
+            jQuery("#" + SelectObjId).trigger("chosen:updated");
+        }
+    });
+}
+
+function ComAjaxGetForParent(SelectCategory, Url, XmlNodeParent, XmlNodeChild, SelectObjChildId, SelectObjChildOption, IsCity)
+{
+    var AttributeID = IsCity == 1 ? "ID" : "Id";
+    var AttributeName = "Name";
+
+    jQuery.ajax({
+        url: Url, 
+        type: "get",
+        datatype: "xml",
+        success: function (xmldoc) {
+            jQuery("#" + SelectObjChildId).find("option").remove();
+            jQuery("#" + SelectObjChildId).append("<option  value='0'> --«Î—°‘Ò-- </option>");
+            jQuery(xmldoc).find("Root>" + XmlNodeParent + "[" + AttributeID + "=" + SelectCategory + "]>" + XmlNodeChild + "").each(function () {
+                if (SelectObjChildOption == jQuery(this).attr(AttributeID)) {
+                    if (IsCity==1) {
+                        jQuery("#" + SelectObjChildId).append("<option selected value='" + jQuery(this).attr(AttributeID) + "'>" +jQuery(this).text() + "</option>");
+                    }
+                    else {
+                        jQuery("#" + SelectObjChildId).append("<option selected value='" + jQuery(this).attr(AttributeID) + "'>" + jQuery(this).attr(AttributeName) + "</option>");
+                    }
+                    
+                }
+                else {
+                    if (IsCity == 1) {
+                        jQuery("#" + SelectObjChildId).append("<option value='" + jQuery(this).attr(AttributeID) + "'>" + jQuery(this).text()  + "</option>");
+                    }
+                    else {
+                        jQuery("#" + SelectObjChildId).append("<option value='" + jQuery(this).attr(AttributeID) + "'>" + jQuery(this).attr(AttributeName) + "</option>");
+                    }
+                    
+                }
+            });
+
+            jQuery("#" + SelectObjChildId).chosen({ 'width': '100%', 'white-space': 'nowrap' });
+            jQuery("#" + SelectObjChildId).trigger("chosen:updated");
+        }
+    });
+}
+
 function ComAjax(Url,datas,SaveMsg)
 {
     $.ajaxAntiForgery({
@@ -83,11 +169,25 @@ function ComAjax(Url,datas,SaveMsg)
 }
 
 jQuery.jsparams = {
+    input: function(Id){
+        return $("#" + Id).val();
+    },
+    input_multiple: function (Id) {
+        var inputList = $('input[id*=' + Id + ']');
+        return StringCombine(inputList);
+    },
+    select: function(Id){
+        return $("#" + Id + "  option:selected").val();
+    },
+    select_multiple:function(Id){
+        var optionList=$("#" + Id + "  option:selected");
+        return StringCombine(optionList);
+    },
     check: function (Id) {
-        return $("#"+Id).attr("checked") == "checked" ? true : false;
+        return $("#" + Id).attr("checked") == "checked" ? true : false;
     },
     radio: function (name) {
-        return $('input:radio[name=' + name + ']:checked').val()
+        return $('input:radio[name=' + name + ']:checked').val();
     }
 };
 
