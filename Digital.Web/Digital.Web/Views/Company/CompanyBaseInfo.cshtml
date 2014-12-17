@@ -10,22 +10,14 @@
 }
 
 @section PageSpecificJavascriptIncludes{
-    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
-    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
-    <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
 
-    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-    <script src="../DigitalStyle/js/messages_cn.js"></script>
-    <script src="../DigitalStyle/js/JqueryToken.js"></script>
-    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
-
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
-    <script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
-    <script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
-    <script src="../DigitalStyle/js/jquery.mousewheel.js"></script>
-    <script src="../DigitalStyle/js/dropzone.min.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 信息设置 <span>企业中心</span></h2>
@@ -762,7 +754,7 @@
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,
                     CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,
                     CompanyCorporateRepresentative:valCompanyCorporateRepresentative,CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount};
-                ComAjax("/Company/CompanyBaseInfoMore",datas,"生产能力");
+                ComAjax("/Company/CompanyBaseInfoMore",datas,"更多信息");
 
                 //alert(3333);
             }

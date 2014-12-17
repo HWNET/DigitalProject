@@ -222,11 +222,6 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
-
-            if (IsInsert == 1 && ReturnResult == "OK")
-            {
-                return Redirect("../Users/Login");
-            }
             return Content(ReturnResult);
         }
         #endregion

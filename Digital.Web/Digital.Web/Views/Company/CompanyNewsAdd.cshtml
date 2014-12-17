@@ -9,16 +9,32 @@
     ViewBag.Title = "添加播报";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
+@section PageSpecificJavascriptIncludes{
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
 
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+    <!-- CKEditor -->
+    <script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>
+    <script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
+    <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
+    <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
 
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
-<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
-<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <!-- commom form js -->
+    <script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
+    <script src="../DigitalStyle/js/dropzone.min.js"></script>
+    <script src="../DigitalStyle/js/colorpicker.js"></script>
+
+}
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 添加播报 <span>播报中心</span></h2>
@@ -104,20 +120,7 @@
 
                             <div class="col-sm-4 ">
                                 <select id="NewsCategory" class="form-control chosen-select" data-placeholder="选择分类...">
-                                    @{
-                                        if (ViewBag.CategoryList != null)
-                                        {
-                                            foreach (var CategoryMode in (List<NewsCategoryModel>)ViewBag.CategoryList)
-                                            {
-                                                var IsSelected = string.Empty;
-                                                if (CategoryMode.NewsCategoryID == 1)
-                                                {
-                                                    IsSelected = "selected";
-                                                }
-                                                <option value="@CategoryMode.NewsCategoryID" @IsSelected>@CategoryMode.NewsCategoryName</option>
-                                            }
-                                        }
-                                    }
+                                    <option value="0"> --请选择-- </option>
                                 </select>
                             </div>
                         </div>
@@ -174,40 +177,12 @@
 </div>
 
 
-<!-- common js -->
-<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
-<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../DigitalStyle/js/jquery-ui-1.10.3.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap.min.js"></script>
-<script src="../DigitalStyle/js/modernizr.min.js"></script>
-<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
-<script src="../DigitalStyle/js/toggles.min.js"></script>
-<script src="../DigitalStyle/js/retina.min.js"></script>
-<script src="../DigitalStyle/js/jquery.cookies.js"></script>
-
-<!-- CKEditor -->
-<script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
-<script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
-<script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
-
-<!-- commom form js -->
-<script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
-<script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
-<script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
-<script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
-<script src="../DigitalStyle/js/jquery.mousewheel.js"></script>
-<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
-<script src="../DigitalStyle/js/dropzone.min.js"></script>
-<script src="../DigitalStyle/js/colorpicker.js"></script>
-
-<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-<script src="../DigitalStyle/js/JqueryToken.js"></script>
-<script src="js/custom.js"></script>
 
 <script>
     jQuery(document).ready(function () {
+        //select option : NewsCategory
+        var NewsCategoryjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((List<NewsCategoryModel>)ViewBag.CategoryList))
+        DropOption(NewsCategoryjsons,$("#NewsCategory"),@Model.NewsCategoryID);
 
         // Chosen Select
         jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
@@ -286,7 +261,7 @@
     jQuery(document).ready(function () {
 
         // HTML5 WYSIWYG Editor
-        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
+        //jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
 
         // CKEditor
         jQuery('#ckeditor').ckeditor();
@@ -332,7 +307,6 @@
 
     });
 
-
     // For News Add Operation , Submit Button
     function Save() {
         var $valid = jQuery('#firstForm').valid();
@@ -356,13 +330,13 @@
             }
 
             //------------------TAB 01 : 播报信息
-            var valNewsTitle = $("#NewsTitle").val();
-            var valNewsAbstract = $("#NewsAbstract").val();
-            var valNewsThumbnail = $("#NewsThumbnail").val();
-            var valNewsCategoryID = $("#NewsCategory option:selected").val();
-            var valNewsOrderID = $("#NewsOrderID").val();
-            var valNewsKeywords = $("#NewsKeywords").val();
-            var valNewsLabels = $("#NewsLabels").val();
+            var valNewsTitle = $.jsparams.input("NewsTitle");//$("#NewsTitle").val();
+            var valNewsAbstract = $.jsparams.input("NewsAbstract");//$("#NewsAbstract").val();
+            var valNewsThumbnail = $.jsparams.input("NewsThumbnail");//$("#NewsThumbnail").val();
+            var valNewsCategoryID = $.jsparams.select("NewsCategory");//$("#NewsCategory option:selected").val();
+            var valNewsOrderID = $.jsparams.input("NewsOrderID");//$("#NewsOrderID").val();
+            var valNewsKeywords = $.jsparams.input("NewsKeywords");//$("#NewsKeywords").val();
+            var valNewsLabels = $.jsparams.input("NewsLabels");//$("#NewsLabels").val();
             var valNewsBody = $("#ckeditor").html();
 
             var stringTABONE = valNewsTitle + "_" + valNewsAbstract + "_" + valNewsThumbnail + "_" +
@@ -370,39 +344,17 @@
                 valNewsBody;
             alert(stringTABONE);
 
-            alert(1);
-            $.ajaxAntiForgery({
-                type: "post",
-                data: { CompanyID:@CompanyID,IsInsert:IsInsert,NewsTitle:valNewsTitle,NewsAbstract:valNewsAbstract,
-                    NewsThumbnail:valNewsThumbnail,NewsCategoryID:valNewsCategoryID,NewsOrderID:valNewsOrderID,
-                    NewsKeywords:valNewsKeywords,NewsLabels:valNewsLabels,NewsBody:valNewsBody},
-                url: "/Company/CompanyNewsSave",
-                success: function (data) {
-                    SaveInfo(true, "播报信息");
-                }
-            });
-            alert(1111);
+            //alert(1);
+            
+            var datas={ CompanyID:@CompanyID,IsInsert:IsInsert,NewsTitle:valNewsTitle,NewsAbstract:valNewsAbstract,
+                NewsThumbnail:valNewsThumbnail,NewsCategoryID:valNewsCategoryID,NewsOrderID:valNewsOrderID,
+                NewsKeywords:valNewsKeywords,NewsLabels:valNewsLabels,NewsBody:valNewsBody};
+            ComAjax("/Company/CompanyNewsSave",datas,"播报信息");
+
+            //alert(1111);
         }
     }
 
-    function SaveInfo(IsSuccess, msg) {
-        if (IsSuccess) {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg + ',保存成功.',
-                sticky: false,
-                time: ''
-            });
-        }
-        else {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg + ',保存失败.',
-                sticky: false,
-                time: ''
-            });
-        }
-    }
 </script>
 
 

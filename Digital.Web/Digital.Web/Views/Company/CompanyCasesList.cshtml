@@ -3,8 +3,20 @@
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
-<link href="../DigitalStyle/css/prettyPhoto.css" rel="stylesheet">
-<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+@section PageSpecificJavascriptIncludes{
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link href="../DigitalStyle/css/prettyPhoto.css" rel="stylesheet">
+    <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+
+    <script src="../DigitalStyle/js/jquery.prettyPhoto.js"></script>
+    <script src="../DigitalStyle/js/dropzone.min.js"></script>
+}
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 案例总览 <span>案例信息</span></h2>
@@ -275,24 +287,6 @@
     </div>
 </div>
 
-
-
-<script src="../js/jquery-1.10.2.min.js"></script>
-<script src="../js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/modernizr.min.js"></script>
-<script src="../js/jquery.sparkline.min.js"></script>
-<script src="../js/toggles.min.js"></script>
-<script src="../js/retina.min.js"></script>
-<script src="../js/jquery.cookies.js"></script>
-
-<script src="../js/jquery.prettyPhoto.js"></script>
-
-
-<script src="../js/chosen.jquery.min.js"></script>
-<script src="../js/dropzone.min.js"></script>
-
-<script src="../js/custom.js"></script>
 <script>
     jQuery(document).ready(function () {
         // Chosen Select
