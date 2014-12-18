@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Item Id="1" Name="研发阶段"/>
+  <Item Id="2" Name="待转让"/>
+  <Item Id="3" Name="Status03"/>
+  <Item Id="4" Name="Status04"/>
+  <Item Id="5" Name="Status05"/>
+</Root>

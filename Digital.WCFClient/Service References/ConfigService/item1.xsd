@@ -1083,10 +1083,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTechnologyDomainList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTechnologyDomainListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetTechnologyDomainListResult" nillable="true" type="q83:ArrayOfTechnologyDomainMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDevelopmentStatusList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDevelopmentStatusListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetDevelopmentStatusListResult" nillable="true" type="q84:ArrayOfDevelopmentStatusMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="PatentDisable">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q83:PatentModel" />
+        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q85:PatentModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1100,7 +1124,7 @@
   <xs:element name="PatentTransfer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q84:PatentModel" />
+        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q86:PatentModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1114,28 +1138,28 @@
   <xs:element name="SinglePageInsert">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q85:SinglePageModel" />
+        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q87:SinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SinglePageInsertResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageInsertResult" nillable="true" type="q86:SinglePageModel" />
+        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageInsertResult" nillable="true" type="q88:SinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SinglePageUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q87:SinglePageModel" />
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q89:SinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SinglePageUpdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageUpdateResult" nillable="true" type="q88:SinglePageModel" />
+        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageUpdateResult" nillable="true" type="q90:SinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1149,7 +1173,7 @@
   <xs:element name="SinglePageQueryByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryByIdResult" nillable="true" type="q89:SinglePageModel" />
+        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryByIdResult" nillable="true" type="q91:SinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1163,7 +1187,7 @@
   <xs:element name="SinglePageQueryByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryByNameResult" nillable="true" type="q90:SinglePageModel" />
+        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryByNameResult" nillable="true" type="q92:SinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1203,7 +1227,7 @@
   <xs:element name="SinglePageQueryListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryListResult" nillable="true" type="q91:ArrayOfSinglePageModel" />
+        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryListResult" nillable="true" type="q93:ArrayOfSinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1217,7 +1241,7 @@
   <xs:element name="SinglePageQueryListByCompanyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryListByCompanyResult" nillable="true" type="q92:ArrayOfSinglePageModel" />
+        <xs:element xmlns:q94="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="SinglePageQueryListByCompanyResult" nillable="true" type="q94:ArrayOfSinglePageModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

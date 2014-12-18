@@ -10,9 +10,15 @@
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
-<link href="../DigitalStyle/css/jquery.datatables.css" rel="stylesheet">
-<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
-<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+@section PageSpecificJavascriptIncludes{
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+}
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 播报分类管理 <span>播报中心</span></h2>
@@ -167,53 +173,10 @@
 </div>
 
 
-<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
-<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap.min.js"></script>
-<script src="../DigitalStyle/js/modernizr.min.js"></script>
-<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
-<script src="../DigitalStyle/js/toggles.min.js"></script>
-<script src="../DigitalStyle/js/retina.min.js"></script>
-<script src="../DigitalStyle/js/jquery.cookies.js"></script>
 
-<script src="../DigitalStyle/js/holder.js"></script>
-<script src="../DigitalStyle/js/morris.min.js"></script>
-<script src="../DigitalStyle/js/raphael-2.1.0.min.js"></script>
-
-<script src="../DigitalStyle/js/jquery.datatables.min.js"></script>
-<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
-
-<script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
-<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-<script src="../DigitalStyle/js/JqueryToken.js"></script>
-<script src="../DigitalStyle/js/custom.js"></script>
 
 <script>
     jQuery(document).ready(function () {
-
-        jQuery('#table1').dataTable();
-
-        jQuery('#table2').dataTable({
-            "sPaginationType": "full_numbers"
-        });
-
-        // Chosen Select
-        jQuery("select").chosen({
-            'min-width': '100px',
-            'white-space': 'nowrap',
-            disable_search_threshold: 10
-        });
-
-        // Delete row in a table
-        //jQuery('.delete-row').click(function () {
-        //    var c = confirm("Continue delete?");
-        //    if (c)
-        //        jQuery(this).closest('tr').fadeOut(function () {
-        //            jQuery(this).remove();
-        //        });
-
-        //    return false;
-        //});
 
         // Show aciton upon row hover
         jQuery('.table-hidaction tbody tr').hover(function () {
@@ -254,13 +217,13 @@
                             }
                         }
             //------------------TAB 01 : 播报类别信息
-            var valNewsCategoryOrderID = $("#NewsCategoryOrderID").val();
-            var valNewsCategoryName = $("#NewsCategoryName").val();
-            var valNewsCategoryPicture = $("#NewsCategoryPicture").val();
-            var valNewsCategoryContent = $("#NewsCategoryContent").val();
+            var valNewsCategoryOrderID = $.jsparams.input("NewsCategoryOrderID");
+            var valNewsCategoryName = $.jsparams.input("NewsCategoryName");
+            var valNewsCategoryPicture = $.jsparams.input("NewsCategoryPicture");
+            var valNewsCategoryContent = $.jsparams.input("NewsCategoryContent");
             var valNewsCategoryParentID = 0;
 
-            var valNewsCategoryID=$("#NewsCategoryID").val();
+            var valNewsCategoryID=$.jsparams.input("NewsCategoryID");
             NewsCategoryID=parseInt(valNewsCategoryID);
 
             if (NewsCategoryID>0) {
@@ -273,6 +236,10 @@
             alert(1);
             alert("NewsCategoryID:"+NewsCategoryID+" IsInsert:"+IsInsert);
 
+            @*var datas={ CategoryID:NewsCategoryID,CompanyID:@CompanyID,IsInsert:IsInsert,NewsCategoryName:valNewsCategoryName,NewsCategoryPicture:valNewsCategoryPicture,
+                NewsCategoryContent:valNewsCategoryContent,NewsCategoryParentID:valNewsCategoryParentID,NewsCategoryOrderID:valNewsCategoryOrderID};
+            ComAjax("/Company/CompanyNewsCategoryEdit",datas,"播报分类信息");*@
+
             $.ajaxAntiForgery({
                 type: "post",
                 data:{ CategoryID:NewsCategoryID,CompanyID:@CompanyID,IsInsert:IsInsert,NewsCategoryName:valNewsCategoryName,NewsCategoryPicture:valNewsCategoryPicture,
@@ -283,11 +250,12 @@
 
                     // 1. after success , need do close DIV Display
                     // 2. refresh current page
-                    
+
                     SaveInfo(true,"播报分类信息");
                     //$('#progressWizard').bootstrapWizard('show',1);
                 }
             })
+
             alert(1111);
         }
     }
@@ -370,25 +338,4 @@
         }
     }
 
-    function SaveInfo(IsSuccess,msg)
-    {
-        if(IsSuccess)
-        {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg+',保存成功.',
-                sticky: false,
-                time: ''
-            });
-        }
-        else
-        {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg+',保存失败.',
-                sticky: false,
-                time: ''
-            });
-        }
-    }
 </script>

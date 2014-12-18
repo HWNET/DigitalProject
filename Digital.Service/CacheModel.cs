@@ -50,7 +50,11 @@ namespace Digital.Service
 
         public List<Digital.Contact.Models.NewsCategoryModel> NewsCategoryModelList { get; set; }
         public List<Digital.Contact.Models.NewsModel> NewsModelList { get; set; }
+
+        public List<TechnologyDomainMode> TechnologyDomainModelist { get; set; }
+        public List<DevelopmentStatusMode> DevelopmentStatusModelist { get; set; }
         public List<Digital.Contact.Models.PatentModel> PatentModelList { get; set; }
+        
         public List<Digital.Contact.Models.SinglePageModel> SinglePageModelList { get; set; }
 
     }

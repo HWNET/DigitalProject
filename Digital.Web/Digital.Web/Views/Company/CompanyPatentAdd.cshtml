@@ -9,16 +9,23 @@
     ViewBag.Title = "添加专利";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
+@section PageSpecificJavascriptIncludes{
 
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
-<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
-<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
 
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+    <!-- CKEditor -->
+    <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
+    <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+    <!-- commom form js -->
+    <script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
+}
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 添加专利 <span>专利中心</span></h2>
     <div class="breadcrumb-wrapper">
@@ -105,8 +112,8 @@
                             <label class="col-sm-3 control-label">技术领域</label>
 
                             <div class="col-sm-4 ">
-                                <select class="form-control chosen-select" data-placeholder="选择分类...">
-                                    <option value="United States">X86工控板</option>
+                                <select id="TechnologyDomain" class="form-control chosen-select" data-placeholder="选择分类...">
+                                    <option value="0"> --请选择-- </option>
                                 </select>
                             </div>
 
@@ -116,9 +123,8 @@
                             <label class="col-sm-3 control-label">开发状态</label>
 
                             <div class="col-sm-4 ">
-                                <select class="form-control chosen-select" data-placeholder="选择状态...">
-                                    <option value="United States">研发阶段</option>
-                                    <option value="United States">待转让</option>
+                                <select id="DevelopmentStatus" class="form-control chosen-select" data-placeholder="选择状态...">
+                                    <option value="0"> --请选择-- </option>
                                 </select>
                             </div>
 
@@ -142,7 +148,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="checkbox">专利简介</label>
                             <div class="col-sm-6">
-                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.PatentIntro</textarea>
+                                <textarea id="PatentIntro" name="PatentIntro" placeholder="请在此输入专利简介" class="form-control" rows="10">@Model.PatentIntro</textarea>
                             </div>
                         </div>
                     </form>
@@ -157,51 +163,20 @@
                         </div>
                     </div>
                 </div>
-
-
             </div><!-- panel -->
         </div>
-
-
-
     </div>
 </div>
 
-
-<!-- common js -->
-<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
-<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../DigitalStyle/js/jquery-ui-1.10.3.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap.min.js"></script>
-<script src="../DigitalStyle/js/modernizr.min.js"></script>
-<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
-<script src="../DigitalStyle/js/toggles.min.js"></script>
-<script src="../DigitalStyle/js/retina.min.js"></script>
-<script src="../DigitalStyle/js/jquery.cookies.js"></script>
-
-<!-- CKEditor -->
-<script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
-<script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
-<script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
-
-<!-- commom form js -->
-<script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
-<script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
-<script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
-<script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
-<script src="../DigitalStyle/js/jquery.mousewheel.js"></script>
-<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
-<script src="../DigitalStyle/js/dropzone.min.js"></script>
-<script src="../DigitalStyle/js/colorpicker.js"></script>
-
-<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-<script src="../DigitalStyle/js/JqueryToken.js"></script>
-<script src="js/custom.js"></script>
-
 <script>
     jQuery(document).ready(function () {
+
+        //select option : TechnologyDomain
+        var TechnologyDomainjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<TechnologyDomainMode>)ViewBag.TechnologyDomainList))
+        DropOption(TechnologyDomainjsons,$("#TechnologyDomain"),@Model.PatentTechnologyDomain);
+        //select option : DevelopmentStatus
+        var DevelopmentStatusjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<DevelopmentStatusMode>)ViewBag.DevelopmentStatusList))
+        DropOption(DevelopmentStatusjsons,$("#DevelopmentStatus"),@Model.PatentDevelopmentStatus);
 
         // Chosen Select
         jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
@@ -212,32 +187,6 @@
         // Textarea Autogrow
         jQuery('#PatentAbstract').autogrow();
 
-        // Color Picker
-        if (jQuery('#colorpicker').length > 0) {
-            jQuery('#colorSelector').ColorPicker({
-                onShow: function (colpkr) {
-                    jQuery(colpkr).fadeIn(500);
-                    return false;
-                },
-                onHide: function (colpkr) {
-                    jQuery(colpkr).fadeOut(500);
-                    return false;
-                },
-                onChange: function (hsb, hex, rgb) {
-                    jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
-                    jQuery('#colorpicker').val('#' + hex);
-                }
-            });
-        }
-
-        // Color Picker Flat Mode
-        jQuery('#colorpickerholder').ColorPicker({
-            flat: true,
-            onChange: function (hsb, hex, rgb) {
-                jQuery('#colorpicker3').val('#' + hex);
-            }
-        });
-
         // Date Picker
         jQuery('#datepicker').datepicker();
 
@@ -247,20 +196,6 @@
             numberOfMonths: 3,
             showButtonPanel: true
         });
-
-        // Spinner
-        var spinner = jQuery('#spinner').spinner();
-        spinner.spinner('value', 0);
-
-        // Input Masks
-        jQuery("#date").mask("99/99/9999");
-        jQuery("#phone").mask("(999) 999-9999");
-        jQuery("#ssn").mask("999-99-9999");
-
-        // Time Picker
-        jQuery('#timepicker').timepicker({ defaultTIme: false });
-        jQuery('#timepicker2').timepicker({ showMeridian: false });
-        jQuery('#timepicker3').timepicker({ minuteStep: 15 });
 
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
@@ -278,12 +213,12 @@
     jQuery(document).ready(function () {
 
         // HTML5 WYSIWYG Editor
-        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
+        //jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
 
         // CKEditor
-        jQuery('#ckeditor').ckeditor();
+        jQuery('textarea#PatentIntro').ckeditor();
 
-        jQuery('#inlineedit1, #inlineedit2').ckeditor();
+        //jQuery('#inlineedit1, #inlineedit2').ckeditor();
 
         // Uncomment the following code to test the "Timeout Loading Method".
         // CKEDITOR.loadFullCoreTimeout = 5;
@@ -345,16 +280,16 @@
                 }
             }
             //------------------TAB 01 : 专利信息
-            var valPatentNumber = $("#PatentNumber").val();
-            var valPatentName = $("#PatentName").val();
-            var valPatentAbstract = $("#PatentAbstract").val();
-            var valPatentCerificate = $("#PatentCerificate").val();
-            var valPatentDate = $("#PatentDate").val();
-            var valPatentTechnologyDomain = "TechnologyDomain01"; //select option:selected
-            var valPatentDevelopmentStatus = "Status01";//select option:selected
-            var valPatentOrderID = $("#PatentOrderID").val();
-            var valPatentLabels = $("#PatentLabels").val();
-            var valPatentIntro = $("#ckeditor").val();
+            var valPatentNumber = $.jsparams.input("PatentNumber");
+            var valPatentName = $.jsparams.input("PatentName");
+            var valPatentAbstract = $.jsparams.input("PatentAbstract");
+            var valPatentCerificate = $.jsparams.input("PatentCerificate");
+            var valPatentDate = $.jsparams.input("PatentDate");
+            var valPatentTechnologyDomain = $.jsparams.select("TechnologyDomain");
+            var valPatentDevelopmentStatus = $.jsparams.select("DevelopmentStatus");
+            var valPatentOrderID = $.jsparams.input("PatentOrderID");
+            var valPatentLabels = $.jsparams.input("PatentLabels");
+            var valPatentIntro = $("#PatentIntro").val();
 
             var stringTABONE = valPatentNumber + "_" + valPatentName + "_" + valPatentAbstract + "_" +
                 valPatentCerificate + "_" + valPatentDate + "_" + valPatentTechnologyDomain + "_" +
@@ -362,40 +297,15 @@
                 valPatentIntro;
             alert(stringTABONE);
 
-            alert(1);
-            $.ajaxAntiForgery({
-                type: "post",
-                data: { CompanyID:@CompanyID,IsInsert:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,
-                    PatentAbstract:valPatentAbstract,PatentCerificate:valPatentCerificate,PatentDate:valPatentDate,
-                    PatentTechnologyDomain:valPatentTechnologyDomain,PatentDevelopmentStatus:valPatentDevelopmentStatus,
-                    PatentOrderID:valPatentOrderID,PatentLabels:valPatentLabels,PatentIntro:valPatentIntro},
-                url: "/Company/CompanyPatentSave",
-                success: function (data) {
-                    SaveInfo(true, "专利信息");
-                }
-            });
-            alert(1111);
+            var datas= { CompanyID:@CompanyID,IsInsert:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,
+                PatentAbstract:valPatentAbstract,PatentCerificate:valPatentCerificate,PatentDate:valPatentDate,
+                PatentTechnologyDomain:valPatentTechnologyDomain,PatentDevelopmentStatus:valPatentDevelopmentStatus,
+                PatentOrderID:valPatentOrderID,PatentLabels:valPatentLabels,PatentIntro:valPatentIntro};
+            ComAjax("/Company/CompanyPatentSave",datas,"专利信息");
+
         }
     }
 
-    function SaveInfo(IsSuccess, msg) {
-        if (IsSuccess) {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg + ',保存成功.',
-                sticky: false,
-                time: ''
-            });
-        }
-        else {
-            jQuery.gritter.add({
-                title: '系统提示!',
-                text: msg + ',保存失败.',
-                sticky: false,
-                time: ''
-            });
-        }
-    }
 </script>
 
 

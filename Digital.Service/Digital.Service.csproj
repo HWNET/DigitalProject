@@ -104,6 +104,12 @@
     <Content Include="Config\EquipmentIntro.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\PatentDevelopStatus.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\PatentTechnologyDomain.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\SystemCertification.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

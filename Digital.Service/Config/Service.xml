@@ -24,6 +24,8 @@
     <Item Name="QualityAssurance" Model="QualityAssuranceMode" ref="">1</Item>
     <Item Name="Year" Model="CompanyYearEstablishedMode" ref="">1</Item>
     <Item Name="AssetsUnit" Model="CompanyRegisteredAssetsUnitMode" ref="">1</Item>
+    <Item Name="PatentTechnologyDomain" Model="TechnologyDomainMode" ref="">1</Item>
+    <Item Name="PatentDevelopStatus" Model="DevelopmentStatusMode" ref="">0</Item>
     <Item Name="" Model="" ref="">0</Item>
   </XmlFile>
 </Root>

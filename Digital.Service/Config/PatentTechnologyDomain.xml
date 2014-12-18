@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Item Id="1" Name="domain01"/>
+  <Item Id="2" Name="domain02"/>
+  <Item Id="3" Name="domain03"/>
+  <Item Id="4" Name="domain04"/>
+  <Item Id="5" Name="domain05"/>
+</Root>

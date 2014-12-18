@@ -18,8 +18,8 @@ namespace Digital.Contact.Models
         public string PatentAbstract { get; set; } //专利概述
         public string PatentCerificate { get; set; } //专利证书
         public string PatentDate { get; set; } //专利日期
-        public string PatentTechnologyDomain { get; set; } //技术领域
-        public string PatentDevelopmentStatus { get; set; } //开发状态
+        public int PatentTechnologyDomain { get; set; } //技术领域
+        public int PatentDevelopmentStatus { get; set; } //开发状态
         public int PatentOrderID { get; set; } //排序值
         public string PatentLabels { get; set; } //标签
         public string PatentIntro { get; set; } //专利简介

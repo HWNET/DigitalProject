@@ -443,14 +443,14 @@
       <xs:element minOccurs="0" name="PatentAbstract" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PatentCerificate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PatentDate" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PatentDevelopmentStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentDevelopmentStatus" type="xs:int" />
       <xs:element minOccurs="0" name="PatentID" type="xs:int" />
       <xs:element minOccurs="0" name="PatentIntro" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PatentLabels" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PatentName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PatentNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PatentOrderID" type="xs:int" />
-      <xs:element minOccurs="0" name="PatentTechnologyDomain" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatentTechnologyDomain" type="xs:int" />
       <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -679,4 +679,32 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCompanyRegisteredAssetsUnitMode" nillable="true" type="tns:ArrayOfCompanyRegisteredAssetsUnitMode" />
+  <xs:complexType name="ArrayOfTechnologyDomainMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TechnologyDomainMode" nillable="true" type="tns:TechnologyDomainMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTechnologyDomainMode" nillable="true" type="tns:ArrayOfTechnologyDomainMode" />
+  <xs:complexType name="TechnologyDomainMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TechnologyDomainMode" nillable="true" type="tns:TechnologyDomainMode" />
+  <xs:complexType name="ArrayOfDevelopmentStatusMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DevelopmentStatusMode" nillable="true" type="tns:DevelopmentStatusMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDevelopmentStatusMode" nillable="true" type="tns:ArrayOfDevelopmentStatusMode" />
+  <xs:complexType name="DevelopmentStatusMode">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseNameValueMode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DevelopmentStatusMode" nillable="true" type="tns:DevelopmentStatusMode" />
 </xs:schema>

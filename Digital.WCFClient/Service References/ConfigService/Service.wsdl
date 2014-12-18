@@ -565,6 +565,18 @@
   <wsdl:message name="IPatentService_PatentQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:PatentQueryListByCompanyResponse" />
   </wsdl:message>
+  <wsdl:message name="IPatentService_GetTechnologyDomainList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTechnologyDomainList" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_GetTechnologyDomainList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTechnologyDomainListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_GetDevelopmentStatusList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDevelopmentStatusList" />
+  </wsdl:message>
+  <wsdl:message name="IPatentService_GetDevelopmentStatusList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDevelopmentStatusListResponse" />
+  </wsdl:message>
   <wsdl:message name="IPatentService_PatentDisable_InputMessage">
     <wsdl:part name="parameters" element="tns:PatentDisable" />
   </wsdl:message>
@@ -963,6 +975,14 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentQueryListByCompany">
       <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentQueryListByCompany" message="tns:IPatentService_PatentQueryListByCompany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/PatentQueryListByCompanyResponse" message="tns:IPatentService_PatentQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTechnologyDomainList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/GetTechnologyDomainList" message="tns:IPatentService_GetTechnologyDomainList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/GetTechnologyDomainListResponse" message="tns:IPatentService_GetTechnologyDomainList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetDevelopmentStatusList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/GetDevelopmentStatusList" message="tns:IPatentService_GetDevelopmentStatusList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPatentService/GetDevelopmentStatusListResponse" message="tns:IPatentService_GetDevelopmentStatusList_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PatentDisable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPatentService/PatentDisable" message="tns:IPatentService_PatentDisable_InputMessage" />
@@ -1760,6 +1780,24 @@
     </wsdl:operation>
     <wsdl:operation name="PatentQueryListByCompany">
       <soap12:operation soapAction="http://tempuri.org/IPatentService/PatentQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyDomainList">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/GetTechnologyDomainList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDevelopmentStatusList">
+      <soap12:operation soapAction="http://tempuri.org/IPatentService/GetDevelopmentStatusList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

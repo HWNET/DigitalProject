@@ -94,6 +94,9 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CompanyYearEstablishedMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.DevelopmentStatusMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.EquipmentIntroMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -140,6 +143,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.SkillsModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.TechnologyDomainMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.UsersInfoModel.datasource">

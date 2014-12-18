@@ -140,5 +140,36 @@ namespace Digital.Service.Implements
         {
             throw new NotImplementedException();
         }
+
+        #region GetTechnologyDomainList
+        public List<TechnologyDomainMode> GetTechnologyDomainList()
+        {
+            var modes = GenericList.CacheModelObj.TechnologyDomainModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region GetDevelopmentStatusList
+        public List<DevelopmentStatusMode> GetDevelopmentStatusList()
+        {
+            var modes = GenericList.CacheModelObj.DevelopmentStatusModelist;
+            if (modes != null)
+            {
+                return modes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
+
     }
 }

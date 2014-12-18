@@ -29,6 +29,11 @@ namespace Digital.Service.Interfaces
         List<PatentModel> PatentQueryListByCompany(int CompanyId);
 
         [OperationContract]
+        List<TechnologyDomainMode> GetTechnologyDomainList();
+        [OperationContract]
+        List<DevelopmentStatusMode> GetDevelopmentStatusList();
+
+        [OperationContract]
         bool PatentDisable(PatentModel Model); //专利停用 
         [OperationContract]
         bool PatentTransfer(PatentModel Model); //专利转让

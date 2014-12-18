@@ -2958,7 +2958,7 @@ namespace Digital.WCFClient.ConfigService {
         private string PatentDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PatentDevelopmentStatusField;
+        private int PatentDevelopmentStatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PatentIDField;
@@ -2979,7 +2979,7 @@ namespace Digital.WCFClient.ConfigService {
         private int PatentOrderIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PatentTechnologyDomainField;
+        private int PatentTechnologyDomainField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UpdateStatusField;
@@ -3073,12 +3073,12 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PatentDevelopmentStatus {
+        public int PatentDevelopmentStatus {
             get {
                 return this.PatentDevelopmentStatusField;
             }
             set {
-                if ((object.ReferenceEquals(this.PatentDevelopmentStatusField, value) != true)) {
+                if ((this.PatentDevelopmentStatusField.Equals(value) != true)) {
                     this.PatentDevelopmentStatusField = value;
                     this.RaisePropertyChanged("PatentDevelopmentStatus");
                 }
@@ -3164,12 +3164,12 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PatentTechnologyDomain {
+        public int PatentTechnologyDomain {
             get {
                 return this.PatentTechnologyDomainField;
             }
             set {
-                if ((object.ReferenceEquals(this.PatentTechnologyDomainField, value) != true)) {
+                if ((this.PatentTechnologyDomainField.Equals(value) != true)) {
                     this.PatentTechnologyDomainField = value;
                     this.RaisePropertyChanged("PatentTechnologyDomain");
                 }
@@ -3396,6 +3396,8 @@ namespace Digital.WCFClient.ConfigService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.QualityAssuranceMode))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.ServicesDomainMode))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.CompanyYearEstablishedMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.TechnologyDomainMode))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.DevelopmentStatusMode))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Digital.WCFClient.ConfigService.AnnualBusinessVolumeMode))]
     public partial class BaseNameValueMode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -3459,6 +3461,20 @@ namespace Digital.WCFClient.ConfigService {
     [System.Runtime.Serialization.DataContractAttribute(Name="CompanyYearEstablishedMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
     [System.SerializableAttribute()]
     public partial class CompanyYearEstablishedMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TechnologyDomainMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class TechnologyDomainMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DevelopmentStatusMode", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class DevelopmentStatusMode : Digital.WCFClient.ConfigService.BaseNameValueMode {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -5349,6 +5365,18 @@ namespace Digital.WCFClient.ConfigService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentQueryListByCompany", ReplyAction="http://tempuri.org/IPatentService/PatentQueryListByCompanyResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel>> PatentQueryListByCompanyAsync(int CompanyId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/GetTechnologyDomainList", ReplyAction="http://tempuri.org/IPatentService/GetTechnologyDomainListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.TechnologyDomainMode> GetTechnologyDomainList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/GetTechnologyDomainList", ReplyAction="http://tempuri.org/IPatentService/GetTechnologyDomainListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.TechnologyDomainMode>> GetTechnologyDomainListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/GetDevelopmentStatusList", ReplyAction="http://tempuri.org/IPatentService/GetDevelopmentStatusListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.DevelopmentStatusMode> GetDevelopmentStatusList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/GetDevelopmentStatusList", ReplyAction="http://tempuri.org/IPatentService/GetDevelopmentStatusListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.DevelopmentStatusMode>> GetDevelopmentStatusListAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPatentService/PatentDisable", ReplyAction="http://tempuri.org/IPatentService/PatentDisableResponse")]
         bool PatentDisable(Digital.WCFClient.ConfigService.PatentModel Model);
         
@@ -5451,6 +5479,22 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PatentModel>> PatentQueryListByCompanyAsync(int CompanyId) {
             return base.Channel.PatentQueryListByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.TechnologyDomainMode> GetTechnologyDomainList() {
+            return base.Channel.GetTechnologyDomainList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.TechnologyDomainMode>> GetTechnologyDomainListAsync() {
+            return base.Channel.GetTechnologyDomainListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.DevelopmentStatusMode> GetDevelopmentStatusList() {
+            return base.Channel.GetDevelopmentStatusList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.DevelopmentStatusMode>> GetDevelopmentStatusListAsync() {
+            return base.Channel.GetDevelopmentStatusListAsync();
         }
         
         public bool PatentDisable(Digital.WCFClient.ConfigService.PatentModel Model) {

@@ -82,4 +82,9 @@ namespace Digital.Contact.Models
         public string Value { get; set; }
     }
 
+    //------------------For Company Patent UI Modes
+    //for drop down TechnologyDomain
+    public class TechnologyDomainMode : BaseNameValueMode { }
+    //for drop down DevelopmentStatus
+    public class DevelopmentStatusMode : BaseNameValueMode { }
 }

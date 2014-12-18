@@ -586,6 +586,7 @@ namespace Digital.Web.Controllers
         /// 添加企业播报
         /// </summary>
         /// <returns></returns>
+        /// 
         public ActionResult CompanyNewsAdd()
         {
             ViewBag.MenuModel = base.GetMenu(163);
@@ -622,6 +623,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult CompanyNewsSave(int CompanyID, int IsInsert, string NewsTitle, string NewsAbstract,
             string NewsThumbnail, int NewsCategoryID, int NewsOrderID, string NewsKeywords, string NewsLabels,
             string NewsBody)
@@ -901,8 +903,8 @@ namespace Digital.Web.Controllers
                 PatentAbstract = "PatentAbstract0000",
                 PatentCerificate = "PatentCerificate0000",
                 PatentDate=DateTime.Now.ToShortDateString(),
-                PatentTechnologyDomain = "PatentTechnologyDomain0000",
-                PatentDevelopmentStatus = "PatentDevelopmentStatus0000",
+                PatentTechnologyDomain = 0,
+                PatentDevelopmentStatus = 0,
                 PatentOrderID = 0,
                 PatentLabels = "PatentLabels0000",
                 PatentIntro = "PatentIntro0000",
@@ -910,6 +912,11 @@ namespace Digital.Web.Controllers
                 IsTransferred=false,
                 CompanyID=0,
             };
+
+            var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+            ViewBag.TechnologyDomainList = client.GetTechnologyDomainList();
+            ViewBag.DevelopmentStatusList = client.GetDevelopmentStatusList();
+            client.Close();
 
             return View(PatentModel);
         }
@@ -919,6 +926,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult CompanyPatentSave(int CompanyID, int IsInsert, string PatentNumber, string PatentName,
             string PatentAbstract, string PatentCerificate, string PatentDate, string PatentTechnologyDomain,
             string PatentDevelopmentStatus, int PatentOrderID, string PatentLabels, string PatentIntro)
@@ -936,8 +944,8 @@ namespace Digital.Web.Controllers
                     PatentAbstract = PatentAbstract,
                     PatentCerificate = PatentCerificate,
                     PatentDate = PatentDate,
-                    PatentTechnologyDomain = PatentTechnologyDomain,
-                    PatentDevelopmentStatus = PatentDevelopmentStatus,
+                    PatentTechnologyDomain = Converter.ToInt(PatentTechnologyDomain),
+                    PatentDevelopmentStatus = Converter.ToInt(PatentDevelopmentStatus),
                     PatentOrderID = PatentOrderID,
                     PatentLabels = PatentLabels,
                     PatentIntro = PatentIntro,
