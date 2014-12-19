@@ -49,9 +49,9 @@ namespace Digital.Contact.Models
         //[Display(Name = "主营产品")]
         public string PrimaryProduct { get; set; } //主营产品,5个input value 拼接
 
-        public int PrimarySalesArea { get; set; } //主要销售区域
+        public string PrimarySalesArea { get; set; } //主要销售区域
         [NotMapped]
-        public PrimarySalesAreaMode PrimarySalesAreaMode { get; set; }
+        public List<PrimarySalesAreaMode> PrimarySalesAreaMode { get; set; }
 
         public int CompanyBusinessProvince { get; set; } //经营地址,省份
         [NotMapped]
@@ -69,19 +69,19 @@ namespace Digital.Contact.Models
         [NotMapped]
         public ProductionFormMode ProductionFormMode { get; set; }
 
-        public int ServicesDomain { get; set; } //服务领域
+        public string ServicesDomain { get; set; } //服务领域
         [NotMapped]
         public ServicesDomainMode ServicesDomainMode { get; set; }
 
-        public int ProcessingMethod { get; set; } //加工方式
+        public string ProcessingMethod { get; set; } //加工方式
         [NotMapped]
         public ProcessingMethodMode ProcessingMethodMode { get; set; }
 
-        public int ProcessingCraft { get; set; } //加工工艺
+        public string ProcessingCraft { get; set; } //加工工艺
         [NotMapped]
         public ProcessingCraftMode ProcessingCraftMode { get; set; }
 
-        public int EquipmentIntro { get; set; } //设备介绍
+        public string EquipmentIntro { get; set; } //设备介绍
         [NotMapped]
         public EquipmentIntroMode EquipmentIntroMode { get; set; }
 
@@ -102,11 +102,11 @@ namespace Digital.Contact.Models
         [NotMapped]
         public AnnualExportsVolumeMode AnnualExportsVolumeMode { get; set; }
 
-        public int ManagementSystemCertification { get; set; } //管理体系认证
+        public string ManagementSystemCertification { get; set; } //管理体系认证
         [NotMapped]
         public ManagementSystemCertificationMode ManagementSystemCertificationMode { get; set; }
 
-        public int ProductQualityCertification { get; set; } //产品质量认证
+        public string ProductQualityCertification { get; set; } //产品质量认证
         [NotMapped]
         public ProductQualityCertificationMode ProductQualityCertificationMode { get; set; }
 

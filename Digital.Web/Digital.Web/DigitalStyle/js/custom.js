@@ -43,7 +43,13 @@ function DropOptionDefault(SelectedId)
 function DropOption(objson, selectobj, SelectedId)
 {
     var obj = eval(objson);
-    SelectedId = SelectedId > 0 ? SelectedId : 1;
+    
+
+    var SelectIds = SelectedId.toString().split(",");
+    if (SelectIds.length == 1) {
+        
+        SelectIds = SelectedId > 0 ? SelectedId : 1;
+    }
     $(obj).each(function (index) {
         var val = obj[index];
         if (val.Id == -1 && val.Name == "LINE") {
@@ -57,11 +63,21 @@ function DropOption(objson, selectobj, SelectedId)
         }
         else
         {
+           
             var HtmlSelect = "";
-            if (SelectedId == val.Id)
+           
+            if ($.inArray(val.Id.toString(), SelectIds) != -1)
             {
                 HtmlSelect = "selected"
             }
+            else if (val.Id == SelectIds)
+            {
+                HtmlSelect = "selected"
+            }
+            //if (SelectIds == val.Id)
+            //{
+            //    HtmlSelect = "selected"
+            //}
             selectobj.append("<option value='" + val.Id + "' " + HtmlSelect + ">" + val.Name + "</option>");
     }
        
@@ -240,9 +256,9 @@ jQuery(document).ready(function() {
    
    function adjustmainpanelheight() {
       // Adjust mainpanel height
-      var docHeight = jQuery(document).height();
-      if(docHeight > jQuery('.mainpanel').height())
-         jQuery('.mainpanel').height(docHeight);
+      //var docHeight = jQuery(document).height();
+      //if(docHeight > jQuery('.mainpanel').height())
+      //   jQuery('.mainpanel').height(docHeight);
    }
    adjustmainpanelheight();
    

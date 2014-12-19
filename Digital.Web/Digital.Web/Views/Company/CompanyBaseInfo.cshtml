@@ -132,7 +132,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <select id="PrimaryBusiness" class="form-control">
                                                     <option value="0"> -- 请选择 --</option>
                                                 </select>
@@ -172,13 +172,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">* 经营地址</label>
                                         <div class="col-sm-6">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <select id="BusinessProvince" class="form-control">
                                                     <option value="0"> --请选择-- </option>
                                                 </select>
                                             </div>
 
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <select id="BusinessCity" class="form-control">
                                                     <option value="0"> --请选择-- </option>
                                                 </select>
@@ -385,12 +385,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 企业注册地</label>
                                         <div class="col-sm-6">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <select id="RegisteredProvince" class="form-control">
                                                     <option value="0"> --请选择-- </option>
                                                 </select>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-4">
                                                 <select id="RegisteredCity" class="form-control">
                                                     <option value="0"> --请选择-- </option>
                                                 </select>
@@ -467,23 +467,23 @@
 
         //select option : PrimarySalesArea , multiple
         var PrimarySalesAreajsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<PrimarySalesAreaMode>)ViewBag.PrimarySalesAreaList))
-        DropOption(PrimarySalesAreajsons,$("#PrimarySalesArea"),@Model.PrimarySalesArea);
+        DropOption(PrimarySalesAreajsons,$("#PrimarySalesArea"),@Html.MutiDropDownSelectIsNull(Model.PrimarySalesArea));
 
         //select option : ServicesDomain , multiple
         var ServicesDomainjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ServicesDomainMode>)ViewBag.ServicesDomainList))
-        DropOption(ServicesDomainjsons,$("#ServicesDomain"),@Model.ServicesDomain);
+        DropOption(ServicesDomainjsons,$("#ServicesDomain"),@Html.MutiDropDownSelectIsNull(Model.ServicesDomain));
 
         //select option : ProcessingMethod , multiple
         var ProcessingMethodjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProcessingMethodMode>)ViewBag.ProcessingMethodList))
-        DropOption(ProcessingMethodjsons,$("#ProcessingMethod"),@Model.ProcessingMethod);
+        DropOption(ProcessingMethodjsons,$("#ProcessingMethod"),@Html.MutiDropDownSelectIsNull(Model.ProcessingMethod));
 
         //select option : ProcessingCraft , multiple
         var ProcessingCraftjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProcessingCraftMode>)ViewBag.ProcessingCraftList))
-        DropOption(ProcessingCraftjsons,$("#ProcessingCraft"),@Model.ProcessingCraft);
+        DropOption(ProcessingCraftjsons,$("#ProcessingCraft"),@Html.MutiDropDownSelectIsNull(Model.ProcessingCraft));
 
         //select option : EquipmentIntro , multiple
         var EquipmentIntrojsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<EquipmentIntroMode>)ViewBag.EquipmentIntroList))
-        DropOption(EquipmentIntrojsons,$("#EquipmentIntro"),@Model.EquipmentIntro);
+        DropOption(EquipmentIntrojsons,$("#EquipmentIntro"),@Html.MutiDropDownSelectIsNull(Model.EquipmentIntro));
 
         //select option : ResearchDepartMembers
         var ResearchDepartMembersjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<CompanyMemberMode>)ViewBag.CompanyMemberList))
@@ -503,11 +503,11 @@
 
         //select option : ManagementSystemCertification , multiple
         var ManagementSystemCertificationjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ManagementSystemCertificationMode>)ViewBag.ManagementSystemCertificationList))
-        DropOption(ManagementSystemCertificationjsons,$("#ManagementSystemCertification"),@Model.ManagementSystemCertification);
+        DropOption(ManagementSystemCertificationjsons,$("#ManagementSystemCertification"),@Html.MutiDropDownSelectIsNull(Model.ManagementSystemCertification));
 
         //select option : ProductQualityCertification , multiple
         var ProductQualityCertificationjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<ProductQualityCertificationMode>)ViewBag.ProductQualityCertificationList))
-        DropOption(ProductQualityCertificationjsons,$("#ProductQualityCertification"),@Model.ProductQualityCertification);
+        DropOption(ProductQualityCertificationjsons,$("#ProductQualityCertification"),@Html.MutiDropDownSelectIsNull(Model.ProductQualityCertification));
 
         //radio group : radioQualityAssurance
         var radioQualityAssurancejsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<QualityAssuranceMode>)ViewBag.QualityAssuranceList))
@@ -581,25 +581,9 @@
                 var $current = index + 1;
                 var $percent = ($current / $total) * 100;
                 jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
-
+                jQuery('#progressWizard').find('.next').attr('style','display:none');
+                jQuery('#progressWizard').find('.previous').attr('style','display:none');
                 $("#BtnSave").attr('style','display:block');
-
-                if (index==2) {
-                    jQuery('#progressWizard').find('.next').attr('style','display:none');
-                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
-                }
-                else if(index==0)
-                {
-                    //$("#BtnSave").attr('style','display:none');
-                    jQuery('#progressWizard').find('.previous').attr('style','display:none');
-                    jQuery('#progressWizard').find('.next').attr('style','display:block');
-                }
-                else
-                {
-                    //$("#BtnSave").attr('style','display:none');
-                    jQuery('#progressWizard').find('.previous').attr('style','display:block');
-                    jQuery('#progressWizard').find('.next').attr('style','display:block');
-                }
 
             }
         });
@@ -675,12 +659,6 @@
             var valBusinessCity=$.jsparams.select("BusinessCity");//$("#BusinessCity option:selected").val();
             var valCompanyIntro=$.jsparams.input("CompanyIntro");//$("#CompanyIntro").val();
 
-            var stringTABONE=valCompanyName+"_"+valCompanyRegisteredNO+"_"+valCompanyTypeNO+"_"+valCompanyMembers+"_"+valCompanyBusinessModel+"_"+
-                valIsProvideOEM+"_"+valPrimaryBusinessCategory+"_"+valPrimaryBusiness+"_"+
-                valPrimaryProduct+"_"+valPrimarySalesArea+"_"+valBusinessProvince+"_"+
-                valBusinessCity+"_"+valCompanyIntro;
-            window.alert(stringTABONE);
-
             //-----------------TAB 02 : 生产能力
             var valProductionForm=$.jsparams.select("ProductionForm");//$("#ProductionForm option:selected").val();
             //---------------ServicesDomain
@@ -708,11 +686,6 @@
             //-------------PrimaryEquipments 1,,,,5
             var valPrimaryEquipments=$.jsparams.input_multiple("PrimaryEquipments");
 
-            var stringTABTWO=valProductionForm+"_"+valServicesDomain+"_"+valProcessingMethod+"_"+valProcessingCraft+"_"+
-                valEquipmentIntro+"_"+valResearchDepartMembers+"_"+valCapacityIntro+"_"+valCapacityIntroUnit+"_"+
-                valAnnualBusinessVolume+"_"+valAnnualExportsVolume+"_"+valManagementSystemCertification+"_"+
-                valProductQualityCertification+"_"+valQualityAssurance+"_"+valFactoryArea+"_"+valPrimaryEquipments;
-            window.alert(stringTABTWO);
 
             //-----------------TAB 03 : 更多信息
             var valCompanyYearEstablished=$.jsparams.select("CompanyYearEstablished");//$("#CompanyYearEstablished option:selected").val();
@@ -725,13 +698,12 @@
             var valCompanyBankDeposit=$.jsparams.input("CompanyBankDeposit");//$('input[id="CompanyBankDeposit"]').val();
             var valCompanyBankAccount=$.jsparams.input("CompanyBankAccount");//$('input[id="CompanyBankAccount"]').val();
 
-            var stringTABTHREE=valCompanyYearEstablished+"_"+valCompanyWebsite+"_"+valCompanyRegisteredAssets+"_"+
-                valCompanyRegisteredAssetsUnit+"_"+valCompanyRegisteredProvince+"_"+valCompanyRegisteredCity+"_"+
-                valCompanyCorporateRepresentative+"_"+valCompanyBankDeposit+"_"+valCompanyBankAccount;
-            window.alert(stringTABTHREE);
+
             //......
             if(TabIndex==0){
                 //alert(1);
+                alert(valPrimaryBusinessCategory);
+                alert(valPrimaryBusiness);
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
                     CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
                     PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
@@ -740,7 +712,7 @@
                 //alert(1111);
             }
             else if(TabIndex==1){
-                //alert(2);
+                alert(2);
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
                     ProcessingCraft:valProcessingCraft,EquipmentIntro:valEquipmentIntro,ResearchDepartMembers:valResearchDepartMembers,CapacityIntro:valCapacityIntro,CapacityIntroUnit:valCapacityIntroUnit,
                     AnnualBusinessVolume:valAnnualBusinessVolume,AnnualExportsVolume:valAnnualExportsVolume,ManagementSystemCertification:valManagementSystemCertification,

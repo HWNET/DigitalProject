@@ -79,9 +79,19 @@ namespace Digital.Common.Mvc.Extensions
             return helper.Raw(sb.ToString());
         }
 
-       
 
 
+        public static System.Web.IHtmlString MutiDropDownSelectIsNull(this HtmlHelper helper, string StrValue)
+        {
+            if (string.IsNullOrEmpty(StrValue))
+            {
+                return helper.Raw( "\"0\"");
+            }
+            else
+            {
+                return helper.Raw("\"" + StrValue + "\"");
+            }
+        }
 
 
         public static object IsNull(this HtmlHelper helper, object obj, object IsNullobj, object IsNotNullObj)

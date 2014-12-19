@@ -118,20 +118,21 @@ namespace Digital.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.BusinessAddress = "BusinessAddress1111";
+                    ViewBag.BusinessAddress = "";
                 }
             }
             else
             {
                 CompanyModel = new CompanyModel
                 {
-                    CompanyName = "CompanyName1111",
-                    CompanyRegisteredNO = "CompanyRegisteredNO1111",
+                    CompanyName = "",
+                    CompanyRegisteredNO = "",
+                    PrimarySalesArea="0",
                     IsProvideOEM = true,
                     //CompanyBusinessAddress = "CompanyBusinessAddress1111",
-                    CompanyIntro = "CompanyIntro111111"
+                    CompanyIntro = ""
                 };
-                ViewBag.BusinessAddress = "BusinessAddress1111";
+                ViewBag.BusinessAddress = "";
                 //return HttpNotFound();
             }
             
@@ -156,7 +157,7 @@ namespace Digital.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CompanyBaseInfo(int CompanyID, int IsInsert, string CompanyName, string CompanyRegisteredNO, int CompanyTypeNO, int CompanyMembers,
             int CompanyBusinessModel, int IsProvideOEM, int PrimaryBusinessCategory, int PrimaryBusiness, string PrimaryProduct,
-            int PrimarySalesArea, int CompanyBusinessProvince, int CompanyBusinessCity, string CompanyIntro)
+            string PrimarySalesArea, int CompanyBusinessProvince, int CompanyBusinessCity, string CompanyIntro)
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
@@ -231,8 +232,8 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult CompanyBaseInfoCapacity(int CompanyID,int IsInsert, int ProductionForm,
-            int ServicesDomain, int ProcessingMethod, int ProcessingCraft, int EquipmentIntro, int ResearchDepartMembers, int CapacityIntro, int CapacityIntroUnit,
-            int AnnualBusinessVolume, int AnnualExportsVolume, int ManagementSystemCertification, int ProductQualityCertification,
+            string ServicesDomain, string ProcessingMethod, string ProcessingCraft, string EquipmentIntro, int ResearchDepartMembers, int CapacityIntro, int CapacityIntroUnit,
+            int AnnualBusinessVolume, int AnnualExportsVolume, string ManagementSystemCertification, string ProductQualityCertification,
             int QualityAssurance, string FactoryArea, string PrimaryEquipments)
         {
             //currnet log on user

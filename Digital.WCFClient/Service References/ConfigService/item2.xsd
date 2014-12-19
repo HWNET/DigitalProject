@@ -168,11 +168,11 @@
       <xs:element minOccurs="0" name="CompanyWebsite" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CompanyYearEstablished" type="xs:int" />
       <xs:element minOccurs="0" name="DepartmentModels" nillable="true" type="tns:ArrayOfDepartmentModel" />
-      <xs:element minOccurs="0" name="EquipmentIntro" type="xs:int" />
+      <xs:element minOccurs="0" name="EquipmentIntro" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EquipmentIntroMode" nillable="true" type="tns:EquipmentIntroMode" />
       <xs:element minOccurs="0" name="FactoryArea" type="xs:float" />
       <xs:element minOccurs="0" name="IsProvideOEM" type="xs:boolean" />
-      <xs:element minOccurs="0" name="ManagementSystemCertification" type="xs:int" />
+      <xs:element minOccurs="0" name="ManagementSystemCertification" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ManagementSystemCertificationMode" nillable="true" type="tns:ManagementSystemCertificationMode" />
       <xs:element minOccurs="0" name="NewsCategoryModels" nillable="true" type="tns:ArrayOfNewsCategoryModel" />
       <xs:element minOccurs="0" name="PatentModels" nillable="true" type="tns:ArrayOfPatentModel" />
@@ -182,13 +182,13 @@
       <xs:element minOccurs="0" name="PrimaryBusinessMode" nillable="true" type="tns:PrimaryBusinessMode" />
       <xs:element minOccurs="0" name="PrimaryEquipments" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PrimaryProduct" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PrimarySalesArea" type="xs:int" />
-      <xs:element minOccurs="0" name="PrimarySalesAreaMode" nillable="true" type="tns:PrimarySalesAreaMode" />
-      <xs:element minOccurs="0" name="ProcessingCraft" type="xs:int" />
+      <xs:element minOccurs="0" name="PrimarySalesArea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimarySalesAreaMode" nillable="true" type="tns:ArrayOfPrimarySalesAreaMode" />
+      <xs:element minOccurs="0" name="ProcessingCraft" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ProcessingCraftMode" nillable="true" type="tns:ProcessingCraftMode" />
-      <xs:element minOccurs="0" name="ProcessingMethod" type="xs:int" />
+      <xs:element minOccurs="0" name="ProcessingMethod" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ProcessingMethodMode" nillable="true" type="tns:ProcessingMethodMode" />
-      <xs:element minOccurs="0" name="ProductQualityCertification" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductQualityCertification" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ProductQualityCertificationMode" nillable="true" type="tns:ProductQualityCertificationMode" />
       <xs:element minOccurs="0" name="ProductionForm" type="xs:int" />
       <xs:element minOccurs="0" name="ProductionFormMode" nillable="true" type="tns:ProductionFormMode" />
@@ -196,7 +196,7 @@
       <xs:element minOccurs="0" name="QualityAssuranceMode" nillable="true" type="tns:QualityAssuranceMode" />
       <xs:element minOccurs="0" name="ResearchDepartMemberMode" nillable="true" type="tns:CompanyMemberMode" />
       <xs:element minOccurs="0" name="ResearchDepartMembers" type="xs:int" />
-      <xs:element minOccurs="0" name="ServicesDomain" type="xs:int" />
+      <xs:element minOccurs="0" name="ServicesDomain" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ServicesDomainMode" nillable="true" type="tns:ServicesDomainMode" />
       <xs:element minOccurs="0" name="SinglePageModels" nillable="true" type="tns:ArrayOfSinglePageModel" />
       <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
@@ -481,6 +481,12 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PrimaryBusinessMode" nillable="true" type="tns:PrimaryBusinessMode" />
+  <xs:complexType name="ArrayOfPrimarySalesAreaMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PrimarySalesAreaMode" nillable="true" type="tns:PrimarySalesAreaMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrimarySalesAreaMode" nillable="true" type="tns:ArrayOfPrimarySalesAreaMode" />
   <xs:complexType name="PrimarySalesAreaMode">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseNameValueMode">
@@ -587,12 +593,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfPrimaryBusinessCategoryMode" nillable="true" type="tns:ArrayOfPrimaryBusinessCategoryMode" />
-  <xs:complexType name="ArrayOfPrimarySalesAreaMode">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PrimarySalesAreaMode" nillable="true" type="tns:PrimarySalesAreaMode" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPrimarySalesAreaMode" nillable="true" type="tns:ArrayOfPrimarySalesAreaMode" />
   <xs:complexType name="ArrayOfProductionFormMode">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductionFormMode" nillable="true" type="tns:ProductionFormMode" />

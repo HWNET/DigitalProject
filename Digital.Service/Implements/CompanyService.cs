@@ -39,6 +39,7 @@ namespace Digital.Service.Implements
                 CompanyModel.CompanyMembers = Model.CompanyMembers;  //企业人数
                 CompanyModel.CompanyBusinessModel = Model.CompanyBusinessModel;  //经营模式
                 CompanyModel.IsProvideOEM = Model.IsProvideOEM;  //是否提供 OEM,ODM
+                CompanyModel.PrimaryBusinessCategory = Model.PrimaryBusinessCategory;
                 CompanyModel.PrimaryBusiness = Model.PrimaryBusiness;  //主营行业
                 CompanyModel.PrimaryProduct = Model.PrimaryProduct;  //主营产品
                 CompanyModel.PrimarySalesArea = Model.PrimarySalesArea;  //主要销售区域
