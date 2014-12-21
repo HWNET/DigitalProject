@@ -513,12 +513,12 @@ namespace Digital.Web.Controllers
             ViewBag.MenuModel = base.GetMenu(156);
 
             CasesModel CategoryModel = new CasesModel {
-                CasesName = "CasesName1111",
-                CasesAbstract = "CasesAbstract1111",
+                CasesName = "",
+                CasesAbstract = "",
                 CasesDate=DateTime.Now,
                 CasesOrderBy="1",
-                CasesLabels="CasesLabels1111",
-                CasesDetails="CasesDetails1111",
+                CasesLabels="",
+                CasesDetails="",
             };
             return View(CategoryModel);
         }
