@@ -1079,6 +1079,10 @@ namespace Digital.Web.Controllers
         #endregion
 
         #region CompanySinglePageSave
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult CompanySinglePageSave(int CompanyID, int IsInsert, string PageTitle, string PageKeyWords,
             string PageDescription, string PageRelationFlag, string PageBody)
         { 

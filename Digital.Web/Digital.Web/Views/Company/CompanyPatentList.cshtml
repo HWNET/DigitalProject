@@ -8,9 +8,15 @@
     ViewBag.Title = "专利管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
+@section PageSpecificJavascriptIncludes{
+<link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
 
-<link href="../DigitalStyle/css/morris.css" rel="stylesheet">
-<link href="../DigitalStyle/css/jquery.datatables.css" rel="stylesheet">
+<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
+<script src="../DigitalStyle/js/messages_cn.js"></script>
+
+}
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 专利管理 <span>专利中心</span></h2>
@@ -59,16 +65,16 @@
                     @{
                         if (ViewBag.PatentList != null)
                         {
-                            var StringTransferred="否";
+                            var StringTransferred = "否";
                             foreach (var PatentMode in (List<PatentModel>)ViewBag.PatentList)
                             {
-                                StringTransferred=PatentMode.IsTransferred?"是":"否";
+                                StringTransferred = PatentMode.IsTransferred ? "是" : "否";
                                 <tr>
                                     <td>@PatentMode.PatentOrderID</td>
                                     <td><input type="checkbox" id="checkboxDanger" checked="" /></td>
                                     <td><a href="view-issue.html">所有人可浏览</a></td>
                                     <td>
-                                        @PatentMode.PatentName<br/>@PatentMode.PatentNumber
+                                        @PatentMode.PatentName<br />@PatentMode.PatentNumber
                                     </td>
                                     <td>@PatentMode.PatentTechnologyDomain</td>
                                     <td>@StringTransferred</td>
@@ -121,11 +127,6 @@
                             </div>
                         </td>
                     </tr>
-
-
-
-
-
                 </tbody>
             </table>
         </div>
@@ -143,40 +144,8 @@
     </div>
 </div>
 
-<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
-<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap.min.js"></script>
-<script src="../DigitalStyle/js/modernizr.min.js"></script>
-<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
-<script src="../DigitalStyle/js/toggles.min.js"></script>
-<script src="../DigitalStyle/js/retina.min.js"></script>
-<script src="../DigitalStyle/js/jquery.cookies.js"></script>
-
-<script src="../DigitalStyle/js/jquery.datatables.min.js"></script>
-
-<script src="../DigitalStyle/js/morris.min.js"></script>
-<script src="../DigitalStyle/js/raphael-2.1.0.min.js"></script>
-<script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
-
-<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
-<script src="../DigitalStyle/js/JqueryToken.js"></script>
-<script src="../DigitalStyle/js/custom.js"></script>
-
 <script>
     jQuery(document).ready(function () {
-
-        jQuery('#table1').dataTable();
-
-        jQuery('#table2').dataTable({
-            "sPaginationType": "full_numbers"
-        });
-
-        // Chosen Select
-        jQuery("select").chosen({
-            'min-width': '100px',
-            'white-space': 'nowrap',
-            disable_search_threshold: 10
-        });
 
         // Delete row in a table
         jQuery('.delete-row').click(function () {
@@ -195,69 +164,6 @@
         }, function () {
             jQuery(this).find('.table-action-hide a').animate({ opacity: 0 });
         });
-
-
-    });
-</script>
-
-<script>
-    jQuery(document).ready(function () {
-
-        // Chosen Select
-        jQuery(".chosen-select").chosen({
-            'width': '100%',
-            'white-space': 'nowrap',
-            disable_search: true
-        });
-
-        //new Morris.Bar({
-        //    // ID of the element in which to draw the chart.
-        //    element: 'bar-chart',
-        //    // Chart data records -- each entry in this array corresponds to a point on
-        //    // the chart.
-        //    data: [
-        //        { y: '2006', a: 30, b: 20 },
-        //        { y: '2007', a: 75, b: 65 },
-        //        { y: '2008', a: 50, b: 40 },
-        //        { y: '2009', a: 75, b: 65 },
-        //        { y: '2010', a: 50, b: 40 },
-        //        { y: '2011', a: 75, b: 65 },
-        //        { y: '2012', a: 100, b: 90 }
-        //    ],
-        //    xkey: 'y',
-        //    ykeys: ['a', 'b'],
-        //    labels: ['Solved', 'Unresolved'],
-        //    barColors: ['#D9534F', '#F0AD4E'],
-        //    lineWidth: '1px',
-        //    fillOpacity: 0.8,
-        //    smooth: false,
-        //    hideHover: true
-        //});
-
-        //new Morris.Bar({
-        //    // ID of the element in which to draw the chart.
-        //    element: 'stacked-chart',
-        //    // Chart data records -- each entry in this array corresponds to a point on
-        //    // the chart.
-        //    data: [
-        //        { y: '2006', a: 30, b: 20 },
-        //        { y: '2007', a: 75, b: 65 },
-        //        { y: '2008', a: 50, b: 40 },
-        //        { y: '2009', a: 75, b: 65 },
-        //        { y: '2010', a: 50, b: 40 },
-        //        { y: '2011', a: 75, b: 65 },
-        //        { y: '2012', a: 100, b: 90 }
-        //    ],
-        //    xkey: 'y',
-        //    ykeys: ['a', 'b'],
-        //    labels: ['Series A', 'Series B'],
-        //    barColors: ['#1CAF9A', '#428BCA'],
-        //    lineWidth: '1px',
-        //    fillOpacity: 0.8,
-        //    smooth: false,
-        //    stacked: true,
-        //    hideHover: true
-        //});
 
     });
 </script>

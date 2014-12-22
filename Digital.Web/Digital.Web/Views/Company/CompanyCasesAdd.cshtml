@@ -8,33 +8,23 @@
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 @section PageSpecificJavascriptIncludes{
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
-    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
-    <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
-    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
 
-    <!-- CKEditor -->
-    <script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>
-    <script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
-    <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
-    <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
-
-    <!-- commom form js -->
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
-    <script src="../DigitalStyle/js/bootstrap-timepicker.min.js"></script>
     <script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
     <script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
 
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
-    <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
+    <!-- CKEditor -->
+    <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
+    <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
 
-    <script src="../DigitalStyle/js/dropzone.min.js"></script>
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 添加案例 <span>案例中心</span></h2>
@@ -114,7 +104,7 @@
                             <label class="col-sm-3 control-label">所属分类</label>
 
                             <div class="col-sm-4 ">
-                                <select class="form-control chosen-select" data-placeholder="选择分类...">
+                                <select id="CasesCategory" class="form-control chosen-select" data-placeholder="选择分类...">
                                     <option value="United States">X86工控板</option>
                                 </select>
                             </div>
@@ -140,7 +130,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="checkbox">详细描述</label>
                             <div class="col-sm-6">
-                                <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.CasesDetails</textarea>
+                                <textarea id="CasesDetails" name="CasesDetails" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.CasesDetails</textarea>
                             </div>
                         </div>
                     </form>
@@ -171,7 +161,7 @@
         jQuery('#tags').tagsInput({ width: 'auto' });
 
         // Textarea Autogrow
-        jQuery('#autoResizeTA').autogrow();
+        jQuery('#CasesDetails').autogrow();
 
         // Date Picker
         jQuery('#datepicker').datepicker();
@@ -188,21 +178,13 @@
         jQuery("#phone").mask("(999) 999-9999");
         jQuery("#ssn").mask("999-99-9999");
 
-        // Time Picker
-        jQuery('#timepicker').timepicker({ defaultTIme: false });
-        jQuery('#timepicker2').timepicker({ showMeridian: false });
-        jQuery('#timepicker3').timepicker({ minuteStep: 15 });
-
     });
 </script>
 <script>
     jQuery(document).ready(function () {
 
-        // HTML5 WYSIWYG Editor
-        //jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
-
         // CKEditor
-        jQuery('#ckeditor').ckeditor();
+        jQuery('textarea#CasesDetails').ckeditor();
 
         jQuery('#inlineedit1, #inlineedit2').ckeditor();
 

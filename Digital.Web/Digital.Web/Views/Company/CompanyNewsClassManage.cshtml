@@ -11,7 +11,7 @@
 }
 
 @section PageSpecificJavascriptIncludes{
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css"/>
 
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
@@ -177,6 +177,8 @@
 
 <script>
     jQuery(document).ready(function () {
+        //Textarea Autogrow
+        $("#NewsCategoryContent").autogrow();
 
         // Show aciton upon row hover
         jQuery('.table-hidaction tbody tr').hover(function () {

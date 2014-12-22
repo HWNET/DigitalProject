@@ -192,6 +192,9 @@ jQuery.jsparams = {
         var inputList = $('input[id*=' + Id + ']');
         return StringCombine(inputList);
     },
+    textarea: function (Id) {
+        return $("#" + Id).val();
+    },
     select: function(Id){
         return $("#" + Id + "  option:selected").val();
     },

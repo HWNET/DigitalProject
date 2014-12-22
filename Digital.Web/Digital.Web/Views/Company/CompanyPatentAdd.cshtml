@@ -11,7 +11,7 @@
 }
 @section PageSpecificJavascriptIncludes{
 
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
 
@@ -189,9 +189,7 @@
 
         // Date Picker
         jQuery('#datepicker').datepicker();
-
         jQuery('#datepicker-inline').datepicker();
-
         jQuery('#datepicker-multiple').datepicker({
             numberOfMonths: 3,
             showButtonPanel: true
@@ -212,14 +210,9 @@
 <script>
     jQuery(document).ready(function () {
 
-        // HTML5 WYSIWYG Editor
-        //jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
-
         // CKEditor
         jQuery('textarea#PatentIntro').ckeditor();
-
         //jQuery('#inlineedit1, #inlineedit2').ckeditor();
-
         // Uncomment the following code to test the "Timeout Loading Method".
         // CKEDITOR.loadFullCoreTimeout = 5;
 

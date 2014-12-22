@@ -10,7 +10,7 @@
 }
 
 @section PageSpecificJavascriptIncludes{
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
 
     <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
@@ -431,8 +431,8 @@
                             </div><!-- tab-content -->
                         </form>
                         <ul class="pager wizard">
-                            <li class="previous"><a href="javascript:void(0)">Previous</a></li>
-                            <li class="next"><a href="javascript:void(0)">Next</a></li>
+                            <li class="previous"><a href="javascript:void(0)">上一步</a></li>
+                            <li class="next"><a href="javascript:void(0)">下一步</a></li>
                             <li><button id="BtnSave" class="btn btn-primary" style="display:block" onclick="javascript:Save()">保 存</button></li>
                         </ul>
 
@@ -644,64 +644,61 @@
             //------------------TAB 01 : 基本信息
             var valCompanyName=$.jsparams.input("CompanyName");
             var valCompanyRegisteredNO=$.jsparams.input("CompanyRegisteredNO");
-            var valCompanyTypeNO=$.jsparams.select("CompanyTypeNO");//$("#CompanyTypeNO  option:selected").val();
-            var valCompanyMembers=$.jsparams.select("CompanyMembers");//$("#CompanyMembers option:selected").val();
-            var valCompanyBusinessModel=$.jsparams.radio("radioBusiness");//$('input:radio[name="radioBusiness"]:checked').val();
-            var valIsProvideOEM=$.jsparams.radio("radioOEM");//$('input:radio[name="radioOEM"]:checked').val();
-            var valPrimaryBusinessCategory=$.jsparams.select("PrimaryBusinessCategory");//$("#PrimaryBusinessCategory option:selected").val();
-            var valPrimaryBusiness=$.jsparams.select("PrimaryBusiness");//$("#PrimaryBusiness option:selected").val();
+            var valCompanyTypeNO=$.jsparams.select("CompanyTypeNO");
+            var valCompanyMembers=$.jsparams.select("CompanyMembers");
+            var valCompanyBusinessModel=$.jsparams.radio("radioBusiness");
+            var valIsProvideOEM=$.jsparams.radio("radioOEM");
+            var valPrimaryBusinessCategory=$.jsparams.select("PrimaryBusinessCategory");
+            var valPrimaryBusiness=$.jsparams.select("PrimaryBusiness");
             //---------------PrimaryProduct 1,,,,5
             var valPrimaryProduct=$.jsparams.input_multiple("PrimaryProduct");
             //---------------PrimarySalesArea
-            var valPrimarySalesArea=$.jsparams.select_multiple("PrimarySalesArea");//StringCombine("#PrimarySalesArea option:selected");
+            var valPrimarySalesArea=$.jsparams.select_multiple("PrimarySalesArea");
             //---------------
-            var valBusinessProvince=$.jsparams.select("BusinessProvince");//$("#BusinessProvince option:selected").val();
-            var valBusinessCity=$.jsparams.select("BusinessCity");//$("#BusinessCity option:selected").val();
-            var valCompanyIntro=$.jsparams.input("CompanyIntro");//$("#CompanyIntro").val();
+            var valBusinessProvince=$.jsparams.select("BusinessProvince");
+            var valBusinessCity=$.jsparams.select("BusinessCity");
+            var valCompanyIntro=$.jsparams.input("CompanyIntro");
 
             //-----------------TAB 02 : 生产能力
-            var valProductionForm=$.jsparams.select("ProductionForm");//$("#ProductionForm option:selected").val();
+            var valProductionForm=$.jsparams.select("ProductionForm");
             //---------------ServicesDomain
-            var valServicesDomain=$.jsparams.select_multiple("ServicesDomain");//StringCombine("#ServicesDomain option:selected");
+            var valServicesDomain=$.jsparams.select_multiple("ServicesDomain");
             //--------------ProcessingMethod
-            var valProcessingMethod=$.jsparams.select_multiple("ProcessingMethod");//StringCombine("#ProcessingMethod option:selected");
+            var valProcessingMethod=$.jsparams.select_multiple("ProcessingMethod");
             //-------------ProcessingCraft
-            var valProcessingCraft=$.jsparams.select_multiple("ProcessingCraft");//StringCombine("#ProcessingCraft option:selected");
+            var valProcessingCraft=$.jsparams.select_multiple("ProcessingCraft");
             //-------------EquipmentIntro
-            var valEquipmentIntro=$.jsparams.select_multiple("EquipmentIntro");//StringCombine("#EquipmentIntro option:selected");;
+            var valEquipmentIntro=$.jsparams.select_multiple("EquipmentIntro");
 
-            var valResearchDepartMembers=$.jsparams.select("ResearchDepartMembers");//$("#ResearchDepartMembers option:selected").val();
-            var valCapacityIntro=$.jsparams.input("CapacityIntro");//$("#CapacityIntro").val();
-            var valCapacityIntroUnit=$.jsparams.select("CapacityIntroUnit");//$("#CapacityIntroUnit option:selected").val();
-            var valAnnualBusinessVolume=$.jsparams.select("AnnualBusinessVolume");//$("#AnnualBusinessVolume option:selected").val();
-            var valAnnualExportsVolume=$.jsparams.select("AnnualExportsVolume");//$("#AnnualExportsVolume option:selected").val();
+            var valResearchDepartMembers=$.jsparams.select("ResearchDepartMembers");
+            var valCapacityIntro=$.jsparams.input("CapacityIntro");
+            var valCapacityIntroUnit=$.jsparams.select("CapacityIntroUnit");
+            var valAnnualBusinessVolume=$.jsparams.select("AnnualBusinessVolume");
+            var valAnnualExportsVolume=$.jsparams.select("AnnualExportsVolume");
             //-------------ManagementSystemCertification
-            var valManagementSystemCertification=$.jsparams.select_multiple("ManagementSystemCertification");//StringCombine("#ManagementSystemCertification option:selected");//$("#ManagementSystemCertification option:selected").val();
+            var valManagementSystemCertification=$.jsparams.select_multiple("ManagementSystemCertification");
             //-------------ProductQualityCertification
-            var valProductQualityCertification=$.jsparams.select_multiple("ProductQualityCertification");//StringCombine("#ProductQualityCertification option:selected");//$("#ProductQualityCertification option:selected").val();
+            var valProductQualityCertification=$.jsparams.select_multiple("ProductQualityCertification");
 
-            var valQualityAssurance=$.jsparams.radio("radioQualityAssurance");//$('input:radio[name="radioQualityAssurance"]:checked').val();
-            var valFactoryArea=$.jsparams.input("FactoryArea");//$("#FactoryArea").val();
+            var valQualityAssurance=$.jsparams.radio("radioQualityAssurance");
+            var valFactoryArea=$.jsparams.input("FactoryArea");
 
             //-------------PrimaryEquipments 1,,,,5
             var valPrimaryEquipments=$.jsparams.input_multiple("PrimaryEquipments");
 
-
             //-----------------TAB 03 : 更多信息
-            var valCompanyYearEstablished=$.jsparams.select("CompanyYearEstablished");//$("#CompanyYearEstablished option:selected").val();
-            var valCompanyWebsite=$.jsparams.input("CompanyWebsite");//$("#CompanyWebsite").val();
-            var valCompanyRegisteredAssets=$.jsparams.input("CompanyRegisteredAssets");//$("#CompanyRegisteredAssets").val();
-            var valCompanyRegisteredAssetsUnit=$.jsparams.select("CompanyRegisteredAssetsUnit");//$("#CompanyRegisteredAssetsUnit option:selected").val();
-            var valCompanyRegisteredProvince=$.jsparams.select("RegisteredProvince");//$("#RegisteredProvince option:selected").val();
-            var valCompanyRegisteredCity=$.jsparams.select("RegisteredCity");//$("#RegisteredCity option:selected").val();
-            var valCompanyCorporateRepresentative=$.jsparams.input("CompanyCorporateRepresentative");//$('input[id="CompanyCorporateRepresentative"]').val();
-            var valCompanyBankDeposit=$.jsparams.input("CompanyBankDeposit");//$('input[id="CompanyBankDeposit"]').val();
-            var valCompanyBankAccount=$.jsparams.input("CompanyBankAccount");//$('input[id="CompanyBankAccount"]').val();
-
+            var valCompanyYearEstablished=$.jsparams.select("CompanyYearEstablished");
+            var valCompanyWebsite=$.jsparams.input("CompanyWebsite");
+            var valCompanyRegisteredAssets=$.jsparams.input("CompanyRegisteredAssets");
+            var valCompanyRegisteredAssetsUnit=$.jsparams.select("CompanyRegisteredAssetsUnit");
+            var valCompanyRegisteredProvince=$.jsparams.select("RegisteredProvince");
+            var valCompanyRegisteredCity=$.jsparams.select("RegisteredCity");
+            var valCompanyCorporateRepresentative=$.jsparams.input("CompanyCorporateRepresentative");
+            var valCompanyBankDeposit=$.jsparams.input("CompanyBankDeposit");
+            var valCompanyBankAccount=$.jsparams.input("CompanyBankAccount");
 
             //......
             if(TabIndex==0){
-                //alert(1);
                 alert(valPrimaryBusinessCategory);
                 alert(valPrimaryBusiness);
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
@@ -709,26 +706,19 @@
                     PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
                     CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro};
                 ComAjax("/Company/CompanyBaseInfo",datas,"基本信息");
-                //alert(1111);
             }
             else if(TabIndex==1){
-                alert(2);
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
                     ProcessingCraft:valProcessingCraft,EquipmentIntro:valEquipmentIntro,ResearchDepartMembers:valResearchDepartMembers,CapacityIntro:valCapacityIntro,CapacityIntroUnit:valCapacityIntroUnit,
                     AnnualBusinessVolume:valAnnualBusinessVolume,AnnualExportsVolume:valAnnualExportsVolume,ManagementSystemCertification:valManagementSystemCertification,
                     ProductQualityCertification:valProductQualityCertification,QualityAssurance:valQualityAssurance,FactoryArea:valFactoryArea,PrimaryEquipments:valPrimaryEquipments};
                 ComAjax("/Company/CompanyBaseInfoCapacity",datas,"生产能力");
-                //alert(2222);
             }
             else if(TabIndex==2){
-                //alert(3);
-
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,
                     CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,
                     CompanyCorporateRepresentative:valCompanyCorporateRepresentative,CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount};
                 ComAjax("/Company/CompanyBaseInfoMore",datas,"更多信息");
-
-                //alert(3333);
             }
         }
     }

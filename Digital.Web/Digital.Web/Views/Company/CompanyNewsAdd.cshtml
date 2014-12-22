@@ -10,13 +10,10 @@
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 @section PageSpecificJavascriptIncludes{
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css"/>
     <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
-    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-timepicker.min.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/colorpicker.css" />
-    <link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
-    @*<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />*@
 
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
@@ -24,15 +21,12 @@
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
     <!-- CKEditor -->
-    @*<script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>*@
-    @*<script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>*@
     <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
     <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
 
     <!-- commom form js -->
     <script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
     <script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
-    <script src="../DigitalStyle/js/dropzone.min.js"></script>
     <script src="../DigitalStyle/js/colorpicker.js"></script>
 
 }
@@ -215,14 +209,6 @@
             });
         }
 
-        // Color Picker Flat Mode
-        //jQuery('#colorpickerholder').ColorPicker({
-        //    flat: true,
-        //    onChange: function (hsb, hex, rgb) {
-        //        jQuery('#colorpicker3').val('#' + hex);
-        //    }
-        //});
-
         // Date Picker
         jQuery('#ReleaseTime').datepicker();
 
@@ -247,12 +233,8 @@
 <script>
     jQuery(document).ready(function () {
 
-        // HTML5 WYSIWYG Editor
-        //jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
-
         // CKEditor
         jQuery('textarea#NewsBody').ckeditor();
-
         jQuery('#inlineedit1, #inlineedit2').ckeditor();
 
         // Uncomment the following code to test the "Timeout Loading Method".
@@ -327,21 +309,18 @@
             var valNewsOrderID = $.jsparams.input("NewsOrderID");
             var valNewsKeywords = $.jsparams.input("NewsKeywords");
             var valNewsLabels = $.jsparams.input("NewsLabels");
-            var valNewsBody = $("#NewsBody").val();//CKEDITOR.instances['NewsBody'].getData();
+            var valNewsBody = $.jsparams.textarea("NewsBody");//$("#NewsBody").val();//CKEDITOR.instances['NewsBody'].getData();
 
             var stringTABONE = valNewsTitle + "_" + valNewsAbstract + "_" + valNewsThumbnail + "_" +
                 valNewsCategoryID + "_" + valNewsOrderID + "_" + valNewsKeywords + "_" + valNewsLabels + "_" +
                 valNewsBody;
             alert(stringTABONE);
 
-            //alert(1);
-
             var datas={ CompanyID:@CompanyID,IsInsert:IsInsert,NewsTitle:valNewsTitle,NewsAbstract:valNewsAbstract,
                 NewsThumbnail:valNewsThumbnail,NewsCategoryID:valNewsCategoryID,NewsOrderID:valNewsOrderID,
                 NewsKeywords:valNewsKeywords,NewsLabels:valNewsLabels,NewsBody:valNewsBody};
             ComAjax("/Company/CompanyNewsSave",datas,"播报信息");
 
-            //alert(1111);
         }
     }
 

@@ -9,7 +9,7 @@
 }
 
 @section PageSpecificJavascriptIncludes{
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css"/>
 
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
@@ -187,6 +187,12 @@
 
             return false;
         });
+
+        // Chosen Select
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+        // Textarea Autogrow
+        $("#autoResizeTA").autogrow();
     });
 </script>
 

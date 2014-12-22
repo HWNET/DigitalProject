@@ -9,10 +9,17 @@
     ViewBag.Title = "单页管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
+@section PageSpecificJavascriptIncludes{
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
 
-<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-wysihtml5.css" />
-<link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet">
-
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+    <!-- ckeditor -->
+    <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
+    <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+}
 
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 单独页面 <span>企业单页管理</span></h2>
@@ -92,37 +99,8 @@
     </div>
 </div>
 
-
-<script src="../DigitalStyle/js/jquery-1.10.2.min.js"></script>
-<script src="../DigitalStyle/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap.min.js"></script>
-<script src="../DigitalStyle/js/modernizr.min.js"></script>
-<script src="../DigitalStyle/js/jquery.sparkline.min.js"></script>
-<script src="../DigitalStyle/js/toggles.min.js"></script>
-<script src="../DigitalStyle/js/retina.min.js"></script>
-<script src="../DigitalStyle/js/jquery.cookies.js"></script>
-
-<script src="../DigitalStyle/js/wysihtml5-0.3.0.min.js"></script>
-<script src="../DigitalStyle/js/bootstrap-wysihtml5.js"></script>
-<script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
-<script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
-
-
-<script src="../DigitalStyle/js/custom.js"></script>
-
 <script>
     jQuery(document).ready(function () {
-
-        // HTML5 WYSIWYG Editor
-        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
-
-        // CKEditor
-        jQuery('#ckeditor').ckeditor();
-
-        jQuery('#inlineedit1, #inlineedit2').ckeditor();
-
-        // Uncomment the following code to test the "Timeout Loading Method".
-        // CKEDITOR.loadFullCoreTimeout = 5;
 
         window.onload = function () {
             // Listen to the double click event.
@@ -149,9 +127,7 @@
             if (name == 'div' && element.className.indexOf('editable') != -1)
                 replaceDiv(element);
         }
-
         var editor;
-
         function replaceDiv(div) {
             if (editor)
                 editor.destroy();
