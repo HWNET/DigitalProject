@@ -43,7 +43,7 @@ namespace Digital.Common.Utilities
 
         public abstract string GetResult(string localFileName, string uploadFilePath, string err);
 
-        public abstract void OnUploaded(HttpContext context, string filePath);
+        public abstract void OnUploaded(HttpContext context, string filePath, string folder, string ImageId);
 
         public void ProcessRequest(HttpContext context)
         {
@@ -93,6 +93,7 @@ namespace Digital.Common.Utilities
             else
             {
                 var folder = context.Request["subfolder"] ?? "default";
+                var fileName = context.Request["ImageId"];
                 //var uploadFolderConfig = UploadConfigContext.UploadConfig.UploadFolders.FirstOrDefault(u => string.Equals(folder, u.Path, StringComparison.OrdinalIgnoreCase));
                 //var dirType = uploadFolderConfig == null ? DirType.Day : uploadFolderConfig.DirType;
                 var dirType = DirType.Day;
@@ -116,7 +117,7 @@ namespace Digital.Common.Utilities
                     );
 
                 filePath = Path.Combine(fileFolder,
-                    string.Format("{0}{1}.{2}", DateTime.Now.ToString("yyyyMMddhhmmss"), new Random(DateTime.Now.Millisecond).Next(10000), ext)
+                    string.Format("{0}.{2}", fileName, ext)
                     );
 
                 if (!Directory.Exists(fileFolder))
@@ -131,7 +132,7 @@ namespace Digital.Common.Utilities
                 if (ImageExt.Contains(ext))
                     ThumbnailService.HandleImmediateThumbnail(filePath);
 
-                this.OnUploaded(context, filePath);
+                this.OnUploaded(context, filePath, folder, fileName);
             }
 
             file = null;

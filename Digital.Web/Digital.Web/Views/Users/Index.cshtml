@@ -1,4 +1,5 @@
 ﻿@model Digital.WCFClient.ConfigService.UsersModel
+@using Digital.Common
 @using Digital.Common.Mvc.Extensions
 @{
     ViewBag.Title = "用户管理";
@@ -46,11 +47,13 @@
         <div class="col-sm-9">
 
             <div class="profile-header">
+           
                
                 <script type="text/javascript">
                     $('#uploader').FileUpload({
                         'buttonText':'请上传图片',
-                        'subfolder': 'cms',
+                        'subfolder': 'UserInfo',
+                        'ImageId': '@CryptoService.MD5Encrypt(Model.ID.ToString(), Digital.Common.SerurityType.UserInfoImage)',
                         'callback': function (msg) {
                             //msg.url为图片地址
                             //alert(msg);

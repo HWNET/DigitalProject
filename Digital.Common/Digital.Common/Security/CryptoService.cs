@@ -5,10 +5,17 @@ using Microsoft.Practices.EnterpriseLibrary.Security.Cryptography;
 
 namespace Digital.Common
 {
+    public  enum SerurityType
+    {
+        UserInfoImage
+    }
+
     public class CryptoService
     {
         internal const string PasswordKey = "MvcS0lk$";
         private const string HashKey = "SHA256Managed";
+
+        private const string PasswordImageKey = "我的宝贝龙玥涵";
 
         public static string HashEncrypt(string input)
         {
@@ -26,6 +33,35 @@ namespace Digital.Common
             des.Mode = CipherMode.ECB;
             var encrypted = des.CreateEncryptor().TransformFinalBlock(inputBytes, 0, inputBytes.Length);
             return Convert.ToBase64String(encrypted);
+        }
+
+        public static string MD5Encrypt(string input, SerurityType Types)
+        {
+            var inputBytes = Encoding.UTF8.GetBytes(input);
+            var des = new TripleDESCryptoServiceProvider();
+            if (Types == SerurityType.UserInfoImage)
+            {
+                var keyBytes = Encoding.UTF8.GetBytes(PasswordImageKey);
+                des.Key = MakeMD5(keyBytes);
+            }
+            des.Mode = CipherMode.ECB;
+            var encrypted = des.CreateEncryptor().TransformFinalBlock(inputBytes, 0, inputBytes.Length);
+            return Convert.ToBase64String(encrypted);
+
+        }
+
+        public static string MD5Decrypt(string encodedString, SerurityType Types)
+        {
+            var encodedBytes = Convert.FromBase64String(encodedString);
+            var des = new TripleDESCryptoServiceProvider();
+            if (Types == SerurityType.UserInfoImage)
+            {
+                var keyBytes = Encoding.UTF8.GetBytes(PasswordKey);
+                des.Key = MakeMD5(keyBytes);
+            }
+            des.Mode = CipherMode.ECB;
+            var decrypted = des.CreateDecryptor().TransformFinalBlock(encodedBytes, 0, encodedBytes.Length);
+            return Encoding.Default.GetString(decrypted);
         }
 
         public static string MD5Decrypt(string encodedString)

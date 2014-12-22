@@ -1,9 +1,15 @@
-﻿using Digital.Common.Utilities;
+﻿using Digital.Common;
+using Digital.Common.Logging;
+using Digital.Common.Utilities;
+using Digital.WCFClient;
+using Digital.WCFClient.ConfigService;
+using Digital.Web.Controllers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
 
 namespace Digital.Web
 {
@@ -29,10 +35,11 @@ namespace Digital.Web
 
             return JsonConvert.SerializeObject(result);
         }
-
+        
         //即时生成如201323023_s.jpg的缩略图
-        public override void OnUploaded(HttpContext context, string filePath)
+        public override void OnUploaded(HttpContext context, string filePath, string folder,string ImageId)
         {
+            var logger = new NLogHelper();
             var ext = filePath.Substring(filePath.LastIndexOf('.') + 1).ToLower();
             if (!ImageExt.Contains(ext))
                 return;
@@ -50,6 +57,28 @@ namespace Digital.Web
                     this.MakeThumbnail(filePath, thumbparts[0], thumbparts[1].ToInt(), thumbparts[2].ToInt(), thumbparts[3]);
                 }
             }
+            if (folder == "UserInfo")
+            {
+                try
+                {
+                    var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
+                    int UserId = CryptoService.MD5Decrypt(ImageId, Digital.Common.SerurityType.UserInfoImage).ToInt();
+                    var userModel = client.GetUserInfo(UserId);
+                    userModel.UsersInfoModel.DisplayPicture = filePath;
+
+                    if (client.UpdateUsersInfoModel(userModel) != null)
+                    {
+                        OperatorFactory.UpdateUserModelCache(UserId.ToString(), userModel);
+                        client.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.WriteInfo("Image Upload Update User info error:" + ex.ToString());
+                    throw new Exception("上传失败，请联系管理员");
+                }
+            }
+         
         }
 
         private void MakeThumbnail(string filePath, string suffix, int width, int height, string mode)

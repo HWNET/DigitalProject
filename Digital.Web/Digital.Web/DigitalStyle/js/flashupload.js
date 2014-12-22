@@ -57,7 +57,7 @@ if ("undefined" != typeof staticFileRoot) {
             'fileTypeDesc': "jpg/png/gif Files",
             'fileTypeExts': '*.gif; *.jpg; *.png',
             'auto': true,
-            'multi': true,
+            'multi': false,
             'onUploadSuccess': function (file, data, response) {
                 eval("data = " + data);
 
@@ -74,11 +74,11 @@ if ("undefined" != typeof staticFileRoot) {
                 }
             },
             'onUploadError': function (file, errorCode, errorMsg, errorString) {
-                alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
+                alert('这个文件' + file.name + ' 不能上传: ' + errorString);
             }
         };
 
-        var postParamNames = "subfolder,thumbs,thumbwidth,thumbheight,mode";
+        var postParamNames = "subfolder,thumbs,thumbwidth,thumbheight,mode,ImageId";
         var postParam = {};
 
         for (var i in param) {
