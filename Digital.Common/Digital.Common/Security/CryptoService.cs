@@ -7,7 +7,8 @@ namespace Digital.Common
 {
     public  enum SerurityType
     {
-        UserInfoImage
+        UserInfoImage,
+        UserInfoFolder
     }
 
     public class CryptoService
@@ -15,7 +16,8 @@ namespace Digital.Common
         internal const string PasswordKey = "MvcS0lk$";
         private const string HashKey = "SHA256Managed";
 
-        private const string PasswordImageKey = "我的宝贝龙玥涵";
+        internal const string PasswordImageKey = "我的宝贝龙玥涵";
+        internal const string PasswordUserFolder = "我的宝贝小小";
 
         public static string HashEncrypt(string input)
         {
@@ -44,6 +46,11 @@ namespace Digital.Common
                 var keyBytes = Encoding.UTF8.GetBytes(PasswordImageKey);
                 des.Key = MakeMD5(keyBytes);
             }
+            else if (Types == SerurityType.UserInfoFolder)
+            {
+                var keyBytes = Encoding.UTF8.GetBytes(PasswordUserFolder);
+                des.Key = MakeMD5(keyBytes);
+            }
             des.Mode = CipherMode.ECB;
             var encrypted = des.CreateEncryptor().TransformFinalBlock(inputBytes, 0, inputBytes.Length);
             return Convert.ToBase64String(encrypted);
@@ -56,7 +63,12 @@ namespace Digital.Common
             var des = new TripleDESCryptoServiceProvider();
             if (Types == SerurityType.UserInfoImage)
             {
-                var keyBytes = Encoding.UTF8.GetBytes(PasswordKey);
+                var keyBytes = Encoding.UTF8.GetBytes(PasswordImageKey);
+                des.Key = MakeMD5(keyBytes);
+            }
+            else if (Types == SerurityType.UserInfoFolder)
+            {
+                var keyBytes = Encoding.UTF8.GetBytes(PasswordUserFolder);
                 des.Key = MakeMD5(keyBytes);
             }
             des.Mode = CipherMode.ECB;

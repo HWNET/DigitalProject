@@ -24,6 +24,7 @@
     <!-- CKEditor -->
     <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
     <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
 
 }
 <div class="pageheader">
@@ -72,20 +73,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">案例缩略图</label>
                             <div class="col-sm-6">
-                                <div class="fileupload fileupload-new" data-provides="fileupload">
-                                    <div class="input-append">
-                                        <div class="uneditable-input">
-                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                            <span class="fileupload-preview"></span>
-                                        </div>
-                                        <span class="btn btn-default btn-file">
-                                            <span class="fileupload-new">Select file</span>
-                                            <span class="fileupload-exists">Change</span>
-                                            <input type="file" value="@Model.CasesThumbnail" />
-                                        </span>
-                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                    </div>
-                                </div>
+                                <div id="uploader"></div>
+                                <img id="PersonImage" src="@Html.IsNull(Model.CasesThumbnail, "../DigitalStyle/images/pic-none.png", Model.CasesThumbnail)" class="thumbnail img-responsive" alt="" />
                             </div>
                         </div>
 
@@ -153,6 +142,17 @@
 
 <script>
     jQuery(document).ready(function () {
+                   $('#uploader').FileUpload({
+                       'buttonText':'请上传图片',
+                       'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
+                       'ImageId': '',
+                       'callback': function (msg) {
+                           //msg.url为图片地址
+                           //alert(msg);
+                           $("#PersonImage")[0].src = msg.url;
+                       }
+                   });
+
 
         // Chosen Select
         jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });

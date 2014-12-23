@@ -94,6 +94,15 @@ namespace Digital.Common.Utilities
             {
                 var folder = context.Request["subfolder"] ?? "default";
                 var fileName = context.Request["ImageId"];
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    fileName = HttpUtility.UrlEncode(fileName);
+                }
+                else
+                {
+                    fileName = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddhhmmss"), new Random(DateTime.Now.Millisecond).Next(10000));
+                }
+                
                 //var uploadFolderConfig = UploadConfigContext.UploadConfig.UploadFolders.FirstOrDefault(u => string.Equals(folder, u.Path, StringComparison.OrdinalIgnoreCase));
                 //var dirType = uploadFolderConfig == null ? DirType.Day : uploadFolderConfig.DirType;
                 var dirType = DirType.Day;
@@ -117,7 +126,7 @@ namespace Digital.Common.Utilities
                     );
 
                 filePath = Path.Combine(fileFolder,
-                    string.Format("{0}.{2}", fileName, ext)
+                    string.Format("{0}.{1}", fileName, ext)
                     );
 
                 if (!Directory.Exists(fileFolder))

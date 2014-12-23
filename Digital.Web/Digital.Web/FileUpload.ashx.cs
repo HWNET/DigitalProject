@@ -61,16 +61,19 @@ namespace Digital.Web
             {
                 try
                 {
+               
                     var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
-                    int UserId = CryptoService.MD5Decrypt(ImageId, Digital.Common.SerurityType.UserInfoImage).ToInt();
+                    int UserId = CryptoService.MD5Decrypt(HttpUtility.UrlDecode(ImageId), Digital.Common.SerurityType.UserInfoImage).ToInt();
                     var userModel = client.GetUserInfo(UserId);
-                    userModel.UsersInfoModel.DisplayPicture = filePath;
+                    userModel.UsersInfoModel.DisplayPicture = filePath
+                    .Substring(filePath.IndexOf("\\upload", StringComparison.OrdinalIgnoreCase));
 
                     if (client.UpdateUsersInfoModel(userModel) != null)
                     {
                         OperatorFactory.UpdateUserModelCache(UserId.ToString(), userModel);
-                        client.Close();
+                       
                     }
+                    client.Close();
                 }
                 catch (Exception ex)
                 {

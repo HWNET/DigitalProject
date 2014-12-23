@@ -167,7 +167,7 @@ function ComAjaxGetForParent(SelectCategory, Url, XmlNodeParent, XmlNodeChild, S
     });
 }
 
-function ComAjax(Url,datas,SaveMsg)
+function ComAjax(Url,datas,SaveMsg,callback)
 {
     $.ajaxAntiForgery({
         type: "post",
@@ -175,6 +175,9 @@ function ComAjax(Url,datas,SaveMsg)
         url: Url,
         success: function (data) {
             if (data == "OK") {
+                if (callback != null && typeof (callback) != "undefined") {
+                    eval(callback+"()");
+                }
                 SaveInfo(true, SaveMsg);
             }
             else {

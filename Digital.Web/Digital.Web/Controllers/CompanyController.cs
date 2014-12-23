@@ -1170,5 +1170,77 @@ namespace Digital.Web.Controllers
             }
         }
 
+        //Company/CompanyCasesAdd", { CName: Name, COrderId: OrderId, CImage: Image, CContent: Content }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyCasesAdd(int Id, string CName, int COrderId, string CImage, string CContent, int CParent)
+        {
+            try
+            {
+                var clientUser = ServiceHub.GetCommonServiceClient<UserServiceClient>();
+                var CompanyId= clientUser.GetUserInfo(User.Identity.GetUserId().ToInt(0)).CompanyID;
+                clientUser.Close();
+                if (Id == 0)
+                {
+                    var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
+                    var CaseModel = new CasesCategoryModel()
+                    {
+                        CasesCategoryName = CName,
+                        CasesCategoryOrderID = COrderId,
+                        CasesCategoryPicture = CImage,
+                        CasesCategoryContent = CContent,
+                        CasesCategoryParentID = CParent,
+                        CompanyID = CompanyId.Value,
+                        UpdateStatus = 1
+                    };
+                    client.CasesCategoryInsert(CaseModel);
+                    client.Close();
+                }
+                else
+                {
+                    var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
+                    var CaseModel = new CasesCategoryModel()
+                    {
+                        CasesCategoryName = CName,
+                        CasesCategoryOrderID = COrderId,
+                        CasesCategoryPicture = CImage,
+                        CasesCategoryContent = CContent,
+                        CasesCategoryParentID = CParent,
+                        CompanyID = CompanyId.Value,
+                        CasesCategoryID=Id,
+                        UpdateStatus = 2
+                    };
+                    client.CasesCategoryUpdate(CaseModel);
+                    client.Close();
+                }
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyCasesDelete(int CasesId)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
+                client.CasesCategoryDeleteById(CasesId);
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
+        }
+
     }
 }
