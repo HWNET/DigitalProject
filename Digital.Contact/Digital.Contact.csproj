@@ -74,6 +74,7 @@
     <Compile Include="BLL\CasesCategoryService.cs" />
     <Compile Include="BLL\CasesService.cs" />
     <Compile Include="BLL\CompanyService.cs" />
+    <Compile Include="BLL\FileCabinetService.cs" />
     <Compile Include="BLL\MenuService.cs" />
     <Compile Include="BLL\NewsCategoryService.cs" />
     <Compile Include="BLL\NewsService.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\CompanyUIModes.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\FileCabinetMode.cs" />
     <Compile Include="Models\GoodAtWhatModel.cs" />
     <Compile Include="Models\IdeaModel.cs" />
     <Compile Include="Models\MenuModel.cs" />

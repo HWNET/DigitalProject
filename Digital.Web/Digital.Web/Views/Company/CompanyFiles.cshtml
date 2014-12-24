@@ -1,10 +1,22 @@
-﻿@{
-    ViewBag.Title = "账户信息管理";
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "文件综合管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
+@section PageSpecificJavascriptIncludes{
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/prettyPhoto.css" />
 
-<link href="../DigitalStyle/css/prettyPhoto.css" rel="stylesheet">
-
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+    <script src="../DigitalStyle/js/jquery.prettyPhoto.js"></script>
+}
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 企业文件柜 <span>文件综合管理</span></h2>
     <div class="breadcrumb-wrapper">
@@ -698,18 +710,7 @@
 </div>
 
 
-<script src="../js/jquery-1.10.2.min.js"></script>
-<script src="../js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/modernizr.min.js"></script>
-<script src="../js/jquery.sparkline.min.js"></script>
-<script src="../js/toggles.min.js"></script>
-<script src="../js/retina.min.js"></script>
-<script src="../js/jquery.cookies.js"></script>
 
-<script src="../js/jquery.prettyPhoto.js"></script>
-
-<script src="../js/custom.js"></script>
 <script>
     jQuery(document).ready(function () {
 
