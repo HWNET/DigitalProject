@@ -111,8 +111,8 @@ namespace Digital.Web.Controllers
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
             {
                 CompanyID = UserModel.CompanyID.Value;
-                CompanyModel=client.CompanyQueryById(CompanyID);
-                if (CompanyModel.CompanyBusinessProvinceMode != null && CompanyModel.CompanyBusinessCityMode!=null)
+                CompanyModel = client.CompanyQueryById(CompanyID);
+                if (CompanyModel.CompanyBusinessProvinceMode != null && CompanyModel.CompanyBusinessCityMode != null)
                 {
                     ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
                 }
@@ -127,7 +127,7 @@ namespace Digital.Web.Controllers
                 {
                     CompanyName = "",
                     CompanyRegisteredNO = "",
-                    PrimarySalesArea="0",
+                    PrimarySalesArea = "0",
                     IsProvideOEM = true,
                     //CompanyBusinessAddress = "CompanyBusinessAddress1111",
                     CompanyIntro = ""
@@ -135,7 +135,7 @@ namespace Digital.Web.Controllers
                 ViewBag.BusinessAddress = "";
                 //return HttpNotFound();
             }
-            
+
             client.Close();
             return View(CompanyModel);
         }
@@ -168,13 +168,13 @@ namespace Digital.Web.Controllers
             {
                 var NewModel = new CompanyModel
                 {
-                    CompanyID=CompanyID,
+                    CompanyID = CompanyID,
                     CompanyName = CompanyName,
                     CompanyRegisteredNO = CompanyRegisteredNO,
                     CompanyTypeNO = CompanyTypeNO,
                     CompanyMembers = CompanyMembers,
                     CompanyBusinessModel = CompanyBusinessModel,
-                    IsProvideOEM = IsProvideOEM==1?true:false,
+                    IsProvideOEM = IsProvideOEM == 1 ? true : false,
                     PrimaryBusinessCategory = PrimaryBusinessCategory,
                     PrimaryBusiness = PrimaryBusiness,
                     PrimaryProduct = PrimaryProduct,
@@ -188,13 +188,13 @@ namespace Digital.Web.Controllers
                 {
                     #region new model -- do insert
                     var ResultModel = client.CompanyInsert(NewModel); // update DB
-                    if (ResultModel!=null&&ResultModel.CompanyID > 0) // update web cache
+                    if (ResultModel != null && ResultModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), ResultModel);
 
                         //do user upgrade
                         var UserUpgradeStatus = UpgradeUserToCompanyMember(ResultModel.CompanyID);
-                        ReturnResult = UserUpgradeStatus?"OK":"NOK";
+                        ReturnResult = UserUpgradeStatus ? "OK" : "NOK";
                     }
                     else
                     {
@@ -205,8 +205,8 @@ namespace Digital.Web.Controllers
                 else // old existing model -- do update
                 {
                     #region old existing model -- do update
-                    var CompanyModel = client.CompanyUpdate(NewModel,1); // update DB
-                    if (CompanyModel!=null&&CompanyModel.CompanyID > 0) // update web cache
+                    var CompanyModel = client.CompanyUpdate(NewModel, 1); // update DB
+                    if (CompanyModel != null && CompanyModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
                         ReturnResult = "OK";
@@ -231,7 +231,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyBaseInfoCapacity(int CompanyID,int IsInsert, int ProductionForm,
+        public ActionResult CompanyBaseInfoCapacity(int CompanyID, int IsInsert, int ProductionForm,
             string ServicesDomain, string ProcessingMethod, string ProcessingCraft, string EquipmentIntro, int ResearchDepartMembers, int CapacityIntro, int CapacityIntroUnit,
             int AnnualBusinessVolume, int AnnualExportsVolume, string ManagementSystemCertification, string ProductQualityCertification,
             int QualityAssurance, string FactoryArea, string PrimaryEquipments)
@@ -258,14 +258,14 @@ namespace Digital.Web.Controllers
                     ManagementSystemCertification = ManagementSystemCertification,
                     ProductQualityCertification = ProductQualityCertification,
                     QualityAssurance = QualityAssurance,
-                    FactoryArea =float.Parse(FactoryArea),
+                    FactoryArea = float.Parse(FactoryArea),
                     PrimaryEquipments = PrimaryEquipments,
                 };
                 if (IsInsert == 1) // new model -- do insert
                 {
                     #region new model -- do insert
                     var ResultModel = client.CompanyInsert(NewModel); // update DB
-                    if (ResultModel !=null&& ResultModel.CompanyID > 0) // update web cache
+                    if (ResultModel != null && ResultModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), ResultModel);
 
@@ -282,7 +282,7 @@ namespace Digital.Web.Controllers
                 else // old existing model -- do update
                 {
                     #region old existing model -- do update
-                    var CompanyModel = client.CompanyUpdate(NewModel,2); // update DB
+                    var CompanyModel = client.CompanyUpdate(NewModel, 2); // update DB
                     if (CompanyModel != null && CompanyModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
@@ -336,11 +336,11 @@ namespace Digital.Web.Controllers
                     CompanyBankAccount = CompanyBankAccount
                 };
 
-                if (IsInsert==1) // new model -- do insert
+                if (IsInsert == 1) // new model -- do insert
                 {
                     #region new model -- do insert
                     var ResultModel = client.CompanyInsert(NewModel); // update DB
-                    if (ResultModel !=null&& ResultModel.CompanyID > 0) // update web cache
+                    if (ResultModel != null && ResultModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), ResultModel);
 
@@ -357,7 +357,7 @@ namespace Digital.Web.Controllers
                 else // old existing model -- do update
                 {
                     #region old existing model -- do update
-                    var CompanyModel = client.CompanyUpdate(NewModel,3); // update DB
+                    var CompanyModel = client.CompanyUpdate(NewModel, 3); // update DB
                     if (CompanyModel != null && CompanyModel.CompanyID > 0) // update web cache
                     {
                         OperatorFactory.UpdateCompanyCache(User.Identity.GetUserId(), CompanyModel);
@@ -476,7 +476,7 @@ namespace Digital.Web.Controllers
                 if (UserModel.CompanyID == null || (UserModel.CompanyID != null && string.IsNullOrEmpty(UserModel.CompanyID.Value.ToString())))
                 {
                     //update web cache for UserModel
-                    UserModel.CompanyID=CompanyID;
+                    UserModel.CompanyID = CompanyID;
                     OperatorFactory.UpdateUserModelCache(User.Identity.GetUserId(), UserModel);
 
                     //update db cache for UserModel
@@ -512,15 +512,64 @@ namespace Digital.Web.Controllers
         {
             ViewBag.MenuModel = base.GetMenu(156);
 
-            CasesModel CategoryModel = new CasesModel {
+            CasesModel CategoryModel = new CasesModel
+            {
                 CasesName = "",
                 CasesAbstract = "",
-                CasesDate=DateTime.Now,
-                CasesOrderBy="1",
-                CasesLabels="",
-                CasesDetails="",
+                CasesDate = DateTime.Now,
+                CasesOrderBy = "1",
+                CasesLabels = "",
+                CasesDetails = "",
+                CasesCategoryID = 0
             };
+            var CompanyID = 0;
+            var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
+            List<BaseNameValueMode> CasesCategoryList = new List<BaseNameValueMode>();
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
+            {
+                CompanyID = UserModel.CompanyID.Value;
+                var TempList = client.CasesCategoryQueryListByCompany(CompanyID).ToList();
+                foreach (var Temp in TempList)
+                {
+                    CasesCategoryList.Add(new BaseNameValueMode { Id = Temp.CasesCategoryID, Name = Temp.CasesCategoryName });
+                }
+                ViewBag.CasesCategory = CasesCategoryList;
+
+            }
             return View(CategoryModel);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult CompanyCasesAdd(int Id, string CName, string Abstract, string CImage, string CasesDate, int CasesCategory, int OrderBy, string Labels, string CasesDetails)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+                CasesModel CModel=new CasesModel();
+                if(Id==0)
+                {
+                    CModel.CasesAbstract=Abstract;
+                    CModel.CasesCategoryID=CasesCategory;
+                    CModel.CasesDate=CasesDate.ToDateTime();
+                    CModel.CasesDetails=CasesDetails;
+                    CModel.CasesLabels=Labels;
+                    CModel.CasesName=CName;
+                    CModel.CasesOrderBy=OrderBy.ToString();
+                    CModel.CasesThumbnail=CImage;
+                    CModel.UpdateStatus=1;
+                    client.CasesInsert(CModel);
+                }
+               
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
         }
         #endregion
 
@@ -538,14 +587,14 @@ namespace Digital.Web.Controllers
             var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
 
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) 
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
             {
                 CompanyID = UserModel.CompanyID.Value;
                 CategoryList = client.CasesCategoryQueryListByCompany(CompanyID).ToList();
 
                 ViewBag.CategoryList = CategoryList;
             }
-            
+
             return View();
         }
         #endregion
@@ -592,16 +641,17 @@ namespace Digital.Web.Controllers
         {
             ViewBag.MenuModel = base.GetMenu(163);
 
-            NewsModel NewsModel = new NewsModel {
+            NewsModel NewsModel = new NewsModel
+            {
                 NewsTitle = "NewsTitle0000",
                 NewsAbstract = "NewsAbstract0000",
                 NewsThumbnail = "NewsThumbnail0000",
-                NewsCategoryID=0,
-                NewsOrderID=0,
+                NewsCategoryID = 0,
+                NewsOrderID = 0,
                 NewsKeywords = "NewsKeywords0000",
                 NewsLabels = "NewsLabels0000",
                 NewsBody = "NewsBody0000",
-                ReleaseTime=DateTime.Now,
+                ReleaseTime = DateTime.Now,
             };
 
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
@@ -633,19 +683,19 @@ namespace Digital.Web.Controllers
             var CurrentUser = User.Identity.Name;
             var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
             var ReturnResult = string.Empty;
-            if (!string.IsNullOrEmpty(CurrentUser) && CompanyID>0)
+            if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
             {
                 var NewsModel = new NewsModel
-                { 
-                    NewsTitle=NewsTitle,
-                    NewsAbstract=NewsAbstract,
+                {
+                    NewsTitle = NewsTitle,
+                    NewsAbstract = NewsAbstract,
                     NewsThumbnail = NewsThumbnail,
                     NewsCategoryID = NewsCategoryID,
                     NewsOrderID = NewsOrderID,
                     NewsKeywords = NewsKeywords,
                     NewsLabels = NewsLabels,
                     NewsBody = NewsBody,
-                    ReleaseTime=DateTime.Now,
+                    ReleaseTime = DateTime.Now,
                 };
                 if (IsInsert == 1) // new model -- do insert
                 {
@@ -673,7 +723,7 @@ namespace Digital.Web.Controllers
             }
             client.Close();
 
-            if (ReturnResult=="OK")
+            if (ReturnResult == "OK")
             {
                 return RedirectToAction("CompanyNewsAdd", "Company");
             }
@@ -703,7 +753,8 @@ namespace Digital.Web.Controllers
             ViewBag.CategoryList = CategoryList;
 
 
-            NewsCategoryModel CategoryModel = new NewsCategoryModel {
+            NewsCategoryModel CategoryModel = new NewsCategoryModel
+            {
                 NewsCategoryOrderID = 0,
                 NewsCategoryName = "NewsCategoryName0000",
                 NewsCategoryPicture = "NewsCategoryPicture0000",
@@ -725,7 +776,7 @@ namespace Digital.Web.Controllers
             NewsCategoryModel CategoryModel = null;
             if (!string.IsNullOrEmpty(CurrentUser))
             {
-                CategoryModel=client.NewsCategoryQueryById(CategoryID);
+                CategoryModel = client.NewsCategoryQueryById(CategoryID);
                 ViewBag.CategoryID = CategoryID;
             }
             else
@@ -743,7 +794,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyNewsCategoryEdit(int CategoryID,int CompanyID, int IsInsert, string NewsCategoryName, string NewsCategoryPicture, string NewsCategoryContent,
+        public ActionResult CompanyNewsCategoryEdit(int CategoryID, int CompanyID, int IsInsert, string NewsCategoryName, string NewsCategoryPicture, string NewsCategoryContent,
             int NewsCategoryParentID, int NewsCategoryOrderID)
         {
             //currnet log on user
@@ -755,13 +806,13 @@ namespace Digital.Web.Controllers
             {
                 var CategoryModel = new NewsCategoryModel
                 {
-                    NewsCategoryID=CategoryID,
+                    NewsCategoryID = CategoryID,
                     CompanyID = CompanyID,
-                    NewsCategoryName=NewsCategoryName,
-                    NewsCategoryPicture=NewsCategoryPicture,
-                    NewsCategoryContent=NewsCategoryContent,
-                    NewsCategoryParentID=NewsCategoryParentID,
-                    NewsCategoryOrderID=NewsCategoryOrderID, 
+                    NewsCategoryName = NewsCategoryName,
+                    NewsCategoryPicture = NewsCategoryPicture,
+                    NewsCategoryContent = NewsCategoryContent,
+                    NewsCategoryParentID = NewsCategoryParentID,
+                    NewsCategoryOrderID = NewsCategoryOrderID,
                 };
 
                 if (IsInsert == 1) // new model -- do insert
@@ -811,7 +862,7 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult CompanyNewsCategoryDelete(int CategoryID)
-        { 
+        {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
@@ -819,7 +870,7 @@ namespace Digital.Web.Controllers
 
             if (!string.IsNullOrEmpty(CurrentUser))
             {
-                var result=client.NewsCategoryDeleteById(CategoryID); // update DB
+                var result = client.NewsCategoryDeleteById(CategoryID); // update DB
                 if (result)
                 {
                     // ??? consider whether remove the related news under newscategory
@@ -864,20 +915,20 @@ namespace Digital.Web.Controllers
                 CategoryList = clientCategory.NewsCategoryQueryListByCompany(CompanyID).ToList();
                 NewsList = client.NewsQueryListByCompany(CompanyID).ToList();
 
-                if (NewsList!=null&&CategoryList!=null)
+                if (NewsList != null && CategoryList != null)
                 {
-                    NewsToCategoryList=CategoryList.Join(NewsList, c => c.NewsCategoryID, n => n.NewsCategoryID, (c, n) => new NewsModel
-                    { 
-                         NewsCategoryID=n.NewsCategoryID,
-                         NewsAbstract=n.NewsAbstract,
-                         NewsBody=n.NewsBody,
-                         NewsCategoryModel=c,
-                         NewsID=n.NewsID,
-                         NewsKeywords=n.NewsKeywords,
-                         NewsLabels=n.NewsLabels,
-                         NewsOrderID=n.NewsOrderID,
-                         NewsThumbnail=n.NewsThumbnail,
-                         NewsTitle=n.NewsTitle,
+                    NewsToCategoryList = CategoryList.Join(NewsList, c => c.NewsCategoryID, n => n.NewsCategoryID, (c, n) => new NewsModel
+                    {
+                        NewsCategoryID = n.NewsCategoryID,
+                        NewsAbstract = n.NewsAbstract,
+                        NewsBody = n.NewsBody,
+                        NewsCategoryModel = c,
+                        NewsID = n.NewsID,
+                        NewsKeywords = n.NewsKeywords,
+                        NewsLabels = n.NewsLabels,
+                        NewsOrderID = n.NewsOrderID,
+                        NewsThumbnail = n.NewsThumbnail,
+                        NewsTitle = n.NewsTitle,
                     }).ToList();
                 }
             }
@@ -898,20 +949,21 @@ namespace Digital.Web.Controllers
         {
             ViewBag.MenuModel = base.GetMenu(162);
 
-            PatentModel PatentModel = new PatentModel {
+            PatentModel PatentModel = new PatentModel
+            {
                 PatentNumber = "PatentNumber0000",
                 PatentName = "PatentName0000",
                 PatentAbstract = "PatentAbstract0000",
                 PatentCerificate = "PatentCerificate0000",
-                PatentDate=DateTime.Now.ToShortDateString(),
+                PatentDate = DateTime.Now.ToShortDateString(),
                 PatentTechnologyDomain = 0,
                 PatentDevelopmentStatus = 0,
                 PatentOrderID = 0,
                 PatentLabels = "PatentLabels0000",
                 PatentIntro = "PatentIntro0000",
-                IsDisabled=false,
-                IsTransferred=false,
-                CompanyID=0,
+                IsDisabled = false,
+                IsTransferred = false,
+                CompanyID = 0,
             };
 
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
@@ -1071,8 +1123,8 @@ namespace Digital.Web.Controllers
                 PageDescription = "PageDescription0000",
                 PageRelationFlag = "PageRelationFlag0000",
                 PageBody = "PageBody0000",
-                CompanyID=0,
-                ModifiedTime=DateTime.Now,
+                CompanyID = 0,
+                ModifiedTime = DateTime.Now,
             };
             return View(SinglePageModel);
         }
@@ -1085,7 +1137,7 @@ namespace Digital.Web.Controllers
         [ValidateInput(false)]
         public ActionResult CompanySinglePageSave(int CompanyID, int IsInsert, string PageTitle, string PageKeyWords,
             string PageDescription, string PageRelationFlag, string PageBody)
-        { 
+        {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
             var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
@@ -1153,8 +1205,8 @@ namespace Digital.Web.Controllers
         {
             try
             {
-                var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();  
-                var  Water = client.WaterFind(User.Identity.GetUserId().ToInt(0));              
+                var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
+                var Water = client.WaterFind(User.Identity.GetUserId().ToInt(0));
                 Water.UserId = User.Identity.GetUserId().ToInt(0);
                 Water.WaterPostion = Postion;
                 Water.IsCompanyName = IsCompanyName;
@@ -1170,17 +1222,16 @@ namespace Digital.Web.Controllers
             }
         }
 
-        //Company/CompanyCasesAdd", { CName: Name, COrderId: OrderId, CImage: Image, CContent: Content }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyCasesAdd(int Id, string CName, int COrderId, string CImage, string CContent, int CParent)
+        public ActionResult CompanyCasesClassAdd(int Id, string CName, int COrderId, string CImage, string CContent, int CParent)
         {
             try
             {
                 var clientUser = ServiceHub.GetCommonServiceClient<UserServiceClient>();
-                var CompanyId= clientUser.GetUserInfo(User.Identity.GetUserId().ToInt(0)).CompanyID;
+                var CompanyId = clientUser.GetUserInfo(User.Identity.GetUserId().ToInt(0)).CompanyID;
                 clientUser.Close();
                 if (Id == 0)
                 {
@@ -1209,7 +1260,7 @@ namespace Digital.Web.Controllers
                         CasesCategoryContent = CContent,
                         CasesCategoryParentID = CParent,
                         CompanyID = CompanyId.Value,
-                        CasesCategoryID=Id,
+                        CasesCategoryID = Id,
                         UpdateStatus = 2
                     };
                     client.CasesCategoryUpdate(CaseModel);
@@ -1227,7 +1278,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyCasesDelete(int CasesId)
+        public ActionResult CompanyCasesClassDelete(int CasesId)
         {
             try
             {

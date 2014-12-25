@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Digital.Contact.Models;
 using Digital.Service.Interfaces;
 using Digital.Contact.BLL;
+using System.Configuration;
+using System.IO;
 
 namespace Digital.Service.Implements
 {
@@ -91,6 +93,21 @@ namespace Digital.Service.Implements
             if (CategoryModel!=null)
             {
                 var Result=CasesCategoryService.CasesCategoryDeleteById(CasesCategoryId);
+                if (Result)
+                {
+                    var WebRoot= ConfigurationManager.AppSettings["WebRoot"].ToString();
+                    string PicPath=WebRoot + CategoryModel.CasesCategoryPicture;
+                    if (File.Exists(PicPath))
+                    {
+                        File.Delete(PicPath);
+                    }
+                   string fileName= Path.GetFileNameWithoutExtension(PicPath);
+                   string sPicPath = PicPath.Replace(fileName, fileName + "_s");
+                   if (File.Exists(sPicPath))
+                   {
+                       File.Delete(sPicPath);
+                   }
+                }
                 return Result;
             }
             else

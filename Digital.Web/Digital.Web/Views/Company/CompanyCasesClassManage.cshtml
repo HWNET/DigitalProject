@@ -16,7 +16,7 @@
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
-    <script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
+<script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 案例分类管理 <span>案例中心</span></h2>
@@ -59,37 +59,37 @@
                             </thead>
                             <tbody>
                                 @{
-                                    var List = (List<CasesCategoryModel>)ViewBag.CategoryList;
-                                    if (ViewBag.CategoryList != null && (List.Count > 0))
-                                    {
-                                        var Parent = List.Where(o => o.CasesCategoryParentID == 0).ToList();
-                                        foreach (var CategoryMode in Parent)
-                                        {
-                                            <tr id="tr@{@CategoryMode.CasesCategoryID}">
-                                                <td>@CategoryMode.CasesCategoryOrderID</td>
-                                                <td>@CategoryMode.CasesCategoryName</td>
-                                                <td><a href="javascript:Show(@CategoryMode.CasesCategoryID)"><i class="fa fa-plus-square"></i></a> 添加子类</td>
-                                                <td>@CategoryMode.CasesCategoryPicture</td>
-                                                <td>@CategoryMode.CasesCategoryContent</td>
-                                                <td><a class="btn btn-primary" onclick="javascript:Delete(@CategoryMode.CasesCategoryID)"><i class="fa fa-pencil mr5"></i> 删除</a>&nbsp;<a class="btn btn-primary" onclick="javascript:Edit(@CategoryMode.CasesCategoryID)"><i class="fa fa-pencil mr5"></i> 修改</a></td>
-                                            </tr>
-                                            var SubChild = List.Where(o => o.CasesCategoryParentID == CategoryMode.CasesCategoryID).ToList();
-                                            foreach (var Childs in SubChild)
-                                            {
-                                                <tr id="tr@{@Childs.CasesCategoryID}">
+    var List = (List<CasesCategoryModel>)ViewBag.CategoryList;
+    if (ViewBag.CategoryList != null && (List.Count > 0))
+    {
+        var Parent = List.Where(o => o.CasesCategoryParentID == 0).ToList();
+        foreach (var CategoryMode in Parent)
+        {
+            <tr id="tr@{@CategoryMode.CasesCategoryID}">
+                <td>@CategoryMode.CasesCategoryOrderID</td>
+                <td>@CategoryMode.CasesCategoryName</td>
+                <td><a href="javascript:Show(@CategoryMode.CasesCategoryID)"><i class="fa fa-plus-square"></i></a> 添加子类</td>
+                <td>@CategoryMode.CasesCategoryPicture</td>
+                <td>@CategoryMode.CasesCategoryContent</td>
+                <td><a class="btn btn-primary" onclick="javascript:Delete(@CategoryMode.CasesCategoryID)"><i class="fa fa-pencil mr5"></i> 删除</a>&nbsp;<a class="btn btn-primary" onclick="javascript:Edit(@CategoryMode.CasesCategoryID,0)"><i class="fa fa-pencil mr5"></i> 修改</a></td>
+            </tr>
+            var SubChild = List.Where(o => o.CasesCategoryParentID == CategoryMode.CasesCategoryID).ToList();
+            foreach (var Childs in SubChild)
+            {
+                <tr id="tr@{@Childs.CasesCategoryID}">
 
-                                                    <td>@Childs.CasesCategoryOrderID</td>
-                                                    <td>@Childs.CasesCategoryName</td>
-                                                    <td>@CategoryMode.CasesCategoryName 的子分类</td>
-                                                    <td>@Childs.CasesCategoryPicture</td>
-                                                    <td>@Childs.CasesCategoryContent</td>
-                                                    <td><a class="btn btn-primary" onclick="javascript:Delete(@Childs.CasesCategoryID)"><i class="fa fa-pencil mr5"></i> 删除</a>&nbsp;<a class="btn btn-primary" onclick="javascript:Edit(@Childs.CasesCategoryID)"><i class="fa fa-pencil mr5"></i> 修改</a></td>
-                                                </tr>
-                                            }
-                                        }
-                                    }
+                    <td>@Childs.CasesCategoryOrderID</td>
+                    <td>@Childs.CasesCategoryName</td>
+                    <td>@CategoryMode.CasesCategoryName 的子分类</td>
+                    <td>@Childs.CasesCategoryPicture</td>
+                    <td>@Childs.CasesCategoryContent</td>
+                    <td><a class="btn btn-primary" onclick="javascript:Delete(@Childs.CasesCategoryID)"><i class="fa fa-pencil mr5"></i> 删除</a>&nbsp;<a class="btn btn-primary" onclick="javascript:Edit(@Childs.CasesCategoryID,@CategoryMode.CasesCategoryID)"><i class="fa fa-pencil mr5"></i> 修改</a></td>
+                </tr>
+            }
+        }
+    }
 
-                                }
+}
                             </tbody>
                         </table>
 
@@ -129,46 +129,46 @@
             <div class="modal-body">
                 <input type="hidden" id="ParentId" />
                 <input type="hidden" id="CaseId" />
-                @Html.AntiForgeryToken()><div class="form-group">
-                    <label class="col-sm-3 control-label">排序值</label>
-                    <div class="col-sm-4">
-                        <input type="text" id="OrderId" placeholder="排序值..." class="form-control" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">分类名称</label>
-                    <div class="col-sm-6">
-                        <input type="text" id="Name" placeholder="分类名称..." class="form-control" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">分类图片</label>
-                    <div class="col-sm-6">
-                        <div id="uploader"></div>
-                        <img id="Image" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
-                        <input type="hidden" id="ImagePath" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">分类内容</label>
-                    <div class="col-sm-6">
-                        <textarea id="Content" class="form-control" rows="5"></textarea>
-                    </div>
-                </div>
-
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <button class="btn btn-primary" onclick="javascript:Save()">提交</button>&nbsp;
-                            <button aria-hidden="true" data-dismiss="modal" class="close">取消</button>
+                       @Html.AntiForgeryToken()><div class="form-group">
+                        <label class="col-sm-3 control-label">排序值</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="OrderId" placeholder="排序值..." class="form-control" />
                         </div>
                     </div>
-                </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分类名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="Name" placeholder="分类名称..." class="form-control" />
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分类图片</label>
+                        <div class="col-sm-6">
+                            <div id="uploader"></div>
+                            <img id="Image" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
+                            <input type="hidden" id="ImagePath" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分类内容</label>
+                        <div class="col-sm-6">
+                        <textarea id="Content" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                            <button class="btn btn-primary" onclick="javascript:Save()">提交</button>&nbsp;
+                                <button aria-hidden="true" data-dismiss="modal" class="close">取消</button>
+                            </div>
+                        </div>
+                    </div>
+
+         
             </div>
         </div>
     </div>
@@ -210,14 +210,21 @@
 
     }
 
-    function Show(ParentId) {
+    function Show(ParentId)
+    {
+        $("#Name").val("");
+        $("#OrderId").val("");
+        $("#Image")[0].src = '../DigitalStyle/images/pic-none.png';
+        $("#ImagePath").val('../DigitalStyle/images/pic-none.png');
+        $("#Content").val("");
         $("#DetailModel").modal("show");
         $("#CaseId").val(0);
         $("#ParentId").val(ParentId);
     }
 
-    function Delete(Id) {
-        ComAjax("/Company/CompanyCasesDelete", { CasesId: Id }, "分类删除", "callBack");
+    function Delete(Id)
+    {
+        ComAjax("/Company/CompanyCasesClassDelete", { CasesId:Id}, "分类删除", "callBack");
     }
 
     function Edit(Id, Parent) {
@@ -245,12 +252,11 @@
             Parent = 0;
         }
         var Id = $("#CaseId").val();
-        alert(Id);
-        ComAjax("/Company/CompanyCasesAdd", { Id: Id, CName: Name, COrderId: OrderId, CImage: Image, CContent: Content, CParent: Parent }, "分类管理", "callBack");
+        ComAjax("/Company/CompanyCasesClassAdd", {Id:Id, CName: Name, COrderId: OrderId, CImage: Image, CContent: Content, CParent: Parent }, "分类管理", "callBack");
 
     }
 
-
+  
 </script>
 
 
