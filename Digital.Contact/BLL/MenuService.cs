@@ -80,7 +80,7 @@ namespace Digital.Contact.BLL
                 new MenuModel{ID=159 ,MenuName="添加单页",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanySinglePageAdd"},
                 new MenuModel{ID=160 ,MenuName="单页列表",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanySinglePage"},
                 new MenuModel{ID=161 ,MenuName="专利列表",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanyPatentList"},
-                new MenuModel{ID=162 ,MenuName="添加专利专利",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanyPatentAdd"},
+                new MenuModel{ID=162 ,MenuName="添加专利",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanyPatentAdd"},
                 new MenuModel{ID=163 ,MenuName="添加企业播报",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanyNewsAdd"},
                 new MenuModel{ID=164 ,MenuName="企业播报分类管理",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanyNewsClassManage"},
                 new MenuModel{ID=165 ,MenuName="企业播报列表",Style="glyphicon glyphicon-info-sign",OtherName="",ParentId=150,Url="../Company/CompanyNewsList"},

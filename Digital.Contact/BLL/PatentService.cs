@@ -32,8 +32,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     if (!IsModelExist(Model))
                     {
                         Model = db.PatentModels.Add(Model);
@@ -44,12 +43,7 @@ namespace Digital.Contact.BLL
                     {
                         return null;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -59,8 +53,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     if (IsModelExist(Model))
                     {
                         db.Entry(Model).State = EntityState.Modified;
@@ -71,12 +64,7 @@ namespace Digital.Contact.BLL
                     {
                         return new PatentModel();
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new PatentModel();
-                }
+
             }
         }
         #endregion
@@ -86,15 +74,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.PatentModels.Find(PatentId);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new PatentModel();
-                }
+
             }
         }
         #endregion
@@ -104,16 +86,10 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.PatentModels.Where(o => o.PatentName == PatentName).SingleOrDefault();
                     return model;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new PatentModel();
-                }
+
             }
         }
         #endregion
@@ -123,8 +99,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.PatentModels.Find(PatentId);
                     if (model != null)
                     {
@@ -136,12 +111,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -151,8 +121,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.PatentModels.Where(o => o.CompanyID == CompanyId);
                     if (model != null)
                     {
@@ -164,12 +133,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -179,15 +143,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.PatentModels.ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -197,15 +155,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.PatentModels.Where(o => o.CompanyID == CompanyId).ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion

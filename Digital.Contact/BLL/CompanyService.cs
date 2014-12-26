@@ -32,8 +32,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     if (!IsModelExist(Model))
                     {
                         Model = db.CompanyModels.Add(Model);
@@ -44,12 +43,7 @@ namespace Digital.Contact.BLL
                     {
                         return null;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -59,8 +53,7 @@ namespace Digital.Contact.BLL
         {
             using(var db=new CommunicationContext())
             {
-                try
-                {
+
                     if (IsModelExist(Model))
                     {
                         db.Entry(Model).State = EntityState.Modified;
@@ -71,12 +64,7 @@ namespace Digital.Contact.BLL
                     {
                         return null;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -86,15 +74,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.CompanyModels.Find(CompanyId);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new CompanyModel();
-                }
+
             }
         }
         #endregion
@@ -104,16 +86,10 @@ namespace Digital.Contact.BLL
         {
             using(var db=new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.CompanyModels.Where(o => o.CompanyName == CompanyName).SingleOrDefault();
                     return model;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new CompanyModel();
-                }
+
             }
         }
         #endregion
@@ -123,8 +99,7 @@ namespace Digital.Contact.BLL
         {
             using(var db=new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.CompanyModels.Find(CompanyId);
                     if (model!=null)
                     {
@@ -136,12 +111,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -151,8 +121,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.CompanyModels.Where(o=>o.CompanyRegisteredNO==CompanyRegisteredNO).SingleOrDefault();
                     if (model != null)
                     {
@@ -164,12 +133,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -179,15 +143,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.CompanyModels.ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion

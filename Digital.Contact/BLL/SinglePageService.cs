@@ -31,8 +31,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     if (!IsModelExist(Model))
                     {
                         Model = db.SinglePageModels.Add(Model);
@@ -43,12 +42,7 @@ namespace Digital.Contact.BLL
                     {
                         return null;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -58,8 +52,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     if (IsModelExist(Model))
                     {
                         db.Entry(Model).State = EntityState.Modified;
@@ -70,12 +63,7 @@ namespace Digital.Contact.BLL
                     {
                         return new SinglePageModel();
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new SinglePageModel();
-                }
+
             }
         }
         #endregion
@@ -85,15 +73,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.SinglePageModels.Find(SinglePageId);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new SinglePageModel();
-                }
+
             }
         }
         #endregion
@@ -103,16 +85,10 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.SinglePageModels.Where(o => o.PageTitle == SinglePageName).SingleOrDefault();
                     return model;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new SinglePageModel();
-                }
+
             }
         }
         #endregion
@@ -122,8 +98,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.SinglePageModels.Find(SinglePageId);
                     if (model != null)
                     {
@@ -135,12 +110,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -150,8 +120,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.SinglePageModels.Where(o => o.CompanyID == CompanyId);
                     if (model != null)
                     {
@@ -163,12 +132,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -178,15 +142,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.SinglePageModels.ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -196,15 +154,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.SinglePageModels.Where(o => o.CompanyID == CompanyId).ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion

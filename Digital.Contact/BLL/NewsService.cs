@@ -32,8 +32,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     if (!IsModelExist(Model))
                     {
                         Model = db.NewsModels.Add(Model);
@@ -44,12 +43,7 @@ namespace Digital.Contact.BLL
                     {
                         return null;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -59,8 +53,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     if (IsModelExist(Model))
                     {
                         db.Entry(Model).State = EntityState.Modified;
@@ -71,12 +64,7 @@ namespace Digital.Contact.BLL
                     {
                         return new NewsModel();
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new NewsModel();
-                }
+
             }
         }
         #endregion
@@ -86,15 +74,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.NewsModels.Find(NewsId);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new NewsModel();
-                }
+
             }
         }
         #endregion
@@ -104,16 +86,10 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.NewsModels.Where(o => o.NewsTitle == NewsTitle).SingleOrDefault();
                     return model;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new NewsModel();
-                }
+
             }
         }
         #endregion
@@ -123,8 +99,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.NewsModels.Find(NewsId);
                     if (model != null)
                     {
@@ -136,12 +111,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -151,8 +121,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.NewsModels.Where(o => o.NewsCategoryID == NewsCategoryId);
                     if (model != null)
                     {
@@ -164,12 +133,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -179,8 +143,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var CategoryList = db.NewsCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
                     List<NewsModel> NewsList = new List<NewsModel>();
                     CategoryList.ForEach(c => NewsList.Add(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID).SingleOrDefault()));
@@ -194,12 +157,6 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
             }
         }
         #endregion
@@ -209,15 +166,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.NewsModels.ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -227,16 +178,10 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var NewsList = db.NewsModels.Where(o => o.NewsCategoryID == NewsCategoryId).ToList();
                     return NewsList;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -246,8 +191,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var CategoryList = db.NewsCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
                     List<NewsModel> NewsList = new List<NewsModel>();
                     CategoryList.ForEach(c => NewsList.AddRange(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID)));
@@ -259,12 +203,7 @@ namespace Digital.Contact.BLL
                     //}
 
                     return NewsList;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion

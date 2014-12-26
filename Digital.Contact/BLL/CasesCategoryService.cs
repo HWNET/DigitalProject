@@ -32,8 +32,6 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
                     if (!IsModelExist(Model))
                     {
                         Model=db.CasesCategoryModels.Add(Model);
@@ -44,12 +42,6 @@ namespace Digital.Contact.BLL
                     {
                         return null;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
             }
         }
         #endregion
@@ -59,8 +51,6 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
                     if (IsModelExist(Model))
                     {
                         db.Entry(Model).State = EntityState.Modified;
@@ -71,12 +61,6 @@ namespace Digital.Contact.BLL
                     {
                         return new CasesCategoryModel();
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new CasesCategoryModel();
-                }
             }
         }
         #endregion
@@ -86,15 +70,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.CasesCategoryModels.Find(CasesCategoryId);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new CasesCategoryModel();
-                }
+
             }
         }
         #endregion
@@ -104,16 +82,10 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.CasesCategoryModels.Where(o => o.CasesCategoryName == CasesCategoryName).SingleOrDefault();
                     return model;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return new CasesCategoryModel();
-                }
+
             }
         }
         #endregion
@@ -123,8 +95,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.CasesCategoryModels.Find(CasesCategoryId);
                     if (model != null)
                     {
@@ -136,12 +107,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -151,8 +117,7 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     var model = db.CasesCategoryModels.Where(o=>o.CompanyID==CompanyId);
                     if (model != null)
                     {
@@ -164,12 +129,7 @@ namespace Digital.Contact.BLL
                     {
                         return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return false;
-                }
+
             }
         }
         #endregion
@@ -179,15 +139,9 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.CasesCategoryModels.ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
+
             }
         }
         #endregion
@@ -197,15 +151,8 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-                try
-                {
+
                     return db.CasesCategoryModels.Where(o=>o.CompanyID==CompanyId).ToList();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                    return null;
-                }
             }
         }
         #endregion
