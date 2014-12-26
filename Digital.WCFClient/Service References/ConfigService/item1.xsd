@@ -725,6 +725,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CasesDeleteByIds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesIds" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CasesDeleteByIdsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CasesDeleteByIdsResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NewsCategoryInsert">
     <xs:complexType>
       <xs:sequence>

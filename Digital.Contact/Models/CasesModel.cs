@@ -21,6 +21,11 @@ namespace Digital.Contact.Models
         //[Display(Name = "案例名称")]
         public string CasesName { get; set; } //案例名称
 
+
+        public int CompanyID { get; set; } //所属企业ID
+         [NotMapped]
+        public virtual CompanyModel CompanyModel { get; set; }
+
         //[StringLength(256, MinimumLength = 1, ErrorMessage = "{1}到{0}个字")]
         //[Display(Name = "案例概述")]
         public string CasesAbstract { get; set; } //案例概述

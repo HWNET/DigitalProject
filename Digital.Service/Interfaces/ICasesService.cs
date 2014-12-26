@@ -33,5 +33,7 @@ namespace Digital.Service.Interfaces
         List<CasesModel> CasesQueryListByCategory(int CasesCategoryId);
         [OperationContract]
         List<CasesModel> CasesQueryListByCompany(int CompanyId);
+        [OperationContract]
+        bool CasesDeleteByIds(string CasesIds);
     }
 }

@@ -522,6 +522,15 @@ namespace Digital.Web.Controllers
                 CasesDetails = "",
                 CasesCategoryID = 0
             };
+            CasesCategoryList();
+            return View(CategoryModel);
+        }
+
+        /// <summary>
+        /// 案例分类list
+        /// </summary>
+        private void CasesCategoryList()
+        {
             var CompanyID = 0;
             var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
             List<BaseNameValueMode> CasesCategoryList = new List<BaseNameValueMode>();
@@ -537,7 +546,43 @@ namespace Digital.Web.Controllers
                 ViewBag.CasesCategory = CasesCategoryList;
 
             }
-            return View(CategoryModel);
+            client.Close();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyCasesDelete(int CasesId)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+                client.CasesDeleteById(CasesId);
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyCasesDeleteAll(string CasesIds)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+                client.CasesDeleteByIds(CasesIds);
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
         }
 
         [HttpPost]
@@ -549,22 +594,32 @@ namespace Digital.Web.Controllers
             try
             {
                 var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
-                CasesModel CModel=new CasesModel();
-                if(Id==0)
+                CasesModel CModel = new CasesModel();
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
                 {
-                    CModel.CasesAbstract=Abstract;
-                    CModel.CasesCategoryID=CasesCategory;
-                    CModel.CasesDate=CasesDate.ToDateTime();
-                    CModel.CasesDetails=CasesDetails;
-                    CModel.CasesLabels=Labels;
-                    CModel.CasesName=CName;
-                    CModel.CasesOrderBy=OrderBy.ToString();
-                    CModel.CasesThumbnail=CImage;
-                    CModel.UpdateStatus=1;
-                    client.CasesInsert(CModel);
+                    if (Id == 0)
+                    {
+                        CModel.CasesAbstract = Abstract;
+                        CModel.CasesCategoryID = CasesCategory;
+                        CModel.CasesDate = CasesDate.ToDateTime();
+                        CModel.CasesDetails = CasesDetails;
+                        CModel.CasesLabels = Labels;
+                        CModel.CasesName = CName;
+                        CModel.CasesOrderBy = OrderBy.ToString();
+                        CModel.CasesThumbnail = CImage;
+                        CModel.CasesCategoryID = UserModel.CompanyID.Value;
+                        CModel.UpdateStatus = 1;
+                        client.CasesInsert(CModel);
+                        client.Close();
+                    }
+
+                    return Content("OK");
                 }
-               
-                return Content("OK");
+                else
+                {
+                    return Content("NOK");
+                }
             }
             catch (Exception ex)
             {
@@ -607,6 +662,23 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyCasesList()
         {
             ViewBag.MenuModel = base.GetMenu(158);
+            try
+            {
+                CasesCategoryList();
+                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null)
+                {
+                    ViewBag.CaseList = client.CasesQueryListByCompany(UserModel.CompanyID.Value);
+                }
+                else
+                {
+                    Response.Redirect(Url.StaticFile());
+                }
+            }
+            catch (Exception ex)
+            {
+            }
             return View();
         }
         #endregion
@@ -1292,6 +1364,8 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+
+
 
     }
 }

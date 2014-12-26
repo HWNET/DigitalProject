@@ -44,8 +44,8 @@ namespace Digital.Contact.BLL
                         return null;
                     }
 
-            }
-        }
+                }
+                }
         #endregion
 
         #region CasesUpdate
@@ -62,8 +62,8 @@ namespace Digital.Contact.BLL
                     }
                     else
                     {
-                        return new CasesModel();
-                    }
+                    return new CasesModel();
+                }
 
             }
         }
@@ -77,8 +77,8 @@ namespace Digital.Contact.BLL
 
                     return db.CasesModels.Find(CasesId);
 
+                }
             }
-        }
         #endregion
 
         #region CasesQueryByName
@@ -90,8 +90,8 @@ namespace Digital.Contact.BLL
                     var model = db.CasesModels.Where(o => o.CasesName == CasesName).SingleOrDefault();
                     return model;
 
-            }
-        }
+                }
+                }
         #endregion
 
         #region CasesDeleteById
@@ -134,8 +134,8 @@ namespace Digital.Contact.BLL
                         return false;
                     }
 
-            }
-        }
+                }
+                }
         #endregion
 
         #region CasesDeleteByCompany
@@ -155,8 +155,8 @@ namespace Digital.Contact.BLL
                     }
                     else
                     {
-                        return false;
-                    }
+                    return false;
+                }
 
             }
         }
@@ -170,8 +170,8 @@ namespace Digital.Contact.BLL
 
                     return db.CasesModels.ToList();
 
+                }
             }
-        }
         #endregion
 
         #region CasesQueryListByCategory
@@ -183,8 +183,8 @@ namespace Digital.Contact.BLL
                     var CasesList = db.CasesModels.Where(o => o.CasesCategoryID == CasesCategoryId).ToList();
                     return CasesList;
 
-            }
-        }
+                }
+                }
         #endregion
 
         #region CasesQueryListByCompany
@@ -192,12 +192,15 @@ namespace Digital.Contact.BLL
         {
             using (var db = new CommunicationContext())
             {
-
-                    var CategoryList = db.CasesCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
-                    List<CasesModel> CasesList = new List<CasesModel>();
-                    CategoryList.ForEach(c => CasesList.Add(db.CasesModels.Where(o => o.CasesCategoryID == c.CasesCategoryID).SingleOrDefault()));
-                    return CasesList;
-
+                try
+                {
+                    return db.CasesModels.Where(o => o.CompanyID == CompanyId).ToList();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    return null;
+                }
             }
         }
         #endregion

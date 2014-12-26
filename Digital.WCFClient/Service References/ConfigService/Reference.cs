@@ -5119,6 +5119,12 @@ namespace Digital.WCFClient.ConfigService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesQueryListByCompany", ReplyAction="http://tempuri.org/ICasesService/CasesQueryListByCompanyResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteByIds", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByIdsResponse")]
+        bool CasesDeleteByIds(string CasesIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICasesService/CasesDeleteByIds", ReplyAction="http://tempuri.org/ICasesService/CasesDeleteByIdsResponse")]
+        System.Threading.Tasks.Task<bool> CasesDeleteByIdsAsync(string CasesIds);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -5226,6 +5232,14 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel>> CasesQueryListByCompanyAsync(int CompanyId) {
             return base.Channel.CasesQueryListByCompanyAsync(CompanyId);
+        }
+        
+        public bool CasesDeleteByIds(string CasesIds) {
+            return base.Channel.CasesDeleteByIds(CasesIds);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CasesDeleteByIdsAsync(string CasesIds) {
+            return base.Channel.CasesDeleteByIdsAsync(CasesIds);
         }
     }
     

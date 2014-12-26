@@ -417,6 +417,12 @@
   <wsdl:message name="ICasesService_CasesQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:CasesQueryListByCompanyResponse" />
   </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteByIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteByIds" />
+  </wsdl:message>
+  <wsdl:message name="ICasesService_CasesDeleteByIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CasesDeleteByIdsResponse" />
+  </wsdl:message>
   <wsdl:message name="INewsCategoryService_NewsCategoryInsert_InputMessage">
     <wsdl:part name="parameters" element="tns:NewsCategoryInsert" />
   </wsdl:message>
@@ -903,6 +909,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesQueryListByCompany">
       <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesQueryListByCompany" message="tns:ICasesService_CasesQueryListByCompany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesQueryListByCompanyResponse" message="tns:ICasesService_CasesQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CasesDeleteByIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteByIds" message="tns:ICasesService_CasesDeleteByIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICasesService/CasesDeleteByIdsResponse" message="tns:ICasesService_CasesDeleteByIds_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="INewsCategoryService">
@@ -1594,6 +1604,15 @@
     </wsdl:operation>
     <wsdl:operation name="CasesQueryListByCompany">
       <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CasesDeleteByIds">
+      <soap12:operation soapAction="http://tempuri.org/ICasesService/CasesDeleteByIds" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
