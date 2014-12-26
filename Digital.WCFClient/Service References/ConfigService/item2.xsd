@@ -707,4 +707,37 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="DevelopmentStatusMode" nillable="true" type="tns:DevelopmentStatusMode" />
+  <xs:complexType name="ArrayOfFileFolderMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FileFolderMode" nillable="true" type="tns:FileFolderMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFileFolderMode" nillable="true" type="tns:ArrayOfFileFolderMode" />
+  <xs:complexType name="FileFolderMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileList" nillable="true" type="tns:ArrayOfFilesMode" />
+      <xs:element minOccurs="0" name="FolderDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FolderPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FolderSize" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileFolderMode" nillable="true" type="tns:FileFolderMode" />
+  <xs:complexType name="ArrayOfFilesMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FilesMode" nillable="true" type="tns:FilesMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFilesMode" nillable="true" type="tns:ArrayOfFilesMode" />
+  <xs:complexType name="FilesMode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FileExtensionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileSize" type="xs:long" />
+      <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FilesMode" nillable="true" type="tns:FilesMode" />
 </xs:schema>

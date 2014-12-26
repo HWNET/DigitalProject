@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Digital.Contact.Models;
 using Digital.Service.Interfaces;
 using Digital.Contact.BLL;
+using Digital.Common.Logging;
 
 namespace Digital.Service.Implements
 {
@@ -14,128 +15,218 @@ namespace Digital.Service.Implements
         #region CasesInsert
         public CasesModel CasesInsert(CasesModel Model)
         {
-            Model.UpdateStatus = 1;
-            CasesService CasesService = new CasesService();
-            //Insert DB
-            var Result=CasesService.CasesInsert(Model);
-            //Insert Cache
-            //GenericList.CacheModelObj.CompanyModellist.Add(Model);
-            return Result;
+            try
+            {
+                Model.UpdateStatus = 1;
+                CasesService CasesService = new CasesService();
+                //Insert DB
+                var Result = CasesService.CasesInsert(Model);
+                //Insert Cache
+                //GenericList.CacheModelObj.CompanyModellist.Add(Model);
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CasesUpdate
         public CasesModel CasesUpdate(CasesModel Model)
         {
-            var CasesModel = CasesQueryById(Model.CasesID);
-
-            if (CasesModel != null)
+            try
             {
-                #region Instance Model
+                var CasesModel = CasesQueryById(Model.CasesID);
 
-                #endregion
-                #region UI Models
+                if (CasesModel != null)
+                {
+                    #region Instance Model
 
-                #endregion
+                    #endregion
+                    #region UI Models
 
-                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-                CasesModel.UpdateStatus = 2;
+                    #endregion
 
-                //directly update to DB
-                CasesService CasesService = new CasesService();
-                CasesService.CasesUpdate(Model);
-                return Model;
+                    //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                    CasesModel.UpdateStatus = 2;
+
+                    //directly update to DB
+                    CasesService CasesService = new CasesService();
+                    CasesService.CasesUpdate(Model);
+                    return Model;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
                 return null;
             }
+
         }
         #endregion
 
         #region CasesQueryById
         public CasesModel CasesQueryById(int CasesId)
         {
-            //get model from DB
-            CasesService CasesService = new CasesService();
-            var CasesModel = CasesService.CasesQueryById(CasesId);
-            return CasesModel;
+            try
+            {
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var CasesModel = CasesService.CasesQueryById(CasesId);
+                return CasesModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
         #region CasesQueryByName
         public CasesModel CasesQueryByName(string CasesName)
         {
-            //get model from DB
-            CasesService CasesService = new CasesService();
-            var CasesModel = CasesService.CasesQueryByName(CasesName);
-            return CasesModel;
+            try
+            {
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var CasesModel = CasesService.CasesQueryByName(CasesName);
+                return CasesModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+ 
         }
         #endregion
 
         #region CasesDeleteById
         public bool CasesDeleteById(int CasesId)
         {
-            //get model from DB
-            CasesService CasesService = new CasesService();
-            var Result = CasesService.CasesDeleteById(CasesId);
-            return Result;
+            try
+            {
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var Result = CasesService.CasesDeleteById(CasesId);
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return false;
+            }
+
         }
         #endregion
 
         #region CasesDeleteByCategory
         public bool CasesDeleteByCategory(int CasesCategoryId)
         {
-            //get model from DB
-            CasesService CasesService = new CasesService();
-            var Result = CasesService.CasesDeleteByCategory(CasesCategoryId);
-            return Result;
+            try
+            {
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var Result = CasesService.CasesDeleteByCategory(CasesCategoryId);
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return false;
+            }
+
         }
         #endregion
 
         #region CasesDeleteByCompany
         public bool CasesDeleteByCompany(int CompanyId)
         {
-            CasesService CasesService = new CasesService();
-            var CategoryList = CasesService.CasesQueryListByCompany(CompanyId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            //CategoryModel.UpdateStatus = 3;
+            try
+            {
+                CasesService CasesService = new CasesService();
+                var CategoryList = CasesService.CasesQueryListByCompany(CompanyId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                //CategoryModel.UpdateStatus = 3;
 
-            if (CategoryList != null)
-            {
-                var Result = CasesService.CasesDeleteByCompany(CompanyId);
-                return Result;
+                if (CategoryList != null)
+                {
+                    var Result = CasesService.CasesDeleteByCompany(CompanyId);
+                    return Result;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
                 return false;
             }
+
         }
         #endregion
 
         #region CasesQueryList
         public List<CasesModel> CasesQueryList()
         {
-            CasesService CasesService = new CasesService();
-            var CasesList = CasesService.CasesQueryList();
-            return CasesList;
+            try
+            {
+                CasesService CasesService = new CasesService();
+                var CasesList = CasesService.CasesQueryList();
+                return CasesList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CasesQueryListByCategory
         public List<CasesModel> CasesQueryListByCategory(int CasesCategoryId)
         {
-            CasesService CasesService = new CasesService();
-            var CasesList = CasesService.CasesQueryListByCategory(CasesCategoryId);
-            return CasesList;
+            try
+            {
+                CasesService CasesService = new CasesService();
+                var CasesList = CasesService.CasesQueryListByCategory(CasesCategoryId);
+                return CasesList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CasesQueryListByCompany
         public List<CasesModel> CasesQueryListByCompany(int CompanyId)
         {
-            CasesService CasesService = new CasesService();
-            var CasesList = CasesService.CasesQueryListByCompany(CompanyId);
-            return CasesList;
+            try
+            {
+                CasesService CasesService = new CasesService();
+                var CasesList = CasesService.CasesQueryListByCompany(CompanyId);
+                return CasesList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Digital.Contact.Models;
 using Digital.Service.Interfaces;
 using Digital.Contact.BLL;
+using Digital.Common.Logging;
 
 namespace Digital.Service.Implements
 {
@@ -14,247 +15,292 @@ namespace Digital.Service.Implements
         #region CompanyInsert
         public CompanyModel CompanyInsert(CompanyModel Model)
         {
-            Model.UpdateStatus = 1;
-            CompanyService CompanyService = new CompanyService();
-            //Insert DB
-            var Result=CompanyService.CompanyInsert(Model);
-            //Insert Cache
-            GenericList.CacheModelObj.CompanyModellist.Add(Model);
-            return Result;
+            try
+            {
+                Model.UpdateStatus = 1;
+                CompanyService CompanyService = new CompanyService();
+                //Insert DB
+                var Result = CompanyService.CompanyInsert(Model);
+                //Insert Cache
+                GenericList.CacheModelObj.CompanyModellist.Add(Model);
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CompanyBaseInfos", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
         
         #region CompanyUpdate
         public CompanyModel CompanyUpdate(CompanyModel Model,int TabIndex)
         {
-            var CompanyModel = CompanyQueryById(Model.CompanyID);
-            /**/
-            #region Instance Model
-            if (TabIndex==1)
+            try
             {
-                #region TAB ONE
-                CompanyModel.CompanyName = Model.CompanyName; //公司名称
-                CompanyModel.CompanyRegisteredNO = Model.CompanyRegisteredNO;  //工商注册号
-                CompanyModel.CompanyTypeNO = Model.CompanyTypeNO;  //企业类型
-                CompanyModel.CompanyMembers = Model.CompanyMembers;  //企业人数
-                CompanyModel.CompanyBusinessModel = Model.CompanyBusinessModel;  //经营模式
-                CompanyModel.IsProvideOEM = Model.IsProvideOEM;  //是否提供 OEM,ODM
-                CompanyModel.PrimaryBusinessCategory = Model.PrimaryBusinessCategory;
-                CompanyModel.PrimaryBusiness = Model.PrimaryBusiness;  //主营行业
-                CompanyModel.PrimaryProduct = Model.PrimaryProduct;  //主营产品
-                CompanyModel.PrimarySalesArea = Model.PrimarySalesArea;  //主要销售区域
-                CompanyModel.CompanyBusinessProvince = Model.CompanyBusinessProvince;  //经营地址,省
-                CompanyModel.CompanyBusinessCity = Model.CompanyBusinessCity;  //经营地址,市
-                CompanyModel.CompanyIntro = Model.CompanyIntro; //公司简介
+                var CompanyModel = CompanyQueryById(Model.CompanyID);
+                /**/
+                #region Instance Model
+                if (TabIndex == 1)
+                {
+                    #region TAB ONE
+                    CompanyModel.CompanyName = Model.CompanyName; //公司名称
+                    CompanyModel.CompanyRegisteredNO = Model.CompanyRegisteredNO;  //工商注册号
+                    CompanyModel.CompanyTypeNO = Model.CompanyTypeNO;  //企业类型
+                    CompanyModel.CompanyMembers = Model.CompanyMembers;  //企业人数
+                    CompanyModel.CompanyBusinessModel = Model.CompanyBusinessModel;  //经营模式
+                    CompanyModel.IsProvideOEM = Model.IsProvideOEM;  //是否提供 OEM,ODM
+                    CompanyModel.PrimaryBusinessCategory = Model.PrimaryBusinessCategory;
+                    CompanyModel.PrimaryBusiness = Model.PrimaryBusiness;  //主营行业
+                    CompanyModel.PrimaryProduct = Model.PrimaryProduct;  //主营产品
+                    CompanyModel.PrimarySalesArea = Model.PrimarySalesArea;  //主要销售区域
+                    CompanyModel.CompanyBusinessProvince = Model.CompanyBusinessProvince;  //经营地址,省
+                    CompanyModel.CompanyBusinessCity = Model.CompanyBusinessCity;  //经营地址,市
+                    CompanyModel.CompanyIntro = Model.CompanyIntro; //公司简介
+                    #endregion
+
+                    #region TAB ONE -- UI Models
+                    //CompanyModel.CompanyTypeMode = new CompanyTypeMode { Id = CompanyModel.CompanyTypeNO, Name = GenericList.CacheModelObj.CompanyTypeModelist.Where(o => o.Id == CompanyModel.CompanyTypeNO).SingleOrDefault().Name };
+                    //CompanyModel.CompanyMemberMode = new CompanyMemberMode { Id = CompanyModel.CompanyMembers, Name = GenericList.CacheModelObj.CompanyMemberModelist.Where(o => o.Id == CompanyModel.CompanyMembers).SingleOrDefault().Name };
+                    //CompanyModel.CompanyBusinessMode = new CompanyBusinessMode { Id = CompanyModel.CompanyBusinessModel, Name = GenericList.CacheModelObj.CompanyBusinessModelist.Where(o => o.Id == CompanyModel.CompanyBusinessModel).SingleOrDefault().Name };
+
+
+                    //PrimaryBusinessCategoryMode BCategoryMode = null;
+                    //foreach (var BCMode in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
+                    //{
+                    //    if (BCMode.Id==CompanyModel.PrimaryBusinessCategory)
+                    //    {
+                    //        BCategoryMode = BCMode;
+                    //        break;
+                    //    }
+                    //}
+                    //CompanyModel.PrimaryBusinessCategoryMode = new PrimaryBusinessCategoryMode { Id = CompanyModel.PrimaryBusinessCategory, Name = BCategoryMode.Name };
+
+                    //var PrimaryBusinessName = string.Empty;
+                    //foreach (var item in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
+                    //{
+                    //    var mode = item.PrimaryBusinessList.Where(o => o.Id == CompanyModel.PrimaryBusiness).SingleOrDefault();
+                    //    if (mode != null && mode.Id > 0)
+                    //    {
+                    //        PrimaryBusinessName = mode.Name;
+                    //        break;
+                    //    }
+                    //}
+                    //CompanyModel.PrimaryBusinessMode = new PrimaryBusinessMode { Id = CompanyModel.PrimaryBusiness, Name = PrimaryBusinessName, BusinessCategoryName = BCategoryMode.Name };
+
+                    //CompanyModel.PrimarySalesAreaMode = new PrimarySalesAreaMode { Id = CompanyModel.PrimarySalesArea, Name = GenericList.CacheModelObj.PrimarySalesAreaModelist.Where(o => o.Id == CompanyModel.PrimarySalesArea).SingleOrDefault().Name };
+
+                    //CompanyBusinessProvinceMode BusinessProvinceMode = null;
+                    //foreach (var BProvinceMode in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
+                    //{
+                    //    if (BProvinceMode.Id==CompanyModel.CompanyBusinessProvince)
+                    //    {
+                    //        BusinessProvinceMode = BProvinceMode;
+                    //        break;
+                    //    }
+                    //}
+                    //CompanyModel.CompanyBusinessProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyBusinessProvince, Name = BusinessProvinceMode.Name };
+
+                    //var BusinessCityName = string.Empty;
+                    //foreach (var item in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
+                    //{
+                    //    var mode = item.CompanyBusinessCityModeList.Where(o => o.Id == CompanyModel.CompanyBusinessCity).SingleOrDefault();
+                    //    if (mode != null && mode.Id > 0)
+                    //    {
+                    //        BusinessCityName = mode.Name;
+                    //        break;
+                    //    }
+                    //}
+                    //CompanyModel.CompanyBusinessCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyBusinessCity, Name = BusinessCityName, BusinessProvinceName = BusinessProvinceMode.Name };
+                    #endregion
+
+                }
+                else if (TabIndex == 2)
+                {
+                    #region TAB TWO
+                    CompanyModel.ProductionForm = Model.ProductionForm;  //生产形式
+                    CompanyModel.ServicesDomain = Model.ServicesDomain;  //服务领域
+                    CompanyModel.ProcessingMethod = Model.ProcessingMethod;  //加工方式
+                    CompanyModel.ProcessingCraft = Model.ProcessingCraft;  //加工工艺
+                    CompanyModel.EquipmentIntro = Model.EquipmentIntro;  //设备介绍
+                    CompanyModel.ResearchDepartMembers = Model.ResearchDepartMembers;  //研发部门人数
+                    CompanyModel.CapacityIntro = Model.CapacityIntro;  //产能介绍
+                    CompanyModel.CapacityIntroUnit = Model.CapacityIntroUnit;
+                    CompanyModel.AnnualBusinessVolume = Model.AnnualBusinessVolume;  //年营业额
+                    CompanyModel.AnnualExportsVolume = Model.AnnualExportsVolume;  //年出口额
+                    CompanyModel.ManagementSystemCertification = Model.ManagementSystemCertification;  //管理体系认证
+                    CompanyModel.ProductQualityCertification = Model.ProductQualityCertification;  //产品质量认证
+                    CompanyModel.QualityAssurance = Model.QualityAssurance; //质量控制
+                    CompanyModel.FactoryArea = Model.FactoryArea; //厂房面积
+                    CompanyModel.PrimaryEquipments = Model.PrimaryEquipments;//主要设备
+                    #endregion
+
+                    #region TAB TWO -- UI Models
+                    //CompanyModel.ProductionFormMode = new ProductionFormMode { Id = CompanyModel.ProductionForm, Name = GenericList.CacheModelObj.ProductionFormModelist.Where(o => o.Id == CompanyModel.ProductionForm).SingleOrDefault().Name };
+                    //CompanyModel.ServicesDomainMode = new ServicesDomainMode { Id = CompanyModel.ServicesDomain, Name = GenericList.CacheModelObj.ServicesDomainModelist.Where(o => o.Id == CompanyModel.ServicesDomain).SingleOrDefault().Name };
+                    //CompanyModel.ProcessingMethodMode = new ProcessingMethodMode { Id = CompanyModel.ProcessingMethod, Name = GenericList.CacheModelObj.ProcessingMethodModelist.Where(o => o.Id == CompanyModel.ProcessingMethod).SingleOrDefault().Name };
+                    //CompanyModel.ProcessingCraftMode = new ProcessingCraftMode { Id = CompanyModel.ProcessingCraft, Name = GenericList.CacheModelObj.ProcessingCraftModelist.Where(o => o.Id == CompanyModel.ProcessingCraft).SingleOrDefault().Name };
+                    //CompanyModel.EquipmentIntroMode = new EquipmentIntroMode { Id = CompanyModel.EquipmentIntro, Name = GenericList.CacheModelObj.EquipmentIntroModelist.Where(o => o.Id == CompanyModel.EquipmentIntro).SingleOrDefault().Name };
+                    //CompanyModel.ResearchDepartMemberMode = new CompanyMemberMode { Id = CompanyModel.ResearchDepartMembers, Name = GenericList.CacheModelObj.CompanyMemberModelist.Where(o => o.Id == CompanyModel.ResearchDepartMembers).SingleOrDefault().Name };
+                    //CompanyModel.CapacityUnitMode = new CapacityUnitMode { Id = CompanyModel.CapacityIntroUnit, Name = GenericList.CacheModelObj.CapacityUnitModelist.Where(o => o.Id == CompanyModel.CapacityIntroUnit).SingleOrDefault().Name };
+                    //CompanyModel.AnnualBusinessVolumeMode = new AnnualBusinessVolumeMode { Id = CompanyModel.AnnualBusinessVolume, Name = GenericList.CacheModelObj.AnnualBusinessVolumeModelist.Where(o => o.Id == CompanyModel.AnnualBusinessVolume).SingleOrDefault().Name };
+                    //CompanyModel.AnnualExportsVolumeMode = new AnnualExportsVolumeMode { Id = CompanyModel.AnnualExportsVolume, Name = GenericList.CacheModelObj.AnnualExportsVolumeModelist.Where(o => o.Id == CompanyModel.AnnualExportsVolume).SingleOrDefault().Name };
+                    //CompanyModel.ManagementSystemCertificationMode = new ManagementSystemCertificationMode { Id = CompanyModel.ManagementSystemCertification, Name = GenericList.CacheModelObj.ManagementSystemCertificationModelist.Where(o => o.Id == CompanyModel.ManagementSystemCertification).SingleOrDefault().Name };
+                    //CompanyModel.ProductQualityCertificationMode = new ProductQualityCertificationMode { Id = CompanyModel.ProductQualityCertification, Name = GenericList.CacheModelObj.ProductQualityCertificationModelist.Where(o => o.Id == CompanyModel.ProductQualityCertification).SingleOrDefault().Name };
+                    //CompanyModel.QualityAssuranceMode = new QualityAssuranceMode { Id = CompanyModel.QualityAssurance, Name = GenericList.CacheModelObj.QualityAssuranceModelist.Where(o => o.Id == CompanyModel.QualityAssurance).SingleOrDefault().Name };
+                    #endregion
+                }
+                else if (TabIndex == 3)
+                {
+                    #region TAB THREE
+                    CompanyModel.CompanyYearEstablished = Model.CompanyYearEstablished;//成立年份
+                    CompanyModel.CompanyWebsite = Model.CompanyWebsite;//企业网址
+                    CompanyModel.CompanyRegisteredAssets = Model.CompanyRegisteredAssets; //注册资本
+                    CompanyModel.CompanyRegisteredAssetsUnit = Model.CompanyRegisteredAssetsUnit;//注册资本,单位
+                    CompanyModel.CompanyRegisteredProvince = Model.CompanyRegisteredProvince;//注册地址,省
+                    CompanyModel.CompanyRegisteredCity = Model.CompanyRegisteredCity;//注册地址,市
+                    CompanyModel.CompanyCorporateRepresentative = Model.CompanyCorporateRepresentative;//法人代表
+                    CompanyModel.CompanyBankDeposit = Model.CompanyBankDeposit; //开户行
+                    CompanyModel.CompanyBankAccount = Model.CompanyBankAccount;  //开户行 账户
+                    #endregion
+
+                    #region TAB THREE -- UI Models
+                    //CompanyModel.CompanyRegisteredAssetsUnitMode = new CompanyRegisteredAssetsUnitMode { Id = CompanyModel.CompanyRegisteredAssetsUnit, Name = GenericList.CacheModelObj.CompanyRegisteredAssetsUnitModelist.Where(o => o.Id == CompanyModel.CompanyRegisteredAssetsUnit).SingleOrDefault().Name };
+                    ////var modeBTEST = GenericList.CacheModelObj.CompanyBusinessProvinceModelist.Where(o => o.Id == CompanyModel.CompanyBusinessProvince).ToList();
+                    ////var modeTEST = GenericList.CacheModelObj.CompanyRegisteredProvinceModelist.Where(o => o.Id == CompanyModel.CompanyRegisteredProvince).ToList();
+                    //CompanyBusinessProvinceMode RegisteredProvinceMode = null;
+                    //foreach (var RProvinceMode in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
+                    //{
+                    //    if (RProvinceMode.Id==CompanyModel.CompanyRegisteredProvince)
+                    //    {
+                    //        RegisteredProvinceMode = RProvinceMode;
+                    //        break;
+                    //    }
+                    //}
+
+                    //CompanyModel.CompanyRegisteredProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyRegisteredProvince, Name = RegisteredProvinceMode.Name };
+                    //var RegisteredCityName = string.Empty;
+                    //foreach (var item in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
+                    //{
+                    //    var mode = item.CompanyBusinessCityModeList.Where(o => o.Id == CompanyModel.CompanyRegisteredCity).SingleOrDefault();
+                    //    if (mode != null && mode.Id > 0)
+                    //    {
+                    //        RegisteredCityName = mode.Name;
+                    //        break;
+                    //    }
+                    //}
+                    //CompanyModel.CompanyRegisteredCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyRegisteredCity, Name = RegisteredCityName, BusinessProvinceName = RegisteredProvinceMode.Name };
+                    #endregion
+                }
                 #endregion
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                CompanyModel.UpdateStatus = 2;
 
-                #region TAB ONE -- UI Models
-                //CompanyModel.CompanyTypeMode = new CompanyTypeMode { Id = CompanyModel.CompanyTypeNO, Name = GenericList.CacheModelObj.CompanyTypeModelist.Where(o => o.Id == CompanyModel.CompanyTypeNO).SingleOrDefault().Name };
-                //CompanyModel.CompanyMemberMode = new CompanyMemberMode { Id = CompanyModel.CompanyMembers, Name = GenericList.CacheModelObj.CompanyMemberModelist.Where(o => o.Id == CompanyModel.CompanyMembers).SingleOrDefault().Name };
-                //CompanyModel.CompanyBusinessMode = new CompanyBusinessMode { Id = CompanyModel.CompanyBusinessModel, Name = GenericList.CacheModelObj.CompanyBusinessModelist.Where(o => o.Id == CompanyModel.CompanyBusinessModel).SingleOrDefault().Name };
+                //Update Cache
+                var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyID == CompanyModel.CompanyID).SingleOrDefault();
+                GenericList.CacheModelObj.CompanyModellist.Remove(CompanyModelCache);
+                GenericList.CacheModelObj.CompanyModellist.Add(CompanyModel);
 
-
-                //PrimaryBusinessCategoryMode BCategoryMode = null;
-                //foreach (var BCMode in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
-                //{
-                //    if (BCMode.Id==CompanyModel.PrimaryBusinessCategory)
-                //    {
-                //        BCategoryMode = BCMode;
-                //        break;
-                //    }
-                //}
-                //CompanyModel.PrimaryBusinessCategoryMode = new PrimaryBusinessCategoryMode { Id = CompanyModel.PrimaryBusinessCategory, Name = BCategoryMode.Name };
-                
-                //var PrimaryBusinessName = string.Empty;
-                //foreach (var item in GenericList.CacheModelObj.PrimaryBusinessCategoryModelist)
-                //{
-                //    var mode = item.PrimaryBusinessList.Where(o => o.Id == CompanyModel.PrimaryBusiness).SingleOrDefault();
-                //    if (mode != null && mode.Id > 0)
-                //    {
-                //        PrimaryBusinessName = mode.Name;
-                //        break;
-                //    }
-                //}
-                //CompanyModel.PrimaryBusinessMode = new PrimaryBusinessMode { Id = CompanyModel.PrimaryBusiness, Name = PrimaryBusinessName, BusinessCategoryName = BCategoryMode.Name };
-
-                //CompanyModel.PrimarySalesAreaMode = new PrimarySalesAreaMode { Id = CompanyModel.PrimarySalesArea, Name = GenericList.CacheModelObj.PrimarySalesAreaModelist.Where(o => o.Id == CompanyModel.PrimarySalesArea).SingleOrDefault().Name };
-
-                //CompanyBusinessProvinceMode BusinessProvinceMode = null;
-                //foreach (var BProvinceMode in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
-                //{
-                //    if (BProvinceMode.Id==CompanyModel.CompanyBusinessProvince)
-                //    {
-                //        BusinessProvinceMode = BProvinceMode;
-                //        break;
-                //    }
-                //}
-                //CompanyModel.CompanyBusinessProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyBusinessProvince, Name = BusinessProvinceMode.Name };
-                
-                //var BusinessCityName = string.Empty;
-                //foreach (var item in GenericList.CacheModelObj.CompanyBusinessProvinceModelist)
-                //{
-                //    var mode = item.CompanyBusinessCityModeList.Where(o => o.Id == CompanyModel.CompanyBusinessCity).SingleOrDefault();
-                //    if (mode != null && mode.Id > 0)
-                //    {
-                //        BusinessCityName = mode.Name;
-                //        break;
-                //    }
-                //}
-                //CompanyModel.CompanyBusinessCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyBusinessCity, Name = BusinessCityName, BusinessProvinceName = BusinessProvinceMode.Name };
-                #endregion
-
+                //Insert Buffer
+                GenericList.InsertBuffer(null, CompanyModel);
+                return CompanyModel;
             }
-            else if (TabIndex==2)
+            catch (Exception ex)
             {
-                #region TAB TWO
-                CompanyModel.ProductionForm = Model.ProductionForm;  //生产形式
-                CompanyModel.ServicesDomain = Model.ServicesDomain;  //服务领域
-                CompanyModel.ProcessingMethod = Model.ProcessingMethod;  //加工方式
-                CompanyModel.ProcessingCraft = Model.ProcessingCraft;  //加工工艺
-                CompanyModel.EquipmentIntro = Model.EquipmentIntro;  //设备介绍
-                CompanyModel.ResearchDepartMembers = Model.ResearchDepartMembers;  //研发部门人数
-                CompanyModel.CapacityIntro = Model.CapacityIntro;  //产能介绍
-                CompanyModel.CapacityIntroUnit = Model.CapacityIntroUnit;
-                CompanyModel.AnnualBusinessVolume = Model.AnnualBusinessVolume;  //年营业额
-                CompanyModel.AnnualExportsVolume = Model.AnnualExportsVolume;  //年出口额
-                CompanyModel.ManagementSystemCertification = Model.ManagementSystemCertification;  //管理体系认证
-                CompanyModel.ProductQualityCertification = Model.ProductQualityCertification;  //产品质量认证
-                CompanyModel.QualityAssurance = Model.QualityAssurance; //质量控制
-                CompanyModel.FactoryArea = Model.FactoryArea; //厂房面积
-                CompanyModel.PrimaryEquipments = Model.PrimaryEquipments;//主要设备
-                #endregion
-
-                #region TAB TWO -- UI Models
-                //CompanyModel.ProductionFormMode = new ProductionFormMode { Id = CompanyModel.ProductionForm, Name = GenericList.CacheModelObj.ProductionFormModelist.Where(o => o.Id == CompanyModel.ProductionForm).SingleOrDefault().Name };
-                //CompanyModel.ServicesDomainMode = new ServicesDomainMode { Id = CompanyModel.ServicesDomain, Name = GenericList.CacheModelObj.ServicesDomainModelist.Where(o => o.Id == CompanyModel.ServicesDomain).SingleOrDefault().Name };
-                //CompanyModel.ProcessingMethodMode = new ProcessingMethodMode { Id = CompanyModel.ProcessingMethod, Name = GenericList.CacheModelObj.ProcessingMethodModelist.Where(o => o.Id == CompanyModel.ProcessingMethod).SingleOrDefault().Name };
-                //CompanyModel.ProcessingCraftMode = new ProcessingCraftMode { Id = CompanyModel.ProcessingCraft, Name = GenericList.CacheModelObj.ProcessingCraftModelist.Where(o => o.Id == CompanyModel.ProcessingCraft).SingleOrDefault().Name };
-                //CompanyModel.EquipmentIntroMode = new EquipmentIntroMode { Id = CompanyModel.EquipmentIntro, Name = GenericList.CacheModelObj.EquipmentIntroModelist.Where(o => o.Id == CompanyModel.EquipmentIntro).SingleOrDefault().Name };
-                //CompanyModel.ResearchDepartMemberMode = new CompanyMemberMode { Id = CompanyModel.ResearchDepartMembers, Name = GenericList.CacheModelObj.CompanyMemberModelist.Where(o => o.Id == CompanyModel.ResearchDepartMembers).SingleOrDefault().Name };
-                //CompanyModel.CapacityUnitMode = new CapacityUnitMode { Id = CompanyModel.CapacityIntroUnit, Name = GenericList.CacheModelObj.CapacityUnitModelist.Where(o => o.Id == CompanyModel.CapacityIntroUnit).SingleOrDefault().Name };
-                //CompanyModel.AnnualBusinessVolumeMode = new AnnualBusinessVolumeMode { Id = CompanyModel.AnnualBusinessVolume, Name = GenericList.CacheModelObj.AnnualBusinessVolumeModelist.Where(o => o.Id == CompanyModel.AnnualBusinessVolume).SingleOrDefault().Name };
-                //CompanyModel.AnnualExportsVolumeMode = new AnnualExportsVolumeMode { Id = CompanyModel.AnnualExportsVolume, Name = GenericList.CacheModelObj.AnnualExportsVolumeModelist.Where(o => o.Id == CompanyModel.AnnualExportsVolume).SingleOrDefault().Name };
-                //CompanyModel.ManagementSystemCertificationMode = new ManagementSystemCertificationMode { Id = CompanyModel.ManagementSystemCertification, Name = GenericList.CacheModelObj.ManagementSystemCertificationModelist.Where(o => o.Id == CompanyModel.ManagementSystemCertification).SingleOrDefault().Name };
-                //CompanyModel.ProductQualityCertificationMode = new ProductQualityCertificationMode { Id = CompanyModel.ProductQualityCertification, Name = GenericList.CacheModelObj.ProductQualityCertificationModelist.Where(o => o.Id == CompanyModel.ProductQualityCertification).SingleOrDefault().Name };
-                //CompanyModel.QualityAssuranceMode = new QualityAssuranceMode { Id = CompanyModel.QualityAssurance, Name = GenericList.CacheModelObj.QualityAssuranceModelist.Where(o => o.Id == CompanyModel.QualityAssurance).SingleOrDefault().Name };
-                #endregion
+                logger.WriteInfo("CompanyBaseInfos", MessageLevel.Level2, ex.ToString());
+                return null;
             }
-            else if (TabIndex==3)
-            {
-                #region TAB THREE
-                CompanyModel.CompanyYearEstablished = Model.CompanyYearEstablished;//成立年份
-                CompanyModel.CompanyWebsite = Model.CompanyWebsite;//企业网址
-                CompanyModel.CompanyRegisteredAssets = Model.CompanyRegisteredAssets; //注册资本
-                CompanyModel.CompanyRegisteredAssetsUnit = Model.CompanyRegisteredAssetsUnit;//注册资本,单位
-                CompanyModel.CompanyRegisteredProvince = Model.CompanyRegisteredProvince;//注册地址,省
-                CompanyModel.CompanyRegisteredCity = Model.CompanyRegisteredCity;//注册地址,市
-                CompanyModel.CompanyCorporateRepresentative = Model.CompanyCorporateRepresentative;//法人代表
-                CompanyModel.CompanyBankDeposit = Model.CompanyBankDeposit; //开户行
-                CompanyModel.CompanyBankAccount = Model.CompanyBankAccount;  //开户行 账户
-                #endregion
 
-                #region TAB THREE -- UI Models
-                //CompanyModel.CompanyRegisteredAssetsUnitMode = new CompanyRegisteredAssetsUnitMode { Id = CompanyModel.CompanyRegisteredAssetsUnit, Name = GenericList.CacheModelObj.CompanyRegisteredAssetsUnitModelist.Where(o => o.Id == CompanyModel.CompanyRegisteredAssetsUnit).SingleOrDefault().Name };
-                ////var modeBTEST = GenericList.CacheModelObj.CompanyBusinessProvinceModelist.Where(o => o.Id == CompanyModel.CompanyBusinessProvince).ToList();
-                ////var modeTEST = GenericList.CacheModelObj.CompanyRegisteredProvinceModelist.Where(o => o.Id == CompanyModel.CompanyRegisteredProvince).ToList();
-                //CompanyBusinessProvinceMode RegisteredProvinceMode = null;
-                //foreach (var RProvinceMode in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
-                //{
-                //    if (RProvinceMode.Id==CompanyModel.CompanyRegisteredProvince)
-                //    {
-                //        RegisteredProvinceMode = RProvinceMode;
-                //        break;
-                //    }
-                //}
-
-                //CompanyModel.CompanyRegisteredProvinceMode = new CompanyBusinessProvinceMode { Id = CompanyModel.CompanyRegisteredProvince, Name = RegisteredProvinceMode.Name };
-                //var RegisteredCityName = string.Empty;
-                //foreach (var item in GenericList.CacheModelObj.CompanyRegisteredProvinceModelist)
-                //{
-                //    var mode = item.CompanyBusinessCityModeList.Where(o => o.Id == CompanyModel.CompanyRegisteredCity).SingleOrDefault();
-                //    if (mode != null && mode.Id > 0)
-                //    {
-                //        RegisteredCityName = mode.Name;
-                //        break;
-                //    }
-                //}
-                //CompanyModel.CompanyRegisteredCityMode = new CompanyBusinessCityMode { Id = CompanyModel.CompanyRegisteredCity, Name = RegisteredCityName, BusinessProvinceName = RegisteredProvinceMode.Name };
-                #endregion
-            }
-            #endregion
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            CompanyModel.UpdateStatus = 2;
-
-            //Update Cache
-            var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyID == CompanyModel.CompanyID).SingleOrDefault();
-            GenericList.CacheModelObj.CompanyModellist.Remove(CompanyModelCache);
-            GenericList.CacheModelObj.CompanyModellist.Add(CompanyModel);
-
-            //Insert Buffer
-            GenericList.InsertBuffer(null, CompanyModel);
-            return CompanyModel;
         }
         #endregion
 
         #region CompanyQueryById
         public CompanyModel CompanyQueryById(int CompanyId)
         {
-            var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyID == CompanyId).SingleOrDefault();
-            if (CompanyModelCache != null) // can found in cache
+            try
             {
-                return CompanyModelCache;
-            }
-            else // can not found in cache
-            {
-                CompanyService CompanyService = new CompanyService();
-                var CompanyModel=CompanyService.CompanyQueryById(CompanyId);
-
-                //Cache Company Model
-                if (CompanyModel!=null) // insert data into cache
+                var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyID == CompanyId).SingleOrDefault();
+                if (CompanyModelCache != null) // can found in cache
                 {
-                    GenericList.CacheModelObj.CompanyModellist.Add(CompanyModel);
+                    return CompanyModelCache;
                 }
-                return CompanyModel;
+                else // can not found in cache
+                {
+                    CompanyService CompanyService = new CompanyService();
+                    var CompanyModel = CompanyService.CompanyQueryById(CompanyId);
+
+                    //Cache Company Model
+                    if (CompanyModel != null) // insert data into cache
+                    {
+                        GenericList.CacheModelObj.CompanyModellist.Add(CompanyModel);
+                    }
+                    return CompanyModel;
+                }
             }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CompanyBaseInfos", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CompanyQueryByName
         public CompanyModel CompanyQueryByName(string CompanyName)
         {
-            var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyName == CompanyName).SingleOrDefault();
-            if (CompanyModelCache!=null)
+            try
             {
-                return CompanyModelCache;
-            }
-            else
-            {
-                //get model from DB
-                CompanyService CompanyService = new CompanyService();
-                var CompanyModel = CompanyService.CompanyQueryByName(CompanyName);
-                //insert cache
-                if (CompanyModel!=null)
+                var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyName == CompanyName).SingleOrDefault();
+                if (CompanyModelCache != null)
                 {
-                    GenericList.CacheModelObj.CompanyModellist.Add(CompanyModel);
+                    return CompanyModelCache;
                 }
-                return CompanyModel;
+                else
+                {
+                    //get model from DB
+                    CompanyService CompanyService = new CompanyService();
+                    var CompanyModel = CompanyService.CompanyQueryByName(CompanyName);
+                    //insert cache
+                    if (CompanyModel != null)
+                    {
+                        GenericList.CacheModelObj.CompanyModellist.Add(CompanyModel);
+                    }
+                    return CompanyModel;
+                }
             }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CompanyBaseInfos", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CompanyDeleteById
         public bool CompanyDeleteById(int CompanyId)
         {
-            var CompanyModel = CompanyQueryById(CompanyId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            CompanyModel.UpdateStatus = 3;
+            try
+            {
+                var CompanyModel = CompanyQueryById(CompanyId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                CompanyModel.UpdateStatus = 3;
 
-            //update cache
-            var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyID == CompanyModel.CompanyID).SingleOrDefault();
-            GenericList.CacheModelObj.CompanyModellist.Remove(CompanyModelCache);
-            //insert buffer
-            GenericList.InsertBuffer(null, CompanyModel);
-            return true;
+                //update cache
+                var CompanyModelCache = GenericList.CacheModelObj.CompanyModellist.Where(o => o.CompanyID == CompanyModel.CompanyID).SingleOrDefault();
+                GenericList.CacheModelObj.CompanyModellist.Remove(CompanyModelCache);
+                //insert buffer
+                GenericList.InsertBuffer(null, CompanyModel);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CompanyBaseInfos", MessageLevel.Level2, ex.ToString());
+                return false;
+            }
+
         }
         #endregion
 
@@ -268,23 +314,33 @@ namespace Digital.Service.Implements
         #region CompanyQueryList
         public List<CompanyModel> CompanyQueryList()
         {
-            var CompanyListCache = GenericList.CacheModelObj.CompanyModellist;
-            if (CompanyListCache!=null)
+            try
             {
-                return CompanyListCache;
-            }
-            else
-            {
-                CompanyService CompanyService = new CompanyService();
-                var CompanyList = CompanyService.CompanyQueryList();
-
-                //insert cache
-                if (CompanyList!=null)
+                var CompanyListCache = GenericList.CacheModelObj.CompanyModellist;
+                if (CompanyListCache != null)
                 {
-                    GenericList.CacheModelObj.CompanyModellist = CompanyList;
+                    return CompanyListCache;
                 }
-                return CompanyList;
+                else
+                {
+                    CompanyService CompanyService = new CompanyService();
+                    var CompanyList = CompanyService.CompanyQueryList();
+
+                    //insert cache
+                    if (CompanyList != null)
+                    {
+                        GenericList.CacheModelObj.CompanyModellist = CompanyList;
+                    }
+                    return CompanyList;
+                }
+
             }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CompanyBaseInfos", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 

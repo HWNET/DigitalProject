@@ -11,8 +11,15 @@ using System.Web.Hosting;
 
 namespace Digital.Common.Logging
 {
+    public enum MessageLevel
+    {
+        Level1, //Information
+        Level2, //Error
+        Level3  //Waring
+    }
     public class NLogHelper
     {
+        const string msgTemplate = @"Module: {0}, Method: {1}(), MessageLevel: {2}, Message: {3}";
         private NLog.Logger _logger;
 
         public NLogHelper()
@@ -62,6 +69,33 @@ namespace Digital.Common.Logging
                 throw new NullReferenceException("logger instance is not initialized.");
 
             _logger.Debug(msg);
+        }
+
+        public void WriteInfo(string module, MessageLevel level, string msg)
+        {
+            var method = new System.Diagnostics.StackFrame(1).GetMethod().Name;
+            var msgLevel = SetMessageLevel(level);
+
+            WriteInfo(string.Format(msgTemplate, module, method, msgLevel, msg));
+        }
+
+        private string SetMessageLevel(MessageLevel level)
+        {
+            var msgLevel = string.Empty;
+            if (level == MessageLevel.Level1)
+            {
+                msgLevel = "Information";
+            }
+            else if (level == MessageLevel.Level2)
+            {
+                msgLevel = "Error";
+            }
+            else if (level == MessageLevel.Level3)
+            {
+                msgLevel = "Waring";
+            }
+
+            return msgLevel;
         }
     }
 }

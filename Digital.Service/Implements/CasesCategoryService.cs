@@ -8,6 +8,7 @@ using Digital.Service.Interfaces;
 using Digital.Contact.BLL;
 using System.Configuration;
 using System.IO;
+using Digital.Common.Logging;
 
 namespace Digital.Service.Implements
 {
@@ -16,142 +17,213 @@ namespace Digital.Service.Implements
         #region CasesCategoryInsert
         public CasesCategoryModel CasesCategoryInsert(CasesCategoryModel Model)
         {
-            Model.UpdateStatus = 1;
-            CasesCategoryService CasesCategoryService = new CasesCategoryService();
-            //Insert DB
-            var Result=CasesCategoryService.CasesCategoryInsert(Model);
-            //Insert Cache
-            //GenericList.CacheModelObj.CompanyModellist.Add(Model);
-            return Result;
+            try
+            {
+                Model.UpdateStatus = 1;
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                //Insert DB
+                var Result = CasesCategoryService.CasesCategoryInsert(Model);
+                //Insert Cache
+                //GenericList.CacheModelObj.CompanyModellist.Add(Model);
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
         }
         #endregion
 
         #region CasesCategoryUpdate
         public CasesCategoryModel CasesCategoryUpdate(CasesCategoryModel Model)
         {
-            var CategoryModel = CasesCategoryQueryById(Model.CasesCategoryID);
-
-            if (CategoryModel != null)
+            try
             {
-                #region Instance Model
-                //CategoryModel.CasesCategoryName = Model.CasesCategoryName;
-                //CategoryModel.CasesCategoryContent = Model.CasesCategoryContent;
-                //CategoryModel.CasesCategoryID = Model.CasesCategoryID;
-                //CategoryModel.CasesCategoryOrderID = Model.CasesCategoryOrderID;
-                //CategoryModel.CasesCategoryParentID = CategoryModel.CasesCategoryParentID;
-                //CategoryModel.CasesCategoryPicture = CategoryModel.CasesCategoryPicture;
-                //CategoryModel.CasesModels = Model.CasesModels;
-                //CategoryModel.CompanyID = CategoryModel.CompanyID;
-                #endregion
-                #region UI Models
+                var CategoryModel = CasesCategoryQueryById(Model.CasesCategoryID);
 
-                #endregion
+                if (CategoryModel != null)
+                {
+                    #region Instance Model
+                    //CategoryModel.CasesCategoryName = Model.CasesCategoryName;
+                    //CategoryModel.CasesCategoryContent = Model.CasesCategoryContent;
+                    //CategoryModel.CasesCategoryID = Model.CasesCategoryID;
+                    //CategoryModel.CasesCategoryOrderID = Model.CasesCategoryOrderID;
+                    //CategoryModel.CasesCategoryParentID = CategoryModel.CasesCategoryParentID;
+                    //CategoryModel.CasesCategoryPicture = CategoryModel.CasesCategoryPicture;
+                    //CategoryModel.CasesModels = Model.CasesModels;
+                    //CategoryModel.CompanyID = CategoryModel.CompanyID;
+                    #endregion
+                    #region UI Models
 
-                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-                CategoryModel.UpdateStatus = 2;
+                    #endregion
 
-                //directly update to DB
-                CasesCategoryService CasesCategoryService = new CasesCategoryService();
-                CasesCategoryService.CasesCategoryUpdate(Model);
-                return Model;
+                    //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                    CategoryModel.UpdateStatus = 2;
+
+                    //directly update to DB
+                    CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                    CasesCategoryService.CasesCategoryUpdate(Model);
+                    return Model;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
                 return null;
             }
+
         }
         #endregion
 
         #region CasesCategoryQueryById
         public CasesCategoryModel CasesCategoryQueryById(int CasesCategoryId)
         {
-            //get model from DB
-            CasesCategoryService CasesCategoryService = new CasesCategoryService();
-            var CategoryModel = CasesCategoryService.CasesCategoryQueryById(CasesCategoryId);
-            return CategoryModel;
+            try
+            {
+                //get model from DB
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                var CategoryModel = CasesCategoryService.CasesCategoryQueryById(CasesCategoryId);
+                return CategoryModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CasesCategoryQueryByName
         public CasesCategoryModel CasesCategoryQueryByName(string CasesCategoryName)
         {
-            //get model from DB
-            CasesCategoryService CasesCategoryService = new CasesCategoryService();
-            var CategoryModel = CasesCategoryService.CasesCategoryQueryByName(CasesCategoryName);
-            return CategoryModel;
+            try
+            {
+                //get model from DB
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                var CategoryModel = CasesCategoryService.CasesCategoryQueryByName(CasesCategoryName);
+                return CategoryModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CasesCategoryDeleteById
         public bool CasesCategoryDeleteById(int CasesCategoryId)
         {
-            CasesCategoryService CasesCategoryService = new CasesCategoryService();
-            var CategoryModel = CasesCategoryQueryById(CasesCategoryId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            CategoryModel.UpdateStatus = 3;
+            try
+            {
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                var CategoryModel = CasesCategoryQueryById(CasesCategoryId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                CategoryModel.UpdateStatus = 3;
 
-            if (CategoryModel!=null)
-            {
-                var Result=CasesCategoryService.CasesCategoryDeleteById(CasesCategoryId);
-                if (Result)
+                if (CategoryModel != null)
                 {
-                    var WebRoot= ConfigurationManager.AppSettings["WebRoot"].ToString();
-                    string PicPath=WebRoot + CategoryModel.CasesCategoryPicture;
-                    if (File.Exists(PicPath))
+                    var Result = CasesCategoryService.CasesCategoryDeleteById(CasesCategoryId);
+                    if (Result)
                     {
-                        File.Delete(PicPath);
+                        var WebRoot = ConfigurationManager.AppSettings["WebRoot"].ToString();
+                        string PicPath = WebRoot + CategoryModel.CasesCategoryPicture;
+                        if (File.Exists(PicPath))
+                        {
+                            File.Delete(PicPath);
+                        }
+                        string fileName = Path.GetFileNameWithoutExtension(PicPath);
+                        string sPicPath = PicPath.Replace(fileName, fileName + "_s");
+                        if (File.Exists(sPicPath))
+                        {
+                            File.Delete(sPicPath);
+                        }
                     }
-                   string fileName= Path.GetFileNameWithoutExtension(PicPath);
-                   string sPicPath = PicPath.Replace(fileName, fileName + "_s");
-                   if (File.Exists(sPicPath))
-                   {
-                       File.Delete(sPicPath);
-                   }
+                    return Result;
                 }
-                return Result;
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
                 return false;
             }
+
         }
         #endregion
 
         #region CasesCategoryDeleteByCompany
         public bool CasesCategoryDeleteByCompany(int CompanyId)
         {
-            CasesCategoryService CasesCategoryService = new CasesCategoryService();
-            var CategoryList = CasesCategoryService.CasesCategoryQueryListByCompany(CompanyId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            //CategoryModel.UpdateStatus = 3;
+            try
+            {
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                var CategoryList = CasesCategoryService.CasesCategoryQueryListByCompany(CompanyId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                //CategoryModel.UpdateStatus = 3;
 
-            if (CategoryList != null)
-            {
-                var Result = CasesCategoryService.CasesCategoryDeleteByCompany(CompanyId);
-                return Result;
+                if (CategoryList != null)
+                {
+                    var Result = CasesCategoryService.CasesCategoryDeleteByCompany(CompanyId);
+                    return Result;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
                 return false;
             }
+
         }
         #endregion
 
         #region CasesCategoryQueryList
         public List<CasesCategoryModel> CasesCategoryQueryList()
         {
-            CasesCategoryService CasesCategoryService = new CasesCategoryService();
-            var CategoryList = CasesCategoryService.CasesCategoryQueryList();
-            return CategoryList;
+            try
+            {
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                var CategoryList = CasesCategoryService.CasesCategoryQueryList();
+                return CategoryList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region CasesCategoryQueryListByCompany
         public List<CasesCategoryModel> CasesCategoryQueryListByCompany(int CompanyId)
         {
-            CasesCategoryService CasesCategoryService = new CasesCategoryService();
-            var CategoryList = CasesCategoryService.CasesCategoryQueryListByCompany(CompanyId);
-            return CategoryList;
+            try
+            {
+                CasesCategoryService CasesCategoryService = new CasesCategoryService();
+                var CategoryList = CasesCategoryService.CasesCategoryQueryListByCompany(CompanyId);
+                return CategoryList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("CasesCategory", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
     }

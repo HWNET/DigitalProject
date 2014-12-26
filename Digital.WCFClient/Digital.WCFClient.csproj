@@ -100,6 +100,9 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.EquipmentIntroMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.FileFolderMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ManagementSystemCertificationMode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

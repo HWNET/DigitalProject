@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Digital.Common;
 using Digital.Common.Utilities;
-using Digital.Common.Logging;
 using Digital.Contact.Models;
 using System.IO;
 
@@ -132,12 +131,26 @@ namespace Digital.Contact.BLL
         }
         #endregion
 
-        #region FilesListByDirectory
-        
+        #region FilesRemoveFromDirectory
+        public bool FileRemove(string UserId, string SubDirectoryName,string SubFolder,string FileName)
+        {
+            bool result = false;
+            if (this.IsExistDirectoryRoot(UserId))
+            {
+                var subDirectory = Path.Combine(FileCabinetService.DirectoryRoot, SubDirectoryName);
+                var filePath = Path.Combine(subDirectory, SubFolder, FileName);
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+            }
+
+            return result;
+        }
         #endregion
 
         #region FileDirectorySize
-        protected long FileDirectorySize(string UserId, string SubDirectoryName)
+        public long FileDirectorySize(string UserId, string SubDirectoryName)
         {
             long dirSize = 0;
             if (this.IsExistDirectoryRoot(UserId))

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Digital.Contact.Models;
 using Digital.Service.Interfaces;
 using Digital.Contact.BLL;
+using Digital.Common.Logging;
 
 namespace Digital.Service.Implements
 {
@@ -14,120 +15,192 @@ namespace Digital.Service.Implements
         #region PatentInsert
         public PatentModel PatentInsert(PatentModel Model)
         {
-            Model.UpdateStatus = 1;
-            PatentService PatentService = new PatentService();
-            //Insert DB
-            var Result = PatentService.PatentInsert(Model);
-            //Insert Cache
-            //GenericList.CacheModelObj.CompanyModellist.Add(Model);
-            return Result;
+            try
+            {
+                Model.UpdateStatus = 1;
+                PatentService PatentService = new PatentService();
+                //Insert DB
+                var Result = PatentService.PatentInsert(Model);
+                //Insert Cache
+                //GenericList.CacheModelObj.CompanyModellist.Add(Model);
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region PatentUpdate
         public PatentModel PatentUpdate(PatentModel Model)
         {
-            var PatentModel = PatentQueryById(Model.PatentID);
-
-            if (PatentModel != null)
+            try
             {
-                #region Instance Model
+                var PatentModel = PatentQueryById(Model.PatentID);
 
-                #endregion
-                #region UI Models
+                if (PatentModel != null)
+                {
+                    #region Instance Model
 
-                #endregion
+                    #endregion
+                    #region UI Models
 
-                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-                PatentModel.UpdateStatus = 2;
+                    #endregion
 
-                //directly update to DB
-                PatentService PatentService = new PatentService();
-                PatentService.PatentUpdate(Model);
-                return Model;
+                    //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                    PatentModel.UpdateStatus = 2;
+
+                    //directly update to DB
+                    PatentService PatentService = new PatentService();
+                    PatentService.PatentUpdate(Model);
+                    return Model;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
                 return null;
             }
+
         }
         #endregion
 
         #region PatentQueryById
         public PatentModel PatentQueryById(int PatentId)
         {
-            //get model from DB
-            PatentService PatentService = new PatentService();
-            var PatentModel = PatentService.PatentQueryById(PatentId);
-            return PatentModel;
+            try
+            {
+                //get model from DB
+                PatentService PatentService = new PatentService();
+                var PatentModel = PatentService.PatentQueryById(PatentId);
+                return PatentModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region PatentQueryByName
         public PatentModel PatentQueryByName(string PatentName)
         {
-            //get model from DB
-            PatentService PatentService = new PatentService();
-            var PatentModel = PatentService.PatentQueryByName(PatentName);
-            return PatentModel;
+            try
+            {
+                //get model from DB
+                PatentService PatentService = new PatentService();
+                var PatentModel = PatentService.PatentQueryByName(PatentName);
+                return PatentModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region PatentDeleteById
         public bool PatentDeleteById(int PatentId)
         {
-            PatentService PatentService = new PatentService();
-            var PatentModel = PatentQueryById(PatentId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            //PatentModel.UpdateStatus = 3;
+            try
+            {
+                PatentService PatentService = new PatentService();
+                var PatentModel = PatentQueryById(PatentId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                //PatentModel.UpdateStatus = 3;
 
-            if (PatentModel != null)
-            {
-                var Result = PatentService.PatentDeleteById(PatentId);
-                return Result;
+                if (PatentModel != null)
+                {
+                    var Result = PatentService.PatentDeleteById(PatentId);
+                    return Result;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
                 return false;
             }
+
         }
         #endregion
 
         #region PatentDeleteByCompany
         public bool PatentDeleteByCompany(int CompanyId)
         {
-            PatentService PatentService = new PatentService();
-            var PatentList = PatentService.PatentQueryListByCompany(CompanyId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            //CategoryModel.UpdateStatus = 3;
+            try
+            {
+                PatentService PatentService = new PatentService();
+                var PatentList = PatentService.PatentQueryListByCompany(CompanyId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                //CategoryModel.UpdateStatus = 3;
 
-            if (PatentList != null)
-            {
-                var Result = PatentService.PatentDeleteByCompany(CompanyId);
-                return Result;
+                if (PatentList != null)
+                {
+                    var Result = PatentService.PatentDeleteByCompany(CompanyId);
+                    return Result;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
                 return false;
             }
+
         }
         #endregion
 
         #region PatentQueryList
         public List<PatentModel> PatentQueryList()
         {
-            PatentService PatentService = new PatentService();
-            var PatentList = PatentService.PatentQueryList();
-            return PatentList;
+            try
+            {
+                PatentService PatentService = new PatentService();
+                var PatentList = PatentService.PatentQueryList();
+                return PatentList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region PatentQueryListByCompany
         public List<PatentModel> PatentQueryListByCompany(int CompanyId)
         {
-            PatentService PatentService = new PatentService();
-            var PatentList = PatentService.PatentQueryListByCompany(CompanyId);
-            return PatentList;
+            try
+            {
+                PatentService PatentService = new PatentService();
+                var PatentList = PatentService.PatentQueryListByCompany(CompanyId);
+                return PatentList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
@@ -144,30 +217,48 @@ namespace Digital.Service.Implements
         #region GetTechnologyDomainList
         public List<TechnologyDomainMode> GetTechnologyDomainList()
         {
-            var modes = GenericList.CacheModelObj.TechnologyDomainModelist;
-            if (modes != null)
+            try
             {
-                return modes;
+                var modes = GenericList.CacheModelObj.TechnologyDomainModelist;
+                if (modes != null)
+                {
+                    return modes;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
                 return null;
             }
+
         }
         #endregion
 
         #region GetDevelopmentStatusList
         public List<DevelopmentStatusMode> GetDevelopmentStatusList()
         {
-            var modes = GenericList.CacheModelObj.DevelopmentStatusModelist;
-            if (modes != null)
+            try
             {
-                return modes;
+                var modes = GenericList.CacheModelObj.DevelopmentStatusModelist;
+                if (modes != null)
+                {
+                    return modes;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("Patent", MessageLevel.Level2, ex.ToString());
                 return null;
             }
+
         }
         #endregion
 

@@ -72,6 +72,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IFileCabinetService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -637,6 +645,36 @@
   <wsdl:message name="ISinglePageService_SinglePageQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:SinglePageQueryListByCompanyResponse" />
   </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectoryCreate_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectoryCreate" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectoryCreate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectoryCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectoryPathByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectoryPathByName" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectoryPathByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectoryPathByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectoryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectoryList" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectoryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectoryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectorySize_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectorySize" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileDirectorySize_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileDirectorySizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileRemove" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FileRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileRemoveResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -1025,6 +1063,28 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SinglePageQueryListByCompany">
       <wsdl:input wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompany" message="tns:ISinglePageService_SinglePageQueryListByCompany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISinglePageService/SinglePageQueryListByCompanyResponse" message="tns:ISinglePageService_SinglePageQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="IFileCabinetService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileDirectoryCreate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryCreate" message="tns:IFileCabinetService_FileDirectoryCreate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryCreateResponse" message="tns:IFileCabinetService_FileDirectoryCreate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileDirectoryPathByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryPathByName" message="tns:IFileCabinetService_FileDirectoryPathByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryPathByNameResponse" message="tns:IFileCabinetService_FileDirectoryPathByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileDirectoryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryList" message="tns:IFileCabinetService_FileDirectoryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryListResponse" message="tns:IFileCabinetService_FileDirectoryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileDirectorySize">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectorySize" message="tns:IFileCabinetService_FileDirectorySize_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectorySizeResponse" message="tns:IFileCabinetService_FileDirectorySize_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileRemove" message="tns:IFileCabinetService_FileRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileRemoveResponse" message="tns:IFileCabinetService_FileRemove_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -1900,6 +1960,55 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IFileCabinetService" type="tns:IFileCabinetService">
+    <wsp:PolicyReference URI="#CustomBinding_IFileCabinetService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="FileDirectoryCreate">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FileDirectoryCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileDirectoryPathByName">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FileDirectoryPathByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileDirectoryList">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FileDirectoryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileDirectorySize">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FileDirectorySize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileRemove">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FileRemove" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
@@ -1953,6 +2062,12 @@
       <soap12:address location="net.tcp://localhost:4502/SinglePageService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/SinglePageService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IFileCabinetService" binding="tns:CustomBinding_IFileCabinetService">
+      <soap12:address location="net.tcp://localhost:4502/FileCabinetService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/FileCabinetService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

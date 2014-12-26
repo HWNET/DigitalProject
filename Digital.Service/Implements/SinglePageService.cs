@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Digital.Contact.Models;
 using Digital.Service.Interfaces;
 using Digital.Contact.BLL;
+using Digital.Common.Logging;
 
 namespace Digital.Service.Implements
 {
@@ -14,120 +15,192 @@ namespace Digital.Service.Implements
         #region SinglePageInsert
         public SinglePageModel SinglePageInsert(SinglePageModel Model)
         {
-            Model.UpdateStatus = 1;
-            SinglePageService SinglePageService = new SinglePageService();
-            //Insert DB
-            var Result = SinglePageService.SinglePageInsert(Model);
-            //Insert Cache
-            //GenericList.CacheModelObj.CompanyModellist.Add(Model);
-            return Result;
+            try
+            {
+                Model.UpdateStatus = 1;
+                SinglePageService SinglePageService = new SinglePageService();
+                //Insert DB
+                var Result = SinglePageService.SinglePageInsert(Model);
+                //Insert Cache
+                //GenericList.CacheModelObj.CompanyModellist.Add(Model);
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region SinglePageUpdate
         public SinglePageModel SinglePageUpdate(SinglePageModel Model)
         {
-            var PageModel = SinglePageQueryById(Model.PageID);
-
-            if (PageModel != null)
+            try
             {
-                #region Instance Model
+                var PageModel = SinglePageQueryById(Model.PageID);
 
-                #endregion
-                #region UI Models
+                if (PageModel != null)
+                {
+                    #region Instance Model
 
-                #endregion
+                    #endregion
+                    #region UI Models
 
-                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-                PageModel.UpdateStatus = 2;
+                    #endregion
 
-                //directly update to DB
-                SinglePageService SinglePageService = new SinglePageService();
-                SinglePageService.SinglePageUpdate(Model);
-                return Model;
+                    //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                    PageModel.UpdateStatus = 2;
+
+                    //directly update to DB
+                    SinglePageService SinglePageService = new SinglePageService();
+                    SinglePageService.SinglePageUpdate(Model);
+                    return Model;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
                 return null;
             }
+
         }
         #endregion
 
         #region SinglePageQueryById
         public SinglePageModel SinglePageQueryById(int SinglePageId)
         {
-            //get model from DB
-            SinglePageService SinglePageService = new SinglePageService();
-            var PageModel = SinglePageService.SinglePageQueryById(SinglePageId);
-            return PageModel;
+            try
+            {
+                //get model from DB
+                SinglePageService SinglePageService = new SinglePageService();
+                var PageModel = SinglePageService.SinglePageQueryById(SinglePageId);
+                return PageModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region SinglePageQueryByName
         public SinglePageModel SinglePageQueryByName(string SinglePageName)
         {
-            //get model from DB
-            SinglePageService SinglePageService = new SinglePageService();
-            var PageModel = SinglePageService.SinglePageQueryByName(SinglePageName);
-            return PageModel;
+            try
+            {
+                //get model from DB
+                SinglePageService SinglePageService = new SinglePageService();
+                var PageModel = SinglePageService.SinglePageQueryByName(SinglePageName);
+                return PageModel;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+ 
         }
         #endregion
 
         #region SinglePageDeleteById
         public bool SinglePageDeleteById(int SinglePageId)
         {
-            SinglePageService SinglePageService = new SinglePageService();
-            var PageModel = SinglePageQueryById(SinglePageId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            //PatentModel.UpdateStatus = 3;
+            try
+            {
+                SinglePageService SinglePageService = new SinglePageService();
+                var PageModel = SinglePageQueryById(SinglePageId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                //PatentModel.UpdateStatus = 3;
 
-            if (PageModel != null)
-            {
-                var Result = SinglePageService.SinglePageDeleteById(SinglePageId);
-                return Result;
+                if (PageModel != null)
+                {
+                    var Result = SinglePageService.SinglePageDeleteById(SinglePageId);
+                    return Result;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
                 return false;
             }
+
         }
         #endregion
 
         #region SinglePageDeleteByCompany
         public bool SinglePageDeleteByCompany(int CompanyId)
         {
-            SinglePageService SinglePageService = new SinglePageService();
-            var PageList = SinglePageService.SinglePageQueryListByCompany(CompanyId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            //CategoryModel.UpdateStatus = 3;
+            try
+            {
+                SinglePageService SinglePageService = new SinglePageService();
+                var PageList = SinglePageService.SinglePageQueryListByCompany(CompanyId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                //CategoryModel.UpdateStatus = 3;
 
-            if (PageList != null)
-            {
-                var Result = SinglePageService.SinglePageDeleteByCompany(CompanyId);
-                return Result;
+                if (PageList != null)
+                {
+                    var Result = SinglePageService.SinglePageDeleteByCompany(CompanyId);
+                    return Result;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
                 return false;
             }
+
         }
         #endregion
 
         #region SinglePageQueryList
         public List<SinglePageModel> SinglePageQueryList()
         {
-            SinglePageService SinglePageService = new SinglePageService();
-            var PageList = SinglePageService.SinglePageQueryList();
-            return PageList;
+            try
+            {
+                SinglePageService SinglePageService = new SinglePageService();
+                var PageList = SinglePageService.SinglePageQueryList();
+                return PageList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
 
         #region SinglePageQueryListByCompany
         public List<SinglePageModel> SinglePageQueryListByCompany(int CompanyId)
         {
-            SinglePageService SinglePageService = new SinglePageService();
-            var PageList = SinglePageService.SinglePageQueryListByCompany(CompanyId);
-            return PageList;
+            try
+            {
+                SinglePageService SinglePageService = new SinglePageService();
+                var PageList = SinglePageService.SinglePageQueryListByCompany(CompanyId);
+                return PageList;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("SinglePage", MessageLevel.Level2, ex.ToString());
+                return null;
+            }
+
         }
         #endregion
     }
