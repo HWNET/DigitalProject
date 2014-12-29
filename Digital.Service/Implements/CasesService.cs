@@ -119,6 +119,12 @@ namespace Digital.Service.Implements
             CasesService CasesService = new CasesService();
             var Result = CasesService.CasesDeleteById(CasesId);
             return Result;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return false;
+            }
         }
         #endregion
 
@@ -223,5 +229,11 @@ namespace Digital.Service.Implements
 
         }
         #endregion
+
+
+        public bool CasesDeleteByIds(string CasesIds)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

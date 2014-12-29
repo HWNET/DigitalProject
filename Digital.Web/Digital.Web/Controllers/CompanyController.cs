@@ -693,6 +693,7 @@ namespace Digital.Web.Controllers
             return View();
         }
 
+        #region CompanyFiles
         /// <summary>
         /// 企业文件柜
         /// </summary>
@@ -700,8 +701,70 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyFiles()
         {
             ViewBag.MenuModel = base.GetMenu(154);
+
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            var uploadFolder = UploadConfigContext.UploadPath;
+
+            List<FileFolderMode> DirectoryList = new List<FileFolderMode>();
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                DirectoryList = client.FileDirectoryList(User.Identity.GetUserId()).ToList();
+            }
+            ViewBag.DirectoryList = DirectoryList;
+            client.Close();
+
             return View();
         }
+        #endregion
+
+        #region CompanyFilesFolderSave
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyFilesFolderSave(string UserId,string FolderName)
+        {
+            var ReturnResult = string.Empty;
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+
+            var uploadFolder = UploadConfigContext.UploadPath;
+            var result = false;
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                result=client.FileDirectoryCreate(UserId, FolderName);
+            }
+
+            if (result)
+            {
+                ReturnResult = "OK";
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            
+            return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyFilesByFolder
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyFilesByFolder(string FolderName)
+        {
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            var uploadFolder = UploadConfigContext.UploadPath;
+
+            List<FilesMode> FilesList = new List<FilesMode>();
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                FilesList = client.FilesListByDirectory(User.Identity.GetUserId(),FolderName).ToList();
+            }
+            ViewBag.FilesList = FilesList;
+            return Json(FilesList);
+        }
+        #endregion
+
 
         #region CompanyNewsAdd
         /// <summary>

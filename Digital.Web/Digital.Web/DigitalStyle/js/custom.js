@@ -102,6 +102,17 @@ function RadioHtml(objson, selectobj, SelectedId,className,RadioName)
     });
 }
 
+function UILIHtml(objson, selectobj)
+{
+    var obj = eval(objson);
+    //<li><a href=""><i class="fa fa-folder-o"></i> ²úÆ·Í¼Æ¬</a></li>
+    $(obj).each(function (index) {
+        var val = obj[index];
+
+        selectobj.append("<li><a href=\"#\" onclick=\"javascript:FileListByFolder('" + val.FolderName + "');\"><i class=\"fa fa-folder-o\"></i> " + val.FolderName + "</a></li>");
+    });
+}
+
 function ComAjaxGet(Url, XmlNodeParent,XmlNodeChild,SelectObjId, SelectedObjOption, SelectObjChildId, SelectObjChildOption,IsCity)
 {
     var AttributeID = IsCity == 1 ? "ID" : "Id";
@@ -185,6 +196,21 @@ function ComAjax(Url,datas,SaveMsg,callback)
             }
         }
     })
+}
+
+function ComAjaxJson(Url,Datas,Callback)
+{
+    $.ajaxAntiForgery({
+        type: "post",
+        data: Datas,
+        url: Url,
+        dataType: "json",
+        success: function (data) {
+            if (Callback != null && typeof (Callback) != "undefined") {
+                Callback(data);
+            }
+        }
+    });
 }
 
 jQuery.jsparams = {

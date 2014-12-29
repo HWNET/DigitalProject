@@ -1259,6 +1259,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="VerifyUploadPath">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UploadPath" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyUploadPathResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VerifyUploadPathResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="FileDirectoryCreate">
     <xs:complexType>
       <xs:sequence>
@@ -1300,6 +1314,35 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="FileDirectoryListResult" nillable="true" type="q95:ArrayOfFileFolderMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FilesList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FilesListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="FilesListResult" nillable="true" type="q96:ArrayOfFilesMode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FilesListByDirectory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FilesListByDirectoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="FilesListByDirectoryResult" nillable="true" type="q97:ArrayOfFilesMode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

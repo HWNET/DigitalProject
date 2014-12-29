@@ -12,6 +12,22 @@ namespace Digital.Service.Implements
 {
     public partial class Service : IFileCabinetService
     {
+        #region GetUploadPath
+        public bool VerifyUploadPath(string UploadPath)
+        {
+            var result = false;
+            try
+            {
+                FileCabinetService FileCabinetService = new FileCabinetService();
+                result=FileCabinetService.VerifyUploadPath(UploadPath);
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("FileCabinet", MessageLevel.Level2, ex.ToString());
+            }
+            return result;
+        }
+        #endregion
         #region FileDirectoryCreate
         public bool FileDirectoryCreate(string UserId, string SubDirectoryName)
         {
@@ -63,6 +79,40 @@ namespace Digital.Service.Implements
         }
         #endregion
 
+        #region FilesList
+        public List<FilesMode> FilesList(string UserId)
+        {
+            List<FilesMode> lstFiles = null;
+            try
+            {
+                FileCabinetService FileCabinetService = new FileCabinetService();
+                lstFiles = FileCabinetService.FilesList(UserId);
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("FileCabinet", MessageLevel.Level2, ex.ToString());
+            }
+            return lstFiles;
+        }
+        #endregion
+
+        #region FilesListByDirectory
+        public List<FilesMode> FilesListByDirectory(string UserId, string FolderName)
+        {
+            List<FilesMode> lstFiles = null;
+            try
+            {
+                FileCabinetService FileCabinetService = new FileCabinetService();
+                lstFiles = FileCabinetService.FilesListByDirectory(UserId,FolderName);
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("FileCabinet", MessageLevel.Level2, ex.ToString());
+            }
+            return lstFiles;
+        }
+        #endregion
+
         #region FileDirectorySize
         public long FileDirectorySize(string UserId, string SubDirectoryName)
         {
@@ -96,5 +146,13 @@ namespace Digital.Service.Implements
             return result;
         }
         #endregion
+
+
+
+
+
+
+
+        
     }
 }

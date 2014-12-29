@@ -12,11 +12,17 @@ namespace Digital.Service.Interfaces
     public interface IFileCabinetService
     {
         [OperationContract]
+        bool VerifyUploadPath(string UploadPath);
+        [OperationContract]
         bool FileDirectoryCreate(string UserId, string SubDirectoryName);
         [OperationContract]
         string FileDirectoryPathByName(string UserId, string SubDirectoryName);
         [OperationContract]
         List<FileFolderMode> FileDirectoryList(string UserId);
+        [OperationContract]
+        List<FilesMode> FilesList(string UserId);
+        [OperationContract]
+        List<FilesMode> FilesListByDirectory(string UserId, string FolderName);
         [OperationContract]
         long FileDirectorySize(string UserId, string SubDirectoryName);
         [OperationContract]

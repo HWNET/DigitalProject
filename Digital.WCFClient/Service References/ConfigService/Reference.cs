@@ -3517,6 +3517,12 @@ namespace Digital.WCFClient.ConfigService {
         private string CasesThumbnailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CompanyIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CompanyModel CompanyModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UpdateStatusField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -3655,6 +3661,32 @@ namespace Digital.WCFClient.ConfigService {
                 if ((object.ReferenceEquals(this.CasesThumbnailField, value) != true)) {
                     this.CasesThumbnailField = value;
                     this.RaisePropertyChanged("CasesThumbnail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CompanyID {
+            get {
+                return this.CompanyIDField;
+            }
+            set {
+                if ((this.CompanyIDField.Equals(value) != true)) {
+                    this.CompanyIDField = value;
+                    this.RaisePropertyChanged("CompanyID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CompanyModel CompanyModel {
+            get {
+                return this.CompanyModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompanyModelField, value) != true)) {
+                    this.CompanyModelField = value;
+                    this.RaisePropertyChanged("CompanyModel");
                 }
             }
         }
@@ -4070,10 +4102,7 @@ namespace Digital.WCFClient.ConfigService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode> FileListField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime FolderDateField;
+        private string FolderDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FolderNameField;
@@ -4082,7 +4111,7 @@ namespace Digital.WCFClient.ConfigService {
         private string FolderPathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long FolderSizeField;
+        private string FolderSizeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -4095,25 +4124,12 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode> FileList {
-            get {
-                return this.FileListField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FileListField, value) != true)) {
-                    this.FileListField = value;
-                    this.RaisePropertyChanged("FileList");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime FolderDate {
+        public string FolderDate {
             get {
                 return this.FolderDateField;
             }
             set {
-                if ((this.FolderDateField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.FolderDateField, value) != true)) {
                     this.FolderDateField = value;
                     this.RaisePropertyChanged("FolderDate");
                 }
@@ -4147,12 +4163,12 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long FolderSize {
+        public string FolderSize {
             get {
                 return this.FolderSizeField;
             }
             set {
-                if ((this.FolderSizeField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.FolderSizeField, value) != true)) {
                     this.FolderSizeField = value;
                     this.RaisePropertyChanged("FolderSize");
                 }
@@ -4179,7 +4195,7 @@ namespace Digital.WCFClient.ConfigService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime FileDateField;
+        private string FileDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FileExtensionNameField;
@@ -4191,10 +4207,13 @@ namespace Digital.WCFClient.ConfigService {
         private string FilePathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long FileSizeField;
+        private string FileSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FolderNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FolderParentField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -4207,12 +4226,12 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime FileDate {
+        public string FileDate {
             get {
                 return this.FileDateField;
             }
             set {
-                if ((this.FileDateField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.FileDateField, value) != true)) {
                     this.FileDateField = value;
                     this.RaisePropertyChanged("FileDate");
                 }
@@ -4259,12 +4278,12 @@ namespace Digital.WCFClient.ConfigService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long FileSize {
+        public string FileSize {
             get {
                 return this.FileSizeField;
             }
             set {
-                if ((this.FileSizeField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.FileSizeField, value) != true)) {
                     this.FileSizeField = value;
                     this.RaisePropertyChanged("FileSize");
                 }
@@ -4280,6 +4299,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((object.ReferenceEquals(this.FolderNameField, value) != true)) {
                     this.FolderNameField = value;
                     this.RaisePropertyChanged("FolderName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FolderParent {
+            get {
+                return this.FolderParentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FolderParentField, value) != true)) {
+                    this.FolderParentField = value;
+                    this.RaisePropertyChanged("FolderParent");
                 }
             }
         }
@@ -5911,6 +5943,12 @@ namespace Digital.WCFClient.ConfigService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.IFileCabinetService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IFileCabinetService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/VerifyUploadPath", ReplyAction="http://tempuri.org/IFileCabinetService/VerifyUploadPathResponse")]
+        bool VerifyUploadPath(string UploadPath);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/VerifyUploadPath", ReplyAction="http://tempuri.org/IFileCabinetService/VerifyUploadPathResponse")]
+        System.Threading.Tasks.Task<bool> VerifyUploadPathAsync(string UploadPath);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FileDirectoryCreate", ReplyAction="http://tempuri.org/IFileCabinetService/FileDirectoryCreateResponse")]
         bool FileDirectoryCreate(string UserId, string SubDirectoryName);
         
@@ -5928,6 +5966,18 @@ namespace Digital.WCFClient.ConfigService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FileDirectoryList", ReplyAction="http://tempuri.org/IFileCabinetService/FileDirectoryListResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FileFolderMode>> FileDirectoryListAsync(string UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FilesList", ReplyAction="http://tempuri.org/IFileCabinetService/FilesListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode> FilesList(string UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FilesList", ReplyAction="http://tempuri.org/IFileCabinetService/FilesListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode>> FilesListAsync(string UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FilesListByDirectory", ReplyAction="http://tempuri.org/IFileCabinetService/FilesListByDirectoryResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode> FilesListByDirectory(string UserId, string FolderName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FilesListByDirectory", ReplyAction="http://tempuri.org/IFileCabinetService/FilesListByDirectoryResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode>> FilesListByDirectoryAsync(string UserId, string FolderName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FileDirectorySize", ReplyAction="http://tempuri.org/IFileCabinetService/FileDirectorySizeResponse")]
         long FileDirectorySize(string UserId, string SubDirectoryName);
@@ -5969,6 +6019,14 @@ namespace Digital.WCFClient.ConfigService {
                 base(binding, remoteAddress) {
         }
         
+        public bool VerifyUploadPath(string UploadPath) {
+            return base.Channel.VerifyUploadPath(UploadPath);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyUploadPathAsync(string UploadPath) {
+            return base.Channel.VerifyUploadPathAsync(UploadPath);
+        }
+        
         public bool FileDirectoryCreate(string UserId, string SubDirectoryName) {
             return base.Channel.FileDirectoryCreate(UserId, SubDirectoryName);
         }
@@ -5991,6 +6049,22 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FileFolderMode>> FileDirectoryListAsync(string UserId) {
             return base.Channel.FileDirectoryListAsync(UserId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode> FilesList(string UserId) {
+            return base.Channel.FilesList(UserId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode>> FilesListAsync(string UserId) {
+            return base.Channel.FilesListAsync(UserId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode> FilesListByDirectory(string UserId, string FolderName) {
+            return base.Channel.FilesListByDirectory(UserId, FolderName);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FilesMode>> FilesListByDirectoryAsync(string UserId, string FolderName) {
+            return base.Channel.FilesListByDirectoryAsync(UserId, FolderName);
         }
         
         public long FileDirectorySize(string UserId, string SubDirectoryName) {

@@ -273,6 +273,8 @@
       <xs:element minOccurs="0" name="CasesName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CasesOrderBy" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CasesThumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyModel" nillable="true" type="tns:CompanyModel" />
       <xs:element minOccurs="0" name="UpdateStatus" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -715,11 +717,10 @@
   <xs:element name="ArrayOfFileFolderMode" nillable="true" type="tns:ArrayOfFileFolderMode" />
   <xs:complexType name="FileFolderMode">
     <xs:sequence>
-      <xs:element minOccurs="0" name="FileList" nillable="true" type="tns:ArrayOfFilesMode" />
-      <xs:element minOccurs="0" name="FolderDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FolderDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderPath" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FolderSize" type="xs:long" />
+      <xs:element minOccurs="0" name="FolderSize" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FileFolderMode" nillable="true" type="tns:FileFolderMode" />
@@ -731,12 +732,13 @@
   <xs:element name="ArrayOfFilesMode" nillable="true" type="tns:ArrayOfFilesMode" />
   <xs:complexType name="FilesMode">
     <xs:sequence>
-      <xs:element minOccurs="0" name="FileDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FileDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileExtensionName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FileSize" type="xs:long" />
+      <xs:element minOccurs="0" name="FileSize" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FolderParent" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FilesMode" nillable="true" type="tns:FilesMode" />

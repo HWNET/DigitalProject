@@ -651,6 +651,12 @@
   <wsdl:message name="ISinglePageService_SinglePageQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:SinglePageQueryListByCompanyResponse" />
   </wsdl:message>
+  <wsdl:message name="IFileCabinetService_VerifyUploadPath_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyUploadPath" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_VerifyUploadPath_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyUploadPathResponse" />
+  </wsdl:message>
   <wsdl:message name="IFileCabinetService_FileDirectoryCreate_InputMessage">
     <wsdl:part name="parameters" element="tns:FileDirectoryCreate" />
   </wsdl:message>
@@ -668,6 +674,18 @@
   </wsdl:message>
   <wsdl:message name="IFileCabinetService_FileDirectoryList_OutputMessage">
     <wsdl:part name="parameters" element="tns:FileDirectoryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FilesList_InputMessage">
+    <wsdl:part name="parameters" element="tns:FilesList" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FilesList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FilesListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FilesListByDirectory_InputMessage">
+    <wsdl:part name="parameters" element="tns:FilesListByDirectory" />
+  </wsdl:message>
+  <wsdl:message name="IFileCabinetService_FilesListByDirectory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FilesListByDirectoryResponse" />
   </wsdl:message>
   <wsdl:message name="IFileCabinetService_FileDirectorySize_InputMessage">
     <wsdl:part name="parameters" element="tns:FileDirectorySize" />
@@ -1076,6 +1094,10 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="IFileCabinetService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="VerifyUploadPath">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/VerifyUploadPath" message="tns:IFileCabinetService_VerifyUploadPath_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/VerifyUploadPathResponse" message="tns:IFileCabinetService_VerifyUploadPath_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileDirectoryCreate">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryCreate" message="tns:IFileCabinetService_FileDirectoryCreate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryCreateResponse" message="tns:IFileCabinetService_FileDirectoryCreate_OutputMessage" />
@@ -1087,6 +1109,14 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileDirectoryList">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryList" message="tns:IFileCabinetService_FileDirectoryList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectoryListResponse" message="tns:IFileCabinetService_FileDirectoryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FilesList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FilesList" message="tns:IFileCabinetService_FilesList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FilesListResponse" message="tns:IFileCabinetService_FilesList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FilesListByDirectory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FilesListByDirectory" message="tns:IFileCabinetService_FilesListByDirectory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FilesListByDirectoryResponse" message="tns:IFileCabinetService_FilesListByDirectory_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileDirectorySize">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileDirectorySize" message="tns:IFileCabinetService_FileDirectorySize_InputMessage" />
@@ -1982,6 +2012,15 @@
   <wsdl:binding name="CustomBinding_IFileCabinetService" type="tns:IFileCabinetService">
     <wsp:PolicyReference URI="#CustomBinding_IFileCabinetService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="VerifyUploadPath">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/VerifyUploadPath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FileDirectoryCreate">
       <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FileDirectoryCreate" style="document" />
       <wsdl:input>
@@ -2002,6 +2041,24 @@
     </wsdl:operation>
     <wsdl:operation name="FileDirectoryList">
       <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FileDirectoryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FilesList">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FilesList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FilesListByDirectory">
+      <soap12:operation soapAction="http://tempuri.org/IFileCabinetService/FilesListByDirectory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
