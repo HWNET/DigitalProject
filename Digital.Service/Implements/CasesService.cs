@@ -18,14 +18,14 @@ namespace Digital.Service.Implements
         {
             try
             {
-            Model.UpdateStatus = 1;
-            CasesService CasesService = new CasesService();
-            //Insert DB
+                Model.UpdateStatus = 1;
+                CasesService CasesService = new CasesService();
+                //Insert DB
                 var Result = CasesService.CasesInsert(Model);
-            //Insert Cache
-            //GenericList.CacheModelObj.CompanyModellist.Add(Model);
-            return Result;
-        }
+                //Insert Cache
+                //GenericList.CacheModelObj.CompanyModellist.Add(Model);
+                return Result;
+            }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
@@ -40,27 +40,27 @@ namespace Digital.Service.Implements
         {
             try
             {
-            var CasesModel = CasesQueryById(Model.CasesID);
+                var CasesModel = CasesQueryById(Model.CasesID);
 
-            if (CasesModel != null)
-            {
-                #region Instance Model
+                if (CasesModel != null)
+                {
+                    #region Instance Model
 
-                #endregion
-                #region UI Models
+                    #endregion
+                    #region UI Models
 
-                #endregion
+                    #endregion
 
-                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-                CasesModel.UpdateStatus = 2;
+                    //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                    CasesModel.UpdateStatus = 2;
 
-                //directly update to DB
-                CasesService CasesService = new CasesService();
-                CasesService.CasesUpdate(Model);
-                return Model;
-            }
-            else
-            {
+                    //directly update to DB
+                    CasesService CasesService = new CasesService();
+                    CasesService.CasesUpdate(Model);
+                    return Model;
+                }
+                else
+                {
                     return null;
                 }
             }
@@ -78,11 +78,11 @@ namespace Digital.Service.Implements
         {
             try
             {
-            //get model from DB
-            CasesService CasesService = new CasesService();
-            var CasesModel = CasesService.CasesQueryById(CasesId);
-            return CasesModel;
-        }
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var CasesModel = CasesService.CasesQueryById(CasesId);
+                return CasesModel;
+            }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
@@ -96,17 +96,17 @@ namespace Digital.Service.Implements
         {
             try
             {
-            //get model from DB
-            CasesService CasesService = new CasesService();
-            var CasesModel = CasesService.CasesQueryByName(CasesName);
-            return CasesModel;
-        }
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var CasesModel = CasesService.CasesQueryByName(CasesName);
+                return CasesModel;
+            }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
                 return null;
             }
- 
+
         }
         #endregion
 
@@ -126,6 +126,27 @@ namespace Digital.Service.Implements
                 return false;
             }
         }
+
+        public bool CasesDeleteByIds(string CasesId)
+        {
+            try
+            {
+
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var CasesIds=CasesId.Trim(',').Split(',');
+                foreach(var  Cases in CasesIds)
+                {
+                    CasesService.CasesDeleteById(Cases.ToInt());
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
+                return false;
+            }
+        }
         #endregion
 
         #region CasesDeleteByCategory
@@ -133,11 +154,11 @@ namespace Digital.Service.Implements
         {
             try
             {
-            //get model from DB
-            CasesService CasesService = new CasesService();
-            var Result = CasesService.CasesDeleteByCategory(CasesCategoryId);
-            return Result;
-        }
+                //get model from DB
+                CasesService CasesService = new CasesService();
+                var Result = CasesService.CasesDeleteByCategory(CasesCategoryId);
+                return Result;
+            }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
@@ -152,21 +173,21 @@ namespace Digital.Service.Implements
         {
             try
             {
-            CasesService CasesService = new CasesService();
-            var CategoryList = CasesService.CasesQueryListByCompany(CompanyId);
-            //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
-            //CategoryModel.UpdateStatus = 3;
+                CasesService CasesService = new CasesService();
+                var CategoryList = CasesService.CasesQueryListByCompany(CompanyId);
+                //0 表示不更新 1表示新增加 2 表示更新 3表示删除的 
+                //CategoryModel.UpdateStatus = 3;
 
-            if (CategoryList != null)
-            {
-                var Result = CasesService.CasesDeleteByCompany(CompanyId);
-                return Result;
+                if (CategoryList != null)
+                {
+                    var Result = CasesService.CasesDeleteByCompany(CompanyId);
+                    return Result;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
-        }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
@@ -181,10 +202,10 @@ namespace Digital.Service.Implements
         {
             try
             {
-            CasesService CasesService = new CasesService();
-            var CasesList = CasesService.CasesQueryList();
-            return CasesList;
-        }
+                CasesService CasesService = new CasesService();
+                var CasesList = CasesService.CasesQueryList();
+                return CasesList;
+            }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
@@ -199,10 +220,10 @@ namespace Digital.Service.Implements
         {
             try
             {
-            CasesService CasesService = new CasesService();
-            var CasesList = CasesService.CasesQueryListByCategory(CasesCategoryId);
-            return CasesList;
-        }
+                CasesService CasesService = new CasesService();
+                var CasesList = CasesService.CasesQueryListByCategory(CasesCategoryId);
+                return CasesList;
+            }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
@@ -217,10 +238,10 @@ namespace Digital.Service.Implements
         {
             try
             {
-            CasesService CasesService = new CasesService();
-            var CasesList = CasesService.CasesQueryListByCompany(CompanyId);
-            return CasesList;
-        }
+                CasesService CasesService = new CasesService();
+                var CasesList = CasesService.CasesQueryListByCompany(CompanyId);
+                return CasesList;
+            }
             catch (Exception ex)
             {
                 logger.WriteInfo("Cases", MessageLevel.Level2, ex.ToString());
@@ -231,9 +252,6 @@ namespace Digital.Service.Implements
         #endregion
 
 
-        public bool CasesDeleteByIds(string CasesIds)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

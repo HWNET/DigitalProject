@@ -397,6 +397,8 @@
   <xs:element name="ArrayOfNewsModel" nillable="true" type="tns:ArrayOfNewsModel" />
   <xs:complexType name="NewsModel">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyModel" nillable="true" type="tns:CompanyModel" />
       <xs:element minOccurs="0" name="NewsAbstract" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NewsBody" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NewsCategoryID" type="xs:int" />

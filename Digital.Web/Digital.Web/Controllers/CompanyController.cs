@@ -608,7 +608,7 @@ namespace Digital.Web.Controllers
                         CModel.CasesName = CName;
                         CModel.CasesOrderBy = OrderBy.ToString();
                         CModel.CasesThumbnail = CImage;
-                        CModel.CasesCategoryID = UserModel.CompanyID.Value;
+                        CModel.CompanyID = UserModel.CompanyID.Value;
                         CModel.UpdateStatus = 1;
                         client.CasesInsert(CModel);
                         client.Close();
