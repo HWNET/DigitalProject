@@ -144,12 +144,13 @@ namespace Digital.Contact.BLL
             using (var db = new CommunicationContext())
             {
 
-                    var CategoryList = db.NewsCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
-                    List<NewsModel> NewsList = new List<NewsModel>();
-                    CategoryList.ForEach(c => NewsList.Add(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID).SingleOrDefault()));
+                    //var CategoryList = db.NewsCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
+                    //List<NewsModel> NewsList = new List<NewsModel>();
+                var NewsList = db.NewsModels.Where(o => o.CompanyID == CompanyId);
+                    //CategoryList.ForEach(c => NewsList.Add(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID).SingleOrDefault()));
                     if (NewsList != null)
                     {
-                        db.NewsModels.RemoveRange((IEnumerable<NewsModel>)NewsList);
+                        db.NewsModels.RemoveRange(NewsList);
                         db.SaveChanges();
                         return true;
                     }
@@ -192,17 +193,11 @@ namespace Digital.Contact.BLL
             using (var db = new CommunicationContext())
             {
 
-                    var CategoryList = db.NewsCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
-                    List<NewsModel> NewsList = new List<NewsModel>();
-                    CategoryList.ForEach(c => NewsList.AddRange(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID)));
+                    //var CategoryList = db.NewsCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
+                    //List<NewsModel> NewsList = new List<NewsModel>();
+                    //CategoryList.ForEach(c => NewsList.AddRange(db.NewsModels.Where(o => o.NewsCategoryID == c.NewsCategoryID)));
 
-                    //foreach (var mode in NewsList)
-                    //{
-                    //    var category = CategoryList.Where(o => o.NewsCategoryID == mode.NewsCategoryID).SingleOrDefault();
-                    //    mode.NewsCategoryModel = category;
-                    //}
-
-                    return NewsList;
+                    return db.NewsModels.Where(o=>o.CompanyID==CompanyId).ToList();
 
             }
         }

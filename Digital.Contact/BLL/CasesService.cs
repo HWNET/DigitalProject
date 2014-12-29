@@ -144,12 +144,13 @@ namespace Digital.Contact.BLL
             using (var db = new CommunicationContext())
             {
 
-                    var CategoryList = db.CasesCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
-                    List<CasesModel> CasesList = new List<CasesModel>();
-                    CategoryList.ForEach(c => CasesList.Add(db.CasesModels.Where(o=>o.CasesCategoryID==c.CasesCategoryID).SingleOrDefault()));
+                    //var CategoryList = db.CasesCategoryModels.Where(o => o.CompanyID == CompanyId).ToList();
+                    //List<CasesModel> CasesList = null;
+                    var CasesList=db.CasesModels.Where(o => o.CompanyID == CompanyId);
+                    //CategoryList.ForEach(c => CasesList.Add(db.CasesModels.Where(o=>o.CasesCategoryID==c.CasesCategoryID).SingleOrDefault()));
                     if (CasesList != null)
                     {
-                        db.CasesModels.RemoveRange((IEnumerable<CasesModel>)CasesList);
+                        db.CasesModels.RemoveRange(CasesList);
                         db.SaveChanges();
                         return true;
                     }

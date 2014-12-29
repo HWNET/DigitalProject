@@ -164,8 +164,10 @@ namespace Digital.Contact.Models
 
         public virtual List<DepartmentModel> DepartmentModels { get; set; }
         public virtual List<CasesCategoryModel> CasesCategoryModels { get; set; } //企业案例 类别集合
+        //public virtual List<CasesModel> CasesModels { get; set; } //企业案例集合 
         public virtual List<SinglePageModel> SinglePageModels { get; set; } //企业单页集合
         public virtual List<PatentModel> PatentModels { get; set; } //企业专利集合
         public virtual List<NewsCategoryModel> NewsCategoryModels { get; set; } //企业播报 类别集合
+        //public virtual List<NewsModel> NewsModels { get; set; } //企业播报集合
     }
 }

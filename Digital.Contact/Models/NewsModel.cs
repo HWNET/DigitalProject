@@ -52,6 +52,11 @@ namespace Digital.Contact.Models
         public int ViewsCount { get; set; } //文章 被浏览数
         public DateTime ReleaseTime { get; set; } //发布日期
 
+        //[Required]
+        public int CompanyID { get; set; } //所属企业ID
+        [NotMapped]
+        public virtual CompanyModel CompanyModel { get; set; }
+
         public virtual ICollection<NewsCommentModel> NewsCommentModels { get; set; }
     }
 }
