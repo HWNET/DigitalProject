@@ -736,6 +736,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="FileDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileExtensionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileFullName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileSize" nillable="true" type="xs:string" />

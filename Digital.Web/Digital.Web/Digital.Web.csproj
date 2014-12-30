@@ -177,6 +177,9 @@
     <Compile Include="Controllers\OperatorFactory.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="FileDownload.ashx.cs">
+      <DependentUpon>FileDownload.ashx</DependentUpon>
+    </Compile>
     <Compile Include="FileUpload.ashx.cs">
       <DependentUpon>FileUpload.ashx</DependentUpon>
     </Compile>
@@ -971,6 +974,7 @@
     <Content Include="DigitalStyle\js\codemirror\.DS_Store" />
     <Content Include="FileUpload.ashx" />
     <Content Include="DigitalStyle\js\Uploadify\uploadify.fla" />
+    <Content Include="FileDownload.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

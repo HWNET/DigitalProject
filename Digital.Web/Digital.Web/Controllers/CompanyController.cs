@@ -746,6 +746,24 @@ namespace Digital.Web.Controllers
         }
         #endregion
 
+        #region CompanyFilesList
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyFilesList()
+        {
+            List<FilesMode> FilesList = new List<FilesMode>();
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            var uploadFolder = UploadConfigContext.UploadPath;
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                FilesList = client.FilesList(User.Identity.GetUserId(),string.Empty,string.Empty).ToList();
+            }
+
+            return Json(FilesList);
+        }
+        #endregion
+
         #region CompanyFilesByFolder
         [HttpPost]
         [AllowAnonymous]
@@ -762,6 +780,35 @@ namespace Digital.Web.Controllers
             }
             ViewBag.FilesList = FilesList;
             return Json(FilesList);
+        }
+        #endregion
+
+        #region CompanyFileDeleteByFolder
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyFileDeleteByFolder(string FolderName,string FileName)
+        {
+            var ReturnResult = string.Empty;
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            var uploadFolder = UploadConfigContext.UploadPath;
+
+            var result = false;
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                result=client.FileRemove(User.Identity.GetUserId(), FolderName, FileName);
+            }
+
+            if (result)
+            {
+                ReturnResult = "OK";
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+
+            return Content(ReturnResult);
         }
         #endregion
 

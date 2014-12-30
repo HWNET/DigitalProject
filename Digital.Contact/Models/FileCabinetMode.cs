@@ -25,6 +25,7 @@ namespace Digital.Contact.Models
         public string FolderParent { get; set; }
         public string FolderName { get; set; }
         public string FileName { get; set; }
+        public string FileFullName { get; set; }
         public string FileExtensionName { get; set; }
         public string FilePath { get; set; }
         public string FileSize { get; set; }

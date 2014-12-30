@@ -395,7 +395,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <button class="btn btn-primary" onclick="javascript:Save();">提交</button>&nbsp;
-                                <button class="btn btn-primary" onclick="javascript:alert('1');">取消</button>
+                                <button class="btn btn-primary" onclick="javascript:void(0);">取消</button>
                             </div>
                         </div>
                     </div>
@@ -417,15 +417,15 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu fm-menu" role="menu">
-                <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                <li><a href="~/FileDownload.ashx?folderName={FolderName}&fileName={FileName}" target="_self"><i class="fa fa-download"></i> Download</a></li>
+                <li><a href="#" onclick="javascript:FileDeleteByFolder('{FolderName}','{FileName}');"><i class="fa fa-trash-o"></i> Delete</a></li>
             </ul>
         </div><!-- btn-group -->
         <div class="thmb-prev">
             <img src="../DigitalStyle/images/photos/media-doc.png" class="img-responsive" alt="" />
         </div>
-        <h5 class="fm-title"><a href="">$$FileName</a></h5>
-        <small class="text-muted">Added: $$FileDate</small>
+        <h5 class="fm-title"><a href="">{FileName}</a></h5>
+        <small class="text-muted">Added: {FileDate}</small>
     </div><!-- thmb -->
 </div><!-- col-xs-6 -->
 
@@ -434,6 +434,8 @@
         //UI LI LIST : File Folders
         var Folderjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((List<FileFolderMode>)ViewBag.DirectoryList))
         UILIHtml(Folderjsons,$("#FolderList"));
+
+        FilesList();
 
         jQuery('.thmb').hover(function () {
             var t = jQuery(this);
@@ -531,6 +533,11 @@
         }
     }
 
+    function FilesList()
+    {
+        ComAjaxJson("/Company/CompanyFilesList", {},FilesDisplay);
+    }
+
     function FileListByFolder(folderName)
     {
         var datas={FolderName:folderName};
@@ -545,12 +552,26 @@
             var divFileObj=$("#DivFile").clone();
             //alert(divFileObj.html());
 
-            var divFile=divFileObj.attr("style","block").html().replace("$$FileName",fileMode.FileName).replace("$$FileDate",fileMode.FileDate);
-            divParent.append("<div id=\"DivFile"+index+"\" class=\"col-xs-6 col-sm-4 col-md-3 document\">");
-            divParent.append(divFile);
-            divParent.append("</div>");
+            var reFileName=new RegExp("{FileName}","g");
+            var reFolderName=new RegExp("{FolderName}","g");
+
+            var divFile=divFileObj.attr("style","block").html().replace(reFileName,fileMode.FileName)
+                .replace(reFolderName,fileMode.FolderParent)
+                .replace("{FileDate}",fileMode.FileDate);
+            divParent.append("<div id=\"DivFile"+index+"\" class=\"col-xs-6 col-sm-4 col-md-3 document\">"+divFile+"</div>");
         });
     }
+
+    function FileDeleteByFolder(folderName,fileName)
+    {
+        var datas={FolderName:folderName,FileName:fileName};
+        ComAjax("/Company/CompanyFileDeleteByFolder",datas,"企业文件","callBack");
+    }
+
+    function callBack() {
+        window.location = window.location;
+    }
+
 </script>
 
 

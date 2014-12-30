@@ -104,35 +104,88 @@ namespace Digital.Contact.BLL
 
 
         #region FilesList
-        public List<FilesMode> FilesList(string UserId)
+        List<FilesMode> FileList = null;
+        public List<FilesMode> FilesList(string UserId,string FolderName,string FolderPath)
         {
-            List<FilesMode> FileList = new List<FilesMode>();
+            if (FileList==null)
+            {
+                FileList = new List<FilesMode>();
+            }
             if (this.IsExistDirectoryRoot(UserId))
             {
-                DirectoryInfo DirectoryRoot = new DirectoryInfo(FileCabinetService.DirectoryRoot);
-                var lstDirectory = DirectoryRoot.GetDirectories();
+                DirectoryInfo dirMode = null;
+
+                if (!string.IsNullOrEmpty(FolderName)&&string.IsNullOrEmpty(FolderPath))
+                {
+                    var dirPath = Path.Combine(FileCabinetService.DirectoryRoot, FolderName);
+                    dirMode = new DirectoryInfo(dirPath);
+                }
+                else if (string.IsNullOrEmpty(FolderName) && !string.IsNullOrEmpty(FolderPath))
+                {
+                    dirMode = new DirectoryInfo(FolderPath);
+                }
+                else
+                {
+                    var dirPath = Path.Combine(FileCabinetService.DirectoryRoot);
+                    dirMode = new DirectoryInfo(dirPath);
+                }
+
+                #region GetFiles
+                var lstFiles = dirMode.GetFiles();
+                foreach (var file in lstFiles)
+                {
+                    var FilesMode = new FilesMode
+                    {
+                        FolderParent=dirMode.Parent.Name,
+                        FolderName = dirMode.Name,
+                        FileName = file.Name,
+                        FileFullName = file.FullName,
+                        FileExtensionName = file.Extension,
+                        FilePath = file.FullName,
+                        FileSize = file.Length.ToString(),
+                        FileDate = file.CreationTimeUtc.ToShortDateString()
+                    };
+
+                    FileList.Add(FilesMode);
+                }
+                #endregion
+
+                var lstDirectory = dirMode.GetDirectories();
                 foreach (var dir in lstDirectory)
                 {
-                    #region GetFiles
-                    var lstFiles = dir.GetFiles();
-                    foreach (var file in lstFiles)
-                    {
-                        var FilesMode = new FilesMode
-                        {
-                            FolderName = dir.Name,
-                            FileName = file.Name,
-                            FileExtensionName = file.Extension,
-                            FilePath = file.FullName,
-                            FileSize = file.Length.ToString(),
-                            FileDate = file.CreationTimeUtc.ToShortDateString()
-                        };
-
-                        FileList.Add(FilesMode);
-                    }
-                    #endregion
+                    this.FilesList(UserId, string.Empty, dir.FullName);
                 }
             }
             return FileList;
+        }
+        #endregion
+
+        #region FileStreamByFile
+        public byte[] FileStreamByFile(string UserId, string FolderName, string FileName)
+        {
+            FileStream iStream = null;
+            FilesMode FilesMode = null;
+            byte[] bytes = null;
+            var FilesList = this.FilesListByDirectory(UserId, FolderName);
+            if (FilesList!=null)
+            {
+                FilesMode = FilesList.Where(o => o.FileName == FileName).SingleOrDefault();
+            }
+
+            if (FilesMode!=null)
+            {
+                FileInfo fileInfo = new FileInfo(FilesMode.FileFullName);
+                if (fileInfo.Exists)
+                {
+                    iStream = new FileStream(fileInfo.FullName,FileMode.Open);
+                    bytes = new byte[(int)iStream.Length];
+                    iStream.Read(bytes, 0, bytes.Length);
+                    iStream.Close();
+                    iStream.Dispose();
+                }
+            }
+
+            return bytes;
         }
         #endregion
 
@@ -157,6 +210,7 @@ namespace Digital.Contact.BLL
                                 FolderParent=FolderName,
                                 FolderName = dir.Name,
                                 FileName = file.Name,
+                                FileFullName=file.FullName,
                                 FileExtensionName = file.Extension,
                                 FilePath = file.FullName,
                                 FileSize = file.Length.ToString(),
@@ -201,16 +255,26 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region FilesRemoveFromDirectory
-        public bool FileRemove(string UserId, string SubDirectoryName,string SubFolder,string FileName)
+        public bool FileRemove(string UserId, string FolderName,string FileName)
         {
             bool result = false;
-            if (this.IsExistDirectoryRoot(UserId))
+            FilesMode FilesMode = null;
+            var FilesList = this.FilesListByDirectory(UserId, FolderName);
+            if (FilesList != null)
             {
-                var subDirectory = Path.Combine(FileCabinetService.DirectoryRoot, SubDirectoryName);
-                var filePath = Path.Combine(subDirectory, SubFolder, FileName);
+                FilesMode = FilesList.Where(o => o.FileName == FileName).SingleOrDefault();
+            }
+
+            if (FilesMode != null)
+            {
+                var filePath = FilesMode.FileFullName;
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
+                    if (!File.Exists(filePath))
+                    {
+                        result = true;
+                    }
                 }
             }
 

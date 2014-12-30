@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Digital.Contact.Models;
 using System.ServiceModel;
+using System.IO;
 
 namespace Digital.Service.Interfaces
 {
@@ -20,12 +21,14 @@ namespace Digital.Service.Interfaces
         [OperationContract]
         List<FileFolderMode> FileDirectoryList(string UserId);
         [OperationContract]
-        List<FilesMode> FilesList(string UserId);
+        List<FilesMode> FilesList(string UserId, string FolderName, string FolderPath);
         [OperationContract]
         List<FilesMode> FilesListByDirectory(string UserId, string FolderName);
         [OperationContract]
         long FileDirectorySize(string UserId, string SubDirectoryName);
         [OperationContract]
-        bool FileRemove(string UserId, string SubDirectoryName, string SubFolder, string FileName);
+        bool FileRemove(string UserId, string FolderName, string FileName);
+        [OperationContract]
+        byte[] FileStreamByFile(string UserId, string FolderName, string FileName);
     }
 }

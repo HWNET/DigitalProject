@@ -1321,6 +1321,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FolderPath" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1365,8 +1367,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="SubDirectoryName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="SubFolder" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -1375,6 +1376,22 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="FileRemoveResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileStreamByFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileStreamByFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FileStreamByFileResult" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
