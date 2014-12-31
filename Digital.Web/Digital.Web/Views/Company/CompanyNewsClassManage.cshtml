@@ -38,6 +38,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
                         <a href="" class="minimize">&minus;</a>
                     </div><!-- panel-btns -->
                     <h3 class="panel-title">分类管理</h3>
@@ -124,9 +125,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">分类名称</label>
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span> 分类名称</label>
                         <div class="col-sm-6">
-                            <input id="NewsCategoryName" type="text" placeholder="分类名称..." value="@Model.NewsCategoryName" class="form-control" />
+                            <input id="NewsCategoryName" type="text" placeholder="分类名称..." value="@Model.NewsCategoryName" class="form-control" required/>
                         </div>
                     </div>
 
@@ -151,9 +152,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">分类内容</label>
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span> 分类内容</label>
                         <div class="col-sm-6">
-                            <textarea id="NewsCategoryContent" class="form-control" rows="5">@Model.NewsCategoryContent</textarea>
+                            <textarea id="NewsCategoryContent" class="form-control" rows="5" required>@Model.NewsCategoryContent</textarea>
                         </div>
                     </div>
 
@@ -161,7 +162,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <button class="btn btn-primary" onclick="javascript:Save();">提交</button>&nbsp;
-                                <button aria-hidden="true" data-dismiss="modal" class="close" onclick="javascript:CategoryDIValuesClear();">取消</button>
+                                <button class="btn btn-primary" onclick="javascript:CategoryDIValuesClear();">取消</button>
                             </div>
                         </div>
                     </div>
@@ -208,16 +209,7 @@
         else {
             var IsInsert = 1; // default option : insert new company model
             var NewsCategoryID=0; // default option : insert new company model
-            @{
 
-                            var CompanyID = 0;
-                            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-                            if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-                            {
-                                //IsInsert = 0;
-                                CompanyID = UserModel.CompanyID.Value;
-                            }
-                        }
             //------------------TAB 01 : 播报类别信息
             var valNewsCategoryOrderID = $.jsparams.input("NewsCategoryOrderID");
             var valNewsCategoryName = $.jsparams.input("NewsCategoryName");
@@ -233,32 +225,14 @@
             }
             var stringTABONE = IsInsert+"_"+valNewsCategoryOrderID + "_" + valNewsCategoryName + "_" + valNewsCategoryPicture + "_" +
                 valNewsCategoryContent + "_" + valNewsCategoryParentID;
-            window.alert(stringTABONE);
+            //window.alert(stringTABONE);
 
-            alert(1);
-            alert("NewsCategoryID:"+NewsCategoryID+" IsInsert:"+IsInsert);
-
-            @*var datas={ CategoryID:NewsCategoryID,CompanyID:@CompanyID,IsInsert:IsInsert,NewsCategoryName:valNewsCategoryName,NewsCategoryPicture:valNewsCategoryPicture,
+            var datas={ CategoryID:NewsCategoryID,IsInsert:IsInsert,NewsCategoryName:valNewsCategoryName,NewsCategoryPicture:valNewsCategoryPicture,
                 NewsCategoryContent:valNewsCategoryContent,NewsCategoryParentID:valNewsCategoryParentID,NewsCategoryOrderID:valNewsCategoryOrderID};
-            ComAjax("/Company/CompanyNewsCategoryEdit",datas,"播报分类信息");*@
+            ComAjax("/Company/CompanyNewsCategoryEdit",datas,"播报分类信息",null);
 
-            $.ajaxAntiForgery({
-                type: "post",
-                data:{ CategoryID:NewsCategoryID,CompanyID:@CompanyID,IsInsert:IsInsert,NewsCategoryName:valNewsCategoryName,NewsCategoryPicture:valNewsCategoryPicture,
-                    NewsCategoryContent:valNewsCategoryContent,NewsCategoryParentID:valNewsCategoryParentID,NewsCategoryOrderID:valNewsCategoryOrderID},
-                url: "/Company/CompanyNewsCategoryEdit",
-                success: function (data) {
-                    CategoryDIValuesClear();
-
-                    // 1. after success , need do close DIV Display
-                    // 2. refresh current page
-
-                    SaveInfo(true,"播报分类信息");
-                    //$('#progressWizard').bootstrapWizard('show',1);
-                }
-            })
-
-            alert(1111);
+            // 1. after success , need do close DIV Display
+            // 2. refresh current page
         }
     }
 
@@ -275,40 +249,31 @@
     // For News Category High Level Edit Operation , DIV category fields display
     function CategoryEdit(CategoryID)
     {
-        alert(CategoryID);
-
         var $valid = jQuery('#firstForm').valid();
         if (!$valid) {
             $validator.focusInvalid();
             return false;
         }
-        else {
-
-            alert(2);
-            $.ajaxAntiForgery({
-                type: "post",
-                data:{CategoryID:parseInt(CategoryID)},
-                url:"/Company/CompanyNewsCategoryByID",
-                dataType:"json",
-                success:function(data){
-                    //alert(data.NewsCategoryName+"_"+data.NewsCategoryParentID+"_2222");
-                    $("#NewsCategoryID").val(data.NewsCategoryID);
-                    $("#NewsCategoryOrderID").val(data.NewsCategoryOrderID);
-                    $("#NewsCategoryName").val(data.NewsCategoryName);
-                    $("#NewsCategoryPicture").val(data.NewsCategoryPicture);
-                    $("#NewsCategoryContent").val(data.NewsCategoryContent);
-                }
-            });
-
-            alert(2222);
+        else
+        {
+            var datas = { CategoryID: parseInt(CategoryID) };
+            ComAjaxJson("/Company/CompanyNewsCategoryByID", datas, CategoryDisplay);
         }
     }
 
+    function CategoryDisplay(dataJson)
+    {
+        var obj = eval(dataJson);
+        $("#NewsCategoryID").val(obj[0].NewsCategoryID);
+        $("#NewsCategoryOrderID").val(obj[0].NewsCategoryOrderID);
+        $("#NewsCategoryName").val(obj[0].NewsCategoryName);
+        $("#NewsCategoryPicture").val(obj[0].NewsCategoryPicture);
+        $("#NewsCategoryContent").val(obj[0].NewsCategoryContent);
+    }
 
     // For News Category High Level Delete Operation
     function CategoryDelete(Sender,CategoryID)
     {
-        alert(CategoryID);
         // Delete row in a table
         //jQuery('.delete-row').click(function () {
 
@@ -316,28 +281,17 @@
         var c = confirm("Continue delete?");
         if (c)
         {
-            alert(3);
-            //CompanyNewsCategoryDelete
-            $.ajaxAntiForgery({
-                type: "post",
-                data:{CategoryID:parseInt(CategoryID)},
-                url:"/Company/CompanyNewsCategoryDelete",
-                success:function(data) {
-                    jQuery(Sender).closest('tr').remove(); // remove current row
+            var datas = { CategoryID: parseInt(CategoryID) };
+            ComAjax("/Company/CompanyNewsCategoryDelete", datas, "播报分类信息", null);
 
-                    //alert("The News Category Deleted Success!");
-
-                    // refresh current page
-                    //location.reload();
-
-                    SaveInfo(true,"播报分类信息");
-                }
-            });
-            alert(3333);
+            // remove current row
+            //jQuery(Sender).closest('tr').remove(); 
+            // refresh current page
         }
         else {
             return false;
         }
     }
+
 
 </script>

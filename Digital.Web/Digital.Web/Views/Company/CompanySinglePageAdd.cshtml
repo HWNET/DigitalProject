@@ -11,7 +11,6 @@
 }
 
 @section PageSpecificJavascriptIncludes{
-    <link href="../DigitalStyle/css/jquery.tagsinput.css" rel="stylesheet" />
     <link href="../DigitalStyle/css/jquery.gritter.css" rel="stylesheet" />
 
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
@@ -40,27 +39,27 @@
                 <form class="form" id="firstForm" onsubmit="return false">
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">页面标题</label>
+                        <label class="col-sm-1 control-label"><span class="asterisk">*</span> 页面标题</label>
                         <div class="col-sm-6">
-                            <input id="PageTitle" value="@Model.PageTitle" type="text" placeholder="" class="form-control">
+                            <input id="PageTitle" value="@Model.PageTitle" type="text" placeholder="" class="form-control" required />
                             <span class="help-block">
                                 标题信息将便于搜索引擎对该页面的判定，以确定排名
                             </span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">关键字</label>
+                        <label class="col-sm-1 control-label"><span class="asterisk">*</span> 关键字</label>
                         <div class="col-sm-6">
-                            <input id="PageKeyWords" value="@Model.PageKeyWords" type="text" placeholder="" class="form-control">
+                            <input id="PageKeyWords" value="@Model.PageKeyWords" type="text" placeholder="" class="form-control" required />
                             <span class="help-block">
                                 关键字信息将用于您的网站优化
                             </span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">页面描述</label>
+                        <label class="col-sm-1 control-label"><span class="asterisk">*</span> 页面描述</label>
                         <div class="col-sm-6">
-                            <textarea id="PageDescription" class="form-control" rows="5">@Model.PageDescription</textarea>
+                            <textarea id="PageDescription" class="form-control" rows="5" required>@Model.PageDescription</textarea>
                             <span class="help-block">
                                 限100字内
                             </span>
@@ -81,8 +80,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <textarea id="PageBody" name="PageBody" placeholder="请在此输入主题内容" class="form-control" rows="10">@Model.PageBody</textarea>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"><span class="asterisk">*</span> 页面内容</label>
+                        <div class="col-sm-6">
+                            <textarea id="PageBody" name="PageBody" placeholder="请在此输入页面内容" class="form-control" rows="10" required>@Model.PageBody</textarea>
+                        </div>
+                    </div>
                 </form>
             </div>
 
@@ -114,14 +117,9 @@
                 jQuery(element).closest('.form-group').removeClass('has-error');
             }
         });
-      
+
         // Textarea Autogrow
         jQuery('#PageBody').autogrow();
-
-        // Input Masks
-        jQuery("#date").mask("99/99/9999");
-        jQuery("#phone").mask("(999) 999-9999");
-        jQuery("#ssn").mask("999-99-9999");
 
     });
 </script>
@@ -184,30 +182,19 @@
         else {
             var IsInsert = 1; // default option : insert single page model
             var SinglePageID = 0; // default option : insert single page model
-            @{
-
-                var CompanyID = 0;
-                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-                {
-                    //IsInsert = 0;
-                    CompanyID = UserModel.CompanyID.Value;
-                }
-            }
-
+            
             //------------------TAB 01 : 单页信息
             var valPageTitle = $.jsparams.input("PageTitle");
             var valPageKeyWords = $.jsparams.input("PageKeyWords");
             var valPageDescription = $.jsparams.textarea("PageDescription");
             var valPageRelationFlag = $.jsparams.input("PageRelationFlag");
             var valPageBody = $.jsparams.textarea("PageBody");
-            var valCompanyID = @CompanyID;
 
             var stringTABONE = valPageTitle + "_" + valPageKeyWords + "_" + valPageDescription + "_" +
                 valPageRelationFlag + "_" + valPageBody + "_" + valCompanyID;
-            alert(stringTABONE);
+            //alert(stringTABONE);
 
-            var datas={ CompanyID:@CompanyID,IsInsert:IsInsert,PageTitle:valPageTitle,PageKeyWords:valPageKeyWords,
+            var datas={IsInsert:IsInsert,PageTitle:valPageTitle,PageKeyWords:valPageKeyWords,
                 PageDescription:valPageDescription,PageRelationFlag:valPageRelationFlag,PageBody:valPageBody};
             ComAjax("/Company/CompanySinglePageSave",datas,"单页信息");
 

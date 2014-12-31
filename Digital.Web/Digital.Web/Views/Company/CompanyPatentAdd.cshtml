@@ -44,6 +44,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
                         <a href="" class="minimize">&minus;</a>
                     </div><!-- panel-btns -->
                     <h3 class="panel-title">专利管理</h3>
@@ -54,17 +55,17 @@
                     <form class="form-horizontal form-bordered" id="firstForm" onsubmit="return false">
                         @Html.AntiForgeryToken()
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">专利号</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利号</label>
                             <div class="col-sm-6">
-                                <input id="PatentNumber" value="@Model.PatentNumber" type="text" placeholder="项目号" class="form-control" />
+                                <input id="PatentNumber" value="@Model.PatentNumber" type="text" placeholder="专利号" class="form-control" required/>
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">专利名称</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利名称</label>
                             <div class="col-sm-6">
-                                <input id="PatentName" value="@Model.PatentName" type="text" placeholder="项目名称" class="form-control" />
+                                <input id="PatentName" value="@Model.PatentName" type="text" placeholder="专利名称" class="form-control" required/>
                             </div>
                         </div>
 
@@ -99,10 +100,10 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">专利日期</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利日期</label>
                             <div class="col-sm-4 ">
                                 <div class="input-group">
-                                    <input id="PatentDate" value="@Model.PatentDate" type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                    <input id="PatentDate" value="@Model.PatentDate" type="text" class="form-control" placeholder="mm/dd/yyyy" required/>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -146,9 +147,9 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="checkbox">专利简介</label>
+                            <label class="col-sm-3 control-label" for="checkbox"><span class="asterisk">*</span> 专利简介</label>
                             <div class="col-sm-6">
-                                <textarea id="PatentIntro" name="PatentIntro" placeholder="请在此输入专利简介" class="form-control" rows="10">@Model.PatentIntro</textarea>
+                                <textarea id="PatentIntro" name="PatentIntro" placeholder="请在此输入专利简介" class="form-control" rows="10" required>@Model.PatentIntro</textarea>
                             </div>
                         </div>
                     </form>
@@ -262,16 +263,7 @@
         else {
             var IsInsert = 1; // default option : insert patent model
             var PatentID = 0; // default option : insert patent model
-            @{
-
-                var CompanyID = 0;
-                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-                {
-                    //IsInsert = 0;
-                    CompanyID = UserModel.CompanyID.Value;
-                }
-            }
+            
             //------------------TAB 01 : 专利信息
             var valPatentNumber = $.jsparams.input("PatentNumber");
             var valPatentName = $.jsparams.input("PatentName");
@@ -282,15 +274,15 @@
             var valPatentDevelopmentStatus = $.jsparams.select("DevelopmentStatus");
             var valPatentOrderID = $.jsparams.input("PatentOrderID");
             var valPatentLabels = $.jsparams.input("PatentLabels");
-            var valPatentIntro = $("#PatentIntro").val();
+            var valPatentIntro = $.jsparams.textarea("PatentIntro");
 
             var stringTABONE = valPatentNumber + "_" + valPatentName + "_" + valPatentAbstract + "_" +
                 valPatentCerificate + "_" + valPatentDate + "_" + valPatentTechnologyDomain + "_" +
                 valPatentDevelopmentStatus + "_" + valPatentOrderID + "_" + valPatentLabels + "_" +
                 valPatentIntro;
-            alert(stringTABONE);
+            //alert(stringTABONE);
 
-            var datas= { CompanyID:@CompanyID,IsInsert:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,
+            var datas= {IsInsert:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,
                 PatentAbstract:valPatentAbstract,PatentCerificate:valPatentCerificate,PatentDate:valPatentDate,
                 PatentTechnologyDomain:valPatentTechnologyDomain,PatentDevelopmentStatus:valPatentDevelopmentStatus,
                 PatentOrderID:valPatentOrderID,PatentLabels:valPatentLabels,PatentIntro:valPatentIntro};

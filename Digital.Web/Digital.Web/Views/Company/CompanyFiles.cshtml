@@ -385,9 +385,9 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">分类名称</label>
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span>分类名称</label>
                         <div class="col-sm-6">
-                            <input id="FolderName" type="text" placeholder="分类名称..." class="form-control" />
+                            <input id="FolderName" type="text" placeholder="分类名称..." class="form-control" required/>
                         </div>
                     </div>
 
@@ -515,6 +515,15 @@
 
         jQuery("a[rel^='prettyPhoto']").prettyPhoto();
 
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
     });
 
     function Save()

@@ -59,9 +59,9 @@
                     <form class="form-horizontal form-bordered" id="firstForm" onsubmit="return false">
                         @Html.AntiForgeryToken()
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">文章标题</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 文章标题</label>
                             <div class="col-sm-4">
-                                <input id="NewsTitle" value="@Model.NewsTitle" type="text" placeholder="" class="form-control" />
+                                <input id="NewsTitle" value="@Model.NewsTitle" type="text" placeholder="" class="form-control" required/>
                             </div>
                             <div class="col-sm-2">
                                 <input type="text" name="colorpicker" class="form-control colorpicker-input" id="colorpicker" />
@@ -73,9 +73,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">摘要</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 摘要</label>
                             <div class="col-sm-6">
-                                <textarea id="NewsAbstract" class="form-control" rows="3">@Model.NewsAbstract</textarea>
+                                <textarea id="NewsAbstract" class="form-control" rows="3" required>@Model.NewsAbstract</textarea>
                             </div>
                         </div>
 
@@ -101,10 +101,10 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">发布日期</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 发布日期</label>
                             <div class="col-sm-4 ">
                                 <div class="input-group">
-                                    <input type="text" value="@Model.ReleaseTime" class="form-control" placeholder="mm/dd/yyyy" id="ReleaseTime">
+                                    <input type="text" value="@Model.ReleaseTime" class="form-control" placeholder="mm/dd/yyyy" id="ReleaseTime" required/>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -128,9 +128,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">关键字</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 关键字</label>
                             <div class="col-sm-4">
-                                <input name="NewsKeywords" id="NewsKeywords" class="form-control" value="@Model.NewsKeywords" />
+                                <input name="NewsKeywords" id="NewsKeywords" class="form-control" value="@Model.NewsKeywords" required/>
                             </div>
                         </div>
 
@@ -145,9 +145,9 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="checkbox">文章内容</label>
+                            <label class="col-sm-3 control-label" for="checkbox"><span class="asterisk">*</span> 文章内容</label>
                             <div class="col-sm-6">
-                                <textarea id="NewsBody" name="NewsBody" placeholder="请在此输入文章内容" cols="80" rows="10">@Model.NewsBody</textarea>
+                                <textarea id="NewsBody" name="NewsBody" placeholder="请在此输入文章内容" cols="80" rows="10" required>@Model.NewsBody</textarea>
                             </div>
                         </div>
                     </form>
@@ -287,20 +287,6 @@
             var IsInsert = 1; // default option : insert new company model
             var NewsID = 0; // default option : insert new company model
 
-            @{
-
-                var CompanyID = 0;
-                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-                {
-                    //IsInsert = 0;
-                    CompanyID = UserModel.CompanyID.Value;
-                }
-
-                //var NewsBody = string.Empty;
-                //NewsBody = Request.Unvalidated().Form["NewsBody"];
-            }
-
             //------------------TAB 01 : 播报信息
             var valNewsTitle = $.jsparams.input("NewsTitle");
             var valNewsAbstract = $.jsparams.input("NewsAbstract");
@@ -314,9 +300,9 @@
             var stringTABONE = valNewsTitle + "_" + valNewsAbstract + "_" + valNewsThumbnail + "_" +
                 valNewsCategoryID + "_" + valNewsOrderID + "_" + valNewsKeywords + "_" + valNewsLabels + "_" +
                 valNewsBody;
-            alert(stringTABONE);
+            //alert(stringTABONE);
 
-            var datas={ CompanyID:@CompanyID,IsInsert:IsInsert,NewsTitle:valNewsTitle,NewsAbstract:valNewsAbstract,
+            var datas={IsInsert:IsInsert,NewsTitle:valNewsTitle,NewsAbstract:valNewsAbstract,
                 NewsThumbnail:valNewsThumbnail,NewsCategoryID:valNewsCategoryID,NewsOrderID:valNewsOrderID,
                 NewsKeywords:valNewsKeywords,NewsLabels:valNewsLabels,NewsBody:valNewsBody};
             ComAjax("/Company/CompanyNewsSave",datas,"播报信息");

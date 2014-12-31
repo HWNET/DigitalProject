@@ -857,12 +857,20 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CompanyNewsSave(int CompanyID, int IsInsert, string NewsTitle, string NewsAbstract,
+        public ActionResult CompanyNewsSave(int IsInsert, string NewsTitle, string NewsAbstract,
             string NewsThumbnail, int NewsCategoryID, int NewsOrderID, string NewsKeywords, string NewsLabels,
             string NewsBody)
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
+            var CompanyID = 0;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                //IsInsert = 0;
+                CompanyID = UserModel.CompanyID.Value;
+            }
+
             var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
             var ReturnResult = string.Empty;
             if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
@@ -976,11 +984,19 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyNewsCategoryEdit(int CategoryID, int CompanyID, int IsInsert, string NewsCategoryName, string NewsCategoryPicture, string NewsCategoryContent,
+        public ActionResult CompanyNewsCategoryEdit(int CategoryID,int IsInsert, string NewsCategoryName, string NewsCategoryPicture, string NewsCategoryContent,
             int NewsCategoryParentID, int NewsCategoryOrderID)
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
+            var CompanyID = 0;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                //IsInsert = 0;
+                CompanyID = UserModel.CompanyID.Value;
+            }
+
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
             var ReturnResult = string.Empty;
 
@@ -1162,12 +1178,20 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CompanyPatentSave(int CompanyID, int IsInsert, string PatentNumber, string PatentName,
+        public ActionResult CompanyPatentSave(int IsInsert, string PatentNumber, string PatentName,
             string PatentAbstract, string PatentCerificate, string PatentDate, string PatentTechnologyDomain,
             string PatentDevelopmentStatus, int PatentOrderID, string PatentLabels, string PatentIntro)
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
+            var CompanyID = 0;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                //IsInsert = 0;
+                CompanyID = UserModel.CompanyID.Value;
+            }
+
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
             var ReturnResult = string.Empty;
             if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
@@ -1317,11 +1341,19 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CompanySinglePageSave(int CompanyID, int IsInsert, string PageTitle, string PageKeyWords,
+        public ActionResult CompanySinglePageSave(int IsInsert, string PageTitle, string PageKeyWords,
             string PageDescription, string PageRelationFlag, string PageBody)
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
+            var CompanyID = 0;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            {
+                //IsInsert = 0;
+                CompanyID = UserModel.CompanyID.Value;
+            }
+
             var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
             var ReturnResult = string.Empty;
             if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
