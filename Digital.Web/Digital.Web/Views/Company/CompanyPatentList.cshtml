@@ -85,13 +85,9 @@
                                                 <i class="fa fa-cog"></i>
                                             </a>
                                             <ul role="menu" class="dropdown-menu pull-right">
-                                                <li><a href="#">预览</a></li>
-                                                <li><a href="#">公开转让</a></li>
-                                                <li><a href="#">查看权限</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#">编辑</a></li>
-                                                <li><a href="#">删除</a></li>
-                                                <li><a href="#">停用</a></li>
+                                                <li><a href="CompanyPatentAdd?Id=@PatentMode.PatentID">编辑</a></li>
+                                                <li><a href="javasript:Delete(@PatentMode.PatentID)">删除</a></li>
+                                                
                                             </ul>
                                         </div>
 
@@ -102,7 +98,7 @@
 
                     }
 
-                    <tr>
+                    @*<tr>
                         <td>12</td>
                         <td><input type="checkbox" id="checkboxDanger" checked="" /></td>
                         <td><a href="view-issue.html">仅好友圈可浏览</a></td>
@@ -126,7 +122,7 @@
                                 </ul>
                             </div>
                         </td>
-                    </tr>
+                    </tr>*@
                 </tbody>
             </table>
         </div>

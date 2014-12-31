@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">案例缩略图</label>
                             <div class="col-sm-6">
-                                <input id="ImagePath" type="hidden" />
+                                <input id="ImagePath" type="hidden" value="@Model.CasesThumbnail" />
                                 <div id="uploader"></div>
                                 <img id="PersonImage" src="@Html.IsNull(Model.CasesThumbnail, "../DigitalStyle/images/pic-none.png", Model.CasesThumbnail)" class="thumbnail img-responsive" alt="" />
                             </div>
@@ -192,7 +192,10 @@
         var OrderBy= $("#OrderBy").val();
         var Labels=$("#Labels").val();
         var CasesDetails=$("#CasesDetails").val();
-        var Id=0;
+        @{
+            var Ids = Request["Id"] == null ? "0" : Request["Id"].ToString();
+        }
+        var Id=@Ids;
         ComAjax("/Company/CompanyCasesAdd", {Id:Id, CName: Name, Abstract: Abstract, CImage: Image, CasesDate: CasesDate, CasesCategory: CasesCategory,OrderBy:OrderBy,Labels:Labels,CasesDetails:CasesDetails }, "添加案例");
     }
 </script>

@@ -42,13 +42,13 @@
 
 if ("undefined" != typeof staticFileRoot) {
 
-    document.write('<link rel="stylesheet" type="text/css" href="' + staticFileRoot + '/DigitalStyle/js/Uploadify/uploadify.v3.2.css"/>');
-    document.write('<script type="text/javascript" src="' + staticFileRoot + '/DigitalStyle/js/Uploadify/jquery.uploadify.v3.2.min.js"></script>');
+    document.write('<link rel="stylesheet" type="text/css" href="' + staticFileRoot + '/DigitalStyle/js/Uploadify/uploadify.css"/>');
+    document.write('<script type="text/javascript" src="' + staticFileRoot + '/DigitalStyle/js/Uploadify/jquery.uploadify.min.js"></script>');
 
     $.fn.FileUpload = function (param) {
 
         var uploadparam = {
-            'swf': '/DigitalStyle/js/Uploadify/uploadify.v3.2.swf',
+            'swf': '/DigitalStyle/js/Uploadify/uploadify.swf',
             'uploader': staticFileRoot + "/FileUpload.ashx",
             'method': 'GET',
             'buttonText' : '选择文件上传',

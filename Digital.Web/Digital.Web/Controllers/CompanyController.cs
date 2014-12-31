@@ -7,6 +7,7 @@ using Digital.WCFClient;
 using Digital.WCFClient.ConfigService;
 using Microsoft.AspNet.Identity;
 using Digital.Common.Utilities;
+using System.IO;
 
 namespace Digital.Web.Controllers
 {
@@ -14,6 +15,56 @@ namespace Digital.Web.Controllers
     {
         //
         // GET: /Company/Index  这个地方就是他的地址  下面的INDEX就是你页面名  Company就是文件夹的名字 你要现实页面 下面代码必须有  如果你的页面叫LIST   
+
+        public ActionResult SaveUploadedFile()
+        {
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    //Save file content goes here
+                    fName = file.FileName;
+                    if (file != null && file.ContentLength > 0)
+                    {
+
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages", Server.MapPath(@"\")));
+
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
+
+                        var fileName1 = Path.GetFileName(file.FileName);
+
+                        bool isExists = System.IO.Directory.Exists(pathString);
+
+                        if (!isExists)
+                            System.IO.Directory.CreateDirectory(pathString);
+
+                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                        file.SaveAs(path);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                isSavedSuccessfully = false;
+            }
+
+
+            if (isSavedSuccessfully)
+            {
+                return Json(new { Message = fName });
+            }
+            else
+            {
+                return Json(new { Message = "Error in saving file" });
+            }
+        }
+
         public ActionResult Index()
         {
             ViewBag.MenuModel = base.GetMenu(2);
@@ -511,9 +562,17 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyCasesAdd()
         {
             ViewBag.MenuModel = base.GetMenu(156);
-
-            CasesModel CategoryModel = new CasesModel
+            CasesModel CategoryModel = null;
+            if (!string.IsNullOrEmpty(Request["Id"]))
             {
+                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+                CategoryModel = client.CasesQueryById(Request["Id"].ToString().ToInt());
+                client.Close();
+            }
+            else
+            {
+                CategoryModel = new CasesModel
+                {
                 CasesName = "",
                 CasesAbstract = "",
                 CasesDate = DateTime.Now,
@@ -522,6 +581,7 @@ namespace Digital.Web.Controllers
                 CasesDetails = "",
                 CasesCategoryID = 0
             };
+            }
             CasesCategoryList();
             return View(CategoryModel);
         }
@@ -611,6 +671,22 @@ namespace Digital.Web.Controllers
                         CModel.CompanyID = UserModel.CompanyID.Value;
                         CModel.UpdateStatus = 1;
                         client.CasesInsert(CModel);
+                        client.Close();
+                    }
+                    else
+                    {
+                        CModel.CasesID = Id;
+                        CModel.CasesAbstract = Abstract;
+                        CModel.CasesCategoryID = CasesCategory;
+                        CModel.CasesDate = CasesDate.ToDateTime();
+                        CModel.CasesDetails = CasesDetails;
+                        CModel.CasesLabels = Labels;
+                        CModel.CasesName = CName;
+                        CModel.CasesOrderBy = OrderBy.ToString();
+                        CModel.CasesThumbnail = CImage;
+                        CModel.CompanyID = UserModel.CompanyID.Value;
+                        CModel.UpdateStatus = 1;
+                        client.CasesUpdate(CModel);
                         client.Close();
                     }
 
@@ -721,7 +797,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyFilesFolderSave(string UserId,string FolderName)
+        public ActionResult CompanyFilesFolderSave(string UserId, string FolderName)
         {
             var ReturnResult = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
@@ -730,7 +806,7 @@ namespace Digital.Web.Controllers
             var result = false;
             if (client.VerifyUploadPath(uploadFolder))
             {
-                result=client.FileDirectoryCreate(UserId, FolderName);
+                result = client.FileDirectoryCreate(UserId, FolderName);
             }
 
             if (result)
@@ -776,7 +852,7 @@ namespace Digital.Web.Controllers
             List<FilesMode> FilesList = new List<FilesMode>();
             if (client.VerifyUploadPath(uploadFolder))
             {
-                FilesList = client.FilesListByDirectory(User.Identity.GetUserId(),FolderName).ToList();
+                FilesList = client.FilesListByDirectory(User.Identity.GetUserId(), FolderName).ToList();
             }
             ViewBag.FilesList = FilesList;
             return Json(FilesList);
@@ -1146,25 +1222,33 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyPatentAdd()
         {
             ViewBag.MenuModel = base.GetMenu(162);
-
-            PatentModel PatentModel = new PatentModel
+            var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+            PatentModel PatentModel = null;
+            if (!string.IsNullOrEmpty(Request["Id"]))
             {
-                PatentNumber = "PatentNumber0000",
-                PatentName = "PatentName0000",
-                PatentAbstract = "PatentAbstract0000",
-                PatentCerificate = "PatentCerificate0000",
+                PatentModel = client.PatentQueryById(Request["Id"].ToString().ToInt());
+            }
+            else
+            {
+                PatentModel = new PatentModel
+                {
+                    PatentNumber = "",
+                    PatentName = "",
+                    PatentAbstract = "",
+                    PatentCerificate = "",
                 PatentDate = DateTime.Now.ToShortDateString(),
                 PatentTechnologyDomain = 0,
                 PatentDevelopmentStatus = 0,
                 PatentOrderID = 0,
-                PatentLabels = "PatentLabels0000",
-                PatentIntro = "PatentIntro0000",
+                    PatentLabels = "",
+                    PatentIntro = "",
                 IsDisabled = false,
                 IsTransferred = false,
                 CompanyID = 0,
             };
+            }
 
-            var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+
             ViewBag.TechnologyDomainList = client.GetTechnologyDomainList();
             ViewBag.DevelopmentStatusList = client.GetDevelopmentStatusList();
             client.Close();
@@ -1178,7 +1262,7 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CompanyPatentSave(int IsInsert, string PatentNumber, string PatentName,
+        public ActionResult CompanyPatentSave( int Id, string PatentNumber, string PatentName,
             string PatentAbstract, string PatentCerificate, string PatentDate, string PatentTechnologyDomain,
             string PatentDevelopmentStatus, int PatentOrderID, string PatentLabels, string PatentIntro)
         {
@@ -1193,8 +1277,13 @@ namespace Digital.Web.Controllers
             }
 
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             var ReturnResult = string.Empty;
-            if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
+            if (UserModel != null && UserModel.CompanyID > 0)
+            {
+
+
+                if (Id == 0) // new model -- do insert
             {
                 var PatentModel = new PatentModel
                 {
@@ -1203,18 +1292,15 @@ namespace Digital.Web.Controllers
                     PatentAbstract = PatentAbstract,
                     PatentCerificate = PatentCerificate,
                     PatentDate = PatentDate,
-                    PatentTechnologyDomain = Converter.ToInt(PatentTechnologyDomain),
-                    PatentDevelopmentStatus = Converter.ToInt(PatentDevelopmentStatus),
+                        PatentTechnologyDomain =PatentTechnologyDomain.ToInt(),
+                        PatentDevelopmentStatus =PatentDevelopmentStatus.ToInt(), 
                     PatentOrderID = PatentOrderID,
                     PatentLabels = PatentLabels,
                     PatentIntro = PatentIntro,
                     IsDisabled = false,
                     IsTransferred = false,
-                    CompanyID = CompanyID,
+                        CompanyID = UserModel.CompanyID.Value,
                 };
-
-                if (IsInsert == 1) // new model -- do insert
-                {
                     #region new model -- do insert
                     var ResultModel = client.PatentInsert(PatentModel); // update DB
                     if (ResultModel != null && ResultModel.PatentID > 0) // update web cache
@@ -1230,7 +1316,22 @@ namespace Digital.Web.Controllers
                 }
                 else // old existing model -- do update
                 {
-                    ReturnResult = "NOK";
+                    var UpdatePatentModel = client.PatentQueryById(Request["Id"].ToString().ToInt());
+                    UpdatePatentModel.PatentNumber = PatentNumber;
+                    UpdatePatentModel.PatentName = PatentName;
+                    UpdatePatentModel.PatentAbstract = PatentAbstract;
+                    UpdatePatentModel.PatentCerificate = PatentCerificate;
+                    UpdatePatentModel.PatentDate = PatentDate;
+                    UpdatePatentModel.PatentTechnologyDomain = PatentTechnologyDomain.ToInt();
+                    UpdatePatentModel.PatentDevelopmentStatus = PatentDevelopmentStatus.ToInt();
+                    UpdatePatentModel.PatentOrderID = PatentOrderID;
+                    UpdatePatentModel.PatentLabels = PatentLabels;
+                    UpdatePatentModel.PatentIntro = PatentIntro;
+                    UpdatePatentModel.IsDisabled = false;
+                    UpdatePatentModel.IsTransferred = false;
+                    UpdatePatentModel.CompanyID = UserModel.CompanyID.Value;
+                    client.PatentUpdate(UpdatePatentModel);
+                    ReturnResult = "OK";
                 }
             }
             else
@@ -1321,18 +1422,48 @@ namespace Digital.Web.Controllers
         public ActionResult CompanySinglePageAdd()
         {
             ViewBag.MenuModel = base.GetMenu(159);
-
-            SinglePageModel SinglePageModel = new SinglePageModel
+            SinglePageModel SinglePageModel = null;
+            if (!string.IsNullOrEmpty(Request["Id"]))
             {
-                PageTitle = "PageTitle0000",
-                PageKeyWords = "PageKeyWords0000",
-                PageDescription = "PageDescription0000",
-                PageRelationFlag = "PageRelationFlag0000",
-                PageBody = "PageBody0000",
+                var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
+                SinglePageModel = client.SinglePageQueryById(Request["Id"].ToString().ToInt());
+                client.Close();
+            }
+            else
+            {
+                SinglePageModel = new SinglePageModel
+            {
+                   PageTitle = "",
+                   PageKeyWords = "",
+                   PageDescription = "",
+                   PageRelationFlag = "",
+                   PageBody = "",
                 CompanyID = 0,
                 ModifiedTime = DateTime.Now,
             };
+            }
             return View(SinglePageModel);
+        }
+        #endregion
+
+
+        #region SinglePageDelete
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanySinglePageDelete(int Id)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
+                client.SinglePageDeleteById(Id);
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
         }
         #endregion
 
@@ -1341,7 +1472,7 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CompanySinglePageSave(int IsInsert, string PageTitle, string PageKeyWords,
+        public ActionResult CompanySinglePageSave(int Id, string PageTitle, string PageKeyWords,
             string PageDescription, string PageRelationFlag, string PageBody)
         {
             //currnet log on user
@@ -1356,7 +1487,8 @@ namespace Digital.Web.Controllers
 
             var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
             var ReturnResult = string.Empty;
-            if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            if (UserModel != null && UserModel.CompanyID > 0)
             {
                 var SinglePageModel = new SinglePageModel
                 {
@@ -1365,10 +1497,10 @@ namespace Digital.Web.Controllers
                     PageDescription = PageDescription,
                     PageRelationFlag = PageRelationFlag,
                     PageBody = PageBody,
-                    CompanyID = CompanyID,
+                    CompanyID = UserModel.CompanyID.Value,
                     ModifiedTime = DateTime.Now,
                 };
-                if (IsInsert == 1) // new model -- do insert
+                if (Id == 0) // new model -- do insert
                 {
                     #region new model -- do insert
                     var ResultModel = client.SinglePageInsert(SinglePageModel); // update DB
@@ -1385,7 +1517,16 @@ namespace Digital.Web.Controllers
                 }
                 else // old existing model -- do update
                 {
-                    ReturnResult = "NOK";
+                    var UpdateSinglePageModel = client.SinglePageQueryById(Id);
+                    UpdateSinglePageModel.PageTitle = PageTitle;
+                    UpdateSinglePageModel.PageKeyWords = PageKeyWords;
+                    UpdateSinglePageModel.PageDescription = PageDescription;
+                    UpdateSinglePageModel.PageRelationFlag = PageRelationFlag;
+                    UpdateSinglePageModel.PageBody = PageBody;
+                    UpdateSinglePageModel.CompanyID = UserModel.CompanyID.Value;
+                    UpdateSinglePageModel.ModifiedTime = DateTime.Now;
+                    client.SinglePageUpdate(UpdateSinglePageModel);
+                    ReturnResult = "OK";
                 }
             }
             else

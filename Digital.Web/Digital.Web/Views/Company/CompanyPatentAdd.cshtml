@@ -11,7 +11,7 @@
 }
 @section PageSpecificJavascriptIncludes{
 
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
+    @*<link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
 
@@ -25,6 +25,29 @@
     <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
     <!-- commom form js -->
     <script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>*@
+<link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+<link rel="stylesheet" href="../DigitalStyle/css/jquery.tagsinput.css" />
+<link href="../DigitalStyle/js/dropzone/content/Scripts/dropzone/css/basic.css" rel="stylesheet" />
+<link href="../DigitalStyle/js/dropzone/content/Scripts/dropzone/css/dropzone.css" rel="stylesheet" />
+
+<script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+<script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
+<script src="../DigitalStyle/js/jquery.maskedinput.min.js"></script>
+<script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
+
+<script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+<script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+<script src="../DigitalStyle/js/JqueryToken.js"></script>
+<script src="../DigitalStyle/js/messages_cn.js"></script>
+
+
+<!-- CKEditor -->
+<script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
+<script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
+
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 添加专利 <span>专利中心</span></h2>
@@ -81,22 +104,19 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">专利证书</label>
                             <div class="col-sm-6">
-                                <div class="fileupload fileupload-new" data-provides="fileupload">
-                                    <div class="input-append">
-                                        <div class="uneditable-input">
-                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                            <span class="fileupload-preview"></span>
+                                <div class="jumbotron">
+                                    <form action="~/Home/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+                                        <div class="fallback">
+                                            <input name="file" type="file" multiple />
+                                            <input type="submit" value="Upload" />
                                         </div>
-                                        <span class="btn btn-default btn-file">
-                                            <span class="fileupload-new">选择专利证书文件</span>
-                                            <span class="fileupload-exists">更改</span>
-                                            <input id="PatentCerificate" value="@Model.PatentCerificate" type="file" />
-                                        </span>
-                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">删除</a>
+                                    </form>
                                     </div>
+                                @*<input id="ImagePath" type="hidden" value="@Model.PatentCerificate" />
+                                <div id="uploader"></div>
+                                <img id="PersonImage" src="@Html.IsNull(Model.PatentCerificate, "../DigitalStyle/images/pic-none.png", Model.PatentCerificate)" class="thumbnail img-responsive" alt="" />*@
                                 </div>
                             </div>
-                        </div>
 
 
                         <div class="form-group">
@@ -169,9 +189,28 @@
     </div>
 </div>
 
+<script src="../DigitalStyle/js/dropzone/content/Scripts/dropzone/dropzone.js"></script>
 <script>
     jQuery(document).ready(function () {
-
+        @*$('#uploader').FileUpload({
+            'buttonText':'请上传文件',
+            'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
+            'ImageId': '',
+            'callback': function (msg) {
+                //msg.url为图片地址
+                //alert(msg);
+                $("#ImagePath").val(msg.url);
+                $("#PersonImage")[0].src = msg.url;
+            }
+        });*@
+        Dropzone.options.dropzoneForm = {
+            init: function () {
+                this.on("complete", function (data) {
+                    //var res = eval('(' + data.xhr.responseText + ')');
+                    var res = JSON.parse(data.xhr.responseText);
+                });
+            }
+        };
         //select option : TechnologyDomain
         var TechnologyDomainjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<TechnologyDomainMode>)ViewBag.TechnologyDomainList))
         DropOption(TechnologyDomainjsons,$("#TechnologyDomain"),@Model.PatentTechnologyDomain);
@@ -197,14 +236,7 @@
         });
 
         // With Form Validation Wizard
-        var $validator = jQuery("#firstForm").validate({
-            highlight: function (element) {
-                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-            },
-            success: function (element) {
-                jQuery(element).closest('.form-group').removeClass('has-error');
-            }
-        });
+       
 
     });
 </script>
@@ -213,7 +245,7 @@
 
         // CKEditor
         jQuery('textarea#PatentIntro').ckeditor();
-        //jQuery('#inlineedit1, #inlineedit2').ckeditor();
+    
         // Uncomment the following code to test the "Timeout Loading Method".
         // CKEDITOR.loadFullCoreTimeout = 5;
 
@@ -261,31 +293,29 @@
             return false;
         }
         else {
-            var IsInsert = 1; // default option : insert patent model
+             @{
+                 var Ids = Request["Id"] == null ? "0" : Request["Id"].ToString();
+             }
+            var IsInsert=@Ids;
             var PatentID = 0; // default option : insert patent model
-            
+
             //------------------TAB 01 : 专利信息
             var valPatentNumber = $.jsparams.input("PatentNumber");
             var valPatentName = $.jsparams.input("PatentName");
             var valPatentAbstract = $.jsparams.input("PatentAbstract");
-            var valPatentCerificate = $.jsparams.input("PatentCerificate");
             var valPatentDate = $.jsparams.input("PatentDate");
             var valPatentTechnologyDomain = $.jsparams.select("TechnologyDomain");
             var valPatentDevelopmentStatus = $.jsparams.select("DevelopmentStatus");
             var valPatentOrderID = $.jsparams.input("PatentOrderID");
             var valPatentLabels = $.jsparams.input("PatentLabels");
-            var valPatentIntro = $.jsparams.textarea("PatentIntro");
+            var valPatentIntro = $("#PatentIntro").val();
+            var Image = $("#ImagePath").val();
 
-            var stringTABONE = valPatentNumber + "_" + valPatentName + "_" + valPatentAbstract + "_" +
-                valPatentCerificate + "_" + valPatentDate + "_" + valPatentTechnologyDomain + "_" +
-                valPatentDevelopmentStatus + "_" + valPatentOrderID + "_" + valPatentLabels + "_" +
-                valPatentIntro;
-            //alert(stringTABONE);
 
-            var datas= {IsInsert:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,
-                PatentAbstract:valPatentAbstract,PatentCerificate:valPatentCerificate,PatentDate:valPatentDate,
+            var datas= {Id:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,
+                PatentAbstract:valPatentAbstract,PatentCerificate:Image,PatentDate:valPatentDate,
                 PatentTechnologyDomain:valPatentTechnologyDomain,PatentDevelopmentStatus:valPatentDevelopmentStatus,
-                PatentOrderID:valPatentOrderID,PatentLabels:valPatentLabels,PatentIntro:valPatentIntro};
+                PatentOrderID:valPatentOrderID,PatentLabels:valPatentLabels,PatentIntro:valPatentIntro,ImageSrc:Image};
             ComAjax("/Company/CompanyPatentSave",datas,"专利信息");
 
         }

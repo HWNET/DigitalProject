@@ -117,7 +117,7 @@
                 jQuery(element).closest('.form-group').removeClass('has-error');
             }
         });
-
+      
         // Textarea Autogrow
         jQuery('#PageBody').autogrow();
 
@@ -182,19 +182,30 @@
         else {
             var IsInsert = 1; // default option : insert single page model
             var SinglePageID = 0; // default option : insert single page model
-            
+            @{
+
+                var CompanyID = 0;
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID !=null&& UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                {
+                    //IsInsert = 0;
+                    CompanyID = UserModel.CompanyID.Value;
+                }
+            }
+
             //------------------TAB 01 : 单页信息
             var valPageTitle = $.jsparams.input("PageTitle");
             var valPageKeyWords = $.jsparams.input("PageKeyWords");
             var valPageDescription = $.jsparams.textarea("PageDescription");
             var valPageRelationFlag = $.jsparams.input("PageRelationFlag");
             var valPageBody = $.jsparams.textarea("PageBody");
+            var valCompanyID = @CompanyID;
 
             var stringTABONE = valPageTitle + "_" + valPageKeyWords + "_" + valPageDescription + "_" +
                 valPageRelationFlag + "_" + valPageBody + "_" + valCompanyID;
-            //alert(stringTABONE);
+            alert(stringTABONE);
 
-            var datas={IsInsert:IsInsert,PageTitle:valPageTitle,PageKeyWords:valPageKeyWords,
+            var datas={ CompanyID:@CompanyID,IsInsert:IsInsert,PageTitle:valPageTitle,PageKeyWords:valPageKeyWords,
                 PageDescription:valPageDescription,PageRelationFlag:valPageRelationFlag,PageBody:valPageBody};
             ComAjax("/Company/CompanySinglePageSave",datas,"单页信息");
 

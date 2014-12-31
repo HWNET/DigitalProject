@@ -38,7 +38,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>提示：</strong> 类似企业介绍的关于我们、联系我们、荣誉证书等统称为单独页面，页面标示的作用用于将 指定的页面聚合在一起 形成链接.<br> 单独页面添加上限为30页。
         </div>
-
+        @Html.AntiForgeryToken()
         <div class="col-md-12">
             <div class="table-responsive">
                 <table class="table table-info mb30">
@@ -62,34 +62,14 @@
                                         <td>@PageMode.PageTitle</td>
                                         <td>@PageMode.PageRelationFlag</td>
                                         <td>@PageMode.ModifiedTime</td>
-                                        <td>预览   删除  更改</td>
+                                        <td><a class="btn btn-primary" onclick="javascript:Delete(@PageMode.PageID)"><i class="fa fa-pencil mr5"></i> 删除</a>&nbsp;<a class="btn btn-primary" href="CompanySinglePageAdd?Id=@PageMode.PageID" ><i class="fa fa-pencil mr5"></i> 修改</a></td>
                                     </tr>
                                 }
                             }
 
                         }
 
-                        <tr>
-                            <td>1</td>
-                            <td>联系我们</td>
-                            <td>about-us</td>
-                            <td>2014-8-15</td>
-                            <td>预览   删除  更改</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>企业资质</td>
-                            <td>about-us</td>
-                            <td>2014-8-15</td>
-                            <td>预览   删除  更改</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>品质保证</td>
-                            <td>about-us</td>
-                            <td>2014-8-15</td>
-                            <td>预览   删除  更改</td>
-                        </tr>
+                        
 
                     </tbody>
                 </table>
@@ -100,6 +80,15 @@
 </div>
 
 <script>
+
+    function callBack() {
+        window.location = window.location;
+    }
+
+    function Delete(Id)
+    {
+        ComAjax("/Company/CompanySinglePageDelete", { Id:Id}, "单页删除", "callBack");
+    }
     jQuery(document).ready(function () {
 
         window.onload = function () {
