@@ -41,58 +41,69 @@
 */
 
 if ("undefined" != typeof staticFileRoot) {
+    document.write('<script type="text/javascript" src="' + staticFileRoot + '/DigitalStyle/js/plupload/js/plupload.full.min.js"></script>');
+    document.write('<script type="text/javascript" src="' + staticFileRoot + '/DigitalStyle/js/plupload/js/i18n/zh_CN.js"></script>');
+    try {
 
-    document.write('<link rel="stylesheet" type="text/css" href="' + staticFileRoot + '/DigitalStyle/js/Uploadify/uploadify.css"/>');
-    document.write('<script type="text/javascript" src="' + staticFileRoot + '/DigitalStyle/js/Uploadify/jquery.uploadify.min.js"></script>');
 
-    $.fn.FileUpload = function (param) {
 
-        var uploadparam = {
-            'swf': '/DigitalStyle/js/Uploadify/uploadify.swf',
-            'uploader': staticFileRoot + "/FileUpload.ashx",
-            'method': 'GET',
-            'buttonText' : '选择文件上传',
-            'queueID': 'fileQueue',
-            'fileSizeLimit': '5MB',
-            'fileTypeDesc': "jpg/png/gif Files",
-            'fileTypeExts': '*.gif; *.jpg; *.png',
-            'auto': true,
-            'multi': false,
-            'onUploadSuccess': function (file, data, response) {
-                eval("data = " + data);
+        $.fn.FileUpload = function (param) {
 
-                if (data.err != '') {
-                    alert(data.err);
-                } else {
-                    var msg = data.msg;
+            var uploader = new plupload.Uploader({
+                runtimes: 'html5,flash,silverlight,html4',
+                browse_button: 'pickfiles', // you can pass in id...
+                container: document.getElementById('container'), // ... or DOM Element itself
+                url: staticFileRoot + "/FileUpload.ashx?subfolder=" + param["subfolder"] + "&" + "thumbwidth=" + param["thumbwidth"] + "&" + "thumbheight=" + param["thumbheight"] + "&" + "mode=" + param["mode"] + "&" + "ImageId=" + param["ImageId"],
+                flash_swf_url: staticFileRoot + '/DigitalStyle/js/plupload/js/Moxie.swf',
+                silverlight_xap_url: staticFileRoot + '/DigitalStyle/js/plupload/js/Moxie.xap',
 
-                    if (msg.url)
-                        msg.absoluteUrl = staticFileRoot + msg.url;
+                filters: {
+                    max_file_size: '10mb',
+                    mime_types: [
+                        { title: "Image files", extensions: "jpg,gif,png" },
+                        { title: "Zip files", extensions: "zip" }
+                    ]
+                },
+               
+                init: {
+                    PostInit: function () {
+                        document.getElementById('filelist').innerHTML = '';
 
-                    if (param.callback != undefined)
-                        param.callback(msg,data.err);
+                        document.getElementById('uploadfiles').onclick = function () {
+                            uploader.start();
+                            return false;
+                        };
+                    },
+
+                    FilesAdded: function (up, files) {
+                        plupload.each(files, function (file) {
+                            document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                        });
+                    },
+
+                    UploadProgress: function (up, file) {
+
+                        document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                    },
+                    FileUploaded: function (uploader, file, rep) {
+                        var msg = JSON.parse(rep.response);
+                        callback(msg);
+                       // eval(param["callback"] + "(" + msg + ")");
+                       
+                    },
+                    Error: function (up, err) {
+                        alert("\nError #" + err.code + ": " + err.message);
+                        //document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+                    }
+
                 }
-            },
-            'onUploadError': function (file, errorCode, errorMsg, errorString) {
-                alert('这个文件' + file.name + ' 不能上传: ' + errorString);
-            }
-        };
+            });
+            uploader.init();
 
-        var postParamNames = "subfolder,thumbs,thumbwidth,thumbheight,mode,ImageId";
-        var postParam = {};
-
-        for (var i in param) {
-            if (postParamNames.indexOf(i) < 0) {
-                uploadparam[i] = param[i];
-            }
-            else {
-                postParam[i] = param[i];
-            }
         }
+    }
+    catch (e) {
 
-        uploadparam["formData"] = postParam;
-
-        return this.uploadify(uploadparam);
     }
 
 } else {
@@ -106,6 +117,6 @@ function getThumbAbsoluteUrl(url, suffix) {
     url = head + "_" + suffix + ext;
     if (url.indexOf("http") != 0)
         url = staticFileRoot + url;
-    
+
     return url;
 }

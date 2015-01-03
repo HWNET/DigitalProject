@@ -1268,18 +1268,12 @@ namespace Digital.Web.Controllers
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
-            var CompanyID = 0;
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-            {
-                //IsInsert = 0;
-                CompanyID = UserModel.CompanyID.Value;
-            }
+        
 
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
-            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             var ReturnResult = string.Empty;
-            if (UserModel != null && UserModel.CompanyID > 0)
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID > 0)
             {
 
 
@@ -1477,18 +1471,10 @@ namespace Digital.Web.Controllers
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
-            var CompanyID = 0;
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-            {
-                //IsInsert = 0;
-                CompanyID = UserModel.CompanyID.Value;
-            }
-
             var client = ServiceHub.GetCommonServiceClient<SinglePageServiceClient>();
             var ReturnResult = string.Empty;
-            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-            if (UserModel != null && UserModel.CompanyID > 0)
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID > 0)
             {
                 var SinglePageModel = new SinglePageModel
                 {
