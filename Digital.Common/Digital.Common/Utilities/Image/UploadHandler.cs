@@ -17,7 +17,7 @@ namespace Digital.Common.Utilities
 
         public virtual string FileInputName
         {
-            get { return "filedata"; }
+            get { return "file"; }
         }
 
         public string UploadPath
