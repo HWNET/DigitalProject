@@ -573,14 +573,14 @@ namespace Digital.Web.Controllers
             {
                 CategoryModel = new CasesModel
                 {
-                CasesName = "",
-                CasesAbstract = "",
-                CasesDate = DateTime.Now,
-                CasesOrderBy = "1",
-                CasesLabels = "",
-                CasesDetails = "",
-                CasesCategoryID = 0
-            };
+                    CasesName = "",
+                    CasesAbstract = "",
+                    CasesDate = DateTime.Now,
+                    CasesOrderBy = "1",
+                    CasesLabels = "",
+                    CasesDetails = "",
+                    CasesCategoryID = 0
+                };
             }
             CasesCategoryList();
             return View(CategoryModel);
@@ -817,7 +817,7 @@ namespace Digital.Web.Controllers
             {
                 ReturnResult = "NOK";
             }
-            
+
             return Content(ReturnResult);
         }
         #endregion
@@ -833,7 +833,7 @@ namespace Digital.Web.Controllers
             var uploadFolder = UploadConfigContext.UploadPath;
             if (client.VerifyUploadPath(uploadFolder))
             {
-                FilesList = client.FilesList(User.Identity.GetUserId(),string.Empty,string.Empty).ToList();
+                FilesList = client.FilesList(User.Identity.GetUserId(), string.Empty, string.Empty).ToList();
             }
 
             return Json(FilesList);
@@ -863,7 +863,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyFileDeleteByFolder(string FolderName,string FileName)
+        public ActionResult CompanyFileDeleteByFolder(string FolderName, string FileName)
         {
             var ReturnResult = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
@@ -872,7 +872,7 @@ namespace Digital.Web.Controllers
             var result = false;
             if (client.VerifyUploadPath(uploadFolder))
             {
-                result=client.FileRemove(User.Identity.GetUserId(), FolderName, FileName);
+                result = client.FileRemove(User.Identity.GetUserId(), FolderName, FileName);
             }
 
             if (result)
@@ -898,29 +898,41 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyNewsAdd()
         {
             ViewBag.MenuModel = base.GetMenu(163);
-
-            NewsModel NewsModel = new NewsModel
+            NewsModel NewsModel = null;
+            var client1 = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
+            if (!string.IsNullOrEmpty(Request["Id"]))
             {
-                NewsTitle = "NewsTitle0000",
-                NewsAbstract = "NewsAbstract0000",
-                NewsThumbnail = "NewsThumbnail0000",
-                NewsCategoryID = 0,
-                NewsOrderID = 0,
-                NewsKeywords = "NewsKeywords0000",
-                NewsLabels = "NewsLabels0000",
-                NewsBody = "NewsBody0000",
-                ReleaseTime = DateTime.Now,
-            };
+                NewsModel = client1.NewsQueryById(Request["Id"].ToString().ToInt());
+                client1.Close();
+            }
+            else
+            {
+                 NewsModel = new NewsModel
+                {
+                    NewsTitle = "",
+                    NewsAbstract = "",
+                    NewsThumbnail = "",
+                    NewsCategoryID = 0,
+                    NewsOrderID = 0,
+                    NewsKeywords = "",
+                    NewsLabels = "",
+                    NewsBody = "",
+                    ReleaseTime = DateTime.Now,
+                };
+            }
 
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
             var CompanyID = 0;
-            List<NewsCategoryModel> CategoryList = null;
-
+            List<BaseNameValueMode> CategoryList = new List<BaseNameValueMode>();
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
             {
                 CompanyID = UserModel.CompanyID.Value;
-                CategoryList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
+                var  CategoryModelList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
+                foreach (var Category in CategoryModelList)
+                {
+                    CategoryList.Add(new BaseNameValueMode { Id = Category.NewsCategoryID, Name = Category.NewsCategoryName });
+                }
             }
             ViewBag.CategoryList = CategoryList;
 
@@ -933,7 +945,7 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CompanyNewsSave(int IsInsert, string NewsTitle, string NewsAbstract,
+        public ActionResult CompanyNewsSave(int Id, string NewsTitle, string NewsAbstract,
             string NewsThumbnail, int NewsCategoryID, int NewsOrderID, string NewsKeywords, string NewsLabels,
             string NewsBody)
         {
@@ -953,6 +965,7 @@ namespace Digital.Web.Controllers
             {
                 var NewsModel = new NewsModel
                 {
+                    CompanyID=CompanyID,
                     NewsTitle = NewsTitle,
                     NewsAbstract = NewsAbstract,
                     NewsThumbnail = NewsThumbnail,
@@ -963,7 +976,7 @@ namespace Digital.Web.Controllers
                     NewsBody = NewsBody,
                     ReleaseTime = DateTime.Now,
                 };
-                if (IsInsert == 1) // new model -- do insert
+                if (Id == 0) // new model -- do insert
                 {
                     #region new model -- do insert
                     var ResultModel = client.NewsInsert(NewsModel); // update DB
@@ -980,7 +993,17 @@ namespace Digital.Web.Controllers
                 }
                 else // old existing model -- do update
                 {
-                    ReturnResult = "NOK";
+                    NewsModel.NewsID=Id;
+                    var ResultModel = client.NewsUpdate(NewsModel);
+                    if (ResultModel != null && ResultModel.NewsID > 0) // update web cache
+                    {
+                        //OperatorFactory.UpdateNewsCategoryCache(User.Identity.GetUserId(), ResultModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
                 }
             }
             else
@@ -988,11 +1011,6 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
-
-            if (ReturnResult == "OK")
-            {
-                return RedirectToAction("CompanyNewsAdd", "Company");
-            }
             return Content(ReturnResult);
         }
         #endregion
@@ -1022,9 +1040,9 @@ namespace Digital.Web.Controllers
             NewsCategoryModel CategoryModel = new NewsCategoryModel
             {
                 NewsCategoryOrderID = 0,
-                NewsCategoryName = "NewsCategoryName0000",
-                NewsCategoryPicture = "NewsCategoryPicture0000",
-                NewsCategoryContent = "NewsCategoryContent0000",
+                NewsCategoryName = "",
+                NewsCategoryPicture = "",
+                NewsCategoryContent = "",
             };
             return View(CategoryModel);
         }
@@ -1060,7 +1078,7 @@ namespace Digital.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult CompanyNewsCategoryEdit(int CategoryID,int IsInsert, string NewsCategoryName, string NewsCategoryPicture, string NewsCategoryContent,
+        public ActionResult CompanyNewsCategoryEdit(int CategoryID, int IsInsert, string NewsCategoryName, string NewsCategoryPicture, string NewsCategoryContent,
             int NewsCategoryParentID, int NewsCategoryOrderID)
         {
             //currnet log on user
@@ -1203,6 +1221,7 @@ namespace Digital.Web.Controllers
                         NewsOrderID = n.NewsOrderID,
                         NewsThumbnail = n.NewsThumbnail,
                         NewsTitle = n.NewsTitle,
+                        ReleaseTime=n.ReleaseTime
                     }).ToList();
                 }
             }
@@ -1236,16 +1255,16 @@ namespace Digital.Web.Controllers
                     PatentName = "",
                     PatentAbstract = "",
                     PatentCerificate = "",
-                PatentDate = DateTime.Now.ToShortDateString(),
-                PatentTechnologyDomain = 0,
-                PatentDevelopmentStatus = 0,
-                PatentOrderID = 0,
+                    PatentDate = DateTime.Now.ToShortDateString(),
+                    PatentTechnologyDomain = 0,
+                    PatentDevelopmentStatus = 0,
+                    PatentOrderID = 0,
                     PatentLabels = "",
                     PatentIntro = "",
-                IsDisabled = false,
-                IsTransferred = false,
-                CompanyID = 0,
-            };
+                    IsDisabled = false,
+                    IsTransferred = false,
+                    CompanyID = 0,
+                };
             }
 
 
@@ -1262,14 +1281,14 @@ namespace Digital.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CompanyPatentSave( int Id, string PatentNumber, string PatentName,
+        public ActionResult CompanyPatentSave(int Id, string PatentNumber, string PatentName,
             string PatentAbstract, string PatentCerificate, string PatentDate, string PatentTechnologyDomain,
             string PatentDevelopmentStatus, int PatentOrderID, string PatentLabels, string PatentIntro)
         {
             //currnet log on user
             var CurrentUser = User.Identity.Name;
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-        
+
 
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
             var ReturnResult = string.Empty;
@@ -1278,23 +1297,23 @@ namespace Digital.Web.Controllers
 
 
                 if (Id == 0) // new model -- do insert
-            {
-                var PatentModel = new PatentModel
                 {
-                    PatentNumber = PatentNumber,
-                    PatentName = PatentName,
-                    PatentAbstract = PatentAbstract,
-                    PatentCerificate = PatentCerificate,
-                    PatentDate = PatentDate,
-                        PatentTechnologyDomain =PatentTechnologyDomain.ToInt(),
-                        PatentDevelopmentStatus =PatentDevelopmentStatus.ToInt(), 
-                    PatentOrderID = PatentOrderID,
-                    PatentLabels = PatentLabels,
-                    PatentIntro = PatentIntro,
-                    IsDisabled = false,
-                    IsTransferred = false,
+                    var PatentModel = new PatentModel
+                    {
+                        PatentNumber = PatentNumber,
+                        PatentName = PatentName,
+                        PatentAbstract = PatentAbstract,
+                        PatentCerificate = PatentCerificate,
+                        PatentDate = PatentDate,
+                        PatentTechnologyDomain = PatentTechnologyDomain.ToInt(),
+                        PatentDevelopmentStatus = PatentDevelopmentStatus.ToInt(),
+                        PatentOrderID = PatentOrderID,
+                        PatentLabels = PatentLabels,
+                        PatentIntro = PatentIntro,
+                        IsDisabled = false,
+                        IsTransferred = false,
                         CompanyID = UserModel.CompanyID.Value,
-                };
+                    };
                     #region new model -- do insert
                     var ResultModel = client.PatentInsert(PatentModel); // update DB
                     if (ResultModel != null && ResultModel.PatentID > 0) // update web cache
@@ -1427,11 +1446,11 @@ namespace Digital.Web.Controllers
             {
                 SinglePageModel = new SinglePageModel
             {
-                   PageTitle = "",
-                   PageKeyWords = "",
-                   PageDescription = "",
-                   PageRelationFlag = "",
-                   PageBody = "",
+                PageTitle = "",
+                PageKeyWords = "",
+                PageDescription = "",
+                PageRelationFlag = "",
+                PageBody = "",
                 CompanyID = 0,
                 ModifiedTime = DateTime.Now,
             };
@@ -1633,6 +1652,91 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyPatentDelete(int Id)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+                client.PatentDeleteById(Id);
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyPatentDeletes(string Ids)
+        {
+            try
+            {
+                var IdStr = Ids.Trim(',').Split(',');
+                var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
+                foreach (var Id in IdStr)
+                {
+                    client.PatentDeleteById(Id.ToInt());
+                }
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewsDelete(int Id)
+        {
+            try
+            {
+                var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
+                client.NewsDeleteById(Id);
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewsDeletes(string Ids)
+        {
+            try
+            {
+                var IdStr = Ids.Trim(',').Split(',');
+                var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
+                foreach (var Id in IdStr)
+                {
+                    client.NewsDeleteById(Id.ToInt());
+                }
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                return Content("NOK");
+            }
+        }
+        //CompanyPatentDeletes
 
 
 

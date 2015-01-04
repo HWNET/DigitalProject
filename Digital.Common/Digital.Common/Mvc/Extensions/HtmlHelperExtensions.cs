@@ -96,7 +96,7 @@ namespace Digital.Common.Mvc.Extensions
 
         public static object IsNull(this HtmlHelper helper, object obj, object IsNullobj, object IsNotNullObj)
         {
-            if (obj == null||obj=="")
+            if (obj == null || obj=="")
             {
                 return IsNullobj;
             }

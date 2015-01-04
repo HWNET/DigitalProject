@@ -65,20 +65,19 @@ function DropOption(objson, selectobj, SelectedId)
         {
            
             var HtmlSelect = "";
-           
-            if ($.inArray(val.Id.toString(), SelectIds) != -1)
-            {
-                HtmlSelect = "selected"
+            if (typeof (val.Id) != "undefined") {
+                if ($.inArray(val.Id.toString(), SelectIds) != -1) {
+                    HtmlSelect = "selected"
+                }
+                else if (val.Id == SelectIds) {
+                    HtmlSelect = "selected"
+                }
+                //if (SelectIds == val.Id)
+                //{
+                //    HtmlSelect = "selected"
+                //}
+                selectobj.append("<option value='" + val.Id + "' " + HtmlSelect + ">" + val.Name + "</option>");
             }
-            else if (val.Id == SelectIds)
-            {
-                HtmlSelect = "selected"
-            }
-            //if (SelectIds == val.Id)
-            //{
-            //    HtmlSelect = "selected"
-            //}
-            selectobj.append("<option value='" + val.Id + "' " + HtmlSelect + ">" + val.Name + "</option>");
     }
        
     });
@@ -233,6 +232,25 @@ jQuery.jsparams = {
     },
     check: function (Id) {
         return $("#" + Id).attr("checked") == "checked" ? true : false;
+    },
+    checkByName: function(Name)
+    {
+        var Ids = "";
+        $("input[name='" + Name + "']").each(function (index, domEle) {
+            if ($(this).attr("checked") == "checked") {
+                Ids += $(domEle).val() + ",";
+            }
+        });
+        return Ids;
+    },
+    checkAll:function(Name)
+    {
+
+        $("input[name='" + Name + "']").each(function (index, domEle) {
+          
+            $(domEle).attr('checked', true);
+
+        });
     },
     radio: function (name) {
         return $('input:radio[name=' + name + ']:checked').val();

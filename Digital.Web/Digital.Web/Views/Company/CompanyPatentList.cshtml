@@ -33,27 +33,27 @@
     <div class="row">
 
         <div class="btn-group mr10">
-            <button class="btn btn-white" type="button"><i class="fa fa-check mr5"></i> 全选</button>
+            <button class="btn btn-white" type="button"  onclick="CheckAll()"><i class="fa fa-check mr5"></i> 全选</button>
             @*<button class="btn btn-white" type="button"><i class="fa fa-minus-square mr5"></i> 取消</button>*@
         </div>
 
         <div class="btn-group mr10">
-            <button class="btn btn-success" type="button"><i class="fa fa-pencil mr5"></i>发布专利</button>
-            <button class="btn btn-danger" type="button"><i class="fa fa-trash-o mr5"></i> 删除专利</button>
+            <button class="btn btn-success" onclick="javascript: window.location = 'CompanyPatentAdd'" type="button"><i class="fa fa-pencil mr5"></i>发布专利</button>
+            <button class="btn btn-danger" onclick="javascript:Deletes()" type="button"><i class="fa fa-trash-o mr5"></i> 删除专利</button>
         </div>
 
         <div class="btn-group mr10">
             @*<button class="btn btn-warning" type="button"><i class="fa fa-external-link mr5"></i> 更改浏览权限</button>*@
         </div>
 
-
+        @Html.AntiForgeryToken()
         <div class="table-responsive">
             <table class="table table-primary table-buglist">
                 <thead>
                     <tr>
                         <th>排序</th>
                         <th>选择</th>
-                        <th>权限</th>
+                        @*<th>权限</th>*@
                         <th>专利名称/专利号</th>
                         <th>技术领域</th>
                         <th>是否转让</th>
@@ -71,8 +71,8 @@
                                 StringTransferred = PatentMode.IsTransferred ? "是" : "否";
                                 <tr>
                                     <td>@PatentMode.PatentOrderID</td>
-                                    <td><input type="checkbox" id="checkboxDanger" checked="" /></td>
-                                    <td><a href="view-issue.html">所有人可浏览</a></td>
+                                    <td><input type="checkbox" name="IdCheck" value="@PatentMode.PatentID"  /></td>
+                                    @*<td><a href="view-issue.html">所有人可浏览</a></td>*@
                                     <td>
                                         @PatentMode.PatentName<br />@PatentMode.PatentNumber
                                     </td>
@@ -86,7 +86,7 @@
                                             </a>
                                             <ul role="menu" class="dropdown-menu pull-right">
                                                 <li><a href="CompanyPatentAdd?Id=@PatentMode.PatentID">编辑</a></li>
-                                                <li><a href="javasript:Delete(@PatentMode.PatentID)">删除</a></li>
+                                                <li><a href="javascript:Delete(@PatentMode.PatentID)">删除</a></li>
                                                 
                                             </ul>
                                         </div>
@@ -127,7 +127,7 @@
             </table>
         </div>
 
-        <ul class="pagination pagination-split nomargin">
+        @*<ul class="pagination pagination-split nomargin">
             <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
             <li><a href="#">1</a></li>
             <li class="active"><a href="#">2</a></li>
@@ -135,7 +135,7 @@
             <li><a href="#">4</a></li>
             <li><a href="#">5</a></li>
             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-        </ul>
+        </ul>*@
 
     </div>
 </div>
@@ -162,6 +162,25 @@
         });
 
     });
+
+    function callBack() {
+        window.location = window.location;
+    }
+
+    function CheckAll()
+    {
+        $.jsparams.checkAll("IdCheck");
+    }
+
+    function Deletes()
+    {
+        var Ids = $.jsparams.checkByName("IdCheck");
+        ComAjax("/Company/CompanyPatentDeletes", { Ids: Ids }, "专利删除", "callBack");
+    }
+
+    function Delete(Id) {
+        ComAjax("/Company/CompanyPatentDelete", { Id: Id }, "专利删除", "callBack");
+    }
 </script>
 
 

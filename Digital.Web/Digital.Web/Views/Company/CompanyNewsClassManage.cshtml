@@ -11,13 +11,15 @@
 }
 
 @section PageSpecificJavascriptIncludes{
-    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css"/>
-
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
     <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
+<script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
 }
 
 <div class="pageheader">
@@ -62,24 +64,43 @@
                             </thead>
                             <tbody>
                                 @{
-                                    if (ViewBag.CategoryList != null)
-                                    {
-                                        foreach (var CategoryMode in (List<NewsCategoryModel>)ViewBag.CategoryList)
+    if (ViewBag.CategoryList != null)
+    {
+        var List = (List<NewsCategoryModel>)ViewBag.CategoryList;
+        var Parent = List.Where(o => o.NewsCategoryParentID == 0).ToList();
+                                        foreach (var CategoryMode in Parent)
                                         {
-                                            <tr>
-                                                <td><input type="text" name="name" class="form-control width30" placeholder="10" value="@CategoryMode.NewsCategoryOrderID" /></td>
-                                                <td><input type="text" name="name" class="form-control " placeholder="X86主板" value="@CategoryMode.NewsCategoryName" /></td>
-                                                <td><a href=""><i class="fa fa-plus-square"></i></a> 添加子类</td>
+                                            <tr id="tr@{@CategoryMode.NewsCategoryID}">
+                                                <td>@CategoryMode.NewsCategoryOrderID</td>
+                                                <td>@CategoryMode.NewsCategoryName</td>
+                                                <td><a href="javascript:Show(@CategoryMode.NewsCategoryID)"><i class="fa fa-plus-square"></i></a> 添加子类</td>
                                                 <td>@CategoryMode.NewsCategoryPicture</td>
                                                 <td>@CategoryMode.NewsCategoryContent</td>
                                                 <td class="table-action-hide">
-                                                    <a href="" onclick="javascript:CategoryEdit(@CategoryMode.NewsCategoryID);"><i class="fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg"></i></a>
-                                                    <a href="" onclick="javascript:CategoryDelete(this,@CategoryMode.NewsCategoryID);" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                                                    <a href="javascript:CategoryEdit(@CategoryMode.NewsCategoryID,@CategoryMode.NewsCategoryParentID);"><i class="fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg"></i></a>
+                                                    <a href="javascript:CategoryDelete(this,@CategoryMode.NewsCategoryID);" class="delete-row"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
+                                            var SubChild = List.Where(o => o.NewsCategoryParentID == CategoryMode.NewsCategoryID).ToList();
+                                            foreach (var Childs in SubChild)
+                                            {
+                                                <tr id="tr@{@Childs.NewsCategoryID}">
+
+                                                    <td>@Childs.NewsCategoryOrderID</td>
+                                                    <td>@Childs.NewsCategoryName</td>
+                                                    <td>@CategoryMode.NewsCategoryName 的子分类</td>
+                                                    <td>@Childs.NewsCategoryPicture</td>
+                                                    <td>@Childs.NewsCategoryContent</td>
+                                                    <td class="table-action-hide">
+                                                        <a href="javascript:CategoryEdit(@CategoryMode.NewsCategoryID,@CategoryMode.NewsCategoryParentID);"><i class="fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg"></i></a>
+                                                        <a href="javascript:CategoryDelete(this,@CategoryMode.NewsCategoryID);" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
                                         }
-                                    }
-                                }
+        
+    }
+}
                             </tbody>
                         </table>
 
@@ -106,7 +127,7 @@
 
 </div>
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id="DetailModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -116,6 +137,8 @@
             <div class="modal-body">
                 <form class="form-horizontal form-bordered" id="firstForm" onsubmit="return false">
                     @Html.AntiForgeryToken()
+                    <input type="hidden" id="ParentId" />
+                    <input type="hidden" id="CaseId" />
                     <div class="form-group">
                         <label class="col-sm-3 control-label">排序值</label>
                         <div class="col-sm-4">
@@ -127,27 +150,44 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"><span class="asterisk">*</span> 分类名称</label>
                         <div class="col-sm-6">
-                            <input id="NewsCategoryName" type="text" placeholder="分类名称..." value="@Model.NewsCategoryName" class="form-control" required/>
+                            <input id="NewsCategoryName" type="text" placeholder="分类名称..." value="@Model.NewsCategoryName" class="form-control" required />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">分类图片</label>
                         <div class="col-sm-6">
-                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload fileupload-new" data-provides="fileupload" id="container">
                                 <div class="input-append">
                                     <div class="uneditable-input">
                                         <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                        <span class="fileupload-preview"></span>
+                                        <span id="filelist" class="fileupload-preview"></span>
                                     </div>
                                     <span class="btn btn-default btn-file">
-                                        <span class="fileupload-new">Select file</span>
-                                        <span class="fileupload-exists">Change</span>
-                                        <input id="NewsCategoryPicture" type="file" value="@Model.NewsCategoryPicture" />
+                                        <span class="fileupload-new">选择分类图片</span>
+                                        <span class="fileupload-exists">更改</span>
+                                        <input id="pickfiles" value="@Model.NewsCategoryPicture" type="file" />
                                     </span>
-                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                    <a href="#" id="uploadfiles" class="btn btn-default">上传</a>
                                 </div>
                             </div>
+                            <input id="ImagePath" type="hidden" value="@Model.NewsCategoryPicture" />
+
+                            <img id="PersonImage" src="@Html.IsNull(Model.NewsCategoryPicture, "../DigitalStyle/images/pic-none.png", Model.NewsCategoryPicture)" class="thumbnail img-responsive" alt="" />
+                            @*<div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="input-append">
+                                        <div class="uneditable-input">
+                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new">Select file</span>
+                                            <span class="fileupload-exists">Change</span>
+                                            <input id="NewsCategoryPicture" type="file" value="@Model.NewsCategoryPicture" />
+                                        </span>
+                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                    </div>
+                                </div>*@
                         </div>
                     </div>
 
@@ -177,8 +217,16 @@
 
 
 <script>
+    function callback(msg) {
+        $("#ImagePath").val(msg.msg.url);
+        $("#PersonImage")[0].src = msg.msg.url;
+    }
     jQuery(document).ready(function () {
         //Textarea Autogrow
+        $('#UploadButton').FileUpload({
+            'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
+            'ImageId': '',
+        });
         $("#NewsCategoryContent").autogrow();
 
         // Show aciton upon row hover
@@ -199,37 +247,63 @@
         });
     });
 
+    function Refresh()
+    {
+        window.location = window.location;
+    }
+
+    function Edit(Id, Parent) {
+        var OrderId = $("#tr" + Id).children().eq(0).text();
+  
+        var Name = $("#tr" + Id).children().eq(1).text();
+        var Image = $("#tr" + Id).children().eq(3).text();
+        var Content = $("#tr" + Id).children().eq(4).text();
+        $("#CaseId").val(Id);
+        $("#NewsCategoryName").val(Name);
+        $("#NewsCategoryOrderID").val(OrderId);
+        $("#PersonImage")[0].src = Image;
+        $("#ImagePath").val(Image);
+        $("#NewsCategoryContent").val(Content);
+        $("#ParentId").val(Parent);
+        $("#DetailModel").modal("show");
+    }
     // For News Category High Level Add Operation
     function Save() {
         var $valid = jQuery('#firstForm').valid();
         if (!$valid) {
+           
             $validator.focusInvalid();
             return false;
         }
         else {
             var IsInsert = 1; // default option : insert new company model
-            var NewsCategoryID=0; // default option : insert new company model
+            var NewsCategoryID = 0; // default option : insert new company model
 
             //------------------TAB 01 : 播报类别信息
             var valNewsCategoryOrderID = $.jsparams.input("NewsCategoryOrderID");
             var valNewsCategoryName = $.jsparams.input("NewsCategoryName");
-            var valNewsCategoryPicture = $.jsparams.input("NewsCategoryPicture");
+            var valNewsCategoryPicture = $.jsparams.input("ImagePath");
             var valNewsCategoryContent = $.jsparams.input("NewsCategoryContent");
-            var valNewsCategoryParentID = 0;
-
-            var valNewsCategoryID=$.jsparams.input("NewsCategoryID");
-            NewsCategoryID=parseInt(valNewsCategoryID);
-
-            if (NewsCategoryID>0) {
-                IsInsert=0;
+            var valNewsCategoryParentID = $.jsparams.input("ParentId");
+            if (valNewsCategoryParentID == "")
+            {
+                valNewsCategoryParentID = 0;
             }
-            var stringTABONE = IsInsert+"_"+valNewsCategoryOrderID + "_" + valNewsCategoryName + "_" + valNewsCategoryPicture + "_" +
-                valNewsCategoryContent + "_" + valNewsCategoryParentID;
-            //window.alert(stringTABONE);
 
-            var datas={ CategoryID:NewsCategoryID,IsInsert:IsInsert,NewsCategoryName:valNewsCategoryName,NewsCategoryPicture:valNewsCategoryPicture,
-                NewsCategoryContent:valNewsCategoryContent,NewsCategoryParentID:valNewsCategoryParentID,NewsCategoryOrderID:valNewsCategoryOrderID};
-            ComAjax("/Company/CompanyNewsCategoryEdit",datas,"播报分类信息",null);
+            var valNewsCategoryID = $.jsparams.input("CaseId");
+            if (valNewsCategoryID != "") {
+                NewsCategoryID = valNewsCategoryID*1;
+            }
+            if (NewsCategoryID > 0) {
+                IsInsert = 0;
+            }
+           
+
+            var datas = {
+                CategoryID: NewsCategoryID, IsInsert: IsInsert, NewsCategoryName: valNewsCategoryName, NewsCategoryPicture: valNewsCategoryPicture,
+                NewsCategoryContent: valNewsCategoryContent, NewsCategoryParentID: valNewsCategoryParentID, NewsCategoryOrderID: valNewsCategoryOrderID
+            };
+            ComAjax("/Company/CompanyNewsCategoryEdit", datas, "播报分类信息", "Refresh");
 
             // 1. after success , need do close DIV Display
             // 2. refresh current page
@@ -237,55 +311,61 @@
     }
 
     // DIV category fields display , Clear Input Values
-    function CategoryDIValuesClear()
-    {
-        $("#NewsCategoryID").val("0");
-        $("#NewsCategoryOrderID").val("0");
-        $("#NewsCategoryName").val("NewsCategoryName0000");
-        $("#NewsCategoryPicture").val("NewsCategoryPicture0000");
-        $("#NewsCategoryContent").val("NewsCategoryContent0000");
+    function CategoryDIValuesClear() {
+        $("#NewsCategoryName").val("");
+        $("#NewsCategoryID").val("");
+        $("#PersonImage")[0].src = '../DigitalStyle/images/pic-none.png';
+        $("#ImagePath").val('../DigitalStyle/images/pic-none.png');
+        $("#NewsCategoryContent").val("");
+        $("#CaseId").val(0);
+        $("#ParentId").val("");
     }
-
+    function Show(ParentId) {
+        $("#NewsCategoryName").val("");
+        $("#NewsCategoryID").val("");
+        $("#PersonImage")[0].src = '../DigitalStyle/images/pic-none.png';
+        $("#ImagePath").val('../DigitalStyle/images/pic-none.png');
+        $("#NewsCategoryContent").val("");
+        $("#DetailModel").modal("show");
+        $("#CaseId").val(0);
+        $("#ParentId").val(ParentId);
+    }
     // For News Category High Level Edit Operation , DIV category fields display
-    function CategoryEdit(CategoryID)
-    {
-        var $valid = jQuery('#firstForm').valid();
-        if (!$valid) {
-            $validator.focusInvalid();
-            return false;
-        }
-        else
-        {
-            var datas = { CategoryID: parseInt(CategoryID) };
-            ComAjaxJson("/Company/CompanyNewsCategoryByID", datas, CategoryDisplay);
-        }
+    function CategoryEdit(CategoryID, Parent) {
+        Edit(CategoryID, Parent)
+        //var $valid = jQuery('#firstForm').valid();
+        //if (!$valid) {
+        //    $validator.focusInvalid();
+        //    return false;
+        //}
+        //else {
+        //    var datas = { CategoryID: parseInt(CategoryID) };
+        //    ComAjaxJson("/Company/CompanyNewsCategoryByID", datas, CategoryDisplay);
+        //}
     }
 
-    function CategoryDisplay(dataJson)
-    {
+    function CategoryDisplay(dataJson) {
         var obj = eval(dataJson);
         $("#NewsCategoryID").val(obj[0].NewsCategoryID);
         $("#NewsCategoryOrderID").val(obj[0].NewsCategoryOrderID);
         $("#NewsCategoryName").val(obj[0].NewsCategoryName);
-        $("#NewsCategoryPicture").val(obj[0].NewsCategoryPicture);
+        $("#ImagePath").val(obj[0].NewsCategoryPicture);
         $("#NewsCategoryContent").val(obj[0].NewsCategoryContent);
     }
 
     // For News Category High Level Delete Operation
-    function CategoryDelete(Sender,CategoryID)
-    {
+    function CategoryDelete(Sender, CategoryID) {
         // Delete row in a table
         //jQuery('.delete-row').click(function () {
 
         //});
         var c = confirm("Continue delete?");
-        if (c)
-        {
+        if (c) {
             var datas = { CategoryID: parseInt(CategoryID) };
-            ComAjax("/Company/CompanyNewsCategoryDelete", datas, "播报分类信息", null);
+            ComAjax("/Company/CompanyNewsCategoryDelete", datas, "播报分类信息", "Refresh");
 
             // remove current row
-            //jQuery(Sender).closest('tr').remove(); 
+            //jQuery(Sender).closest('tr').remove();
             // refresh current page
         }
         else {

@@ -8,7 +8,8 @@ namespace Digital.Common
     public  enum SerurityType
     {
         UserInfoImage,
-        UserInfoFolder
+        UserInfoFolder,
+        CaseId
     }
 
     public class CryptoService
@@ -18,6 +19,7 @@ namespace Digital.Common
 
         internal const string PasswordImageKey = "我的宝贝龙玥涵";
         internal const string PasswordUserFolder = "我的宝贝小小";
+        internal const string PasswordCaseId = "佛学阿閦如来陀罗尼";
 
         public static string HashEncrypt(string input)
         {
