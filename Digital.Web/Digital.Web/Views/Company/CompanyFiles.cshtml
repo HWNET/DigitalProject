@@ -41,14 +41,14 @@
                 </div>
             </li>
 
-            <li>
-                <a href="" class="itemopt disabled"><i class="fa fa-download"></i> 下载</a>
-            </li>
+            @*<li>
+                <a href="#" onclick="javascript:FilesOperationByFolders(0);" class="itemopt disabled"><i class="fa fa-download"></i> 下载</a>
+            </li>*@
             @*<li>
                     <a href="" class="itemopt disabled"><i class="fa fa-pencil"></i> 编辑</a>
                 </li>*@
             <li>
-                <a href="" class="itemopt disabled"><i class="fa fa-trash-o"></i> 删除</a>
+                <a href="#" onclick="javascript:FilesOperationByFolders(1);" class="itemopt disabled"><i class="fa fa-trash-o"></i> 删除</a>
             </li>
 
             @*<li class="filter-type">
@@ -408,9 +408,11 @@
 
 <div id="DivFile" class="col-xs-6 col-sm-4 col-md-3 document" style="display:none">
     <div class="thmb">
+        <input type="hidden" id="folder{index}" value="{FolderName}" />
+        <input type="hidden" id="file{index}" value="{FileName}" />
         <div class="ckbox ckbox-default">
-            <input type="checkbox" id="check1" value="1" />
-            <label for="check1"></label>
+            <input type="checkbox" id="check{index}" value="{index}" />
+            <label for="check{index}"></label>
         </div>
         <div class="btn-group fm-group">
             <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
@@ -563,10 +565,11 @@
 
             var reFileName=new RegExp("{FileName}","g");
             var reFolderName=new RegExp("{FolderName}","g");
+            var reIndex=new RegExp("{index}","g");
 
             var divFile=divFileObj.attr("style","block").html().replace(reFileName,fileMode.FileName)
                 .replace(reFolderName,fileMode.FolderParent)
-                .replace("{FileDate}",fileMode.FileDate);
+                .replace("{FileDate}",fileMode.FileDate).replace(reIndex,index);
             divParent.append("<div id=\"DivFile"+index+"\" class=\"col-xs-6 col-sm-4 col-md-3 document\">"+divFile+"</div>");
         });
     }
@@ -577,8 +580,54 @@
         ComAjax("/Company/CompanyFileDeleteByFolder",datas,"企业文件","callBack");
     }
 
-    function callBack() {
+    function callBack() 
+    {
         window.location = window.location;
+    }
+
+    //for selectAll files remove
+    function FilesOperationByFolders(isRemove)
+    {
+        var FolderFiles='';
+        var FoldersList=new Array();
+        var FilesList=new Array();
+
+        jQuery('.ckbox').each(function (index) {
+            var t = jQuery(this);
+            if (t.find('input').attr('id') != "selectall") {
+                if (t.find('input').is(':checked')) {
+                    index=index-1;
+                    var valInput=t.find('input').val();
+                    if (valInput!='{index}') {
+                        var valFolderName=$.jsparams.input("folder"+index);
+                        var valFileName=$.jsparams.input("file"+index);
+                        //FolderFiles+=valFolderName+","+valFileName+"&";
+                        FoldersList.push(valFolderName);
+                        FilesList.push(valFileName);
+                    }
+                }
+            }
+        });
+        
+        if (isRemove==1) {
+            FileAllDeleteByFolder(FoldersList,FilesList);
+        }else {
+            // request to FileDownload.ashx
+            FileAllDownloadByFolder(FoldersList,FilesList);
+        }
+
+    }
+
+    function FileAllDeleteByFolder(folderName,fileName)
+    {
+        var datas={FolderNames:folderName.toString(),FileNames:fileName.toString()};
+        ComAjax("/Company/CompanyFileAllDeleteByFolder",datas,"企业文件","callBack");
+    }
+
+    function FileAllDownloadByFolder(folderName,fileName)
+    {
+        var datas={FolderNames:folderName.toString(),FileNames:fileName.toString()};
+        ComAjax("/Company/CompanyFileAllDownloadByFolder", datas, "企业文件",null);
     }
 
 </script>

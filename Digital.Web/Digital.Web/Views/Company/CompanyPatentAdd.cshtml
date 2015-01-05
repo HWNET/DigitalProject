@@ -301,8 +301,8 @@
             var valPatentDevelopmentStatus = $.jsparams.select("DevelopmentStatus");
             var valPatentOrderID = $.jsparams.input("PatentOrderID");
             var valPatentLabels = $.jsparams.input("PatentLabels");
-            var valPatentIntro = $("#PatentIntro").val();
-            var Image = $("#ImagePath").val();
+            var valPatentIntro = $.jsparams.textarea("PatentIntro");
+            var Image = $.jsparams.input("ImagePath");
 
 
             var datas= {Id:IsInsert,PatentNumber:valPatentNumber,PatentName:valPatentName,

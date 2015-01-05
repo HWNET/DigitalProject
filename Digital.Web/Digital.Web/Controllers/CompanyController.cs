@@ -859,6 +859,26 @@ namespace Digital.Web.Controllers
         }
         #endregion
 
+        #region CompanyFilesDownloadByFolder
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyFileAllDownloadByFolder(string FolderNames,string FileNames)
+        {
+            var ReturnResult = string.Empty;
+            var StringFolders = FolderNames.Split(',');
+            var StringFiles = FileNames.Split(',');
+
+            for (int i = 0; i < StringFolders.Length; i++)
+            {
+                var UrlFileDownload = string.Format("~/FileDownload.ashx?folderName={0}&fileName={1}", StringFolders[i], StringFiles[i]);
+                Response.Redirect(Url.StaticFile(UrlFileDownload));
+            }
+
+            return Content(ReturnResult);
+        }
+        #endregion
+
         #region CompanyFileDeleteByFolder
         [HttpPost]
         [AllowAnonymous]
@@ -885,6 +905,38 @@ namespace Digital.Web.Controllers
             }
 
             return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyFileAllDeleteByFolder
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyFileAllDeleteByFolder(string FolderNames, string FileNames)
+        {
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            try
+            {
+                var StringFolders = FolderNames.Split(',');
+                var StringFiles = FileNames.Split(',');
+                
+                var uploadFolder = UploadConfigContext.UploadPath;
+                for (int i = 0; i < StringFolders.Length; i++)
+                {
+                    client.FileRemove(User.Identity.GetUserId(), StringFolders[i], StringFiles[i]);
+                }
+                client.Close();
+                return Content("OK");
+            }
+            catch (Exception ex)
+            {
+                if (client!=null)
+                {
+                    client.Close();
+                }
+                return Content("NOK");
+            }
+            
         }
         #endregion
 
