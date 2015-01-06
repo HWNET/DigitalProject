@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.IO;
 
 namespace Digital.Common.Mvc.Extensions
 {
@@ -12,6 +13,8 @@ namespace Digital.Common.Mvc.Extensions
     {
         public static string RenderHtml<T>(ControllerContext context, string viewPath, T viewModel, TempDataDictionary viewBag)
         {
+
+
             var view = new RazorView(context, viewPath, null, false, null);
             viewBag = viewBag ?? new TempDataDictionary();
             var sb = new StringBuilder();
@@ -24,5 +27,23 @@ namespace Digital.Common.Mvc.Extensions
             }
             return sb.ToString();
         }
+
+        public static string OutHtml(ControllerContext cc, string tempUrl, ViewDataDictionary vd, TempDataDictionary td) 
+        { 
+            string html = string.Empty;
+            IView v = ViewEngines.Engines.FindView(cc, tempUrl, "").View; 
+            using (StringWriter sw = new StringWriter()) 
+            { 
+                ViewContext vc = new ViewContext(cc, v, vd, td, sw);
+                vc.View.Render(vc, sw); 
+                html = sw.ToString(); 
+            } return html; 
+        }
+
+
+        //public void SaveWebSite(string Path)
+        //{
+        //    //if(File.)
+        //}
     }
 }

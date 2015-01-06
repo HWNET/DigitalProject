@@ -379,6 +379,18 @@ namespace Digital.Web.Controllers
             return View(usersmodel);
         }
 
+
+        public ActionResult Generation()
+        {
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+
+            TempData["message"] = "输出的HTML页面";
+            string SS = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<UsersModel>(this.ControllerContext, "~/Views/WebSiteTemplate/tps_bestfolio-09/index.cshtml", UserModel, this.TempData);
+            return Content("OK");
+        }
+
+        
+
         //// POST: /Users/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]

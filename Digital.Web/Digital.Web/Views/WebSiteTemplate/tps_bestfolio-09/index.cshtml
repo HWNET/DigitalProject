@@ -1,0 +1,200 @@
+﻿@model Digital.WCFClient.ConfigService.UsersModel
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Free web templates Collect from  http://www.cssmoban.com; released for free under a Creative Commons Attribution 3.0 License -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="en" />
+	<meta name="description" content="[HERE PASTE YOUR DESCRIPTION]" />
+	<meta name="author" content="Template:TemplatesDock " />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/nivo.css" />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/skin.css" />	
+	<!--[if IE 6]><script src="javascript/pngfix.js"></script><script>DD_belatedPNG.fix('#logo img, #nav li a, #nav li a span, #nav-icons img, #twitter, #imac');</script><![endif]--> 			
+	<script type="text/javascript" src="javascript/jquery.js"></script>
+	<script type="text/javascript" src="javascript/jquery.nivo.js"></script>
+	<script type="text/javascript" src="javascript/cufon-yui.js"></script>
+	<script type="text/javascript" src="javascript/font.font.js"></script>
+	<script type="text/javascript">
+	Cufon.replace('h1, h2', {hover:true});
+	$(window).load(function() {
+		$('#slider').nivoSlider({
+		effect:'sliceDown',
+		slices:20,
+		animSpeed:500,
+		pauseTime:3000,
+		startSlide:0,
+		directionNav:false,
+		directionNavHide:false,
+		controlNav:false,
+		controlNavThumbs:false,
+		controlNavThumbsFromRel:false,
+		keyboardNav:false,
+		pauseOnHover:true,
+		manualAdvance:false,
+		captionOpacity:0.5,
+		beforeChange:function(){},
+		afterChange:function(){},
+		slideshowEnd:function(){}
+		});
+	});
+	</script>
+	<title>@ViewData["Title"] @Model.UsersInfoModel.QQ @TempData["message"]</title>
+</head>
+
+<body id="hp"> <!-- APPLY CSS STYLES FOR HOMEPAGE -->
+
+<div id="main">
+
+	<!-- HEADER -->
+	<div id="header" class="box">
+
+		<p id="logo"><a href="./" title="[Go to homepage]"><img src="design/logo.png" alt="" /></a></p>
+		<!-- INFO: Used font is named "BALLPARK", you can download it for free here: http://www.fontsquirrel.com/fonts/Ballpark -->
+
+		<!-- NAVIGATION -->
+		<ul id="nav">
+			<li class="current"><a href="#"><span>Homepage</span></a></li>
+			<li><a href="#"><span>Company</span></a></li>
+			<li><a href="#"><span>Products</span></a></li>
+			<li><a href="#"><span>Clients</span></a></li>
+			<li><a href="#"><span>Blog</span></a></li>
+			<li><a href="#"><span>Contact us</span></a></li>
+		</ul>		
+		
+		<!-- SOCIAL ICONS -->
+		<p id="nav-icons"><a href="#"><img src="design/nav-rss.png" alt="" /></a><a href="#"><img src="design/nav-twitter.png" alt="" /></a></p>
+		
+	</div> <!-- /header -->
+
+	<!-- WELCOME -->
+	<div id="welcome" class="box">
+
+		<div id="welcome-inner">
+
+			<h2>Hello world, we are London based new media company.</h2>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisi nunc, aliquam quis sollicitudin in, 
+			malesuada eu lectus. Vivamus sodales semper ultricies. Ut dui anteestem dignissim ac ornare eget, sollicitudin 
+			a libero. Donec quis sem magna, a venenatis felisti. Duis et arcu sed mi pharetra sagittis quis et mag. <strong>Mauris 
+			vitae vestibulum velit</strong> nuleia at venenatis justo. Duis malesuada purus eu mi adipiscing adipiscing. Donec esi.</p>
+		
+		</div> <!-- /welcome-inner -->
+
+		<!-- TWITTER -->
+		<div id="twitter" class="box">
+		
+			<ul>
+				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisi nunc, aliquam quis sollicitudin in, malesuada eu lectus. 
+				Vivamus sodales semper ultricies. Ut dui anteestem dignissim ac ornare eget, sollicitudin a libero. &ndash; <a href="#">58 minutes ago</a></li>
+			</ul>
+
+		</div> <!-- /twitter -->
+		
+		<div id="imac">
+		
+			<!-- REPLACE THESE 3 IMAGES WITH YOUR OWN IMAGES (WIDTH:371, HEIGHT:211) -->
+			<div id="slider" class="nivoSlider">
+				<img src="images/slide-01.jpg" alt="" />
+				<img src="images/slide-02.jpg" alt="" />
+				<img src="images/slide-03.jpg" alt="" />
+			</div> <!-- /slider -->
+			
+		</div> <!-- /imac -->
+		
+	</div> <!-- /welcome -->
+	
+	<!-- COLUMNS -->
+	<div id="section" class="box">
+
+		<!-- CONTENT -->
+		<div id="content">
+
+			<h2 class="nom">Meet our products</h2>		
+			
+			<ul class="products">
+				<li class="box">
+					<div class="products-img"><img src="images/product-01.jpg" alt="" /></div>
+					<!-- Photo: (c) Nic McPhee -->
+					<div class="products-desc">
+						<h3><a href="#">Web Design</a></h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquemi nisi nunc, aliquam quis sollicitudin in, malesuada lectus. Vivamuse sodales semper ultricies. Ut dui anteestem dignissim ac ornareget, sollicitudin a libero. Donec quis sem magna, a venenatis felisti.</p>
+					</div> <!-- /products-desc -->
+				</li>
+				<li class="box">
+					<div class="products-img"><img src="images/product-02.jpg" alt="" /></div>
+					<!-- Photo: (c) Emran Kassim -->
+					<div class="products-desc">
+						<h3><a href="#">Graphic Design</a></h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquemi nisi nunc, aliquam quis sollicitudin in, malesuada lectus. Vivamuse sodales semper ultricies. Ut dui anteestem dignissim ac ornareget, sollicitudin a libero. Donec quis sem magna, a venenatis felisti.</p>
+					</div> <!-- /products-desc -->
+				</li>
+				<li class="last box">
+					<div class="products-img"><img src="images/product-03.jpg" alt="" /></div>
+					<!-- Photo: (c) Scott Robinson -->
+					<div class="products-desc">
+						<h3><a href="#">Corporate Identity</a></h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquemi nisi nunc, aliquam quis sollicitudin in, malesuada lectus. Vivamuse sodales semper ultricies. Ut dui anteestem dignissim ac ornareget, sollicitudin a libero. Donec quis sem magna, a venenatis felisti.</p>
+					</div> <!-- /products-desc -->
+				</li>
+			</ul>
+		
+		</div> <!-- /content -->
+
+		<!-- SIDEBAR -->
+		<div id="aside">
+
+			<h2 class="nom">What is new?</h2>
+			
+			<ul class="articles">
+				<li>
+					<h3><a href="#">Proudly presents new version</a></h3>
+					<p class="date">Monday, October 27</p>
+					<p>Lorem ipsum dolor sit amet, consecti adipiscing elit. Aliquam feugiat aliquet elit in comod. Etiam pharetra consectetur velit vel dignissim. Duisem purus augue, ullamcorper et ultrices quis.</p>
+				</li>
+				<li>
+					<h3><a href="#">New products announced</a></h3>
+					<p class="date">Saturday, October 16</p>
+					<p>Lorem ipsum dolor sit amet, consecti adipiscing elit. Aliquam feugiat aliquet elit in comod. Etiam pharetra consectetur velit vel dignissim. Duisem purus augue, ullamcorper et ultrices quis.</p>
+				</li>
+				<li class="last">
+					<h3><a href="#">Portfolio was updated today</a></h3>
+					<p class="date">Thursday, September 13</p>
+					<p>Lorem ipsum dolor sit amet, consecti adipiscing elit. Aliquam feugiat aliquet elit in comod. Etiam pharetra consectetur velit vel dignissim. Duisem purus augue, ullamcorper et ultrices quis.</p>
+				</li>
+			</ul>
+		
+		</div> <!-- /aside -->
+
+	</div> <!-- /section -->
+
+	<!-- CONTACT -->
+	<div id="contact">
+
+		<address>
+			CompanyName <span>|</span>
+			<a href="#">www.example.com</a> <span>|</span>
+			<a href="mailto:example@example.com">example@example.com</a> <span>|</span>
+			Address: Street 123, New York, NY <span>|</span>
+			Phone: (012) 345-6789
+		</address>		
+
+	</div> <!-- /contact -->	
+	
+	<!-- FOOTER -->
+	<div id="footer" class="box">
+
+		
+		<p class="f-right t-right">Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a><br /><span class="smaller">Tip: <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></span></p>
+		
+	
+		<p class="f-left">Copyright &copy;&nbsp;2011 <a href="#">Bestfolio</a>, All Rights Reserved &reg;</p>
+
+	</div> <!-- /footer -->
+
+</div> <!-- /main -->
+
+<script type="text/javascript"> Cufon.now(); </script>
+
+</body>
+</html>

@@ -937,6 +937,41 @@
     <Content Include="Scripts\dropzone\images\spritemap.png" />
     <Content Include="style\profile.css" />
     <Content Include="style\style-metro.css" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\bog.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\css\main.css" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\css\nivo.css" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\css\skin.css" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\articles.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\bg.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\hp-section.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\imac.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\logo.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\nav-l.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\nav-r.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\nav-rss.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\nav-twitter.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\section.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\twitter.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\ul.gif" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\design\welcome.png" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\images\product-01.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\images\product-02.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\images\product-03.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\images\slide-01.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\images\slide-02.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\images\slide-03.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\javascript\cufon-yui.js" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\javascript\font.font.js" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\javascript\jquery.js" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\javascript\jquery.nivo.js" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\javascript\pngfix.js" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\s.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\subpage.html" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\tmp\article-01.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\tmp\gallery-01.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\tmp\gallery-02.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\tmp\gallery-03.jpg" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\说明.txt" />
     <Content Include="xml\City.xml" />
     <Content Include="xml\PrimaryBusiness.xml" />
     <None Include="DigitalStyle\fonts\fontawesome-webfont.eot" />
@@ -1173,9 +1208,11 @@
     <Content Include="Views\Company\CompanySinglePage.cshtml" />
     <Content Include="Views\Company\CompanySinglePageAdd.cshtml" />
     <Content Include="Views\Company\CompanyWatermarkManage.cshtml" />
+    <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\WebSite\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
