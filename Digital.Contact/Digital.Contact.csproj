@@ -114,6 +114,7 @@
     <Compile Include="Models\UsersInfoModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Models\WaterMarkModel.cs" />
+    <Compile Include="Models\WColumn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

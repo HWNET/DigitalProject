@@ -1209,6 +1209,7 @@
     <Content Include="Views\Company\CompanySinglePageAdd.cshtml" />
     <Content Include="Views\Company\CompanyWatermarkManage.cshtml" />
     <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\index.cshtml" />
+    <Content Include="Views\CWebsite\WColumn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
