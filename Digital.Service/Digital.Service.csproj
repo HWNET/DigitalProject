@@ -53,12 +53,14 @@
     <Compile Include="CacheModel.cs" />
     <Compile Include="Implements\CasesCategoryService.cs" />
     <Compile Include="Implements\CasesService.cs" />
+    <Compile Include="Implements\CertificateService.cs" />
     <Compile Include="Implements\CompanyService.cs" />
     <Compile Include="Implements\DService.cs" />
     <Compile Include="GenericList.cs" />
     <Compile Include="GetXmlConfig.cs" />
     <Compile Include="Implements\ConfigService.cs" />
     <Compile Include="Implements\FileCabinetService.cs" />
+    <Compile Include="Implements\FolderService.cs" />
     <Compile Include="Implements\NewsCategoryService.cs" />
     <Compile Include="Implements\NewsService.cs" />
     <Compile Include="Implements\PatentService.cs" />
@@ -66,9 +68,11 @@
     <Compile Include="Implements\UserService.cs" />
     <Compile Include="Interfaces\ICasesCategoryService.cs" />
     <Compile Include="Interfaces\ICasesService.cs" />
+    <Compile Include="Interfaces\ICertificateService.cs" />
     <Compile Include="Interfaces\ICompanyService.cs" />
     <Compile Include="Interfaces\IConfigService.cs" />
     <Compile Include="Interfaces\IFileCabinetService.cs" />
+    <Compile Include="Interfaces\IFolderService.cs" />
     <Compile Include="Interfaces\INewsCategoryService.cs" />
     <Compile Include="Interfaces\INewsService.cs" />
     <Compile Include="Interfaces\IPatentService.cs" />

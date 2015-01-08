@@ -141,6 +141,7 @@
       <xs:element minOccurs="0" name="CapacityIntroUnit" type="xs:int" />
       <xs:element minOccurs="0" name="CapacityUnitMode" nillable="true" type="tns:CapacityUnitMode" />
       <xs:element minOccurs="0" name="CasesCategoryModels" nillable="true" type="tns:ArrayOfCasesCategoryModel" />
+      <xs:element minOccurs="0" name="CertificateModels" nillable="true" type="tns:ArrayOfCertificateModel" />
       <xs:element minOccurs="0" name="CompanyBankAccount" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CompanyBankDeposit" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CompanyBusinessCity" type="xs:int" />
@@ -171,6 +172,7 @@
       <xs:element minOccurs="0" name="EquipmentIntro" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EquipmentIntroMode" nillable="true" type="tns:EquipmentIntroMode" />
       <xs:element minOccurs="0" name="FactoryArea" type="xs:float" />
+      <xs:element minOccurs="0" name="FolderModels" nillable="true" type="tns:ArrayOfFolderModel" />
       <xs:element minOccurs="0" name="IsProvideOEM" type="xs:boolean" />
       <xs:element minOccurs="0" name="ManagementSystemCertification" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ManagementSystemCertificationMode" nillable="true" type="tns:ManagementSystemCertificationMode" />
@@ -279,6 +281,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CasesModel" nillable="true" type="tns:CasesModel" />
+  <xs:complexType name="ArrayOfCertificateModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CertificateModel" nillable="true" type="tns:CertificateModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCertificateModel" nillable="true" type="tns:ArrayOfCertificateModel" />
+  <xs:complexType name="CertificateModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CertificateID" type="xs:int" />
+      <xs:element minOccurs="0" name="CertificateIntros" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CertificateName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CertificateThumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyModel" nillable="true" type="tns:CompanyModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CertificateModel" nillable="true" type="tns:CertificateModel" />
   <xs:complexType name="CompanyBusinessCityMode">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseNameValueMode">
@@ -360,6 +379,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="EquipmentIntroMode" nillable="true" type="tns:EquipmentIntroMode" />
+  <xs:complexType name="ArrayOfFolderModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FolderModel" nillable="true" type="tns:FolderModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFolderModel" nillable="true" type="tns:ArrayOfFolderModel" />
+  <xs:complexType name="FolderModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyID" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyModel" nillable="true" type="tns:CompanyModel" />
+      <xs:element minOccurs="0" name="FolderID" type="xs:int" />
+      <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FolderNameCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FolderModel" nillable="true" type="tns:FolderModel" />
   <xs:complexType name="ManagementSystemCertificationMode">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseNameValueMode">
@@ -721,6 +756,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="FolderDate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FolderNameCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderPath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderSize" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -741,6 +777,7 @@
       <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileSize" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FolderNameCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FolderParent" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

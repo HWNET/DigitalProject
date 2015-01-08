@@ -36,6 +36,9 @@ namespace Digital.Contact.DAL
         public DbSet<Digital.Contact.Models.PatentModel> PatentModels { get; set; }
         public DbSet<Digital.Contact.Models.SinglePageModel> SinglePageModels { get; set; }
 
+        public DbSet<Digital.Contact.Models.CertificateModel> CertificateModels { get; set; }
+        public DbSet<Digital.Contact.Models.FolderModel> FolderModels { get; set; }
+
         public DbSet<Digital.Contact.Models.WaterMarkModel> WaterMarkModels { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -169,5 +169,7 @@ namespace Digital.Contact.Models
         public virtual List<PatentModel> PatentModels { get; set; } //企业专利集合
         public virtual List<NewsCategoryModel> NewsCategoryModels { get; set; } //企业播报 类别集合
         //public virtual List<NewsModel> NewsModels { get; set; } //企业播报集合
+        public virtual List<CertificateModel> CertificateModels { get; set; } // 企业资质集合
+        public virtual List<FolderModel> FolderModels { get; set; }
     }
 }

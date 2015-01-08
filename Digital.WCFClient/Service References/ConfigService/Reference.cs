@@ -1204,6 +1204,9 @@ namespace Digital.WCFClient.ConfigService {
         private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesCategoryModel> CasesCategoryModelsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel> CertificateModelsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CompanyBankAccountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1292,6 +1295,9 @@ namespace Digital.WCFClient.ConfigService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private float FactoryAreaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel> FolderModelsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsProvideOEMField;
@@ -1490,6 +1496,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((object.ReferenceEquals(this.CasesCategoryModelsField, value) != true)) {
                     this.CasesCategoryModelsField = value;
                     this.RaisePropertyChanged("CasesCategoryModels");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel> CertificateModels {
+            get {
+                return this.CertificateModelsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CertificateModelsField, value) != true)) {
+                    this.CertificateModelsField = value;
+                    this.RaisePropertyChanged("CertificateModels");
                 }
             }
         }
@@ -1880,6 +1899,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((this.FactoryAreaField.Equals(value) != true)) {
                     this.FactoryAreaField = value;
                     this.RaisePropertyChanged("FactoryArea");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel> FolderModels {
+            get {
+                return this.FolderModelsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FolderModelsField, value) != true)) {
+                    this.FolderModelsField = value;
+                    this.RaisePropertyChanged("FolderModels");
                 }
             }
         }
@@ -2675,6 +2707,131 @@ namespace Digital.WCFClient.ConfigService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CertificateModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class CertificateModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CertificateIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CertificateIntrosField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CertificateNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CertificateThumbnailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CompanyIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CompanyModel CompanyModelField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CertificateID {
+            get {
+                return this.CertificateIDField;
+            }
+            set {
+                if ((this.CertificateIDField.Equals(value) != true)) {
+                    this.CertificateIDField = value;
+                    this.RaisePropertyChanged("CertificateID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CertificateIntros {
+            get {
+                return this.CertificateIntrosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CertificateIntrosField, value) != true)) {
+                    this.CertificateIntrosField = value;
+                    this.RaisePropertyChanged("CertificateIntros");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CertificateName {
+            get {
+                return this.CertificateNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CertificateNameField, value) != true)) {
+                    this.CertificateNameField = value;
+                    this.RaisePropertyChanged("CertificateName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CertificateThumbnail {
+            get {
+                return this.CertificateThumbnailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CertificateThumbnailField, value) != true)) {
+                    this.CertificateThumbnailField = value;
+                    this.RaisePropertyChanged("CertificateThumbnail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CompanyID {
+            get {
+                return this.CompanyIDField;
+            }
+            set {
+                if ((this.CompanyIDField.Equals(value) != true)) {
+                    this.CompanyIDField = value;
+                    this.RaisePropertyChanged("CompanyID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CompanyModel CompanyModel {
+            get {
+                return this.CompanyModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompanyModelField, value) != true)) {
+                    this.CompanyModelField = value;
+                    this.RaisePropertyChanged("CompanyModel");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DepartmentModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
     [System.SerializableAttribute()]
     public partial class DepartmentModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2720,6 +2877,115 @@ namespace Digital.WCFClient.ConfigService {
                 if ((object.ReferenceEquals(this.DepartmentNameField, value) != true)) {
                     this.DepartmentNameField = value;
                     this.RaisePropertyChanged("DepartmentName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FolderModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class FolderModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CompanyIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CompanyModel CompanyModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FolderIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FolderNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FolderNameCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CompanyID {
+            get {
+                return this.CompanyIDField;
+            }
+            set {
+                if ((this.CompanyIDField.Equals(value) != true)) {
+                    this.CompanyIDField = value;
+                    this.RaisePropertyChanged("CompanyID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CompanyModel CompanyModel {
+            get {
+                return this.CompanyModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompanyModelField, value) != true)) {
+                    this.CompanyModelField = value;
+                    this.RaisePropertyChanged("CompanyModel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FolderID {
+            get {
+                return this.FolderIDField;
+            }
+            set {
+                if ((this.FolderIDField.Equals(value) != true)) {
+                    this.FolderIDField = value;
+                    this.RaisePropertyChanged("FolderID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FolderName {
+            get {
+                return this.FolderNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FolderNameField, value) != true)) {
+                    this.FolderNameField = value;
+                    this.RaisePropertyChanged("FolderName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FolderNameCode {
+            get {
+                return this.FolderNameCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FolderNameCodeField, value) != true)) {
+                    this.FolderNameCodeField = value;
+                    this.RaisePropertyChanged("FolderNameCode");
                 }
             }
         }
@@ -4140,6 +4406,9 @@ namespace Digital.WCFClient.ConfigService {
         private string FolderNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FolderNameCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FolderPathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -4177,6 +4446,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((object.ReferenceEquals(this.FolderNameField, value) != true)) {
                     this.FolderNameField = value;
                     this.RaisePropertyChanged("FolderName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FolderNameCode {
+            get {
+                return this.FolderNameCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FolderNameCodeField, value) != true)) {
+                    this.FolderNameCodeField = value;
+                    this.RaisePropertyChanged("FolderNameCode");
                 }
             }
         }
@@ -4246,6 +4528,9 @@ namespace Digital.WCFClient.ConfigService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FolderNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FolderNameCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FolderParentField;
@@ -4347,6 +4632,19 @@ namespace Digital.WCFClient.ConfigService {
                 if ((object.ReferenceEquals(this.FolderNameField, value) != true)) {
                     this.FolderNameField = value;
                     this.RaisePropertyChanged("FolderName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FolderNameCode {
+            get {
+                return this.FolderNameCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FolderNameCodeField, value) != true)) {
+                    this.FolderNameCodeField = value;
+                    this.RaisePropertyChanged("FolderNameCode");
                 }
             }
         }
@@ -5998,10 +6296,10 @@ namespace Digital.WCFClient.ConfigService {
         System.Threading.Tasks.Task<bool> VerifyUploadPathAsync(string UploadPath);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FileDirectoryCreate", ReplyAction="http://tempuri.org/IFileCabinetService/FileDirectoryCreateResponse")]
-        bool FileDirectoryCreate(string UserId, string SubDirectoryName);
+        bool FileDirectoryCreate(string UserId, string SubDirectoryName, string SubDirectoryNameCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FileDirectoryCreate", ReplyAction="http://tempuri.org/IFileCabinetService/FileDirectoryCreateResponse")]
-        System.Threading.Tasks.Task<bool> FileDirectoryCreateAsync(string UserId, string SubDirectoryName);
+        System.Threading.Tasks.Task<bool> FileDirectoryCreateAsync(string UserId, string SubDirectoryName, string SubDirectoryNameCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileCabinetService/FileDirectoryPathByName", ReplyAction="http://tempuri.org/IFileCabinetService/FileDirectoryPathByNameResponse")]
         string FileDirectoryPathByName(string UserId, string SubDirectoryName);
@@ -6081,12 +6379,12 @@ namespace Digital.WCFClient.ConfigService {
             return base.Channel.VerifyUploadPathAsync(UploadPath);
         }
         
-        public bool FileDirectoryCreate(string UserId, string SubDirectoryName) {
-            return base.Channel.FileDirectoryCreate(UserId, SubDirectoryName);
+        public bool FileDirectoryCreate(string UserId, string SubDirectoryName, string SubDirectoryNameCode) {
+            return base.Channel.FileDirectoryCreate(UserId, SubDirectoryName, SubDirectoryNameCode);
         }
         
-        public System.Threading.Tasks.Task<bool> FileDirectoryCreateAsync(string UserId, string SubDirectoryName) {
-            return base.Channel.FileDirectoryCreateAsync(UserId, SubDirectoryName);
+        public System.Threading.Tasks.Task<bool> FileDirectoryCreateAsync(string UserId, string SubDirectoryName, string SubDirectoryNameCode) {
+            return base.Channel.FileDirectoryCreateAsync(UserId, SubDirectoryName, SubDirectoryNameCode);
         }
         
         public string FileDirectoryPathByName(string UserId, string SubDirectoryName) {
@@ -6143,6 +6441,338 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<byte[]> FileStreamByFileAsync(string UserId, string FolderName, string FileName) {
             return base.Channel.FileStreamByFileAsync(UserId, FolderName, FileName);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.ICertificateService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface ICertificateService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateInsert", ReplyAction="http://tempuri.org/ICertificateService/CertificateInsertResponse")]
+        Digital.WCFClient.ConfigService.CertificateModel CertificateInsert(Digital.WCFClient.ConfigService.CertificateModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateInsert", ReplyAction="http://tempuri.org/ICertificateService/CertificateInsertResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateInsertAsync(Digital.WCFClient.ConfigService.CertificateModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateUpdate", ReplyAction="http://tempuri.org/ICertificateService/CertificateUpdateResponse")]
+        Digital.WCFClient.ConfigService.CertificateModel CertificateUpdate(Digital.WCFClient.ConfigService.CertificateModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateUpdate", ReplyAction="http://tempuri.org/ICertificateService/CertificateUpdateResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateUpdateAsync(Digital.WCFClient.ConfigService.CertificateModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryById", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryByIdResponse")]
+        Digital.WCFClient.ConfigService.CertificateModel CertificateQueryById(int CertificateId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryById", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryByIdResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryByIdAsync(int CertificateId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryByName", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryByNameResponse")]
+        Digital.WCFClient.ConfigService.CertificateModel CertificateQueryByName(string CertificateName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryByName", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryByNameResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryByNameAsync(string CertificateName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateDeleteById", ReplyAction="http://tempuri.org/ICertificateService/CertificateDeleteByIdResponse")]
+        bool CertificateDeleteById(int CertificateId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateDeleteById", ReplyAction="http://tempuri.org/ICertificateService/CertificateDeleteByIdResponse")]
+        System.Threading.Tasks.Task<bool> CertificateDeleteByIdAsync(int CertificateId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateDeleteByIds", ReplyAction="http://tempuri.org/ICertificateService/CertificateDeleteByIdsResponse")]
+        bool CertificateDeleteByIds(string CertificateIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateDeleteByIds", ReplyAction="http://tempuri.org/ICertificateService/CertificateDeleteByIdsResponse")]
+        System.Threading.Tasks.Task<bool> CertificateDeleteByIdsAsync(string CertificateIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateDeleteByCompany", ReplyAction="http://tempuri.org/ICertificateService/CertificateDeleteByCompanyResponse")]
+        bool CertificateDeleteByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateDeleteByCompany", ReplyAction="http://tempuri.org/ICertificateService/CertificateDeleteByCompanyResponse")]
+        System.Threading.Tasks.Task<bool> CertificateDeleteByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryList", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryList", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel>> CertificateQueryListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryListByCompany", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryListByCompanyResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryListByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICertificateService/CertificateQueryListByCompany", ReplyAction="http://tempuri.org/ICertificateService/CertificateQueryListByCompanyResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel>> CertificateQueryListByCompanyAsync(int CompanyId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICertificateServiceChannel : Digital.WCFClient.ConfigService.ICertificateService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CertificateServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.ICertificateService>, Digital.WCFClient.ConfigService.ICertificateService {
+        
+        public CertificateServiceClient() {
+        }
+        
+        public CertificateServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CertificateServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CertificateServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CertificateServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.CertificateModel CertificateInsert(Digital.WCFClient.ConfigService.CertificateModel Model) {
+            return base.Channel.CertificateInsert(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateInsertAsync(Digital.WCFClient.ConfigService.CertificateModel Model) {
+            return base.Channel.CertificateInsertAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.CertificateModel CertificateUpdate(Digital.WCFClient.ConfigService.CertificateModel Model) {
+            return base.Channel.CertificateUpdate(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateUpdateAsync(Digital.WCFClient.ConfigService.CertificateModel Model) {
+            return base.Channel.CertificateUpdateAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.CertificateModel CertificateQueryById(int CertificateId) {
+            return base.Channel.CertificateQueryById(CertificateId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryByIdAsync(int CertificateId) {
+            return base.Channel.CertificateQueryByIdAsync(CertificateId);
+        }
+        
+        public Digital.WCFClient.ConfigService.CertificateModel CertificateQueryByName(string CertificateName) {
+            return base.Channel.CertificateQueryByName(CertificateName);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryByNameAsync(string CertificateName) {
+            return base.Channel.CertificateQueryByNameAsync(CertificateName);
+        }
+        
+        public bool CertificateDeleteById(int CertificateId) {
+            return base.Channel.CertificateDeleteById(CertificateId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CertificateDeleteByIdAsync(int CertificateId) {
+            return base.Channel.CertificateDeleteByIdAsync(CertificateId);
+        }
+        
+        public bool CertificateDeleteByIds(string CertificateIds) {
+            return base.Channel.CertificateDeleteByIds(CertificateIds);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CertificateDeleteByIdsAsync(string CertificateIds) {
+            return base.Channel.CertificateDeleteByIdsAsync(CertificateIds);
+        }
+        
+        public bool CertificateDeleteByCompany(int CompanyId) {
+            return base.Channel.CertificateDeleteByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CertificateDeleteByCompanyAsync(int CompanyId) {
+            return base.Channel.CertificateDeleteByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryList() {
+            return base.Channel.CertificateQueryList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel>> CertificateQueryListAsync() {
+            return base.Channel.CertificateQueryListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel> CertificateQueryListByCompany(int CompanyId) {
+            return base.Channel.CertificateQueryListByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CertificateModel>> CertificateQueryListByCompanyAsync(int CompanyId) {
+            return base.Channel.CertificateQueryListByCompanyAsync(CompanyId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.IFolderService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface IFolderService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderInsert", ReplyAction="http://tempuri.org/IFolderService/FolderInsertResponse")]
+        Digital.WCFClient.ConfigService.FolderModel FolderInsert(Digital.WCFClient.ConfigService.FolderModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderInsert", ReplyAction="http://tempuri.org/IFolderService/FolderInsertResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderInsertAsync(Digital.WCFClient.ConfigService.FolderModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderUpdate", ReplyAction="http://tempuri.org/IFolderService/FolderUpdateResponse")]
+        Digital.WCFClient.ConfigService.FolderModel FolderUpdate(Digital.WCFClient.ConfigService.FolderModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderUpdate", ReplyAction="http://tempuri.org/IFolderService/FolderUpdateResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderUpdateAsync(Digital.WCFClient.ConfigService.FolderModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryById", ReplyAction="http://tempuri.org/IFolderService/FolderQueryByIdResponse")]
+        Digital.WCFClient.ConfigService.FolderModel FolderQueryById(int FolderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryById", ReplyAction="http://tempuri.org/IFolderService/FolderQueryByIdResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderQueryByIdAsync(int FolderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryByName", ReplyAction="http://tempuri.org/IFolderService/FolderQueryByNameResponse")]
+        Digital.WCFClient.ConfigService.FolderModel FolderQueryByName(string FolderName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryByName", ReplyAction="http://tempuri.org/IFolderService/FolderQueryByNameResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderQueryByNameAsync(string FolderName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryByNameCode", ReplyAction="http://tempuri.org/IFolderService/FolderQueryByNameCodeResponse")]
+        Digital.WCFClient.ConfigService.FolderModel FolderQueryByNameCode(string FolderNameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryByNameCode", ReplyAction="http://tempuri.org/IFolderService/FolderQueryByNameCodeResponse")]
+        System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderQueryByNameCodeAsync(string FolderNameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderDeleteById", ReplyAction="http://tempuri.org/IFolderService/FolderDeleteByIdResponse")]
+        bool FolderDeleteById(int FolderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderDeleteById", ReplyAction="http://tempuri.org/IFolderService/FolderDeleteByIdResponse")]
+        System.Threading.Tasks.Task<bool> FolderDeleteByIdAsync(int FolderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderDeleteByIds", ReplyAction="http://tempuri.org/IFolderService/FolderDeleteByIdsResponse")]
+        bool FolderDeleteByIds(string FolderIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderDeleteByIds", ReplyAction="http://tempuri.org/IFolderService/FolderDeleteByIdsResponse")]
+        System.Threading.Tasks.Task<bool> FolderDeleteByIdsAsync(string FolderIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderDeleteByCompany", ReplyAction="http://tempuri.org/IFolderService/FolderDeleteByCompanyResponse")]
+        bool FolderDeleteByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderDeleteByCompany", ReplyAction="http://tempuri.org/IFolderService/FolderDeleteByCompanyResponse")]
+        System.Threading.Tasks.Task<bool> FolderDeleteByCompanyAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryList", ReplyAction="http://tempuri.org/IFolderService/FolderQueryListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel> FolderQueryList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryList", ReplyAction="http://tempuri.org/IFolderService/FolderQueryListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel>> FolderQueryListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryListByCompany", ReplyAction="http://tempuri.org/IFolderService/FolderQueryListByCompanyResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel> FolderQueryListByCompany(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFolderService/FolderQueryListByCompany", ReplyAction="http://tempuri.org/IFolderService/FolderQueryListByCompanyResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel>> FolderQueryListByCompanyAsync(int CompanyId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IFolderServiceChannel : Digital.WCFClient.ConfigService.IFolderService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class FolderServiceClient : System.ServiceModel.ClientBase<Digital.WCFClient.ConfigService.IFolderService>, Digital.WCFClient.ConfigService.IFolderService {
+        
+        public FolderServiceClient() {
+        }
+        
+        public FolderServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public FolderServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public FolderServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public FolderServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public Digital.WCFClient.ConfigService.FolderModel FolderInsert(Digital.WCFClient.ConfigService.FolderModel Model) {
+            return base.Channel.FolderInsert(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderInsertAsync(Digital.WCFClient.ConfigService.FolderModel Model) {
+            return base.Channel.FolderInsertAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.FolderModel FolderUpdate(Digital.WCFClient.ConfigService.FolderModel Model) {
+            return base.Channel.FolderUpdate(Model);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderUpdateAsync(Digital.WCFClient.ConfigService.FolderModel Model) {
+            return base.Channel.FolderUpdateAsync(Model);
+        }
+        
+        public Digital.WCFClient.ConfigService.FolderModel FolderQueryById(int FolderId) {
+            return base.Channel.FolderQueryById(FolderId);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderQueryByIdAsync(int FolderId) {
+            return base.Channel.FolderQueryByIdAsync(FolderId);
+        }
+        
+        public Digital.WCFClient.ConfigService.FolderModel FolderQueryByName(string FolderName) {
+            return base.Channel.FolderQueryByName(FolderName);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderQueryByNameAsync(string FolderName) {
+            return base.Channel.FolderQueryByNameAsync(FolderName);
+        }
+        
+        public Digital.WCFClient.ConfigService.FolderModel FolderQueryByNameCode(string FolderNameCode) {
+            return base.Channel.FolderQueryByNameCode(FolderNameCode);
+        }
+        
+        public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.FolderModel> FolderQueryByNameCodeAsync(string FolderNameCode) {
+            return base.Channel.FolderQueryByNameCodeAsync(FolderNameCode);
+        }
+        
+        public bool FolderDeleteById(int FolderId) {
+            return base.Channel.FolderDeleteById(FolderId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> FolderDeleteByIdAsync(int FolderId) {
+            return base.Channel.FolderDeleteByIdAsync(FolderId);
+        }
+        
+        public bool FolderDeleteByIds(string FolderIds) {
+            return base.Channel.FolderDeleteByIds(FolderIds);
+        }
+        
+        public System.Threading.Tasks.Task<bool> FolderDeleteByIdsAsync(string FolderIds) {
+            return base.Channel.FolderDeleteByIdsAsync(FolderIds);
+        }
+        
+        public bool FolderDeleteByCompany(int CompanyId) {
+            return base.Channel.FolderDeleteByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> FolderDeleteByCompanyAsync(int CompanyId) {
+            return base.Channel.FolderDeleteByCompanyAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel> FolderQueryList() {
+            return base.Channel.FolderQueryList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel>> FolderQueryListAsync() {
+            return base.Channel.FolderQueryListAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel> FolderQueryListByCompany(int CompanyId) {
+            return base.Channel.FolderQueryListByCompany(CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.FolderModel>> FolderQueryListByCompanyAsync(int CompanyId) {
+            return base.Channel.FolderQueryListByCompanyAsync(CompanyId);
         }
     }
 }

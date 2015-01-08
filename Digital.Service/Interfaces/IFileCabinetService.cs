@@ -15,7 +15,7 @@ namespace Digital.Service.Interfaces
         [OperationContract]
         bool VerifyUploadPath(string UploadPath);
         [OperationContract]
-        bool FileDirectoryCreate(string UserId, string SubDirectoryName);
+        bool FileDirectoryCreate(string UserId, string SubDirectoryName, string SubDirectoryNameCode);
         [OperationContract]
         string FileDirectoryPathByName(string UserId, string SubDirectoryName);
         [OperationContract]

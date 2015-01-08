@@ -16,6 +16,7 @@ namespace Digital.Contact.Models
     public class FileFolderMode
     {
         public string FolderName { get; set; }
+        public string FolderNameCode { get; set; }
         public string FolderPath { get; set; }
         public string FolderSize { get; set; }
         public string FolderDate { get; set; }
@@ -24,6 +25,7 @@ namespace Digital.Contact.Models
     {
         public string FolderParent { get; set; }
         public string FolderName { get; set; }
+        public string FolderNameCode { get; set; }
         public string FileName { get; set; }
         public string FileFullName { get; set; }
         public string FileExtensionName { get; set; }

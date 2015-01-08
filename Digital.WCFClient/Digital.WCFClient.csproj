@@ -73,6 +73,9 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CasesModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CertificateModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.CommonRightModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -104,6 +107,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.FilesMode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.FolderModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.ManagementSystemCertificationMode.datasource">

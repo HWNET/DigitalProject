@@ -94,6 +94,8 @@ namespace Digital.Common.Utilities
             {
                 var folder = context.Request["subfolder"] ?? "default";
                 var fileName = context.Request["ImageId"];
+                var subFolderCode = context.Request["subSubFolderCode"] ?? "default";
+
                 if (!string.IsNullOrEmpty(fileName))
                 {
                     fileName = HttpUtility.UrlEncode(fileName);
@@ -122,6 +124,7 @@ namespace Digital.Common.Utilities
 
                 fileFolder = Path.Combine(UploadConfigContext.UploadPath,
                     folder,
+                    subFolderCode,
                     subFolder
                     );
 
@@ -138,8 +141,8 @@ namespace Digital.Common.Utilities
                 fs.Close();
 
                 //是图片，即使生成对应尺寸
-                if (ImageExt.Contains(ext))
-                    ThumbnailService.HandleImmediateThumbnail(filePath);
+                //if (ImageExt.Contains(ext))
+                //ThumbnailService.HandleImmediateThumbnail(filePath);
 
                 this.OnUploaded(context, filePath, folder, fileName);
             }

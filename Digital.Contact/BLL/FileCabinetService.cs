@@ -63,14 +63,18 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region FileDirectoryCreate
-        public bool FileDirectoryCreate(string UserId,string SubDirectoryName)
+        public bool FileDirectoryCreate(string UserId, string SubDirectoryName, string SubDirectoryNameCode)
         {
             bool result = false;
 
             if (this.IsExistDirectoryRoot(UserId))
             {
-                var subDirectory = Path.Combine(FileCabinetService.DirectoryRoot, SubDirectoryName);
-                if (!Directory.Exists(subDirectory))
+                var subDirectory = Path.Combine(FileCabinetService.DirectoryRoot, SubDirectoryNameCode);
+                // folder name query from DBSet
+                FolderService FolderService = new FolderService();
+                var folderModel = FolderService.FolderQueryByName(SubDirectoryName);
+
+                if (!Directory.Exists(subDirectory) && folderModel==null)
                 {
                     var dirInfo=Directory.CreateDirectory(subDirectory);
                     if (dirInfo != null && dirInfo.Exists)
@@ -199,6 +203,8 @@ namespace Digital.Contact.BLL
                 var DirectorySubFolder = Path.Combine(FileCabinetService.DirectoryRoot, FolderName);
                 DirectoryInfo DirSubFolder = new DirectoryInfo(DirectorySubFolder);
                 var lstDirectory = DirSubFolder.GetDirectories();
+                FolderService FolderService = new FolderService();
+
                 foreach (var dir in lstDirectory)
                 {
                         #region GetFiles
@@ -208,7 +214,7 @@ namespace Digital.Contact.BLL
                             var FilesMode = new FilesMode
                             {
                                 FolderParent=FolderName,
-                                FolderName = dir.Name,
+                                FolderNameCode = dir.Name,
                                 FileName = file.Name,
                                 FileFullName=file.FullName,
                                 FileExtensionName = file.Extension,
@@ -217,6 +223,9 @@ namespace Digital.Contact.BLL
                                 FileDate = file.CreationTimeUtc.ToShortDateString()
                             };
 
+                            // query FolderName from DBSet
+                            var model = FolderService.FolderQueryByNameCode(FilesMode.FolderNameCode);
+                            FilesMode.FolderName = model != null ? model.FolderName : string.Empty;
                             FileList.Add(FilesMode);
                         }
                         #endregion
@@ -235,17 +244,22 @@ namespace Digital.Contact.BLL
             {
                 DirectoryInfo DirectoryRoot = new DirectoryInfo(FileCabinetService.DirectoryRoot);
                 var lstDirectory = DirectoryRoot.GetDirectories();
+                FolderService FolderService = new FolderService();
                 foreach (var dir in lstDirectory)
                 {
                     var FolderMode = new FileFolderMode
                     { 
-                         FolderName=dir.Name,
+                         FolderNameCode=dir.Name,
                          FolderPath=dir.FullName,
                     };
 
                     var FolderSize = this.FileDirectorySize(UserId, dir.FullName);
                     FolderMode.FolderSize = FolderSize.ToString();
                     FolderMode.FolderDate = dir.CreationTimeUtc.ToShortDateString();
+
+                    // query FolderName from DBSet
+                    var model = FolderService.FolderQueryByNameCode(FolderMode.FolderNameCode);
+                    FolderMode.FolderName = model != null ? model.FolderName : string.Empty;
 
                     DirectoryList.Add(FolderMode);
                 }

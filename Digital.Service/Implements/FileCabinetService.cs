@@ -30,13 +30,13 @@ namespace Digital.Service.Implements
         }
         #endregion
         #region FileDirectoryCreate
-        public bool FileDirectoryCreate(string UserId, string SubDirectoryName)
+        public bool FileDirectoryCreate(string UserId, string SubDirectoryName, string SubDirectoryNameCode)
         {
             var result = false;
             try
             {
                 FileCabinetService FileCabinetService = new FileCabinetService();
-                result = FileCabinetService.FileDirectoryCreate(UserId, SubDirectoryName);
+                result = FileCabinetService.FileDirectoryCreate(UserId, SubDirectoryName, SubDirectoryNameCode);
             }
             catch (Exception ex)
             {

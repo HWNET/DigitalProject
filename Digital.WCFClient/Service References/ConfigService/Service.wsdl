@@ -80,6 +80,22 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_ICertificateService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IFolderService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -705,6 +721,120 @@
   <wsdl:message name="IFileCabinetService_FileStreamByFile_OutputMessage">
     <wsdl:part name="parameters" element="tns:FileStreamByFileResponse" />
   </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateInsert" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryById" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateDeleteByIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateDeleteByIds" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateDeleteByIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateDeleteByIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryList" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="ICertificateService_CertificateQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CertificateQueryListByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderInsert_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderInsert" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderInsert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryById" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryByName" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryByNameCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryByNameCode" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryByNameCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryByNameCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderDeleteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderDeleteById" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderDeleteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderDeleteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderDeleteByIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderDeleteByIds" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderDeleteByIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderDeleteByIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderDeleteByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderDeleteByCompany" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderDeleteByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderDeleteByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryList" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryListByCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryListByCompany" />
+  </wsdl:message>
+  <wsdl:message name="IFolderService_FolderQueryListByCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FolderQueryListByCompanyResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -1135,6 +1265,86 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FileStreamByFile">
       <wsdl:input wsaw:Action="http://tempuri.org/IFileCabinetService/FileStreamByFile" message="tns:IFileCabinetService_FileStreamByFile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFileCabinetService/FileStreamByFileResponse" message="tns:IFileCabinetService_FileStreamByFile_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="ICertificateService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateInsert" message="tns:ICertificateService_CertificateInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateInsertResponse" message="tns:ICertificateService_CertificateInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateUpdate" message="tns:ICertificateService_CertificateUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateUpdateResponse" message="tns:ICertificateService_CertificateUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryById" message="tns:ICertificateService_CertificateQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryByIdResponse" message="tns:ICertificateService_CertificateQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryByName" message="tns:ICertificateService_CertificateQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryByNameResponse" message="tns:ICertificateService_CertificateQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateDeleteById" message="tns:ICertificateService_CertificateDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateDeleteByIdResponse" message="tns:ICertificateService_CertificateDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateDeleteByIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateDeleteByIds" message="tns:ICertificateService_CertificateDeleteByIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateDeleteByIdsResponse" message="tns:ICertificateService_CertificateDeleteByIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateDeleteByCompany" message="tns:ICertificateService_CertificateDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateDeleteByCompanyResponse" message="tns:ICertificateService_CertificateDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryList" message="tns:ICertificateService_CertificateQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryListResponse" message="tns:ICertificateService_CertificateQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CertificateQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryListByCompany" message="tns:ICertificateService_CertificateQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICertificateService/CertificateQueryListByCompanyResponse" message="tns:ICertificateService_CertificateQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="IFolderService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderInsert">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderInsert" message="tns:IFolderService_FolderInsert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderInsertResponse" message="tns:IFolderService_FolderInsert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderUpdate" message="tns:IFolderService_FolderUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderUpdateResponse" message="tns:IFolderService_FolderUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderQueryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderQueryById" message="tns:IFolderService_FolderQueryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderQueryByIdResponse" message="tns:IFolderService_FolderQueryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderQueryByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderQueryByName" message="tns:IFolderService_FolderQueryByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderQueryByNameResponse" message="tns:IFolderService_FolderQueryByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderQueryByNameCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderQueryByNameCode" message="tns:IFolderService_FolderQueryByNameCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderQueryByNameCodeResponse" message="tns:IFolderService_FolderQueryByNameCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderDeleteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderDeleteById" message="tns:IFolderService_FolderDeleteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderDeleteByIdResponse" message="tns:IFolderService_FolderDeleteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderDeleteByIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderDeleteByIds" message="tns:IFolderService_FolderDeleteByIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderDeleteByIdsResponse" message="tns:IFolderService_FolderDeleteByIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderDeleteByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderDeleteByCompany" message="tns:IFolderService_FolderDeleteByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderDeleteByCompanyResponse" message="tns:IFolderService_FolderDeleteByCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderQueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderQueryList" message="tns:IFolderService_FolderQueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderQueryListResponse" message="tns:IFolderService_FolderQueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderQueryListByCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderQueryListByCompany" message="tns:IFolderService_FolderQueryListByCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderQueryListByCompanyResponse" message="tns:IFolderService_FolderQueryListByCompany_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -2104,6 +2314,185 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_ICertificateService" type="tns:ICertificateService">
+    <wsp:PolicyReference URI="#CustomBinding_ICertificateService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CertificateInsert">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateQueryById">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateDeleteByIds">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateDeleteByIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateQueryList">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CertificateQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/ICertificateService/CertificateQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IFolderService" type="tns:IFolderService">
+    <wsp:PolicyReference URI="#CustomBinding_IFolderService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="FolderInsert">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderUpdate">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderQueryById">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderQueryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderQueryByName">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderQueryByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderQueryByNameCode">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderQueryByNameCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderDeleteById">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderDeleteById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderDeleteByIds">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderDeleteByIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderDeleteByCompany">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderDeleteByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderQueryList">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderQueryList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FolderQueryListByCompany">
+      <soap12:operation soapAction="http://tempuri.org/IFolderService/FolderQueryListByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
@@ -2163,6 +2552,18 @@
       <soap12:address location="net.tcp://localhost:4502/FileCabinetService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/FileCabinetService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_ICertificateService" binding="tns:CustomBinding_ICertificateService">
+      <soap12:address location="net.tcp://localhost:4502/CertificateService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/CertificateService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IFolderService" binding="tns:CustomBinding_IFolderService">
+      <soap12:address location="net.tcp://localhost:4502/FolderService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/FolderService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

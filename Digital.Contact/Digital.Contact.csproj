@@ -73,8 +73,10 @@
     <Compile Include="BLL\BaseService.cs" />
     <Compile Include="BLL\CasesCategoryService.cs" />
     <Compile Include="BLL\CasesService.cs" />
+    <Compile Include="BLL\CertificateService.cs" />
     <Compile Include="BLL\CompanyService.cs" />
     <Compile Include="BLL\FileCabinetService.cs" />
+    <Compile Include="BLL\FolderService.cs" />
     <Compile Include="BLL\MenuService.cs" />
     <Compile Include="BLL\NewsCategoryService.cs" />
     <Compile Include="BLL\NewsService.cs" />
@@ -89,7 +91,9 @@
     <Compile Include="DAL\CommunicationInitializer.cs" />
     <Compile Include="Models\CasesCategoryModel.cs" />
     <Compile Include="Models\CasesModel.cs" />
+    <Compile Include="Models\CertificateModel.cs" />
     <Compile Include="Models\CityModel.cs" />
+    <Compile Include="Models\FolderModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\CompanyUIModes.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
