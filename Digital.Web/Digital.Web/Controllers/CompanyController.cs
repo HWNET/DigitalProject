@@ -8,6 +8,7 @@ using Digital.WCFClient.ConfigService;
 using Microsoft.AspNet.Identity;
 using Digital.Common.Utilities;
 using System.IO;
+using Digital.Common.Captcha;
 
 namespace Digital.Web.Controllers
 {
@@ -801,15 +802,38 @@ namespace Digital.Web.Controllers
         {
             var ReturnResult = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            var clientFolder = ServiceHub.GetCommonServiceClient<FolderServiceClient>();
 
             var uploadFolder = UploadConfigContext.UploadPath;
+            var FolderNameCode = Config.CaptchaCode;
             var result = false;
-            if (client.VerifyUploadPath(uploadFolder))
+            var resultDB = false;
+            var CompanyID = 0;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            CompanyModel CompanyModel = null;
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
             {
-                result = client.FileDirectoryCreate(UserId, FolderName);
+                CompanyID = UserModel.CompanyID.Value;
+                CompanyModel = OperatorFactory.GetCompanyCache(User.Identity.GetUserId());
             }
 
-            if (result)
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                result = client.FileDirectoryCreate(UserId,FolderName,FolderNameCode);
+                if (result)
+                {
+                    var folder = new FolderModel { 
+                        FolderName=FolderName,
+                        FolderNameCode = FolderNameCode,
+                        CompanyID = CompanyID,
+                        CompanyModel = CompanyModel
+                    };
+                    var folderResult=clientFolder.FolderInsert(folder); // folder infos , insert DB
+                    resultDB = folderResult != null ? true : false;
+                }
+            }
+
+            if (result && resultDB)
             {
                 ReturnResult = "OK";
             }
@@ -817,6 +841,9 @@ namespace Digital.Web.Controllers
             {
                 ReturnResult = "NOK";
             }
+
+            clientFolder.Close();
+            client.Close();
 
             return Content(ReturnResult);
         }
@@ -835,7 +862,7 @@ namespace Digital.Web.Controllers
             {
                 FilesList = client.FilesList(User.Identity.GetUserId(), string.Empty, string.Empty).ToList();
             }
-
+            client.Close();
             return Json(FilesList);
         }
         #endregion
@@ -855,6 +882,8 @@ namespace Digital.Web.Controllers
                 FilesList = client.FilesListByDirectory(User.Identity.GetUserId(), FolderName).ToList();
             }
             ViewBag.FilesList = FilesList;
+
+            client.Close();
             return Json(FilesList);
         }
         #endregion
@@ -903,7 +932,7 @@ namespace Digital.Web.Controllers
             {
                 ReturnResult = "NOK";
             }
-
+            client.Close();
             return Content(ReturnResult);
         }
         #endregion
@@ -1434,6 +1463,7 @@ namespace Digital.Web.Controllers
         }
         #endregion
 
+        #region CompanyPictureUpload
         /// <summary>
         /// 上传图片
         /// </summary>
@@ -1441,8 +1471,21 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyPictureUpload()
         {
             ViewBag.MenuModel = base.GetMenu(155);
+
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            var uploadFolder = UploadConfigContext.UploadPath;
+
+            List<FileFolderMode> DirectoryList = new List<FileFolderMode>();
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                DirectoryList = client.FileDirectoryList(User.Identity.GetUserId()).ToList();
+            }
+            ViewBag.DirectoryList = DirectoryList;
+            client.Close();
+
             return View();
         }
+        #endregion
 
         /// <summary>
         /// 资质介绍

@@ -53,7 +53,7 @@ if ("undefined" != typeof staticFileRoot) {
                 runtimes: 'html5,flash,silverlight,html4',
                 browse_button: 'pickfiles', // you can pass in id...
                 container: document.getElementById('container'), // ... or DOM Element itself
-                url: staticFileRoot + "/FileUpload.ashx?subfolder=" + param["subfolder"] + "&" + "thumbwidth=" + param["thumbwidth"] + "&" + "thumbheight=" + param["thumbheight"] + "&" + "mode=" + param["mode"] + "&" + "ImageId=" + param["ImageId"],
+                url: staticFileRoot + "/FileUpload.ashx?subfolder=" + param["subfolder"] + "&" + "thumbwidth=" + param["thumbwidth"] + "&" + "thumbheight=" + param["thumbheight"] + "&" + "mode=" + param["mode"] + "&" + "ImageId=" + param["ImageId"] + "&" + "subSubFolderCode=" + param["subSubFolderCode"],
                 flash_swf_url: staticFileRoot + '/DigitalStyle/js/plupload/js/Moxie.swf',
                 silverlight_xap_url: staticFileRoot + '/DigitalStyle/js/plupload/js/Moxie.xap',
 

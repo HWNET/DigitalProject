@@ -620,6 +620,10 @@
 
     });
 
+    function callBack() {
+        window.location ="/Users/Login";
+    }
+
     function Save()
     {
         var $valid = jQuery('#firstForm').valid();
@@ -699,13 +703,11 @@
 
             //......
             if(TabIndex==0){
-                alert(valPrimaryBusinessCategory);
-                alert(valPrimaryBusiness);
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
                     CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
                     PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
                     CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro};
-                ComAjax("/Company/CompanyBaseInfo",datas,"基本信息");
+                ComAjax("/Company/CompanyBaseInfo",datas,"基本信息","callBack");
             }
             else if(TabIndex==1){
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,

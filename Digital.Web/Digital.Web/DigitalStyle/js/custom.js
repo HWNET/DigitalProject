@@ -39,7 +39,21 @@ function DropOptionDefault(SelectedId)
     SelectedId = SelectedId > 0 ? SelectedId : 1;
     return SelectedId.toString();
 }
+function DropOptionFolders(objson, selectobj, SelectedId)
+{
+    var obj = eval(objson);
+    $(obj).each(function (index) {
+        var val = obj[index];
+        var HtmlSelect = "";
+        if (typeof (val.FolderName) != "undefined") {
+            if (index == SelectedId) {
+                HtmlSelect = "selected";
+            }
 
+            selectobj.append("<option value='" + val.FolderNameCode + "' " + HtmlSelect + ">" + val.FolderName + "</option>");
+        }
+    });
+}
 function DropOption(objson, selectobj, SelectedId)
 {
     var obj = eval(objson);
@@ -108,7 +122,7 @@ function UILIHtml(objson, selectobj)
     $(obj).each(function (index) {
         var val = obj[index];
 
-        selectobj.append("<li><a href=\"#\" onclick=\"javascript:FileListByFolder('" + val.FolderName + "');\"><i class=\"fa fa-folder-o\"></i> " + val.FolderName + "</a></li>");
+        selectobj.append("<li><a href=\"#\" onclick=\"javascript:FileListByFolder('" + val.FolderNameCode + "');\"><i class=\"fa fa-folder-o\"></i> " + val.FolderName + "</a></li>");
     });
 }
 

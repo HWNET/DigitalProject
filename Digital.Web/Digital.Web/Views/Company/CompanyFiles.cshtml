@@ -377,7 +377,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button" onclick="javascript:alert('1');">&times;</button>
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
                 <h4 class="modal-title">文件分类</h4>
             </div>
             <div class="modal-body">
@@ -395,7 +395,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <button class="btn btn-primary" onclick="javascript:Save();">提交</button>&nbsp;
-                                <button class="btn btn-primary" onclick="javascript:void(0);">取消</button>
+                                <button class="btn btn-default" >取消</button>
                             </div>
                         </div>
                     </div>
@@ -420,7 +420,7 @@
             </button>
             <ul class="dropdown-menu fm-menu" role="menu">
                 <li><a href="~/FileDownload.ashx?folderName={FolderName}&fileName={FileName}" target="_self"><i class="fa fa-download"></i> Download</a></li>
-                <li><a href="#" onclick="javascript:FileDeleteByFolder('{FolderName}','{FileName}');"><i class="fa fa-trash-o"></i> Delete</a></li>
+                <li><a href="" onclick="javascript:FileDeleteByFolder('{FolderName}','{FileName}');"><i class="fa fa-trash-o"></i> Delete</a></li>
             </ul>
         </div><!-- btn-group -->
         <div class="thmb-prev">
@@ -528,6 +528,10 @@
         });
     });
 
+    function callBack() {
+        window.location =window.location;
+    }
+
     function Save()
     {
         var $valid = jQuery('#firstForm').valid();
@@ -539,7 +543,7 @@
 
             var valFolderName = $.jsparams.input("FolderName");
             var datas = {UserId:@User.Identity.GetUserId(),FolderName:valFolderName};
-            ComAjax("/Company/CompanyFilesFolderSave", datas, "文件分类", null);
+            ComAjax("/Company/CompanyFilesFolderSave", datas, "文件分类", "callBack");
 
         }
     }
@@ -558,6 +562,15 @@
     {
         var obj = eval(filesJson);
         var divParent=$("#FileManager");
+        //find divParent.FileManager all child elements,and then remove it
+        $("#FileManager > div[id*='DivFile']").each(function (index,element){
+            var divId=$(this).attr("id");
+            if (divId!="DivFile") {
+                $(this).remove();
+            }
+        });
+
+        //append files div container to divParent.FileManger
         $(obj).each(function (index) {
             var fileMode = obj[index];
             var divFileObj=$("#DivFile").clone();
@@ -582,7 +595,7 @@
 
     function callBack() 
     {
-        window.location = window.location;
+        window.location = "/Company/CompanyFiles";
     }
 
     //for selectAll files remove

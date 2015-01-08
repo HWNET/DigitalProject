@@ -1,4 +1,10 @@
-﻿@{
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@model Digital.WCFClient.ConfigService.FileFolderMode
+@{
     ViewBag.Title = "相册管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
@@ -11,6 +17,8 @@
     <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
+
+    <script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
 }
 
 <div class="pageheader">
@@ -33,21 +41,16 @@
                     <a href="" class="panel-close">&times;</a>
                     <a href="" class="minimize">&minus;</a>
                 </div>
-                <h4 class="panel-title">上传图片</h4>
-                <p>您需要先选择产品分类.</p>
+                <h4 class="panel-title">图片上传</h4>
+
                 <form class="form-horizontal form-bordered">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">选择目标相册</label>
                         <div class="col-sm-4">
-                            <select class="form-control chosen-select" data-placeholder="选择分类...">
-                                <option value="United States">免费发样</option>
-                                <option value="United States">押金测样</option>
-                                <option value="United States">需购买样品，不返还</option>
-                                <option value="United States">其它</option>
-                            </select>
+                            <select id="FolderList" class="form-control chosen-select" data-placeholder="选择相册..."></select>
                         </div>
                         <div class="col-sm-4">
-                            <a href="" class="btn btn-primary mr5 mb10" id="growl-primary">新建上册</a>
+                            @*<a href="" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary mr5 mb10" id="growl-primary">新建相册</a>*@
                         </div>
                     </div>
                 </form>
@@ -58,15 +61,13 @@
                 <div id="basicWizard" class="basic-wizard">
 
                     <ul class="nav nav-pills nav-justified">
-                        <li><a href="#tab1" data-toggle="tab">批量上传</a></li>
+                        @*<li><a href="#tab1" data-toggle="tab">批量上传</a></li>*@
                         <li><a href="#tab2" data-toggle="tab">单个上传</a></li>
                     </ul>
 
                     <div class="tab-content">
                         <div class="tab-pane" id="tab1">
                             <div class="panel-body panel-body-nopadding">
-
-
 
                                 <div class="col-md-6">
                                     <div class="col-sm-12">
@@ -114,117 +115,117 @@
 
                         <div class="tab-pane" id="tab2">
                             <div class="panel-body panel-body-nopadding">
-                                <form class="form-horizontal form-bordered">
-
+                                <form class="form-horizontal form-bordered" onsubmit="return false">
+                                    @Html.AntiForgeryToken()
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">选择文件</label>
+                                        <label class="col-sm-3 control-label">选择图片</label>
                                         <div class="col-sm-9">
-                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload" id="container">
                                                 <div class="input-append">
                                                     <div class="uneditable-input">
                                                         <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                                        <span class="fileupload-preview"></span>
+                                                        <span id="filelist" class="fileupload-preview"></span>
                                                     </div>
                                                     <span class="btn btn-default btn-file">
                                                         <span class="fileupload-new">选择图片</span>
-                                                        <span class="fileupload-exists">Change</span>
-                                                        <input type="file" />
+                                                        <span class="fileupload-exists">更改</span>
+                                                        <input id="pickfiles" value="" type="file" />
                                                     </span>
-                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                    <a href="#" id="uploadfiles" class="btn btn-default">上传</a>
                                                 </div>
                                             </div>
+                                            <input id="ImagePath" type="hidden" />
+
+                                            <img id="PersonImage" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">选择文件</label>
-                                        <div class="col-sm-9">
-                                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                <div class="input-append">
-                                                    <div class="uneditable-input">
-                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                                        <span class="fileupload-preview"></span>
-                                                    </div>
-                                                    <span class="btn btn-default btn-file">
-                                                        <span class="fileupload-new">选择图片</span>
-                                                        <span class="fileupload-exists">Change</span>
-                                                        <input type="file" />
-                                                    </span>
-                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @*<div class="form-group">
+                <label class="col-sm-3 control-label">选择文件</label>
+                <div class="col-sm-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="input-append">
+                            <div class="uneditable-input">
+                                <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                <span class="fileupload-preview"></span>
+                            </div>
+                            <span class="btn btn-default btn-file">
+                                <span class="fileupload-new">选择图片</span>
+                                <span class="fileupload-exists">Change</span>
+                                <input type="file" />
+                            </span>
+                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">选择文件</label>
-                                        <div class="col-sm-9">
-                                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                <div class="input-append">
-                                                    <div class="uneditable-input">
-                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                                        <span class="fileupload-preview"></span>
-                                                    </div>
-                                                    <span class="btn btn-default btn-file">
-                                                        <span class="fileupload-new">选择图片</span>
-                                                        <span class="fileupload-exists">Change</span>
-                                                        <input type="file" />
-                                                    </span>
-                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">选择文件</label>
+                <div class="col-sm-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="input-append">
+                            <div class="uneditable-input">
+                                <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                <span class="fileupload-preview"></span>
+                            </div>
+                            <span class="btn btn-default btn-file">
+                                <span class="fileupload-new">选择图片</span>
+                                <span class="fileupload-exists">Change</span>
+                                <input type="file" />
+                            </span>
+                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">选择文件</label>
-                                        <div class="col-sm-9">
-                                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                <div class="input-append">
-                                                    <div class="uneditable-input">
-                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                                        <span class="fileupload-preview"></span>
-                                                    </div>
-                                                    <span class="btn btn-default btn-file">
-                                                        <span class="fileupload-new">选择图片</span>
-                                                        <span class="fileupload-exists">Change</span>
-                                                        <input type="file" />
-                                                    </span>
-                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">选择文件</label>
+                <div class="col-sm-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="input-append">
+                            <div class="uneditable-input">
+                                <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                <span class="fileupload-preview"></span>
+                            </div>
+                            <span class="btn btn-default btn-file">
+                                <span class="fileupload-new">选择图片</span>
+                                <span class="fileupload-exists">Change</span>
+                                <input type="file" />
+                            </span>
+                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">水印设置</label>
-                                        <div class="col-sm-9">
-                                            <div class="ckbox ckbox-success">
-                                                <input type="checkbox" value="1" id="checkboxDefault" checked="checked" />
-                                                <label for="checkboxDefault">为上传的图片设置水印</label>
-                                            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">水印设置</label>
+                <div class="col-sm-9">
+                    <div class="ckbox ckbox-success">
+                        <input type="checkbox" value="1" id="checkboxDefault" checked="checked" />
+                        <label for="checkboxDefault">为上传的图片设置水印</label>
+                    </div>
 
-                                            <div class="ckbox ckbox-danger">
-                                                <a href="" class="mr5 mb10" id="growl-primary">水印设置</a>
-                                            </div>
-                                        </div>
+                    <div class="ckbox ckbox-danger">
+                        <a href="" class="mr5 mb10" id="growl-primary">水印设置</a>
+                    </div>
+                </div>
 
-                                    </div>
-
-
+            </div>*@
 
                                 </form>
                             </div>
 
-
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3">
-                                        <button class="btn btn-primary">开始上传</button>&nbsp;
-                                        <button class="btn btn-default">取消</button>
+                            @*<div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <button class="btn btn-primary">开始上传</button>&nbsp;
+                                            <button class="btn btn-default">取消</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>*@
                         </div>
 
 
@@ -233,11 +234,10 @@
                 </div>
 
             </div><!-- tab-content -->
-
-            <ul class="pager wizard">
-                <li class="previous"><a href="javascript:void(0)">上一步</a></li>
-                <li class="next"><a href="javascript:void(0)">下一步</a></li>
-            </ul>
+            @*<ul class="pager wizard">
+                    <li class="previous"><a href="javascript:void(0)">上一步</a></li>
+                    <li class="next"><a href="javascript:void(0)">下一步</a></li>
+                </ul>*@
 
         </div><!-- #basicWizard -->
 
@@ -246,12 +246,40 @@
 
 
 <script>
+    function callback(msg) {
+        $("#ImagePath").val(msg.msg.url);
+        $("#PersonImage")[0].src = msg.msg.url;
+    }
+
     jQuery(document).ready(function () {
+        //select option : Picture Folders List
+        var Folderjsons =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((List<FileFolderMode>)ViewBag.DirectoryList))
+        DropOptionFolders(Folderjsons, $("#FolderList"), 1);
+
+        var selectedFolder = $.jsparams.select("FolderList");
+
+        $("#FolderList").change(function () {
+            selectedFolder = $(this).val();
+            //alert(selectedFolder);
+            $('#uploader').FileUpload({
+                'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
+                'ImageId': '',
+                'subSubFolderCode': selectedFolder
+            });
+        });
+
+        //alert(selectedFolder);
+        $('#uploader').FileUpload({
+            'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
+            'ImageId': '',
+            'subSubFolderCode': selectedFolder
+        });
+
         // Chosen Select
         jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
 
         // Basic Wizard
-        jQuery('#basicWizard').bootstrapWizard();
+        //jQuery('#basicWizard').bootstrapWizard();
 
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
@@ -263,20 +291,20 @@
             }
         });
 
-        jQuery('#validationWizard').bootstrapWizard({
-            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
-            onTabClick: function (tab, navigation, index) {
-                return false;
-            },
-            onNext: function (tab, navigation, index) {
-                var $valid = jQuery('#firstForm').valid();
-                if (!$valid) {
+        //jQuery('#validationWizard').bootstrapWizard({
+        //    tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+        //    onTabClick: function (tab, navigation, index) {
+        //        return false;
+        //    },
+        //    onNext: function (tab, navigation, index) {
+        //        var $valid = jQuery('#firstForm').valid();
+        //        if (!$valid) {
 
-                    $validator.focusInvalid();
-                    return false;
-                }
-            }
-        });
+        //            $validator.focusInvalid();
+        //            return false;
+        //        }
+        //    }
+        //});
 
         window.onload = function () {
             // Listen to the double click event.

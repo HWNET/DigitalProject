@@ -1,10 +1,25 @@
-﻿@{
-    ViewBag.Title = "账户信息管理";
+﻿@using Digital.Common.Mvc.Extensions
+@{
+    ViewBag.Title = "企业资质管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
 }
 
-<link href="../DigitalStyle/css/prettyPhoto.css" rel="stylesheet">
-<link rel="stylesheet" href="../DigitalStyle/css/dropzone.css" />
+@section PageSpecificJavascriptIncludes{
+    <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/prettyPhoto.css" />
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
+
+    <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
+    <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/JqueryToken.js"></script>
+    <script src="../DigitalStyle/js/messages_cn.js"></script>
+
+    <script src="../DigitalStyle/js/jquery.prettyPhoto.js"></script>
+    <script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
+    <script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
+
+}
 
 
 <div class="pageheader">
@@ -20,11 +35,7 @@
 
 <div class="contentpanel">
     <div class="row">
-
-
-
         <div class="contentpanel">
-
             <ul class="filemanager-options">
                 <li>
                     <div class="ckbox ckbox-default">
@@ -33,263 +44,119 @@
                     </div>
                 </li>
                 <li>
-                    <a href="" class="itemopt disabled"><i class="fa fa-pencil"></i> 添加证书</a>
+                    <a href="#" onclick="javascript:void(0);" class="itemopt disabled"><i class="fa fa-trash-o"></i> 删除证书</a>
                 </li>
-
-
+                <li>
+                    <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-pencil"></i> 添加证书</a>
+                </li>
             </ul>
-
-
 
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row filemanager">
 
-                        <div class="col-xs-6 col-sm-4 col-md-3 document">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check1" value="1" />
-                                    <label for="check1"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-pencil"></i> 编辑</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> 删除</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <img src="../DigitalStyle/images/photos/media-doc.png" class="img-responsive" alt="" />
-                                </div>
-                                <h5 class="fm-title"><a href="">ISO9001认证</a></h5>
-                                <small class="text-muted">添加日期: 03/18 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-                        <div class="col-xs-6 col-sm-4 col-md-3 image">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check2" value="1" />
-                                    <label for="check2"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                        <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <a href="images/photos/media1.jpg" data-rel="prettyPhoto">
-                                        <img src="../DigitalStyle/images/photos/media1.jpg" class="img-responsive" alt="" />
-                                    </a>
-                                </div>
-                                <h5 class="fm-title"><a href="">Vegetarian.png</a></h5>
-                                <small class="text-muted">Added: Jan 02, 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-                        <div class="col-xs-6 col-sm-4 col-md-3 video">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check3" value="1" />
-                                    <label for="check3"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                        <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <img src="../DigitalStyle/images/photos/media5.png" class="img-responsive" alt="" />
-                                </div>
-                                <h5 class="fm-title"><a href="">DogAnimation.mp4</a></h5>
-                                <small class="text-muted">Added: Jan 02, 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-                        <div class="col-xs-6 col-sm-4 col-md-3 audio">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check7" value="1" />
-                                    <label for="check7"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                        <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <img src="../DigitalStyle/images/photos/media-audio.png" class="img-responsive" alt="" />
-                                </div>
-                                <h5 class="fm-title"><a href="">WreckingBall.mp3</a></h5>
-                                <small class="text-muted">Added: Jan 01, 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-                        <div class="col-xs-6 col-sm-4 col-md-3 image">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check4" value="1" />
-                                    <label for="check4"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                        <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <a href="images/photos/media3.png" data-rel="prettyPhoto">
-                                        <img src="../DigitalStyle/images/photos/media3.png" class="img-responsive" alt="" />
-                                    </a>
-                                </div>
-                                <h5 class="fm-title"><a href="">MyFirstArt.png</a></h5>
-                                <small class="text-muted">Added: Jan 01, 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-                        <div class="col-xs-6 col-sm-4 col-md-3 document">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check5" value="1" />
-                                    <label for="check5"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                        <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <img src="../DigitalStyle/images/photos/media-doc.png" class="img-responsive" alt="" />
-                                </div>
-                                <h5 class="fm-title"><a href="">MyResume.docx</a></h5>
-                                <small class="text-muted">Added: Jan 01, 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-                        <div class="col-xs-6 col-sm-4 col-md-3 video">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check6" value="1" />
-                                    <label for="check6"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                        <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <img src="../DigitalStyle/images/photos/media4.png" class="img-responsive" alt="" />
-                                </div>
-                                <h5 class="fm-title"><a href="">MyFirstMovie.mp4</a></h5>
-                                <small class="text-muted">Added: Jan 01, 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-                        <div class="col-xs-6 col-sm-4 col-md-3 image">
-                            <div class="thmb">
-                                <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check13" value="1" />
-                                    <label for="check13"></label>
-                                </div>
-                                <div class="btn-group fm-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu fm-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                        <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                    </ul>
-                                </div><!-- btn-group -->
-                                <div class="thmb-prev">
-                                    <a href="images/photos/media2.png" data-rel="prettyPhoto">
-                                        <img src="../DigitalStyle/images/photos/media2.png" class="img-responsive" alt="" />
-                                    </a>
-                                </div>
-                                <h5 class="fm-title"><a href="">MeAndFriends.png</a></h5>
-                                <small class="text-muted">Added: Jan 01, 2014</small>
-                            </div><!-- thmb -->
-                        </div><!-- col-xs-6 -->
-
-
-
                     </div><!-- row -->
                 </div><!-- col-sm-9 -->
-
             </div>
         </div>
-
-
     </div>
 </div>
 
+<div id="DetailModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title">企业资质</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered" id="firstForm" onsubmit="return false">
+                    @Html.AntiForgeryToken()
 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span>证书名称</label>
+                        <div class="col-sm-6">
+                            <input id="CertificateName" type="text" placeholder="证书名称..." class="form-control" required />
+                        </div>
+                    </div>
 
-<script src="../js/jquery-1.10.2.min.js"></script>
-<script src="../js/jquery-migrate-1.2.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/modernizr.min.js"></script>
-<script src="../js/jquery.sparkline.min.js"></script>
-<script src="../js/toggles.min.js"></script>
-<script src="../js/retina.min.js"></script>
-<script src="../js/jquery.cookies.js"></script>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span>证书缩略图</label>
+                        <div class="col-sm-6">
+                            <div class="fileupload fileupload-new" data-provides="fileupload" id="container">
+                                <div class="input-append">
+                                    <div class="uneditable-input">
+                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                        <span id="filelist" class="fileupload-preview"></span>
+                                    </div>
+                                    <span class="btn btn-default btn-file">
+                                        <span class="fileupload-new">选择证书缩略图</span>
+                                        <span class="fileupload-exists">更改</span>
+                                        @*@Model.NewsThumbnail*@
+                                        <input id="pickfiles" value="" type="file" />
+                                    </span>
+                                    <a href="#" id="uploadfiles" class="btn btn-default">上传</a>
+                                </div>
+                            </div>
+                            @*@Model.NewsThumbnail*@
+                            <input id="ImagePath" type="hidden" value="" />
+                            @*@Html.IsNull(Model.NewsThumbnail, "../DigitalStyle/images/pic-none.png", Model.NewsThumbnail)*@
+                            <img id="PersonImage" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
 
-<script src="../js/jquery.prettyPhoto.js"></script>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="checkbox">证书描述</label>
+                        <div class="col-sm-6">
+                            <textarea id="CertificateIntro" class="form-control" placeholder="请在此输入证书描述..." rows="10"></textarea>
+                        </div>
+                    </div>
 
-<script src="../js/chosen.jquery.min.js"></script>
-<script src="../js/dropzone.min.js"></script>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button class="btn btn-primary" onclick="javascript:Save();">提交</button>&nbsp;
+                                <button class="btn btn-default">取消</button>
+                            </div>
+                        </div>
+                    </div>
 
-<script src="../js/custom.js"></script>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="DivFile" class="col-xs-6 col-sm-4 col-md-3 document" style="display:none">
+    <div class="thmb">
+        <input type="hidden" id="folder{index}" value="{FolderName}" />
+        <input type="hidden" id="file{index}" value="{FileName}" />
+        <div class="ckbox ckbox-default">
+            <input type="checkbox" id="check{index}" value="{index}" />
+            <label for="check{index}"></label>
+        </div>
+        <div class="btn-group fm-group">
+            <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu fm-menu" role="menu">
+                <li><a href="#"><i class="fa fa-pencil"></i> Download</a></li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+            </ul>
+        </div><!-- btn-group -->
+        <div class="thmb-prev">
+            <img src="../DigitalStyle/images/photos/media-doc.png" class="img-responsive" alt="" />
+        </div>
+        <h5 class="fm-title"><a href="">{FileName}</a></h5>
+        <small class="text-muted">Added: {FileDate}</small>
+    </div><!-- thmb -->
+</div><!-- col-xs-6 -->
+
 <script>
     jQuery(document).ready(function () {
-        // Chosen Select
-        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+        $("#CertificateIntro").autogrow();
 
         jQuery('.thmb').hover(function () {
             var t = jQuery(this);
@@ -369,6 +236,15 @@
 
         jQuery("a[rel^='prettyPhoto']").prettyPhoto();
 
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
     });
 
 </script>
