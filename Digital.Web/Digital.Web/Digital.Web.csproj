@@ -175,6 +175,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OperatorFactory.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="FileDownload.ashx.cs">
@@ -1210,6 +1211,7 @@
     <Content Include="Views\Company\CompanyWatermarkManage.cshtml" />
     <Content Include="Views\WebSiteTemplate\tps_bestfolio-09\index.cshtml" />
     <Content Include="Views\CWebsite\WColumn.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
