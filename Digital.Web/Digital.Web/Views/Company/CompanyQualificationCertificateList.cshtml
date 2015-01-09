@@ -1,4 +1,9 @@
-﻿@using Digital.Common.Mvc.Extensions
+﻿@using Digital.WCFClient.ConfigService
+@using System.Collections.ObjectModel
+@using Digital.Common.Mvc.Extensions
+@using Digital.Web.Controllers
+@using Microsoft.AspNet.Identity
+@model Digital.WCFClient.ConfigService.CertificateModel
 @{
     ViewBag.Title = "企业资质管理";
     Layout = "~/Views/Shared/_LayoutDigital.cshtml";
@@ -44,16 +49,16 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#" onclick="javascript:void(0);" class="itemopt disabled"><i class="fa fa-trash-o"></i> 删除证书</a>
+                    <a href="" onclick="javascript:FilesOperationByFolders(1);" class="itemopt disabled"><i class="fa fa-trash-o"></i> 删除证书</a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-pencil"></i> 添加证书</a>
+                    <a href="" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-pencil"></i> 添加证书</a>
                 </li>
             </ul>
 
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="row filemanager">
+                    <div id="FileManager" class="row filemanager">
 
                     </div><!-- row -->
                 </div><!-- col-sm-9 -->
@@ -74,6 +79,13 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span>证书相册</label>
+                        <div class="col-sm-6">
+                            <select id="FolderList" class="form-control chosen-select" data-placeholder="选择相册..."></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-sm-3 control-label"><span class="asterisk">*</span>证书名称</label>
                         <div class="col-sm-6">
                             <input id="CertificateName" type="text" placeholder="证书名称..." class="form-control" required />
@@ -81,7 +93,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label"><span class="asterisk">*</span>证书缩略图</label>
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span>证书图片</label>
                         <div class="col-sm-6">
                             <div class="fileupload fileupload-new" data-provides="fileupload" id="container">
                                 <div class="input-append">
@@ -90,12 +102,12 @@
                                         <span id="filelist" class="fileupload-preview"></span>
                                     </div>
                                     <span class="btn btn-default btn-file">
-                                        <span class="fileupload-new">选择证书缩略图</span>
+                                        <span class="fileupload-new">选择图片</span>
                                         <span class="fileupload-exists">更改</span>
                                         @*@Model.NewsThumbnail*@
                                         <input id="pickfiles" value="" type="file" />
                                     </span>
-                                    <a href="#" id="uploadfiles" class="btn btn-default">上传</a>
+                                    <a href="" id="uploadfiles" class="btn btn-default">上传</a>
                                 </div>
                             </div>
                             @*@Model.NewsThumbnail*@
@@ -107,9 +119,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="checkbox">证书描述</label>
+                        <label class="col-sm-3 control-label">证书描述</label>
                         <div class="col-sm-6">
-                            <textarea id="CertificateIntro" class="form-control" placeholder="请在此输入证书描述..." rows="10"></textarea>
+                            <textarea id="CertificateIntro" class="form-control" placeholder="请在此输入证书描述..." rows="5" cols="10"></textarea>
                         </div>
                     </div>
 
@@ -117,7 +129,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <button class="btn btn-primary" onclick="javascript:Save();">提交</button>&nbsp;
-                                <button class="btn btn-default">取消</button>
+                                @*<button class="btn btn-default">取消</button>*@
                             </div>
                         </div>
                     </div>
@@ -141,12 +153,12 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu fm-menu" role="menu">
-                <li><a href="#"><i class="fa fa-pencil"></i> Download</a></li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                <li><a href="~/FileDownload.ashx?folderName={FolderName}&fileName={FileName}"><i class="fa fa-pencil"></i> Download</a></li>
+                <li><a href="" onclick="javascript:FileDeleteByFolder('{FolderName}','{FileName}');"><i class="fa fa-trash-o"></i> Delete</a></li>
             </ul>
         </div><!-- btn-group -->
         <div class="thmb-prev">
-            <img src="../DigitalStyle/images/photos/media-doc.png" class="img-responsive" alt="" />
+            <img src="../Upload/{FilePath}" class="img-responsive" alt="" />
         </div>
         <h5 class="fm-title"><a href="">{FileName}</a></h5>
         <small class="text-muted">Added: {FileDate}</small>
@@ -154,9 +166,44 @@
 </div><!-- col-xs-6 -->
 
 <script>
-    jQuery(document).ready(function () {
 
+
+    function callback(msg) {
+        $("#ImagePath").val(msg.msg.url);
+        $("#PersonImage")[0].src = msg.msg.url;
+        if (typeof (msg) != "undefined" && msg != null && msg.msg.url != "") {
+            SaveInfo(true,"上传图片");
+        }
+    }
+    jQuery(document).ready(function () {
+        //select option : Picture Folders List
+        var Folderjsons =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((List<FileFolderMode>)ViewBag.DirectoryList))
+        DropOptionFolders(Folderjsons, $("#FolderList"), 1);
+
+        var selectedFolder = $.jsparams.select("FolderList");
+
+        $("#FolderList").change(function () {
+            selectedFolder = $(this).val();
+            //alert(selectedFolder);
+            $('#uploader').FileUpload({
+                'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
+                'ImageId': '',
+                'subSubFolderCode': selectedFolder
+            });
+        });
+
+        //alert(selectedFolder);
+        $('#uploader').FileUpload({
+            'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
+            'ImageId': '',
+            'subSubFolderCode': selectedFolder
+        });
+
+        FilesList();
+        //textarea autogrow
         $("#CertificateIntro").autogrow();
+        // Chosen Select
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
 
         jQuery('.thmb').hover(function () {
             var t = jQuery(this);
@@ -247,6 +294,117 @@
         });
     });
 
+    function Save()
+    {
+        var $valid = jQuery('#firstForm').valid();
+        if (!$valid) {
+            // $validator.focusInvalid();
+            return false;
+        }
+        else {
+            var CertificateID = 0; // default option : insert new company model
+            @{
+                  var Ids = Request["Id"] == null ? "0" : Request["Id"].ToString();
+              }
+            var IsInsert=@Ids;
+            //------------------TAB 01 : 证书信息
+            var valCertificateName=$.jsparams.input("CertificateName");
+            var valCertificateThumbnail=$.jsparams.input("ImagePath");
+            var valCertificateIntros=$.jsparams.textarea("CertificateIntro");
+
+            var datas={Id:IsInsert,CertificateName:valCertificateName,
+                CertificateThumbnail:valCertificateThumbnail,CertificateIntros:valCertificateIntros};
+            ComAjax("/Company/CompanyCertificateSave",datas,"企业资质","callBack");
+        }
+    }
+    function callBack()
+    {
+        window.location="/Company/CompanyQualificationCertificateList";
+    }
+    function FilesList()
+    {
+        ComAjaxJson("/Company/CompanyFilesList", {},FilesDisplay);
+    }
+    function FilesDisplay(filesJson)
+    {
+        var obj = eval(filesJson);
+        var divParent=$("#FileManager");
+        //find divParent.FileManager all child elements,and then remove it
+        $("#FileManager > div[id*='DivFile']").each(function (index,element){
+            var divId=$(this).attr("id");
+            if (divId!="DivFile") {
+                $(this).remove();
+            }
+        });
+
+        //append files div container to divParent.FileManger
+        $(obj).each(function (index) {
+            var fileMode = obj[index];
+            var divFileObj=$("#DivFile").clone();
+            //alert(divFileObj.html());
+
+            var reFileName=new RegExp("{FileName}","g");
+            var reFolderName=new RegExp("{FolderName}","g");
+            var reIndex=new RegExp("{index}","g");
+            var filePath='UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)'+'/'+fileMode.FolderParent+'/'+fileMode.FolderName+'/'+fileMode.FileName;
+
+            var divFile=divFileObj.attr("style","block").html().replace(reFileName,fileMode.FileName)
+                .replace(reFolderName,fileMode.FolderParent)
+                .replace("{FileDate}",fileMode.FileDate)
+                .replace("{FilePath}",filePath)
+                .replace(reIndex,index);
+            divParent.append("<div id=\"DivFile"+index+"\" class=\"col-xs-6 col-sm-4 col-md-3 document\">"+divFile+"</div>");
+        });
+    }
+    function FileDeleteByFolder(folderName,fileName)
+    {
+        var datas={FolderName:folderName,FileName:fileName};
+        ComAjax("/Company/CompanyFileDeleteByFolder",datas,"企业资质","callBack");
+    }
+    //for selectAll files remove
+    function FilesOperationByFolders(isRemove)
+    {
+        var FolderFiles='';
+        var FoldersList=new Array();
+        var FilesList=new Array();
+
+        jQuery('.ckbox').each(function (index) {
+            var t = jQuery(this);
+            if (t.find('input').attr('id') != "selectall") {
+                if (t.find('input').is(':checked')) {
+                    index=index-1;
+                    var valInput=t.find('input').val();
+                    if (valInput!='{index}') {
+                        var valFolderName=$.jsparams.input("folder"+index);
+                        var valFileName=$.jsparams.input("file"+index);
+                        //FolderFiles+=valFolderName+","+valFileName+"&";
+                        FoldersList.push(valFolderName);
+                        FilesList.push(valFileName);
+                    }
+                }
+            }
+        });
+
+        if (isRemove==1) {
+            FileAllDeleteByFolder(FoldersList,FilesList);
+        }else {
+            // request to FileDownload.ashx
+            FileAllDownloadByFolder(FoldersList,FilesList);
+        }
+
+    }
+
+    function FileAllDeleteByFolder(folderName,fileName)
+    {
+        var datas={FolderNames:folderName.toString(),FileNames:fileName.toString()};
+        ComAjax("/Company/CompanyFileAllDeleteByFolder",datas,"企业资质","callBack");
+    }
+
+    function FileAllDownloadByFolder(folderName,fileName)
+    {
+        var datas={FolderNames:folderName.toString(),FileNames:fileName.toString()};
+        ComAjax("/Company/CompanyFileAllDownloadByFolder", datas, "企业文件",null);
+    }
 </script>
 
 

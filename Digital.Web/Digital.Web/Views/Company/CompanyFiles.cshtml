@@ -48,7 +48,7 @@
                     <a href="" class="itemopt disabled"><i class="fa fa-pencil"></i> 编辑</a>
                 </li>*@
             <li>
-                <a href="#" onclick="javascript:FilesOperationByFolders(1);" class="itemopt disabled"><i class="fa fa-trash-o"></i> 删除</a>
+                <a href="" onclick="javascript:FilesOperationByFolders(1);" class="itemopt disabled"><i class="fa fa-trash-o"></i> 删除</a>
             </li>
 
             @*<li class="filter-type">
@@ -424,7 +424,7 @@
             </ul>
         </div><!-- btn-group -->
         <div class="thmb-prev">
-            <img src="../DigitalStyle/images/photos/media-doc.png" class="img-responsive" alt="" />
+            <img src="../Upload/{FilePath}" class="img-responsive" alt="" />
         </div>
         <h5 class="fm-title"><a href="">{FileName}</a></h5>
         <small class="text-muted">Added: {FileDate}</small>
@@ -579,10 +579,13 @@
             var reFileName=new RegExp("{FileName}","g");
             var reFolderName=new RegExp("{FolderName}","g");
             var reIndex=new RegExp("{index}","g");
+            var filePath='UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)'+'/'+fileMode.FolderParent+'/'+fileMode.FolderName+'/'+fileMode.FileName;
 
             var divFile=divFileObj.attr("style","block").html().replace(reFileName,fileMode.FileName)
                 .replace(reFolderName,fileMode.FolderParent)
-                .replace("{FileDate}",fileMode.FileDate).replace(reIndex,index);
+                .replace("{FileDate}",fileMode.FileDate)
+                .replace("{FilePath}",filePath)
+                .replace(reIndex,index);
             divParent.append("<div id=\"DivFile"+index+"\" class=\"col-xs-6 col-sm-4 col-md-3 document\">"+divFile+"</div>");
         });
     }

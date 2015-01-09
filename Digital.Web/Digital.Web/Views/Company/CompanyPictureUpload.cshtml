@@ -249,6 +249,9 @@
     function callback(msg) {
         $("#ImagePath").val(msg.msg.url);
         $("#PersonImage")[0].src = msg.msg.url;
+        if (typeof (msg) != "undefined" && msg != null && msg.msg.url != "") {
+            SaveInfo(true,"上传图片");
+        }
     }
 
     jQuery(document).ready(function () {

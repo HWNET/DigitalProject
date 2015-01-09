@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Digital.Common.Utilities;
 using System.IO;
 using Digital.Common.Captcha;
+using System.ServiceModel;
 
 namespace Digital.Web.Controllers
 {
@@ -16,7 +17,7 @@ namespace Digital.Web.Controllers
     {
         //
         // GET: /Company/Index  这个地方就是他的地址  下面的INDEX就是你页面名  Company就是文件夹的名字 你要现实页面 下面代码必须有  如果你的页面叫LIST   
-
+        #region SaveUploadedFile
         public ActionResult SaveUploadedFile()
         {
             bool isSavedSuccessfully = true;
@@ -65,6 +66,7 @@ namespace Digital.Web.Controllers
                 return Json(new { Message = "Error in saving file" });
             }
         }
+        #endregion
 
         public ActionResult Index()
         {
@@ -158,37 +160,51 @@ namespace Digital.Web.Controllers
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
             var CompanyID = 0;
             CompanyModel CompanyModel = null;
-
-            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            try
             {
-                CompanyID = UserModel.CompanyID.Value;
-                CompanyModel = client.CompanyQueryById(CompanyID);
-                if (CompanyModel.CompanyBusinessProvinceMode != null && CompanyModel.CompanyBusinessCityMode != null)
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
                 {
-                    ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
+                    CompanyID = UserModel.CompanyID.Value;
+                    CompanyModel = client.CompanyQueryById(CompanyID);
+                    if (CompanyModel.CompanyBusinessProvinceMode != null && CompanyModel.CompanyBusinessCityMode != null)
+                    {
+                        ViewBag.BusinessAddress = CompanyModel.CompanyBusinessProvinceMode.Name + CompanyModel.CompanyBusinessCityMode.Name;
+                    }
+                    else
+                    {
+                        ViewBag.BusinessAddress = "";
+                    }
                 }
                 else
                 {
+                    CompanyModel = new CompanyModel
+                    {
+                        CompanyName = "",
+                        CompanyRegisteredNO = "",
+                        PrimarySalesArea = "0",
+                        IsProvideOEM = true,
+                        //CompanyBusinessAddress = "CompanyBusinessAddress1111",
+                        CompanyIntro = ""
+                    };
                     ViewBag.BusinessAddress = "";
+                    //return HttpNotFound();
                 }
-            }
-            else
-            {
-                CompanyModel = new CompanyModel
-                {
-                    CompanyName = "",
-                    CompanyRegisteredNO = "",
-                    PrimarySalesArea = "0",
-                    IsProvideOEM = true,
-                    //CompanyBusinessAddress = "CompanyBusinessAddress1111",
-                    CompanyIntro = ""
-                };
-                ViewBag.BusinessAddress = "";
-                //return HttpNotFound();
-            }
 
-            client.Close();
+                client.Close();
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View(CompanyModel);
         }
         #endregion
@@ -202,8 +218,6 @@ namespace Digital.Web.Controllers
             return Content(CompanyID);
         }
 
-
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -215,7 +229,10 @@ namespace Digital.Web.Controllers
             var CurrentUser = User.Identity.Name;
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
             var ReturnResult = string.Empty;
+            try
+            {
 
+            
             if (!string.IsNullOrEmpty(CurrentUser))
             {
                 var NewModel = new CompanyModel
@@ -275,6 +292,20 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
+            }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -292,6 +323,10 @@ namespace Digital.Web.Controllers
             var CurrentUser = User.Identity.Name;
             var ReturnResult = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            try
+            {
+
+            
             if (!string.IsNullOrEmpty(CurrentUser))
             {
                 var NewModel = new CompanyModel
@@ -352,10 +387,21 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
-            if (IsInsert == 1 && ReturnResult == "OK")
-            {
-                return Redirect("../Users/Login");
             }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
+            
             return Content(ReturnResult);
         }
         #endregion
@@ -372,6 +418,9 @@ namespace Digital.Web.Controllers
             var CurrentUser = User.Identity.Name;
             var ReturnResult = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
+            try
+            {
+
             if (!string.IsNullOrEmpty(CurrentUser))
             {
                 var NewModel = new CompanyModel
@@ -428,10 +477,21 @@ namespace Digital.Web.Controllers
             }
 
             client.Close();
-            if (IsInsert == 1 && ReturnResult == "OK")
-            {
-                return Redirect("../Users/Login");
             }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
+            
             return Content(ReturnResult);
         }
         #endregion
@@ -441,19 +501,35 @@ namespace Digital.Web.Controllers
         public void SetCompanyTabOne()
         {
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
-            var CompanyTypeList = client.GetCompanyTypeList();
-            ViewBag.CompanyTypeList = CompanyTypeList;
+            try
+            {
+                var CompanyTypeList = client.GetCompanyTypeList();
+                ViewBag.CompanyTypeList = CompanyTypeList;
 
-            var CompanyMemberList = client.GetCompanyMemberList();
-            ViewBag.CompanyMemberList = CompanyMemberList;
+                var CompanyMemberList = client.GetCompanyMemberList();
+                ViewBag.CompanyMemberList = CompanyMemberList;
 
-            var CompanyBusinessList = client.GetCompanyBusinessList();
-            ViewBag.CompanyBusinessList = CompanyBusinessList;
+                var CompanyBusinessList = client.GetCompanyBusinessList();
+                ViewBag.CompanyBusinessList = CompanyBusinessList;
 
-            var PrimarySalesAreaList = client.GetPrimarySalesAreaList();
-            ViewBag.PrimarySalesAreaList = PrimarySalesAreaList;
+                var PrimarySalesAreaList = client.GetPrimarySalesAreaList();
+                ViewBag.PrimarySalesAreaList = PrimarySalesAreaList;
 
-            client.Close();
+                client.Close();
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
+            
         }
         public void SetPrimaryBusinessList()
         {
@@ -465,40 +541,55 @@ namespace Digital.Web.Controllers
         public void SetCompanyTabTwo()
         {
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
-            var ProductionFormList = client.GetProductionFormList();
-            ViewBag.ProductionFormList = ProductionFormList;
+            try
+            {
+                var ProductionFormList = client.GetProductionFormList();
+                ViewBag.ProductionFormList = ProductionFormList;
 
-            var ServicesDomainList = client.GetServicesDomainList();
-            ViewBag.ServicesDomainList = ServicesDomainList;
+                var ServicesDomainList = client.GetServicesDomainList();
+                ViewBag.ServicesDomainList = ServicesDomainList;
 
-            var ProcessingMethodList = client.GetProcessingMethodList();
-            ViewBag.ProcessingMethodList = ProcessingMethodList;
+                var ProcessingMethodList = client.GetProcessingMethodList();
+                ViewBag.ProcessingMethodList = ProcessingMethodList;
 
-            var ProcessingCraftList = client.GetProcessingCraftList();
-            ViewBag.ProcessingCraftList = ProcessingCraftList;
+                var ProcessingCraftList = client.GetProcessingCraftList();
+                ViewBag.ProcessingCraftList = ProcessingCraftList;
 
-            var EquipmentIntroList = client.GetEquipmentIntroList();
-            ViewBag.EquipmentIntroList = EquipmentIntroList;
+                var EquipmentIntroList = client.GetEquipmentIntroList();
+                ViewBag.EquipmentIntroList = EquipmentIntroList;
 
-            var CapacityUnitList = client.GetCapacityUnitList();
-            ViewBag.CapacityUnitList = CapacityUnitList;
+                var CapacityUnitList = client.GetCapacityUnitList();
+                ViewBag.CapacityUnitList = CapacityUnitList;
 
-            var AnnualBusinessVolumeList = client.GetAnnualBusinessVolumeList();
-            ViewBag.AnnualBusinessVolumeList = AnnualBusinessVolumeList;
+                var AnnualBusinessVolumeList = client.GetAnnualBusinessVolumeList();
+                ViewBag.AnnualBusinessVolumeList = AnnualBusinessVolumeList;
 
-            var AnnualExportsVolumeList = client.GetAnnualExportsVolumeList();
-            ViewBag.AnnualExportsVolumeList = AnnualExportsVolumeList;
+                var AnnualExportsVolumeList = client.GetAnnualExportsVolumeList();
+                ViewBag.AnnualExportsVolumeList = AnnualExportsVolumeList;
 
-            var ManagementSystemCertificationList = client.GetManagementSystemCertificationList();
-            ViewBag.ManagementSystemCertificationList = ManagementSystemCertificationList;
+                var ManagementSystemCertificationList = client.GetManagementSystemCertificationList();
+                ViewBag.ManagementSystemCertificationList = ManagementSystemCertificationList;
 
-            var ProductQualityCertificationList = client.GetProductQualityCertificationList();
-            ViewBag.ProductQualityCertificationList = ProductQualityCertificationList;
+                var ProductQualityCertificationList = client.GetProductQualityCertificationList();
+                ViewBag.ProductQualityCertificationList = ProductQualityCertificationList;
 
-            var QualityAssuranceList = client.GetQualityAssuranceList();
-            ViewBag.QualityAssuranceList = QualityAssuranceList;
+                var QualityAssuranceList = client.GetQualityAssuranceList();
+                ViewBag.QualityAssuranceList = QualityAssuranceList;
 
-            client.Close();
+                client.Close();
+            }
+            catch (Exception)
+            {
+                if (client!=null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
         }
         #endregion
 
@@ -506,12 +597,29 @@ namespace Digital.Web.Controllers
         public void SetCompanyTabThree()
         {
             var client = ServiceHub.GetCommonServiceClient<CompanyServiceClient>();
-            var CompanyYearEstablishedList = client.GetCompanyYearEstablishedList();
-            ViewBag.CompanyYearEstablishedList = CompanyYearEstablishedList;
+            try
+            {
+                var CompanyYearEstablishedList = client.GetCompanyYearEstablishedList();
+                ViewBag.CompanyYearEstablishedList = CompanyYearEstablishedList;
 
-            var RegisteredAssetsUnitList = client.GetCompanyRegisteredAssetsUnitList();
-            ViewBag.RegisteredAssetsUnitList = RegisteredAssetsUnitList;
-            client.Close();
+                var RegisteredAssetsUnitList = client.GetCompanyRegisteredAssetsUnitList();
+                ViewBag.RegisteredAssetsUnitList = RegisteredAssetsUnitList;
+                client.Close();
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+
+                throw;
+            }
+            
         }
         #endregion
 
@@ -523,6 +631,9 @@ namespace Digital.Web.Controllers
             bool Result = false;
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             var client = ServiceHub.GetCommonServiceClient<UserServiceClient>();
+            try
+            {
+
             if (UserModel != null)
             {
                 if (UserModel.CompanyID == null || (UserModel.CompanyID != null && string.IsNullOrEmpty(UserModel.CompanyID.Value.ToString())))
@@ -545,6 +656,20 @@ namespace Digital.Web.Controllers
                 Result = false;
             }
             client.Close();
+            }
+            catch (Exception)
+            {
+                Result = false;
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Result;
         }
         #endregion
@@ -564,9 +689,12 @@ namespace Digital.Web.Controllers
         {
             ViewBag.MenuModel = base.GetMenu(156);
             CasesModel CategoryModel = null;
+            var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+            try
+            {
+
             if (!string.IsNullOrEmpty(Request["Id"]))
             {
-                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
                 CategoryModel = client.CasesQueryById(Request["Id"].ToString().ToInt());
                 client.Close();
             }
@@ -584,6 +712,19 @@ namespace Digital.Web.Controllers
                 };
             }
             CasesCategoryList();
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View(CategoryModel);
         }
 
@@ -595,6 +736,9 @@ namespace Digital.Web.Controllers
             var CompanyID = 0;
             var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
             List<BaseNameValueMode> CasesCategoryList = new List<BaseNameValueMode>();
+            try
+            {
+
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
             {
@@ -608,6 +752,19 @@ namespace Digital.Web.Controllers
 
             }
             client.Close();
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
         }
 
 
@@ -616,15 +773,23 @@ namespace Digital.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CompanyCasesDelete(int CasesId)
         {
+            var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
             try
             {
-                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
                 client.CasesDeleteById(CasesId);
                 client.Close();
                 return Content("OK");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
                 return Content("NOK");
             }
         }
@@ -633,15 +798,23 @@ namespace Digital.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CompanyCasesDeleteAll(string CasesIds)
         {
+            var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
             try
             {
-                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
                 client.CasesDeleteByIds(CasesIds);
                 client.Close();
                 return Content("OK");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
                 return Content("NOK");
             }
         }
@@ -652,10 +825,10 @@ namespace Digital.Web.Controllers
         [ValidateInput(false)]
         public ActionResult CompanyCasesAdd(int Id, string CName, string Abstract, string CImage, string CasesDate, int CasesCategory, int OrderBy, string Labels, string CasesDetails)
         {
+            var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+            CasesModel CModel = new CasesModel();
             try
             {
-                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
-                CasesModel CModel = new CasesModel();
                 var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
                 if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
                 {
@@ -698,8 +871,16 @@ namespace Digital.Web.Controllers
                     return Content("NOK");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
                 return Content("NOK");
             }
         }
@@ -717,7 +898,8 @@ namespace Digital.Web.Controllers
             var CompanyID = 0;
             List<CasesCategoryModel> CategoryList = null;
             var client = ServiceHub.GetCommonServiceClient<CasesCategoryServiceClient>();
-
+            try
+            {
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
             {
@@ -726,7 +908,19 @@ namespace Digital.Web.Controllers
 
                 ViewBag.CategoryList = CategoryList;
             }
-
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View();
         }
         #endregion
@@ -739,10 +933,11 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyCasesList()
         {
             ViewBag.MenuModel = base.GetMenu(158);
+            var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
             try
             {
                 CasesCategoryList();
-                var client = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
+                
                 var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
                 if (UserModel != null)
                 {
@@ -753,8 +948,16 @@ namespace Digital.Web.Controllers
                     Response.Redirect(Url.StaticFile());
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
             }
             return View();
         }
@@ -780,16 +983,30 @@ namespace Digital.Web.Controllers
             ViewBag.MenuModel = base.GetMenu(154);
 
             var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
-            var uploadFolder = UploadConfigContext.UploadPath;
-
-            List<FileFolderMode> DirectoryList = new List<FileFolderMode>();
-            if (client.VerifyUploadPath(uploadFolder))
+            try
             {
-                DirectoryList = client.FileDirectoryList(User.Identity.GetUserId()).ToList();
-            }
-            ViewBag.DirectoryList = DirectoryList;
-            client.Close();
+                var uploadFolder = UploadConfigContext.UploadPath;
 
+                List<FileFolderMode> DirectoryList = new List<FileFolderMode>();
+                if (client.VerifyUploadPath(uploadFolder))
+                {
+                    DirectoryList = client.FileDirectoryList(User.Identity.GetUserId()).ToList();
+                }
+                ViewBag.DirectoryList = DirectoryList;
+                client.Close();
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View();
         }
         #endregion
@@ -809,8 +1026,12 @@ namespace Digital.Web.Controllers
             var result = false;
             var resultDB = false;
             var CompanyID = 0;
-            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             CompanyModel CompanyModel = null;
+            try
+            {
+
+            
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0)
             {
                 CompanyID = UserModel.CompanyID.Value;
@@ -844,7 +1065,28 @@ namespace Digital.Web.Controllers
 
             clientFolder.Close();
             client.Close();
-
+            }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (clientFolder != null)
+                {
+                    if (clientFolder.State == CommunicationState.Opened)
+                    {
+                        clientFolder.Close();
+                    }
+                    clientFolder = null;
+                }
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -857,12 +1099,27 @@ namespace Digital.Web.Controllers
         {
             List<FilesMode> FilesList = new List<FilesMode>();
             var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
-            var uploadFolder = UploadConfigContext.UploadPath;
-            if (client.VerifyUploadPath(uploadFolder))
+            try
             {
-                FilesList = client.FilesList(User.Identity.GetUserId(), string.Empty, string.Empty).ToList();
+                var uploadFolder = UploadConfigContext.UploadPath;
+                if (client.VerifyUploadPath(uploadFolder))
+                {
+                    FilesList = client.FilesList(User.Identity.GetUserId(), string.Empty, string.Empty).ToList();
+                }
+                client.Close();
             }
-            client.Close();
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Json(FilesList);
         }
         #endregion
@@ -874,16 +1131,30 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyFilesByFolder(string FolderName)
         {
             var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
-            var uploadFolder = UploadConfigContext.UploadPath;
-
             List<FilesMode> FilesList = new List<FilesMode>();
-            if (client.VerifyUploadPath(uploadFolder))
+            try
             {
-                FilesList = client.FilesListByDirectory(User.Identity.GetUserId(), FolderName).ToList();
-            }
-            ViewBag.FilesList = FilesList;
+                var uploadFolder = UploadConfigContext.UploadPath;
+                if (client.VerifyUploadPath(uploadFolder))
+                {
+                    FilesList = client.FilesListByDirectory(User.Identity.GetUserId(), FolderName).ToList();
+                }
+                ViewBag.FilesList = FilesList;
 
-            client.Close();
+                client.Close();
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Json(FilesList);
         }
         #endregion
@@ -916,23 +1187,37 @@ namespace Digital.Web.Controllers
         {
             var ReturnResult = string.Empty;
             var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
-            var uploadFolder = UploadConfigContext.UploadPath;
+            try
+            {
+                var uploadFolder = UploadConfigContext.UploadPath;
+                var result = false;
+                if (client.VerifyUploadPath(uploadFolder))
+                {
+                    result = client.FileRemove(User.Identity.GetUserId(), FolderName, FileName);
+                }
 
-            var result = false;
-            if (client.VerifyUploadPath(uploadFolder))
-            {
-                result = client.FileRemove(User.Identity.GetUserId(), FolderName, FileName);
+                if (result)
+                {
+                    ReturnResult = "OK";
+                }
+                else
+                {
+                    ReturnResult = "NOK";
+                }
+                client.Close();
             }
-
-            if (result)
+            catch (Exception)
             {
-                ReturnResult = "OK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
             }
-            else
-            {
-                ReturnResult = "NOK";
-            }
-            client.Close();
             return Content(ReturnResult);
         }
         #endregion
@@ -957,18 +1242,21 @@ namespace Digital.Web.Controllers
                 client.Close();
                 return Content("OK");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                if (client!=null)
+                if (client != null)
                 {
-                    client.Close();
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
                 }
                 return Content("NOK");
             }
             
         }
         #endregion
-
 
         #region CompanyNewsAdd
         /// <summary>
@@ -980,43 +1268,66 @@ namespace Digital.Web.Controllers
         {
             ViewBag.MenuModel = base.GetMenu(163);
             NewsModel NewsModel = null;
-            var client1 = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
-            if (!string.IsNullOrEmpty(Request["Id"]))
-            {
-                NewsModel = client1.NewsQueryById(Request["Id"].ToString().ToInt());
-                client1.Close();
-            }
-            else
-            {
-                 NewsModel = new NewsModel
-                {
-                    NewsTitle = "",
-                    NewsAbstract = "",
-                    NewsThumbnail = "",
-                    NewsCategoryID = 0,
-                    NewsOrderID = 0,
-                    NewsKeywords = "",
-                    NewsLabels = "",
-                    NewsBody = "",
-                    ReleaseTime = DateTime.Now,
-                };
-            }
-
+            var clientNews = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
             var CompanyID = 0;
             List<BaseNameValueMode> CategoryList = new List<BaseNameValueMode>();
-            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
-            {
-                CompanyID = UserModel.CompanyID.Value;
-                var  CategoryModelList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
-                foreach (var Category in CategoryModelList)
-                {
-                    CategoryList.Add(new BaseNameValueMode { Id = Category.NewsCategoryID, Name = Category.NewsCategoryName });
-                }
-            }
-            ViewBag.CategoryList = CategoryList;
 
+            try
+            {
+                if (!string.IsNullOrEmpty(Request["Id"]))
+                {
+                    NewsModel = clientNews.NewsQueryById(Request["Id"].ToString().ToInt());
+                    clientNews.Close();
+                }
+                else
+                {
+                     NewsModel = new NewsModel
+                    {
+                        NewsTitle = "",
+                        NewsAbstract = "",
+                        NewsThumbnail = "",
+                        NewsCategoryID = 0,
+                        NewsOrderID = 0,
+                        NewsKeywords = "",
+                        NewsLabels = "",
+                        NewsBody = "",
+                        ReleaseTime = DateTime.Now,
+                    };
+                }
+
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                {
+                    CompanyID = UserModel.CompanyID.Value;
+                    var  CategoryModelList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
+                    foreach (var Category in CategoryModelList)
+                    {
+                        CategoryList.Add(new BaseNameValueMode { Id = Category.NewsCategoryID, Name = Category.NewsCategoryName });
+                    }
+                }
+                ViewBag.CategoryList = CategoryList;
+            }
+            catch (Exception)
+            {
+                if (clientNews != null)
+                {
+                    if (clientNews.State == CommunicationState.Opened)
+                    {
+                        clientNews.Close();
+                    }
+                    clientNews = null;
+                }
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View(NewsModel);
         }
         #endregion
@@ -1033,6 +1344,11 @@ namespace Digital.Web.Controllers
             //currnet log on user
             var CurrentUser = User.Identity.Name;
             var CompanyID = 0;
+            var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
+            var ReturnResult = string.Empty;
+            try
+            {
+
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
             {
@@ -1040,8 +1356,6 @@ namespace Digital.Web.Controllers
                 CompanyID = UserModel.CompanyID.Value;
             }
 
-            var client = ServiceHub.GetCommonServiceClient<NewsServiceClient>();
-            var ReturnResult = string.Empty;
             if (!string.IsNullOrEmpty(CurrentUser) && CompanyID > 0)
             {
                 var NewsModel = new NewsModel
@@ -1092,6 +1406,21 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
+            }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+
+                throw;
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -1108,23 +1437,40 @@ namespace Digital.Web.Controllers
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
             var CompanyID = 0;
             List<NewsCategoryModel> CategoryList = null;
-
-            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+            NewsCategoryModel CategoryModel = null;
+            try
             {
-                CompanyID = UserModel.CompanyID.Value;
-                CategoryList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
+                var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+                if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
+                {
+                    CompanyID = UserModel.CompanyID.Value;
+                    CategoryList = client.NewsCategoryQueryListByCompany(CompanyID).ToList();
+                }
+                ViewBag.CategoryList = CategoryList;
             }
-            ViewBag.CategoryList = CategoryList;
-
-
-            NewsCategoryModel CategoryModel = new NewsCategoryModel
+            catch (Exception)
             {
-                NewsCategoryOrderID = 0,
-                NewsCategoryName = "",
-                NewsCategoryPicture = "",
-                NewsCategoryContent = "",
-            };
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+
+                throw;
+            }
+            finally
+            {
+                CategoryModel = new NewsCategoryModel
+                {
+                    NewsCategoryOrderID = 0,
+                    NewsCategoryName = "",
+                    NewsCategoryPicture = "",
+                    NewsCategoryContent = "",
+                };
+            }
             return View(CategoryModel);
         }
         #endregion
@@ -1139,6 +1485,9 @@ namespace Digital.Web.Controllers
             var CurrentUser = User.Identity.Name;
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
             NewsCategoryModel CategoryModel = null;
+            try
+            {
+
             if (!string.IsNullOrEmpty(CurrentUser))
             {
                 CategoryModel = client.NewsCategoryQueryById(CategoryID);
@@ -1151,6 +1500,20 @@ namespace Digital.Web.Controllers
             }
 
             client.Close();
+            }
+            catch (Exception)
+            {
+                CategoryModel = new NewsCategoryModel();
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Json(CategoryModel);
         }
         #endregion
@@ -1166,14 +1529,15 @@ namespace Digital.Web.Controllers
             var CurrentUser = User.Identity.Name;
             var CompanyID = 0;
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
+            var ReturnResult = string.Empty;
+            try
+            {
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
             {
                 //IsInsert = 0;
                 CompanyID = UserModel.CompanyID.Value;
             }
-
-            var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
-            var ReturnResult = string.Empty;
 
             if (!string.IsNullOrEmpty(CurrentUser))
             {
@@ -1225,7 +1589,20 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
-
+            }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -1240,10 +1617,11 @@ namespace Digital.Web.Controllers
             var CurrentUser = User.Identity.Name;
             var client = ServiceHub.GetCommonServiceClient<NewsCategoryServiceClient>();
             var ReturnResult = string.Empty;
-
+            var result = client.NewsCategoryDeleteById(CategoryID); // update DB
+            try
+            {
             if (!string.IsNullOrEmpty(CurrentUser))
             {
-                var result = client.NewsCategoryDeleteById(CategoryID); // update DB
                 if (result)
                 {
                     // ??? consider whether remove the related news under newscategory
@@ -1259,6 +1637,20 @@ namespace Digital.Web.Controllers
             else
             {
                 ReturnResult = "NOK";
+            }
+            }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
             }
             return Content(ReturnResult);
         }
@@ -1278,8 +1670,10 @@ namespace Digital.Web.Controllers
             var CompanyID = 0;
             List<NewsModel> NewsList = null;
             List<NewsCategoryModel> CategoryList = null;
-
             List<NewsModel> NewsToCategoryList = null;
+            try
+            {
+
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
             {
@@ -1310,6 +1704,27 @@ namespace Digital.Web.Controllers
 
             client.Close();
             clientCategory.Close();
+            }
+            catch (Exception)
+            {
+                if (clientCategory != null)
+                {
+                    if (clientCategory.State == CommunicationState.Opened)
+                    {
+                        clientCategory.Close();
+                    }
+                    clientCategory = null;
+                }
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View();
         }
         #endregion
@@ -1324,11 +1739,29 @@ namespace Digital.Web.Controllers
             ViewBag.MenuModel = base.GetMenu(162);
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
             PatentModel PatentModel = null;
-            if (!string.IsNullOrEmpty(Request["Id"]))
+            try
             {
-                PatentModel = client.PatentQueryById(Request["Id"].ToString().ToInt());
+                if (!string.IsNullOrEmpty(Request["Id"]))
+                {
+                    PatentModel = client.PatentQueryById(Request["Id"].ToString().ToInt());
+                }
+                ViewBag.TechnologyDomainList = client.GetTechnologyDomainList();
+                ViewBag.DevelopmentStatusList = client.GetDevelopmentStatusList();
+                client.Close();
             }
-            else
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
+            finally
             {
                 PatentModel = new PatentModel
                 {
@@ -1347,12 +1780,6 @@ namespace Digital.Web.Controllers
                     CompanyID = 0,
                 };
             }
-
-
-            ViewBag.TechnologyDomainList = client.GetTechnologyDomainList();
-            ViewBag.DevelopmentStatusList = client.GetDevelopmentStatusList();
-            client.Close();
-
             return View(PatentModel);
         }
         #endregion
@@ -1369,14 +1796,12 @@ namespace Digital.Web.Controllers
             //currnet log on user
             var CurrentUser = User.Identity.Name;
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
-
-
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
             var ReturnResult = string.Empty;
+            try
+            {
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID > 0)
             {
-
-
                 if (Id == 0) // new model -- do insert
                 {
                     var PatentModel = new PatentModel
@@ -1433,7 +1858,20 @@ namespace Digital.Web.Controllers
                 ReturnResult = "NOK";
             }
             client.Close();
-
+            }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return Content(ReturnResult);
         }
         #endregion
@@ -1450,7 +1888,8 @@ namespace Digital.Web.Controllers
             var client = ServiceHub.GetCommonServiceClient<PatentServiceClient>();
             var CompanyID = 0;
             List<PatentModel> PatentList = null;
-
+            try
+            {
             var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
             if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID.Value > 0) // UserModel.CompanyID.Value : update existing company model
             {
@@ -1458,7 +1897,19 @@ namespace Digital.Web.Controllers
                 PatentList = client.PatentQueryListByCompany(CompanyID).ToList();
             }
             ViewBag.PatentList = PatentList;
-
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View();
         }
         #endregion
@@ -1476,17 +1927,104 @@ namespace Digital.Web.Controllers
             var uploadFolder = UploadConfigContext.UploadPath;
 
             List<FileFolderMode> DirectoryList = new List<FileFolderMode>();
+            try
+            {
             if (client.VerifyUploadPath(uploadFolder))
             {
                 DirectoryList = client.FileDirectoryList(User.Identity.GetUserId()).ToList();
             }
             ViewBag.DirectoryList = DirectoryList;
             client.Close();
-
+            }
+            catch (Exception)
+            {
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+                throw;
+            }
             return View();
         }
         #endregion
 
+        #region CompanyCertificateSave
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult CompanyCertificateSave(int Id, string CertificateName, string CertificateThumbnail, string CertificateIntros)
+        {
+            var ReturnResult = string.Empty;
+            //currnet log on user
+            var CurrentUser = User.Identity.Name;
+            var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
+            var client = ServiceHub.GetCommonServiceClient<CertificateServiceClient>();
+            try
+            {
+            if (UserModel != null && UserModel.CompanyID != null && UserModel.CompanyID > 0)
+            {
+                var CertificateModel = new CertificateModel { 
+                    CertificateName=CertificateName,
+                    CertificateThumbnail=CertificateThumbnail,
+                    CertificateIntros=CertificateIntros,
+                    CompanyID=UserModel.CompanyID.Value,
+                };
+                if (Id == 0) // new model -- do insert
+                {
+                    #region new model -- do insert
+                    var ResultModel = client.CertificateInsert(CertificateModel); // update DB
+                    if (ResultModel != null && ResultModel.CertificateID > 0) // update web cache
+                    {
+                        //OperatorFactory.UpdateNewsCategoryCache(User.Identity.GetUserId(), ResultModel);
+                        ReturnResult = "OK";
+                    }
+                    else
+                    {
+                        ReturnResult = "NOK";
+                    }
+                    #endregion
+                }
+                else // old existing model -- do update
+                {
+                    var UpdateCertificateModel = client.CertificateQueryById(Id);
+                    UpdateCertificateModel.CertificateName = CertificateName;
+                    UpdateCertificateModel.CertificateThumbnail = CertificateThumbnail;
+                    UpdateCertificateModel.CertificateIntros = CertificateIntros;
+                    UpdateCertificateModel.CompanyID = UserModel.CompanyID.Value;
+                    client.CertificateUpdate(UpdateCertificateModel);
+                    ReturnResult = "OK";
+                }
+            }
+            else
+            {
+                ReturnResult = "NOK";
+            }
+            client.Close();
+            }
+            catch (Exception)
+            {
+                ReturnResult = "NOK";
+                if (client != null)
+                {
+                    if (client.State == CommunicationState.Opened)
+                    {
+                        client.Close();
+                    }
+                    client = null;
+                }
+
+                throw;
+            }
+            return Content(ReturnResult);
+        }
+        #endregion
+
+        #region CompanyQualificationCertificateList
         /// <summary>
         /// 资质介绍
         /// </summary>
@@ -1494,8 +2032,30 @@ namespace Digital.Web.Controllers
         public ActionResult CompanyQualificationCertificateList()
         {
             ViewBag.MenuModel = base.GetMenu(152);
+            
+            #region ViewBag.DirectoryList
+            var client = ServiceHub.GetCommonServiceClient<FileCabinetServiceClient>();
+            var uploadFolder = UploadConfigContext.UploadPath;
+
+            List<FileFolderMode> DirectoryList = new List<FileFolderMode>();
+            if (client.VerifyUploadPath(uploadFolder))
+            {
+                DirectoryList = client.FileDirectoryList(User.Identity.GetUserId()).ToList();
+            }
+            ViewBag.DirectoryList = DirectoryList;
+            client.Close();
+            #endregion
+
+            #region ViewBag.FolderNameCode
+            //var clientFolder = ServiceHub.GetCommonServiceClient<FolderServiceClient>();
+            //var FolderMode=clientFolder.FolderQueryByName("企业资质");
+            //ViewBag.FolderNameCode = FolderMode == null ? "default" : FolderMode.FolderNameCode;
+            //clientFolder.Close();
+            #endregion
+
             return View();
         }
+        #endregion
 
         #region CompanySinglePage
         /// <summary>
@@ -1553,7 +2113,6 @@ namespace Digital.Web.Controllers
             return View(SinglePageModel);
         }
         #endregion
-
 
         #region SinglePageDelete
         [HttpPost]
@@ -1639,6 +2198,7 @@ namespace Digital.Web.Controllers
         }
         #endregion
 
+        #region CompanyWatermarkManage
         /// <summary>
         /// 水印设置
         /// </summary>
@@ -1651,8 +2211,9 @@ namespace Digital.Web.Controllers
             client.Close();
             return View(WateModel);
         }
+        #endregion
 
-
+        #region CompanyWaterEdit
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -1676,8 +2237,9 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+        #endregion
 
-
+        #region CompanyCasesClassAdd
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -1728,8 +2290,9 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+        #endregion
 
-
+        #region CompanyCasesClassDelete
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -1747,8 +2310,9 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+        #endregion
 
-
+        #region CompanyPatentDelete
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -1766,8 +2330,9 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+        #endregion
 
-
+        #region CompanyPatentDeletes
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -1789,8 +2354,9 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+        #endregion
 
-
+        #region NewsDelete
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -1808,8 +2374,9 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
+        #endregion
 
-
+        #region NewsDeletes
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -1831,9 +2398,6 @@ namespace Digital.Web.Controllers
                 return Content("NOK");
             }
         }
-        //CompanyPatentDeletes
-
-
-
+        #endregion
     }
 }
