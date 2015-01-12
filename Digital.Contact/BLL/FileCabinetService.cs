@@ -142,6 +142,7 @@ namespace Digital.Contact.BLL
                     {
                         FolderParent=dirMode.Parent.Name,
                         FolderName = dirMode.Name,
+                        FolderNameCode=dirMode.Name,
                         FileName = file.Name,
                         FileFullName = file.FullName,
                         FileExtensionName = file.Extension,
@@ -214,6 +215,7 @@ namespace Digital.Contact.BLL
                             var FilesMode = new FilesMode
                             {
                                 FolderParent=FolderName,
+                                FolderName=dir.Name,
                                 FolderNameCode = dir.Name,
                                 FileName = file.Name,
                                 FileFullName=file.FullName,

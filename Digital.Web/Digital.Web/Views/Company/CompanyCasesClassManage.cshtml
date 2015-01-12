@@ -130,7 +130,8 @@
             <div class="modal-body">
                 <input type="hidden" id="ParentId" />
                 <input type="hidden" id="CaseId" />
-                @Html.AntiForgeryToken()><div class="form-group">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
                     <label class="col-sm-3 control-label">排序值</label>
                     <div class="col-sm-4">
                         <input type="text" id="OrderId" placeholder="排序值..." class="form-control" />
@@ -181,7 +182,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
                             <button class="btn btn-primary" onclick="javascript:Save()">提交</button>&nbsp;
-                            <button aria-hidden="true" data-dismiss="modal" class="close">取消</button>
+                            <button class="btn btn-default">取消</button>
                         </div>
                     </div>
                 </div>

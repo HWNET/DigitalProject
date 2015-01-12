@@ -10,6 +10,7 @@
 }
 
 @section PageSpecificJavascriptIncludes{
+    <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-override.css" />
     <link rel="stylesheet" href="../DigitalStyle/css/jquery.gritter.css" />
 
     <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
@@ -66,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><span class="asterisk">*</span> 公司名称</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="请用中文完整填写在工商局注册的公司全称" id="CompanyName" value="@Model.CompanyName" class="form-control" required/>
+                                            <input type="text" placeholder="请用中文完整填写在工商局注册的公司全称" id="CompanyName" value="@Model.CompanyName" class="form-control" required />
                                             <span class="help-block">
                                                 地区、字号、经营行业、公司体制，如：广州市格列服装有限公司；<br>
                                                 个体经营者请按照“经营者姓名”+“个体经营”字样，如：“张三（个体经营）”<br>
