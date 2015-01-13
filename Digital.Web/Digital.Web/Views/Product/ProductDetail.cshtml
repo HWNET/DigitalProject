@@ -1,8 +1,613 @@
-﻿
-@{
-    ViewBag.Title = "ProductDetail";
-    Layout = "~/Views/Shared/_LayoutDigital.cshtml";
-}
+﻿<div class="pageheader">
+    <h2><i class="fa fa-user"></i> 添加产品 <span>产品管理</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">你的位置:</span>
+        <ol class="breadcrumb">
+            <li><a href="">企业中心</a></li>
+            <li class="active">业务部</li>
+        </ol>
+    </div>
+</div>
 
-<h2>ProductDetail</h2>
+<div class="contentpanel">
+    <div class="row">
 
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-btns">
+                    <a href="" class="panel-close">&times;</a>
+                    <a href="" class="minimize">&minus;</a>
+                </div>
+                <h4 class="panel-title">添加产品</h4>
+                <p>您需要先选择产品分类.</p>
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>提示!</strong> 产品 详细规格项 里面具体对应哪个表单由用户选择的产品分类决定，即：产品详细规格由通用表单及附加表单共同决定，这里已把所有产品的共性参数搜集归纳出来；比如：整机有外壳，而主板则没有外壳，故作此安排；产品规格添加分4步进行，除第三项以外，其它均为共性参数
+                </div>
+            </div>
+            <div class="panel-body panel-body-nopadding">
+
+                <!-- BASIC WIZARD -->
+                <div id="basicWizard" class="basic-wizard">
+
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="#tab1" data-toggle="tab"><span>1:</span> 选择分类</a></li>
+                        <li><a href="#tab2" data-toggle="tab"><span>2:</span> 基础信息</a></li>
+                        <li><a href="#tab3" data-toggle="tab"><span>3:</span> 详细规格</a></li>
+                        <li><a href="#tab4" data-toggle="tab"><span>4:</span> 产品关联信息</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab1">
+                            <div class="panel-body panel-body-nopadding">
+                                <form class="form-horizontal form-bordered">
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品分类</label>
+                                        <div class="col-sm-2">
+                                            <select id="flowers" name="flowers" title="Please select at least 2 flowers" class="form-control" size="10" multiple="multiple" required>
+                                                <option value="lily">成品</option>
+                                                <option value="jasmine">半成品</option>
+                                                <option value="daisy">电子电器</option>
+                                                <option value="iris">五金</option>
+                                                <option value="rose">塑胶及木制类</option>
+                                                <option value="rose">包材</option>
+                                                <option value="rose">辅料</option>
+                                                <option value="rose">低值易耗</option>
+                                            </select>
+                                            <label class="error" for="flowers"></label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <select id="flowers" name="flowers" title="Please select at least 2 flowers" class="form-control" size="10" multiple="multiple" required>
+                                                <option value="lily">主板</option>
+                                                <option value="jasmine">笔记本</option>
+                                                <option value="daisy">迷你PC</option>
+                                                <option value="iris">准系统</option>
+                                                <option value="rose">电源</option>
+                                                <option value="rose">键盘</option>
+                                                <option value="rose">鼠标</option>
+                                                <option value="rose">机箱</option>
+                                                <option value="rose">Rose</option>
+                                            </select>
+                                            <label class="error" for="flowers"></label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <select id="flowers" name="flowers" title="Please select at least 2 flowers" class="form-control" size="10" multiple="multiple" required>
+                                                <option value="lily">X86主板</option>
+                                                <option value="jasmine">ARM主板</option>
+                                                <option value="daisy">单片机主板</option>
+                                                <option value="iris">FPGA主板</option>
+                                                <option value="rose">其它</option>
+                                            </select>
+                                            <label class="error" for="flowers"></label>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="tab-pane" id="tab2">
+                            <div class="panel-body panel-body-nopadding">
+                                <form class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品标题</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" placeholder="" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="text" name="colorpicker" class="form-control colorpicker-input" id="colorpicker" />
+                                            <span id="colorSelector" class="colorselector">
+                                                <span></span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品排序值</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" placeholder="数字、越小越靠前" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品关键字</label>
+                                        <div class="col-sm-4">
+                                            <input name="keywords" id="keywords" class="form-control" value="关键字1,关键字2" />
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">列表描述</label>
+                                        <div class="col-sm-6">
+                                            <textarea id="autoResizeTA" class="form-control" rows="6"></textarea>
+                                            <span class="help-block">列表概述用于添加产品在列表中的描述信息.<a href="">查看对应显示位</a></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品概述</label>
+                                        <div class="col-sm-6">
+                                            <textarea id="autoResizeTA" class="form-control" rows="6"></textarea>
+                                            <span class="help-block">产品概述用于介绍产品主体信息.<a href="">查看对应显示位</a></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">样品测试</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control chosen-select" data-placeholder="选择分类...">
+                                                <option value="United States">免费发样</option>
+                                                <option value="United States">押金测样</option>
+                                                <option value="United States">需购买样品，不返还</option>
+                                                <option value="United States">其它</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">价格体系</label>
+
+
+                                        <div class="col-sm-1">
+                                            <input type="text" placeholder="1pcs-" class="form-control">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" placeholder="49pcs" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="text" placeholder="500.00" class="form-control">
+                                        </div>
+
+
+
+                                        <div class="col-sm-2">
+                                            <select id="flowers" name="flowers" title="Please select at least 2 flowers" class="form-control" size="8" multiple="multiple" required>
+                                                <option value="lily">所有人可见</option>
+                                                <option value="jasmine">仅好友可见</option>
+                                                <option value="daisy">仅主动报价可见</option>
+                                                <option value="iris">隐藏</option>
+                                            </select>
+                                            <label class="error" for="flowers"></label>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品缩略图</label>
+                                        <div class="col-sm-6">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="input-append">
+                                                    <div class="uneditable-input">
+                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                                        <span class="fileupload-preview"></span>
+                                                    </div>
+                                                    <span class="btn btn-default btn-file">
+                                                        <span class="fileupload-new">选择图片</span>
+                                                        <span class="fileupload-exists">Change</span>
+                                                        <input type="file" />
+                                                    </span>
+                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">有效期</label>
+                                        <div class="col-sm-2 ">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 ">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">所属分类</label>
+
+                                        <div class="col-sm-4 ">
+                                            <select class="form-control chosen-select" data-placeholder="选择分类...">
+                                                <option value="United States">X86工控板</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="checkbox">产品详细介绍</label>
+                                        <div class="col-sm-6">
+                                            <textarea id="ckeditor" placeholder="请在此输入主题内容" class="form-control" rows="10"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="checkbox">产品图集</label>
+                                    <div class="col-sm-6">
+                                        <form action="files" class="dropzone">
+                                            <div class="fallback">
+                                                <input name="file" type="file" multiple />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="tab3">
+
+                            <div class="panel-body panel-body-nopadding">
+                                <form class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品尺寸</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="" class="form-control" />
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">工业特性</label>
+                                        <div class="col-sm-6">
+                                            <textarea id="autoResizeTA" class="form-control" rows="6"></textarea>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">接口描述</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="" class="form-control" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">重量</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">尺寸</label>
+                                        <div class="col-sm-6 ">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">认证</label>
+
+                                        <div class="col-sm-4 ">
+                                            <select class="form-control chosen-select" data-placeholder="选择分类...">
+                                                <option value="United States">X86工控板</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">测试</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" placeholder="数字、越小越靠前" class="form-control" />
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane" id="tab4">
+                            <div class="panel-body panel-body-nopadding">
+                                <form class="form-horizontal form-bordered">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品规格书</label>
+                                        <div class="col-sm-6">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="input-append">
+                                                    <div class="uneditable-input">
+                                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                                        <span class="fileupload-preview"></span>
+                                                    </div>
+                                                    <span class="btn btn-default btn-file">
+                                                        <span class="fileupload-new">选择文件</span>
+                                                        <span class="fileupload-exists">Change</span>
+                                                        <input type="file" />
+                                                    </span>
+                                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产品相关文章</label>
+                                        <div class="col-sm-6">
+                                            <select class="chosen-select" multiple data-placeholder="请选择需要关联的文章...">
+                                                <option value=""></option>
+                                                <option value="United States">用户发布的文章分类</option>
+                                                <option value="United Kingdom">用户发布的文章列表</option>
+                                                <option value="United Kingdom">此处关联后截取文章的部分内容</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">关联案例</label>
+                                        <div class="col-sm-6">
+                                            <select class="chosen-select" multiple data-placeholder="请选择需要关联的案例...">
+                                                <option value=""></option>
+                                                <option value="United States">同上</option>
+                                                <option value="United Kingdom">同上</option>
+                                                <option value="United Kingdom">同上</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">配套关联下载</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" placeholder="驱动下载" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" placeholder="http://www.abc.com/ed/aaa.exe" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"></label>
+                                        <div class="col-sm-2">
+                                            <input type="text" placeholder="宣传册下载" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" placeholder="http://www.abc.com/ed/aaa.pdf" class="form-control" />
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div><!-- tab-content -->
+
+                    <ul class="pager wizard">
+                        <li class="previous"><a href="javascript:void(0)">上一步</a></li>
+                        <li class="next"><a href="javascript:void(0)">下一步</a></li>
+                    </ul>
+
+                </div><!-- #basicWizard -->
+
+            </div><!-- panel-body -->
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<script>
+    jQuery(document).ready(function () {
+
+        // Chosen Select
+        jQuery(".chosen-select").chosen({ 'width': '100%', 'white-space': 'nowrap' });
+
+        // Tags Input
+        jQuery('#tags').tagsInput({ width: 'auto' });
+
+        // Tags Input
+        jQuery('#keywords').tagsInput({ width: 'auto' });
+
+        // Textarea Autogrow
+        jQuery('#autoResizeTA').autogrow();
+
+        // Color Picker
+        if (jQuery('#colorpicker').length > 0) {
+            jQuery('#colorSelector').ColorPicker({
+                onShow: function (colpkr) {
+                    jQuery(colpkr).fadeIn(500);
+                    return false;
+                },
+                onHide: function (colpkr) {
+                    jQuery(colpkr).fadeOut(500);
+                    return false;
+                },
+                onChange: function (hsb, hex, rgb) {
+                    jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
+                    jQuery('#colorpicker').val('#' + hex);
+                }
+            });
+        }
+
+        // Color Picker Flat Mode
+        jQuery('#colorpickerholder').ColorPicker({
+            flat: true,
+            onChange: function (hsb, hex, rgb) {
+                jQuery('#colorpicker3').val('#' + hex);
+            }
+        });
+
+        // Date Picker
+        jQuery('#datepicker').datepicker();
+
+        jQuery('#datepicker-inline').datepicker();
+
+        jQuery('#datepicker-multiple').datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+
+        // Spinner
+        var spinner = jQuery('#spinner').spinner();
+        spinner.spinner('value', 0);
+
+        // Input Masks
+        jQuery("#date").mask("99/99/9999");
+        jQuery("#phone").mask("(999) 999-9999");
+        jQuery("#ssn").mask("999-99-9999");
+
+        // Time Picker
+        jQuery('#timepicker').timepicker({ defaultTIme: false });
+        jQuery('#timepicker2').timepicker({ showMeridian: false });
+        jQuery('#timepicker3').timepicker({ minuteStep: 15 });
+
+
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+
+        // HTML5 WYSIWYG Editor
+        jQuery('#wysiwyg').wysihtml5({ color: true, html: true });
+
+        // CKEditor
+        jQuery('#ckeditor').ckeditor();
+
+        jQuery('#inlineedit1, #inlineedit2').ckeditor();
+
+        // Uncomment the following code to test the "Timeout Loading Method".
+        // CKEDITOR.loadFullCoreTimeout = 5;
+
+        window.onload = function () {
+            // Listen to the double click event.
+            if (window.addEventListener)
+                document.body.addEventListener('dblclick', onDoubleClick, false);
+            else if (window.attachEvent)
+                document.body.attachEvent('ondblclick', onDoubleClick);
+        };
+
+        function onDoubleClick(ev) {
+            // Get the element which fired the event. This is not necessarily the
+            // element to which the event has been attached.
+            var element = ev.target || ev.srcElement;
+
+            // Find out the div that holds this element.
+            var name;
+
+            do {
+                element = element.parentNode;
+            }
+            while (element && (name = element.nodeName.toLowerCase()) &&
+                (name != 'div' || element.className.indexOf('editable') == -1) && name != 'body');
+
+            if (name == 'div' && element.className.indexOf('editable') != -1)
+                replaceDiv(element);
+        }
+
+        var editor;
+
+        function replaceDiv(div) {
+            if (editor)
+                editor.destroy();
+            editor = CKEDITOR.replace(div);
+        }
+
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+
+        // Basic Wizard
+        jQuery('#basicWizard').bootstrapWizard();
+
+        // Progress Wizard
+        $('#progressWizard').bootstrapWizard({
+            'nextSelector': '.next',
+            'previousSelector': '.previous',
+            onNext: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            },
+            onPrevious: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                jQuery('#progressWizard').find('.progress-bar').css('width', $percent + '%');
+            }
+        });
+
+        // Disabled Tab Click Wizard
+        jQuery('#disabledTabWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
+                return false;
+            }
+        });
+
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+
+        jQuery('#validationWizard').bootstrapWizard({
+            tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+            onTabClick: function (tab, navigation, index) {
+                return false;
+            },
+            onNext: function (tab, navigation, index) {
+                var $valid = jQuery('#firstForm').valid();
+                if (!$valid) {
+
+                    $validator.focusInvalid();
+                    return false;
+                }
+            }
+        });
+
+
+    });
+</script>
