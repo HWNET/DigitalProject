@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Digital.Web.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         //
         // GET: /Product/
@@ -17,6 +17,7 @@ namespace Digital.Web.Controllers
 
         public ActionResult ProductDetail()
         {
+            ViewBag.MenuModel = base.GetMenu(2);
             return View();
         }
 	}
