@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.IO;
+using System.Xml;
+using System.Web;
+using Digital.Common.Utilities;
 
 namespace Digital.Common.Mvc.Extensions
 {
@@ -28,6 +31,83 @@ namespace Digital.Common.Mvc.Extensions
             return sb.ToString();
         }
 
+        public static void SavePage(string Html,int TemplateId,string SavePath)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(SavePath, false, System.Text.Encoding.UTF8)) //保存地址 
+                {
+                    sw.WriteLine(Html);
+                    sw.Flush();
+                    sw.Close();
+
+                }
+            }
+            catch
+            {
+                
+            } 
+        }
+
+        public static List<PageModel> GetHtmlMap(int TemplateId)
+        {
+            List<PageModel> PageModelList = new List<PageModel>();
+            try
+            {
+                XmlDocument xml = new XmlDocument();
+                xml.Load(HttpContext.Current.Server.MapPath("~/xml/WebSiteUrl.xml"));
+                XmlNodeList nodelist = xml.SelectNodes("/Root/Template");
+                foreach (XmlNode Node in nodelist)
+                {
+                    if (Node.Attributes["Id"].Value == TemplateId.ToString())
+                    {
+                        foreach (XmlNode PageNodel in Node.ChildNodes)
+                        {
+                            var PageModels = new PageModel()
+                            {
+                                Name = PageNodel.Attributes["Name"].Value,
+                                Path = PageNodel.Attributes["Path"].Value,
+                                Model = PageNodel.Attributes["Model"].Value,
+                                Loop = PageNodel.Attributes["Loop"].Value.ToBool(),
+                                PageSize = PageNodel.Attributes["PageSize"].Value.ToInt(),
+                                Formate = PageNodel.Attributes["Formate"].Value,
+
+                            };
+                            List<PageModelParemetr> Paremeterlist=new List<PageModelParemetr>();
+                            foreach (XmlNode ParemeterNodel in PageNodel.ChildNodes)
+                            {
+                                Paremeterlist.Add(new PageModelParemetr() {
+                                    ParemeterName = ParemeterNodel.Attributes["value"].Value
+                                });
+                            }
+                            PageModels.Paremeter=Paremeterlist;
+                            PageModelList.Add(PageModels);
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+ 
+            }
+            return PageModelList;
+        }
+
+
+        public static string[] GetParemeterValue(List<PageModelParemetr> ParemetrName)
+        {
+            string[] ArrValue=new string[ParemetrName.Count];
+            for(int i=0;i<ParemetrName.Count;i++)
+            {
+                if(ParemetrName[i].ParemeterName=="CasesCategoryID")
+                {
+
+                }
+            }
+            return ArrValue;
+        }
+
         public static string OutHtml(ControllerContext cc, string tempUrl, ViewDataDictionary vd, TempDataDictionary td) 
         { 
             string html = string.Empty;
@@ -39,11 +119,37 @@ namespace Digital.Common.Mvc.Extensions
                 html = sw.ToString(); 
             } return html; 
         }
+    }
 
 
-        //public void SaveWebSite(string Path)
-        //{
-        //    //if(File.)
-        //}
+    // <Page Name="index" Path="\WebSiteTemplate\Template1\index.cshtml">
+    //</Page>
+    //<Page Name="CaseList" Model="CasesModel" Loop="true" PageSize="15" Formate="CaseList_{0}_{1}.html" Path="\WebSiteTemplate\Template1\portfolio.cshtml">
+    //  <Paremeter value="CasesCategoryID" ></Paremeter>
+    //  <Paremeter value="PageId" ></Paremeter>
+    //</Page>
+    //<Page Name="CaseDetail" Model="CasesModel" Loop="true" PageSize="1" Formate="CaseDetail_{0}.html" Path="\WebSiteTemplate\Template1\blog.cshtml">
+    //   <Paremeter value="CasesID" ></Paremeter>
+    //</Page>
+    public class PageModel
+    {
+        public string Name { get; set; }
+
+        public string Path { get; set; }
+
+        public string Model { get; set; }
+
+        public bool Loop { get; set; }
+
+        public int PageSize { get; set; }
+
+        public string Formate { get; set; }
+
+        public List<PageModelParemetr> Paremeter { get; set; }
+    }
+
+    public class PageModelParemetr
+    {
+        public string ParemeterName { get; set; }
     }
 }

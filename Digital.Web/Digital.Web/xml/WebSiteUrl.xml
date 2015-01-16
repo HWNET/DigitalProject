@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root WebSiteUrl="E:\myUfile\DigitalProject\DigitalProject\Digital.Web\Digital.Web\Company\1">
+  <Template Id="1" Name="Template1">
+    <Page Name="index" Model="" Loop="false" PageSize="1" Formate="index.html" Path="~/Views/WebSiteTemplate/Template1/index.cshtml">
+    </Page>
+    <Page Name="CaseList" Model="CasesModel" Loop="true" PageSize="15" Formate="CaseList_{0}_{1}.html" Path="~/Views/WebSiteTemplate/Template1/portfolio.cshtml">
+      <Paremeter value="CasesCategoryID" ></Paremeter>
+      <Paremeter value="PageId" ></Paremeter>
+    </Page>
+    <Page Name="CaseDetail" Model="CasesModel" Loop="true" PageSize="1" Formate="CaseDetail_{0}.html" Path="~/Views/WebSiteTemplate/Template1/blog.cshtml">
+       <Paremeter value="CasesID" ></Paremeter>
+    </Page>
+  </Template>
+</Root>

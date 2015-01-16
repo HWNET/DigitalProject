@@ -782,4 +782,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FilesMode" nillable="true" type="tns:FilesMode" />
+  <xs:complexType name="WebSiteModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KeyWords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TemplatePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WebTitle" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WebSiteModel" nillable="true" type="tns:WebSiteModel" />
 </xs:schema>

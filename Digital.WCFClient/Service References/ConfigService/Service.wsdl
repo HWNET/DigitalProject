@@ -96,6 +96,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IWebSiteService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -835,6 +843,12 @@
   <wsdl:message name="IFolderService_FolderQueryListByCompany_OutputMessage">
     <wsdl:part name="parameters" element="tns:FolderQueryListByCompanyResponse" />
   </wsdl:message>
+  <wsdl:message name="IWebSiteService_GetIndexModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndexModel" />
+  </wsdl:message>
+  <wsdl:message name="IWebSiteService_GetIndexModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndexModelResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -1345,6 +1359,12 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="FolderQueryListByCompany">
       <wsdl:input wsaw:Action="http://tempuri.org/IFolderService/FolderQueryListByCompany" message="tns:IFolderService_FolderQueryListByCompany_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFolderService/FolderQueryListByCompanyResponse" message="tns:IFolderService_FolderQueryListByCompany_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="IWebSiteService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetIndexModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebSiteService/GetIndexModel" message="tns:IWebSiteService_GetIndexModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebSiteService/GetIndexModelResponse" message="tns:IWebSiteService_GetIndexModel_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -2493,6 +2513,19 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IWebSiteService" type="tns:IWebSiteService">
+    <wsp:PolicyReference URI="#CustomBinding_IWebSiteService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetIndexModel">
+      <soap12:operation soapAction="http://tempuri.org/IWebSiteService/GetIndexModel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="CustomBinding_IConfigService" binding="tns:CustomBinding_IConfigService">
       <soap12:address location="net.tcp://localhost:4502/ConfigService" />
@@ -2564,6 +2597,12 @@
       <soap12:address location="net.tcp://localhost:4502/FolderService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:4502/FolderService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IWebSiteService" binding="tns:CustomBinding_IWebSiteService">
+      <soap12:address location="net.tcp://localhost:4502/WebSiteService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:4502/WebSiteService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

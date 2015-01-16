@@ -938,8 +938,8 @@
     <Content Include="Scripts\dropzone\images\spritemap.png" />
     <Content Include="style\profile.css" />
     <Content Include="style\style-metro.css" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\blog.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\contact.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\blog.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\contact.html" />
     <Content Include="Company\Template1\css\ie8-hacks.css" />
     <Content Include="Company\Template1\css\nivo-slider.css" />
     <Content Include="Company\Template1\css\reset.css" />
@@ -948,16 +948,16 @@
     <Content Include="Company\Template1\css\styled-elements.css" />
     <Content Include="Company\Template1\css\superfish.css" />
     <Content Include="Company\Template1\css\tabs.css" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\features-accordion.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\features-columns.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\features-infobox.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\features-monobox.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\features-tabs.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\features-toggle.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\features.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\gallery-2.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\gallery-3.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\gallery.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\features-accordion.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\features-columns.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\features-infobox.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\features-monobox.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\features-tabs.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\features-toggle.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\features.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\gallery-2.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\gallery-3.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\gallery.html" />
     <Content Include="Company\Template1\images\01.jpg" />
     <Content Include="Company\Template1\images\02.jpg" />
     <Content Include="Company\Template1\img\balloon.png" />
@@ -1359,7 +1359,10 @@
     <Content Include="Company\Template1\img\tabs.png" />
     <Content Include="Company\Template1\img\to-top.png" />
     <Content Include="Company\Template1\img\twitter-border.png" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\index.html" />
+    <Content Include="xml\WebSiteUrl.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Views\WebSiteTemplate\Template1\index.cshtml" />
     <Content Include="Company\Template1\js\custom.js" />
     <Content Include="Company\Template1\js\DD_belatedPNG.js" />
     <Content Include="Company\Template1\js\easing.js" />
@@ -1504,10 +1507,10 @@
     <Content Include="Company\Template1\js\tweet\index.css" />
     <Content Include="Company\Template1\js\tweet\index.html" />
     <Content Include="Company\Template1\js\tweet\jquery.tweet.js" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\portfolio.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\project.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\single.html" />
-    <Content Include="Views\WebSiteTemplate\ftpm_161\video-gallery.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\portfolio.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\project.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\single.html" />
+    <Content Include="Views\WebSiteTemplate\Template1\video-gallery.html" />
     <Content Include="xml\City.xml" />
     <Content Include="xml\PrimaryBusiness.xml" />
     <None Include="DigitalStyle\fonts\fontawesome-webfont.eot" />

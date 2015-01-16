@@ -61,6 +61,7 @@
     <Compile Include="Implements\ConfigService.cs" />
     <Compile Include="Implements\FileCabinetService.cs" />
     <Compile Include="Implements\FolderService.cs" />
+    <Compile Include="Implements\WebSiteService.cs" />
     <Compile Include="Implements\NewsCategoryService.cs" />
     <Compile Include="Implements\NewsService.cs" />
     <Compile Include="Implements\PatentService.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Interfaces\IConfigService.cs" />
     <Compile Include="Interfaces\IFileCabinetService.cs" />
     <Compile Include="Interfaces\IFolderService.cs" />
+    <Compile Include="Interfaces\IWebSiteService.cs" />
     <Compile Include="Interfaces\INewsCategoryService.cs" />
     <Compile Include="Interfaces\INewsService.cs" />
     <Compile Include="Interfaces\IPatentService.cs" />

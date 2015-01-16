@@ -169,6 +169,9 @@
     <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.WaterMarkModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConfigService\Digital.WCFClient.ConfigService.WebSiteModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ConfigService\item.xsd">
       <SubType>Designer</SubType>
     </None>

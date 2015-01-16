@@ -40,7 +40,7 @@ namespace Digital.Chart.Chart
             //这里不能直接调用Sender，因为Sender是一个不退出的“死循环”，否则这个构造函数将不会退出。
             //其他的流程也将不会再执行下去了。所以要采用异步的方式。
             //Task.Run(() => Sender());
-            m_context.Clients.Group("Group1").broadcastMessage1("group is:" + tag, "current count:" + count);
+            //m_context.Clients.Group("Group1").broadcastMessage1("group is:" + tag, "current count:" + count);
         }
 
         public IHubContext GlobalContext
