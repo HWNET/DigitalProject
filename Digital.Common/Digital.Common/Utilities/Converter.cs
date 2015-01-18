@@ -263,6 +263,8 @@ namespace Digital.Common.Utilities
             return weekdays[dayOfWeek];
         }
 
+
+
         #region Convert string type to other types
         /// <summary>
         /// 字符串转int

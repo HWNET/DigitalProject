@@ -155,6 +155,9 @@
     <Content Include="Config\Skills.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\WebSiteUrl.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Year.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

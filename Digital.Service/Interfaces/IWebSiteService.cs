@@ -13,5 +13,7 @@ namespace Digital.Service.Interfaces
     {
         [OperationContract]
         WebSiteModel GetIndexModel(int CompanyId);
+        [OperationContract]
+        List<PageModel> GetPageList(int TemplateId, int CompanyId);
     }
 }

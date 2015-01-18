@@ -49,64 +49,64 @@ namespace Digital.Common.Mvc.Extensions
             } 
         }
 
-        public static List<PageModel> GetHtmlMap(int TemplateId)
-        {
-            List<PageModel> PageModelList = new List<PageModel>();
-            try
-            {
-                XmlDocument xml = new XmlDocument();
-                xml.Load(HttpContext.Current.Server.MapPath("~/xml/WebSiteUrl.xml"));
-                XmlNodeList nodelist = xml.SelectNodes("/Root/Template");
-                foreach (XmlNode Node in nodelist)
-                {
-                    if (Node.Attributes["Id"].Value == TemplateId.ToString())
-                    {
-                        foreach (XmlNode PageNodel in Node.ChildNodes)
-                        {
-                            var PageModels = new PageModel()
-                            {
-                                Name = PageNodel.Attributes["Name"].Value,
-                                Path = PageNodel.Attributes["Path"].Value,
-                                Model = PageNodel.Attributes["Model"].Value,
-                                Loop = PageNodel.Attributes["Loop"].Value.ToBool(),
-                                PageSize = PageNodel.Attributes["PageSize"].Value.ToInt(),
-                                Formate = PageNodel.Attributes["Formate"].Value,
+        //public static List<PageModel> GetHtmlMap(int TemplateId)
+        //{
+        //    List<PageModel> PageModelList = new List<PageModel>();
+        //    try
+        //    {
+        //        XmlDocument xml = new XmlDocument();
+        //        xml.Load(HttpContext.Current.Server.MapPath("~/xml/WebSiteUrl.xml"));
+        //        XmlNodeList nodelist = xml.SelectNodes("/Root/Template");
+        //        foreach (XmlNode Node in nodelist)
+        //        {
+        //            if (Node.Attributes["Id"].Value == TemplateId.ToString())
+        //            {
+        //                foreach (XmlNode PageNodel in Node.ChildNodes)
+        //                {
+        //                    var PageModels = new PageModel()
+        //                    {
+        //                        Name = PageNodel.Attributes["Name"].Value,
+        //                        Path = PageNodel.Attributes["Path"].Value,
+        //                        Model = PageNodel.Attributes["Model"].Value,
+        //                        Loop = PageNodel.Attributes["Loop"].Value.ToBool(),
+        //                        PageSize = PageNodel.Attributes["PageSize"].Value.ToInt(),
+        //                        Formate = PageNodel.Attributes["Formate"].Value,
 
-                            };
-                            List<PageModelParemetr> Paremeterlist=new List<PageModelParemetr>();
-                            foreach (XmlNode ParemeterNodel in PageNodel.ChildNodes)
-                            {
-                                Paremeterlist.Add(new PageModelParemetr() {
-                                    ParemeterName = ParemeterNodel.Attributes["value"].Value
-                                });
-                            }
-                            PageModels.Paremeter=Paremeterlist;
-                            PageModelList.Add(PageModels);
+        //                    };
+        //                    List<PageModelParemetr> Paremeterlist=new List<PageModelParemetr>();
+        //                    foreach (XmlNode ParemeterNodel in PageNodel.ChildNodes)
+        //                    {
+        //                        Paremeterlist.Add(new PageModelParemetr() {
+        //                            ParemeterName = ParemeterNodel.Attributes["value"].Value
+        //                        });
+        //                    }
+        //                    PageModels.Paremeter=Paremeterlist;
+        //                    PageModelList.Add(PageModels);
                             
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
  
-            }
-            return PageModelList;
-        }
+        //    }
+        //    return PageModelList;
+        //}
 
 
-        public static string[] GetParemeterValue(List<PageModelParemetr> ParemetrName)
-        {
-            string[] ArrValue=new string[ParemetrName.Count];
-            for(int i=0;i<ParemetrName.Count;i++)
-            {
-                if(ParemetrName[i].ParemeterName=="CasesCategoryID")
-                {
+        //public static string[] GetParemeterValue(List<PageModelParemetr> ParemetrName)
+        //{
+        //    string[] ArrValue=new string[ParemetrName.Count];
+        //    for(int i=0;i<ParemetrName.Count;i++)
+        //    {
+        //        if(ParemetrName[i].ParemeterName=="CasesCategoryID")
+        //        {
 
-                }
-            }
-            return ArrValue;
-        }
+        //        }
+        //    }
+        //    return ArrValue;
+        //}
 
         public static string OutHtml(ControllerContext cc, string tempUrl, ViewDataDictionary vd, TempDataDictionary td) 
         { 
@@ -131,25 +131,5 @@ namespace Digital.Common.Mvc.Extensions
     //<Page Name="CaseDetail" Model="CasesModel" Loop="true" PageSize="1" Formate="CaseDetail_{0}.html" Path="\WebSiteTemplate\Template1\blog.cshtml">
     //   <Paremeter value="CasesID" ></Paremeter>
     //</Page>
-    public class PageModel
-    {
-        public string Name { get; set; }
-
-        public string Path { get; set; }
-
-        public string Model { get; set; }
-
-        public bool Loop { get; set; }
-
-        public int PageSize { get; set; }
-
-        public string Formate { get; set; }
-
-        public List<PageModelParemetr> Paremeter { get; set; }
-    }
-
-    public class PageModelParemetr
-    {
-        public string ParemeterName { get; set; }
-    }
+    
 }

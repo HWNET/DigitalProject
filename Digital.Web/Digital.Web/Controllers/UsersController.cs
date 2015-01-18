@@ -12,6 +12,8 @@ using Microsoft.Owin.Security;
 using Digital.WCFClient;
 using Digital.WCFClient.ConfigService;
 using System.Security.Claims;
+using Digital.Common.Utilities;
+using System.Collections.ObjectModel;
 
 namespace Digital.Web.Controllers
 {
@@ -386,64 +388,14 @@ namespace Digital.Web.Controllers
 
             //TempData["message"] = "输出的HTML页面";
             //string SS = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<UsersModel>(this.ControllerContext, "~/Views/WebSiteTemplate/tps_bestfolio-09/index.cshtml", UserModel, this.TempData);
-            var PageList = Digital.Common.Mvc.Extensions.ControllerExtensions.GetHtmlMap(1);
+            //var PageList = Digital.Common.Mvc.Extensions.ControllerExtensions.GetHtmlMap(1);
             var client = ServiceHub.GetCommonServiceClient<WebSiteServiceClient>();
             int CompanyId = 1;
             var WebModel = client.GetIndexModel(CompanyId);
             client.Close();
             string Path = Server.MapPath("~");
-            foreach (var Model in PageList)
-            {
-                if (Model.Loop)
-                {
-                    if (Model.Model == "CasesModel")
-                    {
-                        var Casesclient = ServiceHub.GetCommonServiceClient<CasesServiceClient>();
-                        var CaseList = Casesclient.CasesQueryListByCompany(CompanyId);
-                        Casesclient.Close();
-
-                        if (Model.PageSize > 1)
-                        {
-                            int TotalCount = CaseList.Count();
-                            int PageCount = (int)Math.Round((double)TotalCount / Model.PageSize);
-                            string FileName = string.Empty;
-                            string[] ArrValue = new string[Model.Paremeter.Count];
-                            
-                            for (int pageIndex = 1; pageIndex <= PageCount; pageIndex++)
-                            {
-                                
-                                var tempData = CaseList.Skip<CasesModel>(Model.PageSize * (pageIndex - 1)).
-                                       Take<CasesModel>(Model.PageSize).ToList();
-                                for (int i = 0; i < Model.Paremeter.Count; i++)
-                                {
-                                    if (Model.Paremeter[i].ParemeterName == "CasesCategoryID")
-                                    {
-                                        
-                                    }
-                                }
-                                string Html = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<List<CasesModel>>(this.ControllerContext, Model.Path, tempData, this.TempData);
-                                Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, 1, Path + @"\Company\" + CompanyId + @"\" + FileName);
-                            }
-
-                        }
-                        else
-                        {
-                            foreach (var CaseModel in CaseList)
-                            {
-                                string Html = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<CasesModel>(this.ControllerContext, Model.Path, CaseModel, this.TempData);
-                                Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, 1, @"E:\myUfile\DigitalProject\DigitalProject\Digital.Web\Digital.Web\Company\1");
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    string Html = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<WebSiteModel>(this.ControllerContext, Model.Path, WebModel, this.TempData);
-                    Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, 1, @"E:\myUfile\DigitalProject\DigitalProject\Digital.Web\Digital.Web\Company\1");
-
-                }
-
-            }
+            //Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<List<CasesModel>>(this.ControllerContext, Model.Path, tempData, this.TempData);
+            //Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, 1, Path + @"\Company\" + CompanyId + @"\" + FileName);
 
             return Content("OK");
         }

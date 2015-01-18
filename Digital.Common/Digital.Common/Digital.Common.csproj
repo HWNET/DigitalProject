@@ -112,6 +112,7 @@
     <Compile Include="Utilities\GeoHelper.cs" />
     <Compile Include="Utilities\ImageUtil.cs" />
     <Compile Include="Utilities\JsUtil.cs" />
+    <Compile Include="Utilities\LinqExt.cs" />
     <Compile Include="Utilities\MailHelper.cs" />
     <Compile Include="Utilities\NetHelper.cs" />
     <Compile Include="Utilities\NPOI\ColumnBuilder.cs" />

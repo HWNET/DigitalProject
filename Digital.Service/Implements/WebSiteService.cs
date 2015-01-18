@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using Digital.Common.Utilities;
 
 namespace Digital.Service.Implements
 {
@@ -24,6 +26,107 @@ namespace Digital.Service.Implements
 
             }
             return Model;
+        }
+
+
+        public List<PageModel> GetPageList(int TemplateId,int CompanyId)
+        {
+            List<PageModel> PageList = new List<PageModel>();
+            var FormatList= GetHtmlMap(CompanyId);
+            foreach (var FormatPage in FormatList)
+            {
+                if (FormatPage.Loop)
+                {
+                    if (FormatPage.Model == "CasesModel")
+                    {
+                        var CaseCategoryList= CasesCategoryQueryListByCompany(CompanyId);
+                        var CaselList = CasesQueryListByCompany(CompanyId);
+                        if (FormatPage.PageSize > 1)
+                        {
+                            foreach (var CategoryModel in CaseCategoryList)
+                            {
+                                var SubCaseList = CaselList.Where(o => o.CasesCategoryID == CategoryModel.CasesCategoryID).ToList();
+                                int TotalCount = SubCaseList.Count();
+                                int PageCount = (int)Math.Round((double)TotalCount / FormatPage.PageSize);
+                                for (int PageIndex = 1; PageIndex <= PageCount; PageIndex++)
+                                {
+                                    var PageNewModel = FormatPage;
+                                    //categoryId
+                                    PageNewModel.Paremeter[0].ParemeterValue = CategoryModel.CasesCategoryID.ToString();
+                                    PageNewModel.Paremeter[1].ParemeterValue = PageIndex.ToString();
+
+                                    PageNewModel.FileName = string.Format(PageNewModel.Formate, PageNewModel.Paremeter[0].ParemeterValue, PageNewModel.Paremeter[1].ParemeterValue);
+                                    var tempData = SubCaseList.Skip<CasesModel>(FormatPage.PageSize * (PageIndex - 1)).
+                                         Take<CasesModel>(FormatPage.PageSize).ToList();
+                                    PageNewModel.ModelList = tempData.ToArray<object>();
+                                    PageList.Add(PageNewModel);
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+                            foreach (var CaseModel in CaselList)
+                            {
+                                var PageNewModel = FormatPage;
+                                PageNewModel.Paremeter[0].ParemeterValue = CaseModel.CasesID.ToString();
+                                PageNewModel.ObjModel = CaseModel;
+                                PageList.Add(PageNewModel);
+                            }
+                        }
+                    }
+                }
+            }
+            return PageList;
+        }
+
+
+        public  List<PageModel> GetHtmlMap(int TemplateId)
+        {
+            List<PageModel> PageModelList = new List<PageModel>();
+            try
+            {
+                var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
+                var xml = new XmlDocument();
+                var path = ServicePath + "\\Config\\Service.xml";
+                xml.Load(path);
+                XmlNodeList nodelist = xml.SelectNodes("/Root/Template");
+                foreach (XmlNode Node in nodelist)
+                {
+                    if (Node.Attributes["Id"].Value == TemplateId.ToString())
+                    {
+                        foreach (XmlNode PageNodel in Node.ChildNodes)
+                        {
+                            var PageModels = new PageModel()
+                            {
+                                Name = PageNodel.Attributes["Name"].Value,
+                                Path = PageNodel.Attributes["Path"].Value,
+                                Model = PageNodel.Attributes["Model"].Value,
+                                Loop = PageNodel.Attributes["Loop"].Value.ToBool(),
+                                PageSize = PageNodel.Attributes["PageSize"].Value.ToInt(),
+                                Formate = PageNodel.Attributes["Formate"].Value,
+
+                            };
+                            List<PageModelParemetr> Paremeterlist = new List<PageModelParemetr>();
+                            foreach (XmlNode ParemeterNodel in PageNodel.ChildNodes)
+                            {
+                                Paremeterlist.Add(new PageModelParemetr()
+                                {
+                                    ParemeterName = ParemeterNodel.Attributes["value"].Value
+                                });
+                            }
+                            PageModels.Paremeter = Paremeterlist;
+                            PageModelList.Add(PageModels);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return PageModelList;
         }
     }
 }
