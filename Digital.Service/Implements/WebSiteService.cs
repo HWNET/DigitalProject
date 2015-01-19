@@ -47,10 +47,25 @@ namespace Digital.Service.Implements
                             {
                                 var SubCaseList = CaselList.Where(o => o.CasesCategoryID == CategoryModel.CasesCategoryID).ToList();
                                 int TotalCount = SubCaseList.Count();
-                                int PageCount = (int)Math.Round((double)TotalCount / FormatPage.PageSize);
+                                int PageCount = (TotalCount / FormatPage.PageSize+1);
                                 for (int PageIndex = 1; PageIndex <= PageCount; PageIndex++)
                                 {
-                                    var PageNewModel = FormatPage;
+                                    var PageNewModel = new PageModel()
+                                    {
+                                        CaseModel = FormatPage.CaseModel,
+                                        //CaseModelList = FormatPage.CaseModelList,
+                                        FileName = FormatPage.FileName,
+                                        Formate = FormatPage.Formate,
+                                        Loop = FormatPage.Loop,
+                                        Model = FormatPage.Model,
+                                        Name = FormatPage.Name,
+                                        PageSize = FormatPage.PageSize,
+                                        Paremeter = FormatPage.Paremeter,
+                                        Path = FormatPage.Path,
+                                        
+                                    };
+                                
+
                                     //categoryId
                                     PageNewModel.Paremeter[0].ParemeterValue = CategoryModel.CasesCategoryID.ToString();
                                     PageNewModel.Paremeter[1].ParemeterValue = PageIndex.ToString();
@@ -58,7 +73,7 @@ namespace Digital.Service.Implements
                                     PageNewModel.FileName = string.Format(PageNewModel.Formate, PageNewModel.Paremeter[0].ParemeterValue, PageNewModel.Paremeter[1].ParemeterValue);
                                     var tempData = SubCaseList.Skip<CasesModel>(FormatPage.PageSize * (PageIndex - 1)).
                                          Take<CasesModel>(FormatPage.PageSize).ToList();
-                                    PageNewModel.ModelList = tempData.ToArray<object>();
+                                    PageNewModel.CaseModelList = tempData;
                                     PageList.Add(PageNewModel);
                                 }
                             }
@@ -68,9 +83,24 @@ namespace Digital.Service.Implements
                         {
                             foreach (var CaseModel in CaselList)
                             {
-                                var PageNewModel = FormatPage;
+                                var PageNewModel = new PageModel()
+                                {
+                                   // CaseModel = CaseModel,
+                                    CaseModelList = FormatPage.CaseModelList,
+                                    FileName = FormatPage.FileName,
+                                    Formate = FormatPage.Formate,
+                                    Loop = FormatPage.Loop,
+                                    Model = FormatPage.Model,
+                                    Name = FormatPage.Name,
+                                    PageSize = FormatPage.PageSize,
+                                    Paremeter = FormatPage.Paremeter,
+                                    Path = FormatPage.Path,
+
+                                };
+                                //var PageNewModel = FormatPage;
                                 PageNewModel.Paremeter[0].ParemeterValue = CaseModel.CasesID.ToString();
-                                PageNewModel.ObjModel = CaseModel;
+                                PageNewModel.CaseModel = CaseModel;
+                                PageNewModel.FileName = string.Format(PageNewModel.Formate, PageNewModel.Paremeter[0].ParemeterValue);
                                 PageList.Add(PageNewModel);
                             }
                         }
@@ -88,7 +118,7 @@ namespace Digital.Service.Implements
             {
                 var ServicePath = AppDomain.CurrentDomain.BaseDirectory;
                 var xml = new XmlDocument();
-                var path = ServicePath + "\\Config\\Service.xml";
+                var path = ServicePath + "\\Config\\WebSiteUrl.xml";
                 xml.Load(path);
                 XmlNodeList nodelist = xml.SelectNodes("/Root/Template");
                 foreach (XmlNode Node in nodelist)

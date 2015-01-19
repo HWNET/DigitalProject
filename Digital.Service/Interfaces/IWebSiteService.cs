@@ -14,6 +14,8 @@ namespace Digital.Service.Interfaces
         [OperationContract]
         WebSiteModel GetIndexModel(int CompanyId);
         [OperationContract]
+        [ServiceKnownType(typeof(object))]
+        [ServiceKnownType(typeof(List<object>))]
         List<PageModel> GetPageList(int TemplateId, int CompanyId);
     }
 }

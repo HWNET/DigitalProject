@@ -938,7 +938,7 @@
     <Content Include="Scripts\dropzone\images\spritemap.png" />
     <Content Include="style\profile.css" />
     <Content Include="style\style-metro.css" />
-    <Content Include="Views\WebSiteTemplate\Template1\blog.html" />
+    <None Include="Views\WebSiteTemplate\Template1\blog.cshtml" />
     <Content Include="Views\WebSiteTemplate\Template1\contact.html" />
     <Content Include="Company\Template1\css\ie8-hacks.css" />
     <Content Include="Company\Template1\css\nivo-slider.css" />
@@ -1507,7 +1507,7 @@
     <Content Include="Company\Template1\js\tweet\index.css" />
     <Content Include="Company\Template1\js\tweet\index.html" />
     <Content Include="Company\Template1\js\tweet\jquery.tweet.js" />
-    <Content Include="Views\WebSiteTemplate\Template1\portfolio.html" />
+    <None Include="Views\WebSiteTemplate\Template1\portfolio.cshtml" />
     <Content Include="Views\WebSiteTemplate\Template1\project.html" />
     <Content Include="Views\WebSiteTemplate\Template1\single.html" />
     <Content Include="Views\WebSiteTemplate\Template1\video-gallery.html" />

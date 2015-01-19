@@ -391,9 +391,29 @@ namespace Digital.Web.Controllers
             //var PageList = Digital.Common.Mvc.Extensions.ControllerExtensions.GetHtmlMap(1);
             var client = ServiceHub.GetCommonServiceClient<WebSiteServiceClient>();
             int CompanyId = 1;
+            int TemplateId = 1;
             var WebModel = client.GetIndexModel(CompanyId);
-            client.Close();
+            //client.Close();
             string Path = Server.MapPath("~");
+            var PageList = client.GetPageList(TemplateId, CompanyId);
+            client.Close();
+            foreach (var PageModel in PageList)
+            {
+                string Html = string.Empty;
+                if (PageModel.Model == "CasesModel")
+                {
+                    if (PageModel.PageSize == 1)
+                    {
+                        Html = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<CasesModel>(this.ControllerContext, PageModel.Path, PageModel.CaseModel, this.TempData);
+                    }
+                    else
+                    {
+
+                        Html = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<ObservableCollection<CasesModel>>(this.ControllerContext, PageModel.Path, PageModel.CaseModelList, this.TempData);
+                    }
+                }
+                Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, TemplateId, Path + @"\Company\" + CompanyId + @"\" + PageModel.FileName);
+            }
             //Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<List<CasesModel>>(this.ControllerContext, Model.Path, tempData, this.TempData);
             //Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, 1, Path + @"\Company\" + CompanyId + @"\" + FileName);
 

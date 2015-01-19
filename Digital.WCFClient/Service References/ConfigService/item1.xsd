@@ -1672,4 +1672,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPageList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TemplateId" type="xs:int" />
+        <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q116="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="GetPageListResult" nillable="true" type="q116:ArrayOfPageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -109,6 +109,7 @@
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" />
+      <xsd:import schemaLocation="http://localhost:4503/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IConfigService_GetMenuList_InputMessage">
@@ -849,6 +850,12 @@
   <wsdl:message name="IWebSiteService_GetIndexModel_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetIndexModelResponse" />
   </wsdl:message>
+  <wsdl:message name="IWebSiteService_GetPageList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageList" />
+  </wsdl:message>
+  <wsdl:message name="IWebSiteService_GetPageList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageListResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -1365,6 +1372,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetIndexModel">
       <wsdl:input wsaw:Action="http://tempuri.org/IWebSiteService/GetIndexModel" message="tns:IWebSiteService_GetIndexModel_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWebSiteService/GetIndexModelResponse" message="tns:IWebSiteService_GetIndexModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPageList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebSiteService/GetPageList" message="tns:IWebSiteService_GetPageList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebSiteService/GetPageListResponse" message="tns:IWebSiteService_GetPageList_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -2518,6 +2529,15 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetIndexModel">
       <soap12:operation soapAction="http://tempuri.org/IWebSiteService/GetIndexModel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageList">
+      <soap12:operation soapAction="http://tempuri.org/IWebSiteService/GetPageList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

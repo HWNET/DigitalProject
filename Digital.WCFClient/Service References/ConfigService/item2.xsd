@@ -792,4 +792,38 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WebSiteModel" nillable="true" type="tns:WebSiteModel" />
+  <xs:complexType name="ArrayOfPageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PageModel" nillable="true" type="tns:PageModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPageModel" nillable="true" type="tns:ArrayOfPageModel" />
+  <xs:complexType name="PageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CaseModel" nillable="true" type="tns:CasesModel" />
+      <xs:element minOccurs="0" name="CaseModelList" nillable="true" type="tns:ArrayOfCasesModel" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Formate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Loop" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+      <xs:element minOccurs="0" name="Paremeter" nillable="true" type="tns:ArrayOfPageModelParemetr" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PageModel" nillable="true" type="tns:PageModel" />
+  <xs:complexType name="ArrayOfPageModelParemetr">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PageModelParemetr" nillable="true" type="tns:PageModelParemetr" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPageModelParemetr" nillable="true" type="tns:ArrayOfPageModelParemetr" />
+  <xs:complexType name="PageModelParemetr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ParemeterName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParemeterValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PageModelParemetr" nillable="true" type="tns:PageModelParemetr" />
 </xs:schema>

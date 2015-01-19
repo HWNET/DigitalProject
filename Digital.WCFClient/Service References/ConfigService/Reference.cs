@@ -4781,6 +4781,256 @@ namespace Digital.WCFClient.ConfigService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PageModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class PageModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Digital.WCFClient.ConfigService.CasesModel CaseModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CaseModelListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FormateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool LoopField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PageSizeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModelParemetr> ParemeterField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PathField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Digital.WCFClient.ConfigService.CasesModel CaseModel {
+            get {
+                return this.CaseModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CaseModelField, value) != true)) {
+                    this.CaseModelField = value;
+                    this.RaisePropertyChanged("CaseModel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.CasesModel> CaseModelList {
+            get {
+                return this.CaseModelListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CaseModelListField, value) != true)) {
+                    this.CaseModelListField = value;
+                    this.RaisePropertyChanged("CaseModelList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Formate {
+            get {
+                return this.FormateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FormateField, value) != true)) {
+                    this.FormateField = value;
+                    this.RaisePropertyChanged("Formate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Loop {
+            get {
+                return this.LoopField;
+            }
+            set {
+                if ((this.LoopField.Equals(value) != true)) {
+                    this.LoopField = value;
+                    this.RaisePropertyChanged("Loop");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Model {
+            get {
+                return this.ModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
+                    this.ModelField = value;
+                    this.RaisePropertyChanged("Model");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PageSize {
+            get {
+                return this.PageSizeField;
+            }
+            set {
+                if ((this.PageSizeField.Equals(value) != true)) {
+                    this.PageSizeField = value;
+                    this.RaisePropertyChanged("PageSize");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModelParemetr> Paremeter {
+            get {
+                return this.ParemeterField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParemeterField, value) != true)) {
+                    this.ParemeterField = value;
+                    this.RaisePropertyChanged("Paremeter");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Path {
+            get {
+                return this.PathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PathField, value) != true)) {
+                    this.PathField = value;
+                    this.RaisePropertyChanged("Path");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PageModelParemetr", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class PageModelParemetr : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ParemeterNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ParemeterValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ParemeterName {
+            get {
+                return this.ParemeterNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParemeterNameField, value) != true)) {
+                    this.ParemeterNameField = value;
+                    this.RaisePropertyChanged("ParemeterName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ParemeterValue {
+            get {
+                return this.ParemeterValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParemeterValueField, value) != true)) {
+                    this.ParemeterValueField = value;
+                    this.RaisePropertyChanged("ParemeterValue");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.IConfigService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IConfigService {
@@ -6894,6 +7144,12 @@ namespace Digital.WCFClient.ConfigService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebSiteService/GetIndexModel", ReplyAction="http://tempuri.org/IWebSiteService/GetIndexModelResponse")]
         System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.WebSiteModel> GetIndexModelAsync(int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebSiteService/GetPageList", ReplyAction="http://tempuri.org/IWebSiteService/GetPageListResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModel> GetPageList(int TemplateId, int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebSiteService/GetPageList", ReplyAction="http://tempuri.org/IWebSiteService/GetPageListResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModel>> GetPageListAsync(int TemplateId, int CompanyId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -6929,6 +7185,14 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<Digital.WCFClient.ConfigService.WebSiteModel> GetIndexModelAsync(int CompanyId) {
             return base.Channel.GetIndexModelAsync(CompanyId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModel> GetPageList(int TemplateId, int CompanyId) {
+            return base.Channel.GetPageList(TemplateId, CompanyId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModel>> GetPageListAsync(int TemplateId, int CompanyId) {
+            return base.Channel.GetPageListAsync(TemplateId, CompanyId);
         }
     }
 }
