@@ -17,5 +17,8 @@ namespace Digital.Service.Interfaces
         [ServiceKnownType(typeof(object))]
         [ServiceKnownType(typeof(List<object>))]
         List<PageModel> GetPageList(int TemplateId, int CompanyId);
+
+         [OperationContract]
+        bool CreatePage(CreatePageModel Model);
     }
 }

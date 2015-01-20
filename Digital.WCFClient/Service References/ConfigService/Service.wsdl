@@ -856,6 +856,12 @@
   <wsdl:message name="IWebSiteService_GetPageList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPageListResponse" />
   </wsdl:message>
+  <wsdl:message name="IWebSiteService_CreatePage_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePage" />
+  </wsdl:message>
+  <wsdl:message name="IWebSiteService_CreatePage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePageResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IConfigService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMenuList">
       <wsdl:input wsaw:Action="http://tempuri.org/IConfigService/GetMenuList" message="tns:IConfigService_GetMenuList_InputMessage" />
@@ -1376,6 +1382,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetPageList">
       <wsdl:input wsaw:Action="http://tempuri.org/IWebSiteService/GetPageList" message="tns:IWebSiteService_GetPageList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWebSiteService/GetPageListResponse" message="tns:IWebSiteService_GetPageList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CreatePage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebSiteService/CreatePage" message="tns:IWebSiteService_CreatePage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebSiteService/CreatePageResponse" message="tns:IWebSiteService_CreatePage_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_IConfigService" type="tns:IConfigService">
@@ -2538,6 +2548,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetPageList">
       <soap12:operation soapAction="http://tempuri.org/IWebSiteService/GetPageList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePage">
+      <soap12:operation soapAction="http://tempuri.org/IWebSiteService/CreatePage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

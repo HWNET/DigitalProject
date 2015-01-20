@@ -5031,6 +5031,131 @@ namespace Digital.WCFClient.ConfigService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreatePageModel", Namespace="http://schemas.datacontract.org/2004/07/Digital.Contact.Models")]
+    [System.SerializableAttribute()]
+    public partial class CreatePageModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CompanyIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsScanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TemplateIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> UpdateTimeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CompanyId {
+            get {
+                return this.CompanyIdField;
+            }
+            set {
+                if ((this.CompanyIdField.Equals(value) != true)) {
+                    this.CompanyIdField = value;
+                    this.RaisePropertyChanged("CompanyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsScan {
+            get {
+                return this.IsScanField;
+            }
+            set {
+                if ((this.IsScanField.Equals(value) != true)) {
+                    this.IsScanField = value;
+                    this.RaisePropertyChanged("IsScan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int State {
+            get {
+                return this.StateField;
+            }
+            set {
+                if ((this.StateField.Equals(value) != true)) {
+                    this.StateField = value;
+                    this.RaisePropertyChanged("State");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TemplateId {
+            get {
+                return this.TemplateIdField;
+            }
+            set {
+                if ((this.TemplateIdField.Equals(value) != true)) {
+                    this.TemplateIdField = value;
+                    this.RaisePropertyChanged("TemplateId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> UpdateTime {
+            get {
+                return this.UpdateTimeField;
+            }
+            set {
+                if ((this.UpdateTimeField.Equals(value) != true)) {
+                    this.UpdateTimeField = value;
+                    this.RaisePropertyChanged("UpdateTime");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConfigService.IConfigService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IConfigService {
@@ -7150,6 +7275,12 @@ namespace Digital.WCFClient.ConfigService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebSiteService/GetPageList", ReplyAction="http://tempuri.org/IWebSiteService/GetPageListResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModel>> GetPageListAsync(int TemplateId, int CompanyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebSiteService/CreatePage", ReplyAction="http://tempuri.org/IWebSiteService/CreatePageResponse")]
+        bool CreatePage(Digital.WCFClient.ConfigService.CreatePageModel Model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWebSiteService/CreatePage", ReplyAction="http://tempuri.org/IWebSiteService/CreatePageResponse")]
+        System.Threading.Tasks.Task<bool> CreatePageAsync(Digital.WCFClient.ConfigService.CreatePageModel Model);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -7193,6 +7324,14 @@ namespace Digital.WCFClient.ConfigService {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Digital.WCFClient.ConfigService.PageModel>> GetPageListAsync(int TemplateId, int CompanyId) {
             return base.Channel.GetPageListAsync(TemplateId, CompanyId);
+        }
+        
+        public bool CreatePage(Digital.WCFClient.ConfigService.CreatePageModel Model) {
+            return base.Channel.CreatePage(Model);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreatePageAsync(Digital.WCFClient.ConfigService.CreatePageModel Model) {
+            return base.Channel.CreatePageAsync(Model);
         }
     }
 }

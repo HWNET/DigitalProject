@@ -826,4 +826,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PageModelParemetr" nillable="true" type="tns:PageModelParemetr" />
+  <xs:complexType name="CreatePageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsScan" type="xs:boolean" />
+      <xs:element minOccurs="0" name="State" type="xs:int" />
+      <xs:element minOccurs="0" name="TemplateId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateTime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreatePageModel" nillable="true" type="tns:CreatePageModel" />
 </xs:schema>

@@ -1687,4 +1687,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CreatePage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q117="http://schemas.datacontract.org/2004/07/Digital.Contact.Models" minOccurs="0" name="Model" nillable="true" type="q117:CreatePageModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreatePageResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -17,7 +17,6 @@ namespace Digital.Common.Mvc.Extensions
         public static string RenderHtml<T>(ControllerContext context, string viewPath, T viewModel, TempDataDictionary viewBag)
         {
 
-
             var view = new RazorView(context, viewPath, null, false, null);
             viewBag = viewBag ?? new TempDataDictionary();
             var sb = new StringBuilder();
@@ -30,6 +29,9 @@ namespace Digital.Common.Mvc.Extensions
             }
             return sb.ToString();
         }
+
+
+       
 
         public static void SavePage(string Html,int TemplateId,string SavePath)
         {

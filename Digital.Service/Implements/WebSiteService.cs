@@ -28,6 +28,39 @@ namespace Digital.Service.Implements
             return Model;
         }
 
+        public bool CreatePage(CreatePageModel Model)
+        {
+            try
+            {
+                WebSiteService IndexSvr = new WebSiteService();
+                var CModel= IndexSvr.FindCreatPage(Model.CompanyId);
+                //insert
+                if (CModel == null)
+                {
+                    var Buffer = IndexSvr.UpdatePage(Model);
+                    GenericList.InsertPageBuffer(Buffer);
+                }
+                else
+                {
+                    //update 大于10分钟才能更新
+                    if (CModel.UpdateTime != null && DateTime.Now.Subtract(CModel.UpdateTime.Value).Minutes > 10 && !CModel.IsScan)
+                    {
+                        var Buffer = IndexSvr.UpdatePage(Model);
+                        GenericList.InsertPageBuffer(Buffer);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
 
         public List<PageModel> GetPageList(int TemplateId,int CompanyId)
         {
@@ -109,6 +142,9 @@ namespace Digital.Service.Implements
             }
             return PageList;
         }
+
+
+
 
 
         public  List<PageModel> GetHtmlMap(int TemplateId)

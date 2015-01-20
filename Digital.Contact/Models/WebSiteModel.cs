@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -49,8 +50,30 @@ namespace Digital.Contact.Models
 
         public string FileName { get; set; }
 
+      
+
         public List<PageModelParemetr> Paremeter { get; set; }
     }
+
+    public class CreatePageModel
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public int TemplateId { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public DateTime? UpdateTime { get; set; }
+
+        public bool IsScan { get; set; }
+
+        /// <summary>
+        /// 1 Complete,0 no complete
+        /// </summary>
+        public int State { get; set; }
+    }
+
 
     public class PageModelParemetr
     {

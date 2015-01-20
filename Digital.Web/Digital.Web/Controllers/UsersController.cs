@@ -395,25 +395,14 @@ namespace Digital.Web.Controllers
             var WebModel = client.GetIndexModel(CompanyId);
             //client.Close();
             string Path = Server.MapPath("~");
-            var PageList = client.GetPageList(TemplateId, CompanyId);
-            client.Close();
-            foreach (var PageModel in PageList)
-            {
-                string Html = string.Empty;
-                if (PageModel.Model == "CasesModel")
-                {
-                    if (PageModel.PageSize == 1)
-                    {
-                        Html = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<CasesModel>(this.ControllerContext, PageModel.Path, PageModel.CaseModel, this.TempData);
-                    }
-                    else
-                    {
-
-                        Html = Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<ObservableCollection<CasesModel>>(this.ControllerContext, PageModel.Path, PageModel.CaseModelList, this.TempData);
-                    }
-                }
-                Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, TemplateId, Path + @"\Company\" + CompanyId + @"\" + PageModel.FileName);
-            }
+            CreatePageModel PageModels = new CreatePageModel();
+            PageModels.CompanyId = CompanyId;
+            PageModels.IsScan = false;
+            PageModels.TemplateId = TemplateId;
+            PageModels.State = 0;
+            PageModels.UpdateTime = null;
+            var PageList = client.CreatePage(PageModels);
+            
             //Digital.Common.Mvc.Extensions.ControllerExtensions.RenderHtml<List<CasesModel>>(this.ControllerContext, Model.Path, tempData, this.TempData);
             //Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, 1, Path + @"\Company\" + CompanyId + @"\" + FileName);
 

@@ -10,7 +10,7 @@ using MySql.Data.Entity;
 namespace Digital.Contact.DAL
 {
     //[DbConfigurationType(typeof(MySqlEFConfiguration))]
-    public class CommunicationContext:DbContext
+    public class CommunicationContext : DbContext
     {
         public CommunicationContext() : base("CommunicationContext") { this.Configuration.ProxyCreationEnabled = false; }
 
@@ -43,9 +43,11 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.ProductDetail> ProductDetail { get; set; }
 
+        public DbSet<Digital.Contact.Models.CreatePageModel> CreatePageModel { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());  
+            Database.SetInitializer(new DropCreateDatabaseAlways<DbContext>());
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 

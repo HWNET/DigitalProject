@@ -247,6 +247,10 @@
     <Content Include="lib\packages\Newtonsoft.Json.5.0.6\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll" />
     <Content Include="lib\packages\Newtonsoft.Json.5.0.6\lib\portable-net45+wp80+win8\Newtonsoft.Json.xml" />
     <Content Include="lib\packages\Owin.1.0\lib\net40\Owin.dll" />
+    <Content Include="lib\packages\RazorEngine.3.5.0\lib\net40\RazorEngine.dll" />
+    <Content Include="lib\packages\RazorEngine.3.5.0\lib\net40\RazorEngine.xml" />
+    <Content Include="lib\packages\RazorEngine.3.5.0\lib\net45\RazorEngine.dll" />
+    <Content Include="lib\packages\RazorEngine.3.5.0\lib\net45\RazorEngine.xml" />
     <Content Include="lib\packages\Respond.1.2.0\content\Scripts\respond.js" />
     <Content Include="lib\packages\Respond.1.2.0\content\Scripts\respond.min.js" />
     <Content Include="lib\packages\WebGrease.1.5.2\lib\WebGrease.dll" />
@@ -337,6 +341,9 @@
     <None Include="lib\packages\Newtonsoft.Json.5.0.6\Newtonsoft.Json.5.0.6.nuspec" />
     <None Include="lib\packages\Owin.1.0\Owin.1.0.nupkg" />
     <None Include="lib\packages\Owin.1.0\Owin.1.0.nuspec" />
+    <None Include="lib\packages\RazorEngine.3.5.0\LICENSE.md" />
+    <None Include="lib\packages\RazorEngine.3.5.0\RazorEngine.3.5.0.nupkg" />
+    <None Include="lib\packages\RazorEngine.3.5.0\RazorEngine.3.5.0.nuspec" />
     <None Include="lib\packages\repositories.config" />
     <None Include="lib\packages\Respond.1.2.0\Respond.1.2.0.nupkg" />
     <None Include="lib\packages\Respond.1.2.0\Respond.1.2.0.nuspec" />

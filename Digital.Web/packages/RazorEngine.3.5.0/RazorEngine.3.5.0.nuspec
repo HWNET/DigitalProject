@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>RazorEngine</id>
+    <version>3.5.0</version>
+    <title>RazorEngine</title>
+    <authors>Matthew Abbott,  Ben Dornis,  Matthias Dittrich</authors>
+    <owners>Matthew Abbott,  Ben Dornis,  Matthias Dittrich</owners>
+    <licenseUrl>https://github.com/Antaris/RazorEngine/blob/master/doc/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/Antaris/RazorEngine</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>RazorEngine - A Templating Engine based on the Razor parser.</description>
+    <summary>Simple templating using Razor syntax.</summary>
+    <releaseNotes>documentation website based on FSharp.Formatting (https://Antaris.github.io/RazorEngine), can be build locally
+travis and appveyor build systems to automatically build on mono and windows.
+build environment to build and release the project, the documentation and the nuget package.
+readded support for net40 (which will use the Razor with version 2.0.30506.0)
+New API surface (various classes are Obsolete now).
+Improved Isolation (AppDomain Sandboxing) support.
+Caching API.
+Fixed most open bugs.
+Razor 4 support (in 4.0.0)
+Roslyn Support (via RazorEngine.Roslyn, not supported on net40)
+Please report breaking changes in 3.5.0 (from 3.4.x) and open an issue!</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>C# razor template engine programming</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="Microsoft.AspNet.Razor" version="[2.0.30506.0]" />
+      </group>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Microsoft.AspNet.Razor" version="3.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

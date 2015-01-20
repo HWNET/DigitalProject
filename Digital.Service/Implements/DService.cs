@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Digital.Contact.BLL;
+using System.Configuration;
 
 namespace Digital.Service.Implements
 {
@@ -28,7 +29,8 @@ namespace Digital.Service.Implements
         public Task _CHeckReloadDB;
         public CancellationToken _cancelToken;
         private CancellationTokenSource _cancelDBToken;
-        
+        private CancellationTokenSource _cancelPageToken;
+
         private int delayTime = 10;
 
         public Digital.Contact.Models.MenuModel MenuList { get; set; }
@@ -44,12 +46,12 @@ namespace Digital.Service.Implements
                 TaskScheduler.UnobservedTaskException += (s, e) =>
                 {
                     e.SetObserved();
-                    logger.WriteInfo( "Service"+e.Exception.InnerException.ToString());
+                    logger.WriteInfo("Service" + e.Exception.InnerException.ToString());
                 };
             }
             catch (Exception ex)
             {
-                logger.WriteInfo( "Service"+ex.ToString());
+                logger.WriteInfo("Service" + ex.ToString());
             }
             _CheckReloadXml = new Task(() =>
             {
@@ -59,7 +61,7 @@ namespace Digital.Service.Implements
                 }
                 catch (Exception ex)
                 {
-                    logger.WriteInfo("_CheckReloadXml:Error"+ex.ToString());
+                    logger.WriteInfo("_CheckReloadXml:Error" + ex.ToString());
                 }
             });
             _CheckReloadXml.Start();
@@ -77,17 +79,89 @@ namespace Digital.Service.Implements
             //_CHeckReloadDB.Start();
             _cancelDBToken = new CancellationTokenSource();
             CreateDBMonitor(_cancelDBToken.Token);
+            _cancelPageToken = new CancellationTokenSource();
+            CreatePageMonitor(_cancelPageToken.Token);
         }
 
-       
+
 
         private void CreateDBMonitor(CancellationToken token)
         {
             //_tagMonitorTask = Task.Factory.StartNew(DAServiceTripMonitor, token, token);
             Task.Factory.StartNew(UpdateDB, token, token).IgnoreExceptions();
+
         }
 
+        private void CreatePageMonitor(CancellationToken token)
+        {
+            Task.Factory.StartNew(PageMonitor, token, token).IgnoreExceptions();
+        }
 
+        #region
+        private void PageMonitor(object param)
+        {
+            while (true)
+            {
+                var cToken = (CancellationToken)param;
+                if (cToken.IsCancellationRequested)
+                {
+                    break;
+                }
+                try
+                {
+                    //get create page event from queue
+                    if (GenericList.PageBuffer != null)
+                    {
+                        var _Buffer = GenericList.PageBuffer.Get(cToken);
+                        if (_Buffer != null)
+                        {
+                            var CPageModel = _Buffer as CreatePageModel;
+                            var PageList = GetPageList(_Buffer.TemplateId, _Buffer.CompanyId);
+                            WebSiteService bll = new WebSiteService();
+                            CPageModel.IsScan = true;
+                            bll.UpdatePage(CPageModel);
+                            string Path = ConfigurationManager.AppSettings["WebRoot"].ToString();
+                            foreach (var PageModel in PageList)
+                            {
+                                string Html = string.Empty;
+                                if (PageModel.Model == "CasesModel")
+                                {
+                                    if (PageModel.PageSize == 1)
+                                    {
+                                        string path1 = PageModel.Path;
+
+                                        var index = System.IO.File.ReadAllText(path1, Encoding.UTF8);
+                                        Html = RazorEngine.Razor.Parse<CasesModel>(index, PageModel.CaseModel, PageModel.Name);
+                                    }
+                                    else
+                                    {
+                                        string path1 = PageModel.Path;
+
+                                        var index = System.IO.File.ReadAllText(path1, Encoding.UTF8);
+                                        Html = RazorEngine.Razor.Parse<CasesModel>(index, PageModel.CaseModel, PageModel.Name);
+                                    }
+                                }
+                                Digital.Common.Mvc.Extensions.ControllerExtensions.SavePage(Html, _Buffer.TemplateId, Path + @"\Company\" + _Buffer.CompanyId + @"\" + PageModel.FileName);
+
+                            }
+                            CPageModel.State = 1;
+                            CPageModel.IsScan = false;
+                            CPageModel.UpdateTime = DateTime.Now;
+                            bll.UpdatePage(CPageModel);
+                        }
+                    }
+                    else
+                    {
+                        Thread.Sleep(60000);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+        #endregion
 
 
         private object CacheLock = new object();
@@ -108,14 +182,14 @@ namespace Digital.Service.Implements
                     Digital.Contact.BLL.UsersService UserService = new Contact.BLL.UsersService();
                     //Skill cache
                     var UserList = UserService.GetAllUserList();
-                    if (UserList!=null)
+                    if (UserList != null)
                     {
                         foreach (var User in UserList)
                         {
                             GenericList.CacheModelObj.UserModellist.Add(User.ID, User);
                         }
                     }
-                    
+
                     foreach (var Usermodel in GenericList.CacheModelObj.UserModellist)
                     {
                         var ProvinceModel = GenericList.CacheModelObj.ProvinceModellist.Where(o => o.ID == Usermodel.Value.UsersInfoModel.ProvinceID).FirstOrDefault();
@@ -134,20 +208,20 @@ namespace Digital.Service.Implements
                 }
                 catch (Exception ex)
                 {
-                    logger.WriteInfo("UserCacheList:Error:"+ex.ToString());
+                    logger.WriteInfo("UserCacheList:Error:" + ex.ToString());
                 }
             }
         }
 
 
-       
+
         /// <summary>
         /// Company Cache
         /// </summary>
         private void CompanyCacheList()
         {
             logger.WriteInfo("CompanyCacheList");
-            if (GenericList.CacheModelObj.CompanyModellist==null)
+            if (GenericList.CacheModelObj.CompanyModellist == null)
             {
                 try
                 {
@@ -341,7 +415,7 @@ namespace Digital.Service.Implements
         private void CasesCategoryCacheList()
         {
             logger.WriteInfo("CasesCategoryCacheList");
-            if (GenericList.CacheModelObj.CasesCategoryModellist==null)
+            if (GenericList.CacheModelObj.CasesCategoryModellist == null)
             {
                 try
                 {
@@ -367,7 +441,7 @@ namespace Digital.Service.Implements
         private void CasesCacheList()
         {
             logger.WriteInfo("CasesCacheList");
-            if (GenericList.CacheModelObj.CasesModellist==null)
+            if (GenericList.CacheModelObj.CasesModellist == null)
             {
                 try
                 {
@@ -386,7 +460,7 @@ namespace Digital.Service.Implements
                 }
             }
         }
-       
+
         #endregion
 
         /// <summary>
@@ -400,7 +474,7 @@ namespace Digital.Service.Implements
                 var cToken = (CancellationToken)param;
                 if (cToken.IsCancellationRequested)
                 {
-                    
+
                     break;
                 }
                 try
@@ -410,7 +484,7 @@ namespace Digital.Service.Implements
                     {
                         //Goodat
                         var _Buffer = GenericList.MessageBuffer.Get(cToken);
-                        if (_Buffer!=null&&_Buffer.MainObject as GoodAtWhatModel != null)
+                        if (_Buffer != null && _Buffer.MainObject as GoodAtWhatModel != null)
                         {
                             UsersModel UserModel = _Buffer.RootObject as UsersModel;
                             GoodAtWhatModel goodatModel = _Buffer.MainObject as GoodAtWhatModel;
@@ -434,7 +508,7 @@ namespace Digital.Service.Implements
                             continue;
                         }
                         //CompanyModel
-                        if (_Buffer!=null&&_Buffer.MainObject as CompanyModel !=null)
+                        if (_Buffer != null && _Buffer.MainObject as CompanyModel != null)
                         {
                             CompanyModel CompanyModelBuffer = _Buffer.MainObject as CompanyModel;
                             if (CompanyModelBuffer.UpdateStatus == 2) //update model on DB
@@ -455,7 +529,7 @@ namespace Digital.Service.Implements
                     logger.WriteInfo("UpdateDB:Error:" + ex.ToString());
                     //log
                 }
-         
+
             }
 
         }
@@ -475,7 +549,7 @@ namespace Digital.Service.Implements
                     if (ct.IsCancellationRequested)
                         break;
                     bool IsAll = false;
-                    
+
                     if (GetXmlConfig.GetXmlValue("ReloadAll") == "1")
                     {
                         //更新xml放入内存的方法
@@ -586,7 +660,7 @@ namespace Digital.Service.Implements
                             {
                                 InitList.InitModel<QualityAssuranceMode>(xmlMode.Name, xmlMode.Model);
                             }
-                            
+
                             #endregion
 
                             #region TAB THREE
@@ -610,7 +684,7 @@ namespace Digital.Service.Implements
                                 InitList.InitModel<DevelopmentStatusMode>(xmlMode.Name, xmlMode.Model);
                             }
                             #endregion
-                            
+
                             #endregion
                             GetXmlConfig.UpdateStatus(xmlMode.Name, "0");
                         }
@@ -651,7 +725,7 @@ namespace Digital.Service.Implements
 
         }
 
-        
+
 
 
 

@@ -20,6 +20,7 @@ namespace Digital.Service
     {
         public static CacheModel CacheModelObj { get; set; }
         public static BufferManager<BufferFormat> MessageBuffer { get; set; }
+        public static BufferManager<CreatePageModel> PageBuffer { get; set; }
         public GenericList()
         {
             if (CacheModelObj == null)
@@ -29,6 +30,10 @@ namespace Digital.Service
             if (MessageBuffer == null)
             {
                 MessageBuffer = new BufferManager<BufferFormat>();
+            }
+            if (PageBuffer == null)
+            {
+                PageBuffer = new BufferManager<CreatePageModel>();
             }
         }
 
@@ -45,6 +50,14 @@ namespace Digital.Service
                 Buffer.RootObject = RootObj;
                 Buffer.MainObject = MainObj;
                 MessageBuffer.Put(Buffer);
+            }
+        }
+
+        public static void InsertPageBuffer(CreatePageModel Obj)
+        {
+            if (Obj != null)
+            {
+                PageBuffer.Put(Obj);
             }
         }
 
