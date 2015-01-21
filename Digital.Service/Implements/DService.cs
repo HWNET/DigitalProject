@@ -120,6 +120,7 @@ namespace Digital.Service.Implements
                             WebSiteService bll = new WebSiteService();
                             CPageModel.IsScan = true;
                             bll.UpdatePage(CPageModel);
+                            var WebSiteModel = bll.GetWebSiteModel(_Buffer.CompanyId);
                             string Path = ConfigurationManager.AppSettings["WebRoot"].ToString();
                             foreach (var PageModel in PageList)
                             {
@@ -131,7 +132,9 @@ namespace Digital.Service.Implements
                                         string path1 = PageModel.Path;
 
                                         var index = System.IO.File.ReadAllText(path1, Encoding.UTF8);
-                                        Html = RazorEngine.Razor.Parse<CasesModel>(index, PageModel.CaseModel, PageModel.Name);
+                                        RazorEngine.Templating.DynamicViewBag  ViewBag=new RazorEngine.Templating.DynamicViewBag();
+                                        ViewBag.AddValue("WebSite", WebSiteModel);
+                                        Html = RazorEngine.Razor.Parse<CasesModel>(index, PageModel.CaseModel, ViewBag, PageModel.Name);
                                     }
                                     else
                                     {

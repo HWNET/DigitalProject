@@ -43,7 +43,7 @@ namespace Digital.Service.Implements
                 else
                 {
                     //update 大于10分钟才能更新
-                    if (CModel.UpdateTime != null && DateTime.Now.Subtract(CModel.UpdateTime.Value).Minutes > 10 && !CModel.IsScan)
+                    if (CModel.UpdateTime != null && DateTime.Now.Subtract(CModel.UpdateTime.Value).TotalMinutes > 10 && !CModel.IsScan)
                     {
                         var Buffer = IndexSvr.UpdatePage(Model);
                         GenericList.InsertPageBuffer(Buffer);
