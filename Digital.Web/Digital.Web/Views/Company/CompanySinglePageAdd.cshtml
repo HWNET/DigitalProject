@@ -16,11 +16,13 @@
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/chosen.jquery.min.js"></script>
-    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
 
     <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
     <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
+    <script src="../DigitalStyle/js/formvalidator.js"></script>
+
 }
 <div class="contentpanel">
     <div class="row">
@@ -41,7 +43,9 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label"><span class="asterisk">*</span> 页面标题</label>
                         <div class="col-sm-6">
-                            <input id="PageTitle" value="@Model.PageTitle" type="text" placeholder="" class="form-control" required />
+                            @*<input id="PageTitle" value="@Model.PageTitle" type="text" placeholder="" class="form-control" required />*@
+                            @Html.TextBoxFor(m => m.PageTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PageTitle, null, new { @class="help-inline"})
                             <span class="help-block">
                                 标题信息将便于搜索引擎对该页面的判定，以确定排名
                             </span>
@@ -50,7 +54,9 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label"><span class="asterisk">*</span> 关键字</label>
                         <div class="col-sm-6">
-                            <input id="PageKeyWords" value="@Model.PageKeyWords" type="text" placeholder="" class="form-control" required />
+                            @*<input id="PageKeyWords" value="@Model.PageKeyWords" type="text" placeholder="" class="form-control" required />*@
+                            @Html.TextBoxFor(m => m.PageKeyWords, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PageKeyWords, null, new { @class="help-inline"})
                             <span class="help-block">
                                 关键字信息将用于您的网站优化
                             </span>
@@ -59,9 +65,11 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label"><span class="asterisk">*</span> 页面描述</label>
                         <div class="col-sm-6">
-                            <textarea id="PageDescription" class="form-control" rows="5" required>@Model.PageDescription</textarea>
+                            @*<textarea id="PageDescription" class="form-control" rows="5" required>@Model.PageDescription</textarea>*@
+                            @Html.TextAreaFor(m => m.PageDescription, new { @class = "form-control", @rows = "5" })
+                            @Html.ValidationMessageFor(m => m.PageDescription, null, new { @class="help-inline"})
                             <span class="help-block">
-                                限100字内
+                                (限100字内)
                             </span>
                         </div>
                     </div>
@@ -70,7 +78,9 @@
                         <label class="col-sm-1 control-label">关联标示</label>
                         <div class="col-sm-6">
                             <div class="col-sm-3">
-                                <input id="PageRelationFlag" value="@Model.PageRelationFlag" type="text" placeholder="" class="form-control">
+                                @*<input id="PageRelationFlag" value="@Model.PageRelationFlag" type="text" placeholder="" class="form-control">*@
+                                @Html.TextBoxFor(m => m.PageRelationFlag, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.PageRelationFlag, null, new { @class="help-inline"})
                             </div>
                             <div class="col-sm-3">
                                 <select class="form-control mb15">
@@ -83,19 +93,22 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label"><span class="asterisk">*</span> 页面内容</label>
                         <div class="col-sm-6">
-                            <textarea id="PageBody" name="PageBody" placeholder="请在此输入页面内容" class="form-control" rows="10" required>@Model.PageBody</textarea>
+                            @*<textarea id="PageBody" name="PageBody" placeholder="请在此输入页面内容" class="form-control" rows="10" required>@Model.PageBody</textarea>*@
+                            @Html.TextAreaFor(m => m.PageBody, new { @class = "form-control", @rows = "10", @placeholder = "请在此输入页面内容" })
+                            @Html.ValidationMessageFor(m => m.PageBody, null, new { @class="help-inline"})
                         </div>
                     </div>
-                </form>
-            </div>
 
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <button class="btn btn-primary" onclick="javascript: Save();">提交</button>&nbsp;
-                        <button class="btn btn-default">取消</button>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button class="btn btn-primary" onclick="javascript: Save();">提交</button>&nbsp;
+                                <button class="btn btn-default">取消</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                </form>
             </div>
 
         </div> <!-- panel -->
@@ -104,79 +117,92 @@
 </div>
 
 
-
 <script>
     jQuery(document).ready(function () {
 
+        // Textarea Autogrow
+        jQuery('#PageBody').autogrow();
+
+        // CKEditor
+        jQuery('textarea#PageBody').ckeditor();
+        jQuery('#inlineedit1, #inlineedit2').ckeditor();
+        CKEDITOR.instances["PageBody"].on("instanceReady", function()   
+        {   
+            //set keyup event   
+            this.document.on("keyup", updateTextArea);   
+            //and paste event   
+            this.document.on("paste", updateTextArea);   
+  
+        });
+
         // With Form Validation Wizard
-        var $validator = jQuery("#firstForm").validate({
+        jQuery("#firstForm").validate({
+            rules:{
+                PageTitle:{
+                    required:true,
+                    isContainsSpecialChar:true
+                },
+                PageKeyWords:{
+                    required:true,
+                    isContainsSpecialChar:true
+                },
+                PageDescription:{
+                    required:true,
+                    stringContentCheck:[1,200]
+                },
+                PageBody:{
+                    required:true
+                }
+            },
+            messages:{
+                PageTitle:{
+                    required:"请输入页面标题",
+                    isContainsSpecialChar:"含有中英文特殊字符"
+                },
+                PageKeyWords:{
+                    required:"请输入页面关键字",
+                    isContainsSpecialChar:"含有中英文特殊字符"
+                },
+                PageDescription:{
+                    required:"请输入页面简介",
+                    stringContentCheck:$.validator.format("请确保内容输入{0}-{1}字节以内")
+                },
+                PageBody:{
+                    required:"请输入页面内容"
+                }
+            },
             highlight: function (element) {
                 jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
             success: function (element) {
                 jQuery(element).closest('.form-group').removeClass('has-error');
+            },
+            focusInvalid: false,
+            onkeyup: false,
+            ignore:'',
+            errorPlacement: function (error, element) {
+                //alert(error.html());
+                error.insertAfter($(element).parent().children().last());
             }
         });
-      
-        // Textarea Autogrow
-        jQuery('#PageBody').autogrow();
 
-    });
-</script>
-
-<script>
-    jQuery(document).ready(function () {
-
-        // CKEditor
-        jQuery('textarea#PageBody').ckeditor();
-
-        jQuery('#inlineedit1, #inlineedit2').ckeditor();
-
-        // Uncomment the following code to test the "Timeout Loading Method".
-        // CKEDITOR.loadFullCoreTimeout = 5;
-
-        window.onload = function () {
-            // Listen to the double click event.
-            if (window.addEventListener)
-                document.body.addEventListener('dblclick', onDoubleClick, false);
-            else if (window.attachEvent)
-                document.body.attachEvent('ondblclick', onDoubleClick);
-        };
-
-        function onDoubleClick(ev) {
-            // Get the element which fired the event. This is not necessarily the
-            // element to which the event has been attached.
-            var element = ev.target || ev.srcElement;
-
-            // Find out the div that holds this element.
-            var name;
-
-            do {
-                element = element.parentNode;
-            }
-            while (element && (name = element.nodeName.toLowerCase()) &&
-                (name != 'div' || element.className.indexOf('editable') == -1) && name != 'body');
-
-            if (name == 'div' && element.className.indexOf('editable') != -1)
-                replaceDiv(element);
-        }
-
-        var editor;
-
-        function replaceDiv(div) {
-            if (editor)
-                editor.destroy();
-            editor = CKEDITOR.replace(div);
-        }
 
     });
 
+    function updateTextArea()   
+    {   
+        CKEDITOR.tools.setTimeout( function()   
+        {    
+            $("#PageBody").val(CKEDITOR.instances[$("#PageBody").attr("id")].getData());   
+            $("#PageBody").trigger('keyup');  
+            $("#PageBody").trigger('paste');
+        }, 0);     
+    } 
 
     // For SinglePage Add Operation , Submit Button
     function Save() {
         var $valid = jQuery('#firstForm').valid();
         if (!$valid) {
-            $validator.focusInvalid();
             return false;
         }
         else {

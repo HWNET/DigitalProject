@@ -749,7 +749,6 @@ namespace Digital.Web.Controllers
                     CasesCategoryList.Add(new BaseNameValueMode { Id = Temp.CasesCategoryID, Name = Temp.CasesCategoryName });
                 }
                 ViewBag.CasesCategory = CasesCategoryList;
-
             }
             client.Close();
             }

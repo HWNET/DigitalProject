@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="../DigitalStyle/css/bootstrap-fileupload.min.css" />
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
     <script src="../DigitalStyle/js/bootstrap-fileupload.min.js"></script>
-    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
     <script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
+    <script src="../DigitalStyle/js/formvalidator.js"></script>
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 案例分类管理 <span>案例中心</span></h2>
@@ -127,68 +128,81 @@
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
                 <h4 class="modal-title">添加顶级分类</h4>
             </div>
-            <div class="modal-body">
-                <input type="hidden" id="ParentId" />
-                <input type="hidden" id="CaseId" />
-                @Html.AntiForgeryToken()
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">排序值</label>
-                    <div class="col-sm-4">
-                        <input type="text" id="OrderId" placeholder="排序值..." class="form-control" />
+            <form id="firstForm" class="form" onsubmit="return false;">
+                <div class="modal-body">
+                    <input type="hidden" id="ParentId" />
+                    <input type="hidden" id="CaseId" />
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span> 排序值</label>
+                        <div class="col-sm-4">
+                            @*<input type="text" id="OrderId" placeholder="排序值..." class="form-control" required/>*@
+                            @Html.TextBoxFor(m => m.CasesCategoryOrderID, new { @id = "OrderId", @class = "form-control", @placeholder = "排序值..." })
+                            @Html.ValidationMessageFor(m => m.CasesCategoryOrderID, null, new { @class="help-inline"})
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">分类名称</label>
-                    <div class="col-sm-6">
-                        <input type="text" id="Name" placeholder="分类名称..." class="form-control" />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span> 分类名称</label>
+                        <div class="col-sm-6">
+                            @*<input type="text" id="Name" placeholder="分类名称..." class="form-control" required />*@
+                            @Html.TextBoxFor(m => m.CasesCategoryName, new { @id = "Name", @placeholder = "分类名称...", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CasesCategoryName, null, new { @class="help-inline"})
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">分类图片</label>
-                    <div class="col-sm-6">
-                        <div class="fileupload fileupload-new" data-provides="fileupload" id="container">
-                            <div class="input-append">
-                                <div class="uneditable-input">
-                                    <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                    <span id="filelist" class="fileupload-preview"></span>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span> 分类图片</label>
+                        <div class="col-sm-6">
+                            <div class="fileupload fileupload-new" data-provides="fileupload" id="container">
+                                <div class="input-append">
+                                    <div class="uneditable-input">
+                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                        <span id="filelist" class="fileupload-preview"></span>
+                                    </div>
+                                    <span class="btn btn-default btn-file">
+                                        <span class="fileupload-new">选择分类图片</span>
+                                        <span class="fileupload-exists">更改</span>
+                                        @*<input id="pickfiles" value="" type="file" required/>*@
+                                        @Html.TextBoxFor(m => m.CasesCategoryPicture, new { @id = "pickfiles", @type = "file" })
+                                        @Html.ValidationMessageFor(m => m.CasesCategoryPicture, null, new { @class="help-inline"})
+                                    </span>
+                                    <a href="#" id="uploadfiles" class="btn btn-default">上传</a>
                                 </div>
-                                <span class="btn btn-default btn-file">
-                                    <span class="fileupload-new">选择分类图片</span>
-                                    <span class="fileupload-exists">更改</span>
-                                    <input id="pickfiles" value="" type="file" />
-                                </span>
-                                <a href="#" id="uploadfiles" class="btn btn-default">上传</a>
+                            </div>
+                            <input id="ImagePath" type="hidden" value="" />
+
+                            <img id="PersonImage" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
+                            @*<div id="uploader"></div>
+                                <img id="Image" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
+                                <input type="hidden" id="ImagePath" />*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">分类内容</label>
+                        <div class="col-sm-6">
+                            @*<textarea id="Content" class="form-control" rows="5"></textarea>*@
+                            @Html.TextAreaFor(m => m.CasesCategoryContent, new {@id="Content" ,@class="form-control" ,@rows="5" })
+                            @Html.ValidationMessageFor(m => m.CasesCategoryContent, null, new { @class="help-inline"})
+                            <span class="help-block">
+                                (限制100字以内)
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button class="btn btn-primary" onclick="javascript:Save()">提交</button>&nbsp;
+                                <button class="btn btn-default">取消</button>
                             </div>
                         </div>
-                        <input id="ImagePath" type="hidden" value="" />
-
-                        <img id="PersonImage" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
-                        @*<div id="uploader"></div>
-                            <img id="Image" src="../DigitalStyle/images/pic-none.png" class="thumbnail img-responsive" alt="" />
-                            <input type="hidden" id="ImagePath" />*@
                     </div>
+
+
                 </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">分类内容</label>
-                    <div class="col-sm-6">
-                        <textarea id="Content" class="form-control" rows="5"></textarea>
-                    </div>
-                </div>
-
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <button class="btn btn-primary" onclick="javascript:Save()">提交</button>&nbsp;
-                            <button class="btn btn-default">取消</button>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -220,6 +234,60 @@
 
         // Textarea Autogrow
         //$("#autoResizeTA").autogrow();
+
+        // With Form Validation Wizard
+        var $validator = jQuery("#firstForm").validate({
+            rules: {
+                CasesCategoryOrderID: {
+                    required: true,
+                    isContainsSpecialChar: true,
+                    numberCheck: true
+                },
+                CasesCategoryName: {
+                    required: true,
+                    isContainsSpecialChar: true
+                },
+                CasesCategoryPicture: {
+                    required: true
+                },
+                CasesCategoryContent: {
+                    required: true,
+                    stringContentCheck: [1, 200]
+                }
+            },
+            messages: {
+                CasesCategoryOrderID: {
+                    required: "请输入类别排序值",
+                    isContainsSpecialChar: "含有中英文特殊字符",
+                    numberCheck: "只能包括数字"
+                },
+                CasesCategoryName: {
+                    required: "请输入类别名称",
+                    isContainsSpecialChar: "含有中英文特殊字符"
+                },
+                CasesCategoryPicture: {
+                    required: "请选择类别图片",
+                },
+                CasesCategoryContent: {
+                    required: "请输入类别内容",
+                    stringContentCheck: $.validator.format("请确保内容输入{0}-{1}字节以内")
+                }
+            },
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            },
+            focusInvalid: false,
+            onkeyup: false,
+            ignore: '',
+            errorPlacement: function (error, element) {
+                error.insertAfter($(element).parent().children().last());
+            }
+        });
+
+
     });
     function callBack() {
         //$("#DetailModel").modal("hide");
@@ -258,20 +326,25 @@
     }
 
     function Save() {
-        var Name = $("#Name").val();
-        var OrderId = $("#OrderId").val();
-        var Image = $("#ImagePath").val();
-        var Content = $("#Content").val();
-        var Parent = $("#ParentId").val();
-        if (Parent == null || typeof (Parent) == "undefined" || Parent == "") {
-            Parent = 0;
-        }
-        var Id = $("#CaseId").val();
-        ComAjax("/Company/CompanyCasesClassAdd", { Id: Id, CName: Name, COrderId: OrderId, CImage: Image, CContent: Content, CParent: Parent }, "分类管理", "callBack");
 
+        var $valid = jQuery('#firstForm').valid();
+        //debugger;
+        if (!$valid) {
+            return false;
+        }
+        else {
+            var Name = $("#Name").val();
+            var OrderId = $("#OrderId").val();
+            var Image = $("#ImagePath").val();
+            var Content = $("#Content").val();
+            var Parent = $("#ParentId").val();
+            if (Parent == null || typeof (Parent) == "undefined" || Parent == "") {
+                Parent = 0;
+            }
+            var Id = $("#CaseId").val();
+            ComAjax("/Company/CompanyCasesClassAdd", { Id: Id, CName: Name, COrderId: OrderId, CImage: Image, CContent: Content, CParent: Parent }, "分类管理", "callBack");
+        }
     }
 
 
 </script>
-
-

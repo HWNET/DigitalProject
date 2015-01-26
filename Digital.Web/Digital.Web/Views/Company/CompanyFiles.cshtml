@@ -385,7 +385,7 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label"><span class="asterisk">*</span>分类名称</label>
+                        <label class="col-sm-3 control-label"><span class="asterisk">*</span> 分类名称</label>
                         <div class="col-sm-6">
                             <input id="FolderName" type="text" placeholder="分类名称..." class="form-control" required/>
                         </div>
@@ -536,7 +536,6 @@
     {
         var $valid = jQuery('#firstForm').valid();
         if (!$valid) {
-            $validator.focusInvalid();
             return false;
         }
         else {

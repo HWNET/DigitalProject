@@ -15,10 +15,11 @@
 
     <script src="../DigitalStyle/js/bootstrap-wizard.min.js"></script>
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
-    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/jquery.autogrow-textarea.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
+    <script src="../DigitalStyle/js/formvalidator.js"></script>
 }
 <div class="pageheader">
     <h2><i class="fa fa-user"></i> 信息设置 <span>企业中心</span></h2>
@@ -55,7 +56,7 @@
                             <li><a href="#ptab2" data-toggle="tab"><span>2:</span> 生产能力</a></li>
                             <li><a href="#ptab3" data-toggle="tab"><span>3:</span> 更多信息</a></li>
                         </ul>
-                        <form class="form" id="firstForm" onsubmit="return false">
+                        <form class="form" id="firstForm" onsubmit="return false;">
                             @Html.AntiForgeryToken()
                             <div class="tab-content">
 
@@ -67,7 +68,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><span class="asterisk">*</span> 公司名称</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="请用中文完整填写在工商局注册的公司全称" id="CompanyName" value="@Model.CompanyName" class="form-control" required />
+                                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "请用中文完整填写在工商局注册的公司全称" })
+                                            @Html.ValidationMessageFor(m => m.CompanyName, null, new { @class="help-inline"})
                                             <span class="help-block">
                                                 地区、字号、经营行业、公司体制，如：广州市格列服装有限公司；<br>
                                                 个体经营者请按照“经营者姓名”+“个体经营”字样，如：“张三（个体经营）”<br>
@@ -78,10 +80,10 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><span class="asterisk">*</span> 工商注册号</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="请用工商局注册号" id="CompanyRegisteredNO" value="@Model.CompanyRegisteredNO" class="form-control" required />
+                                            @Html.TextBoxFor(m => m.CompanyRegisteredNO, new { @class = "form-control", @placeholder = "请用工商局注册号" })
+                                            @Html.ValidationMessageFor(m => m.CompanyRegisteredNO, null, new { @class="help-inline"})
                                         </div>
                                     </div>
-
 
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">企业类型</label>
@@ -191,7 +193,9 @@
                                                 </div>*@
 
                                             <div class="col-sm-6">
-                                                <input type="text" id="BusinessAddress" placeholder="" value="@ViewBag.BusinessAddress" class="form-control" required />
+                                                <input type="text" id="BusinessAddress" placeholder="" value="@ViewBag.BusinessAddress" class="form-control" />
+                                                <span class="field-validation-valid help-inline" data-valmsg-replace="true" data-valmsg-for="BusinessAddress" />
+                                                @*@Html.Editor("BusinessAddress")*@
                                                 <span class="help-block">
                                                     你可以使用地图定位查看或修改位置。地图定位
                                                 </span>
@@ -202,7 +206,11 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><span class="asterisk">*</span> 公司简介</label>
                                         <div class="col-sm-6">
-                                            <textarea id="CompanyIntro" class="form-control" rows="5" required>@Model.CompanyIntro</textarea>
+                                            @Html.TextAreaFor(m => m.CompanyIntro, new { @class = "form-control" ,@rows="5"})
+                                            @Html.ValidationMessageFor(m => m.CompanyIntro, null, new { @class="help-inline"})
+                                            <span class="help-block">
+                                                (限制500字以内)
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -326,7 +334,8 @@
                                         <label class="col-sm-3 control-label"><span class="asterisk">*</span> 厂房面积</label>
                                         <div class="col-sm-6">
                                             <div class="col-sm-4">
-                                                <input type="text" id="FactoryArea" placeholder="Default Input" value="@Model.FactoryArea" class="form-control" required />
+                                                @Html.TextBoxFor(m => m.FactoryArea, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.FactoryArea, null, new { @class="help-inline"})
                                             </div>
                                             <div class="col-sm-2">
                                                 平方米
@@ -368,7 +377,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 企业网址</label>
                                         <div class="col-sm-6">
-                                            <input type="text" id="CompanyWebsite" placeholder="eg：http: //www.abc.com" value="@Model.CompanyWebsite" class="form-control" />
+                                            @Html.TextBoxFor(m => m.CompanyWebsite, new { @class="form-control"})
+                                            @Html.ValidationMessageFor(m => m.CompanyWebsite, null, new { @class="help-inline"})
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -424,19 +434,20 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"> 账号</label>
                                         <div class="col-sm-6">
-                                            <input type="text" id="CompanyBankAccount" placeholder="请输入企业账号" value="@Model.CompanyBankAccount" class="form-control" />
+                                            @Html.TextBoxFor(m => m.CompanyBankAccount, new { @class="form-control"})
+                                            @Html.ValidationMessageFor(m => m.CompanyBankAccount, null, new {@class="help-inline" })
                                         </div>
                                     </div>
                                 </div>
 
                             </div><!-- tab-content -->
+                            <ul class="pager wizard">
+                                <li class="previous"><a href="javascript:void(0)">上一步</a></li>
+                                <li class="next"><a href="javascript:void(0)">下一步</a></li>
+                                <li><button id="BtnSave" class="btn btn-primary" style="display:block" onclick="javascript:Save()">保 存</button></li>
+                            </ul>
                         </form>
-                        <ul class="pager wizard">
-                            <li class="previous"><a href="javascript:void(0)">上一步</a></li>
-                            <li class="next"><a href="javascript:void(0)">下一步</a></li>
-                            <li><button id="BtnSave" class="btn btn-primary" style="display:block" onclick="javascript:Save()">保 存</button></li>
-                        </ul>
-
+                       
                     </div><!-- #basicWizard -->
 
                 </div><!-- panel-body -->
@@ -591,13 +602,76 @@
 
         // With Form Validation Wizard
         var $validator = jQuery("#firstForm").validate({
+            rules:{
+                CompanyName:{
+                    required:true,
+                    stringCNCheck:true
+                },
+                CompanyRegisteredNO:{
+                    required:true,
+                    stringNUCheck:true
+                },
+                BusinessAddress:{
+                    required:true,
+                    stringCNNCheck:true
+                },
+                CompanyIntro:{
+                    required:true,
+                    stringContentCheck:[1,1000]
+                },
+                FactoryArea:{
+                    required:true,
+                    floatCheck:true
+                },
+                CompanyWebsite:{
+                    siteCheck:true
+                },
+                CompanyBankAccount:{
+                    bankCheck:true
+                }
+            },
+            messages:{
+                CompanyName:{
+                    required:"请输入工商局注册的公司完整名称",
+                    stringCNCheck:"只能包括中文字、( 和 )"
+                },
+                CompanyRegisteredNO:{
+                    required:"请输入工商局注册号",
+                    stringNUCheck:"只能包括英文字母和数字"
+                },
+                BusinessAddress:{
+                    required:"请确保企业经营地址不为空",
+                    stringCNNCheck:"只能包括中文字"
+                },
+                CompanyIntro:{
+                    required:"请输入公司简介",
+                    stringContentCheck:$.validator.format("请确保内容输入{0}-{1}字节以内")
+                },
+                FactoryArea:{
+                    required:"请输入厂房面积",
+                    floatCheck:"只能包括数字或者小数位数字"
+                },
+                CompanyWebsite:{
+                    siteCheck:"只能是一个合法有效的网址"
+                },
+                CompanyBankAccount:{
+                    bankCheck:"只能包括19位数字"
+                }
+            },
             highlight: function (element) {
                 jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
             success: function (element) {
                 jQuery(element).closest('.form-group').removeClass('has-error');
+            },
+            focusInvalid: false,
+            onkeyup: false,
+            errorPlacement: function (error, element) {
+                //error.appendTo(element.next("span"));
+                error.insertAfter($(element).parent().children().last());
             }
         });
+
 
         jQuery('#progressWizard').bootstrapWizard({
             tabClass: 'nav nav-pills nav-justified nav-disabled-click',
@@ -627,14 +701,14 @@
 
     function Save()
     {
-        var $valid = jQuery('#firstForm').valid();
-        if (!$valid) {
-            $validator.focusInvalid();
-            return false;
-        }
-        else{
+        //var $valid = jQuery('#firstForm').valid();
+        //if (!$valid) {
+        //    $validator.focusInvalid();
+        //    return false;
+        //}
+        //else{
 
-            @{
+        @{
                 var IsInsert = 1; // default option : insert new company model
                 var CompanyID = 0;
                 var UserModel = OperatorFactory.GetUser(User.Identity.GetUserId());
@@ -645,79 +719,115 @@
                 }
             }
 
-            var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
-            //------------------TAB 01 : 基本信息
-            var valCompanyName=$.jsparams.input("CompanyName");
-            var valCompanyRegisteredNO=$.jsparams.input("CompanyRegisteredNO");
-            var valCompanyTypeNO=$.jsparams.select("CompanyTypeNO");
-            var valCompanyMembers=$.jsparams.select("CompanyMembers");
-            var valCompanyBusinessModel=$.jsparams.radio("radioBusiness");
-            var valIsProvideOEM=$.jsparams.radio("radioOEM");
-            var valPrimaryBusinessCategory=$.jsparams.select("PrimaryBusinessCategory");
-            var valPrimaryBusiness=$.jsparams.select("PrimaryBusiness");
-            //---------------PrimaryProduct 1,,,,5
-            var valPrimaryProduct=$.jsparams.input_multiple("PrimaryProduct");
-            //---------------PrimarySalesArea
-            var valPrimarySalesArea=$.jsparams.select_multiple("PrimarySalesArea");
-            //---------------
-            var valBusinessProvince=$.jsparams.select("BusinessProvince");
-            var valBusinessCity=$.jsparams.select("BusinessCity");
-            var valCompanyIntro=$.jsparams.input("CompanyIntro");
+        var TabIndex=  $('#progressWizard').bootstrapWizard('currentIndex');
+        //------------------TAB 01 : 基本信息
+        var valCompanyName=$.jsparams.input("CompanyName");
+        var valCompanyRegisteredNO=$.jsparams.input("CompanyRegisteredNO");
+        var valCompanyTypeNO=$.jsparams.select("CompanyTypeNO");
+        var valCompanyMembers=$.jsparams.select("CompanyMembers");
+        var valCompanyBusinessModel=$.jsparams.radio("radioBusiness");
+        var valIsProvideOEM=$.jsparams.radio("radioOEM");
+        var valPrimaryBusinessCategory=$.jsparams.select("PrimaryBusinessCategory");
+        var valPrimaryBusiness=$.jsparams.select("PrimaryBusiness");
+        //---------------PrimaryProduct 1,,,,5
+        var valPrimaryProduct=$.jsparams.input_multiple("PrimaryProduct");
+        //---------------PrimarySalesArea
+        var valPrimarySalesArea=$.jsparams.select_multiple("PrimarySalesArea");
+        //---------------
+        var valBusinessProvince=$.jsparams.select("BusinessProvince");
+        var valBusinessCity=$.jsparams.select("BusinessCity");
+        var valCompanyIntro=$.jsparams.input("CompanyIntro");
 
-            //-----------------TAB 02 : 生产能力
-            var valProductionForm=$.jsparams.select("ProductionForm");
-            //---------------ServicesDomain
-            var valServicesDomain=$.jsparams.select_multiple("ServicesDomain");
-            //--------------ProcessingMethod
-            var valProcessingMethod=$.jsparams.select_multiple("ProcessingMethod");
-            //-------------ProcessingCraft
-            var valProcessingCraft=$.jsparams.select_multiple("ProcessingCraft");
-            //-------------EquipmentIntro
-            var valEquipmentIntro=$.jsparams.select_multiple("EquipmentIntro");
+        //-----------------TAB 02 : 生产能力
+        var valProductionForm=$.jsparams.select("ProductionForm");
+        //---------------ServicesDomain
+        var valServicesDomain=$.jsparams.select_multiple("ServicesDomain");
+        //--------------ProcessingMethod
+        var valProcessingMethod=$.jsparams.select_multiple("ProcessingMethod");
+        //-------------ProcessingCraft
+        var valProcessingCraft=$.jsparams.select_multiple("ProcessingCraft");
+        //-------------EquipmentIntro
+        var valEquipmentIntro=$.jsparams.select_multiple("EquipmentIntro");
 
-            var valResearchDepartMembers=$.jsparams.select("ResearchDepartMembers");
-            var valCapacityIntro=$.jsparams.input("CapacityIntro");
-            var valCapacityIntroUnit=$.jsparams.select("CapacityIntroUnit");
-            var valAnnualBusinessVolume=$.jsparams.select("AnnualBusinessVolume");
-            var valAnnualExportsVolume=$.jsparams.select("AnnualExportsVolume");
-            //-------------ManagementSystemCertification
-            var valManagementSystemCertification=$.jsparams.select_multiple("ManagementSystemCertification");
-            //-------------ProductQualityCertification
-            var valProductQualityCertification=$.jsparams.select_multiple("ProductQualityCertification");
+        var valResearchDepartMembers=$.jsparams.select("ResearchDepartMembers");
+        var valCapacityIntro=$.jsparams.input("CapacityIntro");
+        var valCapacityIntroUnit=$.jsparams.select("CapacityIntroUnit");
+        var valAnnualBusinessVolume=$.jsparams.select("AnnualBusinessVolume");
+        var valAnnualExportsVolume=$.jsparams.select("AnnualExportsVolume");
+        //-------------ManagementSystemCertification
+        var valManagementSystemCertification=$.jsparams.select_multiple("ManagementSystemCertification");
+        //-------------ProductQualityCertification
+        var valProductQualityCertification=$.jsparams.select_multiple("ProductQualityCertification");
 
-            var valQualityAssurance=$.jsparams.radio("radioQualityAssurance");
-            var valFactoryArea=$.jsparams.input("FactoryArea");
+        var valQualityAssurance=$.jsparams.radio("radioQualityAssurance");
+        var valFactoryArea=$.jsparams.input("FactoryArea");
 
-            //-------------PrimaryEquipments 1,,,,5
-            var valPrimaryEquipments=$.jsparams.input_multiple("PrimaryEquipments");
+        //-------------PrimaryEquipments 1,,,,5
+        var valPrimaryEquipments=$.jsparams.input_multiple("PrimaryEquipments");
 
-            //-----------------TAB 03 : 更多信息
-            var valCompanyYearEstablished=$.jsparams.select("CompanyYearEstablished");
-            var valCompanyWebsite=$.jsparams.input("CompanyWebsite");
-            var valCompanyRegisteredAssets=$.jsparams.input("CompanyRegisteredAssets");
-            var valCompanyRegisteredAssetsUnit=$.jsparams.select("CompanyRegisteredAssetsUnit");
-            var valCompanyRegisteredProvince=$.jsparams.select("RegisteredProvince");
-            var valCompanyRegisteredCity=$.jsparams.select("RegisteredCity");
-            var valCompanyCorporateRepresentative=$.jsparams.input("CompanyCorporateRepresentative");
-            var valCompanyBankDeposit=$.jsparams.input("CompanyBankDeposit");
-            var valCompanyBankAccount=$.jsparams.input("CompanyBankAccount");
+        //-----------------TAB 03 : 更多信息
+        var valCompanyYearEstablished=$.jsparams.select("CompanyYearEstablished");
+        var valCompanyWebsite=$.jsparams.input("CompanyWebsite");
+        var valCompanyRegisteredAssets=$.jsparams.input("CompanyRegisteredAssets");
+        var valCompanyRegisteredAssetsUnit=$.jsparams.select("CompanyRegisteredAssetsUnit");
+        var valCompanyRegisteredProvince=$.jsparams.select("RegisteredProvince");
+        var valCompanyRegisteredCity=$.jsparams.select("RegisteredCity");
+        var valCompanyCorporateRepresentative=$.jsparams.input("CompanyCorporateRepresentative");
+        var valCompanyBankDeposit=$.jsparams.input("CompanyBankDeposit");
+        var valCompanyBankAccount=$.jsparams.input("CompanyBankAccount");
 
-            //......
-            if(TabIndex==0){
+        //......
+        if(TabIndex==0){
+            
+            jQuery("#firstForm").validate({
+                ignore:"#FactoryArea,#CompanyWebsite,#CompanyBankAccount"
+            });
+            var $valid = jQuery('#firstForm').valid(); 
+            if (!$valid)
+            {
+                return false;
+            }
+            else
+            {
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyName:valCompanyName,CompanyRegisteredNO:valCompanyRegisteredNO,
                     CompanyTypeNO:valCompanyTypeNO,CompanyMembers:valCompanyMembers,CompanyBusinessModel:valCompanyBusinessModel,IsProvideOEM:valIsProvideOEM,
                     PrimaryBusinessCategory:valPrimaryBusinessCategory,PrimaryBusiness:valPrimaryBusiness,PrimaryProduct:valPrimaryProduct,PrimarySalesArea:valPrimarySalesArea,
                     CompanyBusinessProvince:valBusinessProvince,CompanyBusinessCity:valBusinessCity,CompanyIntro:valCompanyIntro};
                 ComAjax("/Company/CompanyBaseInfo",datas,"基本信息","callBack");
             }
-            else if(TabIndex==1){
+        }
+        else if(TabIndex==1){
+            
+            jQuery("#firstForm").validate({
+                ignore:"#CompanyName,#CompanyRegisteredNO,#BusinessAddress,#CompanyIntro,#CompanyWebsite,#CompanyBankAccount"
+            });
+            var $valid = jQuery('#firstForm').valid();
+            if (!$valid)
+            {
+                return false;
+            }
+            else
+            {
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,ProductionForm:valProductionForm,ServicesDomain:valServicesDomain,ProcessingMethod:valProcessingMethod,
                     ProcessingCraft:valProcessingCraft,EquipmentIntro:valEquipmentIntro,ResearchDepartMembers:valResearchDepartMembers,CapacityIntro:valCapacityIntro,CapacityIntroUnit:valCapacityIntroUnit,
                     AnnualBusinessVolume:valAnnualBusinessVolume,AnnualExportsVolume:valAnnualExportsVolume,ManagementSystemCertification:valManagementSystemCertification,
                     ProductQualityCertification:valProductQualityCertification,QualityAssurance:valQualityAssurance,FactoryArea:valFactoryArea,PrimaryEquipments:valPrimaryEquipments};
                 ComAjax("/Company/CompanyBaseInfoCapacity",datas,"生产能力");
             }
-            else if(TabIndex==2){
+
+        }
+        else if(TabIndex==2){
+            
+            jQuery("#firstForm").validate({
+                ignore:"#CompanyName,#CompanyRegisteredNO,#BusinessAddress,#CompanyIntro,#FactoryArea"
+            });
+            var $valid = jQuery('#firstForm').valid();
+            if (!$valid)
+            {
+                return false;
+            }
+            else
+            {
                 var datas={ CompanyID:@CompanyID,IsInsert:@IsInsert,CompanyYearEstablished:valCompanyYearEstablished,CompanyWebsite:valCompanyWebsite,CompanyRegisteredAssets:valCompanyRegisteredAssets,
                     CompanyRegisteredAssetsUnit:valCompanyRegisteredAssetsUnit,CompanyRegisteredProvince:valCompanyRegisteredProvince,CompanyRegisteredCity:valCompanyRegisteredCity,
                     CompanyCorporateRepresentative:valCompanyCorporateRepresentative,CompanyBankDeposit:valCompanyBankDeposit,CompanyBankAccount:valCompanyBankAccount};
@@ -725,5 +835,6 @@
             }
         }
     }
+    //}
 
 </script>

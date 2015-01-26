@@ -36,7 +36,7 @@
     <script src="../DigitalStyle/js/jquery.tagsinput.min.js"></script>
 
     <script src="../DigitalStyle/js/jquery.gritter.min.js"></script>
-    <script src="../DigitalStyle/js/jquery.validate.min.js"></script>
+    <script src="../DigitalStyle/js/jquery.validate.js"></script>
     <script src="../DigitalStyle/js/JqueryToken.js"></script>
     <script src="../DigitalStyle/js/messages_cn.js"></script>
 
@@ -45,6 +45,7 @@
     <script src="../DigitalStyle/js/ckeditor/ckeditor.js"></script>
     <script src="../DigitalStyle/js/ckeditor/adapters/jquery.js"></script>
     <script type="text/javascript" src="@Url.StaticFile("/DigitalStyle/js/flashupload.js")"></script>
+    <script src="../DigitalStyle/js/formvalidator.js"></script>
 
 }
 <div class="pageheader">
@@ -78,7 +79,9 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利号</label>
                             <div class="col-sm-6">
-                                <input id="PatentNumber" value="@Model.PatentNumber" type="text" placeholder="专利号" class="form-control" required />
+                                @*<input id="PatentNumber" value="@Model.PatentNumber" type="text" placeholder="专利号" class="form-control"  />*@
+                                @Html.TextBoxFor(m => m.PatentNumber, new { @class = "form-control", @placeholder = "专利号" })
+                                @Html.ValidationMessageFor(m => m.PatentNumber, null, new { @class="help-inline"})
                             </div>
                         </div>
 
@@ -86,21 +89,28 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利名称</label>
                             <div class="col-sm-6">
-                                <input id="PatentName" value="@Model.PatentName" type="text" placeholder="专利名称" class="form-control" required />
+                                @*<input id="PatentName" value="@Model.PatentName" type="text" placeholder="专利名称" class="form-control"  />*@
+                                @Html.TextBoxFor(m => m.PatentName, new { @class = "form-control", @placeholder = "专利名称" })
+                                @Html.ValidationMessageFor(m => m.PatentName, null, new { @class="help-inline"})
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">概述</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利概述</label>
                             <div class="col-sm-6">
-                                <textarea id="PatentAbstract" class="form-control" rows="5">@Model.PatentAbstract</textarea>
+                                @*<textarea id="PatentAbstract" class="form-control" rows="5">@Model.PatentAbstract</textarea>*@
+                                @Html.TextAreaFor(m => m.PatentAbstract, new { @class = "form-control",@rows="5" })
+                                @Html.ValidationMessageFor(m => m.PatentAbstract, null, new { @class="help-inline"})
+                                <span class="help-block">
+                                    (限制100字以内)
+                                </span>
                             </div>
                         </div>
 
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">专利证书</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利证书</label>
                             <div class="col-sm-6">
                                 <div class="fileupload fileupload-new" data-provides="fileupload" id="container">
                                     <div class="input-append">
@@ -111,8 +121,10 @@
                                         <span class="btn btn-default btn-file">
                                             <span class="fileupload-new">选择专利证书文件</span>
                                             <span class="fileupload-exists">更改</span>
-                                            <input id="pickfiles" value="@Model.PatentCerificate" type="file" />
-                                        </span>   
+                                            @*<input id="pickfiles" value="@Model.PatentCerificate" type="file" />*@
+                                            @Html.TextBoxFor(m => m.PatentCerificate, new { @id = "pickfiles", @type = "file" })
+                                            @Html.ValidationMessageFor(m => m.PatentCerificate, null, new { @class="help-inline"})
+                                        </span>
                                         <a href="#" id="uploadfiles" class="btn btn-default">上传</a>
                                     </div>
                                 </div>
@@ -127,7 +139,9 @@
                             <label class="col-sm-3 control-label"><span class="asterisk">*</span> 专利日期</label>
                             <div class="col-sm-4 ">
                                 <div class="input-group">
-                                    <input id="PatentDate" value="@Model.PatentDate" type="text" class="form-control" placeholder="mm/dd/yyyy" required />
+                                    @*<input id="PatentDate" value="@Model.PatentDate" type="text" class="form-control" placeholder="mm/dd/yyyy" required />*@
+                                    @Html.TextBoxFor(m => m.PatentDate, new { @class = "form-control", @placeholder = "mm/dd/yyyy" })
+                                    @Html.ValidationMessageFor(m => m.PatentDate, null, new { @class="help-inline"})
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -137,7 +151,7 @@
                             <label class="col-sm-3 control-label">技术领域</label>
 
                             <div class="col-sm-4 ">
-                                <select id="TechnologyDomain" class="form-control chosen-select" data-placeholder="选择分类...">
+                                <select id="TechnologyDomain" class="form-control chosen-select" data-placeholder="选择分类..." required>
                                     <option value="0"> --请选择-- </option>
                                 </select>
                             </div>
@@ -148,7 +162,7 @@
                             <label class="col-sm-3 control-label">开发状态</label>
 
                             <div class="col-sm-4 ">
-                                <select id="DevelopmentStatus" class="form-control chosen-select" data-placeholder="选择状态...">
+                                <select id="DevelopmentStatus" class="form-control chosen-select" data-placeholder="选择状态..." required>
                                     <option value="0"> --请选择-- </option>
                                 </select>
                             </div>
@@ -157,14 +171,18 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">排序值</label>
                             <div class="col-sm-4">
-                                <input id="PatentOrderID" value="@Model.PatentOrderID" type="text" placeholder="50" class="form-control" />
+                                @*<input id="PatentOrderID" value="@Model.PatentOrderID" type="text" placeholder="50" class="form-control" />*@
+                                @Html.TextBoxFor(m => m.PatentOrderID, new { @class = "form-control", @placeholder = "50" })
+                                @Html.ValidationMessageFor(m => m.PatentOrderID, null, new { @class="help-inline"})
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">标签</label>
+                            <label class="col-sm-3 control-label"><span class="asterisk">*</span> 标签</label>
                             <div class="col-sm-4">
-                                <input id="PatentLabels" name="PatentLabels" class="form-control" value="@Model.PatentLabels" />
+                                @*<input id="PatentLabels" name="PatentLabels" class="form-control" value="@Model.PatentLabels" />*@
+                                @Html.TextBoxFor(m => m.PatentLabels, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.PatentLabels, null, new { @class="help-inline"})
                             </div>
                         </div>
 
@@ -173,21 +191,27 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="checkbox"><span class="asterisk">*</span> 专利简介</label>
                             <div class="col-sm-6">
-                                <textarea id="PatentIntro" name="PatentIntro" placeholder="请在此输入专利简介" class="form-control" rows="10" required>@Model.PatentIntro</textarea>
+                                @*<textarea id="PatentIntro" name="PatentIntro" placeholder="请在此输入专利简介" class="form-control" rows="10" required>@Model.PatentIntro</textarea>*@
+                                @Html.TextAreaFor(m => m.PatentIntro, new { @class = "form-control", @placeholder = "请在此输入专利简介", @rows = "10" })
+                                @Html.ValidationMessageFor(m => m.PatentIntro, null, new { @class="help-inline"})
+                                <span class="help-block">
+                                    (限制500字以内)
+                                </span>
                             </div>
                         </div>
+
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <button class="btn btn-primary" onclick="javascript: Save();">提交</button>&nbsp;
+                                    <button class="btn btn-default">取消</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
 
-
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <button class="btn btn-primary" onclick="javascript: Save();">提交</button>&nbsp;
-                            <button class="btn btn-default">取消</button>
-                        </div>
-                    </div>
-                </div>
             </div><!-- panel -->
         </div>
     </div>
@@ -203,7 +227,7 @@
             'subfolder': 'UserInfo' + '@Digital.Common.CryptoService.MD5Encrypt(User.Identity.GetUserId(),Digital.Common.SerurityType.UserInfoFolder)',
             'ImageId': '',
         });
-        
+
         //select option : TechnologyDomain
         var TechnologyDomainjsons=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject((ObservableCollection<TechnologyDomainMode>)ViewBag.TechnologyDomainList))
         DropOption(TechnologyDomainjsons,$("#TechnologyDomain"),@Model.PatentTechnologyDomain);
@@ -228,61 +252,107 @@
             showButtonPanel: true
         });
 
-        // With Form Validation Wizard
+        // CKEditor
+        jQuery('textarea#PatentIntro').ckeditor();
+        CKEDITOR.instances["PatentIntro"].on("instanceReady", function()   
+        {   
+            //set keyup event   
+            this.document.on("keyup", updateTextArea);   
+            //and paste event   
+            this.document.on("paste", updateTextArea);   
+  
+        });
 
+        // With Form Validation Wizard
+        jQuery("#firstForm").validate({
+            rules:{
+                PatentNumber:{
+                    required:true,
+                    isContainsSpecialChar:true
+                },
+                PatentName:{
+                    required:true,
+                    isContainsSpecialChar:true
+                },
+                PatentAbstract:{
+                    required:true,
+                    stringContentCheck:[1,200]
+                },
+                PatentCerificate:{
+                    required:true
+                },
+                PatentDate:{
+                    required:true
+                },
+                PatentLabels:{
+                    required:true
+                },
+                PatentIntro:{
+                    required:true,
+                    stringContentCheck:[1,1000]
+                }
+            },
+            messages:{
+                PatentNumber:{
+                    required:"请输入专利号",
+                    isContainsSpecialChar:"含有中英文特殊字符"
+                },
+                PatentName:{
+                    required:"请输入专利名称",
+                    isContainsSpecialChar:"含有中英文特殊字符"
+                },
+                PatentAbstract:{
+                    required:"请输入专利概述",
+                    stringContentCheck:$.validator.format("请确保内容输入{0}-{1}字节以内")
+                },
+                PatentCerificate:{
+                    required:"请选择专利缩略图"
+                },
+                PatentDate:{
+                    required:"请选择专利日期"
+                },
+                PatentLabels:{
+                    required:"请输入专利标签",
+                    isContainsSpecialChar:"含有中英文特殊字符"
+                },
+                PatentIntro:{
+                    required:"请输入专利内容",
+                    stringContentCheck:$.validator.format("请确保内容输入{0}-{1}字节以内")
+                }
+            },
+            highlight: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).closest('.form-group').removeClass('has-error');
+            },
+            focusInvalid: false,
+            onkeyup: false,
+            ignore:'',
+            errorPlacement: function (error, element) {
+                //alert(error.html());
+                error.insertAfter($(element).parent().children().last());
+            }
+        });
 
     });
 </script>
 <script>
-    jQuery(document).ready(function () {
 
-        // CKEditor
-        jQuery('textarea#PatentIntro').ckeditor();
-
-        // Uncomment the following code to test the "Timeout Loading Method".
-        // CKEDITOR.loadFullCoreTimeout = 5;
-
-        window.onload = function () {
-            // Listen to the double click event.
-            if (window.addEventListener)
-                document.body.addEventListener('dblclick', onDoubleClick, false);
-            else if (window.attachEvent)
-                document.body.attachEvent('ondblclick', onDoubleClick);
-        };
-
-        function onDoubleClick(ev) {
-            // Get the element which fired the event. This is not necessarily the
-            // element to which the event has been attached.
-            var element = ev.target || ev.srcElement;
-
-            // Find out the div that holds this element.
-            var name;
-
-            do {
-                element = element.parentNode;
-            }
-            while (element && (name = element.nodeName.toLowerCase()) &&
-                (name != 'div' || element.className.indexOf('editable') == -1) && name != 'body');
-
-            if (name == 'div' && element.className.indexOf('editable') != -1)
-                replaceDiv(element);
-        }
-
-        var editor;
-
-        function replaceDiv(div) {
-            if (editor)
-                editor.destroy();
-            editor = CKEDITOR.replace(div);
-        }
-
-    });
-
+    function updateTextArea()   
+    {   
+        CKEDITOR.tools.setTimeout( function()   
+        {    
+            $("#PatentIntro").val(CKEDITOR.instances[$("#PatentIntro").attr("id")].getData());   
+            $("#PatentIntro").trigger('keyup');  
+            $("#PatentIntro").trigger('paste');
+        }, 0);     
+    } 
     // For Patent Add Operation , Submit Button
     function Save() {
         var $valid = jQuery('#firstForm').valid();
+        //debugger;
         if (!$valid) {
-            $validator.focusInvalid();
             return false;
         }
         else {

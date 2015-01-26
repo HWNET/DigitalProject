@@ -703,6 +703,7 @@
     <Content Include="DigitalStyle\js\flot\flot.pie.min.js" />
     <Content Include="DigitalStyle\js\flot\flot.resize.min.js" />
     <Content Include="DigitalStyle\js\flot\flot.symbol.min.js" />
+    <Content Include="DigitalStyle\js\formvalidator.js" />
     <Content Include="DigitalStyle\js\fullcalendar.min.js" />
     <Content Include="DigitalStyle\js\gmaps.js" />
     <Content Include="DigitalStyle\js\holder.js" />
@@ -724,6 +725,7 @@
     <Content Include="DigitalStyle\js\jquery.sparkline.min.js" />
     <Content Include="DigitalStyle\js\jquery.tagsinput.min.js" />
     <Content Include="DigitalStyle\js\jquery.ui.touch-punch.min.js" />
+    <Content Include="DigitalStyle\js\jquery.validate.js" />
     <Content Include="DigitalStyle\js\jquery.validate.min.js" />
     <Content Include="DigitalStyle\js\JqueryToken.js" />
     <Content Include="DigitalStyle\js\masonry.pkgd.min.js" />

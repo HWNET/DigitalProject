@@ -1,4 +1,47 @@
 
+String.prototype.gblen = function () {
+    var len = 0;
+    for (var i = 0; i < this.length; i++) {
+        if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
+            len += 2;
+        } else {
+            len++;
+        }
+    }
+    return len;
+}
+String.prototype.gbtrim = function (len, s) {
+    var str = '';
+    var sp = s || '';
+    var len2 = 0;
+    for (var i = 0; i < this.length; i++) {
+        if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
+            len2 += 2;
+        } else {
+            len2++;
+        }
+    }
+    if (len2 <= len) {
+        return this;
+    }
+    len2 = 0;
+    len = (len > sp.length) ? len - sp.length : len;
+    for (var i = 0; i < this.length; i++) {
+        if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
+            len2 += 2;
+        } else {
+            len2++;
+        }
+        if (len2 > len) {
+            str += sp;
+            break;
+        }
+        str += this.charAt(i);
+    }
+    return str;
+}
+
+
 function SaveInfo(IsSuccess, msg) {
     if (IsSuccess) {
         jQuery.gritter.add({
