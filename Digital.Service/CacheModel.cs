@@ -57,7 +57,7 @@ namespace Digital.Service
         
         public List<Digital.Contact.Models.SinglePageModel> SinglePageModelList { get; set; }
 
-        public List<Digital.Contact.Models.ProductDetail> ProductDetailList { get; set; }
+        public List<Digital.Contact.Models.ProductDetailModel> ProductDetailList { get; set; }
 
     }
 }

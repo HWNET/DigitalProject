@@ -104,7 +104,7 @@
     <Compile Include="Models\FileCabinetMode.cs" />
     <Compile Include="Models\GoodAtWhatModel.cs" />
     <Compile Include="Models\IdeaModel.cs" />
-    <Compile Include="Models\ProductDetail.cs" />
+    <Compile Include="Models\ProductDetailModel.cs" />
     <Compile Include="Models\WebSiteModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\NewsCategoryModel.cs" />

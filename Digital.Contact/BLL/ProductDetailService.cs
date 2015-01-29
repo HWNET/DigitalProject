@@ -18,7 +18,7 @@ namespace Digital.Contact.BLL
     public class ProductDetailService
     {
         #region IsModelExist
-        private bool IsModelExist(ProductDetail Model)
+        private bool IsModelExist(ProductDetailModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -33,7 +33,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region ProductDetailInsert
-        public ProductDetail ProductDetailInsert(ProductDetail Model)
+        public ProductDetailModel ProductDetailInsert(ProductDetailModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -54,7 +54,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region ProductDetailUpdate
-        public ProductDetail ProductDetailUpdate(ProductDetail Model)
+        public ProductDetailModel ProductDetailUpdate(ProductDetailModel Model)
         {
             using (var db = new CommunicationContext())
             {
@@ -67,7 +67,7 @@ namespace Digital.Contact.BLL
                 }
                 else
                 {
-                    return new ProductDetail();
+                    return new ProductDetailModel();
                 }
 
             }
@@ -75,7 +75,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region ProductDetailQueryById
-        public ProductDetail ProductDetailQueryById(int ProductDetailId)
+        public ProductDetailModel ProductDetailQueryById(int ProductDetailId)
         {
             using (var db = new CommunicationContext())
             {
@@ -87,7 +87,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region ProductDetailQueryByTitle
-        public ProductDetail ProductDetailQueryByTitle(string ProductName)
+        public ProductDetailModel ProductDetailQueryByTitle(string ProductName)
         {
             using (var db = new CommunicationContext())
             {
@@ -143,7 +143,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region ProductDetailQueryList
-        public List<ProductDetail> ProductDetailQueryList()
+        public List<ProductDetailModel> ProductDetailQueryList()
         {
             using (var db = new CommunicationContext())
             {
@@ -155,7 +155,7 @@ namespace Digital.Contact.BLL
         #endregion
 
         #region ProductDetailQueryListByCompany
-        public List<ProductDetail> ProductDetailQueryListByCompany(int CompanyId)
+        public List<ProductDetailModel> ProductDetailQueryListByCompany(int CompanyId)
         {
             using (var db = new CommunicationContext())
             {

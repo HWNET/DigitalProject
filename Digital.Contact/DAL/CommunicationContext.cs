@@ -41,7 +41,7 @@ namespace Digital.Contact.DAL
 
         public DbSet<Digital.Contact.Models.WaterMarkModel> WaterMarkModels { get; set; }
 
-        public DbSet<Digital.Contact.Models.ProductDetail> ProductDetail { get; set; }
+        public DbSet<Digital.Contact.Models.ProductDetailModel> ProductDetail { get; set; }
 
         public DbSet<Digital.Contact.Models.CreatePageModel> CreatePageModel { get; set; }
 

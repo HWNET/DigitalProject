@@ -17,7 +17,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Digital.Contact.Models
 {
     [Table("ProductDetail", Schema = "dbo")]
-    public class ProductDetail
+    public class ProductDetailModel
     {
         [Key]
      public int ProductId {get;set;}
